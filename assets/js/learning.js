@@ -32,11 +32,25 @@ const guideData = {
       ["verificacion.html", "VLANs permitidas y verificación"],
     ],
   },
+  routing: {
+    folder: "routing",
+    label: "Routing",
+    sections: [
+      ["index.html", "Antes de configurar routing"],
+      ["inter-vlan.html", "Routing inter-VLAN"],
+      ["rutas-estaticas.html", "Rutas estáticas"],
+      ["dhcp-vlan.html", "DHCP por VLAN"],
+      ["ripv2.html", "RIPv2 básico"],
+      ["ospf.html", "OSPF básico"],
+      ["verificacion.html", "Verificación y diagnóstico"],
+    ],
+  },
 };
 
 function currentGuideKey(url = window.location.href) {
   const path = new URL(url, window.location.href).pathname;
   if (path.includes("/trunking/")) return "trunking";
+  if (path.includes("/routing/")) return "routing";
   if (path.includes("/vlans/")) return "vlans";
   return "initial";
 }
@@ -44,6 +58,9 @@ function currentGuideKey(url = window.location.href) {
 function renderGuideNavigation() {
   const guideSidebar = document.querySelector("[data-guide-sidebar]");
   if (!guideSidebar) return;
+
+  const eyebrow = document.querySelector(".lesson-content .eyebrow");
+  if (eyebrow) eyebrow.innerHTML = eyebrow.innerHTML.replace("Lección", "Módulo");
 
   guideSidebar.querySelector(".sidebar-categories")?.remove();
   const guideKey = currentGuideKey();
@@ -55,7 +72,7 @@ function renderGuideNavigation() {
     <a class="sidebar-category ${guideKey === "initial" ? "active" : ""}" data-guide="initial" href="${categoryHref("initial")}"><span>01</span><b>Config. inicial</b><i aria-hidden="true">↗</i></a>
     <a class="sidebar-category ${guideKey === "vlans" ? "active" : ""}" data-guide="vlans" href="${categoryHref("vlans")}"><span>02</span><b>VLANs</b><i aria-hidden="true">↗</i></a>
     <a class="sidebar-category ${guideKey === "trunking" ? "active" : ""}" data-guide="trunking" href="${categoryHref("trunking")}"><span>03</span><b>Trunking</b><i aria-hidden="true">↗</i></a>
-    <span class="sidebar-category is-soon"><span>04</span><b>Routing</b><em>Pronto</em></span>`;
+    <a class="sidebar-category ${guideKey === "routing" ? "active" : ""}" data-guide="routing" href="${categoryHref("routing")}"><span>04</span><b>Routing</b><i aria-hidden="true">↗</i></a>`;
   guideSidebar.querySelector(".sidebar-brand")?.insertAdjacentElement("afterend", categories);
 
   const lessonNav = guideSidebar.querySelector(".lesson-nav");
@@ -65,6 +82,12 @@ function renderGuideNavigation() {
     lessonNav.innerHTML = sections.map(([fileName, label], index) =>
       `<a class="${fileName === currentLesson ? "active" : ""}" href="${fileName}"><span>${String(index + 1).padStart(2, "0")}</span>${label}</a>`
     ).join("");
+  }
+
+  const isIntroModule = currentLesson === "index.html";
+  const lessonLead = document.querySelector(".lesson-content .lesson-lead");
+  if (isIntroModule && lessonLead && !document.querySelector(".equipment-note")) {
+    lessonLead.insertAdjacentHTML("afterend", '<div class="lesson-note equipment-note"><strong>Equipos recomendados:</strong> utiliza un router Cisco 2911 y un switch Cisco 2960 (capa 2). Son modelos disponibles en Packet Tracer y compatibles con los ejercicios de esta guía.</div>');
   }
 }
 
