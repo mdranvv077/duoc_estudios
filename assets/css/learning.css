@@ -72,6 +72,8 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .lesson-content h1 { max-width: 780px; margin-bottom: 21px; font-size: clamp(2.15rem, 4.5vw, 4.2rem); }
 .lesson-content h2 { margin: 43px 0 16px; font-size: clamp(1.3rem, 3vw, 1.85rem); }
 .lesson-content p { max-width: 720px; color: #c0cad7; font-size: 1rem; line-height: 1.82; }
+.lesson-content .topic-link { color: var(--cyan); text-decoration: none; }
+.lesson-content .topic-link:hover { color: var(--orange); }
 .lesson-lead { color: var(--muted) !important; font-size: 1.05rem !important; }
 .lesson-content ul { max-width: 720px; padding-left: 20px; color: #c0cad7; line-height: 1.85; }
 .lesson-content li::marker { color: var(--magenta); }

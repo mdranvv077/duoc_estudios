@@ -15,12 +15,30 @@ const guideData = {
   vlans: {
     folder: "vlans",
     label: "VLANs",
-    sections: [["index.html", "Antes de configurar VLANs"]],
+    sections: [
+      ["index.html", "Antes de configurar VLANs"],
+      ["crear-vlans.html", "Crear y nombrar VLANs"],
+      ["puertos-access.html", "Puertos de acceso"],
+      ["verificacion.html", "Verificación y guardado"],
+    ],
+  },
+  trunking: {
+    folder: "trunking",
+    label: "Trunking",
+    sections: [
+      ["index.html", "Antes de configurar trunks"],
+      ["trunk-estatico.html", "Trunk estático"],
+      ["vlan-nativa.html", "VLAN nativa"],
+      ["verificacion.html", "VLANs permitidas y verificación"],
+    ],
   },
 };
 
 function currentGuideKey(url = window.location.href) {
-  return new URL(url, window.location.href).pathname.includes("/vlans/") ? "vlans" : "initial";
+  const path = new URL(url, window.location.href).pathname;
+  if (path.includes("/trunking/")) return "trunking";
+  if (path.includes("/vlans/")) return "vlans";
+  return "initial";
 }
 
 function renderGuideNavigation() {
@@ -32,10 +50,11 @@ function renderGuideNavigation() {
   const categories = document.createElement("nav");
   categories.className = "sidebar-categories";
   categories.setAttribute("aria-label", "Categorías de Packet Tracer");
+  const categoryHref = (key) => guideKey === key ? "index.html" : `../${guideData[key].folder}/index.html`;
   categories.innerHTML = `
-    <a class="sidebar-category ${guideKey === "initial" ? "active" : ""}" href="${guideKey === "initial" ? "index.html" : "../configuracion-inicial/index.html"}"><span>01</span><b>Config. inicial</b><i aria-hidden="true">↗</i></a>
-    <a class="sidebar-category ${guideKey === "vlans" ? "active" : ""}" href="${guideKey === "vlans" ? "index.html" : "../vlans/index.html"}"><span>02</span><b>VLANs</b><i aria-hidden="true">↗</i></a>
-    <span class="sidebar-category is-soon"><span>03</span><b>Trunking</b><em>Pronto</em></span>
+    <a class="sidebar-category ${guideKey === "initial" ? "active" : ""}" data-guide="initial" href="${categoryHref("initial")}"><span>01</span><b>Config. inicial</b><i aria-hidden="true">↗</i></a>
+    <a class="sidebar-category ${guideKey === "vlans" ? "active" : ""}" data-guide="vlans" href="${categoryHref("vlans")}"><span>02</span><b>VLANs</b><i aria-hidden="true">↗</i></a>
+    <a class="sidebar-category ${guideKey === "trunking" ? "active" : ""}" data-guide="trunking" href="${categoryHref("trunking")}"><span>03</span><b>Trunking</b><i aria-hidden="true">↗</i></a>
     <span class="sidebar-category is-soon"><span>04</span><b>Routing</b><em>Pronto</em></span>`;
   guideSidebar.querySelector(".sidebar-brand")?.insertAdjacentElement("afterend", categories);
 
@@ -104,7 +123,7 @@ document.addEventListener("click", (event) => {
     return;
   }
 
-  const categoryLink = event.target.closest("a.sidebar-category");
+  const categoryLink = event.target.closest("a.sidebar-category, a.topic-link");
   if (categoryLink && !event.defaultPrevented && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
     event.preventDefault();
     loadGuide(categoryLink.href);
@@ -123,8 +142,7 @@ document.addEventListener("click", (event) => {
 window.addEventListener("popstate", () => {
   const guideKey = currentGuideKey();
   const activeCategory = document.querySelector(".sidebar-category.active");
-  const activeGuideLabel = activeCategory?.querySelector("b")?.textContent;
-  if ((guideKey === "vlans" && activeGuideLabel !== "VLANs") || (guideKey === "initial" && activeGuideLabel !== "Config. inicial")) {
+  if (activeCategory?.dataset.guide !== guideKey) {
     loadGuide(window.location.href, false);
   } else {
     loadLesson(window.location.href, false);
