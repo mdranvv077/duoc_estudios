@@ -19,3 +19,43 @@ if (sidebarToggle && guideSidebar) {
     sidebarToggle.setAttribute("aria-expanded", String(isOpen));
   });
 }
+
+const lessonContent = document.querySelector(".lesson-content");
+
+async function loadLesson(url, addHistory = true) {
+  if (!lessonContent) return;
+
+  lessonContent.classList.add("is-changing");
+
+  try {
+    await new Promise((resolve) => window.setTimeout(resolve, 180));
+    const response = await fetch(url, { headers: { "X-Requested-With": "DGNV-Studios" } });
+    if (!response.ok) throw new Error("No se pudo cargar la lección.");
+
+    const nextDocument = new DOMParser().parseFromString(await response.text(), "text/html");
+    const nextContent = nextDocument.querySelector(".lesson-content");
+    if (!nextContent) throw new Error("La lección no tiene contenido compatible.");
+
+    lessonContent.innerHTML = nextContent.innerHTML;
+    document.title = nextDocument.title;
+
+    document.querySelectorAll(".lesson-nav a").forEach((link) => {
+      link.classList.toggle("active", new URL(link.href).pathname === new URL(url, window.location.href).pathname);
+    });
+
+    if (addHistory) history.pushState({}, "", url);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    requestAnimationFrame(() => lessonContent.classList.remove("is-changing"));
+  } catch (error) {
+    window.location.href = url;
+  }
+}
+
+document.addEventListener("click", (event) => {
+  const link = event.target.closest(".lesson-nav a, .lesson-actions a");
+  if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  loadLesson(link.href);
+});
+
+window.addEventListener("popstate", () => loadLesson(window.location.href, false));

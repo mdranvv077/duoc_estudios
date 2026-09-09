@@ -64,7 +64,7 @@ a.category-button:hover { transform: translateY(-3px); border-color: rgba(46, 23
 .category-arrow { color: var(--cyan); font-size: 1.15rem; }
 .category-status { padding: 4px 6px; color: var(--orange); border: 1px solid rgba(255, 157, 46, .24); font: .58rem "DM Mono", monospace; text-transform: uppercase; }
 
-.learning-shell { display: block; width: min(900px, calc(100% - 312px)); margin: 0 36px 0 auto; padding: 34px 0 70px; }
+.learning-shell { display: flex; justify-content: center; width: auto; margin: 0 36px 0 276px; padding: 34px 0 70px; }
 .guide-sidebar { position: fixed; z-index: 1; top: 86px; bottom: 0; left: 0; width: 252px; overflow-x: hidden; overflow-y: auto; border: 1px solid rgba(46, 234, 255, .2); border-bottom: 0; border-left: 0; background: linear-gradient(165deg, rgba(18, 27, 41, .97), rgba(8, 11, 17, .97)); animation: .45s cubic-bezier(.2, .8, .2, 1) both sidebar-enter; }
 .sidebar-brand { display: block; padding: 22px 21px 18px; color: inherit; border-bottom: 1px solid var(--line); text-decoration: none; }
 .sidebar-brand small { display: block; margin-bottom: 7px; color: var(--orange); font: .63rem "DM Mono", monospace; text-transform: uppercase; letter-spacing: .08em; }
@@ -87,7 +87,8 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .sidebar-back:hover { color: var(--cyan); }
 
 .sidebar-toggle { display: none; }
-.lesson-content { min-height: 600px; padding: clamp(27px, 5vw, 58px); border: 1px solid var(--line); background: linear-gradient(145deg, rgba(15, 21, 31, .9), rgba(9, 13, 20, .9)); animation: .52s .09s cubic-bezier(.2, .8, .2, 1) both lesson-enter; }
+.lesson-content { width: min(900px, 100%); min-height: 600px; padding: clamp(27px, 5vw, 58px) 0; border: 0; background: transparent; animation: .52s .09s cubic-bezier(.2, .8, .2, 1) both lesson-enter; transition: opacity .18s ease, transform .18s ease; }
+.lesson-content.is-changing { opacity: 0; transform: translateY(9px); }
 .lesson-content .eyebrow { margin-bottom: 18px; }
 .lesson-content h1 { max-width: 780px; margin-bottom: 21px; font-size: clamp(2.15rem, 4.5vw, 4.2rem); }
 .lesson-content h2 { margin: 43px 0 16px; font-size: clamp(1.3rem, 3vw, 1.85rem); }
