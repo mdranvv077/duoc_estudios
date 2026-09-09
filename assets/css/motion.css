@@ -23,6 +23,10 @@
   animation: guide-menu-backdrop-enter .28s ease-out both;
 }
 
+@media (max-width: 760px) {
+  .guide-menu[open] { animation: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .guide-menu[open],
   .guide-menu[open]::backdrop {
