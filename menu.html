@@ -9,19 +9,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/logo.css" />
+    <link rel="stylesheet" href="assets/css/motion.css" />
+    <link rel="stylesheet" href="assets/css/credits.css" />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
   </head>
   <body>
     <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
     <header class="site-header container">
-      <a class="brand" href="index.html" aria-label="Inicio DGNV Studios"><span class="brand-mark" aria-hidden="true">&lt;/&gt;</span><span>DGNV Studios</span></a>
-      <nav aria-label="Navegación principal"><a class="active" href="#guias">Guías</a><a href="#proximamente">Próximamente</a></nav>
+      <a class="brand" href="menu.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a>
     </header>
     <main>
       <section class="hero container">
         <p class="eyebrow"><span></span> Biblioteca técnica en construcción</p>
-        <h1>Aprende tecnología,<br /><em>guía a guía.</em></h1>
+        <h1>Guías para comenzar<br /><em>en el mundo IT.</em></h1>
         <p class="hero-copy">Guías visuales, directas y ordenadas para entender, practicar y construir. Empezamos con Cisco Packet Tracer y seguiremos sumando nuevas áreas.</p>
-        <button class="button" type="button" data-open-guides>Explorar guías <span aria-hidden="true">↓</span></button>
+        <button class="button" type="button" data-open-guides>Explorar guías</button>
         <div class="terminal-preview" aria-label="Ejemplo de comandos Cisco"><div class="terminal-top"><span></span><span></span><span></span><small>CLI / Router</small></div><p><b>Router&gt;</b> <i>enable</i></p><p><strong>Router#</strong> <i>configure terminal</i></p><p><strong>Router(config)#</strong> <span>hostname CORE-01</span></p></div>
       </section>
       <section class="guide-section container" id="guias">
@@ -44,7 +47,7 @@
         <div class="guide-menu-item"><span class="menu-number">02</span><span><strong>Python</strong><small>Próximamente</small></span><i>Pronto</i></div>
       </div>
     </dialog>
-    <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p>© <span id="year"></span></p></footer>
+    <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
     <script src="assets/js/main.js"></script>
   </body>
 </html>

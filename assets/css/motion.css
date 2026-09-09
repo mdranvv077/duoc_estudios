@@ -1,0 +1,31 @@
+@keyframes guide-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes guide-menu-backdrop-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.guide-menu[open] {
+  animation: guide-menu-enter .36s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.guide-menu[open]::backdrop {
+  animation: guide-menu-backdrop-enter .28s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-menu[open],
+  .guide-menu[open]::backdrop {
+    animation: none;
+  }
+}

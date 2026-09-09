@@ -1,0 +1,19 @@
+/* Mantiene el ancho útil constante con o sin barra vertical. */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* La cabecera no hereda tamaño ni posición del contenido de cada página. */
+.site-header {
+  flex: 0 0 86px;
+}
+
+.brand {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 760px) {
+  .site-header {
+    flex-basis: 70px;
+  }
+}

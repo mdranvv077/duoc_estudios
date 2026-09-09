@@ -1,0 +1,8 @@
+@import url("site-shell.css");
+
+.brand-logo {
+  width: 27px;
+  height: 27px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 7px rgba(46, 234, 255, .36));
+}
