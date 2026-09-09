@@ -1,0 +1,51 @@
+/* Ajustes compartidos para todas las páginas de DGNV Studios. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+img, svg { max-width: 100%; }
+
+@media (max-width: 1100px) {
+  .container { width: min(100% - 40px, 1120px); }
+  body .guide-sidebar { width: 224px; }
+  body .learning-shell { left: 224px; padding-right: 28px; padding-left: 28px; }
+  body:has(.learning-shell) .site-header { padding-right: 28px; padding-left: 28px; }
+}
+
+@media (max-width: 760px) {
+  .container { width: min(100% - 28px, 1120px); }
+  .site-header { height: 68px; }
+  .brand { font-size: 1rem; }
+  .site-header .brand-logo { width: 24px; height: 24px; }
+  h1 { letter-spacing: -.06em; }
+
+  body .learning-shell { width: min(100% - 28px, 1120px); padding: 16px 0 0; }
+  body .lesson-content { padding: 24px 0 38px; }
+  body .lesson-content h1 { font-size: clamp(2.05rem, 12vw, 3.35rem); }
+  body .lesson-content h2 { margin-top: 34px; font-size: clamp(1.3rem, 7vw, 1.7rem); }
+  body .lesson-content p { font-size: .96rem; line-height: 1.72; }
+  body .lesson-content ul { padding-left: 18px; line-height: 1.72; }
+  body .cli-block { margin: 20px 0; padding: 38px 14px 16px; font-size: .68rem; line-height: 1.75; }
+  body .cli-block::after { font-size: .6rem; }
+  body .lesson-note { margin-top: 24px; padding: 14px; font-size: .8rem; }
+  body .lesson-actions { margin-top: 34px; }
+  body .lesson-content > footer { flex-direction: column; align-items: flex-start; gap: 8px; padding: 20px 0 28px; }
+
+  .packet-hub { padding-top: 52px; }
+  .packet-hub-intro h1 { font-size: clamp(2.45rem, 13vw, 3.6rem); }
+  .category-panel { padding: 14px; }
+  .category-button { min-height: 58px; padding: 10px 12px; }
+  .guide-menu { width: min(100% - 24px, 630px); max-height: calc(100dvh - 24px); }
+}
+
+@media (max-width: 430px) {
+  .site-header { height: 62px; }
+  .brand { gap: 8px; font-size: .94rem; }
+  .eyebrow { font-size: .64rem; }
+  body .sidebar-toggle { padding: 12px; font-size: .66rem; }
+  body .lesson-nav a { padding: 10px 8px; font-size: .72rem; }
+  body .cli-block { font-size: .63rem; }
+  footer { font-size: .73rem; }
+}
+
+@media (hover: none) {
+  .button, .category-button, .lesson-actions a, .sidebar-category, .lesson-nav a { -webkit-tap-highlight-color: transparent; }
+  .button, .category-button { min-height: 44px; }
+}

@@ -1,5 +1,6 @@
 @import url("site-shell.css");
 @import url("scrollbar.css");
+@import url("responsive.css");
 
 .brand-logo {
   width: 27px;
