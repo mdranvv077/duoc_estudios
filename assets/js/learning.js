@@ -13,6 +13,24 @@ if (guideSidebar) {
   guideSidebar.querySelector(".sidebar-brand")?.insertAdjacentElement("afterend", categories);
 }
 
+const lessonNav = document.querySelector(".lesson-nav");
+const lessonSections = [
+  ["index.html", "Antes de configurar"],
+  ["conexion-cli.html", "Conocer la CLI"],
+  ["configuracion-base.html", "Configuración básica"],
+  ["seguridad.html", "Seguridad del dispositivo"],
+  ["acceso-ssh.html", "Acceso remoto por SSH"],
+  ["interfaces-ipv4.html", "IP en interfaces"],
+  ["verificacion.html", "Verificación y guardado"],
+];
+
+if (lessonNav) {
+  const currentLesson = new URL(window.location.href).pathname.split("/").pop();
+  lessonNav.innerHTML = lessonSections.map(([fileName, label], index) =>
+    `<a class="${fileName === currentLesson ? "active" : ""}" href="${fileName}"><span>${String(index + 1).padStart(2, "0")}</span>${label}</a>`
+  ).join("");
+}
+
 if (sidebarToggle && guideSidebar) {
   sidebarToggle.addEventListener("click", () => {
     const isOpen = guideSidebar.classList.toggle("is-open");
