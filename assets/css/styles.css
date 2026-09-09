@@ -11,7 +11,7 @@
 }
 
 @media (max-width: 760px) {
-  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; overscroll-behavior-x: none; touch-action: pan-y; }
   .container { width: min(calc(100% - 28px), 1120px); }
   .site-header { height: 68px; }
   .hero { padding: 64px 0 60px; }
@@ -22,7 +22,7 @@
   .guide-card .guide-icon { width: 54px; height: 54px; }
   .guide-card h3 { font-size: 1.28rem; }
   .guide-card ul { flex-direction: column; gap: 8px; }
-  .guide-menu { position: fixed; inset: 50% auto auto 50%; box-sizing: border-box; width: calc(100% - 24px); max-width: 630px; max-height: calc(100dvh - 24px); margin: 0; transform: translate(-50%, -50%); }
+  .guide-menu { position: fixed; inset: 50% auto auto 50%; box-sizing: border-box; width: calc(100% - 24px); max-width: 630px; max-height: calc(100dvh - 24px); margin: 0; overflow-x: hidden; overscroll-behavior: contain; transform: translate(-50%, -50%); }
   .guide-menu-top > div, .guide-menu-item > span { min-width: 0; }
   .guide-menu-copy, .guide-menu-item strong, .guide-menu-item small { overflow-wrap: anywhere; }
 }
