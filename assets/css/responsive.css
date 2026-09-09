@@ -1,9 +1,11 @@
 /* Ajustes compartidos para todas las páginas de DGNV Studios. */
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html { max-width: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; overflow-x: clip; }
+body { max-width: 100%; overflow-x: hidden; overflow-x: clip; }
+main, section, header, footer, .container { min-width: 0; }
 img, svg { max-width: 100%; }
 
 @media (max-width: 1100px) {
-  .container { width: min(100% - 40px, 1120px); }
+  .container { width: min(calc(100% - 40px), 1120px); }
   body .guide-sidebar { width: 224px; }
   body .learning-shell { left: 224px; padding-right: 28px; padding-left: 28px; }
   body:has(.learning-shell) .site-header { padding-right: 28px; padding-left: 28px; }
@@ -20,13 +22,13 @@ img, svg { max-width: 100%; }
 }
 
 @media (max-width: 760px) {
-  .container { width: min(100% - 28px, 1120px); }
+  .container { width: min(calc(100% - 28px), 1120px); }
   .site-header { height: 68px; }
   .brand { font-size: 1rem; }
   .site-header .brand-logo { width: 24px; height: 24px; }
   h1 { letter-spacing: -.06em; }
 
-  body .learning-shell { width: min(100% - 28px, 1120px); padding: 16px 0 0; }
+  body .learning-shell { width: min(calc(100% - 28px), 1120px); padding: 16px 0 0; }
   body .lesson-content { padding: 24px 0 38px; }
   body .lesson-content h1 { font-size: clamp(2.05rem, 12vw, 3.35rem); }
   body .lesson-content h2 { margin-top: 34px; font-size: clamp(1.3rem, 7vw, 1.7rem); }
@@ -42,7 +44,9 @@ img, svg { max-width: 100%; }
   .packet-hub-intro h1 { font-size: clamp(2.45rem, 13vw, 3.6rem); }
   .category-panel { padding: 14px; }
   .category-button { min-height: 58px; padding: 10px 12px; }
-  .guide-menu { width: min(100% - 24px, 630px); max-height: calc(100dvh - 24px); }
+  .guide-menu { position: fixed; inset: 50% auto auto 50%; box-sizing: border-box; width: calc(100% - 24px); max-width: 630px; max-height: calc(100dvh - 24px); margin: 0; transform: translate(-50%, -50%); }
+  .guide-menu-top > div, .guide-menu-item > span { min-width: 0; }
+  .guide-menu-copy, .guide-menu-item strong, .guide-menu-item small { overflow-wrap: anywhere; }
   .hero { padding: 64px 0 60px; }
   .hero h1 { font-size: clamp(2.5rem, 13vw, 3.75rem); }
   .hero .terminal-preview { margin-top: 28px; }
