@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Guías claras y prácticas de tecnología, redes, programación y herramientas digitales." />
+    <title>DGNV Studios — Guías técnicas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+    <header class="site-header container">
+      <a class="brand" href="index.html" aria-label="Inicio DGNV Studios"><span class="brand-mark" aria-hidden="true">&lt;/&gt;</span><span>DGNV Studios</span></a>
+      <nav aria-label="Navegación principal"><a class="active" href="#guias">Guías</a><a href="#proximamente">Próximamente</a></nav>
+    </header>
+    <main>
+      <section class="hero container">
+        <p class="eyebrow"><span></span> Biblioteca técnica en construcción</p>
+        <h1>Aprende tecnología,<br /><em>guía a guía.</em></h1>
+        <p class="hero-copy">Guías visuales, directas y ordenadas para entender, practicar y construir. Empezamos con Cisco Packet Tracer y seguiremos sumando nuevas áreas.</p>
+        <button class="button" type="button" data-open-guides>Explorar guías <span aria-hidden="true">↓</span></button>
+        <div class="terminal-preview" aria-label="Ejemplo de comandos Cisco"><div class="terminal-top"><span></span><span></span><span></span><small>CLI / Router</small></div><p><b>Router&gt;</b> <i>enable</i></p><p><strong>Router#</strong> <i>configure terminal</i></p><p><strong>Router(config)#</strong> <span>hostname CORE-01</span></p></div>
+      </section>
+      <section class="guide-section container" id="guias">
+        <div class="section-heading"><div><p class="eyebrow"><span></span> Guía disponible</p><h2>Cisco Packet Tracer</h2></div><p>Desde la primera topología hasta configuraciones más avanzadas de switching y routing.</p></div>
+        <a class="guide-card" href="guias/packet-tracer/index.html">
+          <div class="guide-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M12 15.5 24 8l12 7.5v17L24 40l-12-7.5v-17Z"/><path d="m12 15.5 12 7 12-7M24 22.5V40"/></svg></div>
+          <div class="guide-content"><p class="card-label">Redes · Cisco</p><h3>Packet Tracer</h3><p>Fundamentos, comandos CLI y laboratorios para poner en práctica cada concepto.</p><ul><li>Configuración inicial</li><li>VLANs y trunking</li><li>Routing y servicios</li></ul></div><span class="card-arrow" aria-hidden="true">↗</span>
+        </a>
+      </section>
+      <section class="coming-soon container" id="proximamente"><p class="eyebrow"><span></span> En camino</p><h2>Más áreas de aprendizaje,<br />pronto.</h2><div class="chips"><span>Python</span><span>Linux</span><span>Ciberseguridad</span></div></section>
+    </main>
+    <dialog class="guide-menu" id="guide-menu" aria-labelledby="guide-menu-title">
+      <div class="guide-menu-top">
+        <div><p class="eyebrow"><span></span> Navegador de guías</p><h2 id="guide-menu-title">Elige una ruta.</h2></div>
+        <button class="close-menu" type="button" data-close-guides aria-label="Cerrar guía">×</button>
+      </div>
+      <p class="guide-menu-copy">Cada guía abre en su propia página para mantener el sitio ágil y fácil de recorrer.</p>
+      <div class="guide-menu-list">
+        <a class="guide-menu-item available" href="guias/packet-tracer/index.html"><span class="menu-number">01</span><span><strong>Cisco Packet Tracer</strong><small>Redes y configuración CLI</small></span><b>↗</b></a>
+        <div class="guide-menu-item"><span class="menu-number">02</span><span><strong>Python</strong><small>Programación desde cero</small></span><i>Pronto</i></div>
+        <div class="guide-menu-item"><span class="menu-number">03</span><span><strong>Linux</strong><small>Terminal y administración</small></span><i>Pronto</i></div>
+        <div class="guide-menu-item"><span class="menu-number">04</span><span><strong>Ciberseguridad</strong><small>Fundamentos y herramientas</small></span><i>Pronto</i></div>
+      </div>
+    </dialog>
+    <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p>© <span id="year"></span></p></footer>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
