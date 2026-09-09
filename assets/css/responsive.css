@@ -9,6 +9,16 @@ img, svg { max-width: 100%; }
   body:has(.learning-shell) .site-header { padding-right: 28px; padding-left: 28px; }
 }
 
+@media (max-width: 960px) {
+  .hero { padding: 88px 0 76px; }
+  .hero .terminal-preview { position: relative; right: auto; bottom: auto; width: min(100%, 520px); margin-top: 36px; }
+  .guide-section { padding: 64px 0 82px; }
+  .guide-card { grid-template-columns: 76px minmax(0, 1fr); gap: 20px; padding: 25px; }
+  .guide-card .card-arrow { display: none; }
+  .guide-card ul { flex-wrap: wrap; gap: 9px 18px; }
+  footer { flex-wrap: wrap; align-items: flex-start; gap: 10px 22px; }
+}
+
 @media (max-width: 760px) {
   .container { width: min(100% - 28px, 1120px); }
   .site-header { height: 68px; }
@@ -33,6 +43,13 @@ img, svg { max-width: 100%; }
   .category-panel { padding: 14px; }
   .category-button { min-height: 58px; padding: 10px 12px; }
   .guide-menu { width: min(100% - 24px, 630px); max-height: calc(100dvh - 24px); }
+  .hero { padding: 64px 0 60px; }
+  .hero h1 { font-size: clamp(2.5rem, 13vw, 3.75rem); }
+  .hero .terminal-preview { margin-top: 28px; }
+  .guide-section { padding: 54px 0 65px; }
+  .guide-card { grid-template-columns: 58px minmax(0, 1fr); padding: 20px; }
+  .guide-card .guide-icon { width: 54px; height: 54px; }
+  .guide-card h3 { font-size: 1.28rem; }
 }
 
 @media (max-width: 430px) {
