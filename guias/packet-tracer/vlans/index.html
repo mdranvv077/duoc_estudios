@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Introducción a VLANs en Cisco Packet Tracer." />
+  <title>VLANs — Packet Tracer</title>
+  <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../../assets/css/styles.css" />
+  <link rel="stylesheet" href="../../../assets/css/logo.css" />
+  <link rel="stylesheet" href="../../../assets/css/credits.css" />
+  <link rel="stylesheet" href="../../../assets/css/learning.css" />
+</head>
+<body>
+  <header class="site-header container">
+    <a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a>
+  </header>
+  <main class="container learning-shell">
+    <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Lecciones de VLANs</button>
+    <aside class="guide-sidebar" data-guide-sidebar>
+      <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 02</small><strong>VLANs</strong></a>
+      <nav class="lesson-nav" aria-label="Lecciones de VLANs"></nav>
+      <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+    </aside>
+    <article class="lesson-content">
+      <p class="eyebrow"><span></span> Lección 01</p>
+      <h1>Antes de las <em>VLANs.</em></h1>
+      <p class="lesson-lead">Una VLAN permite separar una misma red física en redes lógicas independientes. Antes de crear una, es importante entender qué problema resuelve.</p>
+
+      <h2>Una red, varios grupos</h2>
+      <p>En una red pequeña, todos los equipos conectados a un mismo switch suelen compartir el mismo dominio de broadcast. Eso significa que ciertos mensajes se distribuyen a todos los dispositivos, incluso si pertenecen a áreas distintas.</p>
+      <p>Las VLANs permiten dividir esos grupos sin necesitar un switch físico por cada área. Por ejemplo, estudiantes, docentes y administración pueden conectarse al mismo switch, pero seguir separados como si fueran redes distintas.</p>
+
+      <h2>Qué necesitas saber antes de configurarlas</h2>
+      <ul>
+        <li>Una VLAN se identifica con un número, llamado <strong>ID de VLAN</strong>.</li>
+        <li>Un puerto de switch puede pertenecer a una VLAN determinada.</li>
+        <li>Los equipos de VLANs distintas no se comunican directamente sin una solución de routing entre VLANs.</li>
+        <li>La creación y asignación de VLANs se realiza en switches; más adelante, trunking permitirá transportar varias VLANs entre dispositivos.</li>
+      </ul>
+
+      <div class="lesson-note"><strong>En la práctica:</strong> las VLANs se usan tanto en Packet Tracer como en redes reales para segmentar, organizar y mejorar la seguridad de una red.</div>
+      <div class="lesson-actions"><span></span><a href="../index.html">Volver a categorías →</a></div>
+      <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+    </article>
+  </main>
+  <script src="../../../assets/js/main.js"></script>
+  <script src="../../../assets/js/learning.js"></script>
+</body>
+</html>

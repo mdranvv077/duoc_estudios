@@ -1,79 +1,134 @@
-const sidebarToggle = document.querySelector("[data-sidebar-toggle]");
-const guideSidebar = document.querySelector("[data-guide-sidebar]");
+const guideData = {
+  initial: {
+    folder: "configuracion-inicial",
+    label: "Config. inicial",
+    sections: [
+      ["index.html", "Antes de configurar"],
+      ["conexion-cli.html", "Conocer la CLI"],
+      ["configuracion-base.html", "Configuración básica"],
+      ["seguridad.html", "Seguridad del dispositivo"],
+      ["acceso-ssh.html", "Acceso remoto por SSH"],
+      ["interfaces-ipv4.html", "IP en interfaces"],
+      ["verificacion.html", "Verificación y guardado"],
+    ],
+  },
+  vlans: {
+    folder: "vlans",
+    label: "VLANs",
+    sections: [["index.html", "Antes de configurar VLANs"]],
+  },
+};
 
-if (guideSidebar) {
+function currentGuideKey(url = window.location.href) {
+  return new URL(url, window.location.href).pathname.includes("/vlans/") ? "vlans" : "initial";
+}
+
+function renderGuideNavigation() {
+  const guideSidebar = document.querySelector("[data-guide-sidebar]");
+  if (!guideSidebar) return;
+
+  guideSidebar.querySelector(".sidebar-categories")?.remove();
+  const guideKey = currentGuideKey();
   const categories = document.createElement("nav");
   categories.className = "sidebar-categories";
   categories.setAttribute("aria-label", "Categorías de Packet Tracer");
   categories.innerHTML = `
-    <a class="sidebar-category active" href="index.html"><span>01</span><b>Config. inicial</b><i aria-hidden="true">↗</i></a>
-    <span class="sidebar-category is-soon"><span>02</span><b>VLANs</b><em>Pronto</em></span>
+    <a class="sidebar-category ${guideKey === "initial" ? "active" : ""}" href="${guideKey === "initial" ? "index.html" : "../configuracion-inicial/index.html"}"><span>01</span><b>Config. inicial</b><i aria-hidden="true">↗</i></a>
+    <a class="sidebar-category ${guideKey === "vlans" ? "active" : ""}" href="${guideKey === "vlans" ? "index.html" : "../vlans/index.html"}"><span>02</span><b>VLANs</b><i aria-hidden="true">↗</i></a>
     <span class="sidebar-category is-soon"><span>03</span><b>Trunking</b><em>Pronto</em></span>
     <span class="sidebar-category is-soon"><span>04</span><b>Routing</b><em>Pronto</em></span>`;
   guideSidebar.querySelector(".sidebar-brand")?.insertAdjacentElement("afterend", categories);
-}
 
-const lessonNav = document.querySelector(".lesson-nav");
-const lessonSections = [
-  ["index.html", "Antes de configurar"],
-  ["conexion-cli.html", "Conocer la CLI"],
-  ["configuracion-base.html", "Configuración básica"],
-  ["seguridad.html", "Seguridad del dispositivo"],
-  ["acceso-ssh.html", "Acceso remoto por SSH"],
-  ["interfaces-ipv4.html", "IP en interfaces"],
-  ["verificacion.html", "Verificación y guardado"],
-];
-
-if (lessonNav) {
+  const lessonNav = guideSidebar.querySelector(".lesson-nav");
+  const sections = guideData[guideKey].sections;
   const currentLesson = new URL(window.location.href).pathname.split("/").pop();
-  lessonNav.innerHTML = lessonSections.map(([fileName, label], index) =>
-    `<a class="${fileName === currentLesson ? "active" : ""}" href="${fileName}"><span>${String(index + 1).padStart(2, "0")}</span>${label}</a>`
-  ).join("");
+  if (lessonNav) {
+    lessonNav.innerHTML = sections.map(([fileName, label], index) =>
+      `<a class="${fileName === currentLesson ? "active" : ""}" href="${fileName}"><span>${String(index + 1).padStart(2, "0")}</span>${label}</a>`
+    ).join("");
+  }
 }
 
-if (sidebarToggle && guideSidebar) {
-  sidebarToggle.addEventListener("click", () => {
-    const isOpen = guideSidebar.classList.toggle("is-open");
-    sidebarToggle.setAttribute("aria-expanded", String(isOpen));
-  });
+async function fetchGuideDocument(url) {
+  const response = await fetch(url, { headers: { "X-Requested-With": "DGNV-Studios" } });
+  if (!response.ok) throw new Error("No se pudo cargar la guía.");
+  return new DOMParser().parseFromString(await response.text(), "text/html");
 }
-
-const lessonContent = document.querySelector(".lesson-content");
 
 async function loadLesson(url, addHistory = true) {
+  const lessonContent = document.querySelector(".lesson-content");
   if (!lessonContent) return;
 
-  lessonContent.classList.add("is-changing");
-
   try {
-    await new Promise((resolve) => window.setTimeout(resolve, 180));
-    const response = await fetch(url, { headers: { "X-Requested-With": "DGNV-Studios" } });
-    if (!response.ok) throw new Error("No se pudo cargar la lección.");
-
-    const nextDocument = new DOMParser().parseFromString(await response.text(), "text/html");
+    const nextDocument = await fetchGuideDocument(url);
     const nextContent = nextDocument.querySelector(".lesson-content");
     if (!nextContent) throw new Error("La lección no tiene contenido compatible.");
 
     lessonContent.innerHTML = nextContent.innerHTML;
     document.title = nextDocument.title;
-
-    document.querySelectorAll(".lesson-nav a").forEach((link) => {
-      link.classList.toggle("active", new URL(link.href).pathname === new URL(url, window.location.href).pathname);
-    });
-
     if (addHistory) history.pushState({}, "", url);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    requestAnimationFrame(() => lessonContent.classList.remove("is-changing"));
+    document.querySelector(".learning-shell")?.scrollTo({ top: 0, behavior: "smooth" });
+    renderGuideNavigation();
+  } catch (error) {
+    window.location.href = url;
+  }
+}
+
+async function loadGuide(url, addHistory = true) {
+  const learningShell = document.querySelector(".learning-shell");
+  const lessonContent = document.querySelector(".lesson-content");
+  if (!learningShell || !lessonContent) return;
+
+  try {
+    const nextDocument = await fetchGuideDocument(url);
+    const nextShell = nextDocument.querySelector(".learning-shell");
+    if (!nextShell) throw new Error("La categoría no tiene contenido compatible.");
+
+    learningShell.innerHTML = nextShell.innerHTML;
+    document.title = nextDocument.title;
+    if (addHistory) history.pushState({}, "", url);
+    learningShell.scrollTo({ top: 0, behavior: "smooth" });
+    renderGuideNavigation();
   } catch (error) {
     window.location.href = url;
   }
 }
 
 document.addEventListener("click", (event) => {
-  const link = event.target.closest(".lesson-nav a, .lesson-actions a");
-  if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const sidebarToggle = event.target.closest("[data-sidebar-toggle]");
+  if (sidebarToggle) {
+    const guideSidebar = document.querySelector("[data-guide-sidebar]");
+    if (!guideSidebar) return;
+    const isOpen = guideSidebar.classList.toggle("is-open");
+    sidebarToggle.setAttribute("aria-expanded", String(isOpen));
+    return;
+  }
+
+  const categoryLink = event.target.closest("a.sidebar-category");
+  if (categoryLink && !event.defaultPrevented && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+    event.preventDefault();
+    loadGuide(categoryLink.href);
+    return;
+  }
+
+  const lessonLink = event.target.closest(".lesson-nav a, .lesson-actions a");
+  if (!lessonLink || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const currentFolder = new URL("./", window.location.href).pathname;
+  const targetFolder = new URL("./", lessonLink.href).pathname;
+  if (currentFolder !== targetFolder) return;
   event.preventDefault();
-  loadLesson(link.href);
+  loadLesson(lessonLink.href);
 });
 
-window.addEventListener("popstate", () => loadLesson(window.location.href, false));
+window.addEventListener("popstate", () => {
+  const guideKey = currentGuideKey();
+  const activeCategory = document.querySelector(".sidebar-category.active");
+  const activeGuideLabel = activeCategory?.querySelector("b")?.textContent;
+  if ((guideKey === "vlans" && activeGuideLabel !== "VLANs") || (guideKey === "initial" && activeGuideLabel !== "Config. inicial")) {
+    loadGuide(window.location.href, false);
+  } else {
+    loadLesson(window.location.href, false);
+  }
+});
+
+renderGuideNavigation();
