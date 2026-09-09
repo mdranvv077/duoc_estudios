@@ -1,0 +1,29 @@
+html,
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(20, 111, 126, .58) transparent;
+}
+
+html::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+html::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(20, 111, 126, .58);
+  background-clip: padding-box;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(24, 126, 141, .62);
+  background-clip: padding-box;
+}

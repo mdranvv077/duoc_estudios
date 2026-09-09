@@ -105,7 +105,7 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .lesson-actions { display: flex; justify-content: space-between; gap: 14px; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); }
 .lesson-actions a { color: var(--cyan); font: .7rem "DM Mono", monospace; text-decoration: none; }
 .lesson-actions a:hover { color: var(--orange); }
-.learning-shell > footer { flex: 0 0 auto; width: min(900px, 100%); margin: 0; }
+.lesson-content > footer { width: 100%; margin-top: 48px; }
 
 body:has(.learning-shell) { overflow: hidden; }
 body:has(.learning-shell) .site-header { position: fixed; z-index: 2; top: 0; right: 0; left: 0; width: auto; margin: 0; padding: 0 max(24px, calc((100vw - 1120px) / 2)); background: var(--bg); }
@@ -122,7 +122,7 @@ body:has(.learning-shell) .site-header { position: fixed; z-index: 2; top: 0; ri
   .guide-sidebar.is-open { display: block; }
   .lesson-content { min-height: auto; padding: 28px 21px 38px; }
   .lesson-actions { flex-direction: column; }
-  .learning-shell > footer { width: 100%; margin: 0; }
+  .lesson-content > footer { width: 100%; margin-top: 34px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
