@@ -1,1 +1,44 @@
-<!doctype html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Operaciones y texto — Python</title><link rel="icon" type="image/png" href="../../../img/favicon.png"><link rel="stylesheet" href="../../../assets/css/styles.css"><link rel="stylesheet" href="../../../assets/css/logo.css"><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile"><link rel="stylesheet" href="../../../assets/css/credits.css"><link rel="stylesheet" href="../../../assets/css/learning.css"><link rel="stylesheet" href="../../../assets/css/python.css"></head><body><header class="site-header container"><a class="brand" href="../../../index.html"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt=""><span>DGNV Studios</span></a></header><main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de fundamentos</button><aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Python · 01</small><strong>Fundamentos</strong></a><nav class="sidebar-categories"><a class="sidebar-category active" href="index.html"><span>01</span><b>Fundamentos</b><i>↗</i></a><span class="sidebar-category is-soon"><span>02</span><b>Lógica y funciones</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside><article class="lesson-content"><p class="eyebrow"><span></span>Módulo 03</p><h1>Operaciones, texto y <em>salida.</em></h1><p class="lesson-lead">Python puede calcular con números y luego convertir ese resultado en un mensaje claro para quien usa el programa.</p><h2>Operaciones básicas</h2><p>Usa <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> y <code>**</code> para sumar, restar, multiplicar, dividir y elevar. El operador <code>+=</code> toma el valor actual, realiza una suma y lo guarda nuevamente.</p><pre class="code-block"><code><span class="py-variable">puntos</span> <span class="py-operator">=</span> <span class="py-number">10</span><br><span class="py-variable">puntos</span> <span class="py-operator">+=</span> <span class="py-number">5</span><br><span class="py-variable">cuadrado</span> <span class="py-operator">=</span> <span class="py-number">4</span> <span class="py-operator">**</span> <span class="py-number">2</span><br><span class="py-builtin">print</span>(<span class="py-string">f"Puntos: {</span><span class="py-variable">puntos</span><span class="py-string">} · Cuadrado: {</span><span class="py-variable">cuadrado</span><span class="py-string">}"</span>)</code></pre><div class="python-reading"><strong>Lectura natural:</strong> empieza con 10 puntos, suma 5 y reemplaza el valor guardado. Luego calcula 4 elevado a 2 y muestra ambos resultados.</div><h2>f-strings: texto que incorpora valores</h2><p>La letra <code>f</code> antes de las comillas permite insertar una variable entre llaves. Así el mensaje se adapta sin tener que escribir cada valor manualmente.</p><div class="lesson-actions"><a href="variables-tipos.html">← Variables y tipos</a><a href="entrada-practica.html">Siguiente: entrada de datos →</a></div><footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer></article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/python-guide.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Operaciones y texto — Python</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png">
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../../assets/css/logo.css">
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile">
+    <link rel="stylesheet" href="../../../assets/css/credits.css">
+    <link rel="stylesheet" href="../../../assets/css/learning.css">
+    <link rel="stylesheet" href="../../../assets/css/python.css">
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt=""><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de fundamentos</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Python · 01</small><strong>Fundamentos</strong></a>
+        <nav class="sidebar-categories"><a class="sidebar-category active" href="index.html"><span>01</span><b>Fundamentos</b><i>↗</i></a><span class="sidebar-category is-soon"><span>02</span><b>Lógica y funciones</b><em>Pronto</em></span></nav>
+        <nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 03</p>
+        <h1>Operaciones, texto y <em>salida.</em></h1>
+        <p class="lesson-lead">Python puede calcular con números y luego convertir ese resultado en un mensaje claro para quien usa el programa.</p>
+        <h2>Operaciones básicas</h2>
+        <p>Una operación toma números, los relaciona con un símbolo y devuelve un resultado. Empieza leyendo una línea a la vez: mira los números, identifica el símbolo y pregúntate qué resultado debería aparecer.</p>
+        <pre class="code-block"><code><span class="py-builtin">print</span>(<span class="py-number">2</span> <span class="py-operator">+</span> <span class="py-number">3</span>)<br><span class="py-builtin">print</span>(<span class="py-number">8</span> <span class="py-operator">-</span> <span class="py-number">3</span>)<br><span class="py-builtin">print</span>(<span class="py-number">4</span> <span class="py-operator">*</span> <span class="py-number">2</span>)<br><span class="py-builtin">print</span>(<span class="py-number">10</span> <span class="py-operator">/</span> <span class="py-number">2</span>)<br><span class="py-builtin">print</span>(<span class="py-number">2</span> <span class="py-operator">**</span> <span class="py-number">3</span>)</code></pre>
+        <div class="python-reading"><strong>Lectura natural:</strong> muestra 5; luego muestra 5; después 8; después 5.0; y finalmente 8, porque <code>2 ** 3</code> significa “2 elevado a 3”.</div>
+        <h2>Guardar un resultado simple</h2>
+        <p>También puedes guardar el resultado en una variable. Así no necesitas volver a calcularlo si lo usarás después. El operador <code>+=</code> es una forma corta de sumar algo a lo que ya estaba guardado.</p>
+        <pre class="code-block"><code><span class="py-variable">vidas</span> <span class="py-operator">=</span> <span class="py-number">3</span><br><span class="py-variable">vidas</span> <span class="py-operator">+=</span> <span class="py-number">1</span><br><span class="py-builtin">print</span>(<span class="py-variable">vidas</span>)</code></pre>
+        <div class="python-reading"><strong>Lectura natural:</strong> guarda 3 en la caja llamada <code>vidas</code>; suma 1 a ese valor y vuelve a guardarlo. Al final muestra 4.</div>
+        <h2>f-strings: texto que incorpora valores</h2>
+        <p>La letra <code>f</code> antes de las comillas permite insertar una variable entre llaves. Así el mensaje se adapta sin tener que escribir cada valor manualmente.</p>
+        <div class="lesson-actions"><a href="variables-tipos.html">← Variables y tipos</a><a href="entrada-practica.html">Siguiente: entrada de datos →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/python-guide.js"></script>
+  </body>
+</html>
