@@ -16,6 +16,8 @@
   .site-header { height: 68px; }
   .hero { padding: 64px 0 60px; }
   .hero h1 { font-size: clamp(2.5rem, 13vw, 3.75rem); }
+  .ambient-one { width: 280px; height: 280px; right: 0; }
+  .ambient-two { width: 220px; height: 220px; left: 0; }
   .hero .terminal-preview { width: 100%; margin-top: 28px; }
   .guide-section { padding: 54px 0 65px; }
   .guide-card { grid-template-columns: 58px minmax(0, 1fr); padding: 20px; }
