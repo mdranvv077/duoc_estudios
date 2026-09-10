@@ -11,3 +11,19 @@ if (guideMenu && openGuides && closeGuides) {
     if (event.target === guideMenu) guideMenu.close();
   });
 }
+
+const discordInvite = document.querySelector("[data-discord-invite]");
+
+if (discordInvite) {
+  window.setTimeout(() => {
+    discordInvite.classList.add("is-icon-visible");
+    discordInvite.setAttribute("aria-hidden", "false");
+  }, 4000);
+
+  window.setTimeout(() => discordInvite.classList.add("is-message-visible"), 8000);
+
+  window.setTimeout(() => {
+    discordInvite.classList.remove("is-icon-visible", "is-message-visible");
+    discordInvite.setAttribute("aria-hidden", "true");
+  }, 20000);
+}
