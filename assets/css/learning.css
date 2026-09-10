@@ -77,29 +77,35 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .lesson-lead { color: var(--muted) !important; font-size: 1.05rem !important; }
 .lesson-content ul { max-width: 720px; padding-left: 20px; color: #c0cad7; line-height: 1.85; }
 .lesson-content li::marker { color: var(--magenta); }
-.topology-card { max-width: 720px; margin: 28px 0 34px; padding: 18px; border: 1px solid rgba(46, 234, 255, .24); background: linear-gradient(135deg, rgba(14, 24, 37, .86), rgba(5, 9, 14, .86)); }
+.topology-card { max-width: 720px; margin: 28px 0 34px; padding: 20px; border: 1px solid rgba(46, 234, 255, .38); background: radial-gradient(circle at 50% 45%, rgba(46, 234, 255, .065), transparent 52%), linear-gradient(135deg, rgba(14, 24, 37, .9), rgba(5, 9, 14, .9)); }
 .topology-card figcaption { display: grid; gap: 5px; margin-bottom: 12px; }
 .topology-card figcaption span { color: var(--orange); font: .62rem "DM Mono", monospace; letter-spacing: .09em; text-transform: uppercase; }
 .topology-card figcaption strong { color: var(--text); font-size: .91rem; }
-.topology-map { position: relative; min-height: clamp(164px, 24vw, 210px); }
+.topology-map { position: relative; min-height: clamp(178px, 25vw, 230px); }
 .topology-cables { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.topology-cables path { fill: none; stroke: rgba(46, 234, 255, .72); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 6 5; filter: drop-shadow(0 0 5px rgba(46, 234, 255, .18)); }
-.topology-node { position: absolute; top: 50%; display: grid; justify-items: center; width: 19%; transform: translate(-50%, -36%); text-align: center; }
+.topology-cables path { fill: none; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 11 8; }
+.topology-cables .cable-direct { stroke: var(--cyan); filter: drop-shadow(0 0 5px rgba(46, 234, 255, .18)); }
+.topology-cables .cable-crossed { stroke: var(--orange); filter: drop-shadow(0 0 5px rgba(255, 157, 46, .16)); }
+.topology-node { position: absolute; top: 50%; display: grid; justify-items: center; width: 19%; transform: translate(-50%, -34%); text-align: center; }
 .node-one { left: 8%; }
 .node-two { left: 38%; }
 .node-three { left: 62%; }
 .node-four { left: 92%; }
-.device-icon { display: block; width: clamp(52px, 10vw, 86px); height: clamp(47px, 8vw, 68px); background-image: url("../../guias/packet-tracer/img/cisco-devices-sprite.png"); background-repeat: no-repeat; background-size: auto 100%; }
-.router-icon { background-position: left center; }
-.switch-icon { background-position: right center; }
+.device-icon { display: block; width: clamp(62px, 11vw, 96px); height: clamp(47px, 8vw, 72px); object-fit: contain; }
+.router-icon { width: clamp(66px, 11vw, 96px); }
+.switch-icon { width: clamp(68px, 12vw, 102px); }
 .topology-node b { margin-top: 4px; color: #e4edf5; font: .71rem "DM Mono", monospace; }
 .topology-node small { margin-top: 3px; color: var(--muted); font: clamp(.48rem, 1.25vw, .62rem) "DM Mono", monospace; white-space: nowrap; }
-.topology-link { position: absolute; top: calc(50% - 35px); transform: translateX(-50%); display: grid; gap: 3px; text-align: center; white-space: nowrap; }
+.topology-link { position: absolute; top: calc(50% - 48px); transform: translateX(-50%); display: grid; gap: 3px; text-align: center; white-space: nowrap; }
 .link-one { left: 23%; }
 .link-two { left: 50%; }
 .link-three { left: 77%; }
-.topology-link span { color: #dfe9f3; font: clamp(.48rem, 1.35vw, .64rem) "DM Mono", monospace; }
-.topology-link small { color: var(--orange); font: clamp(.44rem, 1.2vw, .58rem) "DM Mono", monospace; text-transform: uppercase; }
+.topology-link span { color: #dfe9f3; font: clamp(.48rem, 1.35vw, .66rem) "DM Mono", monospace; }
+.topology-legend { display: flex; justify-content: center; gap: 0; width: fit-content; max-width: 100%; margin: 1px auto 20px; border: 1px solid rgba(46, 234, 255, .32); background: rgba(5, 10, 16, .46); }
+.topology-legend span { display: flex; align-items: center; gap: 9px; padding: 10px 14px; color: #c1cddb; font-size: .72rem; white-space: nowrap; }
+.topology-legend span + span { border-left: 1px solid rgba(46, 234, 255, .26); }
+.topology-legend i { display: block; width: 45px; border-top: 3px dashed var(--cyan); }
+.topology-legend .legend-crossed i { border-color: var(--orange); }
 .topology-caption { max-width: none !important; margin: 6px 0 0; color: var(--muted) !important; font-size: .78rem !important; line-height: 1.55 !important; }
 .topology-caption code { color: var(--magenta); font: inherit; }
 .cli-block { position: relative; box-sizing: border-box; width: 100%; min-width: 0; max-width: 720px; margin: 25px 0; padding: 39px 20px 19px; overflow-x: hidden; border: 1px solid rgba(46, 234, 255, .25); background: #04070b; color: #dbe7ef; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025); font: .78rem/1.9 "DM Mono", monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
@@ -134,9 +140,12 @@ body:has(.learning-shell) .site-header { position: fixed; z-index: 2; top: 0; ri
   .guide-sidebar { position: relative; top: 0; bottom: auto; width: auto; display: none; border: 1px solid rgba(46, 234, 255, .2); }
   .guide-sidebar.is-open { display: block; }
   .lesson-content { min-height: auto; padding: 28px 21px 38px; }
-  .topology-card { margin-top: 24px; padding: 14px 10px; }
+  .topology-card { margin-top: 24px; padding: 15px 10px; }
   .topology-node { transform: translate(-50%, -34%); }
-  .topology-link { top: calc(50% - 29px); }
+  .topology-link { top: calc(50% - 42px); }
+  .topology-legend { margin-bottom: 16px; }
+  .topology-legend span { gap: 6px; padding: 8px 7px; font-size: .63rem; }
+  .topology-legend i { width: 26px; }
   .topology-caption { padding: 0 5px; }
   .lesson-actions { flex-direction: column; }
   .lesson-content > footer { width: 100%; margin-top: 34px; }
