@@ -28,7 +28,8 @@ img, svg { max-width: 100%; }
   .site-header .brand-logo { width: 24px; height: 24px; }
   h1 { letter-spacing: -.06em; }
 
-  body .learning-shell { width: min(calc(100% - 28px), 1120px); padding: 16px 0 0; }
+  body .learning-shell { position: relative; top: auto; right: auto; bottom: auto; left: auto; display: grid; grid-template-columns: 1fr; gap: 12px; width: min(calc(100% - 28px), 1120px); margin: auto; padding: 16px 0 0; overflow: visible; }
+  body .guide-sidebar { position: relative; top: auto; right: auto; bottom: auto; left: auto; width: auto; }
   body .lesson-content { padding: 24px 0 38px; }
   body .lesson-content h1 { font-size: clamp(2.05rem, 12vw, 3.35rem); }
   body .lesson-content h2 { margin-top: 34px; font-size: clamp(1.3rem, 7vw, 1.7rem); }
