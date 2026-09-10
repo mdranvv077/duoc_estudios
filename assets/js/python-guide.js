@@ -12,6 +12,36 @@ function renderPythonNavigation() {
   nav.innerHTML = pythonModules.map(([file, label], index) => `<a class="${file === current ? "active" : ""}" href="${file}"><span>${String(index + 1).padStart(2, "0")}</span>${label}</a>`).join("");
 }
 
+function addPythonExplanations() {
+  const lesson = new URL(window.location.href).pathname.split("/").pop();
+  const lead = document.querySelector(".lesson-lead");
+  const actions = document.querySelector(".lesson-actions");
+  if (!lead || lead.dataset.explained === "true") return;
+  lead.dataset.explained = "true";
+  const details = {
+    "index.html": {
+      before: `<section class="python-explanation"><h2>Antes del primer ejemplo</h2><p>Un programa es una lista de instrucciones que Python ejecuta en orden. No intenta adivinar qué quieres hacer: lee la primera línea, termina esa tarea y recién entonces continúa con la siguiente.</p><p>Por eso, al enfrentarte a un bloque nuevo, hazte tres preguntas: <strong>¿qué valor aparece aquí?</strong>, <strong>¿dónde se guarda?</strong> y <strong>¿qué se muestra o cambia después?</strong>. Leer código de esa forma es más útil que memorizar palabras sueltas.</p></section>`,
+      after: `<section class="python-explanation"><h2>Qué hace <code>print()</code></h2><p><code>print()</code> no guarda ni modifica datos: solo muestra un resultado en la consola. Dentro de sus paréntesis puedes colocar texto, números, una variable o una mezcla usando un f-string.</p><div class="lesson-note"><strong>Orden importante:</strong> primero debe existir una variable; después puedes usarla en un <code>print()</code>. Si intentas mostrar un nombre que Python no conoce, aparecerá un error.</div></section>`,
+    },
+    "variables-tipos.html": {
+      before: `<section class="python-explanation"><h2>Por qué usamos variables</h2><p>Un programa casi nunca trabaja con un solo valor fijo. Puede recibir una edad, calcular un promedio o guardar si una conexión está activa. Una variable permite ponerle un nombre entendible a cada dato y reutilizarlo sin escribirlo otra vez.</p><p>La caja es una ayuda para empezar: el nombre queda asociado a un valor. Si asignas otro valor al mismo nombre, Python deja de usar el anterior y conserva el nuevo. Así una variable puede representar un estado que cambia mientras avanza el programa.</p></section>`,
+      after: `<section class="python-explanation"><h2>El tipo cambia lo que puedes hacer</h2><p>Un <code>int</code> y un <code>float</code> sirven para cálculos; un <code>str</code> representa texto; un <code>bool</code> representa una respuesta lógica. Antes de operar, pregúntate si el valor es un número, texto o una respuesta de verdadero/falso.</p><div class="lesson-note"><strong>Importante:</strong> <code>"18"</code> es texto y <code>18</code> es un número. Se ven parecidos, pero Python no los trata igual.</div></section>`,
+    },
+    "operaciones-texto.html": {
+      before: `<section class="python-explanation"><h2>Primero piensa el resultado</h2><p>Una operación toma valores y produce otro valor. Por ejemplo, una multiplicación puede transformar cantidad y precio en un total. Guardar ese resultado en una variable hace que el programa sea más claro y que puedas usarlo después en otro cálculo o mensaje.</p><p>Lee <code>puntos += 5</code> como una instrucción, no como una igualdad de matemáticas: toma lo que está guardado en <code>puntos</code>, suma cinco y guarda el resultado en la misma variable.</p></section>`,
+      after: `<section class="python-explanation"><h2>Texto que se adapta al resultado</h2><p>Un f-string comienza con la letra <code>f</code> y usa llaves para insertar valores. Es útil porque el texto permanece legible mientras los datos cambian según cada ejecución.</p><div class="lesson-note"><strong>Comprueba siempre:</strong> calcula primero, guarda el resultado y luego muéstralo. Separar esos pasos ayuda a detectar errores.</div></section>`,
+    },
+    "entrada-practica.html": {
+      before: `<section class="python-explanation"><h2>Un programa puede preguntar</h2><p><code>input()</code> detiene el programa y espera una respuesta escrita por la persona. Ese dato entra como texto, incluso si se ven números en pantalla. Por eso, cuando quieres sumar, dividir o comparar una edad, debes convertir ese texto con <code>int()</code> o <code>float()</code>.</p><p>Conviene pensar el flujo antes de programar: pedir un dato, convertirlo si hace falta, calcular y finalmente mostrar una conclusión. Ese mismo orden aparece en programas mucho más grandes.</p></section>`,
+      after: `<section class="python-explanation"><h2>Antes de calcular</h2><p>Una conversión funciona solo si la persona escribió un valor compatible. Más adelante, con condiciones y <code>exit()</code>, podrás validar una respuesta incorrecta y detener una interacción de manera controlada.</p><div class="lesson-note"><strong>Para esta práctica:</strong> escribe primero qué datos necesitas, qué cálculo harás con ellos y cuál será el mensaje final. Recién después traduce esos pasos a Python.</div></section>`,
+    },
+  };
+  const content = details[lesson];
+  if (!content) return;
+  lead.insertAdjacentHTML("afterend", content.before);
+  actions?.insertAdjacentHTML("beforebegin", content.after);
+}
+
 async function loadPythonModule(url, addHistory = true) {
   const content = document.querySelector(".lesson-content");
   if (!content) return;
@@ -26,6 +56,7 @@ async function loadPythonModule(url, addHistory = true) {
     if (addHistory) history.pushState({}, "", url);
     document.querySelector(".learning-shell")?.scrollTo({ top: 0, behavior: "smooth" });
     renderPythonNavigation();
+    addPythonExplanations();
   } catch { window.location.href = url; }
 }
 
@@ -39,3 +70,4 @@ document.addEventListener("click", (event) => {
 });
 window.addEventListener("popstate", () => loadPythonModule(window.location.href, false));
 renderPythonNavigation();
+addPythonExplanations();
