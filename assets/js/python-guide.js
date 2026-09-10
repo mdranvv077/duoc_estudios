@@ -64,7 +64,7 @@ function addPythonOutputs() {
   outputs[lesson]?.forEach(({ block: index, text }) => {
     const block = blocks[index];
     if (!block || block.nextElementSibling?.classList.contains("code-output")) return;
-    block.insertAdjacentHTML("afterend", `<pre class="code-output" aria-label="Resultado del código"><code>${text}</code></pre>`);
+    block.insertAdjacentHTML("afterend", `<div class="code-output" aria-label="Resultado del código"><span class="code-output-label">Python · resultado</span><code>${text}</code></div>`);
   });
 }
 
