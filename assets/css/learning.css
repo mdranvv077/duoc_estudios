@@ -91,11 +91,11 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .node-two { left: 38%; }
 .node-three { left: 62%; }
 .node-four { left: 92%; }
-.device-icon { display: block; width: clamp(62px, 11vw, 96px); height: clamp(47px, 8vw, 72px); object-fit: contain; }
-.router-icon { width: clamp(66px, 11vw, 96px); }
-.switch-icon { width: clamp(68px, 12vw, 102px); }
-.topology-node b { margin-top: 4px; color: #e4edf5; font: .71rem "DM Mono", monospace; }
-.topology-node small { margin-top: 3px; color: var(--muted); font: clamp(.48rem, 1.25vw, .62rem) "DM Mono", monospace; white-space: nowrap; }
+.device-icon { display: block; box-sizing: border-box; width: clamp(56px, 9.5vw, 82px); height: clamp(44px, 7vw, 62px); padding: 4px; object-fit: contain; }
+.router-icon { width: clamp(60px, 9.5vw, 84px); }
+.switch-icon { width: clamp(62px, 10.5vw, 90px); }
+.topology-node b { margin-top: 5px; color: #e4edf5; font: .75rem "DM Mono", monospace; }
+.topology-node small { margin-top: 4px; color: #aebdcd; font: clamp(.58rem, 1.4vw, .7rem) "DM Mono", monospace; white-space: nowrap; }
 .topology-link { position: absolute; top: calc(50% - 48px); transform: translateX(-50%); display: grid; gap: 3px; text-align: center; white-space: nowrap; }
 .link-one { left: 23%; }
 .link-two { left: 50%; }
