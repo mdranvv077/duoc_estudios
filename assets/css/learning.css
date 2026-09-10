@@ -127,14 +127,15 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 
 html:has(.learning-shell), body:has(.learning-shell) { overflow-x: hidden; }
 body:has(.learning-shell) { overflow-y: hidden; }
-body:has(.learning-shell) .site-header { position: fixed; z-index: 2; top: 0; right: 0; left: 0; width: auto; margin: 0; padding: 0 max(24px, calc((100vw - 1120px) / 2)); background: var(--bg); }
+/* El encabezado de una guía usa exactamente el mismo contenedor visual que el inicio. */
+body:has(.learning-shell) .site-header { position: fixed; z-index: 2; top: 0; right: auto; left: 50%; width: min(1120px, calc(100% - 48px)); margin: 0; padding: 0; transform: translateX(-50%); background: var(--bg); }
 
 @media (max-width: 760px) {
   .packet-hub { padding: 58px 0 63px; }
   .category-panel { padding: 17px; }
   .category-grid { grid-template-columns: 1fr; }
   body:has(.learning-shell) { overflow: auto; }
-  body:has(.learning-shell) .site-header { position: relative; width: min(100% - 34px, 1120px); margin: auto; padding: 0; }
+  body:has(.learning-shell) .site-header { position: relative; right: auto; left: auto; width: min(calc(100% - 28px), 1120px); margin: auto; padding: 0; transform: none; }
   .learning-shell { position: relative; top: auto; right: auto; bottom: auto; left: auto; display: grid; grid-template-columns: 1fr; gap: 12px; width: min(100% - 34px, 1120px); margin: auto; padding: 20px 0 0; overflow: visible; }
   .sidebar-toggle { display: inline-flex; align-items: center; gap: 9px; width: 100%; padding: 13px 15px; color: var(--cyan); border: 1px solid rgba(46, 234, 255, .3); background: rgba(46, 234, 255, .05); font: .71rem "DM Mono", monospace; cursor: pointer; }
   .guide-sidebar { position: relative; top: 0; bottom: auto; width: auto; display: none; border: 1px solid rgba(46, 234, 255, .2); }
