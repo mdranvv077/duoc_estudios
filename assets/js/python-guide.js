@@ -42,6 +42,32 @@ function addPythonExplanations() {
   actions?.insertAdjacentHTML("beforebegin", content.after);
 }
 
+function addPythonOutputs() {
+  const lesson = new URL(window.location.href).pathname.split("/").pop();
+  const outputs = {
+    "index.html": [
+      { block: 0, text: "Hola, Caroline" },
+      { block: 1, text: "Puedes ingresar" },
+    ],
+    "variables-tipos.html": [
+      { block: 0, text: "El próximo año tendrás 19" },
+    ],
+    "operaciones-texto.html": [
+      { block: 1, text: "4" },
+    ],
+    "entrada-practica.html": [
+      { block: 0, text: "Caroline, el próximo año tendrás 19." },
+    ],
+  };
+
+  const blocks = document.querySelectorAll(".code-block");
+  outputs[lesson]?.forEach(({ block: index, text }) => {
+    const block = blocks[index];
+    if (!block || block.nextElementSibling?.classList.contains("code-output")) return;
+    block.insertAdjacentHTML("afterend", `<pre class="code-output" aria-label="Resultado del código"><code>${text}</code></pre>`);
+  });
+}
+
 async function loadPythonModule(url, addHistory = true) {
   const content = document.querySelector(".lesson-content");
   if (!content) return;
@@ -57,6 +83,7 @@ async function loadPythonModule(url, addHistory = true) {
     document.querySelector(".learning-shell")?.scrollTo({ top: 0, behavior: "smooth" });
     renderPythonNavigation();
     addPythonExplanations();
+    addPythonOutputs();
   } catch { window.location.href = url; }
 }
 
@@ -71,3 +98,4 @@ document.addEventListener("click", (event) => {
 window.addEventListener("popstate", () => loadPythonModule(window.location.href, false));
 renderPythonNavigation();
 addPythonExplanations();
+addPythonOutputs();
