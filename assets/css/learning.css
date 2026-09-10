@@ -94,13 +94,13 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .device-icon { display: block; box-sizing: border-box; width: clamp(56px, 9.5vw, 82px); height: clamp(44px, 7vw, 62px); padding: 4px; object-fit: contain; }
 .router-icon { width: clamp(60px, 9.5vw, 84px); }
 .switch-icon { width: clamp(62px, 10.5vw, 90px); }
-.topology-node b { margin-top: 5px; color: #e4edf5; font: .75rem "DM Mono", monospace; }
-.topology-node small { margin-top: 4px; color: #aebdcd; font: clamp(.58rem, 1.4vw, .7rem) "DM Mono", monospace; white-space: nowrap; }
+.topology-node b { margin-top: 5px; color: #e4edf5; font: calc(.75rem + 2px) "DM Mono", monospace; }
+.topology-node small { margin-top: 4px; color: #aebdcd; font: clamp(calc(.58rem + 2px), calc(1.4vw + 2px), calc(.7rem + 2px)) "DM Mono", monospace; white-space: nowrap; }
 .topology-link { position: absolute; top: calc(50% - 48px); transform: translateX(-50%); display: grid; gap: 3px; text-align: center; white-space: nowrap; }
 .link-one { left: 23%; }
 .link-two { left: 50%; }
 .link-three { left: 77%; }
-.topology-link span { color: #dfe9f3; font: clamp(.48rem, 1.35vw, .66rem) "DM Mono", monospace; }
+.topology-link span { color: #dfe9f3; font: clamp(calc(.48rem + 2px), calc(1.35vw + 2px), calc(.66rem + 2px)) "DM Mono", monospace; }
 .topology-legend { display: flex; justify-content: center; gap: 0; width: fit-content; max-width: 100%; margin: 1px auto 20px; border: 1px solid rgba(46, 234, 255, .32); background: rgba(5, 10, 16, .46); }
 .topology-legend span { display: flex; align-items: center; gap: 9px; padding: 10px 14px; color: #c1cddb; font-size: .72rem; white-space: nowrap; }
 .topology-legend span + span { border-left: 1px solid rgba(46, 234, 255, .26); }
