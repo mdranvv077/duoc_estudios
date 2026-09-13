@@ -72,11 +72,10 @@
 }
 
 .afk-logo-depth {
-  opacity: .7;
+  opacity: 0;
   filter: brightness(.23) saturate(.8) drop-shadow(0 0 16px rgba(0, 73, 89, .42));
-  transform: translateZ(-32px) rotateY(180deg);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  transform: translateZ(-32px);
+  animation: afk-back-face-logo 22s linear infinite;
 }
 
 .afk-logo-symbol::after {
@@ -121,7 +120,10 @@
   inset: 0;
   color: rgba(76, 108, 116, .92);
   text-shadow: -7px 9px 0 rgba(2, 16, 21, .75), 0 0 18px rgba(9, 78, 91, .2);
-  transform: translateZ(-34px) rotateY(180deg);
+  transform: translateZ(-34px);
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+  animation: afk-back-face-text 22s linear infinite;
 }
 
 @keyframes afk-breathe {
@@ -134,11 +136,22 @@
   to { transform: rotateY(360deg); }
 }
 
+@keyframes afk-back-face-logo {
+  0%, 100% { opacity: 0; }
+  50% { opacity: .7; }
+}
+
+@keyframes afk-back-face-text {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
 @media (max-width: 620px) {
   .afk-logo-breathe { flex-direction: column; gap: 19px; }
   .afk-wordmark-front, .afk-wordmark-back { font-size: clamp(2.5rem, 14vw, 4.8rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .afk-logo-motion, .afk-logo-breathe { animation: none; }
+  .afk-logo-motion, .afk-logo-breathe, .afk-logo-depth, .afk-wordmark-back { animation: none; }
+  .afk-logo-depth, .afk-wordmark-back { opacity: 0; }
 }
