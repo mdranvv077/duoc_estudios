@@ -72,17 +72,19 @@
           del ciclo.
         </p>
         <div class="lesson-note">
-          <strong>Compáralo con <code>if</code>:</strong> un <code>if</code>
-          hace la pregunta una vez; un <code>while</code> hace esa misma pregunta
-          después de cada vuelta. El ciclo termina cuando la condición se vuelve
-          <code>False</code>, o cuando aparece un <code>break</code>.
+          <strong>Compáralo con <code>if</code>:</strong> un
+          <code>if</code> hace la pregunta una vez; un <code>while</code> hace
+          esa misma pregunta después de cada vuelta. El ciclo termina cuando la
+          condición se vuelve <code>False</code>, o cuando aparece un
+          <code>break</code>.
         </div>
         <p>
           Sirve para evitar escribir la misma instrucción muchas veces. En vez
           de copiar tres, diez o una cantidad desconocida de líneas, describes
-          una regla: <strong>repite esta tarea mientras todavía haga falta</strong>.
-          Por eso aparece en intentos de acceso, validación de formularios,
-          menús simples o acciones que continúan mientras quede tiempo, saldo o
+          una regla:
+          <strong>repite esta tarea mientras todavía haga falta</strong>. Por
+          eso aparece en intentos de acceso, validación de formularios, menús
+          simples o acciones que continúan mientras quede tiempo, saldo o
           energía.
         </p>
         <p>
@@ -164,8 +166,8 @@
           programas que esperan una opción de salida.
         </p>
         <p>
-          <strong>Contexto:</strong> este menú debe mantenerse abierto hasta
-          que la persona escriba <code>salir</code>. Como no conocemos cuántas
+          <strong>Contexto:</strong> este menú debe mantenerse abierto hasta que
+          la persona escriba <code>salir</code>. Como no conocemos cuántas
           opciones elegirá, usamos <code>while True</code> y dejamos que
           <code>break</code> defina el momento de terminar.
         </p>
@@ -174,10 +176,10 @@
         ><code><span class="py-keyword">while</span> <span class="py-boolean">True</span>: <span class="py-guide-comment"># el ciclo sigue hasta encontrar break</span><br>    <span class="py-variable">opcion</span> <span class="py-operator">=</span> <span class="py-builtin">input</span>(<span class="py-string">"Escribe una opción: "</span>)<br><br>    <span class="py-keyword">if</span> <span class="py-variable">opcion</span> <span class="py-operator">==</span> <span class="py-string">"salir"</span>:<br>        <span class="py-keyword">break</span> <span class="py-guide-comment"># termina el while por completo</span><br><br>    <span class="py-builtin">print</span>(<span class="py-string">f"Elegiste: {</span><span class="py-variable">opcion</span><span class="py-string">}"</span>)<br><br><span class="py-builtin">print</span>(<span class="py-string">"Menú cerrado"</span>)</code></pre>
         <div class="python-reading">
           <strong>Lectura natural:</strong> el menú pregunta una opción una y
-          otra vez. Si la respuesta es “salir”, Python ejecuta <code>break</code>
-          y sale del <code>while</code>; por eso llega a “Menú cerrado”. Si se
-          escribe cualquier otra cosa, muestra la opción elegida y vuelve a
-          preguntar.
+          otra vez. Si la respuesta es “salir”, Python ejecuta
+          <code>break</code> y sale del <code>while</code>; por eso llega a
+          “Menú cerrado”. Si se escribe cualquier otra cosa, muestra la opción
+          elegida y vuelve a preguntar.
         </div>
         <div class="lesson-note">
           <strong>Importante:</strong> <code>while True</code> por sí solo no
@@ -195,7 +197,7 @@
         <div class="lesson-actions">
           <a href="../logica-funciones/funciones-flujo.html"
             >← Funciones y exit()</a
-          ><a href="../index.html">Volver a las categorías de Python →</a>
+          ><a href="for-range.html">Siguiente: for y range() →</a>
         </div>
         <footer class="container">
           <p>DGNV Studios <small>— aprende construyendo.</small></p>

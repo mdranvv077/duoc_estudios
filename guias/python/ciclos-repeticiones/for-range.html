@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>for y range — Python</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/responsive.css?v=20260909-mobile"
+    />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css" />
+    <link rel="stylesheet" href="../../../assets/css/python.css" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html"
+        ><img
+          class="brand-logo"
+          src="../../../assets/images/dgnv-logo.png"
+          alt=""
+        /><span>DGNV Studios</span></a
+      >
+    </header>
+    <main class="container learning-shell">
+      <button
+        class="sidebar-toggle"
+        type="button"
+        data-sidebar-toggle
+        aria-expanded="false"
+      >
+        ☰ Módulos de ciclos
+      </button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"
+          ><small>Python · 03</small><strong>Ciclos y repeticiones</strong></a
+        >
+        <nav class="sidebar-categories">
+          <a class="sidebar-category" href="../fundamentos/index.html"
+            ><span>01</span><b>Fundamentos</b><i>↗</i></a
+          ><a class="sidebar-category" href="../logica-funciones/index.html"
+            ><span>02</span><b>Lógica y funciones</b><i>↗</i></a
+          ><a class="sidebar-category active" href="index.html"
+            ><span>03</span><b>Ciclos y repeticiones</b><i>↗</i></a
+          >
+        </nav>
+        <nav class="lesson-nav"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 02</p>
+        <h1>Repetir con <em>for.</em></h1>
+        <p class="lesson-lead">
+          <code>for</code> repite un bloque una cantidad definida de veces. Es
+          una forma clara de decir: “haz esta tarea para cada número que genere
+          este rango”.
+        </p>
+        <h2>Cuándo elegir <code>for</code></h2>
+        <p>
+          Usa <code>for</code> cuando ya sabes cuántas vueltas necesitas. Por
+          ejemplo: mostrar tres intentos, realizar cinco preguntas o imprimir
+          los números del 1 al 10. No necesitas aumentar una variable
+          manualmente: Python avanza por el rango por ti.
+        </p>
+        <div class="lesson-note">
+          <strong>Relación con <code>while</code>:</strong>
+          <code>while</code> se repite mientras una condición sea verdadera;
+          <code>for</code> se usa cuando ya tienes un recorrido definido. Ambos
+          repiten instrucciones, pero responden a necesidades distintas.
+        </div>
+        <h2>El primer rango</h2>
+        <p>
+          <code>range(1, 4)</code> genera los números 1, 2 y 3. El primer número
+          indica dónde comenzar; el segundo indica dónde detenerse, pero no se
+          incluye. Por eso el 4 no aparece.
+        </p>
+        <p>
+          <strong>Contexto:</strong> un programa debe mostrar las tres rondas de
+          una actividad. El número de la ronda cambia automáticamente en cada
+          vuelta.
+        </p>
+        <pre
+          class="code-block"
+        ><code><span class="py-keyword">for</span> <span class="py-variable">ronda</span> <span class="py-keyword">in</span> <span class="py-builtin">range</span>(<span class="py-number">1</span>, <span class="py-number">4</span>): <span class="py-guide-comment"># 1, 2 y 3</span><br>    <span class="py-builtin">print</span>(<span class="py-string">f"Ronda {</span><span class="py-variable">ronda</span><span class="py-string">}"</span>)</code></pre>
+        <div class="python-reading">
+          <strong>Lectura natural:</strong> para cada número desde 1 hasta antes
+          de 4, guárdalo temporalmente en <code>ronda</code> y muestra ese
+          número. Python hace tres vueltas: una con 1, otra con 2 y otra con 3.
+        </div>
+        <h2>Empezar desde cero</h2>
+        <p>
+          Si escribes solo <code>range(3)</code>, Python comienza en 0. Eso
+          genera 0, 1 y 2: tres números en total. Es normal verlo en código,
+          aunque al empezar suele ser más legible indicar el inicio y el final
+          de forma explícita.
+        </p>
+        <pre
+          class="code-block"
+        ><code><span class="py-keyword">for</span> <span class="py-variable">numero</span> <span class="py-keyword">in</span> <span class="py-builtin">range</span>(<span class="py-number">3</span>):<br>    <span class="py-builtin">print</span>(<span class="py-variable">numero</span>)</code></pre>
+        <div class="python-reading">
+          <strong>Lectura natural:</strong> repite tres veces. En la primera
+          vuelta <code>numero</code> vale 0, luego vale 1 y finalmente vale 2.
+        </div>
+        <h2>Avanzar de cierto número en cierto número</h2>
+        <p>
+          <code>range(inicio, fin, paso)</code> permite indicar cuánto aumenta
+          el contador en cada vuelta. El tercer valor es el salto entre un
+          número y otro.
+        </p>
+        <p>
+          <strong>Contexto:</strong> una barra de progreso debe mostrar avances
+          de 25 en 25 hasta llegar al 100 %.
+        </p>
+        <pre
+          class="code-block"
+        ><code><span class="py-keyword">for</span> <span class="py-variable">progreso</span> <span class="py-keyword">in</span> <span class="py-builtin">range</span>(<span class="py-number">0</span>, <span class="py-number">101</span>, <span class="py-number">25</span>): <span class="py-guide-comment"># aumenta de 25 en 25</span><br>    <span class="py-builtin">print</span>(<span class="py-string">f"{</span><span class="py-variable">progreso</span><span class="py-string">}% completado"</span>)</code></pre>
+        <div class="python-reading">
+          <strong>Lectura natural:</strong> empieza en 0 y, en cada vuelta, suma
+          25. Como el final no se incluye, usamos 101 para que 100 sí aparezca.
+          El resultado muestra 0 %, 25 %, 50 %, 75 % y 100 %.
+        </div>
+        <div class="lesson-note">
+          <strong>Fíjate:</strong> el valor que cambia en un
+          <code>for</code> —como <code>ronda</code> o <code>progreso</code>— lo
+          actualiza Python. No necesitas escribir <code>+= 1</code> dentro del
+          bloque.
+        </div>
+        <h2>Práctica</h2>
+        <p>
+          Haz un programa que muestre cinco mensajes: “Ejercicio 1 listo”,
+          “Ejercicio 2 listo” y así hasta el 5. Usa una variable llamada
+          <code>ejercicio</code> y <code>range(1, 6)</code>. Luego cambia el
+          rango para que muestre solo los números pares entre 2 y 10.
+        </p>
+        <div class="lesson-actions">
+          <a href="index.html">← Repetir con while</a
+          ><a href="../index.html">Volver a las categorías de Python →</a>
+        </div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">
+            Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y
+            Telecomunicaciones · 2026
+          </p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/python-loops.js"></script>
+  </body>
+</html>
