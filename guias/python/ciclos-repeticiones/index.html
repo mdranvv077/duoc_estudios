@@ -150,10 +150,33 @@
             opción activa.
           </li>
         </ul>
+        <h2>Salir antes con <code>break</code></h2>
+        <p>
+          <code>break</code> termina el ciclo inmediatamente. Es útil cuando
+          surge una señal clara para detenerse, aunque la condición del
+          <code>while</code> todavía sea verdadera. Se usa mucho en menús y
+          programas que esperan una opción de salida.
+        </p>
+        <p>
+          <strong>Contexto:</strong> este menú debe mantenerse abierto hasta
+          que la persona escriba <code>salir</code>. Como no conocemos cuántas
+          opciones elegirá, usamos <code>while True</code> y dejamos que
+          <code>break</code> defina el momento de terminar.
+        </p>
+        <pre
+          class="code-block"
+        ><code><span class="py-keyword">while</span> <span class="py-boolean">True</span>: <span class="py-guide-comment"># el ciclo sigue hasta encontrar break</span><br>    <span class="py-variable">opcion</span> <span class="py-operator">=</span> <span class="py-builtin">input</span>(<span class="py-string">"Escribe una opción: "</span>)<br><br>    <span class="py-keyword">if</span> <span class="py-variable">opcion</span> <span class="py-operator">==</span> <span class="py-string">"salir"</span>:<br>        <span class="py-keyword">break</span> <span class="py-guide-comment"># termina el while por completo</span><br><br>    <span class="py-builtin">print</span>(<span class="py-string">f"Elegiste: {</span><span class="py-variable">opcion</span><span class="py-string">}"</span>)<br><br><span class="py-builtin">print</span>(<span class="py-string">"Menú cerrado"</span>)</code></pre>
+        <div class="python-reading">
+          <strong>Lectura natural:</strong> el menú pregunta una opción una y
+          otra vez. Si la respuesta es “salir”, Python ejecuta <code>break</code>
+          y sale del <code>while</code>; por eso llega a “Menú cerrado”. Si se
+          escribe cualquier otra cosa, muestra la opción elegida y vuelve a
+          preguntar.
+        </div>
         <div class="lesson-note">
-          <strong>Por ahora evita:</strong> <code>while True</code>. Puede ser
-          útil más adelante, pero necesitas conocer una instrucción adicional
-          para detenerlo de forma controlada.
+          <strong>Importante:</strong> <code>while True</code> por sí solo no
+          termina nunca. Solo úsalo cuando exista un camino claro hacia
+          <code>break</code>, como la opción <code>salir</code> de este ejemplo.
         </div>
         <h2>Práctica</h2>
         <p>
