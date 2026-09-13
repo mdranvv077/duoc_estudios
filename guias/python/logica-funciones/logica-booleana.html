@@ -65,7 +65,12 @@
         <h2><code>and</code>: ambas deben cumplirse</h2>
         <p>
           <code>and</code> exige que las dos partes sean verdaderas. Si una sola
-          falla, el <code>if</code> completo es falso y no ejecuta su bloque.
+          falla, el <code>if</code> completo es falso, no ejecuta su bloque y continua
+          si hay <code>elif</code> o <code>else</code> presentes.
+        </p>
+        <p>
+          <strong>Contexto:</strong> en una entrada a un evento, la persona debe
+          traer tanto su entrada como una identificación válida.
         </p>
         <pre
           class="code-block"
@@ -82,6 +87,10 @@
           <code>or</code> solo necesita una parte verdadera. Falla únicamente
           cuando las dos partes son falsas.
         </p>
+        <p>
+          <strong>Contexto:</strong> un sistema permite iniciar sesión con una
+          clave o con una tarjeta de acceso; cualquiera de las dos sirve.
+        </p>
         <pre
           class="code-block"
         ><code><span class="py-variable">tiene_clave</span> <span class="py-operator">=</span> <span class="py-boolean">False</span><br><span class="py-variable">tiene_tarjeta</span> <span class="py-operator">=</span> <span class="py-boolean">True</span><br><br><span class="py-keyword">if</span> <span class="py-variable">tiene_clave</span> <span class="py-keyword">or</span> <span class="py-variable">tiene_tarjeta</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"Puede iniciar"</span>)</code></pre>
@@ -94,6 +103,10 @@
         <p>
           <code>not</code> cambia <code>True</code> por <code>False</code>, y
           <code>False</code> por <code>True</code>.
+        </p>
+        <p>
+          <strong>Contexto:</strong> antes de mostrar una sección privada, el
+          programa revisa que la cuenta no esté bloqueada.
         </p>
         <pre
           class="code-block"
@@ -108,6 +121,10 @@
         <p>
           Para empezar, úsalos para comprobar si una variable todavía no tiene
           información. <code>None</code> significa “por ahora, no hay valor”.
+        </p>
+        <p>
+          <strong>Contexto:</strong> el código de una compra puede estar vacío
+          al inicio y aparecer recién después de que la persona lo ingresa.
         </p>
         <pre
           class="code-block"
