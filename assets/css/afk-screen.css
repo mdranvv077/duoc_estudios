@@ -32,6 +32,8 @@
 
 .afk-logo-motion {
   perspective: 1000px;
+  transform-style: preserve-3d;
+  will-change: transform;
   animation: afk-turn 22s linear infinite;
 }
 
@@ -42,6 +44,7 @@
   color: rgba(237, 242, 247, .92);
   filter: drop-shadow(0 0 35px rgba(46, 234, 255, .17));
   transform-origin: center;
+  transform-style: preserve-3d;
   animation: afk-breathe 5.5s ease-in-out infinite;
 }
 
@@ -58,6 +61,7 @@
   letter-spacing: -.075em;
   line-height: .9;
   white-space: nowrap;
+  backface-visibility: visible;
 }
 
 @keyframes afk-breathe {

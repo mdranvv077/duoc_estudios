@@ -67,8 +67,13 @@ if (afkScreen) {
   const afkTrigger = document.getElementById("year");
   let idleTimer;
   let hideTimer;
+  let ignoreActivityUntil = 0;
 
   const showAfkScreen = () => {
+    if (vlsmAnnouncement?.open) {
+      idleTimer = window.setTimeout(showAfkScreen, 1000);
+      return;
+    }
     afkScreen.hidden = false;
     window.requestAnimationFrame(() => afkScreen.classList.add("is-visible"));
     afkScreen.setAttribute("aria-hidden", "false");
@@ -83,6 +88,7 @@ if (afkScreen) {
   };
 
   const resetIdleTimer = () => {
+    if (Date.now() < ignoreActivityUntil) return;
     window.clearTimeout(idleTimer);
     hideAfkScreen();
     idleTimer = window.setTimeout(showAfkScreen, idleDelay);
@@ -94,6 +100,7 @@ if (afkScreen) {
   document.addEventListener("visibilitychange", () => { if (!document.hidden) resetIdleTimer(); });
   afkTrigger?.addEventListener("click", () => {
     window.clearTimeout(idleTimer);
+    ignoreActivityUntil = Date.now() + 900;
     showAfkScreen();
   });
   resetIdleTimer();
