@@ -5,6 +5,7 @@
   display: grid;
   place-items: center;
   opacity: 0;
+  pointer-events: none;
   background: rgba(4, 8, 13, .18);
   backdrop-filter: blur(10px) brightness(.72) saturate(.82);
   perspective: 1100px;
@@ -12,7 +13,10 @@
 }
 
 .afk-screen[hidden] { display: none; }
-.afk-screen.is-visible { opacity: 1; }
+.afk-screen.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
 
 .footer-afk-trigger {
   padding: 0;
