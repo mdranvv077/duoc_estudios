@@ -73,6 +73,7 @@ if (afkScreen) {
   const afkTrigger = document.getElementById("year");
   let idleTimer;
   let hideTimer;
+  let showFrame;
   let ignoreActivityUntil = 0;
 
   const showAfkScreen = () => {
@@ -80,13 +81,17 @@ if (afkScreen) {
       idleTimer = window.setTimeout(showAfkScreen, 1000);
       return;
     }
+
+    window.clearTimeout(hideTimer);
+    window.cancelAnimationFrame(showFrame);
     afkScreen.hidden = false;
-    window.requestAnimationFrame(() => afkScreen.classList.add("is-visible"));
+    showFrame = window.requestAnimationFrame(() => afkScreen.classList.add("is-visible"));
     afkScreen.setAttribute("aria-hidden", "false");
   };
 
   const hideAfkScreen = () => {
     window.clearTimeout(hideTimer);
+    window.cancelAnimationFrame(showFrame);
     if (!afkScreen.classList.contains("is-visible")) return;
     afkScreen.classList.remove("is-visible");
     afkScreen.setAttribute("aria-hidden", "true");
