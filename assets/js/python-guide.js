@@ -12,6 +12,16 @@ function renderPythonNavigation() {
   nav.innerHTML = pythonModules.map(([file, label], index) => `<a class="${file === current ? "active" : ""}" href="${file}"><span>${String(index + 1).padStart(2, "0")}</span>${label}</a>`).join("");
 }
 
+function activatePythonCategories() {
+  document.querySelectorAll(".sidebar-categories .is-soon").forEach((item) => {
+    const link = document.createElement("a");
+    link.className = "sidebar-category";
+    link.href = "../logica-funciones/index.html";
+    link.innerHTML = "<span>02</span><b>Lógica y funciones</b><i>↗</i>";
+    item.replaceWith(link);
+  });
+}
+
 function addPythonExplanations() {
   const lesson = new URL(window.location.href).pathname.split("/").pop();
   const lead = document.querySelector(".lesson-lead");
@@ -97,5 +107,6 @@ document.addEventListener("click", (event) => {
 });
 window.addEventListener("popstate", () => loadPythonModule(window.location.href, false));
 renderPythonNavigation();
+activatePythonCategories();
 addPythonExplanations();
 addPythonOutputs();
