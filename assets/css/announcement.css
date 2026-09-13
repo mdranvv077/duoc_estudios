@@ -2,6 +2,42 @@
   width: min(560px, calc(100% - 34px));
 }
 
+.vlsm-announcement[open] {
+  animation: vlsm-announcement-in .42s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.vlsm-announcement.is-closing {
+  animation: vlsm-announcement-out .42s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.vlsm-announcement::backdrop {
+  animation: vlsm-backdrop-in .42s ease both;
+}
+
+.vlsm-announcement.is-closing::backdrop {
+  animation: vlsm-backdrop-out .42s ease both;
+}
+
+@keyframes vlsm-announcement-in {
+  from { opacity: 0; transform: translateY(18px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes vlsm-announcement-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(18px) scale(.985); }
+}
+
+@keyframes vlsm-backdrop-in {
+  from { background: rgba(3, 6, 11, 0); }
+  to { background: rgba(3, 6, 11, .74); }
+}
+
+@keyframes vlsm-backdrop-out {
+  from { background: rgba(3, 6, 11, .74); }
+  to { background: rgba(3, 6, 11, 0); }
+}
+
 .vlsm-announcement h2 {
   margin-top: 16px;
   font-size: clamp(2rem, 5vw, 3.15rem);
@@ -43,5 +79,14 @@
 @media (max-width: 760px) {
   .vlsm-announcement {
     padding: 24px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vlsm-announcement[open],
+  .vlsm-announcement.is-closing,
+  .vlsm-announcement::backdrop,
+  .vlsm-announcement.is-closing::backdrop {
+    animation-duration: .01ms;
   }
 }

@@ -13,16 +13,35 @@ if (guideMenu && openGuides && closeGuides) {
 }
 
 const vlsmAnnouncement = document.getElementById("vlsm-announcement");
-const closeVlsmAnnouncement = document.querySelector("[data-close-vlsm]");
+const closeVlsmButton = document.querySelector("[data-close-vlsm]");
 
-if (vlsmAnnouncement && closeVlsmAnnouncement) {
-  closeVlsmAnnouncement.addEventListener("click", () => vlsmAnnouncement.close());
+if (vlsmAnnouncement && closeVlsmButton) {
+  const dismissVlsmAnnouncement = () => {
+    if (!vlsmAnnouncement.open || vlsmAnnouncement.classList.contains("is-closing")) return;
+
+    vlsmAnnouncement.classList.add("is-closing");
+    vlsmAnnouncement.addEventListener("animationend", function closeAfterAnimation(event) {
+      if (event.animationName !== "vlsm-announcement-out") return;
+      vlsmAnnouncement.classList.remove("is-closing");
+      vlsmAnnouncement.close();
+      vlsmAnnouncement.removeEventListener("animationend", closeAfterAnimation);
+    });
+  };
+
+  closeVlsmButton.addEventListener("click", dismissVlsmAnnouncement);
   vlsmAnnouncement.addEventListener("click", (event) => {
-    if (event.target === vlsmAnnouncement) vlsmAnnouncement.close();
+    if (event.target === vlsmAnnouncement) dismissVlsmAnnouncement();
   });
+  vlsmAnnouncement.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    dismissVlsmAnnouncement();
+  });
+
   window.setTimeout(() => {
-    if (!vlsmAnnouncement.open) vlsmAnnouncement.showModal();
-  }, 900);
+    if (vlsmAnnouncement.open) return;
+    vlsmAnnouncement.showModal();
+    window.setTimeout(dismissVlsmAnnouncement, 10000);
+  }, 10000);
 }
 
 const discordInvite = document.querySelector("[data-discord-invite]");
