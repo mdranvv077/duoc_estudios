@@ -6,6 +6,7 @@
 .code-output-label { flex: 0 0 auto; color: var(--muted); font: .59rem "DM Mono", monospace; letter-spacing: .07em; }
 .code-output code { color: #dce6f1; font: inherit; }
 .py-comment { color: #718096; }
+.py-guide-comment { color: #009d00; }
 .py-keyword { color: #ff9d2e; }
 .py-function, .py-builtin { color: #2eeaff; }
 .py-string { color: #a6e22e; }
