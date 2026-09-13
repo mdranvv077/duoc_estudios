@@ -20,7 +20,7 @@
     <header class="site-header container"><a class="brand" href="../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
     <main class="container vlsm-page">
       <section class="vlsm-intro">
-        <div><p class="eyebrow"><span></span> Redes · Herramienta práctica</p><h1>Calculadora <em>VLSM.</em></h1><p class="hero-copy">Distribuye una red en subredes de tamaños distintos. Escribe la red disponible, indica cuántos hosts requiere cada área y la calculadora asignará primero los bloques más grandes.</p></div>
+        <div><p class="eyebrow"><span></span> Redes · Herramienta práctica</p><h1>Calculadora <em>VLSM.</em></h1><p class="hero-copy">Distribuye una red en subredes de tamaños distintos. Escribe la red disponible, indica cuántos hosts requiere cada área y la calculadora asignará primero los bloques más grandes.</p><button class="button vlsm-help-button" type="button" data-open-vlsm-help>Guía rápida de VLSM <span aria-hidden="true">↗</span></button></div>
         <aside class="vlsm-how"><p>Cómo usarla</p><ol><li>Ingresa la red base con su prefijo.</li><li>Añade las áreas y sus hosts necesarios.</li><li>Calcula y revisa cada rango asignado.</li></ol></aside>
       </section>
       <section class="vlsm-workspace" aria-labelledby="calculator-title">
@@ -43,6 +43,14 @@
       </section>
       <section class="vlsm-explainer"><p class="eyebrow"><span></span> Antes de usar VLSM</p><h2>¿Qué está resolviendo?</h2><div class="explainer-grid"><p>VLSM significa <strong>Variable Length Subnet Mask</strong>: permite que cada subred tenga una máscara distinta según la cantidad de equipos que necesita.</p><p>En vez de reservar el mismo espacio para todos, se asigna primero la subred más grande y luego las menores. Así evitas desperdiciar direcciones IP.</p><p>La calculadora es una ayuda para planificar y comprender; antes de configurar un router o switch, verifica siempre que el diseño coincida con la topología real.</p></div></section>
     </main>
+    <dialog class="guide-menu vlsm-help" id="vlsm-help" aria-labelledby="vlsm-help-title">
+      <div class="guide-menu-top"><div><p class="eyebrow"><span></span> Guía rápida</p><h2 id="vlsm-help-title">Entiende <em>VLSM.</em></h2></div><button class="close-menu" type="button" data-close-vlsm-help aria-label="Cerrar guía rápida">×</button></div>
+      <div class="vlsm-help-content">
+        <p><strong>VLSM</strong> sirve para dividir una red grande en varias subredes de tamaños diferentes. En una empresa, por ejemplo, Administración puede necesitar 50 equipos, Ventas 25 e Invitados 10: no tiene sentido entregarles el mismo bloque a todas.</p>
+        <div class="vlsm-help-steps"><article><span>01</span><div><h3>Parte por la red disponible</h3><p>Ingresa el bloque que te asignaron, como <code>192.168.10.0/24</code>. Ese es el espacio total que puedes distribuir.</p></div></article><article><span>02</span><div><h3>Indica los hosts de cada área</h3><p>Escribe solo los equipos que realmente necesita cada subred. La calculadora reserva también red y broadcast.</p></div></article><article><span>03</span><div><h3>Asigna de mayor a menor</h3><p>VLSM siempre entrega primero el bloque más grande. Así los bloques pequeños no dejan sin espacio al más grande.</p></div></article><article><span>04</span><div><h3>Lleva el plan a la topología</h3><p>Usa la IP de red, el rango utilizable y la máscara para configurar interfaces, gateways y equipos finales.</p></div></article></div>
+        <p class="vlsm-help-tip"><strong>¿Cuándo usarlo?</strong> Cuando áreas, VLANs o sedes requieren cantidades distintas de hosts y quieres aprovechar las direcciones IP sin desperdiciarlas.</p>
+      </div>
+    </dialog>
     <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
     <script src="../../assets/js/main.js"></script><script src="../../assets/js/calc-vlsm.js"></script>
   </body>
