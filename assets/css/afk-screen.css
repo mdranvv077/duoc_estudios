@@ -137,13 +137,15 @@
 }
 
 @keyframes afk-back-face-logo {
-  0%, 100% { opacity: 0; }
-  50% { opacity: .7; }
+  0%, 49.99% { opacity: 0; }
+  50%, 99.99% { opacity: .7; }
+  100% { opacity: 0; }
 }
 
 @keyframes afk-back-face-text {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
+  0%, 49.99% { opacity: 0; }
+  50%, 99.99% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 @media (max-width: 620px) {
