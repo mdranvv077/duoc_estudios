@@ -64,6 +64,7 @@ const afkScreen = document.getElementById("afk-screen");
 
 if (afkScreen) {
   const idleDelay = 60000;
+  const afkTrigger = document.getElementById("year");
   let idleTimer;
   let hideTimer;
 
@@ -91,5 +92,9 @@ if (afkScreen) {
     window.addEventListener(eventName, resetIdleTimer, { passive: true });
   });
   document.addEventListener("visibilitychange", () => { if (!document.hidden) resetIdleTimer(); });
+  afkTrigger?.addEventListener("click", () => {
+    window.clearTimeout(idleTimer);
+    showAfkScreen();
+  });
   resetIdleTimer();
 }

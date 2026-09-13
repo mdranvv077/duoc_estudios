@@ -13,6 +13,23 @@
 .afk-screen[hidden] { display: none; }
 .afk-screen.is-visible { opacity: 1; }
 
+.footer-afk-trigger {
+  padding: 0;
+  color: var(--magenta);
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  transition: color .2s ease, text-shadow .2s ease;
+}
+
+.footer-afk-trigger:hover,
+.footer-afk-trigger:focus-visible {
+  color: #ff6fa5;
+  outline: 0;
+  text-shadow: 0 0 10px rgba(255, 46, 123, .42);
+}
+
 .afk-logo-motion {
   perspective: 1000px;
   animation: afk-turn 22s linear infinite;
