@@ -37,11 +37,17 @@ if (vlsmAnnouncement && closeVlsmButton) {
     dismissVlsmAnnouncement();
   });
 
-  window.setTimeout(() => {
+  const showVlsmAnnouncement = () => {
+    if (afkScreen?.classList.contains("is-visible")) {
+      window.setTimeout(showVlsmAnnouncement, 1000);
+      return;
+    }
     if (vlsmAnnouncement.open) return;
     vlsmAnnouncement.showModal();
     window.setTimeout(dismissVlsmAnnouncement, 10000);
-  }, 10000);
+  };
+
+  window.setTimeout(showVlsmAnnouncement, 10000);
 }
 
 const discordInvite = document.querySelector("[data-discord-invite]");
