@@ -41,7 +41,7 @@
 .afk-logo-breathe {
   display: flex;
   align-items: center;
-  gap: clamp(18px, 3vw, 42px);
+  gap: clamp(10px, 1.5vw, 22px);
   color: rgba(237, 242, 247, .92);
   transform-origin: center;
   transform-style: preserve-3d;
@@ -65,7 +65,7 @@
 }
 
 .afk-logo-front {
-  transform: translateZ(32px);
+  transform: translateZ(22px);
   filter: drop-shadow(0 0 22px rgba(46, 234, 255, .34));
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -74,7 +74,7 @@
 .afk-logo-depth {
   opacity: 0;
   filter: brightness(.23) saturate(.8) drop-shadow(0 0 16px rgba(0, 73, 89, .42));
-  transform: translateZ(-32px);
+  transform: translateZ(-22px);
   animation: afk-back-face-logo 22s linear infinite;
 }
 
@@ -112,7 +112,7 @@
 
 .afk-wordmark-front {
   text-shadow: 1px 1px 0 rgba(101, 220, 235, .18), 8px 9px 0 rgba(5, 42, 53, .48), 0 0 25px rgba(46, 234, 255, .14);
-  transform: translateZ(34px);
+  transform: translateZ(22px);
 }
 
 .afk-wordmark-back {
@@ -120,7 +120,7 @@
   inset: 0;
   color: rgba(76, 108, 116, .92);
   text-shadow: -7px 9px 0 rgba(2, 16, 21, .75), 0 0 18px rgba(9, 78, 91, .2);
-  transform: translateZ(-34px);
+  transform: translateZ(-22px);
   -webkit-backface-visibility: visible;
   backface-visibility: visible;
   animation: afk-back-face-text 22s linear infinite;
