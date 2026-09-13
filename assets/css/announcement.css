@@ -73,7 +73,25 @@
 }
 
 .announcement-cta {
+  margin-top: 0;
+}
+
+.announcement-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
   margin-top: 25px;
+}
+
+.announcement-guide-link {
+  color: #b4c0ce;
+  font: 500 .7rem "DM Mono", monospace;
+  text-decoration: none;
+}
+
+.announcement-guide-link:hover {
+  color: var(--cyan);
 }
 
 @media (max-width: 760px) {
