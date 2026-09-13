@@ -7,6 +7,7 @@
   opacity: 0;
   background: rgba(4, 8, 13, .18);
   backdrop-filter: blur(10px) brightness(.72) saturate(.82);
+  perspective: 1100px;
   transition: opacity .7s cubic-bezier(.2, .8, .2, 1), backdrop-filter .7s ease;
 }
 
@@ -48,20 +49,57 @@
   animation: afk-breathe 5.5s ease-in-out infinite;
 }
 
-.afk-logo-breathe img {
+.afk-logo-symbol {
+  position: relative;
+  display: block;
   width: clamp(120px, 17vw, 250px);
   height: clamp(120px, 17vw, 250px);
-  object-fit: contain;
-  filter: drop-shadow(0 0 22px rgba(46, 234, 255, .34));
+  transform-style: preserve-3d;
 }
 
-.afk-logo-breathe span {
+.afk-logo-symbol img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.afk-logo-front {
+  transform: translateZ(32px);
+  filter: drop-shadow(0 0 22px rgba(46, 234, 255, .34));
+  backface-visibility: visible;
+}
+
+.afk-logo-depth {
+  opacity: .62;
+  transform: translate3d(12px, 14px, -12px);
+  filter: brightness(.38) saturate(1.4) drop-shadow(0 0 20px rgba(0, 102, 126, .36));
+}
+
+.afk-logo-symbol::after {
+  position: absolute;
+  z-index: -1;
+  right: 7%;
+  bottom: -12%;
+  left: 7%;
+  height: 20%;
+  content: "";
+  border-radius: 50%;
+  background: rgba(46, 234, 255, .2);
+  filter: blur(13px);
+  transform: translateZ(-35px) rotateX(72deg);
+}
+
+.afk-logo-breathe > span:not(.afk-logo-symbol) {
   font-size: clamp(2.5rem, 7vw, 7.25rem);
   font-weight: 800;
   letter-spacing: -.075em;
   line-height: .9;
   white-space: nowrap;
   backface-visibility: visible;
+  text-shadow: 1px 1px 0 rgba(101, 220, 235, .18), 8px 9px 0 rgba(5, 42, 53, .48), 0 0 25px rgba(46, 234, 255, .14);
+  transform: translateZ(34px);
 }
 
 @keyframes afk-breathe {
@@ -76,7 +114,7 @@
 
 @media (max-width: 620px) {
   .afk-logo-breathe { flex-direction: column; gap: 19px; }
-  .afk-logo-breathe span { font-size: clamp(2.5rem, 14vw, 4.8rem); }
+  .afk-logo-breathe > span:not(.afk-logo-symbol) { font-size: clamp(2.5rem, 14vw, 4.8rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
