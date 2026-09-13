@@ -59,3 +59,37 @@ if (discordInvite) {
     discordInvite.setAttribute("aria-hidden", "true");
   }, 20000);
 }
+
+const afkScreen = document.getElementById("afk-screen");
+
+if (afkScreen) {
+  const idleDelay = 60000;
+  let idleTimer;
+  let hideTimer;
+
+  const showAfkScreen = () => {
+    afkScreen.hidden = false;
+    window.requestAnimationFrame(() => afkScreen.classList.add("is-visible"));
+    afkScreen.setAttribute("aria-hidden", "false");
+  };
+
+  const hideAfkScreen = () => {
+    window.clearTimeout(hideTimer);
+    if (!afkScreen.classList.contains("is-visible")) return;
+    afkScreen.classList.remove("is-visible");
+    afkScreen.setAttribute("aria-hidden", "true");
+    hideTimer = window.setTimeout(() => { afkScreen.hidden = true; }, 700);
+  };
+
+  const resetIdleTimer = () => {
+    window.clearTimeout(idleTimer);
+    hideAfkScreen();
+    idleTimer = window.setTimeout(showAfkScreen, idleDelay);
+  };
+
+  ["pointermove", "pointerdown", "keydown", "scroll", "touchstart"].forEach((eventName) => {
+    window.addEventListener(eventName, resetIdleTimer, { passive: true });
+  });
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) resetIdleTimer(); });
+  resetIdleTimer();
+}

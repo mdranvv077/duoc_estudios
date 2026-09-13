@@ -1,0 +1,63 @@
+.afk-screen {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  background: rgba(4, 8, 13, .18);
+  backdrop-filter: blur(10px) brightness(.72) saturate(.82);
+  transition: opacity .7s cubic-bezier(.2, .8, .2, 1), backdrop-filter .7s ease;
+}
+
+.afk-screen[hidden] { display: none; }
+.afk-screen.is-visible { opacity: 1; }
+
+.afk-logo-motion {
+  perspective: 1000px;
+  animation: afk-turn 22s linear infinite;
+}
+
+.afk-logo-breathe {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 3vw, 42px);
+  color: rgba(237, 242, 247, .92);
+  filter: drop-shadow(0 0 35px rgba(46, 234, 255, .17));
+  transform-origin: center;
+  animation: afk-breathe 5.5s ease-in-out infinite;
+}
+
+.afk-logo-breathe img {
+  width: clamp(120px, 17vw, 250px);
+  height: clamp(120px, 17vw, 250px);
+  object-fit: contain;
+  filter: drop-shadow(0 0 22px rgba(46, 234, 255, .34));
+}
+
+.afk-logo-breathe span {
+  font-size: clamp(2.5rem, 7vw, 7.25rem);
+  font-weight: 800;
+  letter-spacing: -.075em;
+  line-height: .9;
+  white-space: nowrap;
+}
+
+@keyframes afk-breathe {
+  0%, 100% { opacity: .74; transform: scale(.96); }
+  50% { opacity: 1; transform: scale(1.035); }
+}
+
+@keyframes afk-turn {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+@media (max-width: 620px) {
+  .afk-logo-breathe { flex-direction: column; gap: 19px; }
+  .afk-logo-breathe span { font-size: clamp(2.5rem, 14vw, 4.8rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .afk-logo-motion, .afk-logo-breathe { animation: none; }
+}
