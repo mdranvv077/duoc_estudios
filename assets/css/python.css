@@ -7,6 +7,7 @@
 .code-output code { color: #dce6f1; font: inherit; }
 .py-comment { color: #718096; }
 .py-guide-comment { color: #009d00; }
+.lesson-content h2 code { display: inline-block; margin: 0 .08em; padding: .06em .16em; color: var(--cyan); background: rgba(46, 234, 255, .07); font: 500 .72em "DM Mono", monospace; letter-spacing: 0; line-height: 1.15; white-space: nowrap; }
 .py-keyword { color: #ff9d2e; }
 .py-function, .py-builtin { color: #2eeaff; }
 .py-string { color: #a6e22e; }
