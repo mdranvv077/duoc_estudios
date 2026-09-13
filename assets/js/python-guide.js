@@ -20,6 +20,11 @@ function activatePythonCategories() {
     link.innerHTML = "<span>02</span><b>Lógica y funciones</b><i>↗</i>";
     item.replaceWith(link);
   });
+
+  const categories = document.querySelector(".sidebar-categories");
+  if (categories && !categories.querySelector('[href*="ciclos-repeticiones"]')) {
+    categories.insertAdjacentHTML("beforeend", '<a class="sidebar-category" href="../ciclos-repeticiones/index.html"><span>03</span><b>Ciclos y repeticiones</b><i>↗</i></a>');
+  }
 }
 
 function addPythonExplanations() {

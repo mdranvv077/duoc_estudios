@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Ciclos while — Python</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/responsive.css?v=20260909-mobile"
+    />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css" />
+    <link rel="stylesheet" href="../../../assets/css/python.css" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html"
+        ><img
+          class="brand-logo"
+          src="../../../assets/images/dgnv-logo.png"
+          alt=""
+        /><span>DGNV Studios</span></a
+      >
+    </header>
+    <main class="container learning-shell">
+      <button
+        class="sidebar-toggle"
+        type="button"
+        data-sidebar-toggle
+        aria-expanded="false"
+      >
+        ☰ Módulos de ciclos
+      </button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"
+          ><small>Python · 03</small><strong>Ciclos y repeticiones</strong></a
+        >
+        <nav class="sidebar-categories">
+          <a class="sidebar-category" href="../fundamentos/index.html"
+            ><span>01</span><b>Fundamentos</b><i>↗</i></a
+          ><a class="sidebar-category" href="../logica-funciones/index.html"
+            ><span>02</span><b>Lógica y funciones</b><i>↗</i></a
+          ><a class="sidebar-category active" href="index.html"
+            ><span>03</span><b>Ciclos y repeticiones</b><i>↗</i></a
+          >
+        </nav>
+        <nav class="lesson-nav"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 01</p>
+        <h1>Repetir con <em>while.</em></h1>
+        <p class="lesson-lead">
+          <code>while</code> repite un bloque de instrucciones mientras una
+          condición sea verdadera. Es útil cuando no sabes exactamente cuántas
+          veces se repetirá algo, pero sí sabes cuándo debe terminar.
+        </p>
+        <h2>La idea: repetir mientras se cumpla algo</h2>
+        <p>
+          Lee <code>while condicion:</code> como: “mientras esta condición sea
+          verdadera, vuelve a ejecutar las líneas indentadas”. Después de cada
+          recorrido, Python regresa a la pregunta y decide si continúa o sale
+          del ciclo.
+        </p>
+        <p>
+          <strong>Contexto:</strong> imagina una persona que tiene tres intentos
+          para ingresar un código. El programa debe mostrar el número de intento
+          hasta que ya no queden.
+        </p>
+        <pre
+          class="code-block"
+        ><code><span class="py-variable">intento</span> <span class="py-operator">=</span> <span class="py-number">1</span> <span class="py-guide-comment"># comienza en el primer intento</span><br><br><span class="py-keyword">while</span> <span class="py-variable">intento</span> <span class="py-operator">&lt;=</span> <span class="py-number">3</span>: <span class="py-guide-comment"># se repite mientras queden intentos</span><br>    <span class="py-builtin">print</span>(<span class="py-string">f"Intento {</span><span class="py-variable">intento</span><span class="py-string">}"</span>)<br>    <span class="py-variable">intento</span> <span class="py-operator">+=</span> <span class="py-number">1</span> <span class="py-guide-comment"># suma uno para acercarse al final</span></code></pre>
+        <div class="python-reading">
+          <strong>Lectura natural:</strong> empieza con el intento 1. Mientras
+          el intento sea menor o igual a 3, muestra su número y luego le suma
+          uno. Cuando llega a 4, la pregunta “¿4 es menor o igual a 3?” es
+          falsa, así que el ciclo termina.
+        </div>
+        <h2>La variable debe cambiar</h2>
+        <p>
+          Un <code>while</code> necesita que algo cambie dentro del bloque. Si
+          <code>intento</code> nunca aumentara, siempre valdría 1; la condición
+          seguiría siendo verdadera y el ciclo no terminaría. A eso se le llama
+          ciclo infinito.
+        </p>
+        <div class="lesson-note">
+          <strong>Antes de ejecutar:</strong> identifica qué variable controla
+          el ciclo y en qué línea cambia. Si no encuentras esa línea,
+          probablemente el <code>while</code> no tiene una salida.
+        </div>
+        <h2>Repetir una pregunta hasta recibir un dato válido</h2>
+        <p>
+          <code>while</code> también sirve para validar entradas. En vez de
+          terminar el programa por un dato incorrecto, puedes volver a preguntar
+          hasta que la respuesta sea aceptable.
+        </p>
+        <p>
+          <strong>Contexto:</strong> una edad negativa no tiene sentido para
+          este formulario. El programa insiste con la pregunta solo mientras el
+          valor sea menor que cero.
+        </p>
+        <pre
+          class="code-block"
+        ><code><span class="py-variable">edad</span> <span class="py-operator">=</span> <span class="py-builtin">int</span>(<span class="py-builtin">input</span>(<span class="py-string">"Edad: "</span>))<br><br><span class="py-keyword">while</span> <span class="py-variable">edad</span> <span class="py-operator">&lt;</span> <span class="py-number">0</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"La edad no puede ser negativa"</span>)<br>    <span class="py-variable">edad</span> <span class="py-operator">=</span> <span class="py-builtin">int</span>(<span class="py-builtin">input</span>(<span class="py-string">"Escribe la edad nuevamente: "</span>)) <span class="py-guide-comment"># vuelve a pedir el dato</span><br><br><span class="py-builtin">print</span>(<span class="py-string">f"Edad registrada: {</span><span class="py-variable">edad</span><span class="py-string">}"</span>)</code></pre>
+        <div class="python-reading">
+          <strong>Lectura natural:</strong> pide una edad. Si es negativa, avisa
+          el problema y pregunta otra vez. Cada nueva respuesta reemplaza el
+          valor anterior de <code>edad</code>. Cuando se escribe un número
+          válido, la condición deja de cumplirse y se registra la edad.
+        </div>
+        <h2>Cuándo usar <code>while</code></h2>
+        <ul>
+          <li>
+            Cuando una persona debe intentar una acción hasta cumplir una
+            condición.
+          </li>
+          <li>Cuando un dato necesita validarse antes de continuar.</li>
+          <li>
+            Cuando una tarea sigue mientras haya saldo, tiempo, intentos o una
+            opción activa.
+          </li>
+        </ul>
+        <div class="lesson-note">
+          <strong>Por ahora evita:</strong> <code>while True</code>. Puede ser
+          útil más adelante, pero necesitas conocer una instrucción adicional
+          para detenerlo de forma controlada.
+        </div>
+        <h2>Práctica</h2>
+        <p>
+          Crea un programa con una variable llamada <code>energia</code> que
+          comience en 3. Mientras sea mayor que 0, muestra cuánta energía queda
+          y réstale uno. Al finalizar, muestra “Energía agotada”. Léelo como una
+          historia: hay energía, se usa una unidad y se vuelve a revisar si
+          queda.
+        </p>
+        <div class="lesson-actions">
+          <a href="../logica-funciones/funciones-flujo.html"
+            >← Funciones y exit()</a
+          ><a href="../index.html">Volver a las categorías de Python →</a>
+        </div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">
+            Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y
+            Telecomunicaciones · 2026
+          </p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/python-loops.js"></script>
+  </body>
+</html>
