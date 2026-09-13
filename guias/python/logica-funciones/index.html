@@ -1,1 +1,109 @@
-<!doctype html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Decisiones y condiciones — Python</title><link rel="icon" type="image/png" href="../../../img/favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../../assets/css/styles.css"><link rel="stylesheet" href="../../../assets/css/logo.css"><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile"><link rel="stylesheet" href="../../../assets/css/credits.css"><link rel="stylesheet" href="../../../assets/css/learning.css"><link rel="stylesheet" href="../../../assets/css/python.css"></head><body><header class="site-header container"><a class="brand" href="../../../index.html"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt=""><span>DGNV Studios</span></a></header><main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de lógica y funciones</button><aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Python · 02</small><strong>Lógica y funciones</strong></a><nav class="sidebar-categories"><a class="sidebar-category" href="../fundamentos/index.html"><span>01</span><b>Fundamentos</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>02</span><b>Lógica y funciones</b><i>↗</i></a></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside><article class="lesson-content"><p class="eyebrow"><span></span>Módulo 01</p><h1>Decisiones y <em>condiciones.</em></h1><p class="lesson-lead">Una condición hace una pregunta. Si la respuesta es verdadera, Python ejecuta las líneas indentadas debajo; si no, las omite o busca otro camino.</p><h2>Un programa no siempre hace lo mismo</h2><p>Hasta ahora las instrucciones se ejecutaban una tras otra. Con una condición, el programa puede reaccionar a un dato: una edad, una nota o un estado. Lee <code>if</code> como “si ocurre esto, haz lo siguiente”.</p><pre class="code-block"><code><span class="py-variable">edad</span> <span class="py-operator">=</span> <span class="py-number">17</span><br><br><span class="py-keyword">if</span> <span class="py-variable">edad</span> <span class="py-operator">>=</span> <span class="py-number">18</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"Puedes ingresar"</span>)</code></pre><div class="python-reading"><strong>Lectura natural:</strong> guarda 17 en <code>edad</code>. Después pregunta: “¿edad es mayor o igual que 18?”. Como no lo es, la línea con sangría no se ejecuta.</div><h2>La sangría forma el bloque</h2><p>Los cuatro espacios antes de <code>print()</code> indican que esa instrucción pertenece al <code>if</code>. El signo <code>:</code> anuncia que comienza un bloque. Sin una sangría correcta, Python no sabrá qué debe ocurrir cuando la condición se cumple.</p><div class="lesson-note"><strong>Idea clave:</strong> una condición no cambia un valor por sí sola. Solo decide si ciertas instrucciones se ejecutan o no.</div><div class="lesson-actions"><span></span><a href="comparadores.html">Siguiente: comparar valores →</a></div><footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer></article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/python-logic.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Decisiones y condiciones — Python</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/responsive.css?v=20260909-mobile"
+    />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css" />
+    <link rel="stylesheet" href="../../../assets/css/python.css" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html"
+        ><img
+          class="brand-logo"
+          src="../../../assets/images/dgnv-logo.png"
+          alt=""
+        /><span>DGNV Studios</span></a
+      >
+    </header>
+    <main class="container learning-shell">
+      <button
+        class="sidebar-toggle"
+        type="button"
+        data-sidebar-toggle
+        aria-expanded="false"
+      >
+        ☰ Módulos de lógica y funciones
+      </button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"
+          ><small>Python · 02</small><strong>Lógica y funciones</strong></a
+        >
+        <nav class="sidebar-categories">
+          <a class="sidebar-category" href="../fundamentos/index.html"
+            ><span>01</span><b>Fundamentos</b><i>↗</i></a
+          ><a class="sidebar-category active" href="index.html"
+            ><span>02</span><b>Lógica y funciones</b><i>↗</i></a
+          >
+        </nav>
+        <nav class="lesson-nav"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 01</p>
+        <h1>Decisiones y <em>condiciones.</em></h1>
+        <p class="lesson-lead">
+          Una condición hace una pregunta. Si la respuesta es verdadera, Python
+          ejecuta las líneas indentadas debajo; si no, las omite o busca otro
+          camino.
+        </p>
+        <h2>Un programa no siempre hace lo mismo</h2>
+        <p>
+          Hasta ahora las instrucciones se ejecutaban una tras otra. Con una
+          condición, el programa puede reaccionar a un dato: una edad, una nota
+          o un estado. Lee <code>if</code> como “si ocurre esto, haz lo
+          siguiente”.
+        </p>
+        <pre
+          class="code-block"
+        ><code><span class="py-variable">edad</span> <span class="py-operator">=</span> <span class="py-number">17</span><br><br><span class="py-keyword">if</span> <span class="py-variable">edad</span> <span class="py-operator">>=</span> <span class="py-number">18</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"Puedes ingresar"</span>)</code></pre>
+        <div class="python-reading">
+          <strong>Lectura natural:</strong> guarda 17 en <code>edad</code>.
+          Después pregunta: “¿edad es mayor o igual que 18?”. Como no lo es, la
+          línea con sangría no se ejecuta.
+        </div>
+        <h2>La sangría forma el bloque</h2>
+        <p>
+          Los cuatro espacios antes de <code>print()</code> indican que esa
+          instrucción pertenece al <code>if</code>. El signo
+          <code>:</code> anuncia que comienza un bloque. Sin una sangría
+          correcta, Python no sabrá qué debe ocurrir cuando la condición se
+          cumple.
+        </p>
+        <div class="lesson-note">
+          <strong>Idea clave:</strong> una condición no cambia un valor por sí
+          sola. Solo decide si ciertas instrucciones se ejecutan o no.
+        </div>
+        <div class="lesson-actions">
+          <span></span
+          ><a href="comparadores.html">Siguiente: comparar valores →</a>
+        </div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">
+            Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y
+            Telecomunicaciones · 2026
+          </p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/python-logic.js"></script>
+  </body>
+</html>

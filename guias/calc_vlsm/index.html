@@ -3,55 +3,316 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Calculadora VLSM de DGNV Studios para planificar subredes paso a paso." />
+    <meta
+      name="description"
+      content="Calculadora VLSM de DGNV Studios para planificar subredes paso a paso."
+    />
     <title>Calculadora VLSM — DGNV Studios</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../../assets/css/logo.css" />
-    <link rel="stylesheet" href="../../assets/css/responsive.css?v=20260909-mobile" />
+    <link
+      rel="stylesheet"
+      href="../../assets/css/responsive.css?v=20260909-mobile"
+    />
     <link rel="stylesheet" href="../../assets/css/credits.css" />
     <link rel="stylesheet" href="../../assets/css/learning.css" />
     <link rel="stylesheet" href="../../assets/css/calc-vlsm.css" />
     <link rel="icon" type="image/png" href="../../img/favicon.png" />
   </head>
   <body>
-    <header class="site-header container"><a class="brand" href="../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <header class="site-header container">
+      <a class="brand" href="../../index.html" aria-label="Inicio DGNV Studios"
+        ><img
+          class="brand-logo"
+          src="../../assets/images/dgnv-logo.png"
+          alt=""
+        /><span>DGNV Studios</span></a
+      >
+    </header>
     <main class="container vlsm-page">
       <section class="vlsm-intro">
-        <div><p class="eyebrow"><span></span> Redes · Herramienta práctica</p><h1>Calculadora <em>VLSM.</em></h1><p class="hero-copy">Distribuye una red en subredes de tamaños distintos. Escribe la red disponible, indica cuántos hosts requiere cada área y la calculadora asignará primero los bloques más grandes.</p><button class="button vlsm-help-button" type="button" data-open-vlsm-help>Guía rápida de VLSM</button></div>
-        <aside class="vlsm-how"><p>Cómo usarla</p><ol><li>Ingresa la red base con su prefijo.</li><li>Añade las áreas y sus hosts necesarios.</li><li>Calcula y revisa cada rango asignado.</li></ol></aside>
+        <div>
+          <p class="eyebrow"><span></span> Redes · Herramienta práctica</p>
+          <h1>Calculadora <em>VLSM.</em></h1>
+          <p class="hero-copy">
+            Distribuye una red en subredes de tamaños distintos. Escribe la red
+            disponible, indica cuántos hosts requiere cada área y la calculadora
+            asignará primero los bloques más grandes.
+          </p>
+          <button
+            class="button vlsm-help-button"
+            type="button"
+            data-open-vlsm-help
+          >
+            Guía rápida de VLSM
+          </button>
+        </div>
+        <aside class="vlsm-how">
+          <p>Cómo usarla</p>
+          <ol>
+            <li>Ingresa la red base con su prefijo.</li>
+            <li>Añade las áreas y sus hosts necesarios.</li>
+            <li>Calcula y revisa cada rango asignado.</li>
+          </ol>
+        </aside>
       </section>
       <section class="vlsm-workspace" aria-labelledby="calculator-title">
-        <div class="workspace-heading"><div><p class="eyebrow"><span></span> Planificador de subredes</p><h2 id="calculator-title">Define tu escenario.</h2></div><span class="vlsm-status" id="vlsm-status" aria-live="polite">Listo para calcular</span></div>
-        <form id="vlsm-form" novalidate>
-          <div class="network-inputs"><label>Red base<input id="base-network" inputmode="decimal" autocomplete="off" value="192.168.10.0/24" placeholder="Ej. 192.168.10.0/24" aria-describedby="base-network-help" /></label><p id="base-network-help">Usa formato IPv4/CIDR. Ejemplo: <code>192.168.10.0/24</code>.</p></div>
-          <div class="requirements-head"><div><h3>Subredes necesarias</h3><p>Los bloques se ordenan automáticamente de mayor a menor para aprovechar mejor el espacio.</p></div><button class="text-button" type="button" id="add-request">+ Añadir subred</button></div>
-          <div class="request-list" id="request-list">
-            <div class="request-row"><label>Nombre<input class="request-name" value="Administración" maxlength="32" /></label><label>Hosts necesarios<input class="request-hosts" type="number" inputmode="numeric" value="50" min="1" max="16777214" /></label><button class="remove-request" type="button" aria-label="Quitar Administración">×</button></div>
-            <div class="request-row"><label>Nombre<input class="request-name" value="Ventas" maxlength="32" /></label><label>Hosts necesarios<input class="request-hosts" type="number" inputmode="numeric" value="25" min="1" max="16777214" /></label><button class="remove-request" type="button" aria-label="Quitar Ventas">×</button></div>
-            <div class="request-row"><label>Nombre<input class="request-name" value="Invitados" maxlength="32" /></label><label>Hosts necesarios<input class="request-hosts" type="number" inputmode="numeric" value="10" min="1" max="16777214" /></label><button class="remove-request" type="button" aria-label="Quitar Invitados">×</button></div>
+        <div class="workspace-heading">
+          <div>
+            <p class="eyebrow"><span></span> Planificador de subredes</p>
+            <h2 id="calculator-title">Define tu escenario.</h2>
           </div>
-          <button class="button vlsm-calculate" type="submit">Calcular subredes <span aria-hidden="true">→</span></button>
+          <span class="vlsm-status" id="vlsm-status" aria-live="polite"
+            >Listo para calcular</span
+          >
+        </div>
+        <form id="vlsm-form" novalidate>
+          <div class="network-inputs">
+            <label
+              >Red base<input
+                id="base-network"
+                inputmode="decimal"
+                autocomplete="off"
+                value="192.168.10.0/24"
+                placeholder="Ej. 192.168.10.0/24"
+                aria-describedby="base-network-help"
+            /></label>
+            <p id="base-network-help">
+              Usa formato IPv4/CIDR. Ejemplo: <code>192.168.10.0/24</code>.
+            </p>
+          </div>
+          <div class="requirements-head">
+            <div>
+              <h3>Subredes necesarias</h3>
+              <p>
+                Los bloques se ordenan automáticamente de mayor a menor para
+                aprovechar mejor el espacio.
+              </p>
+            </div>
+            <button class="text-button" type="button" id="add-request">
+              + Añadir subred
+            </button>
+          </div>
+          <div class="request-list" id="request-list">
+            <div class="request-row">
+              <label
+                >Nombre<input
+                  class="request-name"
+                  value="Administración"
+                  maxlength="32" /></label
+              ><label
+                >Hosts necesarios<input
+                  class="request-hosts"
+                  type="number"
+                  inputmode="numeric"
+                  value="50"
+                  min="1"
+                  max="16777214" /></label
+              ><button
+                class="remove-request"
+                type="button"
+                aria-label="Quitar Administración"
+              >
+                ×
+              </button>
+            </div>
+            <div class="request-row">
+              <label
+                >Nombre<input
+                  class="request-name"
+                  value="Ventas"
+                  maxlength="32" /></label
+              ><label
+                >Hosts necesarios<input
+                  class="request-hosts"
+                  type="number"
+                  inputmode="numeric"
+                  value="25"
+                  min="1"
+                  max="16777214" /></label
+              ><button
+                class="remove-request"
+                type="button"
+                aria-label="Quitar Ventas"
+              >
+                ×
+              </button>
+            </div>
+            <div class="request-row">
+              <label
+                >Nombre<input
+                  class="request-name"
+                  value="Invitados"
+                  maxlength="32" /></label
+              ><label
+                >Hosts necesarios<input
+                  class="request-hosts"
+                  type="number"
+                  inputmode="numeric"
+                  value="10"
+                  min="1"
+                  max="16777214" /></label
+              ><button
+                class="remove-request"
+                type="button"
+                aria-label="Quitar Invitados"
+              >
+                ×
+              </button>
+            </div>
+          </div>
+          <button class="button vlsm-calculate" type="submit">
+            Calcular subredes <span aria-hidden="true">→</span>
+          </button>
         </form>
       </section>
-      <section class="vlsm-results" id="vlsm-results" aria-labelledby="results-title" hidden>
-        <div class="results-heading"><div><p class="eyebrow"><span></span> Resultado del cálculo</p><h2 id="results-title">Plan de direccionamiento.</h2></div><p id="results-summary"></p></div>
-        <div class="result-table-wrap"><table><thead><tr><th>Subred</th><th>Hosts</th><th>Red / prefijo</th><th>Máscara</th><th>Rango utilizable</th><th>Broadcast</th></tr></thead><tbody id="results-body"></tbody></table></div>
-        <p class="vlsm-note"><strong>Recuerda:</strong> cada subred reserva una dirección para la red y otra para broadcast. Por eso una necesidad de 50 hosts requiere un bloque de 64 direcciones, con 62 utilizables.</p>
+      <section
+        class="vlsm-results"
+        id="vlsm-results"
+        aria-labelledby="results-title"
+        hidden
+      >
+        <div class="results-heading">
+          <div>
+            <p class="eyebrow"><span></span> Resultado del cálculo</p>
+            <h2 id="results-title">Plan de direccionamiento.</h2>
+          </div>
+          <p id="results-summary"></p>
+        </div>
+        <div class="result-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Subred</th>
+                <th>Hosts</th>
+                <th>Red / prefijo</th>
+                <th>Máscara</th>
+                <th>Rango utilizable</th>
+                <th>Broadcast</th>
+              </tr>
+            </thead>
+            <tbody id="results-body"></tbody>
+          </table>
+        </div>
+        <p class="vlsm-note">
+          <strong>Recuerda:</strong> cada subred reserva una dirección para la
+          red y otra para broadcast. Por eso una necesidad de 50 hosts requiere
+          un bloque de 64 direcciones, con 62 utilizables.
+        </p>
       </section>
-      <section class="vlsm-explainer"><p class="eyebrow"><span></span> Antes de usar VLSM</p><h2>¿Qué está resolviendo?</h2><div class="explainer-grid"><p>VLSM significa <strong>Variable Length Subnet Mask</strong>: permite que cada subred tenga una máscara distinta según la cantidad de equipos que necesita.</p><p>En vez de reservar el mismo espacio para todos, se asigna primero la subred más grande y luego las menores. Así evitas desperdiciar direcciones IP.</p><p>La calculadora es una ayuda para planificar y comprender; antes de configurar un router o switch, verifica siempre que el diseño coincida con la topología real.</p></div></section>
+      <section class="vlsm-explainer">
+        <p class="eyebrow"><span></span> Antes de usar VLSM</p>
+        <h2>¿Qué está resolviendo?</h2>
+        <div class="explainer-grid">
+          <p>
+            VLSM significa <strong>Variable Length Subnet Mask</strong>: permite
+            que cada subred tenga una máscara distinta según la cantidad de
+            equipos que necesita.
+          </p>
+          <p>
+            En vez de reservar el mismo espacio para todos, se asigna primero la
+            subred más grande y luego las menores. Así evitas desperdiciar
+            direcciones IP.
+          </p>
+          <p>
+            La calculadora es una ayuda para planificar y comprender; antes de
+            configurar un router o switch, verifica siempre que el diseño
+            coincida con la topología real.
+          </p>
+        </div>
+      </section>
     </main>
-    <dialog class="guide-menu vlsm-help" id="vlsm-help" aria-labelledby="vlsm-help-title">
-      <div class="guide-menu-top"><div><p class="eyebrow"><span></span> Guía rápida</p><h2 id="vlsm-help-title">Entiende <em>VLSM.</em></h2></div><button class="close-menu" type="button" data-close-vlsm-help aria-label="Cerrar guía rápida">×</button></div>
+    <dialog
+      class="guide-menu vlsm-help"
+      id="vlsm-help"
+      aria-labelledby="vlsm-help-title"
+    >
+      <div class="guide-menu-top">
+        <div>
+          <p class="eyebrow"><span></span> Guía rápida</p>
+          <h2 id="vlsm-help-title">Entiende <em>VLSM.</em></h2>
+        </div>
+        <button
+          class="close-menu"
+          type="button"
+          data-close-vlsm-help
+          aria-label="Cerrar guía rápida"
+        >
+          ×
+        </button>
+      </div>
       <div class="vlsm-help-content">
-        <p><strong>VLSM</strong> sirve para dividir una red grande en varias subredes de tamaños diferentes. En una empresa, por ejemplo, Administración puede necesitar 50 equipos, Ventas 25 e Invitados 10: no tiene sentido entregarles el mismo bloque a todas.</p>
-        <div class="vlsm-help-steps"><article><span>01</span><div><h3>Parte por la red disponible</h3><p>Ingresa el bloque que te asignaron, como <code>192.168.10.0/24</code>. Ese es el espacio total que puedes distribuir.</p></div></article><article><span>02</span><div><h3>Indica los hosts de cada área</h3><p>Escribe solo los equipos que realmente necesita cada subred. La calculadora reserva también red y broadcast.</p></div></article><article><span>03</span><div><h3>Asigna de mayor a menor</h3><p>VLSM siempre entrega primero el bloque más grande. Así los bloques pequeños no dejan sin espacio al más grande.</p></div></article><article><span>04</span><div><h3>Lleva el plan a la topología</h3><p>Usa la IP de red, el rango utilizable y la máscara para configurar interfaces, gateways y equipos finales.</p></div></article></div>
-        <p class="vlsm-help-tip"><strong>¿Cuándo usarlo?</strong> Cuando áreas, VLANs o sedes requieren cantidades distintas de hosts y quieres aprovechar las direcciones IP sin desperdiciarlas.</p>
+        <p>
+          <strong>VLSM</strong> sirve para dividir una red grande en varias
+          subredes de tamaños diferentes. En una empresa, por ejemplo,
+          Administración puede necesitar 50 equipos, Ventas 25 e Invitados 10:
+          no tiene sentido entregarles el mismo bloque a todas.
+        </p>
+        <div class="vlsm-help-steps">
+          <article>
+            <span>01</span>
+            <div>
+              <h3>Parte por la red disponible</h3>
+              <p>
+                Ingresa el bloque que te asignaron, como
+                <code>192.168.10.0/24</code>. Ese es el espacio total que puedes
+                distribuir.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>02</span>
+            <div>
+              <h3>Indica los hosts de cada área</h3>
+              <p>
+                Escribe solo los equipos que realmente necesita cada subred. La
+                calculadora reserva también red y broadcast.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>03</span>
+            <div>
+              <h3>Asigna de mayor a menor</h3>
+              <p>
+                VLSM siempre entrega primero el bloque más grande. Así los
+                bloques pequeños no dejan sin espacio al más grande.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>04</span>
+            <div>
+              <h3>Lleva el plan a la topología</h3>
+              <p>
+                Usa la IP de red, el rango utilizable y la máscara para
+                configurar interfaces, gateways y equipos finales.
+              </p>
+            </div>
+          </article>
+        </div>
+        <p class="vlsm-help-tip">
+          <strong>¿Cuándo usarlo?</strong> Cuando áreas, VLANs o sedes requieren
+          cantidades distintas de hosts y quieres aprovechar las direcciones IP
+          sin desperdiciarlas.
+        </p>
       </div>
     </dialog>
-    <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
-    <script src="../../assets/js/main.js"></script><script src="../../assets/js/calc-vlsm.js"></script>
+    <footer class="container">
+      <p>DGNV Studios <small>— aprende construyendo.</small></p>
+      <p class="site-credit">
+        Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y
+        Telecomunicaciones · 2026
+      </p>
+      <p>© <span id="year"></span></p>
+    </footer>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/calc-vlsm.js"></script>
   </body>
 </html>

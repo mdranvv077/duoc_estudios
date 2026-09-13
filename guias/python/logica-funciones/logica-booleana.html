@@ -1,1 +1,143 @@
-<!doctype html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Lógica booleana — Python</title><link rel="icon" type="image/png" href="../../../img/favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../../assets/css/styles.css"><link rel="stylesheet" href="../../../assets/css/logo.css"><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile"><link rel="stylesheet" href="../../../assets/css/credits.css"><link rel="stylesheet" href="../../../assets/css/learning.css"><link rel="stylesheet" href="../../../assets/css/python.css"></head><body><header class="site-header container"><a class="brand" href="../../../index.html"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt=""><span>DGNV Studios</span></a></header><main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de lógica y funciones</button><aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Python · 02</small><strong>Lógica y funciones</strong></a><nav class="sidebar-categories"><a class="sidebar-category" href="../fundamentos/index.html"><span>01</span><b>Fundamentos</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>02</span><b>Lógica y funciones</b><i>↗</i></a></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside><article class="lesson-content"><p class="eyebrow"><span></span>Módulo 04</p><h1>Condiciones combinadas.</h1><p class="lesson-lead">A veces una condición necesita revisar más de una cosa. Las palabras <code>and</code>, <code>or</code> y <code>not</code> unen o modifican respuestas de <code>True</code> y <code>False</code>.</p><h2><code>and</code>: ambas deben cumplirse</h2><p><code>and</code> exige que las dos partes sean verdaderas. Si una sola falla, el <code>if</code> completo es falso y no ejecuta su bloque.</p><pre class="code-block"><code><span class="py-variable">tiene_entrada</span> <span class="py-operator">=</span> <span class="py-boolean">True</span><br><span class="py-variable">tiene_identificacion</span> <span class="py-operator">=</span> <span class="py-boolean">True</span><br><br><span class="py-keyword">if</span> <span class="py-variable">tiene_entrada</span> <span class="py-keyword">and</span> <span class="py-variable">tiene_identificacion</span>: <span class="py-guide-comment"># las dos son necesarias</span><br>    <span class="py-builtin">print</span>(<span class="py-string">"Acceso autorizado"</span>)</code></pre><div class="python-reading"><strong>Lectura natural:</strong> si la persona tiene entrada y tiene identificación, muestra “Acceso autorizado”. Aquí las dos variables guardan <code>True</code>, así que la condición queda como <code>True and True</code>. Como ambas partes se cumplen, Python muestra el mensaje.</div><h2><code>or</code>: basta con una</h2><p><code>or</code> solo necesita una parte verdadera. Falla únicamente cuando las dos partes son falsas.</p><pre class="code-block"><code><span class="py-variable">tiene_clave</span> <span class="py-operator">=</span> <span class="py-boolean">False</span><br><span class="py-variable">tiene_tarjeta</span> <span class="py-operator">=</span> <span class="py-boolean">True</span><br><br><span class="py-keyword">if</span> <span class="py-variable">tiene_clave</span> <span class="py-keyword">or</span> <span class="py-variable">tiene_tarjeta</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"Puede iniciar"</span>)</code></pre><div class="python-reading"><strong>Lectura natural:</strong> no tiene clave, pero sí tarjeta. <code>False or True</code> da <code>True</code>, por eso Python permite iniciar.</div><h2><code>not</code>: invertir una respuesta</h2><p><code>not</code> cambia <code>True</code> por <code>False</code>, y <code>False</code> por <code>True</code>.</p><pre class="code-block"><code><span class="py-variable">cuenta_bloqueada</span> <span class="py-operator">=</span> <span class="py-boolean">False</span><br><br><span class="py-keyword">if</span> <span class="py-keyword">not</span> <span class="py-variable">cuenta_bloqueada</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"Acceso disponible"</span>)</code></pre><div class="python-reading"><strong>Lectura natural:</strong> la cuenta no está bloqueada, porque su valor es <code>False</code>. Al escribir <code>not cuenta_bloqueada</code>, la condición pasa a ser verdadera y se muestra el acceso.</div><h2><code>is</code> e <code>is not</code> con <code>None</code></h2><p>Para empezar, úsalos para comprobar si una variable todavía no tiene información. <code>None</code> significa “por ahora, no hay valor”.</p><pre class="code-block"><code><span class="py-variable">codigo</span> <span class="py-operator">=</span> <span class="py-boolean">None</span><br><br><span class="py-keyword">if</span> <span class="py-variable">codigo</span> <span class="py-keyword">is</span> <span class="py-boolean">None</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"Aún no se ingresó un código"</span>)<br><br><span class="py-variable">codigo</span> <span class="py-operator">=</span> <span class="py-string">"A123"</span><br><span class="py-keyword">if</span> <span class="py-variable">codigo</span> <span class="py-keyword">is not</span> <span class="py-boolean">None</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"Código recibido"</span>)</code></pre><div class="python-reading"><strong>Lectura natural:</strong> primero <code>codigo</code> guarda <code>None</code>, por eso se avisa que falta el dato. Luego guarda “A123”; ahora ya no es <code>None</code>, así que se confirma que el código fue recibido.</div><div class="lesson-note"><strong>Regla simple:</strong> para comparar números o texto usa normalmente <code>==</code>. Por ahora, reserva <code>is</code> e <code>is not</code> para <code>None</code>.</div><div class="lesson-actions"><a href="if-elif-else.html">← if, elif y else</a><a href="funciones-flujo.html">Siguiente: funciones y exit() →</a></div><footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer></article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/python-logic.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Lógica booleana — Python</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/responsive.css?v=20260909-mobile"
+    />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css" />
+    <link rel="stylesheet" href="../../../assets/css/python.css" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html"
+        ><img
+          class="brand-logo"
+          src="../../../assets/images/dgnv-logo.png"
+          alt=""
+        /><span>DGNV Studios</span></a
+      >
+    </header>
+    <main class="container learning-shell">
+      <button
+        class="sidebar-toggle"
+        type="button"
+        data-sidebar-toggle
+        aria-expanded="false"
+      >
+        ☰ Módulos de lógica y funciones
+      </button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"
+          ><small>Python · 02</small><strong>Lógica y funciones</strong></a
+        >
+        <nav class="sidebar-categories">
+          <a class="sidebar-category" href="../fundamentos/index.html"
+            ><span>01</span><b>Fundamentos</b><i>↗</i></a
+          ><a class="sidebar-category active" href="index.html"
+            ><span>02</span><b>Lógica y funciones</b><i>↗</i></a
+          >
+        </nav>
+        <nav class="lesson-nav"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 04</p>
+        <h1>Condiciones combinadas.</h1>
+        <p class="lesson-lead">
+          A veces una condición necesita revisar más de una cosa. Las palabras
+          <code>and</code>, <code>or</code> y <code>not</code> unen o modifican
+          respuestas de <code>True</code> y <code>False</code>.
+        </p>
+        <h2><code>and</code>: ambas deben cumplirse</h2>
+        <p>
+          <code>and</code> exige que las dos partes sean verdaderas. Si una sola
+          falla, el <code>if</code> completo es falso y no ejecuta su bloque.
+        </p>
+        <pre
+          class="code-block"
+        ><code><span class="py-variable">tiene_entrada</span> <span class="py-operator">=</span> <span class="py-boolean">True</span><br><span class="py-variable">tiene_identificacion</span> <span class="py-operator">=</span> <span class="py-boolean">True</span><br><br><span class="py-keyword">if</span> <span class="py-variable">tiene_entrada</span> <span class="py-keyword">and</span> <span class="py-variable">tiene_identificacion</span>: <span class="py-guide-comment"># las dos son necesarias</span><br>    <span class="py-builtin">print</span>(<span class="py-string">"Acceso autorizado"</span>)</code></pre>
+        <div class="python-reading">
+          <strong>Lectura natural:</strong> si la persona tiene entrada y tiene
+          identificación, muestra “Acceso autorizado”. Aquí las dos variables
+          guardan <code>True</code>, así que la condición queda como
+          <code>True and True</code>. Como ambas partes se cumplen, Python
+          muestra el mensaje.
+        </div>
+        <h2><code>or</code>: basta con una</h2>
+        <p>
+          <code>or</code> solo necesita una parte verdadera. Falla únicamente
+          cuando las dos partes son falsas.
+        </p>
+        <pre
+          class="code-block"
+        ><code><span class="py-variable">tiene_clave</span> <span class="py-operator">=</span> <span class="py-boolean">False</span><br><span class="py-variable">tiene_tarjeta</span> <span class="py-operator">=</span> <span class="py-boolean">True</span><br><br><span class="py-keyword">if</span> <span class="py-variable">tiene_clave</span> <span class="py-keyword">or</span> <span class="py-variable">tiene_tarjeta</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"Puede iniciar"</span>)</code></pre>
+        <div class="python-reading">
+          <strong>Lectura natural:</strong> no tiene clave, pero sí tarjeta.
+          <code>False or True</code> da <code>True</code>, por eso Python
+          permite iniciar.
+        </div>
+        <h2><code>not</code>: invertir una respuesta</h2>
+        <p>
+          <code>not</code> cambia <code>True</code> por <code>False</code>, y
+          <code>False</code> por <code>True</code>.
+        </p>
+        <pre
+          class="code-block"
+        ><code><span class="py-variable">cuenta_bloqueada</span> <span class="py-operator">=</span> <span class="py-boolean">False</span><br><br><span class="py-keyword">if</span> <span class="py-keyword">not</span> <span class="py-variable">cuenta_bloqueada</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"Acceso disponible"</span>)</code></pre>
+        <div class="python-reading">
+          <strong>Lectura natural:</strong> la cuenta no está bloqueada, porque
+          su valor es <code>False</code>. Al escribir
+          <code>not cuenta_bloqueada</code>, la condición pasa a ser verdadera y
+          se muestra el acceso.
+        </div>
+        <h2><code>is</code> e <code>is not</code> con <code>None</code></h2>
+        <p>
+          Para empezar, úsalos para comprobar si una variable todavía no tiene
+          información. <code>None</code> significa “por ahora, no hay valor”.
+        </p>
+        <pre
+          class="code-block"
+        ><code><span class="py-variable">codigo</span> <span class="py-operator">=</span> <span class="py-boolean">None</span><br><br><span class="py-keyword">if</span> <span class="py-variable">codigo</span> <span class="py-keyword">is</span> <span class="py-boolean">None</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"Aún no se ingresó un código"</span>)<br><br><span class="py-variable">codigo</span> <span class="py-operator">=</span> <span class="py-string">"A123"</span><br><span class="py-keyword">if</span> <span class="py-variable">codigo</span> <span class="py-keyword">is not</span> <span class="py-boolean">None</span>:<br>    <span class="py-builtin">print</span>(<span class="py-string">"Código recibido"</span>)</code></pre>
+        <div class="python-reading">
+          <strong>Lectura natural:</strong> primero <code>codigo</code> guarda
+          <code>None</code>, por eso se avisa que falta el dato. Luego guarda
+          “A123”; ahora ya no es <code>None</code>, así que se confirma que el
+          código fue recibido.
+        </div>
+        <div class="lesson-note">
+          <strong>Regla simple:</strong> para comparar números o texto usa
+          normalmente <code>==</code>. Por ahora, reserva <code>is</code> e
+          <code>is not</code> para <code>None</code>.
+        </div>
+        <div class="lesson-actions">
+          <a href="if-elif-else.html">← if, elif y else</a
+          ><a href="funciones-flujo.html">Siguiente: funciones y exit() →</a>
+        </div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">
+            Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y
+            Telecomunicaciones · 2026
+          </p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/python-logic.js"></script>
+  </body>
+</html>
