@@ -68,13 +68,14 @@
 .afk-logo-front {
   transform: translateZ(32px);
   filter: drop-shadow(0 0 22px rgba(46, 234, 255, .34));
-  backface-visibility: visible;
+  backface-visibility: hidden;
 }
 
 .afk-logo-depth {
   opacity: .62;
   filter: brightness(.38) saturate(1.4) drop-shadow(0 0 20px rgba(0, 102, 126, .36));
   animation: afk-depth-shift 22s linear infinite;
+  backface-visibility: hidden;
 }
 
 .afk-logo-symbol::after {
@@ -97,7 +98,7 @@
   letter-spacing: -.075em;
   line-height: .9;
   white-space: nowrap;
-  backface-visibility: visible;
+  backface-visibility: hidden;
   text-shadow: 1px 1px 0 rgba(101, 220, 235, .18), 8px 9px 0 rgba(5, 42, 53, .48), 0 0 25px rgba(46, 234, 255, .14);
   transform: translateZ(34px);
   animation: afk-text-depth 22s linear infinite;
