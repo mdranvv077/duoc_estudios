@@ -8,7 +8,7 @@ img, svg { max-width: 100%; }
   .container { width: min(calc(100% - 40px), 1120px); }
   body .guide-sidebar { width: 224px; }
   body .learning-shell { left: 224px; padding-right: 28px; padding-left: 28px; }
-  body:has(.learning-shell) .site-header { padding-right: 28px; padding-left: 28px; }
+  body:has(.learning-shell) .site-header { left: 224px; padding-right: 28px; padding-left: 28px; }
 }
 
 @media (max-width: 960px) {

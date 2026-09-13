@@ -128,7 +128,7 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 html:has(.learning-shell), body:has(.learning-shell) { overflow-x: hidden; }
 body:has(.learning-shell) { overflow-y: hidden; }
 /* El encabezado conserva el diseño del inicio; solo se fija para la navegación lateral. */
-body:has(.learning-shell) .site-header { position: fixed; z-index: 2; top: 0; right: auto; left: calc(50% - 4px); width: min(1120px, calc(100% - 48px)); margin: 0; padding: 0; transform: translateX(-50%); background: transparent; }
+body:has(.learning-shell) .site-header { position: fixed; z-index: 2; top: 0; right: 0; left: 252px; width: auto; margin: 0; padding: 0 36px; transform: none; background: transparent; }
 
 @media (max-width: 760px) {
   .packet-hub { padding: 58px 0 63px; }
