@@ -74,7 +74,9 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .lesson-content p { max-width: 720px; color: #c0cad7; font-size: 1rem; line-height: 1.82; }
 .lesson-content .topic-link { color: var(--cyan); text-decoration: none; }
 .lesson-content .topic-link:hover { color: var(--orange); }
-.assumed-topic-links { display: flex; flex-wrap: wrap; gap: 7px; max-width: 720px; margin: -3px 0 20px; }
+.assumed-topic-shortcuts { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 13px; max-width: 720px; margin: -3px 0 20px; }
+.lesson-content .assumed-topic-shortcuts > p { margin: 0; color: #8e9aaa; font: .66rem/1.45 "DM Mono", monospace; }
+.assumed-topic-links { display: flex; flex-wrap: wrap; gap: 7px; }
 .assumed-topic-links a { padding: 6px 9px; color: #9eabba; border: 1px solid rgba(183, 205, 228, .15); background: rgba(14, 20, 29, .46); font: .62rem "DM Mono", monospace; text-decoration: none; transition: color .18s, border-color .18s, background .18s; }
 .assumed-topic-links a:hover { color: var(--cyan); border-color: rgba(46, 234, 255, .32); background: rgba(46, 234, 255, .045); }
 .lesson-lead { color: var(--muted) !important; font-size: 1.05rem !important; }
