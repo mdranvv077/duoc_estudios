@@ -60,38 +60,52 @@
         <p class="eyebrow"><span></span> Módulo 01</p>
         <h1>Entender <em>Spanning Tree.</em></h1>
         <p class="lesson-lead">
-          Spanning Tree Protocol, o STP, permite mantener enlaces redundantes
-          entre switches sin crear un bucle activo dentro de la red de capa 2.
+          Spanning Tree Protocol, o STP, evita que el tráfico quede dando
+          vueltas sin fin cuando hay varios caminos entre switches.
         </p>
 
-        <h2>Por qué existe STP</h2>
+        <h2>Imagina una red de carreteras</h2>
         <p>
-          Tener más de un camino entre switches es útil: si un cable falla, la
-          red puede continuar por otro. El problema aparece cuando varios
-          caminos permanecen activos al mismo tiempo y forman un circuito
-          cerrado. Una trama puede volver una y otra vez por ese circuito.
+          Piensa en los switches como cruces de carretera y en los cables como
+          caminos. Tener dos caminos para llegar al mismo lugar es bueno: si
+          uno se corta, todavía queda el otro. A esto se le llama
+          <strong>redundancia</strong> o camino de respaldo.
         </p>
         <p>
-          A diferencia de un paquete IP, una trama Ethernet no tiene un
-          contador que la elimine después de cierta cantidad de saltos. El bucle
-          puede provocar tormentas de broadcast, copias repetidas de la misma
-          trama y cambios constantes en la tabla de direcciones MAC de los
-          switches. El resultado puede ser una red muy lenta o completamente
-          inutilizable.
+          El problema aparece si esos caminos forman un círculo y todos quedan
+          abiertos. Sería como un automóvil que entra a una rotonda y nunca
+          encuentra una salida. En la red, ciertos mensajes pueden pasar una y
+          otra vez por los mismos switches. A esto se le llama
+          <strong>bucle de capa 2</strong>.
         </p>
 
-        <h2>Qué hace en la red</h2>
+        <h2>Por qué un bucle es peligroso</h2>
         <p>
-          STP intercambia información entre los switches, elige un switch raíz
-          como punto de referencia y calcula los mejores caminos hacia él. Si
-          encuentra un enlace redundante, mantiene uno de sus puertos sin
-          reenviar tráfico normal. El cable continúa conectado, pero no forma
-          parte del camino activo.
+          Los switches transportan <strong>tramas</strong>, que son los mensajes
+          que viajan dentro de una red local. Algunas tramas son de broadcast:
+          se envían a todos los equipos. Si existe un bucle, pueden multiplicarse
+          y ocupar la red hasta volverla muy lenta. Esto se conoce como tormenta
+          de broadcast.
         </p>
         <p>
-          Cuando falla un enlace principal, STP vuelve a calcular la topología
-          y puede habilitar el camino que estaba bloqueado. Su finalidad no es
-          eliminar la redundancia, sino utilizarla sin permitir bucles.
+          También pueden llegar varias copias del mismo mensaje y los switches
+          pueden confundirse sobre el puerto donde se encuentra cada equipo.
+          Por eso no conviene conectar switches formando un círculo sin la
+          protección de STP.
+        </p>
+
+        <h2>Qué hace STP</h2>
+        <p>
+          STP actúa como un encargado del tránsito. Primero elige un
+          <strong>Root Switch</strong>, que será el punto de referencia para los
+          demás switches. Luego decide cuál es el mejor camino hacia él.
+        </p>
+        <p>
+          Si encuentra un camino repetido, deja uno de los puertos en espera.
+          El cable no se desconecta: simplemente deja de transportar el tráfico
+          normal. Si el camino principal falla, STP puede utilizar ese camino
+          de respaldo. Es parecido a mantener una calle cerrada con una barrera
+          y abrirla cuando la ruta principal deja de estar disponible.
         </p>
 
         <figure class="topology-card stp-topology" aria-labelledby="stp-topology-title">
@@ -102,7 +116,7 @@
           <div
             class="topology-map"
             role="img"
-            aria-label="Tres switches conectados en triángulo. SW1 es el switch raíz. Los enlaces desde SW1 reenvían tráfico y un extremo del enlace entre SW2 y SW3 permanece bloqueado para evitar un bucle."
+            aria-label="Tres switches conectados en triángulo. SW1 es el Root Switch. Los enlaces desde SW1 reenvían tráfico y un extremo del enlace entre SW2 y SW3 permanece bloqueado para evitar un bucle."
           >
             <svg
               class="topology-cables"
@@ -120,7 +134,7 @@
                 class="device-icon switch-icon"
                 src="../img/cisco-switch.png"
                 alt=""
-              /><b>SW1</b><small>Switch raíz</small>
+              /><b>SW1</b><small>Root Switch</small>
             </div>
             <div class="topology-node stp-node-left">
               <img
@@ -134,7 +148,7 @@
                 class="device-icon switch-icon"
                 src="../img/cisco-switch.png"
                 alt=""
-              /><b>SW3</b><small>Puerto alternativo</small>
+              /><b>SW3</b><small>Camino de respaldo</small>
             </div>
           </div>
           <div class="topology-legend" aria-label="Estado de los enlaces">
@@ -142,42 +156,45 @@
             ><span class="legend-blocked"><i></i>Camino bloqueado</span>
           </div>
           <p class="topology-caption">
-            Los tres cables permanecen conectados. STP evita el bucle al dejar
-            un extremo del enlace redundante sin reenviar tráfico de usuario.
+            Los tres cables están conectados, pero STP mantiene cerrado uno de
+            los caminos. Si un enlace celeste falla, el camino magenta puede
+            utilizarse como respaldo.
           </p>
         </figure>
 
         <h2>Conceptos que debes reconocer</h2>
         <ul>
           <li>
-            <strong>Switch raíz:</strong> es la referencia desde la cual se
-            calculan los caminos de la topología.
+            <strong>Root Switch:</strong> es el switch principal que STP utiliza
+            como referencia para ordenar los caminos.
           </li>
           <li>
-            <strong>Puerto raíz:</strong> es el mejor camino de un switch no raíz
-            hacia el switch raíz.
+            <strong>Root Port:</strong> es el puerto que ofrece el mejor camino
+            desde un switch hacia el Root Switch. Cada switch que no sea el
+            Root Switch tendrá uno.
           </li>
           <li>
-            <strong>Puerto designado:</strong> es el puerto elegido para
-            reenviar tráfico en un segmento.
+            <strong>Puerto designado:</strong> es el puerto autorizado para
+            enviar tráfico por un tramo de la red.
           </li>
           <li>
-            <strong>Puerto alternativo:</strong> conserva un camino redundante
-            que puede utilizarse si el principal falla.
+            <strong>Puerto alternativo:</strong> permanece como respaldo para
+            evitar el bucle y puede utilizarse si el camino principal falla.
           </li>
         </ul>
 
         <h2>PVST y las VLANs</h2>
         <p>
-          En esta práctica se utilizará PVST, que mantiene una instancia de
-          Spanning Tree por VLAN. Esto permite que un switch sea raíz para unas
-          VLANs y que otro switch lo sea para otras. Por eso revisarás y
-          configurarás individualmente las VLANs 10, 20, 30 y 40.
+          PVST crea un Spanning Tree separado para cada VLAN. Imagínalo como un
+          mapa de caminos distinto para cada grupo de la red. Por eso SW1 puede
+          ser el Root Switch de las VLANs 10 y 20, mientras SW2 puede serlo para
+          las VLANs 30 y 40.
         </p>
         <div class="lesson-note">
-          <strong>Cuándo se necesita:</strong> STP es importante cuando existen
-          enlaces redundantes entre switches de capa 2. No sustituye al routing
-          ni se configura para crear conectividad entre VLANs diferentes.
+          <strong>Idea principal:</strong> STP permite tener cables de respaldo
+          entre switches sin que el tráfico quede atrapado en un círculo. No se
+          utiliza para comunicar VLANs diferentes; esa tarea corresponde al
+          routing.
         </div>
         <div class="lesson-actions">
           <span></span

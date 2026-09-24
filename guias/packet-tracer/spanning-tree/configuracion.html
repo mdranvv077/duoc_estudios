@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Configuración de PVST, switch raíz, PortFast y BPDU Guard."
+      content="Configuración de PVST, Root Switch, PortFast y BPDU Guard."
     />
     <title>Configurar Spanning Tree — Packet Tracer</title>
     <link rel="icon" type="image/png" href="../../../img/favicon.png" />
@@ -60,23 +60,23 @@
         <p class="eyebrow"><span></span> Módulo 02</p>
         <h1>Configuración y <em>protección.</em></h1>
         <p class="lesson-lead">
-          En esta práctica comprobarás el estado de STP, elegirás los switches
-          raíz para las VLANs 10, 20, 30 y 40, y protegerás los puertos que se
-          conectan a equipos finales.
+          Ahora elegirás el Root Switch de cada VLAN y prepararás de forma
+          segura los puertos donde se conectan computadores u otros equipos
+          finales.
         </p>
 
         <h2>Antes de escribir comandos</h2>
         <p>
           Las cuatro VLANs deben existir en los switches y los enlaces entre
-          ellos deben estar configurados como trunks. Primero observa qué
-          switch fue elegido automáticamente como raíz. Después decide qué
-          equipo cumplirá ese rol para cada VLAN; no conviene dejar una elección
-          importante al azar.
+          ellos deben estar configurados como trunks. Aunque no configures nada,
+          STP elegirá un Root Switch automáticamente. Sin embargo, es mejor que
+          tú decidas cuál será para que los caminos de la red sean predecibles.
         </p>
         <p>
-          El switch con la prioridad más baja gana la elección. Si dos switches
-          tienen la misma prioridad, se utiliza la dirección MAC como
-          desempate. Las prioridades válidas avanzan en bloques de 4096.
+          Piensa en la prioridad como el puntaje de una competencia donde gana
+          el número más bajo. Si dos switches tienen el mismo número, STP usa la
+          dirección MAC para desempatar. Las prioridades avanzan en bloques de
+          4096.
         </p>
 
         <h2>Activar PVST y revisar una VLAN</h2>
@@ -87,19 +87,19 @@
 <span class="cli-prompt">Switch#</span> <span class="cli-command">configure terminal</span><span class="cli-comment"> # abre la configuración global</span>
 <span class="cli-prompt">Switch(config)#</span> <span class="cli-command">spanning-tree mode pvst</span><span class="cli-comment"> # usa una instancia de STP por VLAN</span>
 <span class="cli-prompt">Switch(config)#</span> <span class="cli-command">end</span><span class="cli-comment"> # vuelve al modo privilegiado</span>
-<span class="cli-prompt">Switch#</span> <span class="cli-command">show spanning-tree vlan 10</span><span class="cli-comment"> # muestra la raíz, costos, roles y estados de la VLAN 10</span></code></pre>
+<span class="cli-prompt">Switch#</span> <span class="cli-command">show spanning-tree vlan 10</span><span class="cli-comment"> # muestra el Root Switch, costos, roles y estados de la VLAN 10</span></code></pre>
         <p>
-          En la salida busca la información de <strong>Root ID</strong> y los
-          roles de los puertos. Si el propio equipo es la raíz, Cisco IOS lo
-          indicará. Repite el comando cambiando el ID para revisar las demás
-          VLANs.
+          Este comando es como preguntarle al switch: “¿quién es el Root Switch
+          de esta VLAN y qué tarea cumple cada puerto?” En la respuesta, busca
+          <strong>Root ID</strong>. También podrás reconocer el Root Port y los
+          puertos que están reenviando o bloqueando tráfico.
         </p>
 
-        <h2>Elegir la raíz mediante prioridad</h2>
+        <h2>Elegir el Root Switch mediante prioridad</h2>
         <p>
-          Puedes fijar una prioridad concreta. En el siguiente ejemplo, el
-          switch recibe prioridad 4096 para la VLAN 10. Al ser menor que la
-          prioridad predeterminada habitual, tendrá preferencia en la elección.
+          Puedes entregar un puntaje concreto al switch. En el ejemplo, recibe
+          prioridad 4096 para la VLAN 10. Como un número menor tiene preferencia,
+          este switch tendrá muchas posibilidades de convertirse en Root Switch.
         </p>
         <pre
           class="cli-block"
@@ -108,52 +108,52 @@
 <span class="cli-prompt">Switch(config)#</span> <span class="cli-command">spanning-tree vlan 10 priority 4096</span><span class="cli-comment"> # entrega prioridad a este switch para la VLAN 10</span>
 <span class="cli-prompt">Switch(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda la configuración desde el modo actual</span></code></pre>
         <div class="lesson-note">
-          <strong>Importante:</strong> una prioridad menor tiene preferencia.
-          Configurar 4096 no garantiza por sí solo el resultado si otro switch
-          ya posee una prioridad todavía menor.
+          <strong>Recuerda:</strong> el número menor gana. Si otro switch tiene
+          una prioridad inferior a 4096, ese otro equipo seguirá teniendo la
+          preferencia.
         </div>
 
         <h2>Usar roles primary y secondary</h2>
         <p>
-          También puedes pedirle a IOS que ajuste la prioridad necesaria. En
-          este diseño, SW1 será la raíz principal de las VLANs 10 y 20, y el
-          respaldo de las VLANs 30 y 40.
+          Existe una forma más directa. Con <code>root primary</code> indicas que
+          quieres ese equipo como Root Switch principal. Con
+          <code>root secondary</code> lo preparas como reemplazo por si el
+          principal deja de estar disponible. En este ejemplo, SW1 será el Root
+          Switch de las VLANs 10 y 20, y el respaldo de las VLANs 30 y 40.
         </p>
         <pre
           class="cli-block"
-          aria-label="Configurar raíz principal y secundaria en SW1"
+          aria-label="Configurar Root Switch principal y secundario en SW1"
         ><code><span class="cli-comment"># configuración aplicada en SW1</span>
-<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 10 root primary</span><span class="cli-comment"> # SW1 será la raíz preferida de la VLAN 10</span>
-<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 20 root primary</span><span class="cli-comment"> # SW1 será la raíz preferida de la VLAN 20</span>
+<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 10 root primary</span><span class="cli-comment"> # SW1 será el Root Switch principal de la VLAN 10</span>
+<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 20 root primary</span><span class="cli-comment"> # SW1 será el Root Switch principal de la VLAN 20</span>
 <span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 30 root secondary</span><span class="cli-comment"> # SW1 queda como respaldo de la VLAN 30</span>
 <span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 40 root secondary</span><span class="cli-comment"> # SW1 queda como respaldo de la VLAN 40</span>
 <span class="cli-prompt">SW1(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda los cambios</span></code></pre>
         <p>
-          Para repartir el trabajo, SW2 puede recibir los roles contrarios:
-          principal para las VLANs 30 y 40, y secundario para las VLANs 10 y
-          20. Así cada grupo tiene una raíz prevista y otra de respaldo.
+          En SW2 hacemos lo contrario. De esta forma, cada VLAN tiene un Root
+          Switch principal y otro switch listo como respaldo.
         </p>
         <pre
           class="cli-block"
-          aria-label="Configurar raíz principal y secundaria en SW2"
+          aria-label="Configurar Root Switch principal y secundario en SW2"
         ><code><span class="cli-comment"># configuración complementaria aplicada en SW2</span>
-<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 30 root primary</span><span class="cli-comment"> # SW2 será la raíz preferida de la VLAN 30</span>
-<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 40 root primary</span><span class="cli-comment"> # SW2 será la raíz preferida de la VLAN 40</span>
+<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 30 root primary</span><span class="cli-comment"> # SW2 será el Root Switch principal de la VLAN 30</span>
+<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 40 root primary</span><span class="cli-comment"> # SW2 será el Root Switch principal de la VLAN 40</span>
 <span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 10 root secondary</span><span class="cli-comment"> # SW2 queda como respaldo de la VLAN 10</span>
 <span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 20 root secondary</span><span class="cli-comment"> # SW2 queda como respaldo de la VLAN 20</span>
 <span class="cli-prompt">SW2(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda los cambios</span></code></pre>
 
         <h2>Proteger puertos de acceso</h2>
         <p>
-          PortFast se utiliza en puertos de acceso conectados a dispositivos
-          finales, como computadores o impresoras. Permite que el puerto pase
-          rápidamente a reenviar tráfico, sin esperar la convergencia normal de
-          STP cada vez que el equipo se conecta.
+          Imagina PortFast como una puerta rápida para equipos conocidos. Se usa
+          en puertos de acceso conectados a computadores o impresoras y permite
+          que comiencen a comunicarse sin esperar el proceso normal de STP.
         </p>
         <p>
-          BPDU Guard complementa esa configuración. Si el puerto recibe una
-          BPDU, se interpreta que probablemente conectaron un switch donde
-          debería existir un equipo final y el puerto se protege desactivándose.
+          BPDU Guard funciona como un guardia en esa puerta. Si detecta que
+          conectaron un switch en un puerto destinado a un computador, apaga el
+          puerto para evitar que esa conexión cambie o dañe la topología.
         </p>
         <pre
           class="cli-block"
@@ -165,25 +165,24 @@
 <span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">exit</span><span class="cli-comment"> # vuelve a la configuración global</span>
 <span class="cli-prompt">Switch(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda la configuración</span></code></pre>
         <div class="lesson-note">
-          <strong>No confundas PortFast:</strong> no desactiva Spanning Tree ni
-          impide que el puerto reciba BPDUs. No lo configures en enlaces entre
-          switches; resérvalo para puertos de acceso conectados a equipos
-          finales.
+          <strong>No confundas PortFast:</strong> no apaga Spanning Tree; solo
+          permite que un puerto de usuario empiece a funcionar más rápido. No
+          lo uses en los enlaces que unen un switch con otro switch.
         </div>
 
         <h2>Comprobar el resultado</h2>
         <p>
-          Revisa cada VLAN después de configurar ambos switches. Confirma que
-          aparezca la raíz esperada y que los roles de los puertos coincidan con
-          la topología. En una red con redundancia es normal encontrar un puerto
-          alternativo que no reenvía tráfico de usuario.
+          Revisa una VLAN a la vez. Confirma que aparezca el Root Switch que
+          elegiste y busca el Root Port de los demás switches. Si hay caminos de
+          respaldo, es normal que uno de los puertos no reenvíe tráfico: STP lo
+          mantiene preparado para evitar el bucle.
         </p>
         <pre
           class="cli-block"
           aria-label="Verificar Spanning Tree por VLAN"
-        ><code><span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 10</span><span class="cli-comment"> # verifica la raíz y los puertos de la VLAN 10</span>
+        ><code><span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 10</span><span class="cli-comment"> # verifica el Root Switch y los puertos de la VLAN 10</span>
 <span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 20</span><span class="cli-comment"> # repite la comprobación para la VLAN 20</span>
-<span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 30</span><span class="cli-comment"> # verifica la raíz y los puertos de la VLAN 30</span>
+<span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 30</span><span class="cli-comment"> # verifica el Root Switch y los puertos de la VLAN 30</span>
 <span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 40</span><span class="cli-comment"> # repite la comprobación para la VLAN 40</span></code></pre>
         <div class="lesson-actions">
           <a href="index.html">← Fundamentos y topología</a
