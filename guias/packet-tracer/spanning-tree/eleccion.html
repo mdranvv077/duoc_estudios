@@ -80,9 +80,19 @@
 
         <h2>El BID identifica a cada switch</h2>
         <p>
-          El <strong>BID</strong>, o Bridge ID, es como la identificación con la
-          que cada switch participa en la elección. Se construye con tres
-          elementos:
+          El <strong>BID</strong> significa <strong>Bridge ID</strong> o
+          identificador de puente. Es el valor que STP utiliza para identificar
+          y comparar a los switches durante la elección del Root Switch. No es
+          una dirección IP ni el nombre que escribimos con
+          <code>hostname</code>; es una identidad propia de Spanning Tree.
+        </p>
+        <p>
+          Puedes imaginarlo como la cédula con la que cada switch se presenta
+          ante los demás. El switch que posea el BID más bajo será elegido como
+          Root Switch. En la salida de <code>show spanning-tree</code> aparece
+          como <strong>Bridge ID</strong> para el switch actual y como
+          <strong>Root ID</strong> para el switch que ganó la elección. El BID se
+          construye con tres elementos:
         </p>
         <ul>
           <li>
