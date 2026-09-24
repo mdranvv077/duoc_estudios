@@ -108,6 +108,16 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .topology-legend .legend-crossed i { border-color: var(--orange); }
 .topology-caption { max-width: none !important; margin: 6px 0 0; color: var(--muted) !important; font-size: .78rem !important; line-height: 1.55 !important; }
 .topology-caption code { color: var(--magenta); font: inherit; }
+.stp-topology .topology-map { min-height: clamp(245px, 38vw, 330px); }
+.stp-topology .topology-cables .stp-forwarding { stroke: var(--cyan); filter: drop-shadow(0 0 5px rgba(46, 234, 255, .18)); }
+.stp-topology .topology-cables .stp-blocked { stroke: var(--magenta); filter: drop-shadow(0 0 5px rgba(255, 46, 123, .22)); }
+.stp-topology .topology-cables .stp-block-mark { stroke: var(--magenta); stroke-width: 7; stroke-dasharray: none; }
+.stp-topology .stp-node-root { top: 25%; left: 50%; }
+.stp-topology .stp-node-left { top: 75%; left: 19%; }
+.stp-topology .stp-node-right { top: 75%; left: 81%; }
+.stp-topology .topology-node { width: 26%; }
+.stp-topology .topology-node small { white-space: normal; }
+.topology-legend .legend-blocked i { border-color: var(--magenta); }
 .cli-block { position: relative; box-sizing: border-box; width: 100%; min-width: 0; max-width: 720px; margin: 25px 0; padding: 39px 20px 19px; overflow-x: hidden; border: 1px solid rgba(46, 234, 255, .25); background: #04070b; color: #dbe7ef; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025); font: .78rem/1.9 "DM Mono", monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
 .cli-block::before { content: "Cisco IOS · CLI"; position: absolute; top: 0; right: 0; left: 0; padding: 9px 12px; color: var(--muted); border-bottom: 1px solid var(--line); background: rgba(18, 27, 41, .72); font: .59rem "DM Mono", monospace; letter-spacing: .07em; }
 .cli-block::after { content: "# en verde = explicación de la guía; no se escribe en la CLI."; display: block; margin-top: 13px; padding-top: 10px; border-top: 1px solid rgba(46, 234, 255, .12); color: #009d00; font: .64rem/1.45 "DM Mono", monospace; white-space: normal; }

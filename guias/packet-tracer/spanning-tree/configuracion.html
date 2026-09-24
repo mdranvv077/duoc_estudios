@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Configuración de PVST, switch raíz, PortFast y BPDU Guard."
+    />
+    <title>Configurar Spanning Tree — Packet Tracer</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/responsive.css?v=20260909-mobile"
+    />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/learning.css?v=20260923-stp"
+    />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a
+        class="brand"
+        href="../../../index.html"
+        aria-label="Inicio DGNV Studios"
+        ><img
+          class="brand-logo"
+          src="../../../assets/images/dgnv-logo.png"
+          alt=""
+        /><span>DGNV Studios</span></a
+      >
+    </header>
+    <main class="container learning-shell">
+      <button
+        class="sidebar-toggle"
+        type="button"
+        data-sidebar-toggle
+        aria-expanded="false"
+      >
+        ☰ Módulos de Spanning Tree
+      </button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"
+          ><small>Packet Tracer · 05</small><strong>Spanning Tree</strong></a
+        >
+        <nav class="lesson-nav" aria-label="Módulos de Spanning Tree"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span> Módulo 02</p>
+        <h1>Configuración y <em>protección.</em></h1>
+        <p class="lesson-lead">
+          En esta práctica comprobarás el estado de STP, elegirás los switches
+          raíz para las VLANs 10, 20, 30 y 40, y protegerás los puertos que se
+          conectan a equipos finales.
+        </p>
+
+        <h2>Antes de escribir comandos</h2>
+        <p>
+          Las cuatro VLANs deben existir en los switches y los enlaces entre
+          ellos deben estar configurados como trunks. Primero observa qué
+          switch fue elegido automáticamente como raíz. Después decide qué
+          equipo cumplirá ese rol para cada VLAN; no conviene dejar una elección
+          importante al azar.
+        </p>
+        <p>
+          El switch con la prioridad más baja gana la elección. Si dos switches
+          tienen la misma prioridad, se utiliza la dirección MAC como
+          desempate. Las prioridades válidas avanzan en bloques de 4096.
+        </p>
+
+        <h2>Activar PVST y revisar una VLAN</h2>
+        <pre
+          class="cli-block"
+          aria-label="Activar y revisar PVST"
+        ><code><span class="cli-prompt">Switch&gt;</span> <span class="cli-command">enable</span><span class="cli-comment"> # entra al modo privilegiado</span>
+<span class="cli-prompt">Switch#</span> <span class="cli-command">configure terminal</span><span class="cli-comment"> # abre la configuración global</span>
+<span class="cli-prompt">Switch(config)#</span> <span class="cli-command">spanning-tree mode pvst</span><span class="cli-comment"> # usa una instancia de STP por VLAN</span>
+<span class="cli-prompt">Switch(config)#</span> <span class="cli-command">end</span><span class="cli-comment"> # vuelve al modo privilegiado</span>
+<span class="cli-prompt">Switch#</span> <span class="cli-command">show spanning-tree vlan 10</span><span class="cli-comment"> # muestra la raíz, costos, roles y estados de la VLAN 10</span></code></pre>
+        <p>
+          En la salida busca la información de <strong>Root ID</strong> y los
+          roles de los puertos. Si el propio equipo es la raíz, Cisco IOS lo
+          indicará. Repite el comando cambiando el ID para revisar las demás
+          VLANs.
+        </p>
+
+        <h2>Elegir la raíz mediante prioridad</h2>
+        <p>
+          Puedes fijar una prioridad concreta. En el siguiente ejemplo, el
+          switch recibe prioridad 4096 para la VLAN 10. Al ser menor que la
+          prioridad predeterminada habitual, tendrá preferencia en la elección.
+        </p>
+        <pre
+          class="cli-block"
+          aria-label="Configurar prioridad de Spanning Tree"
+        ><code><span class="cli-prompt">Switch#</span> <span class="cli-command">configure terminal</span><span class="cli-comment"> # abre la configuración global</span>
+<span class="cli-prompt">Switch(config)#</span> <span class="cli-command">spanning-tree vlan 10 priority 4096</span><span class="cli-comment"> # entrega prioridad a este switch para la VLAN 10</span>
+<span class="cli-prompt">Switch(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda la configuración desde el modo actual</span></code></pre>
+        <div class="lesson-note">
+          <strong>Importante:</strong> una prioridad menor tiene preferencia.
+          Configurar 4096 no garantiza por sí solo el resultado si otro switch
+          ya posee una prioridad todavía menor.
+        </div>
+
+        <h2>Usar roles primary y secondary</h2>
+        <p>
+          También puedes pedirle a IOS que ajuste la prioridad necesaria. En
+          este diseño, SW1 será la raíz principal de las VLANs 10 y 20, y el
+          respaldo de las VLANs 30 y 40.
+        </p>
+        <pre
+          class="cli-block"
+          aria-label="Configurar raíz principal y secundaria en SW1"
+        ><code><span class="cli-comment"># configuración aplicada en SW1</span>
+<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 10 root primary</span><span class="cli-comment"> # SW1 será la raíz preferida de la VLAN 10</span>
+<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 20 root primary</span><span class="cli-comment"> # SW1 será la raíz preferida de la VLAN 20</span>
+<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 30 root secondary</span><span class="cli-comment"> # SW1 queda como respaldo de la VLAN 30</span>
+<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 40 root secondary</span><span class="cli-comment"> # SW1 queda como respaldo de la VLAN 40</span>
+<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda los cambios</span></code></pre>
+        <p>
+          Para repartir el trabajo, SW2 puede recibir los roles contrarios:
+          principal para las VLANs 30 y 40, y secundario para las VLANs 10 y
+          20. Así cada grupo tiene una raíz prevista y otra de respaldo.
+        </p>
+        <pre
+          class="cli-block"
+          aria-label="Configurar raíz principal y secundaria en SW2"
+        ><code><span class="cli-comment"># configuración complementaria aplicada en SW2</span>
+<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 30 root primary</span><span class="cli-comment"> # SW2 será la raíz preferida de la VLAN 30</span>
+<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 40 root primary</span><span class="cli-comment"> # SW2 será la raíz preferida de la VLAN 40</span>
+<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 10 root secondary</span><span class="cli-comment"> # SW2 queda como respaldo de la VLAN 10</span>
+<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 20 root secondary</span><span class="cli-comment"> # SW2 queda como respaldo de la VLAN 20</span>
+<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda los cambios</span></code></pre>
+
+        <h2>Proteger puertos de acceso</h2>
+        <p>
+          PortFast se utiliza en puertos de acceso conectados a dispositivos
+          finales, como computadores o impresoras. Permite que el puerto pase
+          rápidamente a reenviar tráfico, sin esperar la convergencia normal de
+          STP cada vez que el equipo se conecta.
+        </p>
+        <p>
+          BPDU Guard complementa esa configuración. Si el puerto recibe una
+          BPDU, se interpreta que probablemente conectaron un switch donde
+          debería existir un equipo final y el puerto se protege desactivándose.
+        </p>
+        <pre
+          class="cli-block"
+          aria-label="Configurar PortFast y BPDU Guard"
+        ><code><span class="cli-prompt">Switch(config)#</span> <span class="cli-command">interface fastEthernet 0/10</span><span class="cli-comment"> # selecciona un puerto conectado a un equipo final</span>
+<span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">switchport mode access</span><span class="cli-comment"> # establece el puerto como acceso</span>
+<span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">spanning-tree portfast</span><span class="cli-comment"> # permite que el puerto comience a reenviar con rapidez</span>
+<span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">spanning-tree bpduguard enable</span><span class="cli-comment"> # protege el puerto si recibe una BPDU</span>
+<span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">exit</span><span class="cli-comment"> # vuelve a la configuración global</span>
+<span class="cli-prompt">Switch(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda la configuración</span></code></pre>
+        <div class="lesson-note">
+          <strong>No confundas PortFast:</strong> no desactiva Spanning Tree ni
+          impide que el puerto reciba BPDUs. No lo configures en enlaces entre
+          switches; resérvalo para puertos de acceso conectados a equipos
+          finales.
+        </div>
+
+        <h2>Comprobar el resultado</h2>
+        <p>
+          Revisa cada VLAN después de configurar ambos switches. Confirma que
+          aparezca la raíz esperada y que los roles de los puertos coincidan con
+          la topología. En una red con redundancia es normal encontrar un puerto
+          alternativo que no reenvía tráfico de usuario.
+        </p>
+        <pre
+          class="cli-block"
+          aria-label="Verificar Spanning Tree por VLAN"
+        ><code><span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 10</span><span class="cli-comment"> # verifica la raíz y los puertos de la VLAN 10</span>
+<span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 20</span><span class="cli-comment"> # repite la comprobación para la VLAN 20</span>
+<span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 30</span><span class="cli-comment"> # verifica la raíz y los puertos de la VLAN 30</span>
+<span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 40</span><span class="cli-comment"> # repite la comprobación para la VLAN 40</span></code></pre>
+        <div class="lesson-actions">
+          <a href="index.html">← Fundamentos y topología</a
+          ><a href="../index.html">Volver a categorías →</a>
+        </div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">
+            Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y
+            Telecomunicaciones · 2026
+          </p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20260923-stp"></script>
+  </body>
+</html>

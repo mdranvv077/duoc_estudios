@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Fundamentos de Spanning Tree en Cisco Packet Tracer."
+    />
+    <title>Spanning Tree — Packet Tracer</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/responsive.css?v=20260909-mobile"
+    />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/learning.css?v=20260923-stp"
+    />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a
+        class="brand"
+        href="../../../index.html"
+        aria-label="Inicio DGNV Studios"
+        ><img
+          class="brand-logo"
+          src="../../../assets/images/dgnv-logo.png"
+          alt=""
+        /><span>DGNV Studios</span></a
+      >
+    </header>
+    <main class="container learning-shell">
+      <button
+        class="sidebar-toggle"
+        type="button"
+        data-sidebar-toggle
+        aria-expanded="false"
+      >
+        ☰ Módulos de Spanning Tree
+      </button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"
+          ><small>Packet Tracer · 05</small><strong>Spanning Tree</strong></a
+        >
+        <nav class="lesson-nav" aria-label="Módulos de Spanning Tree"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span> Módulo 01</p>
+        <h1>Entender <em>Spanning Tree.</em></h1>
+        <p class="lesson-lead">
+          Spanning Tree Protocol, o STP, permite mantener enlaces redundantes
+          entre switches sin crear un bucle activo dentro de la red de capa 2.
+        </p>
+
+        <h2>Por qué existe STP</h2>
+        <p>
+          Tener más de un camino entre switches es útil: si un cable falla, la
+          red puede continuar por otro. El problema aparece cuando varios
+          caminos permanecen activos al mismo tiempo y forman un circuito
+          cerrado. Una trama puede volver una y otra vez por ese circuito.
+        </p>
+        <p>
+          A diferencia de un paquete IP, una trama Ethernet no tiene un
+          contador que la elimine después de cierta cantidad de saltos. El bucle
+          puede provocar tormentas de broadcast, copias repetidas de la misma
+          trama y cambios constantes en la tabla de direcciones MAC de los
+          switches. El resultado puede ser una red muy lenta o completamente
+          inutilizable.
+        </p>
+
+        <h2>Qué hace en la red</h2>
+        <p>
+          STP intercambia información entre los switches, elige un switch raíz
+          como punto de referencia y calcula los mejores caminos hacia él. Si
+          encuentra un enlace redundante, mantiene uno de sus puertos sin
+          reenviar tráfico normal. El cable continúa conectado, pero no forma
+          parte del camino activo.
+        </p>
+        <p>
+          Cuando falla un enlace principal, STP vuelve a calcular la topología
+          y puede habilitar el camino que estaba bloqueado. Su finalidad no es
+          eliminar la redundancia, sino utilizarla sin permitir bucles.
+        </p>
+
+        <figure class="topology-card stp-topology" aria-labelledby="stp-topology-title">
+          <figcaption id="stp-topology-title">
+            <span>Topología de ejemplo</span
+            ><strong>Tres switches con un camino redundante</strong>
+          </figcaption>
+          <div
+            class="topology-map"
+            role="img"
+            aria-label="Tres switches conectados en triángulo. SW1 es el switch raíz. Los enlaces desde SW1 reenvían tráfico y un extremo del enlace entre SW2 y SW3 permanece bloqueado para evitar un bucle."
+          >
+            <svg
+              class="topology-cables"
+              viewBox="0 0 1000 330"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path class="stp-forwarding" d="M500 70L190 245" />
+              <path class="stp-forwarding" d="M500 70L810 245" />
+              <path class="stp-blocked" d="M190 245H810" />
+              <path class="stp-block-mark" d="M705 229L725 261M725 229L705 261" />
+            </svg>
+            <div class="topology-node stp-node-root">
+              <img
+                class="device-icon switch-icon"
+                src="../img/cisco-switch.png"
+                alt=""
+              /><b>SW1</b><small>Switch raíz</small>
+            </div>
+            <div class="topology-node stp-node-left">
+              <img
+                class="device-icon switch-icon"
+                src="../img/cisco-switch.png"
+                alt=""
+              /><b>SW2</b><small>Camino activo</small>
+            </div>
+            <div class="topology-node stp-node-right">
+              <img
+                class="device-icon switch-icon"
+                src="../img/cisco-switch.png"
+                alt=""
+              /><b>SW3</b><small>Puerto alternativo</small>
+            </div>
+          </div>
+          <div class="topology-legend" aria-label="Estado de los enlaces">
+            <span><i></i>Reenvío</span
+            ><span class="legend-blocked"><i></i>Camino bloqueado</span>
+          </div>
+          <p class="topology-caption">
+            Los tres cables permanecen conectados. STP evita el bucle al dejar
+            un extremo del enlace redundante sin reenviar tráfico de usuario.
+          </p>
+        </figure>
+
+        <h2>Conceptos que debes reconocer</h2>
+        <ul>
+          <li>
+            <strong>Switch raíz:</strong> es la referencia desde la cual se
+            calculan los caminos de la topología.
+          </li>
+          <li>
+            <strong>Puerto raíz:</strong> es el mejor camino de un switch no raíz
+            hacia el switch raíz.
+          </li>
+          <li>
+            <strong>Puerto designado:</strong> es el puerto elegido para
+            reenviar tráfico en un segmento.
+          </li>
+          <li>
+            <strong>Puerto alternativo:</strong> conserva un camino redundante
+            que puede utilizarse si el principal falla.
+          </li>
+        </ul>
+
+        <h2>PVST y las VLANs</h2>
+        <p>
+          En esta práctica se utilizará PVST, que mantiene una instancia de
+          Spanning Tree por VLAN. Esto permite que un switch sea raíz para unas
+          VLANs y que otro switch lo sea para otras. Por eso revisarás y
+          configurarás individualmente las VLANs 10, 20, 30 y 40.
+        </p>
+        <div class="lesson-note">
+          <strong>Cuándo se necesita:</strong> STP es importante cuando existen
+          enlaces redundantes entre switches de capa 2. No sustituye al routing
+          ni se configura para crear conectividad entre VLANs diferentes.
+        </div>
+        <div class="lesson-actions">
+          <span></span
+          ><a href="configuracion.html">Siguiente: configuración y protección →</a>
+        </div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">
+            Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y
+            Telecomunicaciones · 2026
+          </p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20260923-stp"></script>
+  </body>
+</html>
