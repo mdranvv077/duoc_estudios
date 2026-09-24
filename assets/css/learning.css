@@ -77,8 +77,14 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .assumed-topic-shortcuts { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 13px; max-width: 720px; margin: -3px 0 20px; }
 .lesson-content .assumed-topic-shortcuts > p { margin: 0; color: #8e9aaa; font: .66rem/1.45 "DM Mono", monospace; }
 .assumed-topic-links { display: flex; flex-wrap: wrap; gap: 7px; }
-.assumed-topic-links a { padding: 6px 9px; color: #9eabba; border: 1px solid rgba(183, 205, 228, .15); background: rgba(14, 20, 29, .46); font: .62rem "DM Mono", monospace; text-decoration: none; transition: color .18s, border-color .18s, background .18s; }
+.assumed-topic-links a { position: relative; padding: 6px 9px; color: #9eabba; border: 1px solid rgba(183, 205, 228, .15); background: rgba(14, 20, 29, .46); font: .62rem "DM Mono", monospace; text-decoration: none; transition: color .18s, border-color .18s, background .18s; }
 .assumed-topic-links a:hover { color: var(--cyan); border-color: rgba(46, 234, 255, .32); background: rgba(46, 234, 255, .045); }
+.assumed-topic-links a::after { content: attr(data-help); position: absolute; z-index: 4; bottom: calc(100% + 9px); left: 50%; width: max-content; max-width: 190px; padding: 7px 9px; color: #c7d1dd; border: 1px solid rgba(46, 234, 255, .24); background: rgba(7, 12, 18, .98); box-shadow: 0 8px 24px rgba(0, 0, 0, .28); font: .61rem/1.45 "DM Mono", monospace; text-align: center; white-space: normal; opacity: 0; pointer-events: none; transform: translate(-50%, 4px); transition: opacity .18s ease, transform .18s ease; }
+.assumed-topic-links a:hover::after, .assumed-topic-links a:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+.assumed-topic-links a:first-child::after { left: 0; transform: translate(0, 4px); }
+.assumed-topic-links a:first-child:hover::after, .assumed-topic-links a:first-child:focus-visible::after { transform: translate(0, 0); }
+.assumed-topic-links a:last-child::after { right: 0; left: auto; transform: translate(0, 4px); }
+.assumed-topic-links a:last-child:hover::after, .assumed-topic-links a:last-child:focus-visible::after { transform: translate(0, 0); }
 .lesson-lead { color: var(--muted) !important; font-size: 1.05rem !important; }
 .lesson-content ul, .lesson-content ol { max-width: 720px; padding-left: 20px; color: #c0cad7; line-height: 1.85; }
 .lesson-content li::marker { color: var(--magenta); }
