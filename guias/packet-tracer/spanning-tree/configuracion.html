@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../../../assets/css/credits.css" />
     <link
       rel="stylesheet"
-      href="../../../assets/css/learning.css?v=20260923-stp"
+      href="../../../assets/css/learning.css?v=20260923-stp-practice"
     />
   </head>
   <body>
@@ -65,15 +65,107 @@
           finales.
         </p>
 
-        <h2>Preparar la práctica</h2>
+        <h2>Punto de partida de la práctica</h2>
         <p>
-          Las cuatro VLANs deben existir en los switches y los enlaces entre
-          ellos deben estar configurados como trunks. Aunque no configures nada,
-          STP elegirá un Root Switch automáticamente. Sin embargo, es mejor que
-          tú decidas cuál será para que los caminos de la red sean predecibles.
+          Desde este punto, la guía <strong>asume que la topología ya está
+          armada</strong>, que las VLANs 10, 20, 30 y 40 ya fueron creadas y que
+          los enlaces entre switches funcionan como trunks. No volveremos a
+          construir esas configuraciones: aquí nos concentraremos solamente en
+          Spanning Tree.
         </p>
+        <div class="lesson-note">
+          <strong>Punto de partida asumido:</strong> este es simplemente el
+          escenario desde el que comienza el ejemplo. Puedes usar otra
+          topología, otras interfaces o VLANs diferentes y adaptar los comandos.
+        </div>
         <p>
-          En los módulos anteriores viste cómo se realiza la elección. Aquí
+          Aunque no configures nada adicional, STP elegirá un Root Switch de
+          forma automática. En esta práctica tomarás el control de esa elección
+          para que los caminos de la red sean más predecibles.
+        </p>
+
+        <figure class="topology-card stp-practice-topology">
+          <figcaption>
+            <span>Topología recomendada</span>
+            <strong>Cuatro switches con enlaces redundantes</strong>
+          </figcaption>
+          <div
+            class="topology-map"
+            role="img"
+            aria-label="Cuatro switches conectados en un cuadrado. Los dos switches inferiores tienen dos computadores cada uno: VLAN 10 y 20 a la izquierda, VLAN 30 y 40 a la derecha."
+          >
+            <svg class="topology-cables" viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true">
+              <path class="stp-trunk" d="M330 86 H670" />
+              <path class="stp-trunk" d="M265 125 V326" />
+              <path class="stp-trunk" d="M735 125 V326" />
+              <path class="stp-trunk" d="M330 350 H670" />
+              <path class="stp-access" d="M220 384 L135 462" />
+              <path class="stp-access" d="M280 384 L355 462" />
+              <path class="stp-access" d="M720 384 L645 462" />
+              <path class="stp-access" d="M780 384 L865 462" />
+            </svg>
+
+            <div class="topology-node practice-switch practice-sw1">
+              <img class="device-icon switch-icon" src="../img/cisco-switch.png" alt="" />
+              <b>SW1</b><small>Root: VLAN 10 y 20</small>
+            </div>
+            <div class="topology-node practice-switch practice-sw2">
+              <img class="device-icon switch-icon" src="../img/cisco-switch.png" alt="" />
+              <b>SW2</b><small>Root: VLAN 30 y 40</small>
+            </div>
+            <div class="topology-node practice-switch practice-sw3">
+              <img class="device-icon switch-icon" src="../img/cisco-switch.png" alt="" />
+              <b>SW3</b><small>Switch de acceso</small>
+            </div>
+            <div class="topology-node practice-switch practice-sw4">
+              <img class="device-icon switch-icon" src="../img/cisco-switch.png" alt="" />
+              <b>SW4</b><small>Switch de acceso</small>
+            </div>
+
+            <div class="topology-node practice-pc practice-pc1">
+              <svg class="endpoint-icon" viewBox="0 0 64 52" aria-hidden="true">
+                <rect x="7" y="5" width="50" height="32" rx="2" />
+                <path d="M23 47h18M32 37v10" />
+              </svg>
+              <b>PC 1</b><small>VLAN 10</small>
+            </div>
+            <div class="topology-node practice-pc practice-pc2">
+              <svg class="endpoint-icon" viewBox="0 0 64 52" aria-hidden="true">
+                <rect x="7" y="5" width="50" height="32" rx="2" />
+                <path d="M23 47h18M32 37v10" />
+              </svg>
+              <b>PC 2</b><small>VLAN 20</small>
+            </div>
+            <div class="topology-node practice-pc practice-pc3">
+              <svg class="endpoint-icon" viewBox="0 0 64 52" aria-hidden="true">
+                <rect x="7" y="5" width="50" height="32" rx="2" />
+                <path d="M23 47h18M32 37v10" />
+              </svg>
+              <b>PC 3</b><small>VLAN 30</small>
+            </div>
+            <div class="topology-node practice-pc practice-pc4">
+              <svg class="endpoint-icon" viewBox="0 0 64 52" aria-hidden="true">
+                <rect x="7" y="5" width="50" height="32" rx="2" />
+                <path d="M23 47h18M32 37v10" />
+              </svg>
+              <b>PC 4</b><small>VLAN 40</small>
+            </div>
+          </div>
+          <div class="topology-legend" aria-hidden="true">
+            <span><i></i> Enlace trunk</span>
+            <span class="legend-access"><i></i> Puerto de acceso</span>
+          </div>
+          <p class="topology-caption">
+            Los cuatro enlaces del cuadrado son trunks. Los PC se conectan a
+            puertos de acceso: PC 1 pertenece a la VLAN 10, PC 2 a la VLAN 20,
+            PC 3 a la VLAN 30 y PC 4 a la VLAN 40. La conexión redundante del
+            cuadrado permite observar cómo STP deja un camino alternativo sin
+            crear un bucle.
+          </p>
+        </figure>
+
+        <p>
+          En los módulos anteriores viste cómo se realiza la elección. Ahora
           aplicarás ese conocimiento primero con una prioridad manual y luego
           con las opciones <code>root primary</code> y
           <code>root secondary</code>.
