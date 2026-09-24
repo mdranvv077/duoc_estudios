@@ -205,8 +205,7 @@
           class="cli-block"
           aria-label="Configurar prioridad de Spanning Tree"
         ><code><span class="cli-prompt">Switch#</span> <span class="cli-command">configure terminal</span><span class="cli-comment"> # abre la configuración global</span>
-<span class="cli-prompt">Switch(config)#</span> <span class="cli-command">spanning-tree vlan 10 priority 4096</span><span class="cli-comment"> # entrega prioridad a este switch para la VLAN 10</span>
-<span class="cli-prompt">Switch(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda la configuración desde el modo actual</span></code></pre>
+<span class="cli-prompt">Switch(config)#</span> <span class="cli-command">spanning-tree vlan 10 priority 4096</span><span class="cli-comment"> # entrega prioridad a este switch para la VLAN 10</span></code></pre>
         <div class="lesson-note">
           <strong>Recuerda:</strong> el número menor gana. Si otro switch tiene
           una prioridad inferior a 4096, ese otro equipo seguirá teniendo la
@@ -228,8 +227,7 @@
 <span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 10 root primary</span><span class="cli-comment"> # SW1 será el Root Switch principal de la VLAN 10</span>
 <span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 20 root primary</span><span class="cli-comment"> # SW1 será el Root Switch principal de la VLAN 20</span>
 <span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 30 root secondary</span><span class="cli-comment"> # SW1 queda como respaldo de la VLAN 30</span>
-<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 40 root secondary</span><span class="cli-comment"> # SW1 queda como respaldo de la VLAN 40</span>
-<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda los cambios</span></code></pre>
+<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">spanning-tree vlan 40 root secondary</span><span class="cli-comment"> # SW1 queda como respaldo de la VLAN 40</span></code></pre>
         <p>
           En SW2 hacemos lo contrario. De esta forma, cada VLAN tiene un Root
           Switch principal y otro switch listo como respaldo.
@@ -241,8 +239,7 @@
 <span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 30 root primary</span><span class="cli-comment"> # SW2 será el Root Switch principal de la VLAN 30</span>
 <span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 40 root primary</span><span class="cli-comment"> # SW2 será el Root Switch principal de la VLAN 40</span>
 <span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 10 root secondary</span><span class="cli-comment"> # SW2 queda como respaldo de la VLAN 10</span>
-<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 20 root secondary</span><span class="cli-comment"> # SW2 queda como respaldo de la VLAN 20</span>
-<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda los cambios</span></code></pre>
+<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">spanning-tree vlan 20 root secondary</span><span class="cli-comment"> # SW2 queda como respaldo de la VLAN 20</span></code></pre>
 
         <h2>Proteger puertos de acceso</h2>
         <p>
@@ -262,8 +259,7 @@
 <span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">switchport mode access</span><span class="cli-comment"> # establece el puerto como acceso</span>
 <span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">spanning-tree portfast</span><span class="cli-comment"> # permite que el puerto comience a reenviar con rapidez</span>
 <span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">spanning-tree bpduguard enable</span><span class="cli-comment"> # protege el puerto si recibe una BPDU</span>
-<span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">exit</span><span class="cli-comment"> # vuelve a la configuración global</span>
-<span class="cli-prompt">Switch(config)#</span> <span class="cli-command">do wr</span><span class="cli-comment"> # guarda la configuración</span></code></pre>
+<span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">exit</span><span class="cli-comment"> # vuelve a la configuración global</span></code></pre>
         <div class="lesson-note">
           <strong>No confundas PortFast:</strong> no apaga Spanning Tree; solo
           permite que un puerto de usuario empiece a funcionar más rápido. No
