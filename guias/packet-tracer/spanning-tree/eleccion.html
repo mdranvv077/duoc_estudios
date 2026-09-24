@@ -96,22 +96,48 @@
         </p>
         <ul>
           <li>
-            <strong>Prioridad:</strong> es un valor configurable. El valor base
-            habitual es 32768 y se modifica en saltos de 4096.
+            <strong>Prioridad:</strong> es la primera parte que STP compara. Su
+            valor base habitual es 32768, pero puede configurarse entre 0 y
+            61440. Un número menor tiene preferencia para convertirse en Root
+            Switch.
           </li>
           <li>
-            <strong>ID de sistema extendido:</strong> normalmente representa el
-            número de VLAN dentro del BID.
+            <strong>ID de sistema extendido:</strong> identifica la instancia de
+            STP. Cuando se utiliza PVST+, corresponde al número de la VLAN. Así,
+            un mismo switch puede tener un BID diferente para la VLAN 10 y para
+            la VLAN 20.
           </li>
           <li>
-            <strong>Dirección MAC:</strong> identifica físicamente al switch y se
-            utiliza para desempatar cuando las prioridades son iguales.
+            <strong>Dirección MAC:</strong> completa el BID e identifica al
+            switch. Si varios switches tienen la misma prioridad dentro de la
+            misma VLAN, gana el que posea la MAC numéricamente más baja.
           </li>
         </ul>
+        <h2>Cómo se calcula la prioridad mostrada</h2>
+        <p>
+          El campo de prioridad del BID tiene 16 bits. Los primeros 4 se usan
+          para la prioridad configurable y los otros 12 quedan reservados para
+          el ID de sistema extendido. Como esos 12 bits están reservados, la
+          prioridad base solo puede avanzar en bloques de 4096: 0, 4096, 8192,
+          12288 y así sucesivamente.
+        </p>
+        <p>
+          El valor que aparece en <code>show spanning-tree</code> se obtiene
+          sumando la prioridad base y el número de VLAN. La dirección MAC forma
+          la parte final del BID, pero no se suma como si fuera otro número de
+          prioridad; se utiliza después para resolver un empate.
+        </p>
+        <div class="lesson-note">
+          <strong>Ejemplo para la VLAN 10:</strong><br />
+          Prioridad predeterminada: <code>32768 + 10 = 32778</code>.<br />
+          Prioridad configurada en 4096: <code>4096 + 10 = 4106</code>.<br />
+          Como 4106 es menor que 32778, el switch configurado con 4096 tendrá
+          preferencia en la elección del Root Switch.
+        </div>
         <div class="lesson-note">
           <strong>Regla principal:</strong> gana el BID más bajo. Primero se
-          compara la prioridad y, si existe un empate, gana la dirección MAC más
-          baja.
+          compara la suma de prioridad e ID de sistema extendido. Si existe un
+          empate, gana la dirección MAC más baja.
         </div>
 
         <h2>Priority y root no son lo mismo</h2>
