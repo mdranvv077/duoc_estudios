@@ -124,7 +124,9 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .stp-practice-topology .topology-cables .stp-access { stroke: var(--orange); filter: drop-shadow(0 0 5px rgba(255, 157, 46, .16)); }
 .stp-practice-topology .practice-switch { width: 27%; }
 .stp-practice-topology .practice-switch small { white-space: normal; }
-.stp-practice-topology .practice-switch b, .stp-practice-topology .practice-switch small { position: relative; z-index: 1; background: rgba(8, 15, 23, .96); box-shadow: 0 0 0 3px rgba(8, 15, 23, .96); }
+.stp-practice-topology .practice-top-switch { transform: translate(-50%, -50%); }
+.stp-practice-topology .practice-node-copy { position: absolute; right: 0; bottom: calc(100% + 5px); left: 0; display: grid; justify-items: center; }
+.stp-practice-topology .practice-node-copy b, .stp-practice-topology .practice-node-copy small { margin-top: 2px; }
 .stp-practice-topology .practice-sw1 { top: 18%; left: 26.5%; }
 .stp-practice-topology .practice-sw2 { top: 18%; left: 73.5%; }
 .stp-practice-topology .practice-sw3 { top: 68%; left: 26.5%; }
@@ -135,7 +137,9 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .stp-practice-topology .practice-pc3 { left: 64.5%; }
 .stp-practice-topology .practice-pc4 { left: 86.5%; }
 .endpoint-icon { display: block; width: clamp(34px, 6vw, 48px); color: var(--cyan); }
-.endpoint-icon rect, .endpoint-icon path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.endpoint-icon rect { fill: rgba(8, 15, 23, .98); }
+.endpoint-icon rect, .endpoint-icon path { stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.endpoint-icon path { fill: none; }
 .stp-practice-topology .practice-pc b { margin-top: 1px; font-size: clamp(.61rem, 1.5vw, .73rem); }
 .stp-practice-topology .practice-pc small { margin-top: 1px; font-size: clamp(.56rem, 1.35vw, .67rem); white-space: normal; }
 .topology-legend .legend-access i { border-color: var(--orange); }
