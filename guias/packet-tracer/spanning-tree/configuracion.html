@@ -243,14 +243,20 @@
 
         <h2>Proteger puertos de acceso</h2>
         <p>
-          Imagina PortFast como una puerta rápida para equipos conocidos. Se usa
-          en puertos de acceso conectados a computadores o impresoras y permite
-          que comiencen a comunicarse sin esperar el proceso normal de STP.
+          Cuando un puerto normal se activa, STP espera y revisa la red antes de
+          permitir que reenvíe tráfico. <strong>PortFast evita esa espera
+          inicial</strong> y lleva rápidamente el puerto al estado
+          <code>Forwarding</code>. Por eso se utiliza en puertos de acceso
+          conectados directamente a computadores, impresoras u otros equipos
+          finales.
         </p>
         <p>
-          BPDU Guard funciona como un guardia en esa puerta. Si detecta que
-          conectaron un switch en un puerto destinado a un computador, apaga el
-          puerto para evitar que esa conexión cambie o dañe la topología.
+          PortFast <strong>no desactiva STP ni bloquea las BPDU</strong>. Imagina
+          que abre una puerta sin hacer esperar al equipo final, pero la puerta
+          todavía conserva un sensor. Ese sensor es <strong>BPDU Guard</strong>:
+          si el puerto recibe una BPDU —algo que normalmente indicaría que
+          conectaron otro switch—, coloca el puerto en estado
+          <code>err-disabled</code> para proteger la topología.
         </p>
         <pre
           class="cli-block"
@@ -262,8 +268,10 @@
 <span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">exit</span><span class="cli-comment"> # vuelve a la configuración global</span></code></pre>
         <div class="lesson-note">
           <strong>No confundas PortFast:</strong> no apaga Spanning Tree; solo
-          permite que un puerto de usuario empiece a funcionar más rápido. No
-          lo uses en los enlaces que unen un switch con otro switch.
+          evita la espera inicial de sus estados y permite que un puerto de
+          usuario empiece a reenviar tráfico más rápido. Tampoco filtra BPDU:
+          esa es otra función. No lo uses en los enlaces que unen un switch con
+          otro switch.
         </div>
 
         <h2>Comprobar el resultado</h2>
