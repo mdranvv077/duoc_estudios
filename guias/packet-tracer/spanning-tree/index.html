@@ -183,12 +183,34 @@
           </li>
         </ul>
 
-        <h2>PVST y las VLANs</h2>
+        <h2>Cuatro tipos que debes conocer</h2>
         <p>
-          PVST crea un Spanning Tree separado para cada VLAN. Imagínalo como un
-          mapa de caminos distinto para cada grupo de la red. Por eso SW1 puede
-          ser el Root Switch de las VLANs 10 y 20, mientras SW2 puede serlo para
-          las VLANs 30 y 40.
+          Todos buscan evitar bucles, pero no trabajan exactamente de la misma
+          manera. Por ahora basta con reconocer estas cuatro versiones:
+        </p>
+        <ul>
+          <li>
+            <strong>STP Legacy (IEEE 802.1D):</strong> es la versión clásica. Usa
+            un solo árbol y puede tardar bastante en reaccionar ante un cambio.
+          </li>
+          <li>
+            <strong>PVST:</strong> versión antigua de Cisco que crea un árbol
+            diferente para cada VLAN y utilizaba ISL. Actualmente se estudia
+            principalmente como antecedente.
+          </li>
+          <li>
+            <strong>PVST+:</strong> mantiene un árbol por VLAN, pero funciona con
+            trunks 802.1Q. Permite usar distintos Root Switch según la VLAN.
+          </li>
+          <li>
+            <strong>Rapid PVST+:</strong> conserva un árbol por VLAN, pero puede
+            reaccionar mucho más rápido cuando un enlace cambia o falla.
+          </li>
+        </ul>
+        <p>
+          En los switches Cisco modernos, el modo llamado <code>pvst</code> en
+          la CLI corresponde a PVST+. En esta guía trabajaremos con ese modo
+          para las VLANs 10, 20, 30 y 40.
         </p>
         <div class="lesson-note">
           <strong>Idea principal:</strong> STP permite tener cables de respaldo
@@ -198,7 +220,7 @@
         </div>
         <div class="lesson-actions">
           <span></span
-          ><a href="configuracion.html">Siguiente: configuración y protección →</a>
+          ><a href="eleccion.html">Siguiente: BPDU, BID y elección →</a>
         </div>
         <footer class="container">
           <p>DGNV Studios <small>— aprende construyendo.</small></p>

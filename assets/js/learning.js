@@ -49,8 +49,10 @@ const guideData = {
     folder: "spanning-tree",
     label: "Spanning Tree",
     sections: [
-      ["index.html", "Fundamentos y topología"],
-      ["configuracion.html", "Configuración y protección"],
+      ["index.html", "Fundamentos y tipos"],
+      ["eleccion.html", "BPDU, BID y elección"],
+      ["puertos-estados.html", "Puertos, estados y tiempos"],
+      ["configuracion.html", "Configuración y verificación"],
     ],
   },
 };

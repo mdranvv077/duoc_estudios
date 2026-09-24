@@ -75,8 +75,9 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .lesson-content .topic-link { color: var(--cyan); text-decoration: none; }
 .lesson-content .topic-link:hover { color: var(--orange); }
 .lesson-lead { color: var(--muted) !important; font-size: 1.05rem !important; }
-.lesson-content ul { max-width: 720px; padding-left: 20px; color: #c0cad7; line-height: 1.85; }
+.lesson-content ul, .lesson-content ol { max-width: 720px; padding-left: 20px; color: #c0cad7; line-height: 1.85; }
 .lesson-content li::marker { color: var(--magenta); }
+.lesson-content > p code { padding: .08em .25em; color: var(--cyan); background: rgba(46, 234, 255, .055); font: .82em "DM Mono", monospace; }
 .topology-card { max-width: 720px; margin: 28px 0 34px; padding: 20px; border: 1px solid rgba(46, 234, 255, .38); background: radial-gradient(circle at 50% 45%, rgba(46, 234, 255, .065), transparent 52%), linear-gradient(135deg, rgba(14, 24, 37, .9), rgba(5, 9, 14, .9)); }
 .topology-card figcaption { display: grid; gap: 5px; margin-bottom: 12px; }
 .topology-card figcaption span { color: var(--orange); font: .62rem "DM Mono", monospace; letter-spacing: .09em; text-transform: uppercase; }

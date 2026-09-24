@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="BPDU, BID, prioridades y costos de Spanning Tree."
+    />
+    <title>BPDU, BID y elección STP — Packet Tracer</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/responsive.css?v=20260909-mobile"
+    />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/learning.css?v=20260923-stp"
+    />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a
+        class="brand"
+        href="../../../index.html"
+        aria-label="Inicio DGNV Studios"
+        ><img
+          class="brand-logo"
+          src="../../../assets/images/dgnv-logo.png"
+          alt=""
+        /><span>DGNV Studios</span></a
+      >
+    </header>
+    <main class="container learning-shell">
+      <button
+        class="sidebar-toggle"
+        type="button"
+        data-sidebar-toggle
+        aria-expanded="false"
+      >
+        ☰ Módulos de Spanning Tree
+      </button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"
+          ><small>Packet Tracer · 05</small><strong>Spanning Tree</strong></a
+        >
+        <nav class="lesson-nav" aria-label="Módulos de Spanning Tree"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span> Módulo 02</p>
+        <h1>BPDU, BID y <em>elección.</em></h1>
+        <p class="lesson-lead">
+          Antes de bloquear un camino, los switches necesitan conversar para
+          elegir un Root Switch y descubrir cuál es la mejor ruta hacia él.
+        </p>
+
+        <h2>Las BPDU son mensajes entre switches</h2>
+        <p>
+          Imagina que cada switch envía una pequeña ficha con información sobre
+          sí mismo y sobre el camino que conoce. Esa ficha se llama
+          <strong>BPDU</strong>, abreviatura de Bridge Protocol Data Unit.
+        </p>
+        <p>
+          Las BPDU no transportan los datos de los usuarios. Son mensajes de
+          control que STP utiliza para comparar switches, elegir el Root Switch
+          y decidir qué puertos pueden reenviar tráfico sin formar un bucle.
+          Entre otros datos, informan el BID, el costo del camino y los
+          temporizadores de STP.
+        </p>
+
+        <h2>El BID identifica a cada switch</h2>
+        <p>
+          El <strong>BID</strong>, o Bridge ID, es como la identificación con la
+          que cada switch participa en la elección. Se construye con tres
+          elementos:
+        </p>
+        <ul>
+          <li>
+            <strong>Prioridad:</strong> es un valor configurable. El valor base
+            habitual es 32768 y se modifica en saltos de 4096.
+          </li>
+          <li>
+            <strong>ID de sistema extendido:</strong> normalmente representa el
+            número de VLAN dentro del BID.
+          </li>
+          <li>
+            <strong>Dirección MAC:</strong> identifica físicamente al switch y se
+            utiliza para desempatar cuando las prioridades son iguales.
+          </li>
+        </ul>
+        <div class="lesson-note">
+          <strong>Regla principal:</strong> gana el BID más bajo. Primero se
+          compara la prioridad y, si existe un empate, gana la dirección MAC más
+          baja.
+        </div>
+
+        <h2>Priority y root no son lo mismo</h2>
+        <p>
+          Con <code>priority</code> escribes directamente el puntaje que deseas
+          usar, por ejemplo 4096. Esto entrega un control exacto, pero debes
+          conocer las prioridades de los otros switches.
+        </p>
+        <p>
+          En cambio, <code>root primary</code> es un atajo de Cisco: el switch
+          revisa la topología e intenta ajustar su prioridad para convertirse en
+          Root Switch. <code>root secondary</code> lo deja preparado como
+          respaldo. Estos comandos no crean un tipo diferente de Root Switch;
+          por debajo siguen trabajando con prioridades.
+        </p>
+
+        <h2>El costo representa la distancia</h2>
+        <p>
+          STP llama <strong>costo</strong> al valor que utiliza para comparar
+          caminos. No se refiere a dinero ni a metros. Depende principalmente
+          de la velocidad del enlace: un enlace más rápido suele tener un costo
+          menor y, por lo tanto, resulta más conveniente.
+        </p>
+        <ul>
+          <li><strong>10 Mb/s:</strong> costo corto 100.</li>
+          <li><strong>100 Mb/s:</strong> costo corto 19.</li>
+          <li><strong>1 Gb/s:</strong> costo corto 4.</li>
+          <li><strong>10 Gb/s:</strong> costo corto 2.</li>
+        </ul>
+        <p>
+          Si un camino atraviesa varios enlaces, STP suma sus costos. Por
+          ejemplo, dos enlaces FastEthernet tienen un costo total de 38. Un
+          switch elegirá como Root Port el puerto que lo lleve al Root Switch
+          con el menor costo acumulado.
+        </p>
+
+        <h2>Cómo se toman las decisiones</h2>
+        <p>
+          Puedes leer el proceso como una serie de preguntas. STP pasa a la
+          siguiente solo cuando existe un empate:
+        </p>
+        <ol>
+          <li>¿Qué BPDU anuncia el Root BID más bajo?</li>
+          <li>¿Qué camino tiene el menor costo hasta el Root Switch?</li>
+          <li>¿Qué switch emisor tiene el BID más bajo?</li>
+          <li>¿Qué puerto emisor tiene el Port ID más bajo?</li>
+        </ol>
+        <p>
+          El resultado es una topología predecible: un Root Switch, un Root
+          Port en cada switch que no sea raíz y un camino redundante que puede
+          quedar en espera.
+        </p>
+        <div class="lesson-actions">
+          <a href="index.html">← Fundamentos y tipos</a
+          ><a href="puertos-estados.html">Siguiente: puertos, estados y tiempos →</a>
+        </div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">
+            Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y
+            Telecomunicaciones · 2026
+          </p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20260923-stp"></script>
+  </body>
+</html>

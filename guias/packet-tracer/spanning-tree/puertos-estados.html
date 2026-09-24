@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Roles, estados y temporizadores de puertos Spanning Tree."
+    />
+    <title>Puertos y estados STP — Packet Tracer</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/responsive.css?v=20260909-mobile"
+    />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/learning.css?v=20260923-stp"
+    />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a
+        class="brand"
+        href="../../../index.html"
+        aria-label="Inicio DGNV Studios"
+        ><img
+          class="brand-logo"
+          src="../../../assets/images/dgnv-logo.png"
+          alt=""
+        /><span>DGNV Studios</span></a
+      >
+    </header>
+    <main class="container learning-shell">
+      <button
+        class="sidebar-toggle"
+        type="button"
+        data-sidebar-toggle
+        aria-expanded="false"
+      >
+        ☰ Módulos de Spanning Tree
+      </button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"
+          ><small>Packet Tracer · 05</small><strong>Spanning Tree</strong></a
+        >
+        <nav class="lesson-nav" aria-label="Módulos de Spanning Tree"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span> Módulo 03</p>
+        <h1>Puertos, estados y <em>tiempos.</em></h1>
+        <p class="lesson-lead">
+          STP entrega una función a cada puerto y también controla en qué estado
+          se encuentra mientras la red decide un camino seguro.
+        </p>
+
+        <h2>Rol y estado no significan lo mismo</h2>
+        <p>
+          El <strong>rol</strong> explica el trabajo del puerto dentro de la
+          topología: por ejemplo, ser el mejor camino al Root Switch. El
+          <strong>estado</strong> indica lo que puede hacer en ese momento: enviar
+          tráfico, aprender direcciones MAC o permanecer bloqueado.
+        </p>
+
+        <h2>BEARD como ayuda de memoria</h2>
+        <p>
+          En clases se puede usar la palabra <strong>BEARD</strong> para recordar
+          los nombres más importantes relacionados con los puertos de STP y
+          RSTP:
+        </p>
+        <ul>
+          <li>
+            <strong>B · Backup:</strong> es el respaldo de un Designated Port.
+            Es poco común en topologías actuales y no reenvía tráfico normal.
+          </li>
+          <li>
+            <strong>E · Edge:</strong> se conecta a un equipo final, como un PC.
+            En Cisco se relaciona con PortFast. Técnicamente describe un tipo
+            de puerto y no un rol elegido como Root o Designated.
+          </li>
+          <li>
+            <strong>A · Alternate:</strong> ofrece otro camino hacia el Root
+            Switch. Permanece sin reenviar tráfico para evitar el bucle.
+          </li>
+          <li>
+            <strong>R · Root:</strong> el Root Port es el mejor camino de un
+            switch hacia el Root Switch. Un switch que no sea raíz tiene uno.
+          </li>
+          <li>
+            <strong>D · Designated:</strong> es el puerto elegido para reenviar
+            tráfico en un segmento. Los puertos activos del Root Switch son
+            Designated Ports.
+          </li>
+        </ul>
+        <div class="lesson-note">
+          <strong>Puerto Disabled:</strong> un puerto deshabilitado no participa
+          en STP, no aprende direcciones MAC y no reenvía tráfico. Puede estar
+          apagado administrativamente o no tener un enlace activo. Disabled es
+          un estado, no la letra D de BEARD; en BEARD, D significa Designated.
+        </div>
+
+        <h2>Estados de STP Legacy</h2>
+        <p>
+          Cuando un puerto se activa, STP clásico no comienza a enviar datos de
+          inmediato. Avanza por varios estados para comprobar que no creará un
+          bucle:
+        </p>
+        <ol>
+          <li>
+            <strong>Blocking:</strong> no reenvía tráfico ni aprende MAC, pero
+            escucha BPDUs para conocer la topología.
+          </li>
+          <li>
+            <strong>Listening:</strong> participa en los cálculos de STP, pero
+            todavía no aprende MAC ni reenvía datos.
+          </li>
+          <li>
+            <strong>Learning:</strong> comienza a aprender direcciones MAC, pero
+            aún no reenvía el tráfico de los usuarios.
+          </li>
+          <li>
+            <strong>Forwarding:</strong> aprende MAC y ya puede reenviar tráfico
+            normalmente.
+          </li>
+          <li>
+            <strong>Disabled:</strong> queda fuera de STP y no realiza ninguna
+            de las funciones anteriores.
+          </li>
+        </ol>
+        <p>
+          En RSTP y Rapid PVST+, los estados Disabled, Blocking y Listening se
+          agrupan bajo el nombre <strong>Discarding</strong>. Los otros dos
+          estados siguen siendo Learning y Forwarding.
+        </p>
+
+        <h2>Temporizadores principales</h2>
+        <p>
+          Los temporizadores evitan que STP tome decisiones apresuradas. Puedes
+          imaginarlos como tiempos de espera antes de abrir una carretera:
+        </p>
+        <ul>
+          <li>
+            <strong>Hello Time · 2 segundos:</strong> intervalo normal entre
+            las BPDU enviadas por el Root Switch.
+          </li>
+          <li>
+            <strong>Max Age · 20 segundos:</strong> tiempo durante el cual se
+            conserva información BPDU antes de considerarla vencida.
+          </li>
+          <li>
+            <strong>Forward Delay · 15 segundos:</strong> tiempo utilizado en
+            Listening y nuevamente en Learning antes de llegar a Forwarding.
+          </li>
+        </ul>
+        <p>
+          Con los valores clásicos, una recuperación puede tardar alrededor de
+          50 segundos: hasta 20 de Max Age, 15 de Listening y 15 de Learning.
+          Las versiones rápidas reducen mucho esa espera mediante un intercambio
+          más directo entre switches.
+        </p>
+        <div class="lesson-note">
+          <strong>Para esta guía:</strong> no necesitas modificar los
+          temporizadores. Lo importante es reconocer para qué sirve cada uno y
+          entender por qué un puerto puede tardar en ponerse verde.
+        </div>
+
+        <h2>Puertos conectados a usuarios</h2>
+        <p>
+          Un puerto conectado a un PC no necesita esperar como un enlace entre
+          switches. En el siguiente módulo utilizarás PortFast para acelerar su
+          inicio y BPDU Guard para protegerlo si alguien conecta otro switch por
+          error.
+        </p>
+        <div class="lesson-actions">
+          <a href="eleccion.html">← BPDU, BID y elección</a
+          ><a href="configuracion.html">Siguiente: configuración y verificación →</a>
+        </div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">
+            Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y
+            Telecomunicaciones · 2026
+          </p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20260923-stp"></script>
+  </body>
+</html>

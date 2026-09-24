@@ -57,15 +57,15 @@
         <a class="sidebar-back" href="../index.html">← Ver categorías</a>
       </aside>
       <article class="lesson-content">
-        <p class="eyebrow"><span></span> Módulo 02</p>
-        <h1>Configuración y <em>protección.</em></h1>
+        <p class="eyebrow"><span></span> Módulo 04</p>
+        <h1>Configuración y <em>verificación.</em></h1>
         <p class="lesson-lead">
           Ahora elegirás el Root Switch de cada VLAN y prepararás de forma
           segura los puertos donde se conectan computadores u otros equipos
           finales.
         </p>
 
-        <h2>Antes de escribir comandos</h2>
+        <h2>Preparar la práctica</h2>
         <p>
           Las cuatro VLANs deben existir en los switches y los enlaces entre
           ellos deben estar configurados como trunks. Aunque no configures nada,
@@ -73,10 +73,10 @@
           tú decidas cuál será para que los caminos de la red sean predecibles.
         </p>
         <p>
-          Piensa en la prioridad como el puntaje de una competencia donde gana
-          el número más bajo. Si dos switches tienen el mismo número, STP usa la
-          dirección MAC para desempatar. Las prioridades avanzan en bloques de
-          4096.
+          En los módulos anteriores viste cómo se realiza la elección. Aquí
+          aplicarás ese conocimiento primero con una prioridad manual y luego
+          con las opciones <code>root primary</code> y
+          <code>root secondary</code>.
         </p>
 
         <h2>Activar PVST y revisar una VLAN</h2>
@@ -180,12 +180,14 @@
         <pre
           class="cli-block"
           aria-label="Verificar Spanning Tree por VLAN"
-        ><code><span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 10</span><span class="cli-comment"> # verifica el Root Switch y los puertos de la VLAN 10</span>
+        ><code><span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree summary</span><span class="cli-comment"> # resume el modo STP y sus instancias activas</span>
+<span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 10</span><span class="cli-comment"> # verifica el Root Switch y los puertos de la VLAN 10</span>
 <span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 20</span><span class="cli-comment"> # repite la comprobación para la VLAN 20</span>
 <span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 30</span><span class="cli-comment"> # verifica el Root Switch y los puertos de la VLAN 30</span>
-<span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 40</span><span class="cli-comment"> # repite la comprobación para la VLAN 40</span></code></pre>
+<span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 40</span><span class="cli-comment"> # repite la comprobación para la VLAN 40</span>
+<span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree interface fastEthernet 0/10 detail</span><span class="cli-comment"> # revisa STP, PortFast y BPDU Guard en el puerto de acceso</span></code></pre>
         <div class="lesson-actions">
-          <a href="index.html">← Fundamentos y topología</a
+          <a href="puertos-estados.html">← Puertos, estados y tiempos</a
           ><a href="../index.html">Volver a categorías →</a>
         </div>
         <footer class="container">

@@ -34,7 +34,7 @@ img, svg { max-width: 100%; }
   body .lesson-content h1 { font-size: clamp(2.05rem, 12vw, 3.35rem); }
   body .lesson-content h2 { margin-top: 34px; font-size: clamp(1.3rem, 7vw, 1.7rem); }
   body .lesson-content p { font-size: .96rem; line-height: 1.72; }
-  body .lesson-content ul { padding-left: 18px; line-height: 1.72; }
+  body .lesson-content ul, body .lesson-content ol { padding-left: 18px; line-height: 1.72; }
   body .cli-block { margin: 20px 0; padding: 38px 14px 16px; font-size: .68rem; line-height: 1.75; }
   body .cli-block::after { font-size: .6rem; }
   body .lesson-note { margin-top: 24px; padding: 14px; font-size: .8rem; }
