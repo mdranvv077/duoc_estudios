@@ -49,6 +49,27 @@
           </nav>
         </div>
 
+        <h2>Qué significa el grupo 1</h2>
+        <p>
+          El número del comando <code>channel-group 1</code> sirve para
+          identificar qué puertos físicos pertenecerán al mismo conjunto. En
+          este caso, Fa0/1 y Fa0/2 entrarán al <strong>grupo 1</strong> y el
+          switch los representará mediante la interfaz lógica
+          <code>Port-channel 1</code>.
+        </p>
+        <p>
+          El número 1 no es una VLAN, una prioridad ni la cantidad de cables.
+          Es solamente el identificador local del EtherChannel dentro del
+          switch. Podríamos escoger otro número disponible, pero utilizamos el 1
+          porque es el primer canal de esta práctica y resulta fácil de reconocer.
+        </p>
+        <div class="lesson-note">
+          <strong>Para mantener el laboratorio ordenado:</strong> utilizaremos
+          el grupo 1 en SW1 y SW2. El número se administra localmente en cada
+          switch, pero repetirlo en ambos lados permite identificar rápidamente
+          que <code>Po1</code> corresponde al mismo enlace entre los equipos.
+        </div>
+
         <h2>Por qué usar interface range</h2>
         <p>
           <code>interface range fastEthernet 0/1 - 2</code> selecciona Fa0/1 y
