@@ -47,6 +47,15 @@
           switches los presentan como una única interfaz llamada
           <strong>Port-channel</strong>.
         </p>
+        <div class="lesson-note">
+          <strong>Una tecnología cercana a la parte física:</strong>
+          EtherChannel trabaja directamente con puertos y cables reales. Para
+          poder unirlos, comprueba que los enlaces sean compatibles: deben
+          coincidir en velocidad, modo dúplex y configuración de switching.
+          Si funcionan como trunks, también deben coincidir la VLAN nativa y
+          las VLANs permitidas. Aunque el resultado es una interfaz lógica, su
+          base son varios enlaces físicos preparados de la misma manera.
+        </div>
 
         <figure class="topology-card etherchannel-topology" aria-labelledby="ether-topology-title">
           <figcaption id="ether-topology-title">
