@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="PAgP y modos desirable y auto en EtherChannel." />
-    <title>PAgP y sus modos — EtherChannel</title>
+    <meta name="description" content="PAgP, LACP y sus modos de negociación en EtherChannel." />
+    <title>PAgP y LACP — EtherChannel</title>
     <link rel="icon" type="image/png" href="../../../img/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,27 +28,31 @@
       </aside>
       <article class="lesson-content">
         <p class="eyebrow"><span></span> Módulo 02</p>
-        <h1>PAgP y sus <em>modos.</em></h1>
+        <h1>PAgP y <em>LACP.</em></h1>
         <p class="lesson-lead">
-          PAgP permite que dos switches Cisco negocien y comprueben si sus
+          PAgP y LACP permiten que dos equipos negocien y comprueben si sus
           puertos pueden trabajar juntos dentro de un EtherChannel.
         </p>
 
         <h2>Qué significa negociar</h2>
         <p>
-          Antes de unir los enlaces, los switches intercambian mensajes PAgP.
-          Es parecido a dos personas que acuerdan formar un equipo: primero
-          confirman que ambas están disponibles y que trabajarán de una manera
-          compatible.
+          Antes de unir los enlaces, los dispositivos intercambian mensajes del
+          protocolo elegido. Es parecido a dos personas que acuerdan formar un
+          equipo: primero confirman que ambas están disponibles y que trabajarán
+          de una manera compatible.
         </p>
         <p>
-          El comando <code>channel-protocol pagp</code> indica qué protocolo se
-          utilizará. Después, <code>channel-group 1 mode ...</code> asigna los
-          puertos al grupo lógico número 1 y define cómo participarán en la
-          negociación.
+          <code>channel-protocol</code> selecciona el protocolo. Después,
+          <code>channel-group 1 mode ...</code> asigna los puertos al grupo
+          lógico número 1 y define cómo participarán en la negociación.
         </p>
 
-        <h2>Desirable y auto</h2>
+        <h2>PAgP: protocolo de Cisco</h2>
+        <p>
+          <strong>PAgP</strong>, o Port Aggregation Protocol, fue creado por
+          Cisco. Se utiliza principalmente entre dispositivos Cisco y trabaja
+          con los modos <code>desirable</code> y <code>auto</code>.
+        </p>
         <ul>
           <li><strong>desirable:</strong> inicia la conversación y propone formar el EtherChannel.</li>
           <li><strong>auto:</strong> espera; si recibe una propuesta PAgP, responde y participa.</li>
@@ -59,21 +63,67 @@
           alguien se lo propone.
         </p>
 
-        <h2>Combinaciones compatibles</h2>
+        <h2>Combinaciones de PAgP</h2>
         <ul>
           <li><strong>desirable + desirable:</strong> funciona; ambos intentan iniciar la negociación.</li>
           <li><strong>desirable + auto:</strong> funciona; uno propone y el otro responde.</li>
           <li><strong>auto + auto:</strong> no forma el canal; ambos esperan y ninguno inicia.</li>
         </ul>
+
+        <h2>LACP: estándar de IEEE</h2>
+        <p>
+          <strong>LACP</strong>, o Link Aggregation Control Protocol, es un
+          estándar abierto de IEEE. Al no pertenecer exclusivamente a Cisco,
+          resulta útil cuando se necesita formar un EtherChannel entre equipos
+          de fabricantes diferentes que sean compatibles con LACP.
+        </p>
+        <ul>
+          <li><strong>active:</strong> inicia la conversación LACP y propone formar el canal.</li>
+          <li><strong>passive:</strong> espera; si recibe una propuesta LACP, responde y participa.</li>
+        </ul>
+        <p>
+          La idea es la misma que en PAgP: <code>active</code> toma la iniciativa
+          y <code>passive</code> espera a que el otro extremo comience.
+        </p>
+
+        <h2>Combinaciones de LACP</h2>
+        <ul>
+          <li><strong>active + active:</strong> funciona; ambos intentan iniciar la negociación.</li>
+          <li><strong>active + passive:</strong> funciona; uno propone y el otro responde.</li>
+          <li><strong>passive + passive:</strong> no forma el canal; ambos esperan y ninguno inicia.</li>
+        </ul>
+
+        <h2>Comparación rápida</h2>
+        <ul>
+          <li><strong>PAgP:</strong> pertenece a Cisco; utiliza <code>desirable</code> y <code>auto</code>.</li>
+          <li><strong>LACP:</strong> es un estándar IEEE; utiliza <code>active</code> y <code>passive</code>.</li>
+          <li><strong>Modo que inicia:</strong> <code>desirable</code> en PAgP y <code>active</code> en LACP.</li>
+          <li><strong>Modo que espera:</strong> <code>auto</code> en PAgP y <code>passive</code> en LACP.</li>
+        </ul>
+
+        <h2>Cómo se selecciona cada protocolo</h2>
+        <p>
+          Los siguientes ejemplos solo muestran la diferencia principal. Se
+          debe escoger un protocolo para el grupo; no se ingresan ambos bloques
+          sobre el mismo EtherChannel.
+        </p>
+        <pre class="cli-block" aria-label="Seleccionar PAgP"><code><span class="cli-comment"># opción PAgP: ejemplo para el lado que inicia</span>
+<span class="cli-prompt">Switch(config-if-range)#</span> <span class="cli-command">channel-protocol pagp</span><span class="cli-comment"> # selecciona el protocolo de Cisco</span>
+<span class="cli-prompt">Switch(config-if-range)#</span> <span class="cli-command">channel-group 1 mode desirable</span><span class="cli-comment"> # inicia la negociación PAgP</span></code></pre>
+        <pre class="cli-block" aria-label="Seleccionar LACP"><code><span class="cli-comment"># opción LACP: ejemplo para el lado que inicia</span>
+<span class="cli-prompt">Switch(config-if-range)#</span> <span class="cli-command">channel-protocol lacp</span><span class="cli-comment"> # selecciona el estándar IEEE</span>
+<span class="cli-prompt">Switch(config-if-range)#</span> <span class="cli-command">channel-group 1 mode active</span><span class="cli-comment"> # inicia la negociación LACP</span></code></pre>
+
         <div class="lesson-note">
           <strong>En esta guía:</strong> SW1 utilizará
           <code>desirable</code> y SW2 utilizará <code>auto</code>. Así podrás
-          reconocer claramente el lado que inicia y el lado que responde.
+          practicar PAgP y reconocer claramente el lado que inicia y el lado
+          que responde. LACP queda explicado como una alternativa equivalente.
         </div>
 
         <h2>Los puertos deben coincidir</h2>
         <p>
-          PAgP no agrupa enlaces que estén preparados de formas incompatibles.
+          PAgP y LACP no agrupan enlaces preparados de formas incompatibles.
           Los puertos miembros deben utilizar la misma velocidad y dúplex, y
           deben coincidir en aspectos como el modo de switchport, la VLAN nativa
           y las VLANs permitidas si funcionan como trunk.
@@ -89,8 +139,8 @@
         <p>
           PAgP y LACP cumplen una función parecida, pero no hablan el mismo
           idioma. Un extremo configurado con PAgP no puede negociar ese mismo
-          EtherChannel con un extremo configurado mediante LACP. En esta
-          práctica utilizaremos PAgP en ambos switches.
+          EtherChannel con un extremo configurado mediante LACP. Ambos extremos
+          del grupo deben utilizar el mismo protocolo.
         </p>
 
         <div class="lesson-actions">
@@ -104,6 +154,6 @@
       </article>
     </main>
     <script src="../../../assets/js/main.js"></script>
-    <script src="../../../assets/js/learning.js?v=20260928-etherchannel"></script>
+    <script src="../../../assets/js/learning.js?v=20260928-etherchannel-2"></script>
   </body>
 </html>

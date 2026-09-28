@@ -60,7 +60,7 @@ const guideData = {
     label: "EtherChannel",
     sections: [
       ["index.html", "Fundamentos de EtherChannel"],
-      ["pagp.html", "PAgP y sus modos"],
+      ["pagp.html", "PAgP y LACP"],
       ["agrupar-puertos.html", "Agrupar puertos físicos"],
       ["trunk-verificacion.html", "Trunk, verificación y guardado"],
     ],
