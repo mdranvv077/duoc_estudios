@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../../../assets/css/logo.css" />
     <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" />
     <link rel="stylesheet" href="../../../assets/css/credits.css" />
-    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20260928-etherchannel" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20260928-etherchannel-workshop" />
   </head>
   <body>
     <header class="site-header container">
@@ -57,31 +57,65 @@
           base son varios enlaces físicos preparados de la misma manera.
         </div>
 
-        <figure class="topology-card etherchannel-topology" aria-labelledby="ether-topology-title">
+        <figure class="topology-card etherchannel-workshop-topology" aria-labelledby="ether-topology-title">
           <figcaption id="ether-topology-title">
-            <span>Topología de ejemplo</span>
-            <strong>Dos enlaces físicos agrupados en Port-channel 1</strong>
+            <span>Topología del primer taller</span>
+            <strong>Cuatro switches y cuatro grupos EtherChannel</strong>
           </figcaption>
-          <div class="topology-map" role="img" aria-label="Dos switches Cisco 2960 conectados mediante los puertos FastEthernet 0/1 y 0/2, agrupados como Port-channel 1.">
-            <svg class="topology-cables" viewBox="0 0 1000 275" preserveAspectRatio="none" aria-hidden="true">
-              <path class="ether-link" d="M220 105 H780" />
-              <path class="ether-link" d="M220 175 H780" />
+          <div class="topology-map" role="img" aria-label="Cuatro switches en cuadrado unidos por cuatro EtherChannel de dos enlaces. Los grupos 1 y 3 usan PAgP, los grupos 2 y 4 usan LACP, y los switches inferiores conectan seis computadores en las VLANs 10, 20 y 30.">
+            <svg class="topology-cables" viewBox="0 0 1000 650" preserveAspectRatio="none" aria-hidden="true">
+              <path class="workshop-pagp" d="M315 120 H685" />
+              <path class="workshop-pagp" d="M315 142 H685" />
+              <path class="workshop-lacp" d="M239 165 V355" />
+              <path class="workshop-lacp" d="M261 165 V355" />
+              <path class="workshop-pagp" d="M315 380 H685" />
+              <path class="workshop-pagp" d="M315 402 H685" />
+              <path class="workshop-lacp" d="M739 165 V355" />
+              <path class="workshop-lacp" d="M761 165 V355" />
+              <path class="workshop-access" d="M210 430 L80 555" />
+              <path class="workshop-access" d="M250 430 L220 555" />
+              <path class="workshop-access" d="M290 430 L360 555" />
+              <path class="workshop-access" d="M710 430 L640 555" />
+              <path class="workshop-access" d="M750 430 L780 555" />
+              <path class="workshop-access" d="M790 430 L920 555" />
             </svg>
-            <div class="topology-node ether-node-left">
+            <div class="topology-node workshop-switch workshop-sw1">
+              <span class="workshop-top-copy"><b>SW1</b><small>Root VLAN 10 y 20</small></span>
               <img class="device-icon switch-icon" src="../img/cisco-switch.png" alt="" />
-              <b>SW1</b><small>Cisco 2960</small>
             </div>
-            <div class="topology-node ether-node-right">
+            <div class="topology-node workshop-switch workshop-sw2">
+              <span class="workshop-top-copy"><b>SW2</b><small>Root VLAN 30 y 40</small></span>
               <img class="device-icon switch-icon" src="../img/cisco-switch.png" alt="" />
-              <b>SW2</b><small>Cisco 2960</small>
             </div>
-            <span class="etherchannel-port port-one">Fa0/1 ↔ Fa0/1</span>
-            <span class="etherchannel-port port-two">Fa0/2 ↔ Fa0/2</span>
-            <span class="etherchannel-label"><strong>Port-channel 1</strong>Un solo enlace lógico</span>
+            <div class="topology-node workshop-switch workshop-sw3">
+              <img class="device-icon switch-icon" src="../img/cisco-switch.png" alt="" />
+              <b>SW3</b>
+            </div>
+            <div class="topology-node workshop-switch workshop-sw4">
+              <img class="device-icon switch-icon" src="../img/cisco-switch.png" alt="" />
+              <b>SW4</b>
+            </div>
+
+            <span class="workshop-group group-one"><strong>Grupo 1</strong>PAgP<small>Fa0/1–2</small></span>
+            <span class="workshop-group group-two"><strong>Grupo 2</strong>LACP<small>Fa0/4–5</small></span>
+            <span class="workshop-group group-three"><strong>Grupo 3</strong>PAgP<small>Fa0/6–7</small></span>
+            <span class="workshop-group group-four"><strong>Grupo 4</strong>LACP<small>Fa0/4–5</small></span>
+
+            <div class="topology-node practice-pc workshop-pc pc-one"><svg class="endpoint-icon" viewBox="0 0 64 52" aria-hidden="true"><rect x="7" y="5" width="50" height="32" rx="2" /><path d="M23 47h18M32 37v10" /></svg><b>PC 1</b><small>VLAN 10</small></div>
+            <div class="topology-node practice-pc workshop-pc pc-two"><svg class="endpoint-icon" viewBox="0 0 64 52" aria-hidden="true"><rect x="7" y="5" width="50" height="32" rx="2" /><path d="M23 47h18M32 37v10" /></svg><b>PC 2</b><small>VLAN 20</small></div>
+            <div class="topology-node practice-pc workshop-pc pc-three"><svg class="endpoint-icon" viewBox="0 0 64 52" aria-hidden="true"><rect x="7" y="5" width="50" height="32" rx="2" /><path d="M23 47h18M32 37v10" /></svg><b>PC 3</b><small>VLAN 30</small></div>
+            <div class="topology-node practice-pc workshop-pc pc-four"><svg class="endpoint-icon" viewBox="0 0 64 52" aria-hidden="true"><rect x="7" y="5" width="50" height="32" rx="2" /><path d="M23 47h18M32 37v10" /></svg><b>PC 4</b><small>VLAN 10</small></div>
+            <div class="topology-node practice-pc workshop-pc pc-five"><svg class="endpoint-icon" viewBox="0 0 64 52" aria-hidden="true"><rect x="7" y="5" width="50" height="32" rx="2" /><path d="M23 47h18M32 37v10" /></svg><b>PC 5</b><small>VLAN 20</small></div>
+            <div class="topology-node practice-pc workshop-pc pc-six"><svg class="endpoint-icon" viewBox="0 0 64 52" aria-hidden="true"><rect x="7" y="5" width="50" height="32" rx="2" /><path d="M23 47h18M32 37v10" /></svg><b>PC 6</b><small>VLAN 30</small></div>
+          </div>
+          <div class="topology-legend" aria-label="Tipos de enlace">
+            <span><i></i>PAgP</span><span class="legend-lacp"><i></i>LACP</span><span class="legend-access-solid"><i></i>Acceso</span>
           </div>
           <p class="topology-caption">
-            Los dos cables trabajan juntos. Para configurar el trunk y revisar
-            el conjunto se utiliza la interfaz lógica <code>Port-channel 1</code>.
+            Cada lado del cuadrado utiliza dos enlaces físicos. Los grupos 1 y
+            3 trabajan con PAgP; los grupos 2 y 4, con LACP. Los PC permiten
+            comprobar las VLANs 10, 20 y 30, mientras la VLAN 99 se utiliza como
+            nativa. La práctica guiada comenzará configurando el grupo 1.
           </p>
         </figure>
 
@@ -124,6 +158,6 @@
       </article>
     </main>
     <script src="../../../assets/js/main.js"></script>
-    <script src="../../../assets/js/learning.js?v=20260928-etherchannel-2"></script>
+    <script src="../../../assets/js/learning.js?v=20260928-etherchannel-workshop"></script>
   </body>
 </html>

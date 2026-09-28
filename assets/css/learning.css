@@ -130,17 +130,36 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .stp-topology .topology-node { width: 26%; }
 .stp-topology .topology-node small { white-space: normal; }
 .topology-legend .legend-blocked i { border-color: var(--magenta); }
-.etherchannel-topology .topology-map { min-height: clamp(210px, 31vw, 275px); }
-.etherchannel-topology .topology-cables .ether-link { stroke: var(--cyan); filter: drop-shadow(0 0 5px rgba(46, 234, 255, .2)); }
-.etherchannel-topology .ether-node-left { top: 53%; left: 16%; }
-.etherchannel-topology .ether-node-right { top: 53%; left: 84%; }
-.etherchannel-topology .topology-node { width: 24%; }
-.etherchannel-topology .topology-node small { white-space: normal; }
-.etherchannel-label { position: absolute; top: 45%; left: 50%; display: grid; gap: 4px; width: 42%; transform: translate(-50%, -50%); color: #c5d0dc; font: .68rem/1.4 "DM Mono", monospace; text-align: center; }
-.etherchannel-label strong { color: var(--orange); font-size: .7rem; }
-.etherchannel-port { position: absolute; left: 50%; padding: 2px 5px; color: #d9e3ec; background: rgba(7, 12, 18, .92); font: .59rem "DM Mono", monospace; transform: translateX(-50%); }
-.etherchannel-port.port-one { top: 26%; }
-.etherchannel-port.port-two { top: 66%; }
+.etherchannel-workshop-topology .topology-map { min-height: clamp(440px, 68vw, 540px); }
+.etherchannel-workshop-topology .topology-cables .workshop-pagp { stroke: var(--cyan); filter: drop-shadow(0 0 5px rgba(46, 234, 255, .2)); }
+.etherchannel-workshop-topology .topology-cables .workshop-lacp { stroke: var(--orange); filter: drop-shadow(0 0 5px rgba(255, 157, 46, .18)); }
+.etherchannel-workshop-topology .topology-cables .workshop-access { stroke: #8e9aaa; stroke-width: 2; stroke-dasharray: none; }
+.etherchannel-workshop-topology .workshop-switch { width: 23%; transform: translate(-50%, -50%); }
+.etherchannel-workshop-topology .workshop-sw1 { top: 20%; left: 25%; }
+.etherchannel-workshop-topology .workshop-sw2 { top: 20%; left: 75%; }
+.etherchannel-workshop-topology .workshop-sw3 { top: 60%; left: 25%; }
+.etherchannel-workshop-topology .workshop-sw4 { top: 60%; left: 75%; }
+.workshop-top-copy { position: absolute; right: -18%; bottom: calc(100% + 5px); left: -18%; display: grid; justify-items: center; }
+.workshop-top-copy b, .workshop-top-copy small { margin-top: 2px; }
+.workshop-top-copy small { white-space: normal; }
+.workshop-group { position: absolute; z-index: 2; display: grid; gap: 2px; padding: 3px 6px; color: #c8d3df; background: rgba(7, 12, 18, .94); font: .58rem/1.25 "DM Mono", monospace; text-align: center; transform: translate(-50%, -50%); }
+.workshop-group strong { color: var(--magenta); font-size: .6rem; text-transform: uppercase; }
+.workshop-group small { color: #8f9dad; font: .52rem "DM Mono", monospace; white-space: nowrap; }
+.workshop-group.group-one { top: 7%; left: 50%; }
+.workshop-group.group-two { top: 40%; left: 8%; }
+.workshop-group.group-three { top: 70%; left: 50%; }
+.workshop-group.group-four { top: 40%; left: 92%; }
+.etherchannel-workshop-topology .workshop-pc { top: 90%; width: 13%; transform: translate(-50%, -50%); }
+.etherchannel-workshop-topology .workshop-pc b { margin-top: 1px; font-size: clamp(.58rem, 1.3vw, .7rem); }
+.etherchannel-workshop-topology .workshop-pc small { margin-top: 1px; font-size: clamp(.52rem, 1.2vw, .63rem); white-space: normal; }
+.etherchannel-workshop-topology .pc-one { left: 8%; }
+.etherchannel-workshop-topology .pc-two { left: 22%; }
+.etherchannel-workshop-topology .pc-three { left: 36%; }
+.etherchannel-workshop-topology .pc-four { left: 64%; }
+.etherchannel-workshop-topology .pc-five { left: 78%; }
+.etherchannel-workshop-topology .pc-six { left: 92%; }
+.topology-legend .legend-lacp i { border-color: var(--orange); }
+.topology-legend .legend-access-solid i { border-top-style: solid; border-color: #8e9aaa; }
 .stp-practice-topology .topology-map { min-height: clamp(360px, 52vw, 455px); }
 .stp-practice-topology .topology-cables .stp-trunk { stroke: var(--cyan); filter: drop-shadow(0 0 5px rgba(46, 234, 255, .18)); }
 .stp-practice-topology .topology-cables .stp-access { stroke: var(--orange); filter: drop-shadow(0 0 5px rgba(255, 157, 46, .16)); }
