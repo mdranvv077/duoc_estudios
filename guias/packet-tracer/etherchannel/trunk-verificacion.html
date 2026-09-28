@@ -87,6 +87,35 @@
           agrupado en el Port-channel.
         </p>
 
+        <h2>Qué significan las letras del resumen</h2>
+        <p>
+          IOS utiliza letras cortas para mostrar el estado del Port-channel y
+          de sus puertos. En esta práctica, el resultado esperado se parece a
+          <strong>Po1(SU)</strong>, con <strong>Fa0/1(P)</strong> y
+          <strong>Fa0/2(P)</strong>. Estas son las letras más útiles, ordenadas
+          desde las más habituales hasta las menos comunes:
+        </p>
+        <ul>
+          <li><strong>S — Layer 2:</strong> el Port-channel funciona en capa 2, como corresponde a este trunk entre switches.</li>
+          <li><strong>U — En uso:</strong> el Port-channel está activo y puede transportar tráfico.</li>
+          <li><strong>P — Dentro del Port-channel:</strong> el puerto físico se incorporó correctamente al grupo.</li>
+          <li><strong>I — Independiente:</strong> el puerto quedó funcionando por separado y no se unió al canal.</li>
+          <li><strong>s — Suspendido:</strong> el switch apartó el puerto porque detectó una incompatibilidad o un problema.</li>
+          <li><strong>D — Apagado:</strong> el enlace o el Port-channel se encuentra caído.</li>
+          <li><strong>R — Layer 3:</strong> el Port-channel funciona como una interfaz de capa 3, algo que no utilizamos en esta práctica.</li>
+          <li><strong>H — En espera:</strong> enlace de respaldo utilizado por LACP; no debería aparecer en este ejercicio con PAgP.</li>
+          <li><strong>u — No apto:</strong> el puerto no cumple las condiciones necesarias para unirse al grupo.</li>
+          <li><strong>w — Esperando:</strong> el puerto todavía espera poder incorporarse al EtherChannel.</li>
+          <li><strong>f — Fallo de asignación:</strong> el switch no pudo asociar el puerto al agregador lógico.</li>
+          <li><strong>d — Puerto predeterminado:</strong> estado interno poco habitual en una práctica básica.</li>
+        </ul>
+        <div class="lesson-note">
+          <strong>Las mayúsculas importan:</strong> <strong>S</strong> significa
+          Layer 2, mientras que <strong>s</strong> significa suspendido.
+          Asimismo, <strong>U</strong> indica que el canal está en uso, pero
+          <strong>u</strong> señala que un puerto no es apto para agruparse.
+        </div>
+
         <h2>Probar la redundancia</h2>
         <p>
           Cuando el canal esté funcionando, desconecta uno de los dos cables en
