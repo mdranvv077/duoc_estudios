@@ -55,10 +55,21 @@ const guideData = {
       ["configuracion.html", "Configuración y verificación"],
     ],
   },
+  etherchannel: {
+    folder: "etherchannel",
+    label: "EtherChannel",
+    sections: [
+      ["index.html", "Fundamentos de EtherChannel"],
+      ["pagp.html", "PAgP y sus modos"],
+      ["agrupar-puertos.html", "Agrupar puertos físicos"],
+      ["trunk-verificacion.html", "Trunk, verificación y guardado"],
+    ],
+  },
 };
 
 function currentGuideKey(url = window.location.href) {
   const path = new URL(url, window.location.href).pathname;
+  if (path.includes("/etherchannel/")) return "etherchannel";
   if (path.includes("/spanning-tree/")) return "spanning";
   if (path.includes("/trunking/")) return "trunking";
   if (path.includes("/routing/")) return "routing";
@@ -84,7 +95,8 @@ function renderGuideNavigation() {
     <a class="sidebar-category ${guideKey === "vlans" ? "active" : ""}" data-guide="vlans" href="${categoryHref("vlans")}"><span>02</span><b>VLANs</b><i aria-hidden="true">↗</i></a>
     <a class="sidebar-category ${guideKey === "trunking" ? "active" : ""}" data-guide="trunking" href="${categoryHref("trunking")}"><span>03</span><b>Trunking</b><i aria-hidden="true">↗</i></a>
     <a class="sidebar-category ${guideKey === "routing" ? "active" : ""}" data-guide="routing" href="${categoryHref("routing")}"><span>04</span><b>Routing</b><i aria-hidden="true">↗</i></a>
-    <a class="sidebar-category ${guideKey === "spanning" ? "active" : ""}" data-guide="spanning" href="${categoryHref("spanning")}"><span>05</span><b>Spanning Tree</b><i aria-hidden="true">↗</i></a>`;
+    <a class="sidebar-category ${guideKey === "spanning" ? "active" : ""}" data-guide="spanning" href="${categoryHref("spanning")}"><span>05</span><b>Spanning Tree</b><i aria-hidden="true">↗</i></a>
+    <a class="sidebar-category ${guideKey === "etherchannel" ? "active" : ""}" data-guide="etherchannel" href="${categoryHref("etherchannel")}"><span>06</span><b>EtherChannel</b><i aria-hidden="true">↗</i></a>`;
   guideSidebar.querySelector(".sidebar-brand")?.insertAdjacentElement("afterend", categories);
 
   const lessonNav = guideSidebar.querySelector(".lesson-nav");
@@ -101,7 +113,9 @@ function renderGuideNavigation() {
   if (isIntroModule && lessonLead && !document.querySelector(".equipment-note")) {
     const equipmentCopy = guideKey === "spanning"
       ? '<strong>Equipos recomendados:</strong> utiliza tres switches Cisco 2960 (capa 2). No necesitas un router para observar el funcionamiento de Spanning Tree en esta práctica.'
-      : '<strong>Equipos recomendados:</strong> utiliza un router Cisco 2911 y un switch Cisco 2960 (capa 2). Son modelos disponibles en Packet Tracer y compatibles con los ejercicios de esta guía.';
+      : guideKey === "etherchannel"
+        ? '<strong>Equipos recomendados:</strong> utiliza dos switches Cisco 2960 (capa 2). Conecta dos cables entre ellos para construir el EtherChannel de esta práctica.'
+        : '<strong>Equipos recomendados:</strong> utiliza un router Cisco 2911 y un switch Cisco 2960 (capa 2). Son modelos disponibles en Packet Tracer y compatibles con los ejercicios de esta guía.';
     lessonLead.insertAdjacentHTML("afterend", `<div class="lesson-note equipment-note">${equipmentCopy}</div>`);
   }
 }

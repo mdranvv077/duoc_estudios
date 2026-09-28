@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Agrupar puertos físicos con PAgP en Cisco Packet Tracer." />
+    <title>Agrupar puertos — EtherChannel</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20260928-etherchannel" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a>
+    </header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de EtherChannel</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 06</small><strong>EtherChannel</strong></a>
+        <nav class="lesson-nav" aria-label="Módulos de EtherChannel"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span> Módulo 03</p>
+        <h1>Agrupar los <em>puertos físicos.</em></h1>
+        <p class="lesson-lead">
+          Ahora reuniremos FastEthernet 0/1 y 0/2 dentro del grupo 1 mediante
+          PAgP: SW1 iniciará la negociación y SW2 responderá.
+        </p>
+
+        <h2>Punto de partida</h2>
+        <p>
+          La guía asume que ya conectaste dos switches 2960 utilizando dos
+          cables: Fa0/1 con Fa0/1 y Fa0/2 con Fa0/2. También asumiremos que las
+          VLANs 10, 20, 30, 40 y 99 ya existen en ambos equipos.
+        </p>
+        <div class="assumed-topic-shortcuts">
+          <p>Si todavía no tienes esa base, puedes revisar:</p>
+          <nav class="assumed-topic-links" aria-label="Categorías relacionadas">
+            <a class="topic-link" href="../vlans/index.html" data-help="Crea y organiza las VLANs.">VLANs</a>
+            <a class="topic-link" href="../trunking/index.html" data-help="Aprende a transportar varias VLANs.">Trunking</a>
+            <a class="topic-link" href="../spanning-tree/index.html" data-help="Evita bucles entre switches.">Spanning Tree</a>
+          </nav>
+        </div>
+
+        <h2>Por qué usar interface range</h2>
+        <p>
+          <code>interface range fastEthernet 0/1 - 2</code> selecciona Fa0/1 y
+          Fa0/2 al mismo tiempo. Así ambos reciben exactamente las mismas
+          instrucciones y disminuye la posibilidad de configurar uno de forma
+          diferente por accidente.
+        </p>
+        <p>
+          Primero apagaremos temporalmente los puertos con
+          <code>shutdown</code>. Esto permite preparar el grupo con calma y
+          encender ambos enlaces cuando la configuración esté lista. La forma
+          abreviada <code>sh</code> representa el mismo comando.
+        </p>
+
+        <h2>Configurar SW1 en desirable</h2>
+        <p>
+          SW1 será el lado que inicia la negociación. Al crear el grupo 1, IOS
+          también crea la interfaz lógica <code>Port-channel 1</code>.
+        </p>
+        <pre class="cli-block" aria-label="Configurar PAgP desirable en SW1"><code><span class="cli-prompt">SW1&gt;</span> <span class="cli-command">enable</span><span class="cli-comment"> # entra al modo privilegiado</span>
+<span class="cli-prompt">SW1#</span> <span class="cli-command">configure terminal</span><span class="cli-comment"> # abre la configuración global</span>
+<span class="cli-prompt">SW1(config)#</span> <span class="cli-command">interface range fastEthernet 0/1 - 2</span><span class="cli-comment"> # selecciona los dos enlaces físicos</span>
+<span class="cli-prompt">SW1(config-if-range)#</span> <span class="cli-command">shutdown</span><span class="cli-comment"> # apaga ambos puertos mientras se preparan</span>
+<span class="cli-prompt">SW1(config-if-range)#</span> <span class="cli-command">channel-protocol pagp</span><span class="cli-comment"> # selecciona PAgP como protocolo</span>
+<span class="cli-prompt">SW1(config-if-range)#</span> <span class="cli-command">channel-group 1 mode desirable</span><span class="cli-comment"> # inicia la negociación del grupo 1</span>
+<span class="cli-prompt">SW1(config-if-range)#</span> <span class="cli-command">no shutdown</span><span class="cli-comment"> # enciende los dos enlaces</span>
+<span class="cli-prompt">SW1(config-if-range)#</span> <span class="cli-command">exit</span><span class="cli-comment"> # vuelve a la configuración global</span></code></pre>
+
+        <h2>Configurar SW2 en auto</h2>
+        <p>
+          En el segundo switch se seleccionan los mismos puertos y el mismo
+          protocolo. El modo <code>auto</code> no inicia la conversación, pero
+          responde a la propuesta enviada por SW1.
+        </p>
+        <pre class="cli-block" aria-label="Configurar PAgP auto en SW2"><code><span class="cli-prompt">SW2&gt;</span> <span class="cli-command">enable</span><span class="cli-comment"> # entra al modo privilegiado</span>
+<span class="cli-prompt">SW2#</span> <span class="cli-command">configure terminal</span><span class="cli-comment"> # abre la configuración global</span>
+<span class="cli-prompt">SW2(config)#</span> <span class="cli-command">interface range fastEthernet 0/1 - 2</span><span class="cli-comment"> # selecciona los dos enlaces físicos</span>
+<span class="cli-prompt">SW2(config-if-range)#</span> <span class="cli-command">shutdown</span><span class="cli-comment"> # apaga ambos puertos mientras se preparan</span>
+<span class="cli-prompt">SW2(config-if-range)#</span> <span class="cli-command">channel-protocol pagp</span><span class="cli-comment"> # selecciona PAgP como protocolo</span>
+<span class="cli-prompt">SW2(config-if-range)#</span> <span class="cli-command">channel-group 1 mode auto</span><span class="cli-comment"> # espera y responde a la negociación</span>
+<span class="cli-prompt">SW2(config-if-range)#</span> <span class="cli-command">no shutdown</span><span class="cli-comment"> # enciende los dos enlaces</span>
+<span class="cli-prompt">SW2(config-if-range)#</span> <span class="cli-command">exit</span><span class="cli-comment"> # vuelve a la configuración global</span></code></pre>
+
+        <div class="lesson-note">
+          <strong>Resultado esperado:</strong> Fa0/1 y Fa0/2 quedan asociados al
+          grupo lógico 1. Todavía falta configurar el trunk sobre
+          <code>Port-channel 1</code>; eso se realizará en el módulo siguiente.
+        </div>
+
+        <div class="lesson-actions">
+          <a href="pagp.html">← PAgP y sus modos</a><a href="trunk-verificacion.html">Siguiente: trunk y verificación →</a>
+        </div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20260928-etherchannel"></script>
+  </body>
+</html>

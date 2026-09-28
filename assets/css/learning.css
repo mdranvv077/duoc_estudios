@@ -130,6 +130,17 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .stp-topology .topology-node { width: 26%; }
 .stp-topology .topology-node small { white-space: normal; }
 .topology-legend .legend-blocked i { border-color: var(--magenta); }
+.etherchannel-topology .topology-map { min-height: clamp(210px, 31vw, 275px); }
+.etherchannel-topology .topology-cables .ether-link { stroke: var(--cyan); filter: drop-shadow(0 0 5px rgba(46, 234, 255, .2)); }
+.etherchannel-topology .ether-node-left { top: 53%; left: 16%; }
+.etherchannel-topology .ether-node-right { top: 53%; left: 84%; }
+.etherchannel-topology .topology-node { width: 24%; }
+.etherchannel-topology .topology-node small { white-space: normal; }
+.etherchannel-label { position: absolute; top: 45%; left: 50%; display: grid; gap: 4px; width: 42%; transform: translate(-50%, -50%); color: #c5d0dc; font: .68rem/1.4 "DM Mono", monospace; text-align: center; }
+.etherchannel-label strong { color: var(--orange); font-size: .7rem; }
+.etherchannel-port { position: absolute; left: 50%; padding: 2px 5px; color: #d9e3ec; background: rgba(7, 12, 18, .92); font: .59rem "DM Mono", monospace; transform: translateX(-50%); }
+.etherchannel-port.port-one { top: 26%; }
+.etherchannel-port.port-two { top: 66%; }
 .stp-practice-topology .topology-map { min-height: clamp(360px, 52vw, 455px); }
 .stp-practice-topology .topology-cables .stp-trunk { stroke: var(--cyan); filter: drop-shadow(0 0 5px rgba(46, 234, 255, .18)); }
 .stp-practice-topology .topology-cables .stp-access { stroke: var(--orange); filter: drop-shadow(0 0 5px rgba(255, 157, 46, .16)); }

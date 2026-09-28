@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Configurar y verificar un EtherChannel trunk con PAgP." />
+    <title>Trunk y verificación — EtherChannel</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20260928-etherchannel" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a>
+    </header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de EtherChannel</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 06</small><strong>EtherChannel</strong></a>
+        <nav class="lesson-nav" aria-label="Módulos de EtherChannel"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span> Módulo 04</p>
+        <h1>Trunk, verificación y <em>guardado.</em></h1>
+        <p class="lesson-lead">
+          Con los puertos físicos agrupados, configuraremos el trunk sobre
+          Port-channel 1 y comprobaremos que ambos enlaces trabajan juntos.
+        </p>
+
+        <h2>Configurar la interfaz lógica</h2>
+        <p>
+          <code>interface port-channel 1</code> abre la interfaz que representa
+          al grupo completo. Desde aquí puedes aplicar una sola configuración
+          de trunk para los dos enlaces físicos.
+        </p>
+        <p>
+          En este ejemplo pasarán las VLANs 10, 20, 30, 40 y 99. La VLAN 99 se
+          usará como nativa únicamente para mantener la misma estructura de las
+          prácticas anteriores; el número puede cambiar según el diseño de tu red.
+        </p>
+        <pre class="cli-block" aria-label="Configurar Port-channel 1 como trunk"><code><span class="cli-comment"># aplica este bloque en SW1 y repítelo sin cambios en SW2</span>
+<span class="cli-prompt">Switch(config)#</span> <span class="cli-command">interface port-channel 1</span><span class="cli-comment"> # entra a la interfaz lógica del grupo 1</span>
+<span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">switchport mode trunk</span><span class="cli-comment"> # convierte el Port-channel en trunk</span>
+<span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">switchport trunk allowed vlan 10,20,30,40,99</span><span class="cli-comment"> # permite estas VLANs</span>
+<span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">switchport trunk native vlan 99</span><span class="cli-comment"> # define la VLAN nativa del ejemplo</span>
+<span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">switchport nonegotiate</span><span class="cli-comment"> # evita negociar el trunk mediante DTP</span>
+<span class="cli-prompt">Switch(config-if)#</span> <span class="cli-command">exit</span><span class="cli-comment"> # vuelve a la configuración global</span></code></pre>
+        <div class="lesson-note">
+          <strong>No confundas las negociaciones:</strong>
+          <code>switchport nonegotiate</code> desactiva DTP, que negocia el modo
+          trunk. No desactiva PAgP; el EtherChannel continúa usando PAgP para
+          mantener agrupados los enlaces.
+        </div>
+
+        <h2>La configuración debe coincidir</h2>
+        <p>
+          Ambos extremos deben utilizar la misma VLAN nativa y la misma lista
+          de VLANs permitidas. Si SW1 permite VLANs diferentes a SW2, el canal
+          puede no formarse correctamente o transportar tráfico de manera
+          inesperada.
+        </p>
+        <p>
+          Una vez creado el EtherChannel, realiza los cambios del trunk sobre
+          <code>Port-channel 1</code>. Así el grupo mantiene una sola
+          configuración lógica y no tienes que modificar Fa0/1 y Fa0/2 por separado.
+        </p>
+
+        <h2>Comprobar EtherChannel</h2>
+        <p>
+          Primero revisa el resumen. Después confirma que el Port-channel está
+          funcionando como trunk y que PAgP reconoce al switch vecino.
+        </p>
+        <pre class="cli-block" aria-label="Verificar EtherChannel y PAgP"><code><span class="cli-prompt">Switch#</span> <span class="cli-command">show etherchannel summary</span><span class="cli-comment"> # muestra el grupo y sus puertos miembros</span>
+<span class="cli-prompt">Switch#</span> <span class="cli-command">show interfaces port-channel 1 trunk</span><span class="cli-comment"> # revisa VLAN nativa y VLANs permitidas</span>
+<span class="cli-prompt">Switch#</span> <span class="cli-command">show pagp neighbor</span><span class="cli-comment"> # comprueba el vecino que negoció mediante PAgP</span></code></pre>
+        <p>
+          En <code>show etherchannel summary</code>, busca <strong>Po1</strong> y
+          confirma que Fa0/1 y Fa0/2 aparezcan dentro del grupo. La letra
+          <strong>P</strong> junto a cada puerto indica que está correctamente
+          agrupado en el Port-channel.
+        </p>
+
+        <h2>Probar la redundancia</h2>
+        <p>
+          Cuando el canal esté funcionando, desconecta uno de los dos cables en
+          Packet Tracer. El enlace restante debería conservar la comunicación.
+          Al volver a conectar el cable, PAgP puede incorporarlo nuevamente al
+          grupo. Esta prueba permite observar la utilidad del EtherChannel sin
+          modificar la configuración.
+        </p>
+
+        <h2>Guardar al finalizar</h2>
+        <p>
+          Guarda la configuración en ambos switches después de comprobar que el
+          grupo y el trunk funcionan correctamente.
+        </p>
+        <pre class="cli-block" aria-label="Guardar la configuración de EtherChannel"><code><span class="cli-prompt">Switch(config)#</span> <span class="cli-command">end</span><span class="cli-comment"> # regresa al modo privilegiado</span>
+<span class="cli-prompt">Switch#</span> <span class="cli-command">copy running-config startup-config</span><span class="cli-comment"> # guarda la configuración para el próximo inicio</span></code></pre>
+
+        <div class="lesson-actions">
+          <a href="agrupar-puertos.html">← Agrupar puertos físicos</a><a href="../index.html">Volver a categorías →</a>
+        </div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20260928-etherchannel"></script>
+  </body>
+</html>

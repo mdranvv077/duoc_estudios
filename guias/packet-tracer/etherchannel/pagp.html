@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PAgP y modos desirable y auto en EtherChannel." />
+    <title>PAgP y sus modos — EtherChannel</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20260928-etherchannel" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a>
+    </header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de EtherChannel</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 06</small><strong>EtherChannel</strong></a>
+        <nav class="lesson-nav" aria-label="Módulos de EtherChannel"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span> Módulo 02</p>
+        <h1>PAgP y sus <em>modos.</em></h1>
+        <p class="lesson-lead">
+          PAgP permite que dos switches Cisco negocien y comprueben si sus
+          puertos pueden trabajar juntos dentro de un EtherChannel.
+        </p>
+
+        <h2>Qué significa negociar</h2>
+        <p>
+          Antes de unir los enlaces, los switches intercambian mensajes PAgP.
+          Es parecido a dos personas que acuerdan formar un equipo: primero
+          confirman que ambas están disponibles y que trabajarán de una manera
+          compatible.
+        </p>
+        <p>
+          El comando <code>channel-protocol pagp</code> indica qué protocolo se
+          utilizará. Después, <code>channel-group 1 mode ...</code> asigna los
+          puertos al grupo lógico número 1 y define cómo participarán en la
+          negociación.
+        </p>
+
+        <h2>Desirable y auto</h2>
+        <ul>
+          <li><strong>desirable:</strong> inicia la conversación y propone formar el EtherChannel.</li>
+          <li><strong>auto:</strong> espera; si recibe una propuesta PAgP, responde y participa.</li>
+        </ul>
+        <p>
+          Una forma sencilla de recordarlo es pensar que <code>desirable</code>
+          pregunta “¿formamos el canal?” y <code>auto</code> responde “sí” cuando
+          alguien se lo propone.
+        </p>
+
+        <h2>Combinaciones compatibles</h2>
+        <ul>
+          <li><strong>desirable + desirable:</strong> funciona; ambos intentan iniciar la negociación.</li>
+          <li><strong>desirable + auto:</strong> funciona; uno propone y el otro responde.</li>
+          <li><strong>auto + auto:</strong> no forma el canal; ambos esperan y ninguno inicia.</li>
+        </ul>
+        <div class="lesson-note">
+          <strong>En esta guía:</strong> SW1 utilizará
+          <code>desirable</code> y SW2 utilizará <code>auto</code>. Así podrás
+          reconocer claramente el lado que inicia y el lado que responde.
+        </div>
+
+        <h2>Los puertos deben coincidir</h2>
+        <p>
+          PAgP no agrupa enlaces que estén preparados de formas incompatibles.
+          Los puertos miembros deben utilizar la misma velocidad y dúplex, y
+          deben coincidir en aspectos como el modo de switchport, la VLAN nativa
+          y las VLANs permitidas si funcionan como trunk.
+        </p>
+        <p>
+          Imagina dos carriles que intentan formar una misma carretera: si uno
+          apunta a un destino distinto, no tendría sentido unirlos. Por eso
+          conviene seleccionar ambos puertos con <code>interface range</code> y
+          aplicarles la misma configuración al mismo tiempo.
+        </p>
+
+        <h2>No mezcles protocolos</h2>
+        <p>
+          PAgP y LACP cumplen una función parecida, pero no hablan el mismo
+          idioma. Un extremo configurado con PAgP no puede negociar ese mismo
+          EtherChannel con un extremo configurado mediante LACP. En esta
+          práctica utilizaremos PAgP en ambos switches.
+        </p>
+
+        <div class="lesson-actions">
+          <a href="index.html">← Fundamentos de EtherChannel</a><a href="agrupar-puertos.html">Siguiente: agrupar puertos →</a>
+        </div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20260928-etherchannel"></script>
+  </body>
+</html>
