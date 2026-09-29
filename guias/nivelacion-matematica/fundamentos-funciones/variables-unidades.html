@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Variables y unidades — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de fundamentos</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 02</small><strong>Fundamentos de funciones</strong></a><nav class="sidebar-categories" aria-label="Categorías de nivelación matemática"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><span class="sidebar-category is-soon"><span>03</span><b>Funciones lineales</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 03</p>
+        <h1>Variables y <em>unidades.</em></h1>
+        <p class="lesson-lead">Las variables indican qué cantidades participan en una función. Una actúa como entrada y la otra cambia como resultado.</p>
+
+        <h2>Variable independiente</h2>
+        <p>La variable independiente es el dato de entrada. Es el valor que se entrega, se selecciona o se deja avanzar para observar qué ocurre. Habitualmente aparece dentro de los paréntesis de la función.</p>
+        <p>Si estudiamos la altura de un bebé según su edad, la cantidad de meses es la variable independiente: elegimos una edad y calculamos la altura estimada para ese momento.</p>
+
+        <h2>Variable dependiente</h2>
+        <p>La variable dependiente es el resultado de la función. Su valor depende de la entrada utilizada. En el ejemplo anterior, la altura es dependiente porque cambia de acuerdo con la cantidad de meses.</p>
+        <div class="math-definition"><small>Relación entre variables</small><strong>Meses de edad → función de crecimiento → altura estimada</strong></div>
+        <div class="concept-pairs">
+          <div><strong>Independiente</strong><span>Entrada que utilizamos para consultar la función. Suele representarse con x.</span></div>
+          <div><strong>Dependiente</strong><span>Salida calculada a partir de la entrada. Suele representarse con y o f(x).</span></div>
+        </div>
+
+        <h2>Cómo reconocerlas en un problema</h2>
+        <p>No dependas solamente de las letras <code>x</code> e <code>y</code>. Lee la situación y pregunta qué valor provoca o explica el cambio del otro.</p>
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Situación</th><th>Variable independiente</th><th>Variable dependiente</th></tr></thead><tbody><tr><td>Altura de un bebé según su edad</td><td>Edad, en meses</td><td>Altura, en centímetros</td></tr><tr><td>Tiempo de transferencia según el archivo</td><td>Tamaño, en gigabytes</td><td>Tiempo, en minutos</td></tr><tr><td>Memoria utilizada por un servidor</td><td>Cantidad de usuarios</td><td>Memoria, en gigabytes</td></tr></tbody></table></div>
+        <p>Una pregunta útil es: “¿qué valor necesito conocer primero para calcular el otro?”. Ese valor suele ser la variable independiente.</p>
+
+        <h2>Las unidades forman parte de la respuesta</h2>
+        <p>Decir que el resultado es <code>52</code> resulta incompleto. Puede tratarse de 52 centímetros, 52 segundos o 52 gigabytes. Las unidades permiten interpretar el número y comprobar que responde lo solicitado.</p>
+        <ul>
+          <li>Escribe la unidad al definir cada variable.</li>
+          <li>Conserva la unidad al construir tablas y gráficos.</li>
+          <li>Inclúyela nuevamente al redactar la conclusión.</li>
+          <li>No mezcles unidades sin convertirlas antes.</li>
+        </ul>
+        <div class="lesson-note"><strong>Ejemplo:</strong> “Para una edad de 6 meses, la altura estimada es de 52 centímetros” comunica la entrada, la salida y las unidades. Responder únicamente “52” no entrega toda la información.</div>
+
+        <h2>Nombres claros en Python</h2>
+        <p>En una fórmula es común utilizar <code>x</code>. En el código podemos elegir un nombre que recuerde qué representa la entrada.</p>
+        <pre class="code-block"><code><span class="py-keyword">def</span> <span class="py-function">altura</span>(<span class="py-variable">meses</span>):<br>    <span class="py-keyword">return</span> (<span class="py-number">2</span> <span class="py-operator">/</span> <span class="py-number">3</span>) <span class="py-operator">*</span> <span class="py-variable">meses</span> <span class="py-operator">+</span> <span class="py-number">48</span><br><br><span class="py-builtin">print</span>(<span class="py-function">altura</span>(<span class="py-number">6</span>))</code></pre>
+        <div class="code-output" aria-label="Resultado del código"><span class="code-output-label">Python · resultado</span><code>52.0</code></div>
+        <p>El nombre <code>meses</code> no cambia la operación matemática, pero evita olvidar qué dato debe colocarse como entrada.</p>
+
+        <div class="lesson-actions"><a href="notacion.html">← Cómo leer f(x)</a><a href="dominio.html">Siguiente: dominio y contexto →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

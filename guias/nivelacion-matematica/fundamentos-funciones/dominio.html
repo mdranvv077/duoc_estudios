@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Dominio y contexto — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de fundamentos</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 02</small><strong>Fundamentos de funciones</strong></a><nav class="sidebar-categories" aria-label="Categorías de nivelación matemática"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><span class="sidebar-category is-soon"><span>03</span><b>Funciones lineales</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 04</p>
+        <h1>Dominio y <em>contexto.</em></h1>
+        <p class="lesson-lead">El dominio reúne los valores que una función acepta como entrada. En un problema aplicado, la situación puede limitar esos valores.</p>
+
+        <h2>Dominio matemático</h2>
+        <p>El dominio matemático se determina observando la fórmula. Pregunta qué números pueden reemplazar a la variable sin producir una operación imposible. Una función sencilla como <code>f(x) = 2x + 3</code> acepta cualquier número real.</p>
+        <p>Otras expresiones pueden imponer restricciones. Por ejemplo, no se puede dividir por cero y, trabajando con números reales, no se puede calcular la raíz cuadrada de un número negativo.</p>
+
+        <h2>Dominio contextualizado</h2>
+        <p>El dominio contextualizado considera lo que representa la variable. La fórmula de crecimiento <code>h(x) = (2/3)x + 48</code> acepta matemáticamente edades negativas o muy grandes, pero si fue creada para estudiar los primeros 24 meses de vida, esas entradas quedan fuera del problema.</p>
+        <div class="math-definition"><small>Ejemplo contextual</small><strong>x representa la edad en meses y puede tomar valores desde 0 hasta 24.</strong></div>
+        <div class="math-formula">Dominio contextual: <span>0 ≤ x ≤ 24</span></div>
+        <p>Los símbolos <code>≤</code> indican que 0 y 24 también están incluidos. La misma información puede escribirse como el intervalo <code>[0, 24]</code>.</p>
+
+        <h2>Valores continuos y discretos</h2>
+        <p>También debemos decidir si la variable puede tomar valores intermedios.</p>
+        <div class="concept-pairs">
+          <div><strong>Variable continua</strong><span>Puede admitir decimales dentro de un intervalo, como tiempo, distancia, altura o temperatura.</span></div>
+          <div><strong>Variable discreta</strong><span>Se cuenta mediante valores separados, normalmente enteros, como personas, equipos o campañas.</span></div>
+        </div>
+        <p>El tiempo puede ser 3,5 segundos, pero no puede haber 3,5 usuarios conectados. Aunque una fórmula entregue ese número, el contexto obliga a revisarlo o redondearlo de una forma justificada.</p>
+
+        <h2>Preparar el dominio en Python</h2>
+        <p>NumPy permite crear los valores de entrada que se usarán en un gráfico. La elección depende del tipo de variable.</p>
+        <pre class="code-block"><code><span class="py-comment"># 100 valores entre 0 y 24 para una curva continua</span><br><span class="py-variable">meses</span> <span class="py-operator">=</span> np.<span class="py-function">linspace</span>(<span class="py-number">0</span>, <span class="py-number">24</span>, <span class="py-number">100</span>)<br><br><span class="py-comment"># usuarios enteros desde 0 hasta 200</span><br><span class="py-variable">usuarios</span> <span class="py-operator">=</span> np.<span class="py-function">arange</span>(<span class="py-number">0</span>, <span class="py-number">201</span>)</code></pre>
+        <p>En <code>arange</code>, el límite final no se incluye. Por eso se escribe <code>201</code> cuando se quiere llegar hasta 200.</p>
+
+        <h2>Qué revisar antes de responder</h2>
+        <ul>
+          <li>Qué representa la variable independiente.</li>
+          <li>Cuál es el mínimo y el máximo permitido.</li>
+          <li>Si los extremos están incluidos.</li>
+          <li>Si se aceptan decimales o solo números enteros.</li>
+          <li>Si la solución obtenida pertenece al dominio contextual.</li>
+        </ul>
+        <div class="lesson-note"><strong>No extiendas el modelo sin justificarlo:</strong> que Python pueda calcular una salida no significa que la función siga describiendo correctamente la realidad fuera del intervalo estudiado.</div>
+
+        <div class="lesson-actions"><a href="variables-unidades.html">← Variables y unidades</a><a href="representaciones.html">Siguiente: representar una función →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Cómo leer f(x) — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de fundamentos</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 02</small><strong>Fundamentos de funciones</strong></a><nav class="sidebar-categories" aria-label="Categorías de nivelación matemática"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><span class="sidebar-category is-soon"><span>03</span><b>Funciones lineales</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 02</p>
+        <h1>Cómo leer <em>f(x).</em></h1>
+        <p class="lesson-lead">La notación de una función identifica su nombre, el valor que recibe y la regla que produce el resultado.</p>
+
+        <h2>Las partes de la notación</h2>
+        <div class="math-formula"><span>f</span>(x) = 2x + 3</div>
+        <ul>
+          <li><code>f</code> es el nombre de la función. También podría llamarse <code>A</code>, <code>C</code>, <code>altura</code> o de otra forma.</li>
+          <li><code>x</code> representa el valor de entrada.</li>
+          <li><code>2x + 3</code> es la regla que se aplica a la entrada.</li>
+          <li><code>f(x)</code> representa la salida obtenida después de aplicar la regla.</li>
+        </ul>
+        <div class="lesson-note"><strong>Importante:</strong> <code>f(x)</code> no significa <code>f × x</code>. Los paréntesis indican que la función <code>f</code> está recibiendo el valor <code>x</code>.</div>
+
+        <h2>Definir no es lo mismo que evaluar</h2>
+        <p>La expresión <code>f(x) = 2x + 3</code> define la regla general. En cambio, <code>f(4)</code> pide utilizar 4 como entrada. Para calcularlo, sustituimos cada aparición de <code>x</code> por 4.</p>
+        <div class="math-definition"><small>Evaluación paso a paso</small><strong>f(4) = 2 · 4 + 3 = 8 + 3 = 11</strong></div>
+        <p>El resultado <code>11</code> es la salida asociada a la entrada <code>4</code>. Su significado y sus unidades dependerán del problema que represente la función.</p>
+
+        <h2>El nombre puede aportar contexto</h2>
+        <p>Las letras cortas son habituales en matemáticas, pero en Python suele ser más claro utilizar nombres descriptivos. Ambas escrituras pueden representar exactamente la misma regla.</p>
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Notación matemática</th><th>Nombre descriptivo en Python</th></tr></thead><tbody><tr><td>f(x)</td><td>tiempo_transferencia(tamano)</td></tr><tr><td>A(l)</td><td>area_cuadrado(lado)</td></tr><tr><td>C(u)</td><td>costo(usuarios)</td></tr></tbody></table></div>
+
+        <h2>De la fórmula al código</h2>
+        <pre class="code-block"><code><span class="py-keyword">def</span> <span class="py-function">f</span>(<span class="py-variable">x</span>):<br>    <span class="py-keyword">return</span> <span class="py-number">2</span> <span class="py-operator">*</span> <span class="py-variable">x</span> <span class="py-operator">+</span> <span class="py-number">3</span><br><br><span class="py-builtin">print</span>(<span class="py-function">f</span>(<span class="py-number">4</span>))</code></pre>
+        <div class="code-output" aria-label="Resultado del código"><span class="code-output-label">Python · resultado</span><code>11</code></div>
+        <p>Python necesita el símbolo <code>*</code> para escribir la multiplicación. Por eso, la expresión matemática <code>2x</code> se escribe <code>2 * x</code> en el código.</p>
+
+        <div class="lesson-actions"><a href="index.html">← Qué es una función</a><a href="variables-unidades.html">Siguiente: variables y unidades →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Representar una función — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de fundamentos</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 02</small><strong>Fundamentos de funciones</strong></a><nav class="sidebar-categories" aria-label="Categorías de nivelación matemática"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><span class="sidebar-category is-soon"><span>03</span><b>Funciones lineales</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 05</p>
+        <h1>Representar una <em>función.</em></h1>
+        <p class="lesson-lead">Una misma función puede expresarse mediante texto, una fórmula, una tabla, un gráfico o código. Cada representación permite observar algo diferente.</p>
+
+        <h2>La situación escrita</h2>
+        <p>Supongamos que un modelo estima la altura de un bebé durante sus primeros 24 meses. Parte desde 48 centímetros y aumenta dos tercios de centímetro por cada mes.</p>
+        <p>El texto entrega el contexto: explica qué representan los datos, las unidades y el periodo en que utilizaremos el modelo.</p>
+
+        <h2>La fórmula</h2>
+        <div class="math-formula"><span>h</span>(x) = (2/3)x + 48</div>
+        <p>En esta fórmula, <code>x</code> es la edad en meses y <code>h(x)</code> es la altura estimada en centímetros. La fórmula permite calcular cualquier salida dentro del dominio definido.</p>
+
+        <h2>La tabla de valores</h2>
+        <p>Una tabla muestra pares de entrada y salida. Cada fila contiene un punto de la función.</p>
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Edad x (meses)</th><th>Altura h(x) (cm)</th><th>Par ordenado</th></tr></thead><tbody><tr><td>0</td><td>48</td><td>(0, 48)</td></tr><tr><td>6</td><td>52</td><td>(6, 52)</td></tr><tr><td>12</td><td>56</td><td>(12, 56)</td></tr><tr><td>24</td><td>64</td><td>(24, 64)</td></tr></tbody></table></div>
+        <p>Los pares ordenados siempre se escriben como <code>(entrada, salida)</code>. En este caso, primero aparecen los meses y después los centímetros.</p>
+
+        <h2>El gráfico</h2>
+        <p>En el plano cartesiano, la variable independiente se ubica normalmente en el eje horizontal y la dependiente en el eje vertical. Los puntos de la tabla pertenecen al mismo gráfico.</p>
+        <div class="concept-pairs"><div><strong>Eje X</strong><span>Edad en meses: variable independiente y entrada de la función.</span></div><div><strong>Eje Y</strong><span>Altura en centímetros: variable dependiente y salida.</span></div></div>
+        <p>Un gráfico debe incluir título, nombres de los ejes y unidades. Además, sus límites deben respetar el dominio contextualizado; aquí no necesitamos mostrar edades negativas ni extender el modelo más allá de 24 meses.</p>
+
+        <h2>La representación en Python</h2>
+        <pre class="code-block"><code><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np<br><span class="py-keyword">import</span> matplotlib.pyplot <span class="py-keyword">as</span> plt<br><br><span class="py-keyword">def</span> <span class="py-function">altura</span>(<span class="py-variable">meses</span>):<br>    <span class="py-keyword">return</span> (<span class="py-number">2</span> <span class="py-operator">/</span> <span class="py-number">3</span>) <span class="py-operator">*</span> <span class="py-variable">meses</span> <span class="py-operator">+</span> <span class="py-number">48</span><br><br><span class="py-variable">x</span> <span class="py-operator">=</span> np.<span class="py-function">linspace</span>(<span class="py-number">0</span>, <span class="py-number">24</span>, <span class="py-number">100</span>)<br><span class="py-variable">y</span> <span class="py-operator">=</span> <span class="py-function">altura</span>(<span class="py-variable">x</span>)<br><br>plt.<span class="py-function">plot</span>(<span class="py-variable">x</span>, <span class="py-variable">y</span>)<br>plt.<span class="py-function">xlabel</span>(<span class="py-string">"Edad (meses)"</span>)<br>plt.<span class="py-function">ylabel</span>(<span class="py-string">"Altura (cm)"</span>)<br>plt.<span class="py-function">title</span>(<span class="py-string">"Altura estimada durante los primeros 24 meses"</span>)<br>plt.<span class="py-function">grid</span>()<br>plt.<span class="py-function">show</span>()</code></pre>
+        <p><code>x</code> contiene las entradas del dominio y <code>y</code> almacena las salidas calculadas por la función. Matplotlib utiliza ambos grupos de valores para dibujar el gráfico.</p>
+
+        <h2>Qué aporta cada representación</h2>
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Representación</th><th>Ayuda principalmente a</th></tr></thead><tbody><tr><td>Texto</td><td>Comprender el contexto, las variables y las unidades.</td></tr><tr><td>Fórmula</td><td>Conocer la regla y calcular valores específicos.</td></tr><tr><td>Tabla</td><td>Comparar entradas y salidas concretas.</td></tr><tr><td>Gráfico</td><td>Observar el comportamiento y los cambios de forma visual.</td></tr><tr><td>Código</td><td>Automatizar cálculos y construir las otras representaciones.</td></tr></tbody></table></div>
+        <div class="lesson-note"><strong>Coherencia:</strong> si la fórmula, la tabla y el gráfico representan el mismo modelo, sus valores deben coincidir. Una diferencia indica que algún dato, cálculo o límite fue adaptado incorrectamente.</div>
+
+        <div class="lesson-actions"><a href="dominio.html">← Dominio y contexto</a><a href="evaluar-interpretar.html">Siguiente: evaluar e interpretar →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

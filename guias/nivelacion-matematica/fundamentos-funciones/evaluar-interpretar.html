@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Evaluar e interpretar — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de fundamentos</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 02</small><strong>Fundamentos de funciones</strong></a><nav class="sidebar-categories" aria-label="Categorías de nivelación matemática"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><span class="sidebar-category is-soon"><span>03</span><b>Funciones lineales</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 06</p>
+        <h1>Evaluar e <em>interpretar.</em></h1>
+        <p class="lesson-lead">Evaluar una función consiste en utilizar una entrada conocida para calcular su salida. Una pregunta inversa entrega la salida y pide encontrar la entrada.</p>
+
+        <h2>Evaluar una función</h2>
+        <p>Utilizaremos nuevamente el modelo de altura <code>h(x) = (2/3)x + 48</code>. Para calcular <code>h(6)</code>, reemplazamos la variable <code>x</code> por 6 en toda la fórmula.</p>
+        <div class="math-definition"><small>Sustitución</small><strong>h(6) = (2/3) · 6 + 48 = 4 + 48 = 52</strong></div>
+        <p>El cálculo produce 52, pero la respuesta todavía necesita contexto: cuando la edad es de 6 meses, la altura estimada por el modelo es de 52 centímetros.</p>
+        <div class="lesson-note"><strong>No confundas los datos:</strong> <code>6</code> es una entrada medida en meses y <code>52</code> es una salida medida en centímetros. No representan la misma variable ni utilizan la misma unidad.</div>
+
+        <h2>Evaluar con Python</h2>
+        <pre class="code-block"><code><span class="py-keyword">def</span> <span class="py-function">altura</span>(<span class="py-variable">meses</span>):<br>    <span class="py-keyword">return</span> (<span class="py-number">2</span> <span class="py-operator">/</span> <span class="py-number">3</span>) <span class="py-operator">*</span> <span class="py-variable">meses</span> <span class="py-operator">+</span> <span class="py-number">48</span><br><br><span class="py-variable">altura_6_meses</span> <span class="py-operator">=</span> <span class="py-function">altura</span>(<span class="py-number">6</span>)<br><span class="py-builtin">print</span>(<span class="py-variable">altura_6_meses</span>)</code></pre>
+        <div class="code-output" aria-label="Resultado del código"><span class="code-output-label">Python · resultado</span><code>52.0</code></div>
+        <p>El decimal <code>.0</code> no cambia el valor. Python lo muestra porque la división utilizada en la fórmula produce números de tipo <code>float</code>.</p>
+
+        <h2>La pregunta en sentido inverso</h2>
+        <p>Ahora conocemos la salida: queremos saber a qué edad el modelo estima una altura de 56 centímetros. La entrada <code>x</code> es la incógnita.</p>
+        <div class="math-definition"><small>Ecuación que debemos resolver</small><strong>(2/3)x + 48 = 56</strong></div>
+        <p>Restamos 48 a ambos lados y después dividimos por <code>2/3</code>. El resultado es <code>x = 12</code>. La interpretación correcta es que el modelo estima una altura de 56 centímetros a los 12 meses.</p>
+        <p>Este tipo de ejercicio busca una entrada a partir de una salida conocida. No es lo mismo que evaluar directamente y todavía no necesitamos estudiar formalmente una función inversa.</p>
+
+        <h2>Resolver la búsqueda con <code>fsolve</code></h2>
+        <p><code>fsolve</code> busca el valor que hace que una expresión sea igual a cero. Por eso transformamos la pregunta en <code>altura(x) - 56 = 0</code>.</p>
+        <pre class="code-block"><code><span class="py-keyword">from</span> scipy.optimize <span class="py-keyword">import</span> fsolve<br><br><span class="py-keyword">def</span> <span class="py-function">altura</span>(<span class="py-variable">meses</span>):<br>    <span class="py-keyword">return</span> (<span class="py-number">2</span> <span class="py-operator">/</span> <span class="py-number">3</span>) <span class="py-operator">*</span> <span class="py-variable">meses</span> <span class="py-operator">+</span> <span class="py-number">48</span><br><br><span class="py-variable">solucion</span> <span class="py-operator">=</span> <span class="py-function">fsolve</span>(<span class="py-keyword">lambda</span> <span class="py-variable">x</span>: <span class="py-function">altura</span>(<span class="py-variable">x</span>) <span class="py-operator">-</span> <span class="py-number">56</span>, <span class="py-number">10</span>)[<span class="py-number">0</span>]<br><span class="py-builtin">print</span>(<span class="py-variable">solucion</span>)</code></pre>
+        <div class="code-output" aria-label="Resultado del código"><span class="code-output-label">Python · resultado</span><code>12.0</code></div>
+        <ul>
+          <li><code>56</code> es la salida objetivo.</li>
+          <li><code>10</code> es un valor inicial desde el cual <code>fsolve</code> comienza a buscar.</li>
+          <li><code>[0]</code> extrae la primera solución entregada.</li>
+        </ul>
+        <div class="lesson-note"><strong>Error común:</strong> usar solamente <code>fsolve(altura, 10)</code> buscaría cuándo la altura vale cero, no cuándo vale 56. El objetivo debe restarse dentro de la expresión.</div>
+
+        <h2>Comprobar e interpretar</h2>
+        <p>Después de encontrar 12, reemplázalo nuevamente en la función: <code>h(12) = 56</code>. Luego confirma que 12 meses pertenece al dominio contextual de 0 a 24 meses.</p>
+        <p>Una respuesta completa debe indicar:</p>
+        <ol>
+          <li>El valor obtenido.</li>
+          <li>La variable que representa.</li>
+          <li>Su unidad.</li>
+          <li>La entrada o salida con la que se relaciona.</li>
+          <li>Si tiene sentido dentro del dominio del problema.</li>
+        </ol>
+        <div class="math-definition"><small>Conclusión completa</small><strong>Según el modelo, el bebé alcanza una altura estimada de 56 centímetros a los 12 meses, valor que se encuentra dentro del periodo estudiado.</strong></div>
+
+        <div class="lesson-actions"><a href="representaciones.html">← Representar una función</a><a href="../index.html">Volver a las categorías →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

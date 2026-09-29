@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Qué es una función — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de fundamentos</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Matemática · 02</small><strong>Fundamentos de funciones</strong></a>
+        <nav class="sidebar-categories" aria-label="Categorías de nivelación matemática"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><span class="sidebar-category is-soon"><span>03</span><b>Funciones lineales</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav>
+        <nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 01</p>
+        <h1>¿Qué es una <em>función?</em></h1>
+        <p class="lesson-lead">Una función es una regla que relaciona valores: recibe una entrada y le asigna un único resultado como salida.</p>
+
+        <h2>Entrada, regla y salida</h2>
+        <p>Una función sirve para representar una relación de forma precisa. Podemos entregar el lado de un cuadrado como entrada y obtener su área como salida. La regla utilizada es elevar el lado al cuadrado.</p>
+        <div class="math-definition"><small>Estructura fundamental</small><strong>Entrada → regla de la función → salida</strong></div>
+        <div class="math-formula"><span>A</span>(lado) = lado²</div>
+        <p>Si el lado mide 3 metros, la función entrega un área de 9 metros cuadrados. Si cambia la entrada, la misma regla permite calcular la salida correspondiente.</p>
+
+        <h2>La condición que debe cumplir</h2>
+        <p>Para que una relación sea una función, cada entrada permitida debe tener una sola salida. No tendría sentido que, usando exactamente la misma regla y el mismo lado de 3 metros, el área fuera 9 y 12 metros cuadrados al mismo tiempo.</p>
+        <p>Dos entradas diferentes sí pueden producir la misma salida. En la función que eleva un número al cuadrado, tanto 2 como −2 producen 4. Eso no rompe la definición porque cada entrada continúa teniendo un único resultado.</p>
+        <div class="concept-pairs">
+          <div><strong>Sí es función</strong><span>Cada entrada apunta a un solo resultado, aunque varias entradas puedan coincidir en la misma salida.</span></div>
+          <div><strong>No es función</strong><span>Una misma entrada recibe dos resultados distintos dentro de la misma relación.</span></div>
+        </div>
+
+        <h2>La función representa una situación</h2>
+        <p>La entrada y la salida no siempre son números aislados. Pueden representar meses y altura, cantidad de usuarios y memoria utilizada, tamaño de un archivo y tiempo de transferencia, o años y valor de un equipo.</p>
+        <p>Por eso, antes de calcular conviene preguntar:</p>
+        <ul>
+          <li>¿Qué dato se entrega como entrada?</li>
+          <li>¿Qué regla relaciona los datos?</li>
+          <li>¿Qué resultado se obtiene y qué significa?</li>
+          <li>¿Qué unidades acompañan a cada valor?</li>
+        </ul>
+
+        <h2>La misma idea en Python</h2>
+        <p>Python permite escribir la regla mediante <code>def</code>. El valor recibido se llama parámetro y <code>return</code> devuelve la salida calculada.</p>
+        <pre class="code-block"><code><span class="py-keyword">def</span> <span class="py-function">area_cuadrado</span>(<span class="py-variable">lado</span>):<br>    <span class="py-keyword">return</span> <span class="py-variable">lado</span> <span class="py-operator">**</span> <span class="py-number">2</span><br><br><span class="py-builtin">print</span>(<span class="py-function">area_cuadrado</span>(<span class="py-number">3</span>))</code></pre>
+        <div class="code-output" aria-label="Resultado del código"><span class="code-output-label">Python · resultado</span><code>9</code></div>
+        <div class="lesson-note"><strong>Por ahora:</strong> no necesitamos condiciones ni ciclos. Solo definiremos reglas, cambiaremos entradas y observaremos los resultados.</div>
+
+        <div class="lesson-actions"><span></span><a href="notacion.html">Siguiente: cómo leer f(x) →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>
