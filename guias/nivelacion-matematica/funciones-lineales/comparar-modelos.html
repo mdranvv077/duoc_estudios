@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" /><title>Comparar dos modelos lineales — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de funciones lineales</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 03</small><strong>Funciones lineales</strong></a><nav class="sidebar-categories"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category" href="../fundamentos-funciones/index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>03</span><b>Funciones lineales</b><i>↗</i></a><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 08</p>
+        <h1>Comparar dos <em>modelos.</em></h1>
+        <p class="lesson-lead">Comparar funciones permite encontrar cuándo ofrecen el mismo resultado y decidir cuál conviene antes o después de ese punto.</p>
+
+        <h2>Dos planes con estructuras distintas</h2>
+        <p>Dos empresas ofrecen un servicio cuyo costo depende de las semanas contratadas. Los valores están expresados en miles de pesos.</p>
+        <div class="math-formula"><span>C₁</span>(t) = 12t + 50</div>
+        <div class="math-formula"><span>C₂</span>(t) = 8t + 100</div>
+        <p>La primera empresa comienza con un costo menor, pero aumenta 12 mil pesos por semana. La segunda comienza más arriba, aunque aumenta solo 8 mil pesos por semana.</p>
+
+        <h2>Encontrar el punto de equilibrio</h2>
+        <p>En la intersección ambas funciones tienen la misma entrada y la misma salida. Igualamos las fórmulas:</p>
+        <div class="math-definition"><small>Intersección</small><strong>12t + 50 = 8t + 100 → 4t = 50 → t = 12,5</strong></div>
+        <p>Al reemplazar <code>t = 12,5</code> en cualquiera de los modelos, el costo es 200 mil pesos. El punto de equilibrio es <code>(12,5; 200)</code>.</p>
+
+        <h2>Decidir antes y después</h2>
+        <p>La intersección divide el dominio en dos intervalos. Probamos un valor a cada lado para saber qué función está por debajo.</p>
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Tiempo</th><th>C₁(t)</th><th>C₂(t)</th><th>Menor costo</th></tr></thead><tbody><tr><td>5 semanas</td><td>110</td><td>140</td><td>Empresa 1</td></tr><tr><td>12,5 semanas</td><td>200</td><td>200</td><td>Iguales</td></tr><tr><td>20 semanas</td><td>290</td><td>260</td><td>Empresa 2</td></tr></tbody></table></div>
+        <ul>
+          <li>Antes de 12,5 semanas, la empresa 1 tiene menor costo.</li>
+          <li>En 12,5 semanas, ambas cuestan lo mismo.</li>
+          <li>Después de 12,5 semanas, la empresa 2 tiene menor costo.</li>
+        </ul>
+
+        <h2>Resolver la intersección con Python</h2>
+        <p>Restar las funciones permite buscar cuándo su diferencia es cero.</p>
+        <pre class="code-block"><code><span class="py-keyword">from</span> scipy.optimize <span class="py-keyword">import</span> fsolve<br><br><span class="py-keyword">def</span> <span class="py-function">costo_1</span>(<span class="py-variable">t</span>):<br>    <span class="py-keyword">return</span> <span class="py-number">12</span> <span class="py-operator">*</span> <span class="py-variable">t</span> <span class="py-operator">+</span> <span class="py-number">50</span><br><br><span class="py-keyword">def</span> <span class="py-function">costo_2</span>(<span class="py-variable">t</span>):<br>    <span class="py-keyword">return</span> <span class="py-number">8</span> <span class="py-operator">*</span> <span class="py-variable">t</span> <span class="py-operator">+</span> <span class="py-number">100</span><br><br><span class="py-variable">t_equilibrio</span> <span class="py-operator">=</span> <span class="py-function">fsolve</span>(<span class="py-keyword">lambda</span> <span class="py-variable">t</span>: <span class="py-function">costo_1</span>(<span class="py-variable">t</span>) <span class="py-operator">-</span> <span class="py-function">costo_2</span>(<span class="py-variable">t</span>), <span class="py-number">10</span>)[<span class="py-number">0</span>]<br><span class="py-variable">costo_equilibrio</span> <span class="py-operator">=</span> <span class="py-function">costo_1</span>(<span class="py-variable">t_equilibrio</span>)<br><br><span class="py-builtin">print</span>(<span class="py-variable">t_equilibrio</span>, <span class="py-variable">costo_equilibrio</span>)</code></pre>
+        <div class="code-output"><span class="code-output-label">Python · resultado</span><code>12.5 200.0</code></div>
+
+        <h2>El dominio puede cambiar la decisión</h2>
+        <p>Si el servicio solo puede contratarse durante un máximo de 10 semanas, la intersección de 12,5 queda fuera del dominio. En ese escenario, la empresa 1 es más económica durante todo el periodo permitido.</p>
+        <div class="lesson-note"><strong>No decidas solo mirando la pendiente:</strong> una empresa puede aumentar más lentamente, pero comenzar con un costo inicial mucho mayor. Para comparar correctamente necesitas considerar <code>m</code>, <code>n</code>, la intersección y el dominio.</div>
+
+        <h2>Procedimiento general de comparación</h2>
+        <ol>
+          <li>Confirma que ambas funciones utilicen las mismas variables y unidades.</li>
+          <li>Interpreta la pendiente y el coeficiente de posición de cada una.</li>
+          <li>Iguala las funciones o resuelve su diferencia.</li>
+          <li>Comprueba la intersección en ambos modelos.</li>
+          <li>Evalúa un valor antes y otro después.</li>
+          <li>Redacta la decisión respetando el dominio.</li>
+        </ol>
+
+        <div class="lesson-actions"><a href="graficar.html">← Graficar con Matplotlib</a><a href="../index.html">Volver a las categorías →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

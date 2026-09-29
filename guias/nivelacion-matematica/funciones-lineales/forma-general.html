@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" /><title>La forma mx + n — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de funciones lineales</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 03</small><strong>Funciones lineales</strong></a><nav class="sidebar-categories"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category" href="../fundamentos-funciones/index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>03</span><b>Funciones lineales</b><i>↗</i></a><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 02</p>
+        <h1>La forma <em>mx + n.</em></h1>
+        <p class="lesson-lead">Toda función lineal de esta guía se escribirá como <code>f(x) = mx + n</code>. Los valores <code>m</code> y <code>n</code> describen cómo se comporta la recta.</p>
+
+        <div class="math-formula"><span>f</span>(x) = <span>m</span>x + <span>n</span></div>
+        <div class="concept-pairs"><div><strong>m · Pendiente</strong><span>Indica cuánto cambia la salida cuando la entrada aumenta una unidad.</span></div><div><strong>n · Coeficiente de posición</strong><span>Indica el valor de la función cuando la entrada es cero.</span></div></div>
+
+        <h2>Separar las partes de una fórmula</h2>
+        <p>En la función <code>C(x) = 1,5x + 10</code>, el número que multiplica a <code>x</code> es <code>m = 1,5</code> y el término que se encuentra solo es <code>n = 10</code>.</p>
+        <div class="math-definition"><small>Identificación</small><strong>C(x) = 1,5x + 10 → m = 1,5 y n = 10</strong></div>
+        <p>Si <code>x</code> representa gigabytes consumidos y <code>C(x)</code> un costo en miles de pesos, el modelo comienza en 10 mil pesos y aumenta 1,5 mil pesos por cada gigabyte.</p>
+
+        <h2>Cuando un término no aparece</h2>
+        <ul>
+          <li>En <code>f(x) = 4x</code>, el coeficiente de posición es <code>n = 0</code>.</li>
+          <li>En <code>f(x) = x + 7</code>, la pendiente es <code>m = 1</code>, porque <code>x</code> equivale a <code>1x</code>.</li>
+          <li>En <code>f(x) = −x + 2</code>, la pendiente es <code>m = −1</code>.</li>
+          <li>En <code>f(x) = 6</code>, la pendiente es <code>m = 0</code>; la salida no cambia.</li>
+        </ul>
+
+        <h2>La posición de los términos puede cambiar</h2>
+        <p>Las expresiones <code>3x + 8</code> y <code>8 + 3x</code> representan la misma función. Para encontrar <code>m</code>, identifica siempre el número que multiplica a la variable. El término sin variable es <code>n</code>.</p>
+        <div class="lesson-note"><strong>No los inviertas:</strong> <code>m</code> es la pendiente o razón de cambio. <code>n</code> es el coeficiente de posición y coincide con la intersección de la recta con el eje Y.</div>
+
+        <h2>Escribirla en Python</h2>
+        <pre class="code-block"><code><span class="py-variable">m</span> <span class="py-operator">=</span> <span class="py-number">1.5</span><br><span class="py-variable">n</span> <span class="py-operator">=</span> <span class="py-number">10</span><br><br><span class="py-keyword">def</span> <span class="py-function">costo</span>(<span class="py-variable">x</span>):<br>    <span class="py-keyword">return</span> <span class="py-variable">m</span> <span class="py-operator">*</span> <span class="py-variable">x</span> <span class="py-operator">+</span> <span class="py-variable">n</span></code></pre>
+        <p>Guardar <code>m</code> y <code>n</code> por separado facilita cambiar el modelo y recordar qué función cumple cada valor.</p>
+
+        <div class="lesson-actions"><a href="index.html">← Reconocer una función lineal</a><a href="pendiente.html">Siguiente: pendiente y razón de cambio →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" /><title>Evaluar y buscar entradas — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de funciones lineales</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 03</small><strong>Funciones lineales</strong></a><nav class="sidebar-categories"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category" href="../fundamentos-funciones/index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>03</span><b>Funciones lineales</b><i>↗</i></a><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 06</p>
+        <h1>Evaluar y buscar <em>entradas.</em></h1>
+        <p class="lesson-lead">Una función lineal permite responder dos preguntas: qué salida corresponde a una entrada y qué entrada produce una salida determinada.</p>
+
+        <h2>Calcular una salida conocida la entrada</h2>
+        <p>Para el modelo <code>T(x) = 2x + 4</code>, queremos conocer el tiempo de una transferencia de 10 GB. Sustituimos <code>x</code> por 10.</p>
+        <div class="math-definition"><small>Evaluación</small><strong>T(10) = 2 · 10 + 4 = 24</strong></div>
+        <p>La conclusión es: según el modelo, transferir 10 GB tarda 24 minutos.</p>
+        <pre class="code-block"><code><span class="py-keyword">def</span> <span class="py-function">tiempo</span>(<span class="py-variable">gigabytes</span>):<br>    <span class="py-keyword">return</span> <span class="py-number">2</span> <span class="py-operator">*</span> <span class="py-variable">gigabytes</span> <span class="py-operator">+</span> <span class="py-number">4</span><br><br><span class="py-builtin">print</span>(<span class="py-function">tiempo</span>(<span class="py-number">10</span>))</code></pre>
+        <div class="code-output"><span class="code-output-label">Python · resultado</span><code>24</code></div>
+
+        <h2>Encontrar la entrada desde una salida</h2>
+        <p>Ahora queremos saber qué tamaño de archivo tarda 30 minutos. La salida es conocida y la entrada es la incógnita.</p>
+        <div class="math-definition"><small>Ecuación</small><strong>2x + 4 = 30 → 2x = 26 → x = 13</strong></div>
+        <p>El archivo tiene un tamaño de 13 GB. Podemos comprobarlo evaluando <code>T(13) = 30</code>.</p>
+
+        <h2>Buscar el valor con <code>fsolve</code></h2>
+        <p><code>fsolve</code> necesita una expresión que sea cero en la solución. Si la salida objetivo es 30, debemos resolver <code>tiempo(x) − 30 = 0</code>.</p>
+        <pre class="code-block"><code><span class="py-keyword">from</span> scipy.optimize <span class="py-keyword">import</span> fsolve<br><br><span class="py-keyword">def</span> <span class="py-function">tiempo</span>(<span class="py-variable">gigabytes</span>):<br>    <span class="py-keyword">return</span> <span class="py-number">2</span> <span class="py-operator">*</span> <span class="py-variable">gigabytes</span> <span class="py-operator">+</span> <span class="py-number">4</span><br><br><span class="py-variable">objetivo</span> <span class="py-operator">=</span> <span class="py-number">30</span><br><span class="py-variable">solucion</span> <span class="py-operator">=</span> <span class="py-function">fsolve</span>(<span class="py-keyword">lambda</span> <span class="py-variable">x</span>: <span class="py-function">tiempo</span>(<span class="py-variable">x</span>) <span class="py-operator">-</span> <span class="py-variable">objetivo</span>, <span class="py-number">10</span>)[<span class="py-number">0</span>]<br><br><span class="py-builtin">print</span>(<span class="py-variable">solucion</span>)</code></pre>
+        <div class="code-output"><span class="code-output-label">Python · resultado</span><code>13.0</code></div>
+        <div class="lesson-note"><strong>Error frecuente:</strong> <code>fsolve(tiempo, 10)</code> buscaría cuándo el tiempo vale cero. Para buscar una salida específica, siempre resta el objetivo: <code>tiempo(x) - objetivo</code>.</div>
+
+        <h2>Verificar el dominio y el tipo de variable</h2>
+        <p>Una solución numérica no se acepta automáticamente. Si el problema limita los archivos entre 1 y 20 GB, 13 pertenece al dominio. Si la entrada representara personas o equipos, habría que comprobar además si debe ser un número entero.</p>
+        <p>No conviertas inmediatamente la solución con <code>int()</code>. Esa conversión elimina los decimales sin decidir si corresponde redondear, aproximar o rechazar el valor.</p>
+
+        <h2>Plantilla para redactar la conclusión</h2>
+        <div class="math-definition"><small>Respuesta completa</small><strong>Según el modelo, una salida de [valor y unidad] se alcanza con una entrada de [valor y unidad], la cual pertenece al dominio estudiado.</strong></div>
+
+        <div class="lesson-actions"><a href="modelo-datos.html">← Construir un modelo</a><a href="graficar.html">Siguiente: graficar con Matplotlib →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

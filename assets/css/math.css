@@ -94,7 +94,45 @@
   line-height: 1.55;
 }
 
+.function-plot-card {
+  width: 100%;
+  max-width: 720px;
+  margin: 26px 0;
+  padding: 17px 18px 13px;
+  overflow: hidden;
+  border: 1px solid rgba(46, 234, 255, .25);
+  background: radial-gradient(circle at 65% 45%, rgba(46, 234, 255, .055), transparent 48%), rgba(5, 9, 14, .8);
+}
+
+.function-plot-card svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.plot-grid { stroke: rgba(183, 205, 228, .1); stroke-width: 1; }
+.plot-axis { stroke: #8290a2; stroke-width: 1.5; }
+.plot-line { fill: none; stroke: var(--cyan); stroke-width: 3; filter: drop-shadow(0 0 5px rgba(46, 234, 255, .3)); }
+.plot-point { fill: var(--magenta); stroke: #071018; stroke-width: 2; }
+.plot-guide { stroke: var(--orange); stroke-width: 1.5; stroke-dasharray: 5 5; }
+.function-plot-card text { fill: #9ba9ba; font: 11px "DM Mono", monospace; }
+.function-plot-card .plot-label { fill: #dce6f1; font-weight: 500; }
+.function-plot-card figcaption { margin-top: 9px; color: var(--muted); font-size: .74rem; line-height: 1.55; }
+
+/* Ventana flexible para ejemplos cuyo encabezado no siempre dice lo mismo. */
+.code-window { box-sizing: border-box; width: 100%; max-width: 720px; margin: 25px 0; overflow: hidden; border: 1px solid rgba(46, 234, 255, .25); background: #05070c; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025); }
+.code-window:has(+ .output-window) { margin-bottom: 0; }
+.code-title { padding: 9px 12px; color: var(--muted); border-bottom: 1px solid var(--line); background: rgba(18, 27, 41, .72); font: .59rem "DM Mono", monospace; letter-spacing: .07em; }
+.code-window pre, .output-window pre { margin: 0; overflow-x: auto; }
+.code-window pre { padding: 18px 20px; color: #dce6f1; font: .82rem/1.9 "DM Mono", monospace; }
+.code-window code, .output-window code { color: inherit; font: inherit; }
+.output-window { box-sizing: border-box; width: 100%; max-width: 720px; margin: 0 0 25px; overflow: hidden; border: 1px solid rgba(46, 234, 255, .25); border-top: 0; background: #000; color: #dce6f1; }
+.output-window .code-title { background: #000; }
+.output-window pre { padding: 11px 20px 13px; font: .82rem/1.7 "DM Mono", monospace; }
+
 @media (max-width: 600px) {
   .concept-pairs { grid-template-columns: 1fr; }
   .math-definition, .math-formula { padding: 15px 16px; }
+  .function-plot-card { padding: 12px 10px 10px; }
+  .code-window pre, .output-window pre { padding-right: 15px; padding-left: 15px; font-size: .72rem; }
 }

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" /><title>Graficar con Matplotlib — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de funciones lineales</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 03</small><strong>Funciones lineales</strong></a><nav class="sidebar-categories"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category" href="../fundamentos-funciones/index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>03</span><b>Funciones lineales</b><i>↗</i></a><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 07</p>
+        <h1>Graficar con <em>Matplotlib.</em></h1>
+        <p class="lesson-lead">Un gráfico permite observar la dirección, el punto inicial y el ritmo de cambio de una función. Debe respetar el contexto y comunicar claramente sus unidades.</p>
+
+        <h2>Preparar las entradas y salidas</h2>
+        <p>Continuaremos con <code>T(x) = 2x + 4</code>. Supongamos que el dominio contextual considera archivos desde 0 hasta 20 GB.</p>
+        <ol>
+          <li><code>np.linspace</code> crea entradas distribuidas dentro del dominio.</li>
+          <li>La función calcula una salida para cada entrada.</li>
+          <li><code>plt.plot</code> une los pares y dibuja la recta.</li>
+        </ol>
+        <pre class="code-block"><code><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np<br><span class="py-keyword">import</span> matplotlib.pyplot <span class="py-keyword">as</span> plt<br><br><span class="py-keyword">def</span> <span class="py-function">tiempo</span>(<span class="py-variable">gigabytes</span>):<br>    <span class="py-keyword">return</span> <span class="py-number">2</span> <span class="py-operator">*</span> <span class="py-variable">gigabytes</span> <span class="py-operator">+</span> <span class="py-number">4</span><br><br><span class="py-variable">x</span> <span class="py-operator">=</span> np.<span class="py-function">linspace</span>(<span class="py-number">0</span>, <span class="py-number">20</span>, <span class="py-number">100</span>)<br><span class="py-variable">y</span> <span class="py-operator">=</span> <span class="py-function">tiempo</span>(<span class="py-variable">x</span>)<br><br>plt.<span class="py-function">plot</span>(<span class="py-variable">x</span>, <span class="py-variable">y</span>, label<span class="py-operator">=</span><span class="py-string">"T(x) = 2x + 4"</span>)<br>plt.<span class="py-function">xlabel</span>(<span class="py-string">"Tamaño del archivo (GB)"</span>)<br>plt.<span class="py-function">ylabel</span>(<span class="py-string">"Tiempo de transferencia (min)"</span>)<br>plt.<span class="py-function">title</span>(<span class="py-string">"Tiempo según el tamaño del archivo"</span>)<br>plt.<span class="py-function">grid</span>()<br>plt.<span class="py-function">legend</span>()<br>plt.<span class="py-function">show</span>()</code></pre>
+
+        <h2>Leer el gráfico</h2>
+        <ul>
+          <li>El eje X muestra la variable independiente: tamaño en GB.</li>
+          <li>El eje Y muestra la variable dependiente: tiempo en minutos.</li>
+          <li>La recta sube porque la pendiente <code>m = 2</code> es positiva.</li>
+          <li>La recta comienza en <code>(0, 4)</code> porque <code>n = 4</code>.</li>
+          <li>El punto <code>(10, 24)</code> representa una transferencia de 10 GB que tarda 24 minutos.</li>
+        </ul>
+
+        <h2>Destacar puntos importantes</h2>
+        <p><code>plt.scatter</code> permite marcar resultados que queremos explicar. Los puntos deben respetar el orden <code>(entrada, salida)</code>.</p>
+        <pre class="code-block"><code><span class="py-comment"># Agregar antes de plt.show()</span><br>plt.<span class="py-function">scatter</span>([<span class="py-number">0</span>, <span class="py-number">10</span>], [<span class="py-function">tiempo</span>(<span class="py-number">0</span>), <span class="py-function">tiempo</span>(<span class="py-number">10</span>)], color<span class="py-operator">=</span><span class="py-string">"red"</span>)<br>plt.<span class="py-function">annotate</span>(<span class="py-string">"Inicio: (0, 4)"</span>, (<span class="py-number">0</span>, <span class="py-number">4</span>))<br>plt.<span class="py-function">annotate</span>(<span class="py-string">"10 GB: (10, 24)"</span>, (<span class="py-number">10</span>, <span class="py-number">24</span>))</code></pre>
+
+        <h2>Usar límites coherentes</h2>
+        <p>Si el ejercicio estudia de 0 a 20 GB, el gráfico no debe sugerir que el modelo fue validado para tamaños negativos o extremadamente grandes. Puedes fijar los límites visibles con:</p>
+        <pre class="code-block"><code>plt.<span class="py-function">xlim</span>(<span class="py-number">0</span>, <span class="py-number">20</span>)<br>plt.<span class="py-function">ylim</span>(<span class="py-number">0</span>, <span class="py-number">45</span>)</code></pre>
+        <div class="lesson-note"><strong>El gráfico también es una respuesta:</strong> no basta con que aparezca una línea. Revisa el título, las variables, las unidades, el dominio y los puntos destacados antes de interpretarlo.</div>
+
+        <h2>Errores frecuentes</h2>
+        <ul>
+          <li>Intercambiar <code>x</code> e <code>y</code> en <code>plt.plot</code>.</li>
+          <li>Olvidar ejecutar la celda de importaciones.</li>
+          <li>Escribir etiquetas sin unidades.</li>
+          <li>Crear un dominio que no corresponde al problema.</li>
+          <li>Modificar la fórmula, pero conservar un título o leyenda antigua.</li>
+        </ul>
+
+        <div class="lesson-actions"><a href="evaluar-resolver.html">← Evaluar y buscar entradas</a><a href="comparar-modelos.html">Siguiente: comparar dos modelos →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

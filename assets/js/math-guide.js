@@ -22,10 +22,41 @@ const mathGuideData = {
       ["evaluar-interpretar.html", "Evaluar e interpretar"],
     ],
   },
+  linear: {
+    folder: "funciones-lineales",
+    label: "Funciones lineales",
+    modules: [
+      ["index.html", "Reconocer una función lineal"],
+      ["forma-general.html", "La forma mx + n"],
+      ["pendiente.html", "Pendiente y razón de cambio"],
+      ["coeficiente-posicion.html", "Coeficiente de posición"],
+      ["modelo-datos.html", "Construir un modelo"],
+      ["evaluar-resolver.html", "Evaluar y buscar entradas"],
+      ["graficar.html", "Graficar con Matplotlib"],
+      ["comparar-modelos.html", "Comparar dos modelos"],
+    ],
+  },
+  nonlinear: {
+    folder: "funciones-no-lineales",
+    label: "Funciones no lineales",
+    modules: [
+      ["index.html", "Reconocer modelos no lineales"],
+      ["cuadraticas.html", "Funciones cuadráticas"],
+      ["puntos-clave.html", "Puntos clave de una parábola"],
+      ["intersecciones-intervalos.html", "Intersecciones e intervalos"],
+      ["polinomios.html", "Funciones polinómicas"],
+      ["exponenciales.html", "Funciones exponenciales"],
+      ["raiz-cuadrada.html", "Funciones con raíz cuadrada"],
+      ["por-tramos.html", "Funciones definidas por tramos"],
+      ["analisis-completo.html", "Analizar un problema completo"],
+    ],
+  },
 };
 
 function currentMathCategory(url = window.location.href) {
   const path = new URL(url, window.location.href).pathname;
+  if (path.includes("/funciones-no-lineales/")) return "nonlinear";
+  if (path.includes("/funciones-lineales/")) return "linear";
   return path.includes("/fundamentos-funciones/")
     ? "fundamentals"
     : "preparation";
@@ -46,8 +77,8 @@ function renderMathNavigation() {
     oldCategories.innerHTML = `
       <a class="sidebar-category ${category === "preparation" ? "active" : ""}" data-math-category="preparation" href="${category === "preparation" ? "index.html" : "../preparacion/index.html"}"><span>01</span><b>Preparación</b><i>↗</i></a>
       <a class="sidebar-category ${category === "fundamentals" ? "active" : ""}" data-math-category="fundamentals" href="${category === "fundamentals" ? "index.html" : "../fundamentos-funciones/index.html"}"><span>02</span><b>Fundamentos</b><i>↗</i></a>
-      <span class="sidebar-category is-soon"><span>03</span><b>Funciones lineales</b><em>Pronto</em></span>
-      <span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span>`;
+      <a class="sidebar-category ${category === "linear" ? "active" : ""}" data-math-category="linear" href="${category === "linear" ? "index.html" : "../funciones-lineales/index.html"}"><span>03</span><b>Funciones lineales</b><i>↗</i></a>
+      <a class="sidebar-category ${category === "nonlinear" ? "active" : ""}" data-math-category="nonlinear" href="${category === "nonlinear" ? "index.html" : "../funciones-no-lineales/index.html"}"><span>04</span><b>No lineales</b><i>↗</i></a>`;
   }
 
   nav.innerHTML = data.modules

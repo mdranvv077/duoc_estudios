@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" /><title>Coeficiente de posición — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de funciones lineales</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 03</small><strong>Funciones lineales</strong></a><nav class="sidebar-categories"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category" href="../fundamentos-funciones/index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>03</span><b>Funciones lineales</b><i>↗</i></a><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 04</p>
+        <h1>Coeficiente <em>de posición.</em></h1>
+        <p class="lesson-lead">El coeficiente de posición <code>n</code> es la salida de la función cuando la entrada vale cero. En el gráfico, indica dónde la recta corta el eje Y.</p>
+
+        <h2>Evaluar la función en cero</h2>
+        <p>En <code>f(x) = mx + n</code>, al reemplazar <code>x</code> por cero, el término <code>mx</code> desaparece.</p>
+        <div class="math-definition"><small>Valor inicial</small><strong>f(0) = m · 0 + n = n</strong></div>
+        <p>Por eso el punto <code>(0, n)</code> siempre pertenece a la recta. También se conoce como intercepto con el eje Y u ordenada al origen.</p>
+
+        <h2>Interpretarlo dentro del contexto</h2>
+        <p>Considera el modelo <code>T(x) = 2x + 4</code>, donde <code>x</code> es el tamaño de un archivo en gigabytes y <code>T(x)</code> es el tiempo total en minutos.</p>
+        <ul>
+          <li><code>m = 2</code>: se agregan 2 minutos por cada gigabyte.</li>
+          <li><code>n = 4</code>: hay 4 minutos iniciales, incluso cuando el tamaño considerado es 0 GB.</li>
+        </ul>
+        <p>Los 4 minutos podrían representar preparación, conexión o una tarea fija previa a la transferencia. El problema debe explicar qué significado tiene ese valor.</p>
+
+        <h2>No siempre representa algo físicamente observable</h2>
+        <p>El punto con <code>x = 0</code> puede quedar fuera del dominio contextual. Si un estudio solo considera servidores entre 20 y 200 usuarios, el modelo aún posee un coeficiente de posición, pero interpretarlo como consumo real con cero usuarios puede ser una extrapolación.</p>
+        <div class="lesson-note"><strong>Antes de interpretarlo:</strong> confirma que la entrada cero tenga sentido y pertenezca al dominio del problema. Matemáticamente <code>n</code> existe, pero su interpretación contextual puede ser limitada.</div>
+
+        <h2>Encontrar <code>n</code> usando un punto</h2>
+        <p>Si conocemos la pendiente y un punto de la recta, reemplazamos sus coordenadas en <code>y = mx + n</code> y despejamos <code>n</code>.</p>
+        <p>Con <code>m = 2</code> y el punto <code>(5, 14)</code>:</p>
+        <div class="math-definition"><small>Despeje</small><strong>14 = 2 · 5 + n → 14 = 10 + n → n = 4</strong></div>
+        <p>También puede calcularse directamente como <code>n = y − mx</code>.</p>
+
+        <h2>No es la intersección con el eje X</h2>
+        <p>El coeficiente de posición se encuentra sobre el eje Y y utiliza <code>x = 0</code>. Para encontrar dónde la recta corta el eje X, debemos buscar cuándo la salida vale cero, es decir, resolver <code>f(x) = 0</code>.</p>
+
+        <h2>Calcularlo en Python</h2>
+        <pre class="code-block"><code><span class="py-variable">m</span> <span class="py-operator">=</span> <span class="py-number">2</span><br><span class="py-variable">x</span>, <span class="py-variable">y</span> <span class="py-operator">=</span> <span class="py-number">5</span>, <span class="py-number">14</span><br><br><span class="py-variable">n</span> <span class="py-operator">=</span> <span class="py-variable">y</span> <span class="py-operator">-</span> <span class="py-variable">m</span> <span class="py-operator">*</span> <span class="py-variable">x</span><br><span class="py-builtin">print</span>(<span class="py-variable">n</span>)</code></pre>
+        <div class="code-output"><span class="code-output-label">Python · resultado</span><code>4</code></div>
+
+        <div class="lesson-actions"><a href="pendiente.html">← Pendiente y razón de cambio</a><a href="modelo-datos.html">Siguiente: construir un modelo →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

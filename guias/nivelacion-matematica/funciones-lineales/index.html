@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Reconocer una función lineal — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de funciones lineales</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 03</small><strong>Funciones lineales</strong></a><nav class="sidebar-categories" aria-label="Categorías de nivelación matemática"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category" href="../fundamentos-funciones/index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>03</span><b>Funciones lineales</b><i>↗</i></a><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 01</p>
+        <h1>Reconocer una función <em>lineal.</em></h1>
+        <p class="lesson-lead">Una función lineal representa una relación que cambia a un ritmo constante. Su gráfico es una línea recta.</p>
+
+        <h2>El mismo cambio en cada intervalo</h2>
+        <p>Imagina que transferir cada gigabyte adicional tarda siempre 2 minutos. Si el archivo aumenta 1 GB, el tiempo aumenta 2 minutos; si aumenta otros 3 GB, el tiempo aumenta 6 minutos. La cantidad cambia, pero la proporción se mantiene.</p>
+        <div class="math-definition"><small>Característica principal</small><strong>Por cada aumento fijo en la entrada, la salida cambia siempre en una cantidad fija.</strong></div>
+        <p>Esa regularidad permite describir la relación con una función lineal. En un gráfico, los puntos quedan alineados y forman una recta.</p>
+
+        <figure class="function-plot-card">
+          <svg viewBox="0 0 640 270" role="img" aria-label="Gráfico de una función lineal creciente">
+            <path class="plot-grid" d="M70 30V230M150 30V230M230 30V230M310 30V230M390 30V230M470 30V230M550 30V230M70 50H590M70 95H590M70 140H590M70 185H590M70 230H590" />
+            <path class="plot-axis" d="M55 230H600M70 245V20" />
+            <path class="plot-line" d="M70 205L550 43" />
+            <circle class="plot-point" cx="70" cy="205" r="5" /><circle class="plot-point" cx="230" cy="151" r="5" /><circle class="plot-point" cx="390" cy="97" r="5" /><circle class="plot-point" cx="550" cy="43" r="5" />
+            <text x="602" y="234">x</text><text x="59" y="17">y</text><text class="plot-label" x="425" y="72">cambio constante</text>
+          </svg>
+          <figcaption>La recta sube de manera uniforme: no cambia de dirección ni se curva.</figcaption>
+        </figure>
+
+        <h2>Situaciones que pueden usar este modelo</h2>
+        <ul>
+          <li>Un costo fijo más un cobro constante por unidad utilizada.</li>
+          <li>El tiempo de transferencia según el tamaño de un archivo.</li>
+          <li>La memoria consumida por cada usuario conectado.</li>
+          <li>La pérdida constante de valor de un equipo con el paso del tiempo.</li>
+          <li>La distancia recorrida a velocidad constante.</li>
+        </ul>
+        <p>El modelo lineal es una simplificación. Solo debe utilizarse mientras el cambio observado pueda considerarse constante y dentro del dominio del problema.</p>
+
+        <h2>Cómo reconocer la fórmula</h2>
+        <p>La variable de entrada aparece elevada a 1, aunque ese exponente normalmente no se escribe. No aparece al cuadrado, dentro de una raíz ni como exponente.</p>
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Expresión</th><th>¿Es lineal?</th><th>Motivo</th></tr></thead><tbody><tr><td>f(x) = 3x + 5</td><td>Sí</td><td>x aparece elevada a 1.</td></tr><tr><td>g(x) = −2x</td><td>Sí</td><td>Tiene cambio constante y posición inicial 0.</td></tr><tr><td>h(x) = x² + 4</td><td>No</td><td>La entrada aparece elevada al cuadrado.</td></tr><tr><td>p(x) = √x</td><td>No</td><td>La entrada está dentro de una raíz.</td></tr></tbody></table></div>
+
+        <h2>Comprobarlo desde una tabla</h2>
+        <p>Si no tenemos la fórmula, podemos comparar cuánto cambia la salida entre filas. Para entradas separadas por la misma distancia, una función lineal presenta siempre la misma diferencia en las salidas.</p>
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>x</th><th>f(x)</th><th>Cambio de salida</th></tr></thead><tbody><tr><td>0</td><td>5</td><td>—</td></tr><tr><td>1</td><td>8</td><td>+3</td></tr><tr><td>2</td><td>11</td><td>+3</td></tr><tr><td>3</td><td>14</td><td>+3</td></tr></tbody></table></div>
+        <div class="lesson-note"><strong>Sobre el nombre:</strong> en esta modalidad usaremos “función lineal” para las expresiones de la forma <code>mx + n</code>, siguiendo el uso habitual de las guías. Algunos textos llaman “función afín” al caso en que <code>n</code> es diferente de cero.</div>
+
+        <div class="lesson-actions"><span></span><a href="forma-general.html">Siguiente: la forma mx + n →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

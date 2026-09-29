@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" /><title>Construir un modelo lineal — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de funciones lineales</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 03</small><strong>Funciones lineales</strong></a><nav class="sidebar-categories"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category" href="../fundamentos-funciones/index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>03</span><b>Funciones lineales</b><i>↗</i></a><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 05</p>
+        <h1>Construir un <em>modelo lineal.</em></h1>
+        <p class="lesson-lead">Cuando no conocemos la fórmula, podemos obtenerla desde puntos, una tabla o mediciones. El objetivo es determinar la pendiente <code>m</code> y el coeficiente de posición <code>n</code>.</p>
+
+        <h2>Primero organiza los datos</h2>
+        <p>Una tabla debe indicar qué variable corresponde a cada columna y qué unidades utiliza. Consideremos estos tiempos de transferencia:</p>
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Tamaño x (GB)</th><th>Tiempo T(x) (min)</th></tr></thead><tbody><tr><td>2</td><td>8</td></tr><tr><td>5</td><td>14</td></tr><tr><td>8</td><td>20</td></tr></tbody></table></div>
+        <p>El tamaño es la variable independiente y el tiempo es la dependiente. Cada fila representa un punto: <code>(2, 8)</code>, <code>(5, 14)</code> y <code>(8, 20)</code>.</p>
+
+        <h2>Método manual con dos puntos</h2>
+        <ol>
+          <li>Calcula la pendiente con dos puntos: <code>m = (14 − 8) / (5 − 2) = 2</code>.</li>
+          <li>Reemplaza un punto en <code>y = mx + n</code>.</li>
+          <li>Despeja <code>n</code>: <code>8 = 2 · 2 + n</code>, por lo tanto <code>n = 4</code>.</li>
+          <li>Escribe el modelo completo.</li>
+        </ol>
+        <div class="math-formula"><span>T</span>(x) = 2x + 4</div>
+        <p>Antes de aceptarlo, comprueba el tercer punto: <code>T(8) = 2 · 8 + 4 = 20</code>. El resultado coincide con la tabla.</p>
+
+        <h2>Obtener el modelo con <code>np.polyfit</code></h2>
+        <p>Cuando existen varios datos, NumPy puede ajustar una recta. <code>np.polyfit(x, y, 1)</code> busca los coeficientes de un polinomio de grado 1, es decir, una expresión de la forma <code>mx + n</code>.</p>
+        <pre class="code-block"><code><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np<br><br><span class="py-variable">x</span> <span class="py-operator">=</span> np.<span class="py-function">array</span>([<span class="py-number">2</span>, <span class="py-number">5</span>, <span class="py-number">8</span>])<br><span class="py-variable">y</span> <span class="py-operator">=</span> np.<span class="py-function">array</span>([<span class="py-number">8</span>, <span class="py-number">14</span>, <span class="py-number">20</span>])<br><br><span class="py-variable">m</span>, <span class="py-variable">n</span> <span class="py-operator">=</span> np.<span class="py-function">polyfit</span>(<span class="py-variable">x</span>, <span class="py-variable">y</span>, <span class="py-number">1</span>)<br><br><span class="py-builtin">print</span>(<span class="py-string">f"m = {m:.2f}"</span>)<br><span class="py-builtin">print</span>(<span class="py-string">f"n = {n:.2f}"</span>)</code></pre>
+        <div class="code-output"><span class="code-output-label">Python · resultado</span><code>m = 2.00<br>n = 4.00</code></div>
+        <p>El formato <code>:.2f</code> muestra dos decimales para evitar una salida extensa causada por aproximaciones numéricas.</p>
+
+        <h2>Datos exactos y datos medidos</h2>
+        <p>Si todos los puntos pertenecen exactamente a una recta, el modelo pasa por cada uno. En mediciones reales puede haber pequeñas variaciones; en ese caso, <code>polyfit</code> construye la recta que mejor se ajusta al conjunto, pero no necesariamente coincide con todas las filas.</p>
+        <div class="lesson-note"><strong>No aceptes la fórmula sin revisarla:</strong> interpreta <code>m</code> y <code>n</code>, evalúa algunos datos conocidos y observa el gráfico. Python encuentra coeficientes, pero tú debes confirmar que el modelo lineal sea apropiado para la situación.</div>
+
+        <h2>Presentar el modelo completo</h2>
+        <p>Una respuesta bien presentada incluye:</p>
+        <ul>
+          <li>La función con nombres o símbolos claros.</li>
+          <li>Qué representa la entrada y su unidad.</li>
+          <li>Qué representa la salida y su unidad.</li>
+          <li>La interpretación de <code>m</code> y <code>n</code>.</li>
+          <li>El dominio donde se utilizará el modelo.</li>
+        </ul>
+
+        <div class="lesson-actions"><a href="coeficiente-posicion.html">← Coeficiente de posición</a><a href="evaluar-resolver.html">Siguiente: evaluar y buscar entradas →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

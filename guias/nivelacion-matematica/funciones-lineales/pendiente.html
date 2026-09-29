@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" /><title>Pendiente y razón de cambio — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de funciones lineales</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 03</small><strong>Funciones lineales</strong></a><nav class="sidebar-categories"><a class="sidebar-category" href="../preparacion/index.html"><span>01</span><b>Preparación</b><i>↗</i></a><a class="sidebar-category" href="../fundamentos-funciones/index.html"><span>02</span><b>Fundamentos</b><i>↗</i></a><a class="sidebar-category active" href="index.html"><span>03</span><b>Funciones lineales</b><i>↗</i></a><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 03</p>
+        <h1>Pendiente y razón <em>de cambio.</em></h1>
+        <p class="lesson-lead">La pendiente <code>m</code> mide el cambio de la salida en relación con el cambio de la entrada.</p>
+
+        <h2>Comparar dos puntos</h2>
+        <p>Para calcular la pendiente necesitamos dos puntos de la misma recta. Si los puntos son <code>(x₁, y₁)</code> y <code>(x₂, y₂)</code>, comparamos la diferencia vertical con la diferencia horizontal.</p>
+        <div class="math-formula"><span>m</span> = (y₂ − y₁) / (x₂ − x₁)</div>
+        <p>Supongamos que una transferencia de 2 GB tarda 8 minutos y una de 5 GB tarda 14 minutos. Los puntos son <code>(2, 8)</code> y <code>(5, 14)</code>.</p>
+        <div class="math-definition"><small>Cálculo</small><strong>m = (14 − 8) / (5 − 2) = 6 / 3 = 2</strong></div>
+        <p>La pendiente es 2: por cada gigabyte adicional, el tiempo aumenta 2 minutos.</p>
+
+        <h2>Las unidades de la pendiente</h2>
+        <p>La pendiente divide la unidad de la variable dependiente por la unidad de la independiente. En el ejemplo anterior:</p>
+        <div class="math-definition"><small>Unidad de m</small><strong>minutos / gigabyte</strong></div>
+        <p>No basta con decir “la pendiente es 2”. Una interpretación completa indica “2 minutos por cada gigabyte”. Ese “por cada” expresa la razón de cambio.</p>
+
+        <h2>El signo indica la dirección</h2>
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Valor de m</th><th>Comportamiento</th><th>Ejemplo posible</th></tr></thead><tbody><tr><td>m &gt; 0</td><td>La salida aumenta.</td><td>Tiempo de transferencia según el tamaño.</td></tr><tr><td>m &lt; 0</td><td>La salida disminuye.</td><td>Valor de un equipo con el paso de los años.</td></tr><tr><td>m = 0</td><td>La salida permanece constante.</td><td>Tarifa fija que no depende del uso.</td></tr></tbody></table></div>
+        <p>El valor absoluto de la pendiente indica la rapidez del cambio. Una pendiente de <code>−5</code> desciende más rápidamente que una de <code>−1</code>, aunque ambas sean negativas.</p>
+
+        <h2>Calcularla desde una tabla</h2>
+        <p>No es obligatorio elegir puntos consecutivos. Cualquier par de puntos distintos de una misma recta entrega la misma pendiente, siempre que mantengas el mismo orden al restar.</p>
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Tamaño (GB)</th><th>Tiempo (min)</th></tr></thead><tbody><tr><td>2</td><td>8</td></tr><tr><td>5</td><td>14</td></tr><tr><td>8</td><td>20</td></tr></tbody></table></div>
+        <p>Entre cada fila, el tamaño aumenta 3 GB y el tiempo aumenta 6 minutos. La razón <code>6/3</code> vuelve a producir <code>m = 2</code>.</p>
+        <div class="lesson-note"><strong>Error común:</strong> no calcules solamente la diferencia de las salidas. La pendiente es <em>cambio de salida dividido por cambio de entrada</em>. Además, nunca uses dos puntos con el mismo valor de <code>x</code>, porque la división tendría denominador cero.</div>
+
+        <h2>Comprobar el cálculo con Python</h2>
+        <pre class="code-block"><code><span class="py-variable">x1</span>, <span class="py-variable">y1</span> <span class="py-operator">=</span> <span class="py-number">2</span>, <span class="py-number">8</span><br><span class="py-variable">x2</span>, <span class="py-variable">y2</span> <span class="py-operator">=</span> <span class="py-number">5</span>, <span class="py-number">14</span><br><br><span class="py-variable">m</span> <span class="py-operator">=</span> (<span class="py-variable">y2</span> <span class="py-operator">-</span> <span class="py-variable">y1</span>) <span class="py-operator">/</span> (<span class="py-variable">x2</span> <span class="py-operator">-</span> <span class="py-variable">x1</span>)<br><span class="py-builtin">print</span>(<span class="py-variable">m</span>)</code></pre>
+        <div class="code-output"><span class="code-output-label">Python · resultado</span><code>2.0</code></div>
+
+        <div class="lesson-actions"><a href="forma-general.html">← La forma mx + n</a><a href="coeficiente-posicion.html">Siguiente: coeficiente de posición →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>
