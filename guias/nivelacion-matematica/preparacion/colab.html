@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Google Colab y sus archivos — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css" />
+    <link rel="stylesheet" href="../../../assets/css/python.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de preparación</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Matemática · 01</small><strong>Preparación y herramientas</strong></a>
+        <nav class="sidebar-categories" aria-label="Categorías de nivelación matemática"><a class="sidebar-category active" href="index.html"><span>01</span><b>Preparación</b><i>↗</i></a><span class="sidebar-category is-soon"><span>02</span><b>Fundamentos</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>03</span><b>Funciones lineales</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav>
+        <nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 02</p>
+        <h1>Google Colab y sus <em>archivos.</em></h1>
+        <p class="lesson-lead">Google Colab permite escribir y ejecutar Python desde el navegador. Para esta modalidad será nuestro entorno principal.</p>
+
+        <h2>Una máquina virtual en el navegador</h2>
+        <p>Colab no ejecuta el código directamente en tu computador. Al iniciar una sesión, Google te presta temporalmente una máquina virtual: un computador remoto preparado para ejecutar Python y varias librerías científicas.</p>
+        <p>Esto evita instalar y configurar todo desde cero, permite trabajar desde equipos diferentes y reduce los problemas de compatibilidad. Solo necesitas un navegador, conexión a Internet y el notebook que quieras utilizar.</p>
+        <div class="lesson-note"><strong>Antes de comenzar:</strong> presiona el botón <strong>Conectar</strong> en la esquina superior derecha y espera a que Colab termine de conectarse con la máquina virtual. Recién entonces ejecuta las celdas.</div>
+
+        <h2>La sesión es temporal</h2>
+        <p>La máquina virtual puede desconectarse después de un periodo sin actividad o al cerrar la sesión. Si eso ocurre, las variables y los archivos temporales cargados en ella pueden desaparecer.</p>
+        <ul>
+          <li>Guarda el notebook en Google Drive o descárgalo.</li>
+          <li>Después de una reconexión, ejecuta nuevamente las celdas desde el inicio.</li>
+          <li>Ejecuta primero la celda que importa las librerías.</li>
+        </ul>
+
+        <h2><code>.ipynb</code> y <code>.py</code></h2>
+        <p>En esta modalidad trabajaremos casi siempre con archivos <code>.ipynb</code>. Un notebook divide el trabajo en celdas: algunas contienen explicaciones y otras contienen código que puede ejecutarse por separado. Esto resulta cómodo para estudiar un problema paso a paso y mantener juntos el procedimiento, el gráfico y la interpretación.</p>
+        <p>Un archivo <code>.py</code> contiene un programa de Python más tradicional, normalmente ejecutado de principio a fin. También puede resolver los mismos ejercicios, pero para usarlo en Visual Studio Code debes tener Python y las librerías necesarias instaladas en el computador.</p>
+        <div class="python-reading"><strong>En resumen:</strong> <code>.ipynb</code> es ideal para experimentar y explicar por partes; <code>.py</code> es ideal para guardar un programa continuo. El lenguaje sigue siendo Python en ambos casos.</div>
+
+        <h2>El orden de ejecución importa</h2>
+        <p>Una celda puede utilizar datos creados en una celda anterior. Por eso, aunque Colab permite ejecutarlas en cualquier orden, conviene avanzar desde arriba hacia abajo. Si un resultado parece extraño, reinicia la sesión y ejecuta todo nuevamente desde el inicio.</p>
+
+        <div class="lesson-actions"><a href="index.html">← Para qué sirven las funciones</a><a href="librerias.html">Siguiente: librerías y buenas prácticas →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

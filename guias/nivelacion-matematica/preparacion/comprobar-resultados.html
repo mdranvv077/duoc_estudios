@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Ejecutar, comprobar e interpretar — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de preparación</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 01</small><strong>Preparación y herramientas</strong></a><nav class="sidebar-categories" aria-label="Categorías de nivelación matemática"><a class="sidebar-category active" href="index.html"><span>01</span><b>Preparación</b><i>↗</i></a><span class="sidebar-category is-soon"><span>02</span><b>Fundamentos</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>03</span><b>Funciones lineales</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 05</p>
+        <h1>Ejecutar, comprobar e <em>interpretar.</em></h1>
+        <p class="lesson-lead">Python puede entregar un resultado correcto para el código escrito y, aun así, ese resultado puede no responder correctamente el problema.</p>
+
+        <h2>Tres comprobaciones diferentes</h2>
+        <ol>
+          <li><strong>El código se ejecuta:</strong> no aparecen errores de escritura, nombres o librerías.</li>
+          <li><strong>El cálculo corresponde:</strong> la fórmula y los datos son los del ejercicio.</li>
+          <li><strong>La respuesta tiene sentido:</strong> pertenece al contexto y utiliza las unidades adecuadas.</li>
+        </ol>
+        <p>Superar la primera comprobación no garantiza las otras dos. Python ejecutará exactamente lo que escribiste, incluso si copiaste un dato equivocado.</p>
+
+        <h2>Prueba con un valor sencillo</h2>
+        <p>Antes de utilizar una tabla grande o generar un gráfico, prueba la función con una entrada cuyo resultado puedas calcular a mano. Si ambas respuestas coinciden, tienes una primera señal de que la adaptación está bien hecha.</p>
+        <pre class="code-block"><code><span class="py-keyword">def</span> <span class="py-function">modelo</span>(<span class="py-variable">x</span>):<br>    <span class="py-keyword">return</span> <span class="py-number">2</span> <span class="py-operator">*</span> <span class="py-variable">x</span> <span class="py-operator">+</span> <span class="py-number">3</span><br><br><span class="py-builtin">print</span>(<span class="py-function">modelo</span>(<span class="py-number">0</span>))</code></pre>
+        <div class="code-output" aria-label="Resultado del código"><span class="code-output-label">Python · resultado</span><code>3</code></div>
+        <div class="python-reading"><strong>Comprobación rápida:</strong> al reemplazar <code>x</code> por cero, la multiplicación desaparece y queda 3. El resultado de Python coincide con el cálculo mental.</div>
+
+        <h2>Interpretar no es repetir el número</h2>
+        <p>Si el resultado es <code>3</code>, todavía falta saber qué representa. Una interpretación completa nombra la variable, añade la unidad y relaciona el resultado con la entrada utilizada.</p>
+        <div class="lesson-note"><strong>Ejemplo de redacción:</strong> “Cuando la entrada es 0 unidades, el modelo entrega un valor inicial de 3 unidades”. Más adelante reemplazaremos “unidades” por meses, centímetros, gigabytes, segundos u otra medida del problema.</div>
+
+        <h2>Revisa el contexto</h2>
+        <p>Una solución matemática puede ser negativa, decimal o muy grande. Eso no significa automáticamente que sirva como respuesta. Si la variable representa personas, por ejemplo, normalmente no tendría sentido responder 4,7 personas; y si representa tiempo transcurrido, un valor negativo podría quedar fuera de la situación estudiada.</p>
+        <ul>
+          <li>Comprueba las unidades.</li>
+          <li>Revisa si el valor está dentro del periodo o rango solicitado.</li>
+          <li>Decide si la variable puede aceptar decimales.</li>
+          <li>Explica cualquier aproximación o redondeo.</li>
+        </ul>
+
+        <h2>Cuando algo falla</h2>
+        <p>Lee primero la última línea del mensaje de error, confirma que ejecutaste las importaciones y revisa la celda modificada. Evita cambiar varias partes al azar: corrige una causa posible, vuelve a ejecutar y observa qué cambió.</p>
+
+        <div class="lesson-actions"><a href="adaptar-codigo.html">← Adaptar códigos del formulario</a><a href="../index.html">Volver a las categorías →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

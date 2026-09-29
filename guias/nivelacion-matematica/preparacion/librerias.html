@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Librerías y buenas prácticas — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de preparación</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 01</small><strong>Preparación y herramientas</strong></a><nav class="sidebar-categories" aria-label="Categorías de nivelación matemática"><a class="sidebar-category active" href="index.html"><span>01</span><b>Preparación</b><i>↗</i></a><span class="sidebar-category is-soon"><span>02</span><b>Fundamentos</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>03</span><b>Funciones lineales</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 03</p>
+        <h1>Librerías y <em>buenas prácticas.</em></h1>
+        <p class="lesson-lead">Una librería agrega herramientas ya preparadas. En vez de programar todo desde cero, importamos las funciones que necesitaremos para calcular y graficar.</p>
+
+        <h2>Las tres herramientas de la modalidad</h2>
+        <ul>
+          <li><code>NumPy</code> ayuda a trabajar con números, rangos de valores y operaciones matemáticas.</li>
+          <li><code>Matplotlib</code> permite representar funciones mediante gráficos.</li>
+          <li><code>fsolve</code>, incluida en SciPy, aproxima el valor que resuelve una ecuación.</li>
+        </ul>
+        <pre class="code-block"><code><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np<br><span class="py-keyword">import</span> matplotlib.pyplot <span class="py-keyword">as</span> plt<br><span class="py-keyword">from</span> scipy.optimize <span class="py-keyword">import</span> fsolve</code></pre>
+        <div class="python-reading"><strong>Lectura natural:</strong> carga NumPy con el nombre corto <code>np</code>, carga las herramientas de gráficos con el nombre <code>plt</code> y trae específicamente <code>fsolve</code> desde SciPy.</div>
+
+        <h2>Primero las importaciones</h2>
+        <p>En ejercicios de este tipo, una buena práctica es mantener las importaciones juntas en la primera celda de código. Cada vez que Colab se conecte a una máquina virtual nueva, ejecuta esa celda antes de usar cualquier plantilla.</p>
+        <p>Importar una librería no realiza el ejercicio ni crea un gráfico automáticamente. Solo deja sus herramientas disponibles para las celdas que vienen después.</p>
+        <div class="lesson-note"><strong>Error común:</strong> si aparece un mensaje como <code>np is not defined</code> o <code>plt is not defined</code>, probablemente no ejecutaste la celda de importaciones o la sesión se reinició.</div>
+
+        <h2>Orden recomendado del notebook</h2>
+        <ol>
+          <li>Título y explicación breve del problema.</li>
+          <li>Importación de librerías.</li>
+          <li>Datos y definición de la función.</li>
+          <li>Cálculo o gráfico.</li>
+          <li>Interpretación del resultado con palabras y unidades.</li>
+        </ol>
+        <p>Este orden permite volver al ejercicio después y entender qué se hizo sin tener que descifrar celdas dispersas.</p>
+
+        <div class="lesson-actions"><a href="colab.html">← Google Colab y sus archivos</a><a href="adaptar-codigo.html">Siguiente: adaptar códigos del formulario →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Adaptar códigos del formulario — Nivelación matemática</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css" /><link rel="stylesheet" href="../../../assets/css/python.css" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de preparación</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · 01</small><strong>Preparación y herramientas</strong></a><nav class="sidebar-categories" aria-label="Categorías de nivelación matemática"><a class="sidebar-category active" href="index.html"><span>01</span><b>Preparación</b><i>↗</i></a><span class="sidebar-category is-soon"><span>02</span><b>Fundamentos</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>03</span><b>Funciones lineales</b><em>Pronto</em></span><span class="sidebar-category is-soon"><span>04</span><b>Cuadráticas</b><em>Pronto</em></span></nav><nav class="lesson-nav"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span>Módulo 04</p>
+        <h1>Adaptar códigos del <em>formulario.</em></h1>
+        <p class="lesson-lead">Las plantillas ahorran tiempo, pero no son respuestas automáticas. Debes reconocer qué partes describen el procedimiento y cuáles pertenecen a los datos del ejercicio.</p>
+
+        <h2>Copiar no significa usar sin leer</h2>
+        <p>El formulario entrega estructuras para graficar, buscar soluciones o construir modelos. Antes de ejecutar una plantilla, identifica qué pregunta intenta responder. Una plantilla para crear un gráfico no reemplaza una plantilla para encontrar un valor desconocido.</p>
+        <p>Después, busca los datos que cambian: números, nombres de variables, función, límites del gráfico y textos de los ejes. El resto suele formar parte del procedimiento general.</p>
+
+        <h2>Una función escrita en Python</h2>
+        <pre class="code-block"><code><span class="py-keyword">def</span> <span class="py-function">modelo</span>(<span class="py-variable">x</span>):<br>    <span class="py-keyword">return</span> <span class="py-number">2</span> <span class="py-operator">*</span> <span class="py-variable">x</span> <span class="py-operator">+</span> <span class="py-number">3</span><br><br><span class="py-variable">resultado</span> <span class="py-operator">=</span> <span class="py-function">modelo</span>(<span class="py-number">4</span>)<br><span class="py-builtin">print</span>(<span class="py-variable">resultado</span>)</code></pre>
+        <div class="code-output" aria-label="Resultado del código"><span class="code-output-label">Python · resultado</span><code>11</code></div>
+        <div class="python-reading"><strong>Lectura natural:</strong> define una función llamada <code>modelo</code>. Cada vez que reciba un valor para <code>x</code>, lo multiplica por 2, suma 3 y devuelve el resultado. Luego utiliza 4 como entrada.</div>
+        <p>En otro problema podrían cambiar el nombre, la expresión matemática y el valor de entrada. La estructura de <code>def</code> y <code>return</code> puede mantenerse.</p>
+
+        <h2>Qué revisar antes de ejecutar</h2>
+        <ul>
+          <li>Que la fórmula coincida con la indicada en el problema.</li>
+          <li>Que no queden números pertenecientes al ejemplo del formulario.</li>
+          <li>Que los nombres utilizados sean iguales en todas las líneas.</li>
+          <li>Que las unidades y límites del gráfico correspondan al contexto.</li>
+          <li>Que las líneas dentro de <code>def</code> mantengan su sangría.</li>
+        </ul>
+        <div class="lesson-note"><strong>Buena práctica:</strong> duplica la celda original antes de modificarla o conserva una copia limpia del formulario. Así podrás comparar tu adaptación sin perder la estructura de referencia.</div>
+
+        <h2>Cambia una cosa a la vez</h2>
+        <p>Si modificas toda la plantilla de una sola vez y aparece un error, será difícil saber dónde comenzó. Primero adapta la función, ejecútala con un valor sencillo y, cuando responda correctamente, continúa con el gráfico o la búsqueda solicitada.</p>
+
+        <div class="lesson-actions"><a href="librerias.html">← Librerías y buenas prácticas</a><a href="comprobar-resultados.html">Siguiente: comprobar e interpretar →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js"></script>
+  </body>
+</html>
