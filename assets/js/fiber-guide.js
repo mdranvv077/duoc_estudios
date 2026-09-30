@@ -151,6 +151,10 @@ function describeVfl(lab) {
   const status = lab.querySelector("[data-vfl-status]");
   if (lab.classList.contains("is-connecting")) {
     status.textContent = "Acercando el inyector al adaptador. Mantén el interruptor apagado mientras lo conectas.";
+  } else if (lab.classList.contains("is-disconnecting")) {
+    status.textContent = mode === "0"
+      ? "Separando el inyector del adaptador."
+      : "Separando el inyector: la luz retrocede por el patch cord y se apaga al abrir la conexión.";
   } else if (mode === "0") {
     status.textContent = connected
       ? "Conectado y apagado. Cuando termines las pruebas, pulsa «Comprobar»."
@@ -164,7 +168,7 @@ function describeVfl(lab) {
 }
 function resetVfl(lab) {
   clearTimeout(vflConnectionTimers.get(lab));
-  lab.classList.remove("is-connecting");
+  lab.classList.remove("is-connecting", "is-disconnecting");
   lab.dataset.connected = "false";
   lab.dataset.mode = "0";
   vflAttempts.delete(lab);
@@ -182,8 +186,8 @@ function resetVfl(lab) {
 function checkVfl(lab) {
   const attempt = vflAttempt(lab);
   const missing = [];
-  if (lab.classList.contains("is-connecting")) {
-    missing.push("Espera a que termine la conexión.");
+  if (lab.classList.contains("is-connecting") || lab.classList.contains("is-disconnecting")) {
+    missing.push("Espera a que termine la maniobra.");
   } else if (lab.dataset.connected !== "true") {
     missing.push("Conecta el patch cord con el inyector apagado.");
   } else if (!attempt.connected) {
@@ -209,10 +213,19 @@ document.addEventListener("click", event => {
   if (button.hasAttribute("data-vfl-reset")) { resetVfl(lab); return; }
   hideVflResult(lab);
   if (lab.dataset.connected === "true") {
-    lab.dataset.connected = "false";
-    vflAttempts.delete(lab);
-    button.textContent = "Conectar patch cord";
+    lab.classList.add("is-disconnecting");
+    button.disabled = true;
+    button.textContent = "Desconectando…";
     describeVfl(lab);
+    vflConnectionTimers.set(lab, setTimeout(() => {
+      if (!lab.isConnected) return;
+      lab.dataset.connected = "false";
+      lab.classList.remove("is-disconnecting");
+      vflAttempts.delete(lab);
+      button.disabled = false;
+      button.textContent = "Conectar patch cord";
+      describeVfl(lab);
+    }, matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1050));
     return;
   }
   if (lab.classList.contains("is-connecting")) return;

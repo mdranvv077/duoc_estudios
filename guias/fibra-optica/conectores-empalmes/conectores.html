@@ -23,6 +23,37 @@
           <div><strong>UPC — normalmente azul</strong><span>El extremo se pule casi perpendicular. Es frecuente en redes de datos.</span></div>
           <div><strong>APC — normalmente verde</strong><span>El extremo posee un ángulo que reduce la reflexión de retorno. Es común en redes ópticas sensibles a reflejos.</span></div>
         </div>
+        <div class="fiber-polish-figure" aria-label="Comparación en perfil de las caras pulidas UPC y APC">
+          <figure>
+            <svg viewBox="0 0 280 220" role="img" aria-labelledby="upc-profile-title upc-profile-desc">
+              <title id="upc-profile-title">Perfil de una férula UPC</title>
+              <desc id="upc-profile-desc">La cara de extremo UPC es plana y perpendicular al eje de la férula.</desc>
+              <path class="polish-upc-body" d="M36 158Q36 146 48 146H232Q244 146 244 158V204H36Z"/>
+              <rect class="polish-collar" x="88" y="137" width="104" height="17" rx="2"/>
+              <path class="polish-ferrule" d="M105 138V33H175V138Z"/>
+              <path class="polish-ferrule-highlight" d="M113 43V132"/>
+              <path class="polish-endface" d="M105 33H175"/>
+              <text x="140" y="25" fill="#cbd7dc" font-size="11" font-family="DM Mono, monospace" text-anchor="middle">0° · PLANO</text>
+            </svg>
+            <figcaption>UPC · cara perpendicular al eje</figcaption>
+          </figure>
+          <figure>
+            <svg viewBox="0 0 280 220" role="img" aria-labelledby="apc-profile-title apc-profile-desc">
+              <title id="apc-profile-title">Perfil de una férula APC con pulido de 8 grados</title>
+              <desc id="apc-profile-desc">La cara APC se inclina 8 grados respecto del plano perpendicular al eje de la férula.</desc>
+              <path class="polish-apc-body" d="M36 158Q36 146 48 146H232Q244 146 244 158V204H36Z"/>
+              <rect class="polish-collar" x="88" y="137" width="104" height="17" rx="2"/>
+              <path class="polish-ferrule" d="M105 138V33L175 42.84V138Z"/>
+              <path class="polish-ferrule-highlight" d="M113 42V130"/>
+              <path class="polish-reference" d="M105 33H181"/>
+              <path class="polish-endface" d="M105 33L175 42.84"/>
+              <path d="M122 33A17 17 0 0 1 121.83 35.36" fill="none" stroke="#ffad47" stroke-width="2"/>
+              <text class="polish-angle" x="133" y="59">8°</text>
+            </svg>
+            <figcaption>APC · cara inclinada 8°</figcaption>
+          </figure>
+        </div>
+        <p class="vfl-caption">La inclinación APC es de 8° respecto a la cara perpendicular; el esquema conserva esa proporción en el perfil.</p>
         <div class="fiber-warning"><strong>No conectes UPC con APC.</strong> Sus superficies no hacen contacto correctamente; aumenta la pérdida y ambas caras pueden dañarse. El color ayuda a reconocerlos, pero verifica siempre la especificación.</div>
 
         <h2>Simplex y dúplex</h2>
