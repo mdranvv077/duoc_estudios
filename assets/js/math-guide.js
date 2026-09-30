@@ -79,7 +79,9 @@ function renderMathNavigation() {
       <a class="sidebar-category ${category === "preparation" ? "active" : ""}" data-math-category="preparation" href="${category === "preparation" ? "index.html" : "../preparacion/index.html"}"><span>01</span><b>Preparación</b><i>↗</i></a>
       <a class="sidebar-category ${category === "fundamentals" ? "active" : ""}" data-math-category="fundamentals" href="${category === "fundamentals" ? "index.html" : "../fundamentos-funciones/index.html"}"><span>02</span><b>Fundamentos</b><i>↗</i></a>
       <a class="sidebar-category ${category === "linear" ? "active" : ""}" data-math-category="linear" href="${category === "linear" ? "index.html" : "../funciones-lineales/index.html"}"><span>03</span><b>Funciones lineales</b><i>↗</i></a>
-      <a class="sidebar-category ${category === "nonlinear" ? "active" : ""}" data-math-category="nonlinear" href="${category === "nonlinear" ? "index.html" : "../funciones-no-lineales/index.html"}"><span>04</span><b>No lineales</b><i>↗</i></a>`;
+      <a class="sidebar-category ${category === "nonlinear" ? "active" : ""}" data-math-category="nonlinear" href="${category === "nonlinear" ? "index.html" : "../funciones-no-lineales/index.html"}"><span>04</span><b>No lineales</b><i>↗</i></a>
+      <span class="sidebar-episode-label">Episodio 02</span>
+      <span class="sidebar-category is-soon"><span>01</span><b>Próximo módulo</b><em>Bloqueado</em></span>`;
   }
 
   nav.innerHTML = data.modules
