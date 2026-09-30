@@ -6,6 +6,7 @@ const fiberGuideData = {
       ["index.html", "Cómo usar esta modalidad"],
       ["enlace-optico.html", "El enlace óptico"],
       ["seguridad-limpieza.html", "Seguridad y limpieza"],
+      ["espectro-electromagnetico.html", "Explorar el espectro"],
     ],
   },
   fiber: {
@@ -117,7 +118,7 @@ document.addEventListener("click", (event) => {
     loadFiberCategory(categoryLink.href);
     return;
   }
-  const link = event.target.closest(".lesson-nav a, .lesson-actions a");
+  const link = event.target.closest(".lesson-nav a, .lesson-actions a, a.spectrum-cta");
   if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   if (new URL("./", link.href).pathname !== new URL("./", location.href).pathname) return;
   event.preventDefault();

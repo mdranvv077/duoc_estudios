@@ -12,6 +12,27 @@
 .packet-hub-intro { max-width: 620px; margin-bottom: 39px; }
 .packet-hub-intro h1 { margin-bottom: 20px; font-size: clamp(2.8rem, 6vw, 5rem); }
 
+.modality-overview {
+  max-width: 920px;
+  margin: 0 0 28px;
+  padding: 23px 25px;
+  border: 1px solid rgba(46, 234, 255, .2);
+  background: linear-gradient(145deg, rgba(15, 24, 35, .74), rgba(7, 11, 17, .74));
+}
+.modality-overview > span {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--orange);
+  font: 500 .62rem "DM Mono", monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.modality-overview h2 { margin: 0 0 18px; font-size: clamp(1.35rem, 3vw, 1.8rem); }
+.outcome-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.outcome-grid article { min-width: 0; padding: 15px 16px; border: 1px solid var(--line); background: rgba(5, 9, 14, .5); }
+.outcome-grid strong { display: block; margin-bottom: 6px; color: var(--cyan); font-size: .8rem; }
+.outcome-grid p { margin: 0; color: var(--muted); font-size: .75rem; line-height: 1.6; }
+
 .category-panel {
   padding: 25px;
   border: 1px solid var(--line);
@@ -212,6 +233,8 @@ body:has(.learning-shell) .site-header { position: fixed; z-index: 2; top: 0; ri
 
 @media (max-width: 760px) {
   .packet-hub { padding: 58px 0 63px; }
+  .modality-overview { padding: 18px 16px; }
+  .outcome-grid { grid-template-columns: 1fr; }
   .category-panel { padding: 17px; }
   .category-grid { grid-template-columns: 1fr; }
   body:has(.learning-shell) { overflow: auto; }
