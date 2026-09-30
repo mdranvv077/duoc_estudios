@@ -133,3 +133,123 @@ addEventListener("popstate", () => {
 });
 
 renderFiberNavigation();
+
+// Delegation keeps the practice working after the guide swaps modules in place.
+const vflConnectionTimers = new WeakMap();
+const vflAttempts = new WeakMap();
+function vflAttempt(lab) {
+  if (!vflAttempts.has(lab)) vflAttempts.set(lab, { connected: false, blink: false, steady: false });
+  return vflAttempts.get(lab);
+}
+function hideVflResult(lab) {
+  lab.querySelector("[data-vfl-result]").hidden = true;
+}
+function describeVfl(lab) {
+  const mode = lab.dataset.mode;
+  const connected = lab.dataset.connected === "true";
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const status = lab.querySelector("[data-vfl-status]");
+  if (lab.classList.contains("is-connecting")) {
+    status.textContent = "Acercando el inyector al adaptador. Mantén el interruptor apagado mientras lo conectas.";
+  } else if (mode === "0") {
+    status.textContent = connected
+      ? "Conectado y apagado. Cuando termines las pruebas, pulsa «Comprobar»."
+      : "Apagado y sin conectar. Puedes mover el interruptor; las pruebas solo cuentan con el patch cord conectado correctamente.";
+  } else {
+    status.textContent = connected
+      ? (mode === "1" ? "Intermitente: la luz de salida se enciende y se apaga." : "Fijo (CW): la luz de salida permanece encendida.")
+      : "El inyector emite luz hacia el conector, pero el patch cord está desconectado. No hay salida por el otro extremo y esto no cuenta como prueba.";
+    if (mode === "1" && reduced) status.textContent += " Movimiento reducido: el parpadeo se representa como luz tenue.";
+  }
+}
+function resetVfl(lab) {
+  clearTimeout(vflConnectionTimers.get(lab));
+  lab.classList.remove("is-connecting");
+  lab.dataset.connected = "false";
+  lab.dataset.mode = "0";
+  vflAttempts.delete(lab);
+  lab.querySelectorAll("[data-vfl-mode]").forEach(slider => {
+    slider.value = "0";
+    slider.setAttribute("aria-valuetext", "Apagado");
+  });
+  lab.querySelector("[data-vfl-mode-label]").textContent = "Apagado";
+  const connect = lab.querySelector("[data-vfl-connect]");
+  connect.disabled = false;
+  connect.textContent = "Conectar patch cord";
+  hideVflResult(lab);
+  describeVfl(lab);
+}
+function checkVfl(lab) {
+  const attempt = vflAttempt(lab);
+  const missing = [];
+  if (lab.classList.contains("is-connecting")) {
+    missing.push("Espera a que termine la conexión.");
+  } else if (lab.dataset.connected !== "true") {
+    missing.push("Conecta el patch cord con el inyector apagado.");
+  } else if (!attempt.connected) {
+    missing.push("Lo conectaste con la luz encendida. Apaga el inyector, desconecta y vuelve a conectar antes de repetir las pruebas.");
+  }
+  if (!attempt.blink) missing.push("Falta probar el modo intermitente con el patch cord conectado correctamente.");
+  if (!attempt.steady) missing.push("Falta probar el modo fijo con el patch cord conectado correctamente.");
+  if (lab.dataset.mode !== "0") missing.push("El inyector sigue encendido: apágalo para terminar.");
+  const result = lab.querySelector("[data-vfl-result]");
+  result.dataset.outcome = missing.length ? "incomplete" : "success";
+  lab.querySelector("[data-vfl-result-title]").textContent = missing.length
+    ? "Aún no está completo" : "¡Bien hecho! Práctica finalizada";
+  lab.querySelector("[data-vfl-result-copy]").textContent = missing.length
+    ? missing.join(" ")
+    : "Conectaste el patch cord con el inyector apagado, probaste la luz intermitente y la fija y lo apagaste al terminar.";
+  result.hidden = false;
+}
+document.addEventListener("click", event => {
+  const button = event.target.closest("[data-vfl-connect], [data-vfl-reset], [data-vfl-check]");
+  if (!button) return;
+  const lab = button.closest("[data-vfl-lab]");
+  if (button.hasAttribute("data-vfl-check")) { checkVfl(lab); return; }
+  if (button.hasAttribute("data-vfl-reset")) { resetVfl(lab); return; }
+  hideVflResult(lab);
+  if (lab.dataset.connected === "true") {
+    lab.dataset.connected = "false";
+    vflAttempts.delete(lab);
+    button.textContent = "Conectar patch cord";
+    describeVfl(lab);
+    return;
+  }
+  if (lab.classList.contains("is-connecting")) return;
+  const attempt = vflAttempt(lab);
+  attempt.connectingSafely = lab.dataset.mode === "0";
+  lab.classList.add("is-connecting");
+  button.disabled = true;
+  button.textContent = "Conectando…";
+  describeVfl(lab);
+  vflConnectionTimers.set(lab, setTimeout(() => {
+    if (!lab.isConnected) return;
+    lab.dataset.connected = "true";
+    lab.classList.remove("is-connecting");
+    attempt.connected = attempt.connectingSafely && lab.dataset.mode === "0";
+    button.disabled = false;
+    button.textContent = "Desconectar";
+    hideVflResult(lab);
+    describeVfl(lab);
+  }, matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1050));
+});
+document.addEventListener("input", event => {
+  if (!event.target.matches("[data-vfl-mode]")) return;
+  const lab = event.target.closest("[data-vfl-lab]");
+  const mode = event.target.value;
+  lab.dataset.mode = mode;
+  const labels = ["Apagado", "Intermitente", "Fijo · CW"];
+  lab.querySelectorAll("[data-vfl-mode]").forEach(control => {
+    control.value = mode;
+    control.setAttribute("aria-valuetext", labels[Number(mode)]);
+  });
+  lab.querySelector("[data-vfl-mode-label]").textContent = labels[Number(mode)];
+  const attempt = vflAttempt(lab);
+  if (lab.classList.contains("is-connecting") && mode !== "0") attempt.connectingSafely = false;
+  if (lab.dataset.connected === "true" && attempt.connected) {
+    if (mode === "1") attempt.blink = true;
+    if (mode === "2") attempt.steady = true;
+  }
+  hideVflResult(lab);
+  describeVfl(lab);
+});

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../../assets/css/credits.css" />
     <link rel="stylesheet" href="../../../assets/css/learning.css?v=20260930-fiber" />
     <link rel="stylesheet" href="../../../assets/css/math.css?v=20260930-fiber" />
-    <link rel="stylesheet" href="../../../assets/css/fiber.css?v=20260930-vector-spectrum" />
+    <link rel="stylesheet" href="../../../assets/css/fiber.css?v=20260930-vfl-faint" />
   </head>
   <body>
     <header class="site-header container">
@@ -31,99 +31,124 @@
       </aside>
       <article class="lesson-content">
         <p class="eyebrow"><span></span> Módulo 04</p>
-        <h1>Explorar el <em>espectro.</em></h1>
-        <p class="lesson-lead">La luz utilizada por una fibra óptica forma parte del espectro electromagnético. Este módulo permite ubicarla, relacionar frecuencia con longitud de onda y comprender por qué una señal activa puede ser invisible.</p>
+        <h1>La luz que <em>no vemos.</em></h1>
+        <p class="lesson-lead">La luz visible ocupa solamente una pequeña parte del espectro. Las señales habituales de fibra óptica se encuentran en el infrarrojo: pueden estar transmitiendo sin producir una luz que el ojo humano pueda ver.</p>
 
         <figure class="fiber-spectrum-card em-spectrum" aria-labelledby="spectrum-title">
           <div class="em-heading">
-            <span>Una mirada a la luz</span>
+            <span>De la luz visible al infrarrojo</span>
             <h2 id="spectrum-title">Espectro electromagnético</h2>
           </div>
-          <div class="em-directions"><span>← Mayor longitud de onda</span><span>Mayor frecuencia →</span></div>
+          <div class="em-directions"><span>← Mayor longitud de onda</span><span>Menor longitud de onda →</span></div>
           <svg class="em-wave" viewBox="0 0 900 120" preserveAspectRatio="none" role="img" aria-label="Onda esquemática: los ciclos se acercan progresivamente de izquierda a derecha.">
             <defs><linearGradient id="em-wave-ink"><stop stop-color="#2eeaff"/><stop offset="1" stop-color="#ff2e7b"/></linearGradient></defs>
             <path class="em-baseline" d="M8 60H892"/>
+            <g class="em-wave-boundaries" aria-hidden="true">
+              <line x1="128.6" y1="5" x2="128.6" y2="115"/><line x1="257.1" y1="5" x2="257.1" y2="115"/><line x1="385.7" y1="5" x2="385.7" y2="115"/><line x1="514.3" y1="5" x2="514.3" y2="115"/><line x1="642.9" y1="5" x2="642.9" y2="115"/><line x1="771.4" y1="5" x2="771.4" y2="115"/>
+            </g>
             <path class="em-wave-line" d="M8.00 60.00 L8.88 59.71 L9.77 59.41 L10.65 59.11 L11.54 58.79 L12.42 58.47 L13.30 58.14 L14.19 57.81 L15.07 57.46 L15.96 57.11 L16.84 56.75 L17.72 56.38 L18.61 56.01 L19.49 55.63 L20.38 55.24 L21.26 54.84 L22.14 54.44 L23.03 54.03 L23.91 53.61 L24.80 53.18 L25.68 52.75 L26.56 52.31 L27.45 51.87 L28.33 51.42 L29.22 50.96 L30.10 50.50 L30.98 50.03 L31.87 49.56 L32.75 49.08 L33.64 48.59 L34.52 48.10 L35.40 47.61 L36.29 47.11 L37.17 46.61 L38.06 46.10 L38.94 45.59 L39.82 45.07 L40.71 44.55 L41.59 44.03 L42.48 43.51 L43.36 42.98 L44.24 42.46 L45.13 41.93 L46.01 41.40 L46.90 40.87 L47.78 40.34 L48.66 39.81 L49.55 39.27 L50.43 38.74 L51.32 38.22 L52.20 37.69 L53.08 37.17 L53.97 36.64 L54.85 36.13 L55.74 35.61 L56.62 35.10 L57.50 34.60 L58.39 34.10 L59.27 33.61 L60.16 33.12 L61.04 32.64 L61.92 32.17 L62.81 31.71 L63.69 31.26 L64.58 30.82 L65.46 30.38 L66.34 29.96 L67.23 29.55 L68.11 29.16 L69.00 28.78 L69.88 28.41 L70.76 28.05 L71.65 27.71 L72.53 27.39 L73.42 27.09 L74.30 26.80 L75.18 26.53 L76.07 26.28 L76.95 26.05 L77.84 25.84 L78.72 25.65 L79.60 25.49 L80.49 25.35 L81.37 25.23 L82.26 25.13 L83.14 25.06 L84.02 25.02 L84.91 25.00 L85.79 25.01 L86.68 25.05 L87.56 25.11 L88.44 25.21 L89.33 25.33 L90.21 25.49 L91.10 25.67 L91.98 25.89 L92.86 26.14 L93.75 26.42 L94.63 26.73 L95.52 27.08 L96.40 27.46 L97.28 27.87 L98.17 28.32 L99.05 28.80 L99.94 29.32 L100.82 29.87 L101.70 30.45 L102.59 31.07 L103.47 31.73 L104.36 32.42 L105.24 33.14 L106.12 33.90 L107.01 34.70 L107.89 35.52 L108.78 36.38 L109.66 37.28 L110.54 38.20 L111.43 39.16 L112.31 40.15 L113.20 41.17 L114.08 42.22 L114.96 43.30 L115.85 44.41 L116.73 45.54 L117.62 46.70 L118.50 47.89 L119.38 49.09 L120.27 50.32 L121.15 51.58 L122.04 52.85 L122.92 54.13 L123.80 55.44 L124.69 56.76 L125.57 58.09 L126.46 59.43 L127.34 60.78 L128.22 62.14 L129.11 63.50 L129.99 64.86 L130.88 66.23 L131.76 67.59 L132.64 68.95 L133.53 70.30 L134.41 71.64 L135.30 72.98 L136.18 74.29 L137.06 75.59 L137.95 76.87 L138.83 78.13 L139.72 79.37 L140.60 80.57 L141.48 81.75 L142.37 82.89 L143.25 84.00 L144.14 85.07 L145.02 86.10 L145.90 87.09 L146.79 88.03 L147.67 88.92 L148.56 89.76 L149.44 90.54 L150.32 91.27 L151.21 91.94 L152.09 92.55 L152.98 93.10 L153.86 93.58 L154.74 94.00 L155.63 94.34 L156.51 94.62 L157.40 94.82 L158.28 94.95 L159.16 95.00 L160.05 94.97 L160.93 94.87 L161.82 94.69 L162.70 94.43 L163.58 94.09 L164.47 93.67 L165.35 93.17 L166.24 92.59 L167.12 91.93 L168.00 91.19 L168.89 90.37 L169.77 89.47 L170.66 88.49 L171.54 87.45 L172.42 86.32 L173.31 85.13 L174.19 83.86 L175.08 82.53 L175.96 81.14 L176.84 79.68 L177.73 78.17 L178.61 76.59 L179.50 74.97 L180.38 73.30 L181.26 71.59 L182.15 69.84 L183.03 68.05 L183.92 66.23 L184.80 64.39 L185.68 62.52 L186.57 60.64 L187.45 58.76 L188.34 56.86 L189.22 54.97 L190.10 53.09 L190.99 51.21 L191.87 49.36 L192.76 47.53 L193.64 45.74 L194.52 43.98 L195.41 42.26 L196.29 40.59 L197.18 38.98 L198.06 37.43 L198.94 35.94 L199.83 34.53 L200.71 33.20 L201.60 31.95 L202.48 30.78 L203.36 29.71 L204.25 28.74 L205.13 27.88 L206.02 27.12 L206.90 26.47 L207.78 25.93 L208.67 25.52 L209.55 25.22 L210.44 25.05 L211.32 25.00 L212.20 25.08 L213.09 25.29 L213.97 25.62 L214.86 26.09 L215.74 26.68 L216.62 27.40 L217.51 28.25 L218.39 29.22 L219.28 30.32 L220.16 31.53 L221.04 32.86 L221.93 34.30 L222.81 35.85 L223.70 37.50 L224.58 39.24 L225.46 41.08 L226.35 43.00 L227.23 44.99 L228.12 47.06 L229.00 49.18 L229.88 51.36 L230.77 53.59 L231.65 55.85 L232.54 58.13 L233.42 60.43 L234.30 62.73 L235.19 65.04 L236.07 67.32 L236.96 69.59 L237.84 71.81 L238.72 74.00 L239.61 76.12 L240.49 78.18 L241.38 80.17 L242.26 82.06 L243.14 83.86 L244.03 85.56 L244.91 87.14 L245.80 88.60 L246.68 89.92 L247.56 91.11 L248.45 92.15 L249.33 93.04 L250.22 93.76 L251.10 94.33 L251.98 94.72 L252.87 94.95 L253.75 95.00 L254.64 94.87 L255.52 94.56 L256.40 94.08 L257.29 93.42 L258.17 92.58 L259.06 91.57 L259.94 90.40 L260.82 89.06 L261.71 87.56 L262.59 85.90 L263.48 84.11 L264.36 82.17 L265.24 80.11 L266.13 77.94 L267.01 75.66 L267.90 73.28 L268.78 70.83 L269.66 68.30 L270.55 65.72 L271.43 63.10 L272.32 60.46 L273.20 57.80 L274.08 55.15 L274.97 52.52 L275.85 49.93 L276.74 47.38 L277.62 44.91 L278.50 42.52 L279.39 40.22 L280.27 38.04 L281.16 35.98 L282.04 34.07 L282.92 32.31 L283.81 30.71 L284.69 29.29 L285.58 28.06 L286.46 27.03 L287.34 26.20 L288.23 25.58 L289.11 25.18 L290.00 25.01 L290.88 25.06 L291.76 25.34 L292.65 25.84 L293.53 26.57 L294.42 27.52 L295.30 28.69 L296.18 30.07 L297.07 31.66 L297.95 33.44 L298.84 35.41 L299.72 37.55 L300.60 39.86 L301.49 42.30 L302.37 44.88 L303.26 47.57 L304.14 50.35 L305.02 53.21 L305.91 56.12 L306.79 59.07 L307.68 62.04 L308.56 65.00 L309.44 67.93 L310.33 70.81 L311.21 73.61 L312.10 76.33 L312.98 78.93 L313.86 81.40 L314.75 83.71 L315.63 85.85 L316.52 87.81 L317.40 89.55 L318.28 91.08 L319.17 92.37 L320.05 93.41 L320.94 94.20 L321.82 94.72 L322.70 94.98 L323.59 94.95 L324.47 94.66 L325.36 94.08 L326.24 93.23 L327.12 92.11 L328.01 90.73 L328.89 89.10 L329.78 87.23 L330.66 85.13 L331.54 82.81 L332.43 80.30 L333.31 77.62 L334.20 74.78 L335.08 71.81 L335.96 68.74 L336.85 65.58 L337.73 62.37 L338.62 59.13 L339.50 55.89 L340.38 52.67 L341.27 49.51 L342.15 46.44 L343.04 43.48 L343.92 40.66 L344.80 38.00 L345.69 35.53 L346.57 33.27 L347.46 31.25 L348.34 29.48 L349.22 27.99 L350.11 26.79 L350.99 25.88 L351.88 25.29 L352.76 25.02 L353.64 25.07 L354.53 25.45 L355.41 26.15 L356.30 27.18 L357.18 28.52 L358.06 30.16 L358.95 32.09 L359.83 34.29 L360.72 36.74 L361.60 39.43 L362.48 42.32 L363.37 45.39 L364.25 48.61 L365.14 51.96 L366.02 55.38 L366.90 58.87 L367.79 62.37 L368.67 65.86 L369.56 69.29 L370.44 72.64 L371.32 75.87 L372.21 78.94 L373.09 81.82 L373.98 84.49 L374.86 86.90 L375.74 89.05 L376.63 90.89 L377.51 92.41 L378.40 93.60 L379.28 94.43 L380.16 94.89 L381.05 94.99 L381.93 94.71 L382.82 94.05 L383.70 93.02 L384.58 91.63 L385.47 89.90 L386.35 87.83 L387.24 85.45 L388.12 82.78 L389.00 79.85 L389.89 76.70 L390.77 73.35 L391.66 69.85 L392.54 66.22 L393.42 62.52 L394.31 58.78 L395.19 55.05 L396.08 51.36 L396.96 47.77 L397.84 44.31 L398.73 41.03 L399.61 37.97 L400.50 35.15 L401.38 32.62 L402.26 30.41 L403.15 28.55 L404.03 27.06 L404.92 25.97 L405.80 25.28 L406.68 25.00 L407.57 25.16 L408.45 25.73 L409.34 26.73 L410.22 28.14 L411.10 29.95 L411.99 32.13 L412.87 34.66 L413.76 37.51 L414.64 40.66 L415.52 44.05 L416.41 47.65 L417.29 51.41 L418.18 55.29 L419.06 59.24 L419.94 63.21 L420.83 67.14 L421.71 70.99 L422.60 74.70 L423.48 78.23 L424.36 81.53 L425.25 84.55 L426.13 87.25 L427.02 89.59 L427.90 91.55 L428.78 93.09 L429.67 94.19 L430.55 94.83 L431.44 95.00 L432.32 94.69 L433.20 93.91 L434.09 92.67 L434.97 90.97 L435.86 88.85 L436.74 86.32 L437.62 83.42 L438.51 80.19 L439.39 76.67 L440.28 72.91 L441.16 68.96 L442.04 64.88 L442.93 60.71 L443.81 56.54 L444.70 52.40 L445.58 48.36 L446.46 44.49 L447.35 40.83 L448.23 37.44 L449.12 34.38 L450.00 31.68 L450.88 29.40 L451.77 27.57 L452.65 26.21 L453.54 25.35 L454.42 25.01 L455.30 25.19 L456.19 25.89 L457.07 27.11 L457.96 28.83 L458.84 31.03 L459.72 33.67 L460.61 36.72 L461.49 40.14 L462.38 43.86 L463.26 47.84 L464.14 52.02 L465.03 56.33 L465.91 60.71 L466.80 65.08 L467.68 69.38 L468.56 73.54 L469.45 77.50 L470.33 81.18 L471.22 84.53 L472.10 87.49 L472.98 90.01 L473.87 92.05 L474.75 93.58 L475.64 94.56 L476.52 94.98 L477.40 94.83 L478.29 94.11 L479.17 92.82 L480.06 90.98 L480.94 88.63 L481.82 85.79 L482.71 82.52 L483.59 78.87 L484.48 74.89 L485.36 70.65 L486.24 66.22 L487.13 61.68 L488.01 57.10 L488.90 52.57 L489.78 48.15 L490.66 43.94 L491.55 39.99 L492.43 36.38 L493.32 33.18 L494.20 30.45 L495.08 28.23 L495.97 26.56 L496.85 25.49 L497.74 25.02 L498.62 25.18 L499.50 25.95 L500.39 27.34 L501.27 29.32 L502.16 31.86 L503.04 34.91 L503.92 38.42 L504.81 42.33 L505.69 46.57 L506.58 51.07 L507.46 55.73 L508.34 60.49 L509.23 65.24 L510.11 69.90 L511.00 74.38 L511.88 78.61 L512.76 82.49 L513.65 85.95 L514.53 88.93 L515.42 91.36 L516.30 93.20 L517.18 94.41 L518.07 94.96 L518.95 94.85 L519.84 94.06 L520.72 92.61 L521.60 90.52 L522.49 87.84 L523.37 84.61 L524.26 80.89 L525.14 76.76 L526.02 72.28 L526.91 67.56 L527.79 62.68 L528.68 57.74 L529.56 52.84 L530.44 48.07 L531.33 43.53 L532.21 39.32 L533.10 35.53 L533.98 32.22 L534.86 29.47 L535.75 27.34 L536.63 25.88 L537.52 25.11 L538.40 25.07 L539.28 25.75 L540.17 27.13 L541.05 29.21 L541.94 31.93 L542.82 35.24 L543.70 39.08 L544.59 43.37 L545.47 48.01 L546.36 52.91 L547.24 57.98 L548.12 63.09 L549.01 68.15 L549.89 73.04 L550.78 77.65 L551.66 81.89 L552.54 85.67 L553.43 88.89 L554.31 91.48 L555.20 93.39 L556.08 94.58 L556.96 95.00 L557.85 94.65 L558.73 93.53 L559.62 91.67 L560.50 89.10 L561.38 85.88 L562.27 82.07 L563.15 77.76 L564.04 73.04 L564.92 68.02 L565.80 62.81 L566.69 57.53 L567.57 52.30 L568.46 47.24 L569.34 42.46 L570.22 38.08 L571.11 34.20 L571.99 30.91 L572.88 28.29 L573.76 26.40 L574.64 25.30 L575.53 25.01 L576.41 25.54 L577.30 26.88 L578.18 29.01 L579.06 31.88 L579.95 35.42 L580.83 39.55 L581.72 44.17 L582.60 49.18 L583.48 54.46 L584.37 59.88 L585.25 65.31 L586.14 70.62 L587.02 75.68 L587.90 80.37 L588.79 84.56 L589.67 88.15 L590.56 91.06 L591.44 93.20 L592.32 94.53 L593.21 95.00 L594.09 94.60 L594.98 93.33 L595.86 91.23 L596.74 88.34 L597.63 84.73 L598.51 80.50 L599.40 75.73 L600.28 70.56 L601.16 65.12 L602.05 59.54 L602.93 53.96 L603.82 48.52 L604.70 43.38 L605.58 38.66 L606.47 34.48 L607.35 30.96 L608.24 28.20 L609.12 26.26 L610.00 25.20 L610.89 25.05 L611.77 25.83 L612.66 27.51 L613.54 30.05 L614.42 33.39 L615.31 37.44 L616.19 42.11 L617.08 47.25 L617.96 52.75 L618.84 58.45 L619.73 64.20 L620.61 69.85 L621.50 75.23 L622.38 80.21 L623.26 84.64 L624.15 88.40 L625.03 91.39 L625.92 93.52 L626.80 94.72 L627.68 94.97 L628.57 94.25 L629.45 92.57 L630.34 89.98 L631.22 86.55 L632.10 82.37 L632.99 77.55 L633.87 72.24 L634.76 66.57 L635.64 60.70 L636.52 54.81 L637.41 49.06 L638.29 43.61 L639.18 38.63 L640.06 34.25 L640.94 30.61 L641.83 27.82 L642.71 25.95 L643.60 25.07 L644.48 25.20 L645.36 26.36 L646.25 28.49 L647.13 31.56 L648.02 35.46 L648.90 40.10 L649.78 45.33 L650.67 51.00 L651.55 56.95 L652.44 63.00 L653.32 68.96 L654.20 74.66 L655.09 79.93 L655.97 84.61 L656.86 88.55 L657.74 91.63 L658.62 93.75 L659.51 94.85 L660.39 94.88 L661.28 93.85 L662.16 91.78 L663.04 88.73 L663.93 84.79 L664.81 80.07 L665.70 74.73 L666.58 68.93 L667.46 62.84 L668.35 56.65 L669.23 50.56 L670.12 44.76 L671.00 39.43 L671.88 34.74 L672.77 30.85 L673.65 27.87 L674.54 25.92 L675.42 25.04 L676.30 25.29 L677.19 26.64 L678.07 29.07 L678.96 32.50 L679.84 36.82 L680.72 41.90 L681.61 47.57 L682.49 53.65 L683.38 59.94 L684.26 66.24 L685.14 72.35 L686.03 78.06 L686.91 83.18 L687.80 87.55 L688.68 91.00 L689.56 93.44 L690.45 94.76 L691.33 94.92 L692.22 93.92 L693.10 91.79 L693.98 88.58 L694.87 84.40 L695.75 79.40 L696.64 73.73 L697.52 67.59 L698.40 61.19 L699.29 54.74 L700.17 48.45 L701.06 42.56 L701.94 37.26 L702.82 32.74 L703.71 29.15 L704.59 26.62 L705.48 25.25 L706.36 25.08 L707.24 26.13 L708.13 28.36 L709.01 31.71 L709.90 36.05 L710.78 41.24 L711.66 47.09 L712.55 53.41 L713.43 59.97 L714.32 66.54 L715.20 72.88 L716.08 78.78 L716.97 84.00 L717.85 88.38 L718.74 91.73 L719.62 93.95 L720.50 94.95 L721.39 94.68 L722.27 93.15 L723.16 90.42 L724.04 86.57 L724.92 81.75 L725.81 76.13 L726.69 69.90 L727.58 63.31 L728.46 56.59 L729.34 49.98 L730.23 43.74 L731.11 38.09 L732.00 33.26 L732.88 29.41 L733.76 26.71 L734.65 25.25 L735.53 25.10 L736.42 26.26 L737.30 28.69 L738.18 32.31 L739.07 36.99 L739.95 42.55 L740.84 48.77 L741.72 55.44 L742.60 62.29 L743.49 69.05 L744.37 75.48 L745.26 81.31 L746.14 86.33 L747.02 90.34 L747.91 93.17 L748.79 94.72 L749.68 94.91 L750.56 93.74 L751.44 91.25 L752.33 87.53 L753.21 82.72 L754.10 77.01 L754.98 70.62 L755.86 63.80 L756.75 56.82 L757.63 49.97 L758.52 43.50 L759.40 37.69 L760.28 32.77 L761.17 28.93 L762.05 26.34 L762.94 25.10 L763.82 25.27 L764.70 26.85 L765.59 29.78 L766.47 33.94 L767.36 39.17 L768.24 45.26 L769.12 51.95 L770.01 58.99 L770.89 66.07 L771.78 72.91 L772.66 79.22 L773.54 84.75 L774.43 89.25 L775.31 92.54 L776.20 94.48 L777.08 94.98 L777.96 94.02 L778.85 91.62 L779.73 87.89 L780.62 82.99 L781.50 77.10 L782.38 70.49 L783.27 63.42 L784.15 56.20 L785.04 49.13 L785.92 42.53 L786.80 36.66 L787.69 31.78 L788.57 28.12 L789.46 25.82 L790.34 25.00 L791.22 25.69 L792.11 27.87 L792.99 31.45 L793.88 36.28 L794.76 42.15 L795.64 48.80 L796.53 55.95 L797.41 63.29 L798.30 70.49 L799.18 77.24 L800.06 83.23 L800.95 88.19 L801.83 91.91 L802.72 94.22 L803.60 95.00 L804.48 94.22 L805.37 91.90 L806.25 88.15 L807.14 83.13 L808.02 77.06 L808.90 70.22 L809.79 62.90 L810.67 55.45 L811.56 48.19 L812.44 41.47 L813.32 35.58 L814.21 30.81 L815.09 27.37 L815.98 25.42 L816.86 25.06 L817.74 26.32 L818.63 29.13 L819.51 33.38 L820.40 38.86 L821.28 45.34 L822.16 52.50 L823.05 60.02 L823.93 67.55 L824.82 74.74 L825.70 81.23 L826.58 86.74 L827.47 90.99 L828.35 93.77 L829.24 94.96 L830.12 94.49 L831.00 92.38 L831.89 88.72 L832.77 83.68 L833.66 77.51 L834.54 70.49 L835.42 62.96 L836.31 55.28 L837.19 47.82 L838.08 40.94 L838.96 34.97 L839.84 30.22 L840.73 26.91 L841.61 25.21 L842.50 25.21 L843.38 26.92 L844.26 30.25 L845.15 35.04 L846.03 41.07 L846.92 48.04 L847.80 55.61 L848.68 63.41 L849.57 71.04 L850.45 78.13 L851.34 84.32 L852.22 89.31 L853.10 92.83 L853.99 94.71 L854.87 94.84 L855.76 93.22 L856.64 89.92 L857.52 85.11 L858.41 79.01 L859.29 71.95 L860.18 64.27 L861.06 56.37 L861.94 48.64 L862.83 41.49 L863.71 35.28 L864.60 30.33 L865.48 26.91 L866.36 25.19 L867.25 25.27 L868.13 27.15 L869.02 30.73 L869.90 35.84 L870.78 42.22 L871.67 49.52 L872.55 57.39 L873.44 65.40 L874.32 73.13 L875.20 80.18 L876.09 86.17 L876.97 90.79 L877.86 93.78 L878.74 94.98 L879.62 94.32 L880.51 91.84 L881.39 87.66 L882.28 81.99 L883.16 75.14 L884.04 67.47 L884.93 59.39 L885.81 51.34 L886.70 43.75 L887.58 37.03 L888.46 31.54 L889.35 27.60 L890.23 25.41 L891.12 25.11 L892.00 26.71"/>
           </svg>
-          <ol class="em-regions" aria-label="Regiones ordenadas de menor a mayor frecuencia">
+          <div class="em-range-caption"><strong>Rangos aproximados de longitud de onda</strong><span>Las columnas separan conceptos; su ancho no representa la proporción real del espectro.</span></div>
+          <ol class="em-regions" aria-label="Regiones ordenadas de mayor a menor longitud de onda">
             <li class="em-region em-radio">
               <span class="em-region-number">01</span>
               <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 26 18 58h28L32 26Zm-8 20h16M21 53l20-14M23 39l20 14"/><circle cx="32" cy="20" r="3"/><path d="M21 10a15 15 0 0 0 0 21M43 10a15 15 0 0 1 0 21M14 4a24 24 0 0 0 0 34M50 4a24 24 0 0 1 0 34"/></svg>
               <strong>Ondas de radio</strong>
-              <span class="em-example">Radiocomunicación</span>
+              <span class="em-range">&gt; 10 cm</span>
             </li>
             <li class="em-region em-micro">
               <span class="em-region-number">02</span>
               <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 18a30 30 0 0 0 32 32ZM16 20l32 28M32 34l16-17M28 48l-5 11h24M39 6a20 20 0 0 1 19 20M40 13a12 12 0 0 1 11 12"/><circle cx="48" cy="17" r="3"/></svg>
               <strong>Microondas</strong>
-              <span class="em-example">Radar y satélites</span>
+              <span class="em-range">10 cm – 1 mm</span>
             </li>
             <li class="em-region em-infra">
               <span class="em-region-number">03</span>
               <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M17 54c-16-17 16-21 0-43M32 54c-16-17 16-21 0-43M47 54c-16-17 16-21 0-43"/></svg>
               <strong>Infrarrojo</strong>
-              <span class="em-example">Comunicaciones ópticas</span>
+              <span class="em-range">750 – 1 000 000<br />nm</span>
+              <span class="em-focus-label">Aquí trabaja la fibra</span>
             </li>
             <li class="em-region em-visible">
               <span class="em-region-number">04</span>
               <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M4 32Q32 0 60 32 32 64 4 32Z"/><circle cx="32" cy="32" r="11"/><circle cx="32" cy="32" r="3"/></svg>
               <strong>Luz visible</strong>
-              <span class="em-example">Visión humana</span>
+              <span class="em-range">400 – 750 nm</span>
             </li>
             <li class="em-region em-uv">
               <span class="em-region-number">05</span>
               <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="14"/><path d="M32 3v8m0 42v8M3 32h8m42 0h8M11 11l6 6m30 30 6 6M11 53l6-6m30-30 6-6"/></svg>
               <strong>Ultravioleta</strong>
-              <span class="em-example">Radiación solar</span>
+              <span class="em-range">10 – 400 nm</span>
             </li>
             <li class="em-region em-xray">
               <span class="em-region-number">06</span>
               <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="9" y="5" width="46" height="54" rx="5"/><path d="M32 13v37M16 20q16 10 32 0M16 28q16 10 32 0M17 36q15 10 30 0M21 46l11-4 11 4"/></svg>
               <strong>Rayos X</strong>
-              <span class="em-example">Imagen médica</span>
+              <span class="em-range">0,01 – 10 nm</span>
             </li>
             <li class="em-region em-gamma">
               <span class="em-region-number">07</span>
               <svg viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="29" ry="12" transform="rotate(-35 32 32)"/><ellipse cx="32" cy="32" rx="29" ry="12" transform="rotate(35 32 32)"/><circle cx="28" cy="28" r="6"/><circle cx="37" cy="29" r="5"/><circle cx="32" cy="37" r="6"/></svg>
               <strong>Rayos gamma</strong>
-              <span class="em-example">Procesos nucleares</span>
+              <span class="em-range">&lt; 0,01 nm</span>
             </li>
           </ol>
-          <div class="em-visible-detail">
-            <div class="em-detail-heading"><strong>Luz visible · ampliación</strong><span>Longitud de onda aproximada</span></div>
-            <div class="em-rainbow" role="img" aria-label="Del rojo al violeta: aproximadamente de 700 a 400 nanómetros."></div>
-            <div class="em-ticks"><span>700 nm<small>Rojo</small></span><span>600 nm<small>Naranja</small></span><span>500 nm<small>Verde azulado</small></span><span>400 nm<small>Violeta</small></span></div>
+          <div class="em-visibility-compare">
+            <article class="em-human-range">
+              <span class="em-compare-label">Lo que puede ver el ojo</span>
+              <strong>Luz visible</strong>
+              <div class="em-rainbow" role="img" aria-label="Luz visible desde aproximadamente 700 nanómetros en rojo hasta 400 nanómetros en violeta."></div>
+              <div class="em-compare-ends"><span>700 nm · rojo</span><span>400 nm · violeta</span></div>
+              <p>Aproximadamente entre 400 y 750 nm.</p>
+            </article>
+            <article class="em-fiber-range">
+              <span class="em-compare-label">Lo que utiliza la fibra</span>
+              <strong>Infrarrojo · invisible para el ojo</strong>
+              <div class="em-fiber-windows">
+                <span><b>850 nm</b><small>Primera ventana</small></span>
+                <span><b>1310 nm</b><small>Segunda ventana</small></span>
+                <span><b>1550 nm</b><small>Tercera ventana</small></span>
+              </div>
+              <p>Una señal puede estar presente aunque no observes ningún brillo.</p>
+            </article>
           </div>
-          <div class="em-fiber-note"><span>En fibra óptica</span><strong>850 · 1310 · 1550 nm</strong><span>Se encuentran en el infrarrojo, más allá del rojo visible.</span></div>
-          <figcaption>Esquema orientativo, sin escala proporcional. Los colores de las regiones son una ayuda visual; solo la franja visible representa colores que percibimos. En un mismo medio, a mayor frecuencia, menor longitud de onda.</figcaption>
+          <figcaption>Esquema orientativo, sin escala proporcional. Las líneas cortadas separan regiones aproximadas: sus límites pueden variar o solaparse según la referencia. Solo la franja visible representa colores que percibimos.</figcaption>
         </figure>
 
-        <h2>Primero, observa la onda</h2>
-        <p>A la izquierda, cada ciclo ocupa más espacio: la onda tiene una <strong>longitud de onda mayor</strong> y una frecuencia menor. Hacia la derecha aparecen más ciclos en el mismo espacio: la <strong>frecuencia aumenta</strong> y la longitud de onda disminuye.</p>
+        <h2>Cómo leer el diagrama</h2>
+        <p>Las líneas verticales separan rangos aproximados de <strong>longitud de onda</strong>. A la izquierda, cada ciclo ocupa más espacio y la longitud de onda es mayor. Hacia la derecha, los ciclos están más juntos y la longitud de onda disminuye.</p>
+        <p>La longitud de onda es la distancia entre dos puntos equivalentes de una onda, por ejemplo, entre una cresta y la siguiente. Esa distancia puede escribirse en metros o en unidades más pequeñas. En fibra óptica se utiliza principalmente el <strong>nanómetro (nm)</strong>.</p>
+        <div class="wavelength-units" aria-label="Unidades de longitud de onda">
+          <div><strong>m</strong><span>metro</span><small>Unidad principal</small></div>
+          <div><strong>mm</strong><span>milímetro</span><small>0,001 m</small></div>
+          <div><strong>µm</strong><span>micrómetro</span><small>0,000001 m</small></div>
+          <div><strong>nm</strong><span>nanómetro</span><small>0,000000001 m</small></div>
+        </div>
         <div class="spectrum-observations">
-          <article><span>Observación 01</span><strong>No todo el espectro es visible</strong><p>Nuestros ojos detectan una franja muy pequeña. Que no veamos otra radiación no significa que no exista.</p></article>
-          <article><span>Observación 02</span><strong>El color depende de la longitud</strong><p>Dentro de la luz visible, el rojo se acerca a 700 nm y el violeta a 400 nm.</p></article>
-          <article><span>Observación 03</span><strong>La fibra usa otras ventanas</strong><p>Las comunicaciones ópticas suelen trabajar también en el infrarrojo, fuera de lo que puede ver el ojo.</p></article>
+          <article><span>Contraste 01</span><strong>Visible: aproximadamente 400 – 700 nm</strong><p>Es la pequeña franja que nuestros ojos interpretan como colores, desde el violeta hasta el rojo.</p></article>
+          <article><span>Contraste 02</span><strong>Fibra: habitualmente 850 – 1550 nm</strong><p>Estas longitudes están más allá del rojo visible y pertenecen al infrarrojo.</p></article>
+          <article><span>Conclusión de seguridad</span><strong>Ausencia de luz visible no significa ausencia de señal</strong><p>La única comprobación segura se realiza con instrumentos adecuados, nunca mirando el extremo.</p></article>
         </div>
 
         <h2>¿Dónde entra la fibra óptica?</h2>
-        <p>En redes de fibra son comunes longitudes de onda cercanas a <strong>850 nm</strong>, <strong>1310 nm</strong> y <strong>1550 nm</strong>. Todas están más allá del rojo visible, dentro del infrarrojo. Se eligen porque las fibras y los equipos pueden transmitir con buenas condiciones en esas regiones.</p>
+        <p>En redes de fibra son comunes las longitudes de onda de <strong>850 nm</strong>, <strong>1310 nm</strong> y <strong>1550 nm</strong>. Todas quedan dentro del infrarrojo, después del rojo visible y fuera del pequeño rango que percibe el ojo humano.</p>
         <div class="fiber-warning"><strong>No ver luz no significa que la fibra esté apagada.</strong> Una señal infrarroja activa puede ser invisible. Nunca mires directamente un conector o puerto para intentar comprobarla.</div>
 
         <h2>Comprueba lo que entendiste</h2>
         <ul>
-          <li>Si la frecuencia aumenta hacia la derecha, ¿qué ocurre con la longitud de onda?</li>
+          <li>¿Hacia qué lado del diagrama disminuye la longitud de onda?</li>
           <li>¿La luz roja tiene una longitud de onda mayor o menor que la violeta?</li>
           <li>¿Por qué no podemos confirmar a simple vista que un enlace de 1310 nm está apagado?</li>
           <li>¿En qué región ubicarías 850, 1310 y 1550 nm?</li>
         </ul>
-        <div class="lesson-note"><strong>Idea principal:</strong> no es necesario memorizar todo el espectro. Lo esencial es reconocer la relación inversa entre frecuencia y longitud de onda, y recordar que una fibra puede transportar señales que nuestros ojos no perciben.</div>
+        <div class="lesson-note"><strong>Idea principal:</strong> no es necesario memorizar todos los rangos. Lo esencial es ubicar las ventanas de 850, 1310 y 1550 nm dentro del infrarrojo y recordar que una fibra puede transportar una señal que nuestros ojos no perciben.</div>
 
         <div class="lesson-actions"><a href="seguridad-limpieza.html">← Seguridad y limpieza</a><a href="../fibras-cables/index.html">Siguiente categoría: fibras y cables →</a></div>
         <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
       </article>
     </main>
     <script src="../../../assets/js/main.js"></script>
-    <script src="../../../assets/js/fiber-guide.js?v=20260930-spectrum"></script>
+    <script src="../../../assets/js/fiber-guide.js?v=20260930-vfl-check"></script>
   </body>
 </html>

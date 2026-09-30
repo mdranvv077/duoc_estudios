@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Herramientas básicas para inspeccionar y comprobar enlaces de fibra óptica." /><title>Herramientas de comprobación — Fibra óptica</title>
     <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/fiber.css?v=20260930-vector-spectrum" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/fiber.css?v=20260930-vfl-faint" />
   </head>
   <body>
     <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
@@ -16,6 +16,77 @@
         <p class="lesson-lead">No existe una herramienta que responda todas las preguntas. Primero define qué necesitas averiguar y luego elige la prueba.</p>
 
         <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Necesidad</th><th>Herramienta</th><th>Qué aporta</th></tr></thead><tbody><tr><td>Revisar el extremo</td><td>Microscopio de inspección</td><td>Muestra contaminación o daño; se usa después de comprobar que no hay potencia.</td></tr><tr><td>Continuidad y fallas cercanas</td><td>Localizador visual de fallas (VFL)</td><td>Inyecta luz visible para seguir fibras o detectar algunas roturas y curvas.</td></tr><tr><td>Potencia en un punto</td><td>Medidor de potencia</td><td>Muestra el nivel recibido, normalmente en dBm.</td></tr><tr><td>Pérdida de extremo a extremo</td><td>Fuente y medidor / OLTS</td><td>Compara una referencia con el valor recibido y entrega pérdida en dB.</td></tr><tr><td>Distancia y ubicación de eventos</td><td>OTDR</td><td>Representa reflexiones y pérdidas a lo largo del enlace.</td></tr></tbody></table></div>
+
+        <section class="vfl-lab" data-vfl-lab data-connected="false" data-mode="0" aria-labelledby="vfl-title">
+          <div class="vfl-heading"><span>Práctica interactiva · VFL</span><h2 id="vfl-title">Sigue la luz por el patch cord</h2><p>Conecta el inyector apagado, prueba la luz intermitente y la fija y vuelve a apagarlo. Pulsa «Comprobar» para revisar tu práctica. Puedes mover el interruptor incluso sin conectar el cable.</p></div>
+          <div class="vfl-scene">
+            <svg viewBox="0 40 760 330" role="img" aria-labelledby="vfl-drawing-title vfl-drawing-desc">
+              <title id="vfl-drawing-title">Inyector de luz y patch cord SC/APC</title>
+              <desc id="vfl-drawing-desc">Un VFL negro con interruptor naranja se acerca al conector verde. El cable amarillo forma una curva y termina frente a una pantalla de observación.</desc>
+              <defs>
+                <linearGradient id="vfl-metal" x2="0" y2="1"><stop stop-color="#0a0d10"/><stop offset=".24" stop-color="#3f464a"/><stop offset=".48" stop-color="#151b1f"/><stop offset=".8" stop-color="#080c0f"/><stop offset="1" stop-color="#252d32"/></linearGradient>
+                <linearGradient id="vfl-orange" x2="0" y2="1"><stop stop-color="#ffb04a"/><stop offset=".5" stop-color="#ff761c"/><stop offset="1" stop-color="#bf4109"/></linearGradient>
+                <linearGradient id="vfl-green" x2="0" y2="1"><stop stop-color="#64dd99"/><stop offset=".48" stop-color="#219663"/><stop offset="1" stop-color="#125738"/></linearGradient>
+                <linearGradient id="vfl-beam"><stop stop-color="#ff3b47" stop-opacity=".8"/><stop offset="1" stop-color="#ff3344" stop-opacity=".08"/></linearGradient>
+                <radialGradient id="vfl-spot"><stop stop-color="#fff4e7"/><stop offset=".13" stop-color="#ff5a5a"/><stop offset="1" stop-color="#ff253e" stop-opacity="0"/></radialGradient>
+              </defs>
+              <path d="M30 320H810" stroke="#203039" stroke-dasharray="3 8"/>
+              <text x="455" y="68" class="vfl-diagram-label">PATCH CORD · SC/APC</text>
+              <path d="M490 149H626C716 149 716 273 626 273H582" fill="none" stroke="#796023" stroke-width="12"/>
+              <path d="M490 149H626C716 149 716 273 626 273H582" fill="none" stroke="#edc54d" stroke-width="7"/>
+              <path d="M425 149H626C716 149 716 273 626 273H543" class="vfl-light vfl-trace" fill="none" stroke="#ff454e" stroke-width="3"/>
+              <g class="vfl-free-light" aria-hidden="true"><path d="M352 149 412 130V168Z" fill="url(#vfl-beam)"/><path d="M352 149H412" stroke="#ff686b" stroke-width="2"/><ellipse cx="407" cy="149" rx="11" ry="17" fill="url(#vfl-spot)"/></g>
+              <!-- Adaptador compatible y conector de entrada. -->
+              <rect x="412" y="135" width="29" height="28" rx="3" fill="#7c9298" stroke="#b8c9cc"/>
+              <rect x="438" y="131" width="43" height="36" rx="3" fill="url(#vfl-green)" stroke="#76dba3"/>
+              <path d="M444 132v34m9-34v34m9-34v34" stroke="#164a33"/>
+              <rect x="479" y="140" width="22" height="18" rx="3" fill="#178858"/>
+              <text x="424" y="194" text-anchor="middle" class="vfl-diagram-small">Adaptador compatible</text>
+              <!-- Extremo de salida orientado hacia una pantalla, no hacia el observador. -->
+              <g transform="translate(120 0)">
+                <path d="M462 273H423" stroke="#edc54d" stroke-width="7"/>
+                <rect x="408" y="264" width="25" height="18" rx="3" fill="#178858"/>
+                <rect x="370" y="255" width="42" height="36" rx="3" fill="url(#vfl-green)" stroke="#76dba3"/>
+                <rect x="360" y="267" width="10" height="12" fill="#e0e4dc"/>
+                <path d="M379 256v34m10-34v34m10-34v34" stroke="#164a33"/>
+              </g>
+              <path class="vfl-light" d="M480 273 373 245V301Z" fill="url(#vfl-beam)"/>
+              <path class="vfl-light" d="M480 273H373" stroke="#ff6164" stroke-width="2"/>
+              <rect x="359" y="234" width="14" height="78" rx="3" fill="#34464f" stroke="#617e8a"/>
+              <ellipse class="vfl-light" cx="370" cy="273" rx="12" ry="28" fill="url(#vfl-spot)"/>
+              <text x="355" y="347" text-anchor="middle" class="vfl-diagram-small">Pantalla de observación</text>
+              <g class="vfl-injector">
+                <ellipse cx="201" cy="192" rx="163" ry="9" fill="#000" opacity=".3"/>
+                <rect x="35" y="123" width="176" height="52" rx="12" fill="url(#vfl-metal)" stroke="#505b62"/>
+                <path d="M57 125v48M64 125v48M184 125v48" stroke="#080c0e" stroke-width="2"/>
+                <rect x="194" y="114" width="142" height="70" rx="15" fill="url(#vfl-metal)" stroke="#515b61"/>
+                <path d="M203 119h123M203 179h123" stroke="#748087" opacity=".3"/>
+                <rect x="315" y="135" width="24" height="28" rx="3" fill="#070c0f" stroke="#6c7c83"/>
+                <rect x="336" y="141" width="16" height="16" rx="2" fill="#b9c2be"/>
+                <path d="M324 117q22-33 46-25" fill="none" stroke="#e86c19" stroke-width="5"/>
+                <ellipse cx="367" cy="91" rx="17" ry="7" transform="rotate(-22 367 91)" fill="url(#vfl-orange)"/>
+                <text x="205" y="132" fill="#cbd1d2" font-size="8" letter-spacing="1">VISUAL FAULT LOCATOR</text>
+                <rect x="211" y="140" width="79" height="31" rx="6" fill="#04080a" stroke="#69747a"/>
+                <g class="vfl-slider-piece"><rect x="214" y="143" width="23" height="25" rx="4" fill="url(#vfl-orange)"/><path d="M220 148v15m5-15v15m5-15v15" stroke="#ffbf78" stroke-width="1"/></g>
+                <foreignObject x="211" y="133" width="79" height="44"><input xmlns="http://www.w3.org/1999/xhtml" class="vfl-device-mode" data-vfl-mode type="range" min="0" max="2" step="1" value="0" aria-label="Interruptor sobre el inyector" aria-valuetext="Apagado" /></foreignObject>
+                <circle class="vfl-led" cx="302" cy="153" r="3" fill="#48555a"/>
+                <text x="130" y="205" class="vfl-diagram-small">INYECTOR DE LUZ</text>
+              </g>
+            </svg>
+          </div>
+          <div class="vfl-controls">
+            <div class="vfl-connect-controls"><button type="button" data-vfl-connect>Conectar patch cord</button><button type="button" class="vfl-reset" data-vfl-reset>Reiniciar</button></div>
+            <div class="vfl-switch"><label for="vfl-mode">Interruptor del inyector <strong data-vfl-mode-label>Apagado</strong></label><input id="vfl-mode" data-vfl-mode type="range" min="0" max="2" step="1" value="0" aria-valuetext="Apagado" /><div class="vfl-switch-labels" aria-hidden="true"><span>OFF · Apagado</span><span>Intermitente</span><span>CW · Fijo</span></div></div>
+          </div>
+          <p class="vfl-status" data-vfl-status role="status" aria-live="polite">Primero conecta el patch cord con el inyector apagado.</p>
+          <div class="vfl-assessment">
+            <div class="vfl-result" data-vfl-result role="status" aria-live="polite" hidden><strong data-vfl-result-title></strong><p data-vfl-result-copy></p></div>
+            <button type="button" data-vfl-check>Comprobar</button>
+          </div>
+          <p class="vfl-caption">El haz y el recorrido por el cable están exagerados para ver la animación: un patch cord intacto no tiene por qué brillar por fuera. El VFL usa luz roja visible; no representa las señales infrarrojas habituales de transmisión.</p>
+          <p class="vfl-caption">Se representa un adaptador compatible con SC/APC. En un equipo real, comprueba la compatibilidad indicada por el fabricante y no acoples una cara APC con una UPC. Nunca mires directamente el puerto ni el extremo de la fibra.</p>
+          <a class="vfl-reference" href="https://thefoa.org/tech/ref/testing/test/visual.html" target="_blank" rel="noopener noreferrer">Referencia: localización visual de fallas · FOA ↗</a>
+        </section>
 
         <h2>Lo que cada equipo no hace</h2>
         <ul>
@@ -35,6 +106,6 @@
         <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
       </article>
     </main>
-    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/fiber-guide.js?v=20260930-fiber"></script>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/fiber-guide.js?v=20260930-vfl-check"></script>
   </body>
 </html>
