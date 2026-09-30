@@ -159,7 +159,7 @@ function describeVfl(lab) {
     status.textContent = connected
       ? (mode === "1" ? "Intermitente: la luz de salida se enciende y se apaga." : "Fijo (CW): la luz de salida permanece encendida.")
       : "El inyector emite luz hacia el conector, pero el patch cord está desconectado. No hay salida por el otro extremo y esto no cuenta como prueba.";
-    if (mode === "1" && reduced) status.textContent += " Movimiento reducido: el parpadeo se representa como luz tenue.";
+    if (mode === "1" && reduced) status.textContent += " Movimiento reducido: el parpadeo se representa como luz fija.";
   }
 }
 function resetVfl(lab) {

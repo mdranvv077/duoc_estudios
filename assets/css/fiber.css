@@ -17,19 +17,25 @@
 .vfl-light, .vfl-free-light { opacity: 0; }
 .vfl-free-light { transform-box: fill-box; transform-origin: right center; pointer-events: none; }
 .vfl-lab[data-connected="false"][data-mode="1"] .vfl-free-light { animation: vfl-free-pulse 1s steps(1, end) infinite; }
-.vfl-lab[data-connected="false"][data-mode="2"] .vfl-free-light { opacity: .13; }
+.vfl-lab[data-connected="false"][data-mode="2"] .vfl-free-light { opacity: 1; }
 .vfl-lab.is-connecting[data-mode="1"] .vfl-free-light,
 .vfl-lab.is-connecting[data-mode="2"] .vfl-free-light { animation: vfl-dock-light 1s cubic-bezier(.3, .05, .2, 1) forwards; }
+.vfl-lab.is-connecting[data-mode="1"] .vfl-trace,
+.vfl-lab.is-connecting[data-mode="2"] .vfl-trace { stroke-dasharray: 1; animation: vfl-trace-reveal 1.05s cubic-bezier(.3, .05, .2, 1) forwards; }
+.vfl-lab.is-connecting[data-mode="1"] .vfl-light:not(.vfl-trace),
+.vfl-lab.is-connecting[data-mode="2"] .vfl-light:not(.vfl-trace) { animation: vfl-output-reveal .6s ease-out .45s both; }
 .vfl-lab[data-connected="true"][data-mode="1"] .vfl-light { animation: vfl-pulse 1s steps(1, end) infinite; }
 .vfl-lab[data-connected="true"][data-mode="2"] .vfl-light { opacity: 1; }
 .vfl-lab[data-mode="1"] .vfl-led, .vfl-lab[data-mode="2"] .vfl-led { fill: #ff4b42; }
 @keyframes vfl-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-@keyframes vfl-free-pulse { 0%, 100% { opacity: .13; } 50% { opacity: .015; } }
+@keyframes vfl-free-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 @keyframes vfl-dock-light {
-  0% { opacity: .13; transform: scaleX(1); }
-  72% { opacity: .07; }
+  0% { opacity: 1; transform: scaleX(1); }
+  72% { opacity: .5; }
   100% { opacity: 0; transform: scaleX(0); }
 }
+@keyframes vfl-trace-reveal { from { opacity: 0; stroke-dashoffset: 1; } to { opacity: 1; stroke-dashoffset: 0; } }
+@keyframes vfl-output-reveal { from { opacity: 0; } to { opacity: 1; } }
 .vfl-controls { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 24px; align-items: center; padding-top: 20px; border-top: 1px solid var(--line); }
 .vfl-connect-controls { display: flex; flex-wrap: wrap; gap: 8px; }
 .vfl-controls button, .vfl-assessment button { min-height: 44px; padding: 10px 13px; border: 1px solid #2f7880; background: #10252d; color: var(--cyan); font: 600 .75rem "Manrope", sans-serif; cursor: pointer; }
@@ -65,9 +71,13 @@
 @media (prefers-reduced-motion: reduce) {
   .vfl-injector, .vfl-slider-piece { transition: none; }
   .vfl-lab[data-connected="true"][data-mode="1"] .vfl-light,
-  .vfl-lab[data-connected="false"][data-mode="1"] .vfl-free-light { animation: none; opacity: .1; }
+  .vfl-lab[data-connected="false"][data-mode="1"] .vfl-free-light { animation: none; opacity: 1; }
   .vfl-lab.is-connecting[data-mode="1"] .vfl-free-light,
   .vfl-lab.is-connecting[data-mode="2"] .vfl-free-light { animation: none; opacity: 0; transform: scaleX(0); }
+  .vfl-lab.is-connecting[data-mode="1"] .vfl-trace,
+  .vfl-lab.is-connecting[data-mode="2"] .vfl-trace { animation: none; opacity: 1; stroke-dasharray: none; stroke-dashoffset: 0; }
+  .vfl-lab.is-connecting[data-mode="1"] .vfl-light:not(.vfl-trace),
+  .vfl-lab.is-connecting[data-mode="2"] .vfl-light:not(.vfl-trace) { animation: none; opacity: 1; }
 }
 .fiber-source small { color: var(--orange); font: .62rem "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
 .fiber-source strong { color: var(--text); font-size: .96rem; line-height: 1.55; }
