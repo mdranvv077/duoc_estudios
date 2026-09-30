@@ -1,5 +1,6 @@
 const loopModules = [
-  ["index.html", "Repetir con while"],
+  ["index.html", "Elegir entre for y while"],
+  ["while.html", "Repetir con while"],
   ["for-range.html", "Repetir con for y range()"],
 ];
 
@@ -13,7 +14,7 @@ function renderLoopNavigation() {
 function addLoopOutputs() {
   const lesson = new URL(location.href).pathname.split("/").pop();
   const outputs = {
-    "index.html": ["Intento 1<br>Intento 2<br>Intento 3"],
+    "while.html": ["Intento 1<br>Intento 2<br>Intento 3"],
     "for-range.html": ["Ronda 1<br>Ronda 2<br>Ronda 3", "0<br>1<br>2", "0% completado<br>25% completado<br>50% completado<br>75% completado<br>100% completado"],
   };
   const blocks = document.querySelectorAll(".code-block");
