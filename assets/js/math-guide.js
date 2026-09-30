@@ -75,6 +75,7 @@ function renderMathNavigation() {
   const oldCategories = sidebar.querySelector(".sidebar-categories");
   if (oldCategories) {
     oldCategories.innerHTML = `
+      <span class="sidebar-episode-label">Episodio 01</span>
       <a class="sidebar-category ${category === "preparation" ? "active" : ""}" data-math-category="preparation" href="${category === "preparation" ? "index.html" : "../preparacion/index.html"}"><span>01</span><b>Preparación</b><i>↗</i></a>
       <a class="sidebar-category ${category === "fundamentals" ? "active" : ""}" data-math-category="fundamentals" href="${category === "fundamentals" ? "index.html" : "../fundamentos-funciones/index.html"}"><span>02</span><b>Fundamentos</b><i>↗</i></a>
       <a class="sidebar-category ${category === "linear" ? "active" : ""}" data-math-category="linear" href="${category === "linear" ? "index.html" : "../funciones-lineales/index.html"}"><span>03</span><b>Funciones lineales</b><i>↗</i></a>

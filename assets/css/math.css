@@ -8,6 +8,16 @@
   background: linear-gradient(135deg, rgba(15, 25, 37, .82), rgba(6, 10, 16, .82));
 }
 
+.episode-panel { display: grid; gap: 18px; }
+.episode-panel .category-panel-title { margin-bottom: 0; }
+.episode-group { padding: 18px; border: 1px solid rgba(46, 234, 255, .18); background: rgba(4, 8, 13, .42); }
+.episode-heading { display: grid; gap: 7px; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.episode-heading span, .episode-category-label, .sidebar-episode-label { color: var(--orange); font: 500 .62rem "DM Mono", monospace; letter-spacing: .09em; text-transform: uppercase; }
+.episode-heading strong { color: var(--text); font-size: 1.15rem; }
+.episode-heading p { max-width: 580px; margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.55; }
+.episode-category-label { display: block; margin: 0 0 10px; color: var(--muted); }
+.sidebar-episode-label { display: block; padding: 7px 9px 5px; }
+
 .math-definition small {
   color: var(--orange);
   font: .62rem "DM Mono", monospace;
@@ -131,6 +141,8 @@
 .output-window pre { padding: 11px 20px 13px; font: .82rem/1.7 "DM Mono", monospace; }
 
 @media (max-width: 600px) {
+  .episode-group { padding: 13px; }
+  .episode-heading { margin-bottom: 14px; padding-bottom: 14px; }
   .concept-pairs { grid-template-columns: 1fr; }
   .math-definition, .math-formula { padding: 15px 16px; }
   .function-plot-card { padding: 12px 10px 10px; }
