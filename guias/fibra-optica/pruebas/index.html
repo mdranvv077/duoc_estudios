@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Diferencia entre potencia en dBm y pérdida en dB en fibra óptica." /><title>Pérdida, dB y dBm — Fibra óptica</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/fiber.css?v=20260930-fiber" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de fibra óptica</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Fibra óptica · 04</small><strong>Potencia y pruebas</strong></a><nav class="sidebar-categories" aria-label="Categorías del episodio"></nav><nav class="lesson-nav" aria-label="Módulos de la categoría"></nav><a class="sidebar-back" href="../index.html">← Ver episodio</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span> Módulo 01</p>
+        <h1>Pérdida, dB y <em>dBm.</em></h1>
+        <p class="lesson-lead">Para interpretar una medición debes separar dos ideas: cuánta potencia existe en un punto y cuánto se perdió entre dos puntos.</p>
+
+        <div class="concept-pairs"><div><strong>dBm — potencia</strong><span>Indica un nivel de potencia referido a 1 mW. Es una medición absoluta en un punto del enlace.</span></div><div><strong>dB — diferencia</strong><span>Indica ganancia o pérdida entre dos valores. En esta guía lo usaremos principalmente para expresar pérdida.</span></div></div>
+
+        <h2>Un ejemplo directo</h2>
+        <p>Si el transmisor entrega <strong>−3 dBm</strong> y al final se reciben <strong>−7 dBm</strong>, el enlace perdió <strong>4 dB</strong>.</p>
+        <div class="math-formula"><span>Pérdida</span> = potencia de entrada − potencia recibida<br />−3 dBm − (−7 dBm) = <span>4 dB</span></div>
+        <p>En dBm, un número más negativo representa menor potencia: −7 dBm es menos potencia que −3 dBm. En cambio, al decir “4 dB de pérdida” expresamos cuánto disminuyó la señal.</p>
+        <div class="fiber-warning"><strong>No mezcles las unidades.</strong> Un medidor puede mostrar −7 dBm de potencia, pero eso no significa que la pérdida sea −7 dB. Para conocer la pérdida necesitas una referencia o el valor de entrada.</div>
+
+        <h2>¿De dónde aparece la pérdida?</h2>
+        <ul><li>La propia fibra atenúa la señal a medida que aumenta la distancia.</li><li>Cada par de conectores agrega una pérdida de inserción.</li><li>Los empalmes agregan pequeñas pérdidas.</li><li>La suciedad, curvas excesivas, daños o componentes incompatibles pueden agregar pérdidas inesperadas.</li></ul>
+        <div class="lesson-note"><strong>Objetivo de la prueba:</strong> no se busca obtener cero pérdida, porque todo enlace real atenúa algo. Se comprueba que el valor medido permanezca dentro del límite diseñado.</div>
+
+        <div class="lesson-actions"><a href="../conectores-empalmes/empalmes-limpieza.html">← Empalmes e inspección</a><a href="presupuesto.html">Siguiente: presupuesto de pérdida →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/fiber-guide.js?v=20260930-fiber"></script>
+  </body>
+</html>

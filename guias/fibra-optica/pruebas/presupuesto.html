@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Ejemplo sencillo de presupuesto de pérdida para un enlace óptico." /><title>Presupuesto de pérdida — Fibra óptica</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/fiber.css?v=20260930-fiber" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de fibra óptica</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Fibra óptica · 04</small><strong>Potencia y pruebas</strong></a><nav class="sidebar-categories" aria-label="Categorías del episodio"></nav><nav class="lesson-nav" aria-label="Módulos de la categoría"></nav><a class="sidebar-back" href="../index.html">← Ver episodio</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span> Módulo 02</p>
+        <h1>Presupuesto de <em>pérdida.</em></h1>
+        <p class="lesson-lead">El presupuesto estima cuánto puede atenuarse la señal antes de instalar. Se suman las pérdidas previstas y se reserva un margen para cambios y envejecimiento.</p>
+
+        <h2>Qué se suma</h2>
+        <div class="math-formula"><span>Pérdida prevista</span> = fibra + conectores + empalmes + margen</div>
+        <p>Los siguientes valores solo sirven para aprender el cálculo. En un proyecto real utiliza la ficha del cable, los componentes, el estándar aplicable y las especificaciones del fabricante.</p>
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Elemento del ejemplo</th><th>Cálculo</th><th>Pérdida</th></tr></thead><tbody><tr><td>2 km de fibra</td><td>2 × 0,35 dB/km</td><td>0,70 dB</td></tr><tr><td>2 pares de conectores</td><td>2 × 0,50 dB</td><td>1,00 dB</td></tr><tr><td>2 empalmes</td><td>2 × 0,10 dB</td><td>0,20 dB</td></tr><tr><td>Margen de diseño</td><td>Valor reservado</td><td>1,50 dB</td></tr><tr><td><strong>Total previsto</strong></td><td>0,70 + 1,00 + 0,20 + 1,50</td><td><strong>3,40 dB</strong></td></tr></tbody></table></div>
+
+        <h2>¿Cabe dentro del equipo?</h2>
+        <p>También existe un presupuesto de potencia del sistema. Se obtiene comparando la potencia mínima del transmisor con la sensibilidad del receptor.</p>
+        <div class="math-formula"><span>Presupuesto disponible</span> = potencia TX mínima − sensibilidad RX</div>
+        <p>Si el equipo dispone de 8 dB y el enlace se diseñó para perder 3,4 dB, existe holgura. Aun así, comprueba otros límites del transceptor, incluida la potencia máxima que acepta el receptor: demasiada potencia también puede ser un problema.</p>
+        <div class="lesson-note"><strong>Decisión:</strong> el diseño es viable cuando la pérdida prevista, incluido su margen, cabe dentro del presupuesto permitido por los equipos y el estándar del enlace.</div>
+
+        <h2>Diseñar primero, medir después</h2>
+        <p>El cálculo predice lo esperable. La prueba confirma lo que realmente quedó instalado. Si el resultado supera el límite, divide el enlace en secciones y revisa primero conectores, limpieza, curvas y empalmes.</p>
+
+        <div class="lesson-actions"><a href="index.html">← Pérdida, dB y dBm</a><a href="herramientas.html">Siguiente: herramientas →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/fiber-guide.js?v=20260930-fiber"></script>
+  </body>
+</html>

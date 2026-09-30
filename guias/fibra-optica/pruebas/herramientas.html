@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Herramientas básicas para inspeccionar y comprobar enlaces de fibra óptica." /><title>Herramientas de comprobación — Fibra óptica</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" /><link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" /><link rel="stylesheet" href="../../../assets/css/learning.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/fiber.css?v=20260930-fiber" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de fibra óptica</button>
+      <aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Fibra óptica · 04</small><strong>Potencia y pruebas</strong></a><nav class="sidebar-categories" aria-label="Categorías del episodio"></nav><nav class="lesson-nav" aria-label="Módulos de la categoría"></nav><a class="sidebar-back" href="../index.html">← Ver episodio</a></aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span> Módulo 03</p>
+        <h1>Herramientas de <em>comprobación.</em></h1>
+        <p class="lesson-lead">No existe una herramienta que responda todas las preguntas. Primero define qué necesitas averiguar y luego elige la prueba.</p>
+
+        <div class="math-table-wrap"><table class="math-table"><thead><tr><th>Necesidad</th><th>Herramienta</th><th>Qué aporta</th></tr></thead><tbody><tr><td>Revisar el extremo</td><td>Microscopio de inspección</td><td>Muestra contaminación o daño; se usa después de comprobar que no hay potencia.</td></tr><tr><td>Continuidad y fallas cercanas</td><td>Localizador visual de fallas (VFL)</td><td>Inyecta luz visible para seguir fibras o detectar algunas roturas y curvas.</td></tr><tr><td>Potencia en un punto</td><td>Medidor de potencia</td><td>Muestra el nivel recibido, normalmente en dBm.</td></tr><tr><td>Pérdida de extremo a extremo</td><td>Fuente y medidor / OLTS</td><td>Compara una referencia con el valor recibido y entrega pérdida en dB.</td></tr><tr><td>Distancia y ubicación de eventos</td><td>OTDR</td><td>Representa reflexiones y pérdidas a lo largo del enlace.</td></tr></tbody></table></div>
+
+        <h2>Lo que cada equipo no hace</h2>
+        <ul>
+          <li><strong>VFL:</strong> es útil para continuidad y ubicación visual, pero no certifica la pérdida del enlace.</li>
+          <li><strong>Medidor solo:</strong> entrega potencia; para medir pérdida necesita una fuente estable y una referencia correcta.</li>
+          <li><strong>OTDR:</strong> ayuda a localizar eventos, pero no reemplaza automáticamente la prueba de pérdida de extremo a extremo.</li>
+          <li><strong>Microscopio:</strong> muestra la superficie; no indica por sí mismo la pérdida total del enlace.</li>
+        </ul>
+
+        <h2>Un orden de diagnóstico sencillo</h2>
+        <div class="fiber-steps"><div><b>01</b><span><strong>Hazlo seguro</strong><p>Identifica el enlace, desconecta cuando corresponda y verifica ausencia de potencia antes de inspeccionar.</p></span></div><div><b>02</b><span><strong>Inspecciona y limpia</strong><p>Revisa ambas caras antes de conectarlas.</p></span></div><div><b>03</b><span><strong>Comprueba lo básico</strong><p>Confirma continuidad, identificación y potencia recibida según la falla.</p></span></div><div><b>04</b><span><strong>Mide y localiza</strong><p>Compara la pérdida con el límite y usa OTDR si necesitas ubicar eventos.</p></span></div><div><b>05</b><span><strong>Documenta</strong><p>Guarda método, referencia, longitud de onda, límites y resultados.</p></span></div></div>
+        <div class="fiber-warning"><strong>Cuidado con el VFL:</strong> aunque su luz sea visible, sigue siendo una fuente óptica. No mires directamente el puerto ni el extremo de la fibra.</div>
+        <div class="fiber-source"><small>Referencia para profundizar</small><strong>FOA explica los métodos de prueba, sus instrumentos y la interpretación de resultados.</strong><a href="https://www.thefoa.org/ESP/Prueba.htm" target="_blank" rel="noopener noreferrer">Leer sobre pruebas en FOA ↗</a></div>
+        <div class="lesson-note"><strong>Cierre del episodio:</strong> ya puedes seguir el enlace de extremo a extremo, reconocer sus componentes y elegir una comprobación inicial. El siguiente episodio podrá llevar estas ideas a planificación e instalación en terreno.</div>
+
+        <div class="lesson-actions"><a href="presupuesto.html">← Presupuesto de pérdida</a><a href="../index.html">Volver al episodio →</a></div>
+        <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/fiber-guide.js?v=20260930-fiber"></script>
+  </body>
+</html>
