@@ -1,0 +1,86 @@
+/* The book keeps its own styles; shared branding comes from the main site. */
+.foa-reader { --foa-line: rgba(148, 181, 204, .2); }
+.foa-reader h1 { font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.13; }
+.foa-breadcrumb { display: inline-block; margin-bottom: 24px; color: var(--muted); font: .7rem "DM Mono", monospace; text-decoration: none; }
+.foa-breadcrumb:hover { color: var(--cyan); }
+.foa-meta { display: flex; flex-wrap: wrap; gap: 9px 20px; margin: 22px 0; color: var(--muted); font: .67rem "DM Mono", monospace; }
+.foa-meta span + span { border-left: 1px solid var(--foa-line); padding-left: 20px; }
+.foa-toc { margin: 25px 0; border: 1px solid var(--foa-line); background: #0f1924; }
+.foa-toc summary { padding: 16px 20px; cursor: pointer; color: var(--cyan); font-size: .87rem; font-weight: 700; }
+.foa-toc nav { padding: 0 20px 18px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 6px 20px; }
+.foa-toc a { padding: 7px 0; color: #b8c9d9; font-size: .78rem; line-height: 1.6; text-decoration: none; border-bottom: 1px solid var(--foa-line); }
+.foa-toc a:hover { color: var(--cyan); }
+.foa-objectives { padding: 22px 25px; margin: 26px 0 38px; background: #2eeaff06; border-left: 2px solid var(--cyan); }
+.lesson-content .foa-objectives h2 { margin: 0 0 14px; font-size: 1rem; }
+.lesson-content .foa-objectives ul { margin: 0; padding-left: 20px; }
+.foa-reader .foa-prose { overflow-wrap: anywhere; }
+.foa-reader .foa-prose h2 { margin: 50px 0 21px; padding-top: 24px; border-top: 1px solid var(--foa-line); font-size: clamp(1.3rem,2.6vw,1.9rem); line-height: 1.35; scroll-margin-top: 25px; }
+.foa-reader .foa-prose h3 { margin: 30px 0 15px; color: #ecf3f9; font-size: 1.08rem; line-height: 1.5; scroll-margin-top: 25px; }
+.foa-reader .foa-prose p, .foa-reader .foa-prose li { color: #bfcbd7; font-size: .96rem; line-height: 1.85; }
+.foa-reader .foa-prose p { max-width: 760px; margin: 0 0 19px; }
+.foa-reader .foa-prose ul, .foa-reader .foa-prose ol { max-width: 760px; padding-left: 25px; margin: 18px 0 24px; }
+.foa-reader .foa-prose li { padding-left: 4px; margin-bottom: 9px; }
+.foa-reader .foa-prose strong { color: #ecf3f9; }
+.foa-reader .foa-prose sup, .foa-reader .foa-prose sub { font-size: .7em; }
+.foa-reader .foa-question { margin-top: 30px !important; padding: 16px 19px; border-left: 2px solid var(--orange); background: #ff9d2e06; color: #e8eef4 !important; font-weight: 600; }
+.foa-reader .foa-answers { padding-left: 46px !important; }
+.foa-answers li::marker { color: var(--orange); font: .75rem "DM Mono", monospace; }
+.foa-figure { width: 100%; margin: 28px 0 32px; border: 1px solid var(--foa-line); background: #0c141e; }
+.foa-figure-link { display: flex; justify-content: center; align-items: center; padding: clamp(10px,2vw,24px); background: #f3f4f5; cursor: zoom-in; }
+.foa-figure img { display: block; width: auto; max-width: 100%; height: auto; max-height: 520px; object-fit: contain; }
+.foa-figure-wide img { width: 100%; max-height: none; }
+.foa-figure figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 9px 20px; padding: 13px 17px; color: #a9b9c8; font: .65rem/1.7 "DM Mono", monospace; }
+.foa-figure figcaption > span { flex: 1 1 240px; }
+.foa-figure figcaption a { color: var(--cyan); text-decoration: none; white-space: nowrap; }
+.foa-table-wrap { max-width: 100%; overflow-x: auto; margin: 27px 0; border: 1px solid var(--foa-line); scrollbar-color: #397084 #0e1721; }
+.foa-table-wrap table { width: 100%; min-width: 560px; border-collapse: collapse; background: #0d1722; font-size: .8rem; line-height: 1.65; }
+.foa-table-wrap caption { padding: 13px 17px; color: var(--orange); text-align: left; background: #0b131c; font: .67rem/1.6 "DM Mono", monospace; }
+.foa-table-wrap th, .foa-table-wrap td { padding: 12px 15px; border: 1px solid var(--foa-line); vertical-align: top; overflow-wrap: normal; }
+.foa-table-wrap th { color: #e5eef4; background: #142331; font-weight: 700; }
+.foa-table-wrap td { color: #bfcbd7; }
+.foa-table-wrap tr:nth-child(even) td { background: #ffffff03; }
+.foa-book-stats { display: flex; flex-wrap: wrap; gap: 25px; margin: 26px 0; padding: 18px 0; border-block: 1px solid var(--foa-line); color: var(--muted); font: .72rem "DM Mono", monospace; }
+.foa-book-stats strong { color: var(--orange); font-size: 1.2rem; margin-right: 6px; }
+.foa-book-intro { margin-bottom: 38px; }
+.foa-start { display: inline-flex; gap: 24px; align-items: center; padding: 13px 18px; border: 1px solid #2eeaff55; color: var(--cyan); text-decoration: none; font-size: .84rem; background: #2eeaff09; }
+.foa-start:hover { background: #2eeaff14; }
+.foa-search-label { display: block; margin: 0 0 10px; color: #d3dce4; font-size: .8rem; }
+.foa-search { display: block; box-sizing: border-box; width: 100%; min-width: 0; border: 1px solid #3b5263; border-radius: 0; background: #101b28; color: #edf4f8; padding: 15px; font: .86rem "Manrope", sans-serif; }
+.foa-reader .foa-search-count { margin: 10px 0 22px; color: var(--muted); font: .65rem "DM Mono", monospace; }
+.foa-chapter-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
+.foa-chapter-card { position: relative; padding: 23px; color: inherit; background: linear-gradient(145deg,#12213066,#0a111a); border: 1px solid var(--foa-line); text-decoration: none; transition: border-color .2s, background .2s; }
+.foa-chapter-card:hover { border-color: #2eeaff88; background: #10202a; }
+.foa-chapter-number { color: var(--orange); font: .72rem "DM Mono", monospace; }
+.foa-reader .foa-chapter-card h2 { margin: 16px 0 12px; font-size: 1.05rem; line-height: 1.5; }
+.foa-reader .foa-chapter-card p { margin: 0 0 20px; font-size: .82rem; line-height: 1.75; }
+.foa-chapter-card small { color: #849dac; font: .61rem "DM Mono", monospace; }
+.foa-card-arrow { position: absolute; top: 20px; right: 22px; color: var(--cyan); }
+.foa-reader [hidden] { display: none !important; }
+.foa-footer { display: flex; flex-wrap: wrap; gap: 15px 25px; margin: 50px 0 20px; padding-top: 23px; border-top: 1px solid var(--foa-line); color: var(--muted); font: .67rem "DM Mono", monospace; }
+.foa-footer a { color: var(--muted); text-decoration: none; }
+.foa-footer a:hover { color: var(--cyan); }
+.foa-footer > span { margin-left: auto; }
+.guide-sidebar:has(.sidebar-standalone.active[data-fiber-category="foa"]) .lesson-nav::before { content: "Capítulos"; }
+.foa-reader :focus-visible, .foa-lightbox :focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+.foa-lightbox { width: min(1200px,94vw); max-width: 94vw; max-height: 92dvh; padding: 0; color: #e5eef5; background: #0a131e; border: 1px solid #3a687b; }
+.foa-lightbox::backdrop { background: #02070cdf; backdrop-filter: blur(9px); }
+.foa-lightbox-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 15px; border-bottom: 1px solid #3a5264; }
+.foa-lightbox-bar strong { font: 600 .8rem/1.5 "Manrope", sans-serif; }
+.foa-lightbox-tools { display: flex; gap: 8px; flex-shrink: 0; }
+.foa-lightbox button { min-width: 44px; min-height: 44px; padding: 8px 12px; color: #2eeaff; background: #112636; border: 1px solid #397086; cursor: pointer; font: .8rem "Manrope", sans-serif; }
+.foa-lightbox-view { display: flex; align-items: center; justify-content: center; overflow: auto; max-height: calc(92dvh - 100px); background: #f3f4f5; padding: 20px; }
+.foa-lightbox-view img { display: block; width: auto; height: auto; max-width: 100%; max-height: 72dvh; object-fit: contain; }
+.foa-lightbox-view.is-zoomed { display: block; }
+.foa-lightbox-view.is-zoomed img { max-width: none; max-height: none; width: var(--foa-zoom-width); }
+@media(max-width:760px) {
+  .foa-toc nav, .foa-chapter-grid { grid-template-columns: minmax(0,1fr); }
+  .foa-reader .foa-prose p, .foa-reader .foa-prose li { font-size: .92rem; line-height: 1.8; }
+  .foa-objectives { padding: 18px; }
+  .foa-meta { gap: 9px 12px; }
+  .foa-meta span + span { padding-left: 12px; }
+  .foa-lightbox-bar { flex-wrap: wrap; }
+  .foa-lightbox-view { padding: 10px; max-height: 65dvh; }
+  .foa-lightbox-view img { max-height: 60dvh; }
+  .foa-figure figcaption { padding: 12px; }
+}
+@media(prefers-reduced-motion:reduce) { .foa-chapter-card { transition: none; } }

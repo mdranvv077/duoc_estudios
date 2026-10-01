@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Inspección, potencia, pérdida de inserción, OTDR y caracterización de enlaces." />
+    <title>Pruebas de fibra óptica — FOA · Fibra óptica</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20260930-foa" />
+    <link rel="stylesheet" href="../../../assets/css/math.css?v=20260930-fiber" />
+    <link rel="stylesheet" href="../../../assets/css/fiber.css?v=20260930-vfl-connect-flow" />
+    <link rel="stylesheet" href="assets/foa.css?v=20260930-book" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Capítulos del libro FOA</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="index.html"><small>Fibra óptica · Biblioteca</small><strong>FOA · Libro de consulta</strong></a>
+        <nav class="sidebar-categories" aria-label="Categorías de fibra óptica"></nav>
+        <nav class="lesson-nav" aria-label="Capítulos del libro FOA"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver modalidad</a>
+      </aside>
+      <article class="lesson-content foa-reader" data-foa-reader>
+        <a class="foa-breadcrumb" data-foa-page href="index.html">← Índice del libro</a>
+        <p class="eyebrow"><span></span> Libro FOA · Capítulo 10</p>
+        <h1>Pruebas de fibra óptica</h1>
+        <p class="lesson-lead">Inspección, potencia, pérdida de inserción, OTDR y caracterización de enlaces.</p>
+        <div class="foa-meta"><span>10 apartados</span><span>Lectura de consulta</span><span>17 figuras</span></div>
+        <details class="foa-toc"><summary>En este capítulo</summary><nav aria-label="Apartados del capítulo"><a href="#pruebas-de-fibra-optica" data-foa-anchor>Pruebas de Fibra Óptica</a>
+<a href="#la-importancia-de-limpiar-los-conectores" data-foa-anchor>La Importancia de Limpiar los Conectores</a>
+<a href="#inspeccion-visual" data-foa-anchor>Inspección Visual</a>
+<a href="#potencia-optica" data-foa-anchor>Potencia Óptica</a>
+<a href="#perdida-optica-o-perdida-por-insercion" data-foa-anchor>Pérdida Óptica o Pérdida Por Inserción</a>
+<a href="#pruebas-de-otdr" data-foa-anchor>Pruebas de OTDR</a>
+<a href="#pruebas-de-redes-de-fibra-optica-de-larga-distancia-y-alta-velocidad" data-foa-anchor>Pruebas de Redes de Fibra Óptica de Larga Distancia y Alta Velocidad</a>
+<a href="#otras-pruebas" data-foa-anchor>Otras Pruebas</a>
+<a href="#preguntas-de-repaso" data-foa-anchor>Preguntas de Repaso</a>
+<a href="#estudios-y-proyectos-adicionales" data-foa-anchor>Estudios y Proyectos Adicionales</a></nav></details>
+        <section class="foa-objectives" aria-label="Objetivos"><h2>Qué aprenderás</h2><ul><li>Qué parámetros deben comprobarse</li><li>Qué instrumentos se utilizan para las pruebas de fibra óptica</li><li>Cómo realizar pruebas básicas de fibra óptica</li><li>Incertidumbre de medición en las pruebas de fibra óptica</li><li>Cómo solucionar problemas</li></ul></section>
+        <div class="foa-prose">
+<figure class="foa-figure foa-figure-wide"><a class="foa-figure-link" href="img/pruebas-01.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Herramientas y métodos de prueba de fibra óptica"><img src="img/pruebas-01.png" alt="Herramientas y métodos de prueba de fibra óptica" width="390" height="50" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.1 · Herramientas y métodos de prueba de fibra óptica</span><a href="img/pruebas-01.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<h2 id="pruebas-de-fibra-optica">Pruebas de Fibra Óptica</h2>
+
+<p>Una vez instalados, empalmados y terminados todos los cables de fibra óptica, hay que probarlos. Para cada planta de cable de fibra óptica, debe comprobar la continuidad y la polaridad, la pérdida de inserción de extremo a extremo y, a continuación, solucionar cualquier problema en cada fibra de cada cable. Si se trata de un cable de planta exterior largo con empalmes intermedios, probablemente querrá verificar también los empalmes individuales con una prueba OTDR, ya que es la única forma de asegurarse de que cada empalme está bien. Si usted es el usuario de la red, también puede interesarle comprobar la potencia del transmisor y del receptor, ya que la potencia es la medida que le indica si el sistema funciona correctamente.</p>
+
+<p>Las pruebas son el objeto de la mayoría de las normas del sector, ya que es necesario verificar las especificaciones de los componentes y sistemas de forma coherente. La mayoría de estas pruebas están relacionadas con las pruebas de fabricación para verificar el rendimiento de los componentes y no son relevantes para las pruebas de instalación. Tal vez la prueba más importante sea la pérdida de inserción de una planta de cable de fibra óptica instalada realizada con una fuente de luz y un medidor de potencia (LSPM) o un equipo de prueba de pérdida óptica (OLTS) que exigen todas las normas internacionales para garantizar que la planta de cable está dentro del presupuesto de pérdida antes de aceptar la instalación.</p>
+
+<p>La comprobación de los componentes de fibra óptica y de las instalaciones de cableado requiere la realización de varias pruebas y mediciones, de las que a continuación se enumeran las más comunes. Algunas pruebas implican la inspección y el juicio del instalador, como la inspección visual o el rastreo, mientras que otras utilizan instrumentos sofisticados que proporcionan mediciones directas. Potencia óptica, necesaria para medir la potencia de la fuente.</p>
+
+<p>La potencia del receptor y, cuando se utiliza con una fuente de prueba, la pérdida o atenuación, es el parámetro más importante y es necesario para casi todas las pruebas de fibra óptica. Las mediciones de retrodispersión realizadas por un OTDR son las siguientes mediciones más importantes, especialmente para probar instalaciones de plantas externas y solucionar problemas. Medición de parámetros geométricos de fibra y ancho de banda o dispersión son esenciales para los fabricantes de fibra, pero no son relevantes para las pruebas sobre el terreno. La resolución de problemas en cables y redes instalados es necesaria en todas las instalaciones.</p>
+
+<h2 id="la-importancia-de-limpiar-los-conectores">La Importancia de Limpiar los Conectores</h2>
+
+<p>Es muy importante inspeccionar y limpiar correctamente todos los conectores de fibra óptica antes de realizar las pruebas, incluidos los conectores de todos los cables de prueba de referencia. El núcleo de una fibra óptica es bastante pequeño; tan pequeño que el polvo suspendido en el aire es a menudo tan grande como el núcleo de la fibra monomodo e incluso grande en comparación con la fibra multimodo. Una pequeña partícula de polvo en la férula de un conector puede provocar pérdidas y reflectancia significativas cuando se acoplan dos conectores o contaminar los transceptores de fibra óptica. A veces, la suciedad puede incluso dañar las fibras. Los líquidos, como los aceites de los dedos, pueden contaminar los conectores y dificultar su limpieza.</p>
+
+<p>Históricamente, la limpieza de los conectores se ha realizado con alcohol isopropílico puro (99% de pureza) y toallitas sin pelusa con un método húmedo/seco. Se humedece una toallita en un punto con alcohol y se pasa el extremo de la férula del conector por el punto humedecido y luego se seca con la toallita seca. Sin embargo, hoy en día existen muchos productos de limpieza de fibra óptica que funcionan mejor y son más fáciles de usar. Existen métodos de limpieza en seco y en húmedo, líquidos de limpieza más eficaces que el alcohol y toallitas más eficaces.</p>
+
+<p>Todos los técnicos de pruebas deberían tener un kit de limpieza de fibra óptica y utilizarlo para limpiar todos los conectores mediante un proceso de inspección/limpieza/inspección para asegurarse de que los conectores se limpian correctamente.</p>
+
+<h2 id="inspeccion-visual">Inspección Visual</h2>
+
+<h3 id="seguimiento-visual">Seguimiento Visual</h3>
+
+<p>La comprobación de la continuidad con un trazador visual de fibra puede trazar el recorrido de una fibra de un extremo a otro a través de muchas conexiones, verificando la continuidad, las conexiones correctas y la polaridad del conector dúplex. Un trazador visual de fibra parece una linterna o un instrumento similar a un bolígrafo con una bombilla o fuente LED que se acopla a un conector de fibra óptica. Conecte la fibra que va a probar al trazador visual y mire al otro extremo de la fibra para ver la luz transmitida a través del núcleo de la fibra. Si no hay luz en el extremo más alejado, vuelva a las conexiones intermedias para encontrar la sección defectuosa del cable.</p>
+
+<p>Un buen ejemplo de cómo un rastreador visual puede ahorrar tiempo y dinero es comprobar la fibra en un carrete antes de instalarlo para asegurarse de que no se ha dañado durante el transporte. En primer lugar, busque signos visibles de daños en la fibra de la bobina (como bobinas agrietadas o rotas, dobleces en el cable, etc.). Durante las pruebas, los trazadores visuales también ayudan a identificar la siguiente fibra que se va a probar para detectar pérdidas con el kit de prueba. Cuando conecte cables en paneles de conexión, utilice el trazador visual para asegurarse de que cada conexión corresponde a las dos fibras correctas! Para asegurarse de que la fibra correcta está conectada entre el transmisor y el receptor, utilice el trazador visual en lugar del transmisor y su ojo en lugar del receptor para verificar la conexión. Siga todas las normas de seguridad ocular cuando trabaje con trazadores visuales.</p>
+
+<h3 id="localizacion-visual-de-averias">Localización Visual de Averías</h3>
+
+<p>Una versión de mayor potencia del rastreador de fibra, denominada localizador visual de fallos (VFL), utiliza un láser visible que también puede encontrar fallos. La luz láser roja es lo suficientemente potente como para comprobar la continuidad o rastrear fibras a lo largo de varios kilómetros, identificar empalmes en bandejas de empalme y mostrar roturas en fibras o conectores de alta pérdida. Podrá ver la pérdida de luz en una rotura de fibra mediante la luz roja brillante de la VFL, incluso a través de la cubierta de muchos cables símplex amarillos o naranjas (no con cubiertas negras o grises, por supuesto.) Su uso más importante es encontrar fallos en cables cortos o cerca del conector donde los OTDR no pueden encontrarlos.</p>
+
+<p>También puede utilizar el VFL para verificar visualmente y optimizar empalmes mecánicos o conectores de fibra óptica de tipo empalme prepulido. Al minimizar visualmente la pérdida de luz, puede obtener el empalme de menor pérdida. Ningún otro método le asegurará un alto rendimiento con esos conectores.</p>
+
+<p>Las VFL necesitan una advertencia sobre seguridad ocular. Las VFL utilizan luz visible. El nivel de potencia es alto y no se debe mirar directamente. Le resultará bastante incómodo mirar directamente a la salida de una fibra iluminada por un VFL, por lo que al trazar fibras, mire hacia el lado de la fibra para ver si se ve la luz del VFL.</p>
+
+<h3 id="inspeccion-visual-de-conectores-mediante-microscopio">Inspección Visual de Conectores Mediante Microscopio</h3>
+
+<p>Los microscopios de inspección de fibra óptica se utilizan para inspeccionar conectores con el fin de confirmar el pulido correcto y encontrar fallos como arañazos, defectos de pulido y suciedad.</p>
+
+<p>Pueden utilizarse tanto para comprobar la calidad del procedimiento de terminación como para diagnosticar problemas. Un conector bien hecho tendrá un acabado liso, pulido y sin arañazos, y la fibra no mostrará signos de grietas, astillas o zonas en las que la fibra sobresalga del extremo de la férula o se regrese hacia adentro de esta.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-02.jpg" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Inspección de la cara de un conector"><img src="img/pruebas-02.jpg" alt="Inspección de la cara de un conector" width="216" height="103" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.2 · Inspección de la cara de un conector</span><a href="img/pruebas-02.jpg" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>El aumento para ver los conectores puede ser de 30 a 400 de potencia, pero es mejor utilizar un aumento medio. Si el aumento es demasiado bajo, es posible que no se vean los detalles críticos. Inspeccionar con un aumento muy alto puede hacer que el observador sea demasiado crítico y rechace buenos conectores. Los conectores multimodo deben utilizar aumentos del orden de 100-200X y la fibra monomodo puede utilizar aumentos superiores, de hasta 400X. Una solución mejor es utilizar un aumento medio, pero inspeccionar el conector de tres maneras: viendo directamente en el extremo de la superficie pulida con iluminación coaxial u oblicua, viendo directamente con luz transmitida a través del núcleo y viendo en ángulo con iluminación desde el ángulo opuesto o con iluminación bastante oblicua.</p>
+
+<p>La visualización directa permite ver la fibra y el orificio de la férula, determinando si el orificio de la férula tiene el tamaño adecuado, la fibra está centrada en el orificio y si se ha aplicado una cantidad adecuada de adhesivo. Sin embargo, es posible que de este modo sólo sean visibles los arañazos más grandes. Añadir la luz transmitida a través del núcleo hará visibles las grietas en el extremo de la fibra, causadas por la presión o el calor durante el proceso de pulido.</p>
+
+<p>Si se observa el extremo del conector en ángulo y se ilumina desde el lado opuesto aproximadamente con el mismo ángulo, o si se utiliza una iluminación de ángulo bajo y se observa directamente, se obtendrá la mejor inspección de la calidad del pulido y de los posibles arañazos. El efecto de sombra de la visión angular o la iluminación realza el contraste de los arañazos contra la superficie pulida y lisa como un espejo del cristal.</p>
+
+<p>Uno tiene que tener cuidado al inspeccionar conectores. A veces se tiende a ser demasiado crítico, sobre todo con grandes aumentos. Por lo general, sólo se consideran un problema los defectos en el núcleo de la fibra. El astillado del vidrio alrededor del exterior del revestimiento no es inusual y no afectará a la capacidad del conector para acoplar la luz en el núcleo de las fibras multimodo. Del mismo modo, los arañazos sólo en el revestimiento no deberían causar ningún problema de pérdida.</p>
+
+<p>Los mejores microscopios permiten inspeccionar el conector desde varios ángulos, ya sea inclinando el conector o disponiendo de iluminación en ángulo para obtener la mejor imagen de lo que ocurre. Compruebe que el microscopio dispone de un adaptador fácil de usar para acoplar los conectores de interés al microscopio.</p>
+
+<p>En la actualidad existen microscopios de lectura de vídeo que permiten ver más fácilmente la cara final del conector y algunos incluso disponen de software que analiza el acabado. Aunque son mucho más caros que los microscopios ópticos normales, facilitarán la inspección y aumentarán enormemente la productividad.</p>
+
+<p>No olvide comprobar que no hay potencia de luz activa en el cable antes de mirarlo al microscopio para proteger sus ojos. El microscopio concentrará cualquier potencia en la fibra y enfocarla hacia su ojo con resultados potencialmente peligrosos. Algunos microscopios disponen de filtros que detienen la radiación infrarroja de los transmisores para minimizar este problema.</p>
+
+<h2 id="potencia-optica">Potencia Óptica</h2>
+
+<p>Prácticamente todas las mediciones en fibra óptica se refieren a la potencia óptica. La salida de un transmisor o la entrada a un receptor son mediciones de potencia óptica &quot;absolutas&quot;, es decir, se mide el valor real de la potencia. La pérdida es una medición de potencia &quot;relativa&quot;, la diferencia entre la potencia acoplada en un componente como un cable, un empalme o un conector y la potencia que se transmite a través de él. Esta diferencia en el nivel de potencia antes y después del componente es lo que llamamos pérdida óptica y define el rendimiento de un cable, conector, empalme u otro componente.</p>
+
+<p>Siempre que se realizan pruebas en redes de fibra óptica, los resultados se muestran en una lectura del instrumento. Las mediciones de potencia se expresan en &quot;dB&quot;, la unidad de medida de potencia y pérdida en las mediciones de fibra óptica. La pérdida óptica se mide en &quot;dB&quot;, mientras que la potencia óptica se mide en &quot;dBm&quot;. La pérdida es un número negativo (como -3.2 dB) al igual que muchas mediciones de potencia. Las mediciones en dB a veces pueden resultar confusas.</p>
+
+<p>En los primeros tiempos de la fibra óptica, la potencia de salida de la fuente se medía normalmente en milivatios, una escala lineal, y la pérdida se medía en dB o decibelios, una escala logarítmica. Con el paso de los años, todas las mediciones migraron a dB por comodidad, causando mucha confusión. Las mediciones de pérdidas se medían generalmente en dB, ya que el dB es un cociente de dos niveles de potencia, uno de los cuales se considera el valor de referencia. El dB es una escala logarítmica donde cada 10 dB representa una relación de 10 veces.</p>
+
+<p>La ecuación real utilizada para calcular dB es dB = 10 log (potencia medida / potencia de referencia).</p>
+
+<p>Así, 10 dB es una relación de 10 veces (o 10 veces más o una décima parte), 20 dB es una relación de 100, 30 dB es una relación de 1000, etc. Cuando las dos potencias ópticas comparadas son iguales, dB = 0, un valor cómodo y fácil de recordar. Si la potencia medida es mayor que la potencia de referencia, dB será un número positivo, pero si es menor que la potencia de referencia, será negativo. Por lo tanto, las mediciones de pérdida se expresan normalmente como un número negativo.</p>
+
+<p>Mediciones de potencia óptica, como la salida de un transmisor o la entrada a un receptor se expresan en unidades de dBm. La &quot;m&quot; en dBm se refiere a una potencia de referencia de 1 milivatio. Así, una fuente con un nivel de potencia de 0 dBm tiene una potencia de 1 milivatio. Del mismo modo, -10 dBm son 0.1 milivatios y +10 dBm son 10 milivatios.</p>
+
+<p>Para medir la pérdida en un sistema de fibra óptica, realizamos dos mediciones de potencia, una medición de referencia antes del componente que estamos probando y una medición de pérdida después de que la luz atraviese el componente. Dado que estamos midiendo la pérdida, la potencia medida será inferior a la potencia de referencia, por lo que la relación entre la potencia medida y la potencia de referencia es inferior a 1 y el logaritmo es negativo, lo que hace que dB sea un número negativo. Cuando fijamos la referencia el medidor indica &quot;0 dB&quot; porque el valor de referencia que hemos fijado y el que mide el medidor son iguales. Entonces, cuando medimos la pérdida, la potencia medida es menor, por lo que el medidor indicará &quot;- 3.0 dB&quot;, por ejemplo, si la potencia probada es la mitad del valor de referencia. Aunque los medidores miden un número negativo para la pérdida, la convención es que la pérdida se exprese como un número positivo, por lo que decimos que la pérdida es de 3.0 dB cuando el medidor marca - 3.0 dB.</p>
+
+<p>Los instrumentos que miden en dB pueden ser medidores de potencia óptica o equipos de prueba de pérdidas ópticas (OLTS por sus siglas en inglés [Optical Loss Test Set). El medidor de potencia óptica suele leer en dBm para las mediciones de potencia o en dB con respecto a un valor de referencia de pérdida establecido por el usuario. Mientras que la mayoría de los medidores de potencia tienen rangos de +3 a -50 dBm, la mayoría de las fuentes están en el rango de +10 a -10 dBm para láseres y de -10 a -20 dBm para LEDs. Sólo los láseres utilizados en CATV o sistemas telefónicos de larga distancia tienen potencias lo suficientemente altas como para ser realmente peligrosos, hasta +20 dBm; es decir, 100 milivatios o una décima parte de un vatio. Es importante recordar que dB es para medir la pérdida, dBm es para medir la potencia y cuanto más negativo es un número, mayor es la pérdida. Ajuste su referencia cero antes de medir la pérdida y compruébela de vez en cuando mientras realiza las mediciones.</p>
+
+<p>Calibración de las Mediciones de Potencia</p>
+
+<p>Para calibrar un equipo de medición de potencia de fibra óptica es necesario establecer un patrón de referencia trazable a un laboratorio nacional, como el Instituto Nacional de Normas y Tecnología de EE.UU., para efectos de comparación al calibrar cada medidor de potencia u otro instrumento. La norma del NIST para todas las mediciones de potencia es un ECPR, o radiómetro piroeléctrico calibrado eléctricamente, que mide la potencia óptica comparando la potencia calorífica de la luz con la potencia calorífica conocida de una resistencia. La calibración se realiza a 850, 1300 y 1550 nm. A veces, los fabricantes utilizan la longitud de onda de los láseres a 1310 nm como longitud de onda calibrada en un medidor de potencia, pero el estándar para la calibración de medidores de potencia es 1300 nm. Para transferir cómodamente su estándar de laboratorio a los laboratorios de calibración de los fabricantes de medidores de potencia de fibra óptica, el NIST utiliza actualmente un medidor de potencia óptico de laboratorio que se envía a los laboratorios como estándar de transferencia.</p>
+
+<p>Los contadores calibrados de esta manera tienen una incertidumbre de calibración de aproximadamente +/- 5%, en comparación con los patrones primarios del NIST. Las limitaciones en la incertidumbre son las inconsistencias inherentes en el acoplamiento óptico, alrededor del 1% en cada transferencia, y ligeras variaciones en la calibración de la longitud de onda. El NIST trabaja continuamente con los fabricantes de instrumentos y los laboratorios privados de calibración para intentar reducir la incertidumbre de estas calibraciones.</p>
+
+<p>La recalibración de los instrumentos debe hacerse anualmente, aunque la experiencia ha demostrado que la precisión de los medidores rara vez cambia significativamente durante ese periodo, siempre que no falle la electrónica del medidor. La calibración de los medidores de potencia de fibra óptica requiere una inversión considerable en bienes de equipo, por lo que los medidores deben devolverse al fabricante original o a laboratorios de calibración privados para su calibración.</p>
+
+<p>Comprendiendo la incertidumbre de medición del medidor de potencia de Fibra Óptica</p>
+
+<p>Se ha prestado mucha atención al desarrollo de normas de transferencia para las mediciones de potencia en fibra óptica. El NIST estadounidense de Boulder (Colorado) y las organizaciones de normalización de la mayoría de los demás países han trabajado para proporcionar buenas normas a partir de las cuales trabajar. Ahora podemos garantizar la trazabilidad de nuestras calibraciones, pero aun así los errores que conllevan las mediciones no son ignorables. Incluso cuando los medidores de potencia de fibra óptica se calibran dentro de las especificaciones, la incertidumbre de una medición puede ser de hasta +/- 5% (aproximadamente 0.2 dB) en comparación con las normas. Comprender los errores de los medidores de potencia y sus causas probables asegurará un punto de vista realista sobre las mediciones de potencia de fibra óptica.</p>
+
+<p>La primera fuente de error es el acoplamiento óptico. La luz de la fibra se expande en un cono. Es importante que la geometría del detector a la fibra sea tal que toda la luz de la fibra llegue al detector, de lo contrario la medición será inferior al valor real. Pero cada vez que la luz atraviesa una interfaz de vidrio y aire, como la ventana del detector, una pequeña cantidad de luz se refleja y se pierde.</p>
+
+<p>Por último, la limpieza de las superficies ópticas implicadas puede provocar absorción y dispersión. La suma total de estos errores potenciales dependerá del tipo de conector, la longitud de onda, el tamaño de la fibra y la apertura numérica.</p>
+
+<p>Además de los errores de acoplamiento, existen errores asociados a la calibración de la longitud de onda. Los detectores semiconductores utilizados en los instrumentos de fibra óptica (y también en los sistemas) tienen una sensibilidad que depende de la longitud de onda. Dado que la longitud de onda real de la fuente rara vez se conoce, existe un error asociado a la sensibilidad espectral del detector. Por convención industrial, las tres longitudes de onda cardinales (850, 1300 y 1550 nm) se utilizan para todas las mediciones de potencia, no la longitud de onda exacta de la fuente.</p>
+
+<p>Existe otra fuente de error en las mediciones de niveles altos y bajos. A niveles altos, la potencia óptica puede sobrecargar y saturar el detector, provocando un error en la medición. A niveles bajos, el ruido inherente del detector se añade a la señal y se convierte en un error. Si la señal está 10 dB por encima del ruido de fondo (10 veces el ruido), el error de desplazamiento es del 10% o 0.4 dB.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-03.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Sensibilidad de los detectores de potencia"><img src="img/pruebas-03.png" alt="Sensibilidad de los detectores de potencia" width="204" height="149" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.3 · Sensibilidad de los detectores de potencia</span><a href="img/pruebas-03.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<h3 id="resolucion-del-instrumento-frente-a-incertidumbre-de-medicion">Resolución del Instrumento Frente a Incertidumbre de Medición</h3>
+
+<p>Teniendo en cuenta la incertidumbre de la mayoría de las mediciones de fibra óptica, los fabricantes de instrumentos han proporcionado medidores de potencia y pérdida con una resolución de medición que suele ser mucho mayor de lo necesario. La incertidumbre de las mediciones de potencia óptica es de unos 0.2 dB (5%), las mediciones de pérdidas suelen tener incertidumbres de 0.2-0.5 dB o más, y las mediciones de pérdidas de retorno óptico tienen una incertidumbre de 1 dB.</p>
+
+<p>Los instrumentos que disponen de lecturas con una resolución de 0.01 dB sólo suelen ser apropiados para mediciones de laboratorio de pérdidas de componentes muy bajas o cambios provocados por cambios ambientales. Dentro del laboratorio, una resolución de 0.01 dB puede ser extremadamente útil, ya que a menudo se miden pérdidas de conectores o empalmes inferiores a 0.10 dB o cambios en las pérdidas bajo tensión ambiental inferiores a 0.1 dB. La estabilidad de las fuentes y el estrés físico sobre los cables limita la incertidumbre de medida a unos 0.02 a 0.05 dB por día, pero una resolución de 0.01 dB puede ser útil para determinar pequeños cambios en el rendimiento de los componentes.</p>
+
+<p>Las mediciones sobre el terreno tienen una incertidumbre mayor porque se miden más componentes a la vez y las pérdidas son mayores. En la práctica, las mediciones son mejores cuando la resolución del instrumento se limita a 0.1 dB. Las lecturas serán más estables al ser leídas y más indicativas de la incertidumbre de la medición.</p>
+
+<h3 id="medidores-de-potencia-de-fibra-optica">Medidores de Potencia de Fibra Óptica</h3>
+
+<p>La medición de la potencia requiere un medidor de potencia con un adaptador que coincida con el conector de fibra óptica en el cable que se está probando, y si usted está probando un transmisor, un cable de fibra óptica en buen estado (del tamaño de fibra adecuado, ya que la potencia acoplada es función del tamaño del núcleo de la fibra) y un poco de ayuda de la electrónica de red para encender el transmisor. Recuerde que cuando mida la potencia, el medidor debe estar ajustado a la longitud de onda y el rango adecuados (normalmente dBm, a veces microwatios, pero nunca &quot;dB&quot;, que es un rango de potencia relativa que sólo se utiliza para comprobar las pérdidas). Consulte las instrucciones que vienen con el equipo de prueba para la configuración y las instrucciones de medición.</p>
+
+<p>Para medir la potencia, conecte el medidor al cable conectado a la fuente que tiene la salida que desea medir. Puede ser en el receptor para medir la potencia del receptor, o utilizando un patchcord o un cable de prueba de referencia (probado y que se sepa que es bueno) que esté conectado al transmisor para medir la potencia de salida. Encienda el transmisor/fuente y espere unos minutos a que se estabilice. Ajuste el medidor de potencia a la longitud de onda correspondiente y anote la potencia que mide el medidor.</p>
+
+<p>Compárala con la potencia especificada para el sistema y asegúrate de que es suficiente pero no excesiva.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-04.jpg" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Controles y adaptador de un medidor de potencia"><img src="img/pruebas-04.jpg" alt="Controles y adaptador de un medidor de potencia" width="216" height="251" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.4 · Controles y adaptador de un medidor de potencia</span><a href="img/pruebas-04.jpg" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<h2 id="perdida-optica-o-perdida-por-insercion">Pérdida Óptica o Pérdida Por Inserción</h2>
+
+<p>La pérdida óptica es el principal parámetro de rendimiento de la mayoría de los componentes de fibra óptica. Para la fibra, es la pérdida por unidad de distancia o coeficiente de atenuación. En el caso de los conectores, es la pérdida de conexión cuando se acoplan a otro conector. En el caso de los cables, es la pérdida total de los componentes del cable, incluidos los conectores, la fibra, los empalmes y cualquier otro componente del tramo de cable que se está probando. Utilizaremos los cables para ilustrar la pérdida por inserción y, a continuación, analizaremos otros componentes.</p>
+
+<p>La pérdida de un cable es la diferencia entre la potencia acoplada al cable en el extremo transmisor y la que sale en el extremo receptor. Las pruebas de pérdidas requieren medir la cantidad total de potencia óptica perdida en un cable (incluida la atenuación de la fibra, la pérdida del conector y la pérdida del empalme) con una fuente de luz de fibra óptica y un medidor de potencia (LSPM por sus siglas en inglés [Light Source and Power Meter) o un equipo de prueba de pérdidas ópticas (OLTS). Generalmente, la fibra multimodo se prueba a 850 nm y, opcionalmente, a 1300 nm con fuentes LED. La fibra monomodo se prueba a 1310 nm y opcionalmente a 1550 nm con fuentes láser.</p>
+
+<p>La mayoría de las pruebas de pérdidas se realizan en conjuntos de cables, ya sean patchcords o plantas de cables instaladas. Pero los fabricantes de fibras prueban la pérdida de cada fibra para calcular su coeficiente de atenuación. Los fabricantes de conectores prueban muchos conectores para obtener un valor medio de la pérdida que tendrá el conector cuando esté terminado en fibras. Otros fabricantes de componentes también prueban la pérdida de sus componentes para verificar su rendimiento.</p>
+
+<p>La medición de la pérdida de inserción se realiza acoplando el cable que se está probando a cables de referencia buenos y conocidos con una potencia de lanzamiento calibrada que se convierte en la referencia de pérdida &quot;0 dB&quot;. ¿Por qué se necesitan cables de referencia para medir las pérdidas? Las pruebas con cables de referencia en cada extremo simulan una planta de cableado con patchcords que se conectan a equipos de transmisión. Se necesita un cable que mida la potencia de salida de la fuente para calibrar la referencia de pérdida &quot;0 dB&quot;.</p>
+
+<p>Además, para medir la pérdida de los conectores del extremo de un cable, hay que acoplarlo a un conector similar que se sepa que funciona bien. Este es un punto importante que a menudo no se comprende del todo. Cuando decimos pérdida de conector, en realidad queremos decir pérdida de &quot;conexión&quot;, es decir, la pérdida de un par de conectores acoplados. Por lo tanto, para probar los conectores es necesario acoplarlos a conectores de referencia, que deben ser de alta calidad para no afectar negativamente a la pérdida medida al acoplarlos a un conector desconocido.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-05.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Medición con fuente de luz y medidor"><img src="img/pruebas-05.png" alt="Medición con fuente de luz y medidor" width="288" height="238" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.5 · Medición con fuente de luz y medidor</span><a href="img/pruebas-05.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Además de un medidor de potencia, necesita una fuente de prueba (fuente de luz) para medir la pérdida. La fuente de prueba debe ser compatible con el tipo de fibra que se está probando (generalmente un LED para MM o un láser para SM) y la longitud de onda (850, 1300, 1550 nm) que se utilizará en el cable de fibra óptica que está probando. Si va a realizar pruebas según algunas normas, es posible que tenga que añadir algún acondicionamiento de modo, como una envoltura de mandril, para cumplir las condiciones de lanzamiento estándar.</p>
+
+<h3 id="fuentes-de-prueba-de-fibra-optica">Fuentes de Prueba de Fibra Óptica</h3>
+
+<p>Debe elegirse una fuente de prueba de fibra óptica que sea compatible con el tipo de fibra utilizada (monomodo o multimodo con el diámetro de núcleo adecuado) y la longitud de onda deseada para realizar la prueba. La mayoría de las fuentes son LED o láseres de los tipos utilizados habitualmente como transmisores en los sistemas de fibra óptica reales, lo que los hace representativos de las aplicaciones reales y mejora la utilidad de las pruebas. Algunas pruebas de laboratorio, como la medición de la atenuación de la fibra en un rango de longitudes de onda requiere una fuente de longitud de onda variable, que suele ser una lámpara de tungsteno con un monocromador para variar la longitud de onda de la fuente de luz.</p>
+
+<p>Las longitudes de onda típicas de las fuentes son 650 o 665 nm (fibra plástica), 820, 850 y 870 nm (fibra multimodo de longitud de onda corta) y 1300 (fibra multimodo de longitud de onda larga) o 1310 nm y 1550 nm (fibra monomodo de longitud de onda larga). Los LED se utilizan normalmente para probar la fibra multimodo y los láseres para la fibra monomodo, aunque hay algunos cruces. Las LAN de alta velocidad que utilizan fibra multimodo pueden probarse con VCSEL como las fuentes del sistema y los cables de parcheo monomodo cortos pueden probarse con LED.</p>
+
+<p>La longitud de onda de la fuente puede ser un factor crítico a la hora de realizar mediciones de pérdidas precisas en enlaces largos, ya que el coeficiente de atenuación de la fibra es sensible a la longitud de onda. Por lo tanto, todas las fuentes de prueba deben calibrarse para la longitud de onda en caso de que se requieran correcciones para las variaciones de longitud de onda.</p>
+
+<p>Las fuentes de prueba casi siempre tienen conectores fijos. Como cables de referencia deben utilizarse cables de parcheo de prueba híbridos con conectores compatibles con la fuente en un extremo y con el conector que se está probando en el otro. Esto puede afectar al tipo de modo de ajuste de referencia utilizado para las pruebas de pérdidas.</p>
+
+<p>Los factores relacionados con la fuente que afectan a la precisión de la medición son la estabilidad de la potencia de salida y la distribución modal lanzada a la fibra multimodo. La estabilidad de la fuente depende principalmente de los circuitos electrónicos de la fuente.</p>
+
+<p>Las normas del sector tienen requisitos sobre la salida modal de las fuentes de prueba para fibra multimodo que son importantes para los fabricantes de las fuentes de prueba. Diversas normas han exigido codificadores, filtros y eliminadores de modo para ajustar la distribución modal en la fibra de forma que se aproxime a las condiciones de funcionamiento reales. En la actualidad, la mayoría de las normas exigen que las fuentes cumplan los requisitos de salida y que en las pruebas se utilice un filtro de modo de tipo envolvente de mandril. Los efectos de la distribución de potencia modal en las mediciones multimodo se tratan en el capítulo sobre fibra óptica.</p>
+
+<h3 id="cables-de-referencia">Cables de Referencia</h3>
+
+<p>Las pruebas de pérdidas requieren de uno a tres cables de referencia, en función de la prueba realizada, el método de prueba y los adaptadores de acoplamiento adecuados para los conectores. Los cables de referencia suelen tener entre 1 y 2 metros de longitud, con fibra y conectores que coinciden con los cables que se van a probar.</p>
+
+<p>La precisión de la medición depende de la calidad de los cables de referencia, ya que se acoplarán al cable sometido a prueba. El estado y la limpieza de los conectores de los cables de lanzamiento y recepción es uno de los factores más importantes para la precisión de las mediciones de pérdidas. Pruebe siempre los cables de referencia mediante el método de patchcord o de un solo extremo que se muestra a continuación para asegurarse de que están en buen estado antes de empezar a probar otros cables. Los grupos de estándares no han logrado especificar con éxito la calidad de los cables de referencia en términos de componentes con tolerancias ajustadas, como la fibra y los conectores. Los estándares que requieren cables de prueba de calidad de referencia ahora especifican cables con conexiones de baja pérdida.</p>
+
+<p>La mejor recomendación para calificar los cables de referencia es elegir cables con bajas pérdidas, probados &quot;single-ended&quot; según la norma de prueba de cables FOTP-171, como se describe a continuación. Las bajas pérdidas son difíciles de definir, pero las superiores a 0.5 dB son cuestionables. Los cables de buena calidad, monomodo o multimodo, deberían presentar pérdidas en un solo extremo inferiores a 0.3 dB.</p>
+
+<p>Cuando se prueban cables multimodo, existe una controversia sobre si los cables fabricados con fibra insensible a dobleces deben utilizarse como cables de referencia. Algunas normas dicen específicamente que no se deben utilizar cables BI (&quot;bend insensitive&quot;) porque tienden a tener un mayor relleno de modo debido al diseño BI de la fibra y son más difíciles de modificar el relleno de modo para condiciones de lanzamiento controladas. El problema es que la mayor parte de la fibra multimodo es ahora fibra BI y no toda está marcada como tal, por lo que realmente no hay forma de seguir esta recomendación.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-06.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Cables de referencia y adaptadores de acoplamiento"><img src="img/pruebas-06.png" alt="Cables de referencia y adaptadores de acoplamiento" width="288" height="126" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.6 · Cables de referencia y adaptadores de acoplamiento</span><a href="img/pruebas-06.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Para las pruebas sólo deben utilizarse adaptadores de acoplamiento de la máxima calidad, ya que también son un factor de pérdida. Los adaptadores baratos suelen tener manguitos de plástico para alinear las férulas de los conectores, que se desgastan rápidamente y provocan grandes pérdidas incluso con conectores buenos. Utilice únicamente adaptadores con férulas metálicas o, preferiblemente, cerámicas, especificados tanto para conectores multimodo como monomodo.</p>
+
+<h3 id="pruebas-de-perdida">Pruebas de Pérdida</h3>
+
+<p>Hay dos métodos que se utilizan para medir la pérdida de inserción con una fuente de luz y un medidor de potencia, una &quot;prueba de patchcord&quot; también llamada &quot;pérdida de un solo extremo&quot;, según la norma FOTP-171 de la TIA, y una &quot;prueba de planta de cable instalada&quot; o &quot;pérdida de doble extremo&quot; según la norma TIA OFSTP-14 (multimodo) y OFSTP-7 (monomodo). La diferencia entre las dos pruebas es que la prueba de pérdida de extremo único utiliza sólo un cable de lanzamiento y prueba únicamente el conector conectado al cable de lanzamiento, además de la fibra y cualquier otro componente del cable. La prueba monomodo se utiliza principalmente para probar patchcords o cables cortos, ya que puede probar cada conector individualmente.</p>
+
+<p>La prueba de pérdida de doble extremo utiliza un cable de lanzamiento y un cable de recepción conectados a el medidor y mide la pérdida de los conectores en ambos extremos del cable sometido a prueba.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-07.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Configuraciones de prueba de pérdida con uno y dos extremos"><img src="img/pruebas-07.png" alt="Configuraciones de prueba de pérdida con uno y dos extremos" width="398" height="164" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.7 · Configuraciones de prueba de pérdida con uno y dos extremos</span><a href="img/pruebas-07.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>La prueba de un solo extremo se suele utilizar en los cables de interconexión (&quot;patch cords&quot;) para poder probar los conectores de cada extremo de un cable corto de forma individual y asegurarse de que ambos son buenos, así como para saber qué conector está defectuoso en caso de que haya algún problema.</p>
+
+<p>Las pruebas de doble extremo se utilizan con una planta de cables instalada para asegurar que la instalación haya sido realizada correctamente y para comparar los resultados de las pruebas con los cálculos del presupuesto de pérdidas.</p>
+
+<p>La pérdida de un solo extremo se mide acoplando el cable que desea probar al cable de inicio de referencia y midiendo la potencia en el extremo lejano con el medidor. Al hacer esto, solo se mide la pérdida del conector acoplado al cable de inicio y la pérdida de cualquier fibra, empalmes u otros conectores en el cable que se está probando. Dado que está apuntando el conector en el extremo lejano del cable hacia un detector en el medidor de potencia en lugar de acoplarlo a otro conector, efectivamente no tiene pérdida, por lo que no se incluye en la medición. Este método se describe en FOTP-171 y se muestra en el dibujo. Una de las ventajas de esta prueba es que permite localizar un conector defectuoso en los cables, ya que se puede invertir el cable para comprobar los conectores de cada extremo por separado. Cuando la pérdida es alta, el conector defectuoso se acopla al cable de referencia.</p>
+
+<p>En una prueba de pérdidas de doble extremo, se conecta el cable a probar entre dos cables de referencia, uno conectado a la fuente y otro al medidor. De este modo, se miden las pérdidas de los conectores de cada extremo, más la pérdida de todo el cable o cables, incluidos los conectores y empalmes, que se encuentran entre ellos. Este es el método especificado en OFSTP-14 (multimodo, la prueba monomodo es OFSTP-7), la prueba estándar de pérdidas en una planta de cable instalada.</p>
+
+<p>Ajuste de la Referencia &quot;0 dB&quot; Para la Comprobación de Pérdidas</p>
+
+<p>Para medir las pérdidas, primero es necesario establecer una potencia de lanzamiento de referencia para las pérdidas, que se convierte en el valor de 0 dB. El ajuste correcto de la potencia de referencia de 0 dB es fundamental para realizar buenas mediciones de pérdidas.</p>
+
+<p>Para las pruebas de un solo extremo, la potencia de referencia para 0 dB se establece en el extremo del cable de referencia. Basta con conectar el medidor de potencia al extremo del cable, medir la potencia de salida y, con la mayoría de los medidores, establecerla como referencia.</p>
+
+<p>para medir las pérdidas. A continuación, el medidor leerá la pérdida de cada cable probado directamente.</p>
+
+<p>Existen tres métodos para ajustar la referencia de una prueba de doble extremo, utilizando uno, dos o tres cables de referencia, y el método elegido afectará a la pérdida medida. ¿Por qué hay tres métodos? Los tres métodos se han desarrollado debido a las variaciones en los estilos de conectores y en la fabricación de los equipos de prueba.</p>
+
+<h3 id="un-cable-de-referencia">Un Cable de Referencia</h3>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-08.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Referencia de pérdida con un cable"><img src="img/pruebas-08.png" alt="Referencia de pérdida con un cable" width="187" height="184" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.8 · Referencia de pérdida con un cable</span><a href="img/pruebas-08.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>La mayoría de los conectores de fibra óptica están fabricados de forma que la fibra se sujeta en una férula que sobresale, lo que se denomina conector tipo &quot;clavija&quot; (&quot;plug&quot;). Dos conectores de enchufe se acoplan mediante un adaptador de acoplamiento que mantiene las férulas alineadas y les permite encontrarse en el centro. Si se prueban conectores de este tipo y el equipo de prueba tiene interfaces que se ajustan a esos conectores, se puede utilizar la referencia de un solo cable. Este método es el más sencillo y generalmente se considera el método de elección, ya que no se incluyen conexiones al establecer la referencia de 0 dB.</p>
+
+<p>Después de fijar una referencia, el cable de lanzamiento se separa del medidor, pero no de la fuente. El cable de referencia de lanzamiento nunca debe retirarse de la fuente después de establecer la referencia para garantizar que la potencia de lanzamiento permanezca constante. El cable de recepción se conecta al medidor y, a continuación, ambos cables de referencia se conectan al cable que se va a comprobar. La lectura de pérdidas incluirá tanto las conexiones al cable bajo prueba como la pérdida de la fibra y cualquier otro componente del propio cable.</p>
+
+<h3 id="referencia-de-dos-cables">Referencia de Dos Cables</h3>
+
+<p>Si el equipo de prueba tiene una interfaz para un estilo diferente de conector, por lo que los conectores de los cables que se van a probar no se pueden acoplar a los instrumentos, se puede utilizar un método de referencia de dos cables. Los cables de referencia deben ser cables híbridos con conectores en un extremo que coincidan con las interfaces de los instrumentos y el otro extremo que se acople a los conectores del cable que se va a probar. La referencia de 0 dB se establece conectando ambos cables de referencia a los instrumentos y conectando los otros extremos con un adaptador de acoplamiento. Una vez ajustada la referencia, se desconectan los dos cables por la mitad y se introduce entre ellos el cable que se va a comprobar.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-09.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Referencia de pérdida con dos cables"><img src="img/pruebas-09.png" alt="Referencia de pérdida con dos cables" width="188" height="184" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.9 · Referencia de pérdida con dos cables</span><a href="img/pruebas-09.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>La lectura de pérdidas incluirá las dos conexiones al cable sometido a prueba y la pérdida de la fibra y de cualquier otro componente del propio cable menos la pérdida de la conexión entre los dos cables de referencia al establecer la referencia. Por lo tanto, la pérdida medida utilizando la referencia de dos cables será inferior a la de la referencia de un cable por la conexión incluida al establecer la referencia. La incertidumbre de esta pérdida de conexión incluida en la referencia también se añade a la incertidumbre de la medición de pérdida de cualquier cable probado de esta manera.</p>
+
+<h3 id="referencia-de-tres-cables">Referencia de Tres Cables</h3>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-10.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Referencia de pérdida con tres cables"><img src="img/pruebas-10.png" alt="Referencia de pérdida con tres cables" width="208" height="202" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.10 · Referencia de pérdida con tres cables</span><a href="img/pruebas-10.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Algunos conectores de fibra óptica son de tipo &quot;enchufe&quot; y &quot;clavija&quot;, es decir, uno tiene una férula saliente y el otro una clavija o receptáculo. Algunos tienen clavijas (pines) de alineación que sólo están en un lado, como el conector MTP, en el que las clavijas se utilizan en el lado del puerto receptor. Suelen utilizarse con clavijas en ambos extremos de los patchcords y con clavijas o receptáculos en los cables de instalación permanente terminados en racks o tomas.</p>
+
+<p>Cualquiera de estos dos tipos de conectores sólo puede acoplarse a un tipo de conector adecuado, lo que dificulta la referencia de uno o dos cables. La solución es una referencia de tres cables, en la que los cables híbridos conectados a los instrumentos para los cables de referencia están terminados en clavijas y un tercer cable terminado en jacks se inserta entre ellos para crear una referencia de 3 cables. Después de ajustar la referencia &quot;0 dB&quot;, el tercer cable de referencia del medio se sustituye por el cable que se va a probar.</p>
+
+<p>Como antes, la lectura de pérdidas incluirá tanto las conexiones al cable bajo prueba como la pérdida de la fibra y cualquier otro componente del propio cable menos la pérdida de las dos conexiones entre el tercer cable de referencia y los dos cables de referencia al establecer la referencia. Dado que el tercer cable suele ser sólo una longitud corta de fibra con conexiones en cada extremo, la pérdida de la fibra es ignorable. La pérdida medida utilizando la referencia de tres cables será inferior a la de la referencia de un cable por las dos conexiones incluidas al establecer la referencia. La incertidumbre de estas dos pérdidas de conexión incluidas en la referencia también se añade a la incertidumbre de la medición de pérdida de cualquier cable probado de esta manera.</p>
+
+<p>Aunque este método de los tres cables tiene la incertidumbre más alta, es el único que funciona para cualquier conector y cualquier equipo de pruebas. Por ello, se ha convertido en el método preferido en varias normas internacionales.</p>
+
+<h3 id="eleccion-de-un-metodo-de-referencia">Elección de Un Método de Referencia</h3>
+
+<p>Algunos libros de referencia y manuales muestran el ajuste de la potencia de referencia para la pérdida utilizando sólo un cable de referencia de lanzamiento, tanto un cable de lanzamiento como de recepción acoplados con un adaptador de acoplamiento o incluso tres cables de referencia. De hecho, las normas del sector incluyen los tres métodos para establecer una referencia de &quot;pérdida de 0 dB&quot;. Los métodos de referencia de dos o tres cables son aceptables para algunas pruebas y son la única forma de probar algunos conectores, pero reducirán la pérdida que mida en la cantidad de pérdida entre sus cables de referencia cuando establezca su referencia de &quot;pérdida de 0 dB&quot;. Además, si alguno de los cables de referencia está mal, el ajuste de la referencia con los cables no revela ese problema. Entonces podría empezar a probar con cables de lanzamiento malos haciendo que todas sus mediciones de pérdida sean erróneas. Esto significa que es muy importante inspeccionar y probar los cables de referencia para asegurarse de que están en buenas condiciones.</p>
+
+<h3 id="acondicionamiento-modal-para-fibras-multimodo">Acondicionamiento Modal Para Fibras Multimodo</h3>
+
+<p>La mayoría de los estándares para pruebas de fibra multimodo incluyen algún acondicionamiento modal para crear condiciones de prueba estandarizadas que garanticen resultados de medición repetibles. El método habitual consiste en utilizar una fuente cuya salida cumpla un criterio estándar, acoplada a un cable de lanzamiento de referencia, en el que se utiliza una envoltura de mandril para eliminar los modos de orden superior. Los fabricantes de equipos de prueba también ofrecen acondicionadores de modo.</p>
+
+<p>Las normas pueden tener métodos diferentes, incluidos requisitos diferentes para fibras diferentes. Las normas internacionales exigen una métrica de acondicionamiento de modo denominada flujo restringido (EF por sus siglas en inglés [encircled flux]), pero la TIA-568 sólo la exige para las fibras OM3/4/5, lo que permite que las fibras heredadas (OM1, OM2) utilicen un método anterior.</p>
+
+<p>Es posible que los cables de lanzamiento de referencia que utilizan fibra insensible a la curvatura no respondan a los métodos habituales de acondicionamiento de modo y, por lo general, no se recomiendan para cables de lanzamiento, pero dado que la mayoría de la fibra multimodo es ahora fibra BI, puede que este no sea un requisito relevante.</p>
+
+<p>¿Qué Pérdidas Hay Que Obtener al Probar los Cables?</p>
+
+<p>Antes de realizar las pruebas, preferiblemente durante la fase de diseño, se debe calcular un presupuesto de pérdidas para la planta de cables que se va a probar, con el fin de comprender las pérdidas esperadas.</p>
+
+<p>resultados de las mediciones. Además de proporcionar valores de pérdidas de referencia con los que realizar pruebas, confirmará que el equipo de transmisión de la red funcionará correctamente en este cable. Aunque es difícil generalizar, he aquí algunas directrices:</p>
+
+<p>-Para cada conector, calcula una pérdida de 0.3-0.5 dB para conectores adhesivos/pulidos, 0.75 para conectores prepulidos/empalmados (0.75 máx. de TIA-568)</p>
+
+<p>-Por cada empalme, 0.2 dB (0.3 máx. según TIA-568)</p>
+
+<p>-En el caso de la fibra multimodo, la pérdida es de unos 3 dB por km para fuentes de 850 nm y de 1 dB por km para 1300 nm. Esto se traduce aproximadamente en una pérdida de 0.1 dB por 100 pies para 850 nm, 0.1 dB por 300 pies para 1300 nm.</p>
+
+<p>-Para fibra monomodo, la pérdida es de unos 0.5 dB por km para fuentes de 1310 nm, 0.4 dB por km para 1550 nm. Esto se traduce aproximadamente en una pérdida de 0.1 dB por 600 pies para 1310 nm, 0.1 dB por 750 pies para 1310 nm.</p>
+
+<p>Así que para la pérdida de una planta de cable, calcular la pérdida aproximada como:</p>
+
+<p>(0.5 dB X # conectores) + (0.2 dB x # empalmes) + pérdida de fibra en la longitud total del cable</p>
+
+<h3 id="sugerencias-para-solucionar-problemas">Sugerencias Para Solucionar Problemas</h3>
+
+<p>La mayoría de los problemas de pérdidas elevadas en los cables se deben a conectores en mal estado o sucios, empalmes con pérdidas elevadas o pérdidas por tensión causadas durante la instalación. Los conectores pueden inspeccionarse con un microscopio para detectar suciedad, arañazos, grietas u otros daños. Los localizadores visuales de averías pueden comprobar la continuidad, las conexiones correctas y, si la cubierta del cable lo permite, los dobleces o roturas de alta pérdida.</p>
+
+<p>Si tienes una alta pérdida en un cable, inviértelo y prueba en la dirección opuesta utilizando el método de un solo extremo si es posible. Dado que la prueba de un solo extremo solo evalúa el conector en un extremo, puedes aislar un conector defectuoso de esta manera: es aquel en el extremo del cable de inicio acoplado al cable de inicio en la prueba cuando mides una pérdida elevada.</p>
+
+<p>Las pérdidas elevadas en la prueba de doble terminación deben aislarse volviendo a probar la terminación simple e invirtiendo la dirección de la prueba para ver si el conector final está mal. Si la pérdida es la misma, es necesario probar cada segmento por separado para aislar el segmento defectuoso o, si es lo suficientemente largo, utilizar un OTDR.</p>
+
+<h2 id="pruebas-de-otdr">Pruebas de OTDR</h2>
+
+<p>Los OTDR son instrumentos de fibra óptica más complicados que pueden tomar una foto instantánea de una fibra, mostrando la ubicación de empalmes, conectores, fallos, etc. Los OTDR son potentes instrumentos de prueba para las instalaciones de cables de fibra óptica, si se sabe cómo configurar correctamente el instrumento para la prueba e interpretar los resultados. Cuando los utiliza un operador experto, los OTDR pueden localizar averías, medir la longitud del cable y verificar la pérdida de empalmes. Dentro de unos límites, también pueden medir la pérdida de una planta de cable. El único parámetro de fibra óptica que no miden es la potencia óptica en el transmisor o el receptor. Hay mucha información en la traza del OTDR, como se muestra en la traza real a continuación.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-11.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Ejemplo de una traza de OTDR"><img src="img/pruebas-11.png" alt="Ejemplo de una traza de OTDR" width="261" height="195" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.11 · Ejemplo de una traza de OTDR</span><a href="img/pruebas-11.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Los OTDR se utilizan casi siempre en cables de planta externa para verificar la pérdida de cada empalme y encontrar puntos de tensión causados por la instalación. También se utilizan ampliamente como herramientas de solución de problemas de OSP, ya que pueden localizar áreas problemáticas, como la pérdida causada por la tensión ejercida sobre un cable durante la instalación. La mayoría de los OTDR carecen de la resolución de distancia necesaria para su uso en los cables más cortos típicos de las redes para predios.</p>
+
+<p>Los OTDR están disponibles en versiones para sistemas de fibra óptica estandarizados, monomodo o multimodo, en las longitudes de onda correspondientes. Para utilizar un OTDR correctamente, es necesario comprender cómo funciona, cómo configurar adecuadamente el instrumento y cómo analizar las trazas. Los OTDR ofrecen una opción de &quot;auto-comprobación&quot;, pero utilizar esa opción sin entender el OTDR y comprobar manualmente su trabajo suele acarrear problemas.</p>
+
+<h3 id="como-funcionan-los-otdr">Cómo Funcionan los OTDR</h3>
+
+<p>A diferencia de las fuentes y los medidores de potencia, que miden directamente la pérdida de la planta de cables de fibra óptica, el OTDR funciona de forma indirecta. La fuente y el medidor duplican el transmisor y el receptor de un enlace de transmisión de fibra óptica, por lo que la medición se correlaciona bien con la pérdida real del sistema.</p>
+
+<p>Sin embargo, el OTDR utiliza la luz retrodispersada de la fibra para determinar la pérdida. El OTDR funciona como un RADAR, enviando un pulso de luz láser de alta potencia a través de la fibra y buscando señales de retorno de la luz retrodispersada en la propia fibra o de la luz reflejada de las uniones de conectores o empalmes. La cantidad de luz retrodispersada es muy pequeña, por lo que el OTDR envía muchos pulsos y promedia las trazas.</p>
+
+<p>En cualquier momento, la luz que ve el OTDR es la luz dispersada del pulso que atraviesa una región de la fibra. Sólo una pequeña cantidad de luz se dispersa de vuelta hacia el OTDR, pero con pulsos de prueba más anchos, receptores sensibles y promediado de señales, es posible realizar mediciones en distancias relativamente largas. Dado que es posible calibrar la velocidad del pulso a medida que pasa por la fibra, el OTDR puede medir el tiempo, calcular la posición del pulso en la fibra y correlacionar lo que ve en la luz retrodispersada con una ubicación real en la fibra. De este modo, puede crear una foto instantánea de la fibra, dando una visualización en cualquier punto de la fibra.</p>
+
+<p>Dado que el pulso se atenúa en la fibra a medida que pasa por ella y sufre pérdidas en conectores y empalmes, la cantidad de potencia del pulso de prueba disminuye a medida que pasa por la fibra en la planta de cables sometida a prueba. Por lo tanto, la parte de la luz que se retrodispersa se reducirá en consecuencia, produciendo una imagen de la pérdida real que se produce en la fibra. Son necesarios algunos cálculos para convertir esta información en una visualización, ya que el proceso se produce dos veces, una saliendo del OTDR y otra en el camino de retorno desde la dispersión en el pulso de prueba.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-12.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Eventos principales en una traza de OTDR"><img src="img/pruebas-12.png" alt="Eventos principales en una traza de OTDR" width="285" height="168" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.12 · Eventos principales en una traza de OTDR</span><a href="img/pruebas-12.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Hay mucha información en la pantalla de un OTDR. La pendiente de la traza de la fibra muestra el coeficiente de atenuación de la fibra (pérdida por distancia) y el OTDR la calibra en dB/km. La caída de la traza de la fibra a través de un conector o empalme permite medir la pérdida en dB. También se puede medir el pico causado por la reflectancia de un conector o empalme mecánico. Aunque algunos usuarios miden la pérdida de extremo a extremo de una planta de cables de fibra óptica con un OTDR, se requiere un cable receptor en el extremo más alejado del cable que se está probando para probar los conectores en ambos extremos y no mide de la misma manera que una fuente de luz y un medidor de potencia (o el transmisor y receptor del sistema), por lo que puede no correlacionarse con la pérdida del sistema.</p>
+
+<p>Observe el gran pulso inicial en la traza OTDR de arriba. Esto se debe a que el pulso de prueba de alta potencia se refleja en el conector del OTDR y sobrecarga el receptor del OTDR. La recuperación del receptor provoca la &quot;zona muerta&quot; cerca del OTDR. Para evitar los problemas causados por la zona muerta, es necesario utilizar siempre un cable de lanzamiento con el largo suficiente cuando se prueben cables.</p>
+
+<p>Los conectores y los empalmes se denominan &quot;eventos&quot; en la jerga de los OTDR. Ambos deben mostrar una pérdida, pero los conectores y los empalmes mecánicos también mostrarán un pico de reflexión para poder distinguirlos de los empalmes de fusión. Además, la altura de ese pico indicará la cantidad de reflexión en el evento, a menos que sea tan grande que sature el receptor del OTDR. En ese caso, el pico tendrá una parte superior plana y una cola en el extremo más alejado, lo que indica que el receptor estaba sobrecargado. La anchura del pico muestra la resolución de distancia del OTDR, o lo cerca que puede detectar los eventos. Los OTDR también pueden detectar problemas en el cable causados durante la instalación. Si una fibra está rota, aparecerá como el extremo de la fibra mucho más corto que el cable o un empalme de alta pérdida en el lugar equivocado. Si el cable está sometido a una tensión excesiva debido a un retorcimiento o a un radio de curvatura demasiado cerrado, se verá como un empalme en el lugar equivocado. Nada ayuda más a la resolución de problemas con un OTDR que disponer de una buena documentación para saber lo que el OTDR debería mostrar en las distintas ubicaciones de la fibra.</p>
+
+<p>Realización de Mediciones con el OTDR</p>
+
+<p>Todos los OTDR muestran la traza en una pantalla y proporcionan dos o más marcadores para colocar en puntos de la pantalla y medir la pérdida y la distancia. Esto puede ser utilizado para medir la pérdida de la fibra según su distancia, donde el OTDR calculará el coeficiente de atenuación de la fibra, o la pérdida de un conector o empalme.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-13.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Medición de atenuación, empalmes y reflectancia"><img src="img/pruebas-13.png" alt="Medición de atenuación, empalmes y reflectancia" width="401" height="104" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.13 · Medición de atenuación, empalmes y reflectancia</span><a href="img/pruebas-13.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Coeficiente de Atenuación de la Fibra</p>
+
+<p>Para medir la longitud y la atenuación de la fibra, colocamos los marcadores en cada extremo de la sección de fibra que deseemos medir. El OTDR calculará la diferencia de distancia entre los dos marcadores y dará la distancia. También leerá la diferencia entre los niveles de potencia de los dos puntos en los que los marcadores cruzan la traza y calculará la pérdida, o diferencia en los dos niveles de potencia en dB. Por último, calculará el coeficiente de atenuación de la fibra dividiendo la pérdida por la distancia y presentará el resultado en dB/km, las unidades normales para la atenuación. Si el segmento de fibra tiene ruido o no parece recto, el OTDR puede promediar la medición con un método denominado análisis de mínimos cuadrados (LSA).</p>
+
+<h3 id="perdida-de-empalme-o-conector">Pérdida de Empalme o Conector</h3>
+
+<p>El OTDR mide la distancia al evento y la pérdida en un evento -un conector o empalme- entre los dos marcadores. Para medir la pérdida en el empalme, mueva los dos marcadores cerca del empalme a medir, teniendo cada uno aproximadamente a la misma distancia del centro del empalme. El OTDR calculará la pérdida en dB entre los dos marcadores, dándole una lectura de pérdida en dB.</p>
+
+<p>Las mediciones de pérdida en conectores o empalmes con cierta reflectancia tendrán un aspecto muy similar, excepto que verá un pico en el conector, causado por la reflexión posterior del conector. El OTDR también puede utilizar un método de mínimos cuadrados para reducir los efectos del ruido y eliminar el error causado por la pérdida de la fibra entre los dos marcadores.</p>
+
+<h3 id="reflectancia">Reflectancia</h3>
+
+<p>Para medir la reflectancia, el OTDR mide la cantidad de luz devuelta tanto por la retrodispersión en la fibra como por el reflejo de un conector o empalme. El cálculo de la reflectancia es un proceso complicado en el que interviene el ruido de la línea base del OTDR, el nivel de retrodispersión y la potencia del pico reflejado. Como todas las mediciones de retrodispersión, tiene una incertidumbre de medición bastante alta, pero un OTDR tiene la ventaja de mostrar dónde se encuentran los eventos reflectantes para poder corregirlos si es necesario.</p>
+
+<h3 id="comparacion-de-trazos">Comparación de Trazos</h3>
+
+<p>Comparar dos trazas en la misma ventana del OTDR es útil para confirmar la recopilación de datos y contrastar diferentes métodos de prueba en la misma fibra.</p>
+
+<p>Las comparaciones también se utilizan para comparar trazas de fibra durante la resolución de problemas o la restauración con trazas tomadas justo después de la instalación para ver qué ha cambiado. Todos los OTDR ofrecen esta función, que permite copiar una traza y pegarla en otra para compararlas.</p>
+
+<h3 id="incertidumbre-de-medicion-otdr">Incertidumbre de Medición OTDR</h3>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-14.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Efecto del desajuste de fibras en una medición OTDR"><img src="img/pruebas-14.png" alt="Efecto del desajuste de fibras en una medición OTDR" width="392" height="103" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.14 · Efecto del desajuste de fibras en una medición OTDR</span><a href="img/pruebas-14.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>La mayor fuente de incertidumbre de medición que se produce al realizar pruebas con un OTDR es una función del coeficiente de retrodispersión de las fibras que se están probando, la cantidad de luz del pulso de prueba saliente que se dispersa de vuelta hacia el OTDR. La luz retrodispersada utilizada para la medición no es una constante, sino una función de la atenuación de la fibra y del diámetro del núcleo de la fibra.</p>
+
+<p>Si observa dos fibras diferentes empalmadas o conectadas en un OTDR, la diferencia en la retrodispersión de cada fibra es una fuente importante de error. Si ambas fibras son idénticas, como en el caso de empalmar una fibra rota, la retrodispersión será la misma a ambos lados de la unión, por lo que el OTDR medirá la pérdida real del empalme. Sin embargo, si las fibras son diferentes, los coeficientes de retrodispersión desiguales harán que se envíe un porcentaje diferente de luz de vuelta al OTDR.</p>
+
+<p>Si la primera fibra tiene más dispersión (mostrada como atenuación) que después de la conexión, el porcentaje de luz del pulso de prueba del OTDR disminuirá, por lo que la pérdida medida en el OTDR incluirá la pérdida real más un error de pérdida causado por el menor nivel de retrodispersión, haciendo que la pérdida mostrada sea mayor de lo que realmente es. Si miramos en sentido contrario, de una fibra de baja atenuación a una fibra de alta atenuación, vemos que la retrodispersión aumenta, lo que hace que la pérdida medida sea menor de lo que realmente es. De hecho, si el cambio en la retrodispersión es mayor que la pérdida de empalme, esto muestra una ganancia, una gran confusión para los nuevos usuarios de OTDR.</p>
+
+<p>Aunque esta fuente de error siempre está presente, puede eliminarse prácticamente tomando lecturas en ambos sentidos y promediando las mediciones, y muchos OTDR lo tienen programado en sus rutinas de medición. Es la única forma de comprobar las pérdidas de los empalmes en línea y obtener resultados precisos.</p>
+
+<h3 id="otdr-fantasmas">OTDR &quot;Fantasmas&quot;</h3>
+
+<p>Si está probando cables cortos con conectores muy reflectantes, es probable que encuentre fantasmas. Éstos están causados por la luz reflejada del conector del extremo lejano que se refleja de un lado a otro de la fibra hasta que se atenúa hasta el nivel de ruido. Los fantasmas son muy confusos, ya que parecen ser eventos reflectantes reales como los conectores, pero no mostrarán ninguna pérdida. La mejor forma de determinar si un reflejo es real o un fantasma es compararlo con la documentación de la planta de cableado. Puede eliminar los fantasmas reduciendo las reflexiones, por ejemplo utilizando líquido de adaptación de índices en el extremo del cable de lanzamiento.</p>
+
+<h3 id="limitaciones-del-otdr">Limitaciones del OTDR</h3>
+
+<p>La resolución de distancia limitada del OTDR hace que sea muy difícil de utilizar en un predio o edificio, donde los cables suelen estar a unos pocos cientos de metros de distancia. La mayoría de los OTDRs tienen muchas dificultades para resolver las características de los cables cortos típicos de una planta de cableado en predios y es probable que muestren &quot;fantasmas&quot; de reflexiones en los conectores, confundiendo al usuario del OTDR.</p>
+
+<p>En cables muy largos, el OTDR mostrará un mayor ruido a mayor distancia del instrumento. El uso de pulsos de prueba más anchos y más promediado de señal aumentará la capacidad de distancia del OTDR.</p>
+
+<h3 id="uso-correcto-del-otdr">Uso Correcto del OTDR</h3>
+
+<p>Al utilizar un OTDR, hay algunas precauciones que harán que las pruebas sean más fáciles y comprensibles. Utilice siempre un cable de lanzamiento largo, que permita al OTDR asentarse tras el pulso inicial y proporcione un cable de referencia para probar el primer conector del cable. Si se desea probar el conector final del cable, se necesita un cable receptor en el extremo más alejado de la planta de cables. El operador del OTDR debe configurar cuidadosamente el instrumento para cada cable.</p>
+
+<p>Una vez más, una buena documentación le ayudará a configurar los parámetros de prueba. Empiece siempre con el OTDR configurado con el ancho de pulso más corto para obtener la mejor resolución y un alcance al menos 2 veces la distancia del cable que está probando. Haga un trazado inicial y vea cómo tiene que cambiar los parámetros de prueba para obtener mejores resultados. Algunos usuarios se ven tentados a utilizar la función de autoprueba o &quot;auto test&quot; del OTDR. Los novatos que utilizan el auto-test causan más problemas que cualquier otra cuestión relacionada con el uso de los OTDR.</p>
+
+<p>No utilice nunca la prueba automática hasta que un técnico experto haya configurado correctamente el OTDR y verificado que la prueba automática ofrece resultados aceptables.</p>
+
+<h2 id="pruebas-de-redes-de-fibra-optica-de-larga-distancia-y-alta-velocidad">Pruebas de Redes de Fibra Óptica de Larga Distancia y Alta Velocidad</h2>
+
+<p>Una de las grandes ventajas de la fibra óptica es su capacidad para las comunicaciones de alta velocidad a larga distancia. La atenuación en longitudes de onda largas es menor. La fibra monomodo tiene un ancho de banda extremadamente alto. Las fibras pueden empalmarse sin apenas pérdidas. Los láseres de alta potencia y los regeneradores amplificadores de fibra permiten obtener fácilmente largas distancias.</p>
+
+<p>Sin embargo, a distancias muy largas, nuevos factores en el rendimiento de la fibra adquieren importancia. La dispersión cromática, causada por la luz de diferentes longitudes de onda, y la dispersión del modo de polarización, causada por la polarización de las fibras, se convierten en factores que limitan los enlaces de fibra. Incluso la variación de la atenuación de la fibra con la longitud de onda puede convertirse en un problema cuando se implementan redes que utilizan multiplexación por división de longitud de onda. Es posible que haya que probar estos tres factores en redes de larga distancia para garantizar un rendimiento adecuado del enlace. (Véase el Capítulo 5 sobre fibra para obtener descripciones de estas características de la fibra).</p>
+
+<h3 id="caracterizacion-de-fibras">Caracterización de Fibras</h3>
+
+<p>A medida que aumentan las velocidades de la red por encima de 10 Gb/s, las distancias superan los 20 km, y se utiliza la multiplexación por división de longitud de onda, es importante comprobar el ancho de banda y la atenuación espectral de las fibras monomodo de las instalaciones exteriores. Esto es especialmente importante para las instalaciones de cable de fibra óptica más antiguas en las que se están actualizando las velocidades de la red, ya que las fibras más antiguas se fabricaron con normas diferentes para redes más lentas. Las nuevas instalaciones también suelen someterse a pruebas para estos mismos requisitos, a fin de garantizar que también admitan velocidades superiores a 100 Gb/s y multiplexación por división de longitud de onda densa.</p>
+
+<p>Las pruebas de campo para las instalaciones de cable incluyen la dispersión cromática (CD), la dispersión del modo de polarización (PMD) y la atenuación espectral (SA) Estas pruebas suelen combinarse y denominarse &quot;Caracterización de la fibra&quot;. Las pruebas son muy especializadas y requieren una instrumentación complicada.</p>
+
+<h3 id="dispersion-cromatica-en-la-planta-de-cables">Dispersión Cromática en la Planta de Cables</h3>
+
+<p>Como ocurre con cualquier otro componente, los parámetros de rendimiento de la fibra óptica pueden variar de un lote a otro, por lo que una planta de cable concatenado de gran longitud con muchas fibras diferentes tendrá una dispersión cromática de extremo a extremo que es una integración de la CD de todas las fibras individuales. Por lo tanto, es probable que se compruebe la CD de la fibra en enlaces de larga distancia después de la instalación o antes de actualizar un enlace a una electrónica de mayor velocidad binaria.</p>
+
+<h3 id="comprobacion-de-la-dispersion-cromatica">Comprobación de la Dispersión Cromática</h3>
+
+<p>Existen varios métodos para comprobar la CD en las fibras. Todos implican pruebas en una variedad de longitudes de onda utilizando varias fuentes discretas de diversas longitudes de onda, un láser sintonizable o una fuente de banda ancha con un monocromador en el receptor y midiendo las velocidades relativas de las señales. A continuación, se analizan los datos tomados en longitudes de onda discretas para calcular la dispersión en términos de ps/nm/km.</p>
+
+<p>Los métodos de prueba utilizan el retardo de fase o el tiempo de vuelo y, por lo general, requieren acceso a ambos extremos de la fibra, así como una segunda fibra para la sincronización de los dos instrumentos de prueba en cada extremo. Sin embargo, también se utiliza un método de prueba OTDR, ya que el OTDR mide el tiempo para convertirlo en distancia. Dado que la velocidad de la luz es diferente a distintas longitudes de onda, el OTDR mediría distancias diferentes en la misma fibra a longitudes de onda diferentes. Las trazas se toman en varias longitudes de onda discretas y la CD puede calcularse a partir de la diferencia en los datos de distancia (o tiempo de ida y vuelta del impulso de prueba) obtenidos de las trazas. Esto permite realizar pruebas de CD sobre el terreno desde un extremo de la fibra.</p>
+
+<p>Todos estos métodos cuentan con normas internacionales para los métodos de pruebas, instrumentos y análisis de datos.</p>
+
+<div class="foa-table-wrap" tabindex="0" role="region" aria-label="Tabla: Comprobación de la Dispersión Cromática"><table><caption>Comprobación de la Dispersión Cromática</caption><thead><tr><th scope="col"><strong>Estándares</strong></th><th scope="col"><strong>Descripción</strong></th></tr></thead><tbody><tr><td>IEC 60793-1-42</td><td>Métodos de medición y procedimientos de ensayo - dispersión cromática</td></tr>
+<tr><td> <br />ITU-T G.650.1</td><td>Definiciones y métodos de ensayo para las pruebas lineales, atributos deterministas de fibra y cable monomodo</td></tr>
+<tr><td>TIA FOTP-175-B</td><td>Medición de la dispersión cromática de fibras ópticas monomodo</td></tr>
+<tr><td>GR-761-CORE</td><td>Criterios genéricos para las pruebas de dispersión cromática</td></tr></tbody></table></div>
+
+<p>Método de desplazamiento de fase</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-15.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Medición de dispersión cromática con fuente de banda ancha"><img src="img/pruebas-15.png" alt="Medición de dispersión cromática con fuente de banda ancha" width="318" height="84" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.15 · Medición de dispersión cromática con fuente de banda ancha</span><a href="img/pruebas-15.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Método de retardo de impulsos</p>
+
+<figure class="foa-figure foa-figure-wide"><a class="foa-figure-link" href="img/pruebas-16.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Medición del retraso con varias longitudes de onda"><img src="img/pruebas-16.png" alt="Medición del retraso con varias longitudes de onda" width="319" height="79" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.16 · Medición del retraso con varias longitudes de onda</span><a href="img/pruebas-16.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Método de prueba OTDR</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/pruebas-17.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Atenuación espectral a diferentes longitudes de onda"><img src="img/pruebas-17.png" alt="Atenuación espectral a diferentes longitudes de onda" width="269" height="128" loading="lazy" decoding="async" /></a><figcaption><span>Figura 10.17 · Atenuación espectral a diferentes longitudes de onda</span><a href="img/pruebas-17.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<h3 id="dispersion-del-modo-de-polarizacion">Dispersión del Modo de Polarización</h3>
+
+<p>La PMD es un problema complejo en la fibra óptica instalada. En una fibra larga concatenada, cada fibra puede tener diferentes características de guía de ondas y birrefringencia del material causadas por las características aleatorias de cada fibra en el enlace y las variaciones de la tensión en la fibra. Las variaciones son particularmente notables en fibra aérea, donde la PMD puede variar considerablemente en función de la temperatura y la velocidad del viento que azota la fibra.</p>
+
+<p>La PMD provoca un ensanchamiento de los impulsos y/o fluctuaciones en la señal eléctrica recibida, lo que puede causar errores en la recepción de las señales. Dado que la PMD puede variar con el tiempo, a menudo se añade un margen adicional de 1 a 3 dB al presupuesto de potencia para tener en cuenta la variación de la PMD.</p>
+
+<p>La PMD es un problema importante a medida que las velocidades de transmisión de datos en enlaces de larga distancia aumentan a 40 Gb/s y 100 Gb/s. Desgraciadamente, no existen sistemas fiables de compensación de la PMD, por lo que la única solución es probar los enlaces que se van a actualizar para detectar la PMD utilizando uno o varios de los métodos de prueba normalizados.</p>
+
+<h3 id="pruebas-pmd">Pruebas PMD</h3>
+
+<p>Por lo general, la PMD se comprueba en las fibras durante su fabricación o durante el cableado. Sobre el terreno, es habitual probar la PMD en fibras recién instaladas destinadas a funcionar a altas velocidades, generalmente superiores a 2.5 Gb/s, o al actualizar fibras instaladas en el pasado. Dado que la PMD varía con el tiempo, una sola prueba se convierte en una media y pueden realizarse pruebas en otro momento para comparar.</p>
+
+<p>Existen varios métodos de prueba de PMD de uso común, algunos de los cuales se limitan al entorno de fabricación, mientras que otros pueden utilizarse sobre el terreno. Esencialmente, todos los instrumentos de prueba tienen una fuente que puede variar la polarización de la señal de prueba y una unidad de medición que puede analizar los cambios de polarización.</p>
+
+<p>Las pruebas de PMD no son fáciles, reproducibles ni precisas. La incertidumbre de la medición puede llegar al 10-20%, como demuestran las pruebas realizadas en los comités internacionales de normalización. Estos comités han llegado a la conclusión de que todas estas técnicas de medición son admisibles, que hay factores en la realización de estas mediciones que no se comprenden bien y que los métodos de análisis de datos no están exentos de dudas. Toda esta incertidumbre de las mediciones de PMD tiene el efecto de dificultar las comparaciones entre pruebas y métodos de prueba. Las variaciones son especialmente elevadas en las pruebas de enlaces de fibra más antiguos. Las presentaciones de campo han demostrado incluso que las variaciones de PMD pueden correlacionarse con la velocidad del viento en los cables aéreos.</p>
+
+<p>Es necesario realizar pruebas de PMD en enlaces largos, pero los datos deben analizarse de forma inteligente para que sean realmente útiles.</p>
+
+<p>A continuación se describen los métodos y las normas pertinentes.</p>
+
+<div class="foa-table-wrap" tabindex="0" role="region" aria-label="Tabla: Pruebas PMD"><table><caption>Pruebas PMD</caption><thead><tr><th scope="col"><strong>Descripción</strong></th><th scope="col"><strong>Método de Prueba</strong></th><th scope="col"><strong>Estándares</strong></th></tr></thead><tbody><tr><td>PMD para fibras ópticas monomodo por el método del analizador fijo</td><td>Recuento de extremos (CE) Transformada de Fourier (FT)</td><td> <br />FOTP-113</td></tr>
+<tr><td>Medición de la PMD en fibras ópticas monomodo mediante medicione del parámetro de Stokes</td><td>Análisis propio de la matriz de Jones (JME)<br />Análisis de la esfera de Poincaré (PSA) </td><td> <br />FOTP-122</td></tr>
+<tr><td>Medición de la PMD en fibras ópticas monomodo y conjuntos de cables mediante interferometría</td><td> <br />Interferometría tradicional (TINTY) Interferometría general (GINTY)</td><td> <br />FOTP-124</td></tr>
+<tr><td>Directrices para la medición de PMD y DGD en componentes y dispositivos de fibra óptica monomodo</td><td> </td><td> <br />FOTP-196</td></tr>
+<tr><td>Métodos de medición y procedimientos de prueba: dispersión del modo de polarización</td><td>Método de medición del analizador fijo (EC / FT)<br />Método de evaluación de Stokes (JME / PSA)<br />Método de interferometría (TINTY)</td><td>IEC 60793-1-48</td></tr>
+<tr><td>Equipos portátiles de prueba de PMD para analizar fibra monomodo</td><td> </td><td>GR-2947-CORE</td></tr>
+<tr><td>Definiciones y métodos de ensayo de los atributos estadísticos y no lineales de fibra y cable monomodo</td><td>Técnica de evaluación de los parámetros de Stokes (JME y PSA) Método del estado de polarización (SOP)<br />Métodos interferométricos ( TINTY &amp; GINTY)<br />Técnica de analizador fijo (EC / FT<br />/ Análisis Coseno-Fourier)</td><td>UIT-T G.650.2<br /> </td></tr></tbody></table></div>
+
+<h3 id="atenuacion-espectral">Atenuación Espectral</h3>
+
+<p>Con el desarrollo de fibras con bajo pico de agua, se ha considerado la posibilidad de transmisión de 1260 a 1675 nm. Esto es el resultado de una cuidadosa fabricación de la fibra para reducir el agua presente en ella (en forma de iones OH-) que provoca una mayor atenuación espectral en torno a 1244 y 1383 nm.</p>
+
+<p>Dado que es posible que se desee utilizar fibras disponibles de atenuación espectral desconocida para CWDM, que utiliza láseres de 1260 a 1670 nm en ventanas de 20 nm, se hace necesario comprobar la atenuación espectral para verificar la posibilidad de uso. En los picos de agua, las fibras heredadas pueden tener coeficientes de atenuación de alrededor de 2 dB/km, mientras que las fibras de picos de agua bajos pueden tener tan sólo 0.4 dB/km.</p>
+
+<p>Las pruebas de atenuación espectral se realizan según las normas TIA/EIA-455-61 o IEC 61300-3-7 con fuentes de banda ancha, como LED, y un analizador de espectro en el extremo receptor de la fibra. La calibración se realiza con una longitud de fibra corta, el instrumento calcula la atenuación espectral en una longitud larga que se está probando. La medición de la atenuación espectral utiliza instrumentos similares a los utilizados para las pruebas de CD por el método de desplazamiento de fase, por lo que algunos instrumentos hacen ambas mediciones a la vez.</p>
+
+<h2 id="otras-pruebas">Otras Pruebas</h2>
+
+<p>Los fabricantes de componentes de fibra óptica realizan pruebas exhaustivas para cualificar los diseños de sus componentes, verificar los procedimientos de fabricación y probar los productos antes de enviarlos a los clientes. Se comprueban las dimensiones de las fibras (tamaño del núcleo y del revestimiento, ovalidad y concentricidad), su rendimiento (coeficiente de atenuación, ancho de banda o dispersión), sus características físicas (resistencia, flexibilidad, etc.) y su capacidad para soportar condiciones ambientales (temperatura, humedad, etc.), y muchos más, incluso durante largos periodos de tiempo). Los cables añaden aún más pruebas medioambientales estrictas.</p>
+
+<p>Los conectores y empalmes se prueban en grandes lotes para determinar las pérdidas medias previstas en instalaciones normales. Las pruebas ambientales son similares a las de los cables, pero pueden añadir pruebas para aplicaciones especiales, como la vibración para su uso en vehículos, barcos o aviones. Los transceptores, WDM, amplificadores de fibra y otros componentes de fibra óptica se someterán a pruebas tanto de rendimiento relacionado con la fibra como de rendimiento eléctrico. La mayoría de estas pruebas se han estandarizado para permitir una comparación justa entre los productos de varios fabricantes.</p>
+
+<p>Hay otras pruebas de campo para plantas de cables que son cada vez más habituales en cables monomodo largos: la dispersión en modo de polarización (PMD) y la dispersión cromática (CD). Estas pruebas adquieren importancia en distancias muy largas con velocidades binarias muy altas. Son muy especializadas y requieren una instrumentación complicada, fuera del alcance de este libro.</p>
+
+<h2 id="preguntas-de-repaso">Preguntas de Repaso</h2>
+
+<p>Verdadero/Falso</p>
+
+<p><em>Indique si la afirmación es verdadera o falsa.</em></p>
+
+<p class="foa-question">______  1. Los cables probados con un OTDR no requieren pruebas de pérdida de inserción con una fuente y un medidor u OLTS.</p>
+
+<p class="foa-question">______  2. Los conectores de cada extremo de la planta de cables no deben contarse al calcular la pérdida de la planta de cables.</p>
+
+<p class="foa-question">______  3. El OTDR nunca debe utilizarse sin un &quot;cable de lanzamiento&quot; que también se llama &quot;supresor de pulsos&quot;.</p>
+
+<p>Elección múltiple</p>
+
+<p><em>Identifique la opción que mejor complete el enunciado o responda a la pregunta.</em></p>
+
+<p class="foa-question">______  4.La pérdida de planta por cable debe estimarse durante la fase de _____________.</p>
+
+<ol class="foa-answers" type="A">
+<li>Diseño</li>
+<li>Instalación</li>
+<li>Pruebas</li>
+<li>Solución de problemas</li>
+</ol>
+
+<p class="foa-question">______  5. El método estándar de comprobación de cables multimodo instalados se describe en _____________.</p>
+
+<ol class="foa-answers" type="A">
+<li>FOTP-34</li>
+<li>ISO 11801</li>
+<li>FOTP-57</li>
+<li>OFSTP-14</li>
+</ol>
+
+<p class="foa-question">______  6. ¿Qué instrumento(s) de prueba se utiliza(n) para comprobar la pérdida de inserción?</p>
+
+<ol class="foa-answers" type="A">
+<li>OLTS o fuente de luz y medidor de potencia</li>
+<li>VFL</li>
+<li>OTDR</li>
+</ol>
+
+<p class="foa-question">______  7. Los cables de fibra óptica de vidrio multimodo de índice graduado se prueban con fuentes _____ a ______ y _____ longitudes de onda.</p>
+
+<ol class="foa-answers" type="A">
+<li>LED, 650, 850 nm</li>
+<li>LED, 850, 1300 nm</li>
+<li>Láser, 980, 1400 nm</li>
+<li>Láser, 1310, 1550 nm</li>
+</ol>
+
+<p class="foa-question">______  8. ¿Qué tipo de fuente se utiliza para probar fibras monomodo?</p>
+
+<ol class="foa-answers" type="A">
+<li>LED</li>
+<li>VCSEL</li>
+<li>Láser</li>
+</ol>
+
+<p class="foa-question">______  9.¿Cuántos métodos se incluyen en las normas para establecer la referencia &quot;0 dB' para las pruebas de pérdidas?</p>
+
+<ol class="foa-answers" type="A">
+<li>Un</li>
+<li>Dos</li>
+<li>Tres</li>
+<li>Cuatro</li>
+</ol>
+
+<p class="foa-question">______  10.¿Qué método de referencia se requiere para la TIA 568?</p>
+
+<ol class="foa-answers" type="A">
+<li>Una vez que la referencia del cable</li>
+<li>Dos cables de referencia</li>
+<li>Tres cables de referencia</li>
+<li>Cualquier método, siempre que esté documentado</li>
+</ol>
+
+<p class="foa-question">______  11. Los cables de referencia deben coincidir con el ________ de los cables que se están probando.</p>
+
+<ol class="foa-answers" type="A">
+<li>Tamaño y tipo de fibra</li>
+<li>Tamaño de la fibra y tipo de conector</li>
+<li>Tipo de conector</li>
+<li>Tamaño de la fibra y especificación de la pérdida</li>
+</ol>
+
+<p class="foa-question">______  12. La pérdida total de la fibra en la planta de cableado se calcula multiplicando el coeficiente de atenuación de la fibra por el/la ___________.</p>
+
+<ol class="foa-answers" type="A">
+<li>Distancia</li>
+<li>Número de enlaces</li>
+<li>Número de conectores</li>
+<li>Número de empalmes</li>
+</ol>
+
+<p class="foa-question">______  13. El principio de funcionamiento de los OTDR es similar a _______.</p>
+
+<ol class="foa-answers" type="A">
+<li>Medidores y fuentes de potencia</li>
+<li>Radar</li>
+<li>Espejos</li>
+<li>Lentes</li>
+</ol>
+
+<p class="foa-question">______  14. Los OTDR se utilizan en cables de planta exterior para________.</p>
+
+<ol class="foa-answers" type="A">
+<li>Verificar la pérdida de empalme</li>
+<li>Medir la distancia</li>
+<li>Encontrar fallos</li>
+<li>Todos los anteriores</li>
+</ol>
+
+<p class="foa-question">______  15. En las aplicaciones de instlaciones en predios, la utilidad de los OTDR se ve limitada por su _________.</p>
+
+<ol class="foa-answers" type="A">
+<li>Potencia de salida</li>
+<li>Capacidad de distancia</li>
+<li>Resolución a distancia</li>
+<li>Software</li>
+</ol>
+
+<h2 id="estudios-y-proyectos-adicionales">Estudios y Proyectos Adicionales</h2>
+
+<p>Las pruebas son uno de los temas más complejos de la fibra óptica.</p>
+
+<p>Cinco maneras de probar los cables de fibra óptica según las normas internacionales</p>
+
+<p>Diferencias en las mediciones OTDR y de pérdida de inserción</p>
+
+<p>Pruebas y resolución de problemas de los sistemas de fibra óptica</p>
+
+<h3 id="ejercicios-de-laboratorio">Ejercicios de Laboratorio</h3>
+
+<p>Mide la potencia óptica con un medidor de potencia de fibra óptica. Cambia la longitud de onda de calibración por otra longitud de onda para ver la diferencia en la calibración.</p>
+
+<p>Utiliza una fuente de luz y un medidor de potencia para medir la pérdida de un cable de fibra óptica. Realice pruebas utilizando cada uno de los métodos para establecer una referencia de 0 dB y observe cómo cambia la pérdida. Determine los efectos de las envolturas de mandril en el cable de lanzamiento probando una planta de cable con una fuente de luz y un medidor de potencia utilizando un cable de referencia de lanzamiento sencillo y luego utilizando diferentes envolturas de mandril.</p>
+
+<p>Utilice un OTDR para aprender a configurar el instrumento y analizar las trazas. Mida la atenuación de la fibra, la pérdida de un empalme o conector y la reflectancia. Vea cómo cambia la medición al medir la pérdida con los métodos de dos puntos y LSA. Pruebe la misma planta de cables con una fuente de luz y un medidor de potencia y con un OTDR utilizando sólo un cable de lanzamiento y luego ambos cables de lanzamiento y recepción. ¿En qué difieren las pérdidas medidas con los distintos métodos?</p>
+        </div>
+        <div class="lesson-actions"><a data-foa-page href="instalacion.html">← Instalación</a><a data-foa-page href="index.html">Volver al índice →</a></div>
+        <footer class="foa-footer"><a href="index.html">FOA · Índice del libro</a><a href="../index.html">Fibra óptica</a><span>DGNV Studios · <span id="year">2026</span></span></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/fiber-guide.js?v=20260930-foa"></script>
+  </body>
+</html>

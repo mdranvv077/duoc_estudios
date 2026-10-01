@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Transceptores, emisores, receptores, WDM y presupuesto de potencia de los enlaces." />
+    <title>Sistemas y componentes de transmisión — FOA · Fibra óptica</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20260930-foa" />
+    <link rel="stylesheet" href="../../../assets/css/math.css?v=20260930-fiber" />
+    <link rel="stylesheet" href="../../../assets/css/fiber.css?v=20260930-vfl-connect-flow" />
+    <link rel="stylesheet" href="assets/foa.css?v=20260930-book" />
+  </head>
+  <body>
+    <header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Capítulos del libro FOA</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="index.html"><small>Fibra óptica · Biblioteca</small><strong>FOA · Libro de consulta</strong></a>
+        <nav class="sidebar-categories" aria-label="Categorías de fibra óptica"></nav>
+        <nav class="lesson-nav" aria-label="Capítulos del libro FOA"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver modalidad</a>
+      </aside>
+      <article class="lesson-content foa-reader" data-foa-reader>
+        <a class="foa-breadcrumb" data-foa-page href="index.html">← Índice del libro</a>
+        <p class="eyebrow"><span></span> Libro FOA · Capítulo 07</p>
+        <h1>Sistemas y componentes de transmisión</h1>
+        <p class="lesson-lead">Transceptores, emisores, receptores, WDM y presupuesto de potencia de los enlaces.</p>
+        <div class="foa-meta"><span>7 apartados</span><span>Lectura de consulta</span><span>16 figuras</span></div>
+        <details class="foa-toc"><summary>En este capítulo</summary><nav aria-label="Apartados del capítulo"><a href="#enlaces-de-datos-de-fibra-optica" data-foa-anchor>Enlaces de Datos de Fibra Óptica</a>
+<a href="#fuentes-para-transmisores-de-fibra-optica" data-foa-anchor>Fuentes Para Transmisores de Fibra Óptica</a>
+<a href="#detectores-para-receptores-de-fibra-optica" data-foa-anchor>Detectores Para Receptores de Fibra Óptica</a>
+<a href="#componentes-especiales-de-transmision-de-fibra-optica" data-foa-anchor>Componentes Especiales de Transmisión de Fibra Óptica</a>
+<a href="#rendimiento-de-enlaces-de-datos-y-presupuesto-de-potencia" data-foa-anchor>Rendimiento de Enlaces de Datos y Presupuesto de Potencia</a>
+<a href="#preguntas-de-repaso" data-foa-anchor>Preguntas de Repaso</a>
+<a href="#estudios-y-proyectos-adicionales" data-foa-anchor>Estudios y Proyectos Adicionales</a></nav></details>
+        <section class="foa-objectives" aria-label="Objetivos"><h2>Qué aprenderás</h2><ul><li>Cómo funcionan los enlaces de datos y los sistemas de transmisión de fibra óptica</li><li>Qué componentes se utilizan en los transceptores</li><li>Tipos de fuentes y detectores utilizados en los transceptores</li><li>Parámetros de rendimiento de los sistemas de transmisión por fibra óptica</li></ul></section>
+        <div class="foa-prose">
+<figure class="foa-figure foa-figure-wide"><a class="foa-figure-link" href="img/sistemas-transmision-01.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Componentes de los sistemas de transmisión por fibra"><img src="img/sistemas-transmision-01.png" alt="Componentes de los sistemas de transmisión por fibra" width="637" height="84" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.1 · Componentes de los sistemas de transmisión por fibra</span><a href="img/sistemas-transmision-01.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<h2 id="enlaces-de-datos-de-fibra-optica">Enlaces de Datos de Fibra Óptica</h2>
+
+<figure class="foa-figure foa-figure-wide"><a class="foa-figure-link" href="img/sistemas-transmision-02.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Enlace bidireccional mediante dos fibras"><img src="img/sistemas-transmision-02.png" alt="Enlace bidireccional mediante dos fibras" width="271" height="43" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.2 · Enlace bidireccional mediante dos fibras</span><a href="img/sistemas-transmision-02.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Los sistemas de transmisión por fibra óptica utilizan enlaces de datos que funcionan de forma similar al diagrama mostrado arriba. Cada enlace de fibra consta de un transmisor en un extremo de la fibra y un receptor en el otro. La mayoría de los sistemas funcionan transmitiendo en una dirección en una fibra y en la dirección inversa en otra fibra para un funcionamiento dúplex completo.</p>
+
+<figure class="foa-figure foa-figure-wide"><a class="foa-figure-link" href="img/sistemas-transmision-03.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Enlace bidireccional mediante una fibra"><img src="img/sistemas-transmision-03.png" alt="Enlace bidireccional mediante una fibra" width="273" height="44" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.3 · Enlace bidireccional mediante una fibra</span><a href="img/sistemas-transmision-03.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Es posible transmitir en ambas direcciones por una sola fibra, pero para ello se necesitan acopladores y la fibra es menos cara que los acopladores. Una red óptica pasiva (PON) FTTH es uno de los únicos sistemas que utilizan la transmisión bidireccional a través de una sola fibra porque su arquitectura de red ya se basa en acopladores.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-04.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Conversión eléctrica y óptica en un transceptor"><img src="img/sistemas-transmision-04.png" alt="Conversión eléctrica y óptica en un transceptor" width="235" height="87" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.4 · Conversión eléctrica y óptica en un transceptor</span><a href="img/sistemas-transmision-04.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<h3 id="transceptores">Transceptores</h3>
+
+<p>La mayoría de los sistemas utilizan un &quot;transceptor&quot; que incluye transmisor y receptor en un solo módulo. El transmisor toma una entrada eléctrica y la convierte en a una salida óptica de un diodo láser o LED. La luz del transmisor se acopla a la fibra con un conector y se transmite a través de la planta de cables de fibra óptica. La luz del extremo de la fibra se acopla a un receptor donde un detector convierte la luz en una señal eléctrica que se acondiciona adecuadamente para su uso por el equipo receptor.</p>
+
+<h3 id="analogico-o-digital">Analógico o Digital</h3>
+
+<p>Las señales analógicas son señales continuamente variables en las que la información de la señal está contenida en la amplitud de la señal a lo largo del tiempo. Las señales digitales se muestrean a intervalos de tiempo regulares y la amplitud se convierte en bytes digitales, de modo que la información es un número digital. Las mayoría de los datos suelen ser naturalmente señales analógicas, mas estas están sujetas a degradación por el ruido en el sistema de transmisión. Cuando una señal analógica se atenúa en un cable, la relación señal/ruido empeora, por lo que la calidad de la señal se degrada. Las señales digitales pueden transmitirse a largas distancias sin degradarse, ya que la señal es menos sensible al ruido.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-05.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Representación de señales analógicas y digitales"><img src="img/sistemas-transmision-05.png" alt="Representación de señales analógicas y digitales" width="216" height="75" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.5 · Representación de señales analógicas y digitales</span><a href="img/sistemas-transmision-05.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Los enlaces de datos por fibra óptica pueden ser analógicos o digitales, aunque la mayoría son digitales. Las redes telefónicas e informáticas son digitales, la televisión por cable es analógica pero se está convirtiendo a digital, y los circuitos cerrados de televisión pueden ser de ambos tipos.</p>
+
+<p>Tanto los enlaces analógicos como los digitales tienen algunos parámetros críticos comunes y algunas diferencias importantes. Para ambos, lo más importante es el margen de pérdida óptica o el balance de potencia. Los enlaces de datos analógicos se prueban en función de la relación señal/ruido para determinar el margen del enlace, mientras que los enlaces digitales utilizan la tasa de error de bit como medida de rendimiento. Ambos enlaces requieren pruebas en todo el ancho de banda especificado para su funcionamiento, pero la mayoría de los enlaces de datos se especifican ahora para un tipo de red específico o aplicación como AM CATV o monitores en color RGB para enlaces analógicos y SONET, Ethernet o canal de fibra para enlaces digitales.</p>
+
+<h3 id="carcasas-de-hardware-electronico">Carcasas de Hardware Electrónico</h3>
+
+<p>Los transceptores suelen estar empaquetados en carcasas estándar del sector para poder alojar varias fuentes en los equipos de transmisión. Los módulos se conectan a un conector dúplex en el extremo óptico y a una interfaz eléctrica estándar en el otro extremo. Los transceptores se alimentan del equipo en el que están integrados.</p>
+
+<h2 id="fuentes-para-transmisores-de-fibra-optica">Fuentes Para Transmisores de Fibra Óptica</h2>
+
+<p>Las fuentes utilizadas para los transmisores de fibra óptica tienen que cumplir varios criterios: estar en la longitud de onda correcta, poder modularse con la rapidez suficiente para transmitir datos y acoplarse eficazmente a la fibra.</p>
+
+<p>Se suelen utilizar cuatro tipos de fuentes: LED, láseres de Fabry-Pérot (FP), láseres de realimentación distribuida (DFB) y láseres de emisión superficial de cavidad vertical (VCSEL). Todos ellos convierten señales eléctricas en ópticas, pero por lo demás son dispositivos muy diferentes. Los tres son dispositivos semiconductores diminutos (chips). Los LED y los VCSEL se fabrican en obleas semiconductoras de modo que emiten luz desde la superficie del chip, mientras que los láseres F-P y DFB emiten desde el lateral del chip a partir de una cavidad láser creada en el centro del mismo.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-06.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Fuentes LED, láser Fabry-Perot y VCSEL"><img src="img/sistemas-transmision-06.png" alt="Fuentes LED, láser Fabry-Perot y VCSEL" width="216" height="79" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.6 · Fuentes LED, láser Fabry-Perot y VCSEL</span><a href="img/sistemas-transmision-06.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Los LED tienen potencias mucho menores que los láseres y su patrón de salida de luz más grande y divergente hace que sean más difíciles de acoplar a las fibras, lo que limita su uso a las fibras multimodo. Los láseres tienen salidas de luz más pequeñas y ajustadas y se acoplan fácilmente a fibras monomodo, lo que los hace ideales para enlaces de alta velocidad a larga distancia. Los LED tienen un ancho de banda mucho menor que los láseres y están limitados a sistemas que funcionan hasta unos 250 MHz o unos 200 Mb/s. Los láseres tienen una capacidad de ancho de banda muy elevada, la mayoría útil hasta bastante más de 10 GHz o 10 Gb/s.</p>
+
+<p>Debido a su método de fabricación, los LED y los VCSEL son baratos. Los láseres son más caros porque crear la cavidad láser dentro del dispositivo es más difícil, hay que separar el chip de la oblea semiconductora y recubrir cada extremo antes de poder probar el láser para ver si es bueno.</p>
+
+<h3 id="especificaciones-tipicas-de-la-fuente-de-fibra-optica">Especificaciones Típicas De La Fuente De Fibra Óptica</h3>
+
+<div class="foa-table-wrap" tabindex="0" role="region" aria-label="Tabla: Especificaciones Típicas De La Fuente De Fibra Óptica"><table><caption>Especificaciones Típicas De La Fuente De Fibra Óptica</caption><thead><tr><th scope="col">Tipo de Dispositivo</th><th scope="col">Largos de Onda (nm)</th><th scope="col">Potencia de Entrada (dBm)</th><th scope="col">Ancho de Banda</th><th scope="col">Tipos de Fibra</th></tr></thead><tbody><tr><td>LED</td><td>850, 1300</td><td>-30 to -10</td><td>&lt;250 MHz</td><td>MM</td></tr>
+<tr><td>Laser Fabry-Perot</td><td>850,1310 (1280-<br />1330), 1550 (1480-<br />1650)</td><td>0 to +10</td><td>&gt;10 GHz</td><td>MM, SM</td></tr>
+<tr><td>Laser DFB</td><td>1550 (1480-1650)</td><td>0 to + 13<br />(+25 con amplificador)</td><td>&gt;10 GHz</td><td>SM</td></tr>
+<tr><td>VCSEL</td><td>850</td><td>-10 to 0</td><td>&gt;10 GHz</td><td>MM</td></tr></tbody></table></div>
+
+<p>Los LED tienen un ancho de banda limitado, mientras que todos los tipos de láser son muy rápidos. Otra gran diferencia entre los LED y ambos tipos de láser es la salida espectral. Los LED tienen una salida espectral muy amplia, por lo que sufren dispersión cromática en la fibra, mientras que los láseres tienen una salida espectral estrecha que sufre muy poca dispersión cromática. Los láseres DFB, que se utilizan en sistemas de larga distancia y DWDM, tienen la anchura espectral más estrecha, lo que minimiza la dispersión cromática en los enlaces más largos. Los láseres DFB también son muy lineales (es decir, la salida de luz sigue directamente a la entrada eléctrica), por lo que pueden utilizarse como fuentes en sistemas de CATV AM.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-07.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Ancho espectral de un LED y un láser"><img src="img/sistemas-transmision-07.png" alt="Ancho espectral de un LED y un láser" width="198" height="118" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.7 · Ancho espectral de un LED y un láser</span><a href="img/sistemas-transmision-07.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>La elección de estos dispositivos viene determinada principalmente por cuestiones de velocidad y compatibilidad de la fibra. Como muchos</p>
+
+<p>sistemas de predios que utilizan fibra multimodo han superado velocidades binarias de 1 Gb/s, los láseres (sobre todo VCSEL) han sustituido a los LED. La salida del LED es muy amplia, pero los láseres están muy focalizados, y las fuentes tendrán un relleno modal muy diferente en las fibras. El lanzamiento restringido del VCSEL o de cualquier láser hace que el ancho de banda efectivo de la fibra sea mayor, pero la fibra optimizada para láser, normalmente OM3, es la la recomendada para láseres.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-08.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Lanzamiento modal de un LED y un láser"><img src="img/sistemas-transmision-08.png" alt="Lanzamiento modal de un LED y un láser" width="224" height="151" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.8 · Lanzamiento modal de un LED y un láser</span><a href="img/sistemas-transmision-08.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>La electrónica de un transmisor es sencilla. Convierten un pulso entrante (voltaje) en un pulso de corriente preciso para accionar la fuente. Por lo general, los láseres se polarizan con una corriente continua baja y se modulan por encima de esa corriente de polarización para maximizar la velocidad.</p>
+
+<h2 id="detectores-para-receptores-de-fibra-optica">Detectores Para Receptores de Fibra Óptica</h2>
+
+<p>Los receptores utilizan detectores semiconductores (fotodiodos o fotodetectores) para convertir las señales ópticas en señales eléctricas. Los fotodiodos de silicio se utilizan para enlaces de longitud de onda corta (650 para POF y 850 para fibra de vidrio MM). Los sistemas de longitud de onda largas suelen utilizar detectores de InGaAs (arseniuro de indio y galio), ya que tienen menos ruido que el germanio, lo que permite disponer de receptores más sensibles.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-09.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Sensibilidad de detectores según la longitud de onda"><img src="img/sistemas-transmision-09.png" alt="Sensibilidad de detectores según la longitud de onda" width="173" height="127" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.9 · Sensibilidad de detectores según la longitud de onda</span><a href="img/sistemas-transmision-09.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Los sistemas de muy alta velocidad utilizan a veces fotodiodos de avalancha (APD por siglas en inglés [avalanche photo diode]) que tienen mayor capacidad de ancho de banda que otros fotodiodos. Los APD se polarizan a alto voltaje para crear ganancia en el fotodiodo, aumentando la sensibilidad y la capacidad de frecuencia. Estos dispositivos son más caros y más complicados de utilizar, pero ofrecen mejoras significativas en el rendimiento.</p>
+
+<h2 id="componentes-especiales-de-transmision-de-fibra-optica">Componentes Especiales de Transmisión de Fibra Óptica</h2>
+
+<h3 id="multiplexacion-por-division-de-longitud-de-onda">Multiplexación por División de Longitud de Onda</h3>
+
+<p>Dado que la luz de diferentes longitudes de onda no se mezcla dentro de la fibra, es posible transmitir señales a varias longitudes de onda diferentes en una sola fibra simultáneamente. Aunque la fibra es barata, la instalación de nuevos cables puede resultar cara, por lo que utilizar las fibras instaladas para transportar señales adicionales puede resultar muy rentable.</p>
+
+<p>La multiplexación por división de longitud de onda (WDM) se utilizó por primera vez con fibra multimodo en los primeros días de la fibra óptica, utilizando tanto 850 como 1310 nm en fibra multimodo, a veces transportando dos señales en la misma dirección y a veces permitiendo la transmisión bidireccional en una fibra. Cuando se utiliza la transmisión bidireccional por una sola fibra, las dos longitudes de onda diferentes evitan la diafonía. Cuando se utilizan en la misma dirección, los filtros eliminan una longitud de onda para evitar la diafonía. Ambas técnicas se utilizan en FTTH.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-10.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Multiplexación bidireccional de longitudes de onda"><img src="img/sistemas-transmision-10.png" alt="Multiplexación bidireccional de longitudes de onda" width="204" height="146" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.10 · Multiplexación bidireccional de longitudes de onda</span><a href="img/sistemas-transmision-10.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>WDM bidireccional en una fibra</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-11.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Dos longitudes de onda en una misma dirección"><img src="img/sistemas-transmision-11.png" alt="Dos longitudes de onda en una misma dirección" width="204" height="168" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.11 · Dos longitudes de onda en una misma dirección</span><a href="img/sistemas-transmision-11.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>WDM con dos longitudes de onda en una fibra en la misma dirección.</p>
+
+<p>Las redes de transmisión monomodo pueden transportar señales a 10 Gb/s en 128 o más longitudes de onda, lo que se denomina multiplexación por división de longitud de onda densa (DWDM). La multiplexación por división de longitud de onda gruesa (CWDM) utiliza nuevas fibras de bajo pico de agua para transmitir señales en láseres en el rango de 1260 a 1670 nm. Ambos sistemas funcionan acoplando muchas longitudes de onda en una fibra mediante un acoplador óptico y separándolas después en el extremo receptor con un acoplador WDM que dirige cada longitud de onda a una fibra distinta. Los sistemas multimodo que utilizan WDM han sido menos populares, pero algunos estándares utilizan WDM gruesa para transportar múltiples señales a más de 1 Gb/s a través de fibras multimodo optimizadas para láser con el fin de crear enlaces de mayor velocidad binaria.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-12.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Demultiplexación de canales DWDM"><img src="img/sistemas-transmision-12.png" alt="Demultiplexación de canales DWDM" width="202" height="173" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.12 · Demultiplexación de canales DWDM</span><a href="img/sistemas-transmision-12.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Los sistemas de DWDM pueden transmitir y separar muchas longitudes de onda muy próximas entre sí.</p>
+
+<h3 id="repetidores-y-amplificadores-de-fibra">Repetidores y Amplificadores de Fibra</h3>
+
+<p>Aunque la baja pérdida de la fibra óptica permite que las señales viajen cientos de kilómetros, las líneas de muy largo recorrido y los cables submarinos requieren regeneradores o repetidores para amplificar la señal periódicamente. Al principio, los repetidores consistían básicamente en un receptor seguido de un transmisor. La señal entrante se convertía de una señal luminosa a una señal eléctrica por un receptor, se limpiaba para eliminar todo el ruido posible y luego se retransmitía por otro transmisor láser. Estos repetidores añadían ruido a la señal, consumían mucha energía y eran complicados, lo que significa que eran una fuente de fallos. Además, tenían que fabricarse para la tasa de bits específica de transmisión y la actualización requería sustituir todos los repetidores, ¡una tarea realmente difícil en un cable submarino!</p>
+
+<p>La solución a los repetidores de fibra óptica fue el amplificador de fibra. El amplificador de fibra típico funciona en la banda de 1480-1650 nm. Consiste en una longitud de fibra dopada con Erbio bombeada con un láser a 980 o 1480 nm. El láser de bombeo suministra la energía para el amplificador, mientras que la señal entrante estimula la emisión a medida que el pulso atraviesa la fibra dopada. La señal estimulada proporciona la ganancia del amplificador, por lo que se produce un crecimiento rápido y exponencial de la potencia óptica en la fibra dopada. Son posibles ganancias de &gt;40 dB (10,000X) con potencias de salida &gt;+26 dBm (400 mW).</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-13.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Amplificador de fibra dopada con erbio"><img src="img/sistemas-transmision-13.png" alt="Amplificador de fibra dopada con erbio" width="324" height="97" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.13 · Amplificador de fibra dopada con erbio</span><a href="img/sistemas-transmision-13.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Además de utilizarse como repetidores, los amplificadores de fibra se emplean para aumentar el nivel de señal de los sistemas de CATV, que requieren altos niveles de potencia en el receptor para mantener un rendimiento adecuado de la relación señal/ruido, lo que permite tendidos de cable más largos o el uso de divisores para &quot;difundir&quot; una única señal a través de un acoplador a muchas fibras, ahorrando el coste de transmisores adicionales. En telefonía, los amplificadores de fibra se combinan con DWDM (multiplexores por división de longitud de onda densa) para superar las ineficiencias de los acopladores DWDM en transmisiones de larga distancia.</p>
+
+<h3 id="bandas-de-transmision-de-longitud-de-onda-en-redes-de-fibra-optica">Bandas de Transmisión de Longitud de Onda en Redes de Fibra Óptica</h3>
+
+<p>A medida que se han desarrollado las redes de fibra óptica para distancias más largas, velocidades más altas y multiplexación por división de longitud de onda (WDM), las fibras se han utilizado en nuevas gamas de longitudes de onda, ahora llamadas &quot;bandas&quot;, en las que la fibra y los equipos de transmisión pueden funcionar con mayor eficacia.</p>
+
+<p>La transmisión por fibra monomodo comenzó en la &quot;banda O&quot;, justo por encima de la longitud de onda de corte de la fibra SM, desarrollada para aprovechar la menor pérdida de la fibra de vidrio en longitudes de onda más largas y la disponibilidad de láseres con diodos de 1310 nm. (Originalmente, las fibras SM se desarrollaron para láseres de 850 nm en los que el núcleo de la fibra era aproximadamente la mitad que el de la fibra SM convencional actual (5 micrones frente a 8-9 micrones a 1310 nm).</p>
+
+<p>Para aprovechar la menor pérdida a 1550 nm, se desarrolló la fibra para la banda C. A medida que los enlaces se hicieron más largos y se empezaron a utilizar amplificadores de fibra en lugar de repetidores ópticos-electrónicos-ópticos, la banda C adquirió mayor importancia. Con la llegada de la DWDM (multiplexación por división de longitud de onda densa), que permitía que varias señales compartieran una misma fibra, se amplió el uso de esta banda. El desarrollo de nuevos amplificadores de fibra (Raman y dopados con tulio) promete ampliar la DWDM a la banda L.</p>
+
+<p>Existen varias versiones de bajo coste de WDM, generalmente denominadas WDM gruesa o CWDM, que utilizan longitudes de onda láser muy separadas. La mayoría no funcionan en largas distancias, por lo que no requieren amplificación, lo que amplía la elección de longitud de onda a toda la banda de longitud de onda de la fibra monomodo y un banda ampliada para fibra multimodo.</p>
+
+<p>Los fabricantes han conseguido fabricar fibra monomodo con un pico de absorción de agua bajo, lo que ha abierto una nueva banda de transmisión (banda E), útil para la CWDM. Para la fibra multimodo, un nuevo tipo de fibra, OM5, se desarrolló para permitir la CWDM con fuentes VCSEL en la gama de longitudes de onda de 850-950 nm.</p>
+
+<p>La aplicación CWDM más popular son los sistemas PON FTTH, que envían señales a los usuarios en sentido descendente a 1490 nm y utilizan una transmisión de bajo coste en sentido ascendente a 1310 nm. Los primeros sistemas PON también utilizaban 1550 en sentido descendente para la televisión, pero se está sustituyendo por IPTV en la señal digital descendente a 1490 nm.</p>
+
+<p>Otros sistemas utilizan una combinación de bandas S, C y L para transportar señales debido a la menor atenuación de la fibra. Algunos sistemas incluso utilizan láseres con una separación de 20 nm en toda la gama de 1260 a 1660 nm, pero sólo con fibras de bajo pico de agua.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-14.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Bandas CWDM y DWDM y atenuación de la fibra"><img src="img/sistemas-transmision-14.png" alt="Bandas CWDM y DWDM y atenuación de la fibra" width="316" height="202" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.14 · Bandas CWDM y DWDM y atenuación de la fibra</span><a href="img/sistemas-transmision-14.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Gama de longitudes de onda en DWDM</p>
+
+<div class="foa-table-wrap" tabindex="0" role="region" aria-label="Tabla: Bandas de Transmisión de Longitud de Onda en Redes de Fibra Óptica"><table><caption>Bandas de Transmisión de Longitud de Onda en Redes de Fibra Óptica</caption><thead><tr><th scope="col">Nombre de la Banda</th><th scope="col">Rangos de Largos de Onda</th><th scope="col">Descripción</th></tr></thead><tbody><tr><td>Banda-O</td><td>1260 – 1360 nm</td><td>Banda original, PON ascendente</td></tr>
+<tr><td>Banda-E</td><td>1360 – 1460 nm</td><td>Pico de agua en la banda</td></tr>
+<tr><td>Banda-S</td><td>1460 – 1530 nm</td><td>PON descendente</td></tr>
+<tr><td>Banda-C</td><td>1530 – 1565 nm</td><td>Atenuación más baja, banda original de DWDM, compatible con amplificadores de fibra, CATV</td></tr>
+<tr><td>Banda-L</td><td>1565 – 1625 nm</td><td>Baja atenuación, banda expandida de DWDM</td></tr>
+<tr><td>Banda-U</td><td>1625 – 1675 nm</td><td>Reservado para uso futuro</td></tr></tbody></table></div>
+
+<h2 id="rendimiento-de-enlaces-de-datos-y-presupuesto-de-potencia">Rendimiento de Enlaces de Datos y Presupuesto de Potencia</h2>
+
+<h3 id="medicion-de-la-calidad-de-la-transmision-de-datos">Medición de La Calidad de La Transmisión de Datos</h3>
+
+<p>Al igual que con la transmisión por cable de cobre o radio, el rendimiento del enlace de datos por fibra óptica puede determinarse por lo bien que transmite los datos; y por lo bien que la señal eléctrica reconvertida que sale del receptor coincide con la entrada al transmisor.</p>
+
+<p>La capacidad de cualquier sistema de fibra óptica para transmitir datos depende, en última instancia, de la potencia óptica en el receptor, como se muestra arriba, donde aparece la tasa de errores de bits del enlace de datos en función de la potencia óptica en el receptor. (La BER es la inversa de la relación señal/ruido, es decir, una BER alta significa una mala relación señal/ruido).</p>
+
+<p>Una potencia demasiado baja o demasiado alta provocará tasas de error de bits elevadas. Demasiada potencia y el amplificador del receptor se satura, demasiado poca y el ruido se convierte en un problema, ya que interfiere con la señal. Esta potencia del receptor depende de dos factores básicos: cuánta potencia lanza a la fibra el transmisor y cuánta se pierde por atenuación en la planta del cable de fibra óptica que conecta el transmisor y el receptor.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-15.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Tasa de error de bits y potencia recibida"><img src="img/sistemas-transmision-15.png" alt="Tasa de error de bits y potencia recibida" width="218" height="149" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.15 · Tasa de error de bits y potencia recibida</span><a href="img/sistemas-transmision-15.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<h3 id="presupuesto-de-potencia-de-enlace">Presupuesto de Potencia de Enlace</h3>
+
+<p>El presupuesto de potencia óptica del enlace viene determinado por dos factores: la sensibilidad del receptor, que se determina en la curva de tasa de error de bits anterior, y la potencia de salida del transmisor en la fibra. El nivel de potencia mínimo que produce una tasa de error de bits aceptable determina la sensibilidad del receptor. La potencia del transmisor acoplada a la fibra óptica determina la potencia transmitida. La diferencia entre estos dos niveles de potencia determina el margen de pérdida (presupuesto de potencia) del enlace.</p>
+
+<p>Los enlaces de alta velocidad como las LAN Ethernet gigabit o 10 gigabit en fibra multimodo tienen factores de reducción del ancho de banda de la fibra causados por la dispersión que afecta los pulsos de datos digitales. La antigua fibra 62.5/125 OM1 suele funcionar sólo en enlaces cortos, mientras que los enlaces en fibra 50/125 OM3 optimizada para láser recorrerán la mayor distancia. Incluso los enlaces de fibra monomodo de larga distancia pueden tener limitaciones causadas por la dispersión cromática o del modo de polarización.</p>
+
+<figure class="foa-figure"><a class="foa-figure-link" href="img/sistemas-transmision-16.png" data-foa-image target="_blank" rel="noopener" aria-label="Ampliar: Presupuesto de potencia y pérdidas de un enlace"><img src="img/sistemas-transmision-16.png" alt="Presupuesto de potencia y pérdidas de un enlace" width="290" height="190" loading="lazy" decoding="async" /></a><figcaption><span>Figura 7.16 · Presupuesto de potencia y pérdidas de un enlace</span><a href="img/sistemas-transmision-16.png" data-foa-image target="_blank" rel="noopener">Ampliar figura <span aria-hidden="true">↗</span></a></figcaption></figure>
+
+<p>Si el enlace está diseñado para funcionar a distintas velocidades binarias, es necesario generar la curva de rendimiento para cada velocidad. Dado que la potencia total de la señal es función de la anchura del pulso y que ésta varía con la velocidad binaria (a mayor velocidad binaria, pulsos más cortos), la sensibilidad del receptor se degradará a mayor velocidad binaria.</p>
+
+<p>Cada fabricante de componentes y sistemas de enlace de datos especifica su enlace para la sensibilidad del receptor (quizás una potencia mínima requerida) y la potencia mínima acoplada en la fibra desde la fuente. Los valores típicos de estos parámetros se muestran en la tabla siguiente. Para que un fabricante o diseñador de sistemas pueda probarlos correctamente, es necesario conocer las condiciones de prueba. Para los componentes de enlace de datos, eso incluye la frecuencia o velocidad de bits de los datos de entrada y el ciclo de trabajo, los voltajes de alimentación y el tipo de fibra acoplada a la fuente. Para los sistemas, será el software de diagnóstico que necesita el sistema.</p>
+
+<h3 id="parametros-tipicos-de-rendimiento-del-enlace-sistema-de-fibra-optica">Parámetros Típicos de Rendimiento del Enlace/Sistema de Fibra Óptica</h3>
+
+<div class="foa-table-wrap" tabindex="0" role="region" aria-label="Tabla: Parámetros Típicos de Rendimiento del Enlace/Sistema de Fibra Óptica"><table><caption>Parámetros Típicos de Rendimiento del Enlace/Sistema de Fibra Óptica</caption><thead><tr><th scope="col">Tipo de Enlace</th><th scope="col">Fibra</th><th scope="col">Fuente/<br />Tipo de Fibra</th><th scope="col">Largo de onda (nm)</th><th scope="col">Poder de Transmisión<br />(dBm)</th><th scope="col">Sensitividad del Receptor (dBm)</th><th scope="col">Margen del Enlace (dB)</th></tr></thead><tbody><tr><td>Telecom</td><td>SM</td><td>Laser</td><td>1310/1550</td><td>+3 to -6</td><td>-30 to -45</td><td>30 to 40</td></tr>
+<tr><td> </td><td>SM</td><td>DWDM</td><td>1550</td><td>+20 to 0</td><td>-30 to -45</td><td>40 to 50</td></tr>
+<tr><td>Datacom</td><td>MM</td><td>LED/VCSEL</td><td>850</td><td>-3 to -15</td><td>-15 to -30</td><td>3 to 25</td></tr>
+<tr><td> </td><td>MM or<br />SM</td><td>Laser</td><td>1310</td><td>-0 to -20</td><td>-15 to -30</td><td>10 to 25</td></tr>
+<tr><td>CATV(AM)</td><td>SM</td><td>Laser</td><td>1310/1550</td><td>+10 to 0</td><td>0 to -10</td><td>10 to 20</td></tr></tbody></table></div>
+
+<p>De todos los enlaces y redes de comunicaciones de datos, hay muchos sistemas de fibra óptica específicos de un proveedor, pero también hay una serie de redes estándar del sector, como Ethernet, que tienen versiones específicas para fibra. Estas redes han acordado especificaciones comunes a los productos de todos los fabricantes para garantizar la interoperabilidad.</p>
+
+<h2 id="preguntas-de-repaso">Preguntas de Repaso</h2>
+
+<p>Verdadero/Falso</p>
+
+<p><em>Indique si la afirmación es verdadera o falsa.</em></p>
+
+<p class="foa-question">______ 1. Los enlaces de fibra óptica suelen utilizar dos fibras para enlaces full dúplex (bidireccionales).</p>
+
+<p class="foa-question">______  2. Los LED tienen una potencia de salida y un ancho de banda mayores que los láseres.</p>
+
+<p>Elección múltiple</p>
+
+<p><em>Identifique la opción que mejor complete el enunciado o responda a la pregunta.</em></p>
+
+<p class="foa-question">______  3. Los sistemas de fibra multimodo que funcionan a velocidades de 1 Gb/s o más utilizan fuentes ___________.</p>
+
+<ol class="foa-answers" type="A">
+<li>LED</li>
+<li>VCSEL</li>
+<li>Láser F-P</li>
+<li>Láser DFB</li>
+</ol>
+
+<p class="foa-question">______  4. La/el ___________ de un láser hace que el ancho de banda efectivo de la fibra multimodo sea mayor que con LED.</p>
+
+<ol class="foa-answers" type="A">
+<li>Lanzamiento modal restringido</li>
+<li>Mayor potencia</li>
+<li>Menor potencia</li>
+<li>Ancho de banda</li>
+</ol>
+
+<p class="foa-question">______  5. Los enlaces de longitud de onda corta de 850 nm pueden utilizar detectores de _____________ en el receptor.</p>
+
+<ol class="foa-answers" type="A">
+<li>Silicio</li>
+<li>Germanio</li>
+<li>InGaAs</li>
+</ol>
+
+<p class="foa-question">______  6. Los enlaces monomodo de longitud de onda larga en el rango de enlaces de 1300-1650 nm deben utilizar detectores de ________ en el receptor para obtener el mejor rendimiento de sensibilidad.</p>
+
+<ol class="foa-answers" type="A">
+<li>Silicio</li>
+<li>Germanio</li>
+<li>InGaAs</li>
+</ol>
+
+<p class="foa-question">______  7. Los amplificadores de fibra y DWDM funcionan entre las longitudes de onda _______________.</p>
+
+<ol class="foa-answers" type="A">
+<li>650-850</li>
+<li>850-1300</li>
+<li>1300-1550</li>
+<li>1480-1650</li>
+</ol>
+
+<p>Respuesta Múltiple</p>
+
+<p><em>Identifique una o varias opciones que completen mejor el enunciado o respondan mejor a la pregunta.</em></p>
+
+<p class="foa-question">______  8. Los transceptores monomodo utilizan fuentes __________ por su mayor potencia acoplada y ancho de banda.</p>
+
+<ol class="foa-answers" type="A">
+<li>LED</li>
+<li>VCSEL</li>
+<li>Láseres F-P</li>
+<li>Láseres DFB</li>
+</ol>
+
+<p class="foa-question">______  9. Los transceptores multimodo utilizan fuentes __________ en función de sus requisitos de potencia acoplada y ancho de banda.</p>
+
+<ol class="foa-answers" type="A">
+<li>LED</li>
+<li>VCSEL</li>
+<li>Láseres F-P</li>
+<li>Láseres DFB</li>
+</ol>
+
+<h2 id="estudios-y-proyectos-adicionales">Estudios y Proyectos Adicionales</h2>
+
+<p>Consulta las páginas web de los fabricantes de fuentes, detectores y transceptores de fibra óptica para ver las especificaciones de rendimiento y las aplicaciones compatibles.</p>
+
+<p>En clase o en el laboratorio, configura un enlace de fibra óptica y comprueba cómo funciona. El enlace puede construirse a partir de componentes o de convertidores de medios disponibles en el mercado.</p>
+        </div>
+        <div class="lesson-actions"><a data-foa-page href="conectores-empalmes.html">← Conectores y empalmes</a><a data-foa-page href="diseno-redes.html">Diseño de redes →</a></div>
+        <footer class="foa-footer"><a href="index.html">FOA · Índice del libro</a><a href="../index.html">Fibra óptica</a><span>DGNV Studios · <span id="year">2026</span></span></footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/fiber-guide.js?v=20260930-foa"></script>
+  </body>
+</html>

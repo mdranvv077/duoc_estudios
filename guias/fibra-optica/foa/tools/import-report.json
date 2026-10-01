@@ -1,0 +1,437 @@
+{
+  "chapters": [
+    {
+      "source": "Introduccion.htm",
+      "page": "introduccion.html",
+      "sourceBlocks": 127,
+      "sourceImages": 2,
+      "figures": 1,
+      "tables": 0,
+      "removed": [
+        "Repeated header logo: ./Introduccion_files/image001.jpg",
+        "En el sitio web de la Asociación de Fibra Óptica (The Fiber Optic Association) figura una lista de las normas EIA/TIA e ISO/IEC. La información sobre las normas EIA/TIA puede encontrarse en el sitio web de la mayoría de los proveedores de hardware de cableado estructurado.",
+        "En la Guía de consulta en línea de la FOA, lea los tem",
+        "Tabla de contenido.",
+        "Ó 2024 The Fiber Optic Association Inc."
+      ],
+      "subsections": 12,
+      "words": 3627,
+      "headings": [
+        "Que es la “Fibra Óptica”?",
+        "¿Cual Fibra Óptica?",
+        "¿Fibra, Cobre o Inalámbrico?",
+        "Los Estándares Facilitan las Aplicaciones de Fibra",
+        "Dos Puntos Críticos al Trabajar con Fibra",
+        "Preguntas de Repaso"
+      ]
+    },
+    {
+      "source": "Jerga.htm",
+      "page": "terminologia.html",
+      "sourceBlocks": 134,
+      "sourceImages": 8,
+      "figures": 7,
+      "tables": 0,
+      "removed": [
+        "Repeated header logo: ./Jerga_files/image001.jpg",
+        "Tabla de contenido.",
+        "Ó 2024 The Fiber Optic Association Inc."
+      ],
+      "subsections": 11,
+      "words": 2205,
+      "headings": [
+        "¿Qué es la Fibra Óptica?",
+        "El Sistema Métrico",
+        "Fibra",
+        "Cable de Fibra Óptica",
+        "Instalaciones en Planta Externa",
+        "Terminaciones y Empalmes",
+        "Especificaciones de Rendimiento de la Fibra",
+        "Herramientas",
+        "Equipos de Prueba de Fibra Óptica",
+        "Preguntas de Repaso",
+        "Estudios y Proyectos Adicionales"
+      ]
+    },
+    {
+      "source": "Comm.htm",
+      "page": "comunicaciones.html",
+      "sourceBlocks": 90,
+      "sourceImages": 7,
+      "figures": 6,
+      "tables": 0,
+      "removed": [
+        "Repeated header logo: ./Comm_files/image001.jpg",
+        "Lea las secciones de la Guía de referencia en línea de la FOA sobre redes de predios y FTTH.",
+        "Tabla de contenido.",
+        "Ó 2024 The Fiber Optic Association Inc."
+      ],
+      "subsections": 15,
+      "words": 2791,
+      "headings": [
+        "¿Por qué Utilizar Fibra?",
+        "Comunicaciones con Fibra Óptica",
+        "Diseño de Redes de Fibra Óptica",
+        "Preguntas de Repaso",
+        "Estudios y Proyectos Adicionales"
+      ]
+    },
+    {
+      "source": "Fibra_optica.htm",
+      "page": "fibra-optica.html",
+      "sourceBlocks": 174,
+      "sourceImages": 17,
+      "figures": 16,
+      "tables": 1,
+      "removed": [
+        "Repeated header logo: ./Fibra_optica_files/image001.jpg",
+        "Aprenda cómo se fabrica la fibra óptica leyendo la página de la Guía de referencia en línea de la FOA o las páginas web de los fabricantes de fibra.",
+        "Aprenda cómo se producen las pérdidas por fibras desajustadas y cuál puede ser su magnitud en la página de la Guía de referencia en línea de la FOA.",
+        "Tabla de contenido.",
+        "Ó 2024 The Fiber Optic Association Inc."
+      ],
+      "subsections": 27,
+      "words": 5456,
+      "headings": [
+        "¿Qué es la Fibra Óptica?",
+        "Tipos de Fibra",
+        "Especificaciones de Fibra",
+        "Preguntas de Repaso",
+        "Estudios y Proyectos Adicionales"
+      ]
+    },
+    {
+      "source": "Cable.htm",
+      "page": "cables.html",
+      "sourceBlocks": 177,
+      "sourceImages": 11,
+      "figures": 10,
+      "tables": 3,
+      "removed": [
+        "Repeated header logo: ./Cable_files/image001.jpg",
+        "Revise los vídeos de FOA sobre la preparación de cables.",
+        "Tabla de contenido.",
+        "Ó 2024 The Fiber Optic Association Inc."
+      ],
+      "subsections": 28,
+      "words": 4588,
+      "headings": [
+        "Diseño de Cables de Fibra Óptica",
+        "Tipos de Cables de Fibra Óptica",
+        "Criterios de Diseño de Cables",
+        "Eligiendo Cables",
+        "Preguntas de Repaso",
+        "Estudios y Proyectos Adicionales"
+      ]
+    },
+    {
+      "source": "Conectores.htm",
+      "page": "conectores-empalmes.html",
+      "sourceBlocks": 230,
+      "sourceImages": 15,
+      "figures": 14,
+      "tables": 0,
+      "removed": [
+        "Repeated header logo: ./Conectores_files/image001.jpg",
+        "Puedes ver más tipos de conectores de fibra óptica en el sitio web FOA Tech Topics.",
+        "Lea la página Identificador de conectores en la Guía de referencia en línea de la FOA para conocer más estilos de conectores.",
+        "Lea las páginas \"Virtual Hands-On\" (prácticas virtuales) de la Guía de referencia en línea de la FOA para ver explicaciones detalladas de cómo se fabrican los conectores epoxi/pulido, anaeróbico/pulido, HotMelt/pulido y pre-pulido/empalme y cómo se pulen las terminaciones monomodo.",
+        "Lea las páginas sobre empalmes por fusión y empalmes mecánicos en la guía de referencia en línea de la FOA para conocer más detalles sobre estos empalmes.",
+        "Lea las páginas \"Virtual Hands-On\" (prácticas virtuales) de la Guía de referencia en línea de la FOA para ver explicaciones detalladas sobre cómo se realizan los empalmes por fusión en fibras simples y de cinta y cómo se realizan los empalmes mecánicos.",
+        "Tabla de contenido.",
+        "Ó 2024 The Fiber Optic Association Inc."
+      ],
+      "subsections": 32,
+      "words": 8499,
+      "headings": [
+        "¿Conectores o Empalmes?",
+        "Especificaciones de Rendimiento",
+        "Conectores",
+        "Procedimientos de Terminación o Conectorización",
+        "Empalmes",
+        "Preguntas de Repaso",
+        "Estudio Adicional",
+        "Proyectos de Laboratorio"
+      ]
+    },
+    {
+      "source": "Sistemas.htm",
+      "page": "sistemas-transmision.html",
+      "sourceBlocks": 130,
+      "sourceImages": 17,
+      "figures": 16,
+      "tables": 3,
+      "removed": [
+        "Repeated header logo: ./Sistemas_files/image001.jpg",
+        "Tabla de contenido.",
+        "Ó 2024 The Fiber Optic Association Inc."
+      ],
+      "subsections": 17,
+      "words": 3476,
+      "headings": [
+        "Enlaces de Datos de Fibra Óptica",
+        "Fuentes Para Transmisores de Fibra Óptica",
+        "Detectores Para Receptores de Fibra Óptica",
+        "Componentes Especiales de Transmisión de Fibra Óptica",
+        "Rendimiento de Enlaces de Datos y Presupuesto de Potencia",
+        "Preguntas de Repaso",
+        "Estudios y Proyectos Adicionales"
+      ]
+    },
+    {
+      "source": "Diseno.htm",
+      "page": "diseno-redes.html",
+      "sourceBlocks": 303,
+      "sourceImages": 7,
+      "figures": 6,
+      "tables": 6,
+      "removed": [
+        "Repeated header logo: ./Diseno_files/image001.jpg",
+        "El libro de texto de la FOA \"FOA Reference Guide To Fiber Optic Network Design\" es una guía completa de todos los aspectos del diseño de fibra óptica y se recomienda a todos los técnicos de fibra óptica que participen en la planificación o el diseño de proyectos.",
+        "Lea las secciones sobre Diseño de redes de fibra óptica de la Guía de referencia en línea de FOA, incluidas las páginas sobre LAN y FTTx.",
+        "Tabla de contenido.",
+        "Ó 2024 The Fiber Optic Association Inc."
+      ],
+      "subsections": 44,
+      "words": 14273,
+      "headings": [
+        "¿Qué Es El Diseño de Redes de Fibra Óptica?",
+        "Elección de Equipo de Transmisión",
+        "Planificación de la Ruta",
+        "Elección de Componentes",
+        "Análisis del Presupuesto de Pérdida de Enlace de la Planta",
+        "Documentación Del Proyecto",
+        "Planificación de la Instalación",
+        "Gestión de Un Proyecto de Fibra Óptica",
+        "Preguntas de Repaso",
+        "Estudios y Proyectos Adicionales"
+      ]
+    },
+    {
+      "source": "Instalacion.htm",
+      "page": "instalacion.html",
+      "sourceBlocks": 461,
+      "sourceImages": 20,
+      "figures": 19,
+      "tables": 0,
+      "removed": [
+        "Repeated header logo: ./Instalacion_files/image001.jpg",
+        "Recuerde que las escuelas aprobadas por la FOA a menudo ofrecen otros tipos de clases además de las clases de certificación CFOT. Consulte con su escuela FOA o la lista online de escuelas aprobadas por la FOA para más información.",
+        "Tabla de contenido.",
+        "Ó 2024 The Fiber Optic Association Inc."
+      ],
+      "subsections": 68,
+      "words": 18896,
+      "headings": [
+        "Preparandose Para La Instalación",
+        "Lista de Comprobación De La Instalación",
+        "Preparativos Para La Instalación De Fibra Óptica En Predios",
+        "Preparativos Para las Instalaciones de Planta Externa",
+        "Tendido y Colocación de Cable",
+        "Equipamiento del Personal de Instalación",
+        "Formación y Seguridad",
+        "Instalación de Cable de Fibra Óptica",
+        "Terminación y Empalme",
+        "Pruebas de la Planta de Cable de Fibra Óptica Instalada",
+        "Administración, Gestión, y Documentación",
+        "Preguntas de Repaso",
+        "Estudios y Proyectos Adicionales"
+      ]
+    },
+    {
+      "source": "Prueba.htm",
+      "page": "pruebas.html",
+      "sourceBlocks": 295,
+      "sourceImages": 18,
+      "figures": 17,
+      "tables": 2,
+      "removed": [
+        "Repeated header logo: ./Prueba_files/image001.jpg",
+        "Encontrará más información sobre los efectos modales en las mediciones de fibras multimodo y envolturas de mandril en el sitio web de la FOA y en el libro de texto de la FOA sobre pruebas.",
+        "La FOA desea agradecer el inestimable material de referencia sobre CD, PMD y SA de las Guías de referencia de la JDSU sobre pruebas de fibra óptica. Estos libros altamente recomendados pueden descargarse del sitio web de la JDSU, jdsu.com.",
+        "El libro de texto de la FOA \"FOA Reference Guide To Fiber Optic Testing\" es una guía completa de todos los aspectos de las pruebas de fibra óptica y se recomienda para todos los técnicos de fibra óptica implicados en las pruebas.",
+        "La Guía de referencia en línea de la FOA contiene muchas páginas de información sobre las pruebas. Le recomendamos que vaya al Índice de la Guía y las lea todas, pero primero éstas:",
+        "Tabla de contenido.",
+        "Ó 2024 The Fiber Optic Association Inc."
+      ],
+      "subsections": 39,
+      "words": 12526,
+      "headings": [
+        "Pruebas de Fibra Óptica",
+        "La Importancia de Limpiar los Conectores",
+        "Inspección Visual",
+        "Potencia Óptica",
+        "Pérdida Óptica o Pérdida Por Inserción",
+        "Pruebas de OTDR",
+        "Pruebas de Redes de Fibra Óptica de Larga Distancia y Alta Velocidad",
+        "Otras Pruebas",
+        "Preguntas de Repaso",
+        "Estudios y Proyectos Adicionales"
+      ]
+    }
+  ],
+  "uniqueImages": 111,
+  "totalFigures": 112,
+  "textEdits": [
+    {
+      "chapter": "Introduccion.htm",
+      "original": "Objectivos: De este capítulo debes aprender:",
+      "replacement": "Objetivos: De este capítulo debes aprender:"
+    },
+    {
+      "chapter": "Introduccion.htm",
+      "original": "La fibra óptica es la tecnología de transmisión de luz a través de finos filamentos de fibras ópticas muy transparentes, normalmente de vidrio, pero a veces de plástico. La fibra óptica se utiliza en comunicaciones, iluminación, medicina, inspecciones ópticas y para fabricar sensores. La FOA está interesada principalmente en la fibra óptica para comunicaciones, por lo que este libro se centrará en esa aplicación.",
+      "replacement": "La fibra óptica es la tecnología de transmisión de luz a través de finos filamentos de fibras ópticas muy transparentes, normalmente de vidrio, pero a veces de plástico. La fibra óptica se utiliza en comunicaciones, iluminación, medicina, inspecciones ópticas y para fabricar sensores. Este capítulo se centra en la fibra óptica para comunicaciones."
+    },
+    {
+      "chapter": "Introduccion.htm",
+      "original": "6. El cableado exterior de la planta puede ser instalado por .",
+      "replacement": "6. El cableado exterior de la planta puede ser instalado por."
+    },
+    {
+      "chapter": "Introduccion.htm",
+      "original": "7. El cable subterráneo suele incluir un gel, polvo o cinta para protegerlo de .",
+      "replacement": "7. El cable subterráneo suele incluir un gel, polvo o cinta para protegerlo de."
+    },
+    {
+      "chapter": "Introduccion.htm",
+      "original": "8. El cable blindado se utiliza en instalaciones de plantas exteriores para .",
+      "replacement": "8. El cable blindado se utiliza en instalaciones de plantas exteriores para."
+    },
+    {
+      "chapter": "Introduccion.htm",
+      "original": "9. La concatenación o unión de dos cables en un tramo largo de planta exterior se realiza casi siempre mediante .",
+      "replacement": "9. La concatenación o unión de dos cables en un tramo largo de planta exterior se realiza casi siempre mediante."
+    },
+    {
+      "chapter": "Introduccion.htm",
+      "original": "10. Los cables en predios de las redes troncales LAN suelen contener .",
+      "replacement": "10. Los cables en predios de las redes troncales LAN suelen contener."
+    },
+    {
+      "chapter": "Introduccion.htm",
+      "original": "12. El equipo de protección que todo instalador de VDV (voz, datos, video) debe llevar siempre es .",
+      "replacement": "12. El equipo de protección que todo instalador de VDV (voz, datos, video) debe llevar siempre es."
+    },
+    {
+      "chapter": "Introduccion.htm",
+      "original": "13. La información sobre la seguridad de los productos químicos utilizados en fibra óptica son o están .",
+      "replacement": "13. La información sobre la seguridad de los productos químicos utilizados en fibra óptica son o están."
+    },
+    {
+      "chapter": "Jerga.htm",
+      "original": "La clave para entender cualquier tecnología es comprender su lenguaje: la jerga. Hemos empezado este libro con una visión general de la jerga de la fibra para introducirle en el lenguaje de la fibra óptica y ayudarle a entender lo que va a leer en el libro. Le sugerimos que lea esta sección primero para ayudarle a comprender el resto del libro y consultarla cuando encuentre un término que no reconozca. También puede utilizar la Guía de referencia en línea de la FOA para obtener explicaciones más detalladas.",
+      "replacement": "La clave para entender cualquier tecnología es comprender su lenguaje: la jerga. Hemos empezado este libro con una visión general de la jerga de la fibra para introducirle en el lenguaje de la fibra óptica y ayudarle a entender lo que va a leer en el libro. Le sugerimos que lea esta sección primero para ayudarle a comprender el resto del libro y consultarla cuando encuentre un término que no reconozca."
+    },
+    {
+      "chapter": "Comm.htm",
+      "original": "6. La capacidad de ancho de banda y distancia de la fibra óptica significa que . (elija todas las que apliquen)",
+      "replacement": "6. La capacidad de ancho de banda y distancia de la fibra óptica significa que. (elija todas las que apliquen)"
+    },
+    {
+      "chapter": "Fibra_optica.htm",
+      "original": "9. La pérdida de una fibra multimodo de índice graduado es mayor en .",
+      "replacement": "9. La pérdida de una fibra multimodo de índice graduado es mayor en."
+    },
+    {
+      "chapter": "Cable.htm",
+      "original": "3. Los cables que contienen fibras multimodo y monomodo se denominan .",
+      "replacement": "3. Los cables que contienen fibras multimodo y monomodo se denominan."
+    },
+    {
+      "chapter": "Cable.htm",
+      "original": "4. Los cables con conductores metálicos además de fibra se denominan .",
+      "replacement": "4. Los cables con conductores metálicos además de fibra se denominan."
+    },
+    {
+      "chapter": "Cable.htm",
+      "original": "5. No debe instalarse ningún cable en interiores a menos que .",
+      "replacement": "5. No debe instalarse ningún cable en interiores a menos que."
+    },
+    {
+      "chapter": "Cable.htm",
+      "original": "6. TODOS los cables de exterior están específicamente diseñados para .",
+      "replacement": "6. TODOS los cables de exterior están específicamente diseñados para."
+    },
+    {
+      "chapter": "Cable.htm",
+      "original": "8. El diseño de cables para alta tensión de tracción en instalaciones de planta exterior suele ser .",
+      "replacement": "8. El diseño de cables para alta tensión de tracción en instalaciones de planta exterior suele ser."
+    },
+    {
+      "chapter": "Cable.htm",
+      "original": "9. La ventaja de un cable de breakout sobre un cable de distribución es .",
+      "replacement": "9. La ventaja de un cable de breakout sobre un cable de distribución es."
+    },
+    {
+      "chapter": "Conectores.htm",
+      "original": "Consulta las fichas técnicas y las notas de aplicación de los conectores en los sitios web de los fabricantes.",
+      "replacement": "Consulta las fichas técnicas y las notas de aplicación de los conectores de los fabricantes."
+    },
+    {
+      "chapter": "Sistemas.htm",
+      "original": "De todos los enlaces y redes de comunicaciones de datos, hay muchos sistemas de fibra óptica específicos de un proveedor, pero también hay una serie de redes estándar del sector, como Ethernet, que tienen versiones específicas para fibra. Estas redes han acordado especificaciones comunes a los productos de todos los fabricantes para garantizar la interoperabilidad. FOA Tech Topics incluye un resumen de las especificaciones de muchos de estos sistemas.",
+      "replacement": "De todos los enlaces y redes de comunicaciones de datos, hay muchos sistemas de fibra óptica específicos de un proveedor, pero también hay una serie de redes estándar del sector, como Ethernet, que tienen versiones específicas para fibra. Estas redes han acordado especificaciones comunes a los productos de todos los fabricantes para garantizar la interoperabilidad."
+    },
+    {
+      "chapter": "Diseno.htm",
+      "original": "Las personas que se dedican al diseño de proyectos de fibra óptica ya deben tener conocimientos de fibra óptica, como haber realizado un curso de certificación CFOT de la FOA, y pueden tener otra formación en las especialidades de diseño de plantas de cableado y/o contratación eléctrica. También es muy importante saber cómo encontrar información exhaustiva, sobre todo en Internet, acerca de productos, normas, códigos y, para las redes OSP, cómo utilizar servicios de cartografía en línea como Google Maps. Se valorará positivamente la experiencia con sistemas CAD.",
+      "replacement": "Las personas que se dedican al diseño de proyectos de fibra óptica ya deben tener conocimientos de fibra óptica, como haber realizado formación técnica en fibra óptica, y pueden tener otra formación en las especialidades de diseño de plantas de cableado y/o contratación eléctrica. También es muy importante saber cómo encontrar información exhaustiva, sobre todo en Internet, acerca de productos, normas, códigos y, para las redes OSP, cómo utilizar servicios de cartografía en línea como Google Maps. Se valorará positivamente la experiencia con sistemas CAD."
+    },
+    {
+      "chapter": "Instalacion.htm",
+      "original": "Los técnicos que realicen la instalación deben estar formados y certificados por organizaciones como la Asociación Profesional de Fibra Óptica FOA (www.thefoa.org) y/o los fabricantes de los productos que se instalen. La certificación ofrece la seguridad de que los técnicos instaladores tienen los conocimientos y la experiencia necesarios para realizar el trabajo.",
+      "replacement": "Los técnicos que realicen la instalación deben estar formados y certificados por organizaciones de formación técnica y/o los fabricantes de los productos que se instalen. La certificación ofrece la seguridad de que los técnicos instaladores tienen los conocimientos y la experiencia necesarios para realizar el trabajo."
+    },
+    {
+      "chapter": "Instalacion.htm",
+      "original": "La regla número 1 de la instalación de fibra óptica es no intentar nunca instalar un nuevo tipo de componente o realizar un nuevo tipo de aplicación sin la formación adecuada. No tener el conocimiento o las habilidades relacionadas con ese componente o aplicación hace virtualmente imposible asegurar el éxito en el trabajo y los errores pueden ser muy caros. En la FOA tenemos muchos ejemplos de instalaciones que salieron mal con terribles consecuencias.",
+      "replacement": "La regla número 1 de la instalación de fibra óptica es no intentar nunca instalar un nuevo tipo de componente o realizar un nuevo tipo de aplicación sin la formación adecuada. No tener el conocimiento o las habilidades relacionadas con ese componente o aplicación hace virtualmente imposible asegurar el éxito en el trabajo y los errores pueden ser muy caros."
+    },
+    {
+      "chapter": "Instalacion.htm",
+      "original": "Nadie puede saberlo todo ni ningún curso de formación puede abarcar todos los aspectos de la fibra óptica, todos los tipos de componentes y aplicaciones. De todos modos, la tecnología siempre está avanzando, por lo que es importante seguir adquiriendo conocimientos de todas las fuentes disponibles. Gran parte de los conocimientos técnicos necesarios se pueden obtener en sitios web como la Guía de referencia en línea de la FOA, pero ¿qué ocurre con las habilidades necesarias para trabajar con componentes de fibra óptica reales para la instalación, las pruebas, la resolución de problemas y la restauración? Estos conocimientos sólo pueden adquirirse con la formación y la experiencia.",
+      "replacement": "Nadie puede saberlo todo ni ningún curso de formación puede abarcar todos los aspectos de la fibra óptica, todos los tipos de componentes y aplicaciones. De todos modos, la tecnología siempre está avanzando, por lo que es importante seguir adquiriendo conocimientos de todas las fuentes disponibles. Gran parte de los conocimientos técnicos necesarios se pueden obtener en materiales de formación técnica, pero ¿qué ocurre con las habilidades necesarias para trabajar con componentes de fibra óptica reales para la instalación, las pruebas, la resolución de problemas y la restauración? Estos conocimientos sólo pueden adquirirse con la formación y la experiencia."
+    },
+    {
+      "chapter": "Instalacion.htm",
+      "original": "Los técnicos de fibra óptica con cierta experiencia a menudo pueden aprender a instalar muchos tipos de componentes nuevos o a manejar equipos nuevos por su cuenta. En los sitios web de la FOA y de muchos fabricantes, hay tutoriales con información sobre la mayoría de los temas de instalación, así como los tutoriales \"prácticos virtuales\" (VHO por siglas en inglés [Virtual hands-on]) de la FOA sobre cómo se hace, paso a paso. La mayoría de los fabricantes tienen buenas instrucciones y a menudo tutoriales en línea para ayudar. Con las herramientas adecuadas y la información sobre las aplicaciones, el técnico astuto debería ser capaz de aprender nuevos procesos en poco tiempo. El secreto, por supuesto, está en hacerlo en un entorno de oficina tranquilo y limpio antes de probarlo en las instalaciones de un cliente con él mirando por encima del hombro.",
+      "replacement": "Los técnicos de fibra óptica con cierta experiencia a menudo pueden aprender a instalar muchos tipos de componentes nuevos o a manejar equipos nuevos por su cuenta. Existen tutoriales con información sobre la mayoría de los temas de instalación, así como tutoriales prácticos virtuales sobre cómo se hace, paso a paso. La mayoría de los fabricantes tienen buenas instrucciones y a menudo tutoriales en línea para ayudar. Con las herramientas adecuadas y la información sobre las aplicaciones, el técnico astuto debería ser capaz de aprender nuevos procesos en poco tiempo. El secreto, por supuesto, está en hacerlo en un entorno de oficina tranquilo y limpio antes de probarlo en las instalaciones de un cliente con él mirando por encima del hombro."
+    },
+    {
+      "chapter": "Instalacion.htm",
+      "original": "A veces, es mejor hacer un curso. Muchas escuelas homologadas por la FOA ofrecen cursos avanzados o especializados en terminación, empalme, pruebas, fibra hasta el hogar, etc. que proporcionan varios días de formación intensiva, con herramientas, equipos y suministros, así como instructores familiarizados con los procesos que se enseñan. Los fabricantes también ofrecen formación específica sobre productos, pero hay que intentar que la impartan ingenieros de aplicaciones y no personal de ventas, que quizá no tengan los conocimientos necesarios para formar adecuadamente a los instaladores.",
+      "replacement": "A veces, es mejor hacer un curso. Muchas escuelas de formación técnica ofrecen cursos avanzados o especializados en terminación, empalme, pruebas, fibra hasta el hogar, etc. que proporcionan varios días de formación intensiva, con herramientas, equipos y suministros, así como instructores familiarizados con los procesos que se enseñan. Los fabricantes también ofrecen formación específica sobre productos, pero hay que intentar que la impartan ingenieros de aplicaciones y no personal de ventas, que quizá no tengan los conocimientos necesarios para formar adecuadamente a los instaladores."
+    },
+    {
+      "chapter": "Instalacion.htm",
+      "original": "¿Puedes aprenderlo tú solo? Algunos aprendemos mejor solos. ¿Hay información sobre el tema fácilmente disponible, por ejemplo en la Guía de referencia de fibra óptica en línea de la FOA? Los buenos vídeos también pueden ayudar, especialmente con temas prácticos como el tendido y la terminación de cables. ¿Puede conseguir las herramientas y componentes adecuados para desarrollar las habilidades necesarias? ¿Hay alguien a quien pueda pedir ayuda?",
+      "replacement": "¿Puedes aprenderlo tú solo? Algunos aprendemos mejor solos. ¿Hay información sobre el tema fácilmente disponible? Los buenos vídeos también pueden ayudar, especialmente con temas prácticos como el tendido y la terminación de cables. ¿Puede conseguir las herramientas y componentes adecuados para desarrollar las habilidades necesarias? ¿Hay alguien a quien pueda pedir ayuda?"
+    },
+    {
+      "chapter": "Instalacion.htm",
+      "original": "¿Ofrecen los formadores independientes, como las escuelas autorizadas por la FOA, formación en este ámbito? ¿Cubre lo que necesita saber? ¿Dispone el formador de la última versión del equipo necesario para la formación? ¿Le formarán con su equipo? ¿El instructor tiene experiencia y conoce bien los productos y la tecnología? ¿Puede el formador ofrecer la certificación del fabricante, así como otras certificaciones?",
+      "replacement": "¿Ofrecen los formadores independientes formación en este ámbito? ¿Cubre lo que necesita saber? ¿Dispone el formador de la última versión del equipo necesario para la formación? ¿Le formarán con su equipo? ¿El instructor tiene experiencia y conoce bien los productos y la tecnología? ¿Puede el formador ofrecer la certificación del fabricante, así como otras certificaciones?"
+    },
+    {
+      "chapter": "Instalacion.htm",
+      "original": "La Norma de Instalación de Fibra Óptica FOA/NECA 301, que puede descargarse gratuitamente de FOA, cubre de forma concisa las directrices para la instalación.",
+      "replacement": "La Norma de Instalación de Fibra Óptica FOA/NECA 301, cubre de forma concisa las directrices para la instalación."
+    },
+    {
+      "chapter": "Prueba.htm",
+      "original": "Las pruebas son el objeto de la mayoría de las normas del sector, ya que es necesario verificar las especificaciones de los componentes y sistemas de forma coherente. En el sitio web de la FOA figura una lista de las normas TIA e ISO sobre fibra óptica. La mayoría de estas pruebas están relacionadas con las pruebas de fabricación para verificar el rendimiento de los componentes y no son relevantes para las pruebas de instalación. Tal vez la prueba más importante sea la pérdida de inserción de una planta de cable de fibra óptica instalada realizada con una fuente de luz y un medidor de potencia (LSPM) o un equipo de prueba de pérdida óptica (OLTS) que exigen todas las normas internacionales para garantizar que la planta de cable está dentro del presupuesto de pérdida antes de aceptar la instalación.",
+      "replacement": "Las pruebas son el objeto de la mayoría de las normas del sector, ya que es necesario verificar las especificaciones de los componentes y sistemas de forma coherente. La mayoría de estas pruebas están relacionadas con las pruebas de fabricación para verificar el rendimiento de los componentes y no son relevantes para las pruebas de instalación. Tal vez la prueba más importante sea la pérdida de inserción de una planta de cable de fibra óptica instalada realizada con una fuente de luz y un medidor de potencia (LSPM) o un equipo de prueba de pérdida óptica (OLTS) que exigen todas las normas internacionales para garantizar que la planta de cable está dentro del presupuesto de pérdida antes de aceptar la instalación."
+    },
+    {
+      "chapter": "Prueba.htm",
+      "original": "Las pruebas de campo para las instalaciones de cable incluyen la dispersión cromática (CD), la dispersión del modo de polarización (PMD) y la atenuación espectral (SA) Estas pruebas suelen combinarse y denominarse \"Caracterización de la fibra\". Las pruebas son muy especializadas y requieren una instrumentación complicada y se tratan con más detalle en el libro de texto de la FOA sobre pruebas.",
+      "replacement": "Las pruebas de campo para las instalaciones de cable incluyen la dispersión cromática (CD), la dispersión del modo de polarización (PMD) y la atenuación espectral (SA) Estas pruebas suelen combinarse y denominarse \"Caracterización de la fibra\". Las pruebas son muy especializadas y requieren una instrumentación complicada."
+    },
+    {
+      "chapter": "Prueba.htm",
+      "original": "Todas las páginas de \"Pruebas y resolución de problemas de los sistemas de fibra óptica\"",
+      "replacement": "Pruebas y resolución de problemas de los sistemas de fibra óptica"
+    }
+  ]
+}

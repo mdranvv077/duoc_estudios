@@ -36,10 +36,29 @@ const fiberGuideData = {
       ["herramientas.html", "Herramientas de comprobación"],
     ],
   },
+  foa: {
+    folder: "foa",
+    label: "FOA · Libro de consulta",
+    modules: [
+      ["index.html", "Índice del libro"],
+      ["introduccion.html", "Introducción"],
+      ["terminologia.html", "Terminología"],
+      ["comunicaciones.html", "Comunicaciones"],
+      ["fibra-optica.html", "La fibra"],
+      ["cables.html", "Cables"],
+      ["conectores-empalmes.html", "Conectores y empalmes"],
+      ["sistemas-transmision.html", "Transmisión"],
+      ["diseno-redes.html", "Diseño de redes"],
+      ["instalacion.html", "Instalación"],
+      ["pruebas.html", "Pruebas"],
+    ],
+  },
 };
 
 function currentFiberCategory(url = location.href) {
   const path = new URL(url, location.href).pathname;
+  if (path.includes("/fibra-optica/foa/")) return "foa";
+  if (path.endsWith("/fibra-optica/modulo-en-blanco.html")) return "standalone";
   if (path.includes("/fibras-cables/")) return "fiber";
   if (path.includes("/conectores-empalmes/")) return "connections";
   if (path.includes("/pruebas/")) return "testing";
@@ -54,10 +73,11 @@ function renderFiberNavigation() {
   if (year) year.textContent = new Date().getFullYear();
   const category = currentFiberCategory();
   const data = fiberGuideData[category];
+  const standalone = category === "standalone";
   const current = new URL(location.href).pathname.split("/").pop();
   const categories = sidebar.querySelector(".sidebar-categories");
   if (categories) {
-    const href = (key) => category === key ? "index.html" : `../${fiberGuideData[key].folder}/index.html`;
+    const href = (key) => standalone ? `${fiberGuideData[key].folder}/index.html` : category === key ? "index.html" : `../${fiberGuideData[key].folder}/index.html`;
     categories.innerHTML = `
       <span class="sidebar-episode-label">Episodio 01</span>
       <a class="sidebar-category ${category === "start" ? "active" : ""}" data-fiber-category="start" href="${href("start")}"><span>01</span><b>Antes de empezar</b><i>↗</i></a>
@@ -65,7 +85,38 @@ function renderFiberNavigation() {
       <a class="sidebar-category ${category === "connections" ? "active" : ""}" data-fiber-category="connections" href="${href("connections")}"><span>03</span><b>Conectores</b><i>↗</i></a>
       <a class="sidebar-category ${category === "testing" ? "active" : ""}" data-fiber-category="testing" href="${href("testing")}"><span>04</span><b>Potencia y pruebas</b><i>↗</i></a>`;
   }
-  nav.innerHTML = data.modules.map(([file, label], index) => `<a class="${file === current ? "active" : ""}" href="${file}"><span>${String(index + 1).padStart(2, "0")}</span>${label}</a>`).join("");
+  nav.hidden = standalone;
+  nav.innerHTML = data ? data.modules.map(([file, label], index) => `<a class="${file === current ? "active" : ""}" href="${file}"><span>${category === "foa" ? index === 0 ? "•" : String(index).padStart(2, "0") : String(index + 1).padStart(2, "0")}</span>${label}</a>`).join("") : "";
+  let standaloneLink = sidebar.querySelector(".sidebar-standalone");
+  if (!standaloneLink) {
+    standaloneLink = document.createElement("a");
+    standaloneLink.className = "sidebar-category sidebar-standalone";
+    standaloneLink.innerHTML = `<span>+</span><b>FOA · El libro</b><i>↗</i>`;
+    sidebar.append(standaloneLink);
+  }
+  standaloneLink.href = standalone ? "foa/index.html" : category === "foa" ? "index.html" : "../foa/index.html";
+  standaloneLink.dataset.fiberCategory = "foa";
+  standaloneLink.classList.toggle("active", category === "foa");
+  if (category === "foa") {
+    import(new URL("assets/foa.js?v=20260930-book", location.href).href)
+      .then(reader => reader.initFoaReader()).catch(console.error);
+  }
+}
+
+async function prepareFiberStyles(nextDocument, url) {
+  const links = [...nextDocument.querySelectorAll('link[rel="stylesheet"]')];
+  await Promise.all(links.filter(link => link.getAttribute("href").includes("foa.css")).map(link => {
+    const href = new URL(link.getAttribute("href"), url).href;
+    if ([...document.querySelectorAll('link[rel="stylesheet"]')].some(current => current.href === href)) return;
+    return new Promise((resolve, reject) => {
+      const style = document.createElement("link");
+      style.rel = "stylesheet";
+      style.href = href;
+      style.onload = resolve;
+      style.onerror = reject;
+      document.head.append(style);
+    });
+  }));
 }
 
 async function fetchFiberDocument(url) {
@@ -79,6 +130,7 @@ async function loadFiberModule(url, addHistory = true) {
   if (!content) return;
   try {
     const nextDocument = await fetchFiberDocument(url);
+    await prepareFiberStyles(nextDocument, url);
     const nextContent = nextDocument.querySelector(".lesson-content");
     if (!nextContent) throw new Error();
     content.innerHTML = nextContent.innerHTML;
@@ -94,6 +146,7 @@ async function loadFiberCategory(url, addHistory = true) {
   if (!shell) return;
   try {
     const nextDocument = await fetchFiberDocument(url);
+    await prepareFiberStyles(nextDocument, url);
     const nextShell = nextDocument.querySelector(".learning-shell");
     if (!nextShell) throw new Error();
     shell.innerHTML = nextShell.innerHTML;
@@ -118,7 +171,7 @@ document.addEventListener("click", (event) => {
     loadFiberCategory(categoryLink.href);
     return;
   }
-  const link = event.target.closest(".lesson-nav a, .lesson-actions a, a.spectrum-cta");
+  const link = event.target.closest(".lesson-nav a, .lesson-actions a, a.spectrum-cta, a[data-foa-page]");
   if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   if (new URL("./", link.href).pathname !== new URL("./", location.href).pathname) return;
   event.preventDefault();
