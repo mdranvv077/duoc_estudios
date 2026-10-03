@@ -34,17 +34,15 @@
           trabajos desarrollados junto a organizaciones y empresas.
         </p>
       </section>
-      <section class="project-list" aria-labelledby="project-list-title">
+      <section class="project-list" aria-labelledby="project-list-title" data-public-projects>
         <p class="project-list-label" id="project-list-title">Proyectos disponibles</p>
-        <a class="project-button" href="proyecto-en-blanco/index.html">
-          <span class="project-number">01</span>
-          <span class="project-name">
-            <strong>Proyecto en blanco</strong>
-            <small>Espacio reservado para la primera idea compartida</small>
-          </span>
-          <span class="project-arrow" aria-hidden="true">↗</span>
-        </a>
+        <div class="project-catalog" data-project-list></div>
+        <div class="project-empty" data-project-empty hidden>
+          <strong>Todavía no hay proyectos públicos.</strong>
+          <p>Los primeros proyectos están tomando forma. Cuando estén listos para compartirse, aparecerán aquí.</p>
+        </div>
       </section>
+      <a class="project-admin-entry" href="admin/index.html">Administración</a>
     </main>
     <footer class="container">
       <p>DGNV Studios <small>— aprende construyendo.</small></p>
@@ -52,5 +50,6 @@
       <p>© <span id="year"></span></p>
     </footer>
     <script src="../assets/js/main.js"></script>
+    <script type="module" src="assets/projects-public.js?v=20261002"></script>
   </body>
 </html>

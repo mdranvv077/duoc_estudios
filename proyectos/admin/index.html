@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="Administración de proyectos de DGNV Studios." />
+    <title>Administración de proyectos — DGNV Studios</title>
+    <link rel="icon" type="image/png" href="../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../assets/css/responsive.css?v=20260909-mobile" />
+    <link rel="stylesheet" href="../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../assets/css/projects.css?v=20261002-admin" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../index.html" aria-label="Inicio DGNV Studios">
+        <img class="brand-logo" src="../../assets/images/dgnv-logo.png" alt="" />
+        <span>DGNV Studios</span>
+      </a>
+    </header>
+    <main class="admin-page container">
+      <section class="admin-login" data-admin-login>
+        <p class="eyebrow"><span></span> Acceso privado</p>
+        <h1>Administración.</h1>
+        <p class="admin-login-copy">Inicia sesión para revisar tanto los proyectos públicos como aquellos que todavía no se muestran públicamente.</p>
+        <form data-admin-form>
+          <label class="admin-field">Usuario<input name="username" type="text" autocomplete="username" required /></label>
+          <label class="admin-field">Contraseña<input name="password" type="password" autocomplete="current-password" required /></label>
+          <button class="button admin-submit" type="submit">Iniciar sesión</button>
+          <p class="admin-error" data-admin-error role="alert" hidden>El usuario o la contraseña no son correctos.</p>
+        </form>
+      </section>
+
+      <section class="admin-dashboard" data-admin-dashboard hidden>
+        <div class="admin-dashboard-top">
+          <div>
+            <p class="eyebrow"><span></span> Catálogo principal</p>
+            <h1>Proyectos.</h1>
+          </div>
+          <button class="admin-logout" type="button" data-admin-logout>Cerrar sesión</button>
+        </div>
+        <div class="admin-summary" aria-label="Resumen de proyectos">
+          <article><strong data-count-public>0</strong><span>Públicos</span></article>
+          <article><strong data-count-private>0</strong><span>No públicos</span></article>
+        </div>
+        <div class="admin-projects" data-admin-projects></div>
+        <p class="admin-note">Este panel sirve para revisar el catálogo publicado. Los estados y contenidos se modifican en los archivos de la web antes de actualizar GitHub Pages.</p>
+      </section>
+    </main>
+    <footer class="container">
+      <p>DGNV Studios <small>— aprende construyendo.</small></p>
+      <p class="site-credit">Vista de administración · Proyectos</p>
+      <p>© <span id="year"></span></p>
+    </footer>
+    <script src="../../assets/js/main.js"></script>
+    <script type="module" src="../assets/admin.js?v=20261002"></script>
+  </body>
+</html>
