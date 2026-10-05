@@ -1,86 +1,268 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 820" role="img" aria-labelledby="title desc">
-  <title id="title">Placa ESP32-S3-N8R2</title>
-  <desc id="desc">Ilustración técnica vectorial frontal con módulo ESP32-S3, antena, pines, botones, LED, circuitos y dos conectores USB-C.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="882" viewBox="0 0 420 882" role="img" aria-labelledby="title desc">
+  <title id="title">ESP32-S3-N8R2 · vista frontal</title>
+  <desc id="desc">Ilustración técnica basada en la fotografía: placa negra alargada, 22 contactos por lado, antena superior, blindaje con recorte para el conector de antena, botones RST y BOOT, regulador, LED RGB y dos carcasas USB-C vistas desde arriba. Representación visual, no un esquema de conexión.</desc>
   <defs>
-    <linearGradient id="pcb" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101923"/><stop offset=".55" stop-color="#070c12"/><stop offset="1" stop-color="#10161d"/></linearGradient>
-    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#edf5f7"/><stop offset=".28" stop-color="#788b92"/><stop offset=".55" stop-color="#d8e0df"/><stop offset="1" stop-color="#607178"/></linearGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe08a"/><stop offset=".45" stop-color="#b97814"/><stop offset="1" stop-color="#f4c75d"/></linearGradient>
-    <radialGradient id="hole"><stop offset="0" stop-color="#091017"/><stop offset=".52" stop-color="#aebec3"/><stop offset=".72" stop-color="#e5eff0"/><stop offset="1" stop-color="#50616a"/></radialGradient>
-    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0V18" fill="none" stroke="#2eeaff" stroke-opacity=".035"/></pattern>
-    <symbol id="pin" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="#111920" stroke="#72868e"/><circle cx="9" cy="9" r="5.6" fill="url(#hole)"/><circle cx="7.2" cy="7" r="1.6" fill="#fff" opacity=".55"/></symbol>
-    <symbol id="pad" viewBox="0 0 15 10"><rect x=".5" y=".5" width="14" height="9" rx="2" fill="url(#gold)" stroke="#fff1bd" stroke-opacity=".55"/></symbol>
-    <symbol id="resistor" viewBox="0 0 34 14"><rect x="1" y="1" width="32" height="12" rx="3" fill="#d7dde0" stroke="#667982"/><rect x="7" y="3" width="20" height="8" rx="2" fill="#394851"/><path d="M10 3v8m14-8v8" stroke="#b87333"/></symbol>
-    <symbol id="smallchip" viewBox="0 0 45 36"><rect x="7" y="4" width="31" height="28" rx="3" fill="#11171d" stroke="#52636d"/><path d="M2 9h5m-5 7h5m-5 7h5m31-14h5m-5 7h5m-5 7h5" stroke="#d7cc9b" stroke-width="3"/><circle cx="14" cy="11" r="2" fill="#71858d"/></symbol>
+    <linearGradient id="pcb" x2="1" y2=".7"><stop stop-color="#151e24"/><stop offset=".48" stop-color="#080e13"/><stop offset="1" stop-color="#121b21"/></linearGradient>
+    <linearGradient id="module" x2=".9" y2="1"><stop stop-color="#242e32"/><stop offset="1" stop-color="#111b20"/></linearGradient>
+    <linearGradient id="shield" x2="1" y2=".65"><stop stop-color="#bfc3b9"/><stop offset=".3" stop-color="#9fa89f"/><stop offset=".7" stop-color="#b1b9ae"/><stop offset="1" stop-color="#899990"/></linearGradient>
+    <linearGradient id="steel" x2="1" y2=".25"><stop stop-color="#80959b"/><stop offset=".13" stop-color="#d9e2df"/><stop offset=".26" stop-color="#9cabae"/><stop offset=".7" stop-color="#b5c4c5"/><stop offset=".92" stop-color="#e1eae5"/><stop offset="1" stop-color="#6c828a"/></linearGradient>
+    <linearGradient id="usb-shell" x2="1" y2=".4"><stop stop-color="#becbcb"/><stop offset=".12" stop-color="#758993"/><stop offset=".27" stop-color="#5b6d78"/><stop offset=".75" stop-color="#6b7e87"/><stop offset=".94" stop-color="#91a3a9"/><stop offset="1" stop-color="#ccd7d5"/></linearGradient>
+    <linearGradient id="case" x2=".85" y2="1"><stop stop-color="#36434b"/><stop offset=".18" stop-color="#263139"/><stop offset=".75" stop-color="#151e25"/><stop offset="1" stop-color="#1e2c33"/></linearGradient>
+    <linearGradient id="ceramic" x2="1" y2=".3"><stop stop-color="#b9a487"/><stop offset=".4" stop-color="#a88e70"/><stop offset="1" stop-color="#cfb798"/></linearGradient>
+    <radialGradient id="gold"><stop stop-color="#f5dfa3"/><stop offset=".4" stop-color="#d5b470"/><stop offset=".74" stop-color="#9a7139"/><stop offset="1" stop-color="#e1c286"/></radialGradient>
+    <radialGradient id="solder" cx=".35" cy=".25" r=".8"><stop stop-color="#e4e9de"/><stop offset=".5" stop-color="#b7c6c0"/><stop offset=".78" stop-color="#77908d"/><stop offset="1" stop-color="#c1d2ca"/></radialGradient>
+    <pattern id="brushing" width="24" height="3" patternUnits="userSpaceOnUse"><path d="M0 .5h17m4 0h3" fill="none" stroke="#eff5e7" stroke-width=".45" opacity=".17"/></pattern>
+    <pattern id="grain" width="16" height="4" patternUnits="userSpaceOnUse"><path d="M1 1h11" fill="none" stroke="#d8e5e4" stroke-width=".45" opacity=".1"/></pattern>
+    <g id="hole">
+      <circle r="11.7" fill="#050a0d" stroke="#506768" stroke-width=".7"/>
+      <circle r="9.4" fill="url(#solder)" stroke="#b3c1b6" stroke-width=".65"/>
+      <circle r="5.1" fill="#1c2c30" stroke="#596d6c" stroke-width=".9"/>
+      <path d="M-6.9 2.2a7.3 7.3 0 0 1 10-8.8" fill="none" stroke="#edf3e8" stroke-width="1.35" stroke-linecap="round" opacity=".7"/>
+      <path d="M-1.7 3.7a4.1 4.1 0 0 0 5.6-4.9" fill="none" stroke="#829995" stroke-width="1.2" opacity=".8"/>
+    </g>
+    <g id="pad">
+      <rect x="-5.7" y="-6.4" width="12" height="12.8" rx="1.4" fill="#aa8e4d" stroke="#d9c695" stroke-width=".6"/>
+      <path d="M-3-4.5h7v9h-7l1.8-4.5Z" fill="url(#steel)" stroke="#d6dfd5" stroke-width=".5"/>
+      <path d="M-5-6v12" stroke="#665732" stroke-width="1"/>
+    </g>
+    <g id="via"><circle r="3.1" fill="#556f6e"/><circle r="1.7" fill="#081319"/><path d="M-2.4 0a2.4 2.4 0 0 1 2.4-2.4" fill="none" stroke="#a1b8af" stroke-width=".6"/></g>
+    <g id="cap">
+      <rect x="-6.5" y="-10.5" width="13" height="21" rx="2.5" fill="#0b1219" stroke="#8ea7aa" stroke-width=".65"/>
+      <rect x="-4.4" y="-9" width="8.8" height="18" rx="1.8" fill="url(#steel)"/>
+      <rect x="-3.7" y="-5.3" width="7.4" height="10.6" rx=".7" fill="url(#ceramic)" stroke="#b9a88b" stroke-width=".35"/>
+    </g>
+    <g id="res">
+      <rect x="-5.1" y="-9.7" width="10.2" height="19.4" rx="1.7" fill="#0b1219" stroke="#6e8a92" stroke-width=".7"/>
+      <rect x="-3.6" y="-8" width="7.2" height="16" rx=".8" fill="url(#steel)"/>
+      <rect x="-3.6" y="-5.3" width="7.2" height="10.6" fill="#20303a"/>
+      <path d="M-2.5-2h5m-5 3h5" stroke="#819393" stroke-width=".7"/>
+    </g>
+    <g id="largecap">
+      <rect x="-35" y="-17" width="70" height="34" rx="9" fill="none" stroke="#a8c5cb" stroke-width="1.2"/>
+      <rect x="-31" y="-13" width="62" height="26" rx="4.5" fill="#0b121a" stroke="#485e68"/>
+      <path d="M-28-10h16v20h-16q-4-10 0-20m56 0H12v20h16q4-10 0-20" fill="url(#steel)" stroke="#c5d9d6" stroke-width=".8"/>
+      <rect x="-13" y="-10" width="26" height="20" rx="1" fill="url(#ceramic)" stroke="#d2c3a2" stroke-width=".8"/>
+      <path d="M-9-8h18" stroke="#e1cbb1" stroke-width=".6" opacity=".8"/>
+    </g>
+    <g id="switch">
+      <rect x="-33" y="-22" width="66" height="44" rx="3" fill="#0b1219" stroke="#839c9f" stroke-width="1"/>
+      <path d="M-37-9h9v18h-9m65-18h9v18h-9" fill="url(#steel)" stroke="#c4d2cb" stroke-width=".6"/>
+      <rect x="-29" y="-19" width="58" height="38" rx="2.5" fill="url(#steel)" stroke="#dfebe0" stroke-width=".8"/>
+      <path d="M-24-15h48v30h-48z" fill="#85958f" stroke="#51656b" stroke-width=".8"/>
+      <circle r="14" fill="#172328" stroke="#cad5c7" stroke-width="1.3"/>
+      <circle r="11.4" fill="#47564f" stroke="#65766f" stroke-width=".65"/>
+      <path d="M-8.4 4a9.1 9.1 0 0 1 12-12" fill="none" stroke="#9aaba2" stroke-width="1" opacity=".65"/>
+      <circle cx="-23" cy="-13" r="1.4" fill="#edf3e5"/><circle cx="23" cy="13" r="1.4" fill="#586e71"/>
+    </g>
+    <g id="sot">
+      <path d="M-12-8h8v5h-8m0 6h8v5h-8m16-5h8v5h-8" fill="url(#steel)" stroke="#ccdad5" stroke-width=".4"/>
+      <rect x="-6" y="-10" width="12" height="20" rx="1" fill="url(#case)" stroke="#546a70" stroke-width=".6"/>
+      <path d="M-4-8h8" stroke="#b0c3c4" stroke-width=".5"/>
+    </g>
+    <g id="qfn">
+      <path d="M8.0 -4v4m0 39v4M-4 3.0h4m47 0h4M13.8 -4v4m0 39v4M-4 8.4h4m47 0h4M19.6 -4v4m0 39v4M-4 13.8h4m47 0h4M25.4 -4v4m0 39v4M-4 19.2h4m47 0h4M31.2 -4v4m0 39v4M-4 24.6h4m47 0h4M37.0 -4v4m0 39v4M-4 30.0h4m47 0h4M42.8 -4v4m0 39v4M-4 35.4h4m47 0h4" fill="none" stroke="url(#steel)" stroke-width="2.2" stroke-linecap="round"/>
+      <rect width="47" height="39" rx="3" fill="url(#case)" stroke="#5d7680" stroke-width=".7"/>
+      <path d="M3 1h40l3 3H2Z" fill="#45535b" opacity=".5"/>
+      <circle cx="6" cy="6" r="1.7" fill="#9dafaa" opacity=".7"/>
+      <path d="M15 12h18m-18 4h12m-12 4h16m-16 4h10" fill="none" stroke="#71868b" stroke-width=".55" opacity=".7"/>
+    </g>
+    <g id="usb-c">
+      <g fill="url(#steel)" stroke="#b6c7c6" stroke-width=".5"><rect x="18.0" y="-15" width="3.4" height="16" rx="1.6"/><rect x="24.2" y="-15" width="3.4" height="16" rx="1.6"/><rect x="30.4" y="-15" width="3.4" height="16" rx="1.6"/><rect x="36.6" y="-15" width="3.4" height="16" rx="1.6"/><rect x="42.8" y="-15" width="3.4" height="16" rx="1.6"/><rect x="49.0" y="-15" width="3.4" height="16" rx="1.6"/><rect x="55.2" y="-15" width="3.4" height="16" rx="1.6"/><rect x="61.4" y="-15" width="3.4" height="16" rx="1.6"/><rect x="67.6" y="-15" width="3.4" height="16" rx="1.6"/><rect x="73.8" y="-15" width="3.4" height="16" rx="1.6"/><rect x="80.0" y="-15" width="3.4" height="16" rx="1.6"/><rect x="86.2" y="-15" width="3.4" height="16" rx="1.6"/></g>
+      <path d="M-5 17h7v78h-7m116-78h7v78h-7" fill="#d4ddcd" stroke="#667b7c"/>
+      <path d="M5 0h104q7 0 7 8v100H0V8q0-8 5-8Z" fill="url(#steel)" stroke="#eff2e4" stroke-width="1.1"/>
+      <path d="M13 6h90q5 0 5 6v92H8V12q0-6 5-6Z" fill="url(#usb-shell)" stroke="#586f79" stroke-width=".8"/>
+      <path d="M13 6h90q5 0 5 6v92H8V12q0-6 5-6Z" fill="url(#grain)"/>
+      <path d="M0 101h116v7H0Z" fill="#a4b4b3"/>
+      <path d="M6 104h104" stroke="#e3eae0" stroke-width="1.4"/>
+      <path d="M19 1v11q0 6 6 6h14q6 0 6-6V1m27 0v11q0 6 6 6h14q6 0 6-6V1" fill="#1c2c35" stroke="#d0ddda" stroke-width="2"/>
+      <path d="M22 1v10q0 3 4 3h11q4 0 4-3V1m34 0v10q0 3 4 3h11q4 0 4-3V1" fill="url(#steel)" stroke="#e1ece1" stroke-width=".8"/>
+      <path d="M24 27h8q4 0 4 3t-4 3h-8q-4 0-4-3t4-3m60-3h8q4 0 4 3t-4 3h-8q-4 0-4-3t4-3" fill="#14242e" stroke="#becdca" stroke-width="1"/>
+      <path d="M10 47v52m97-52v52" stroke="#e4efea" stroke-width="1.2" opacity=".5"/>
+      <path d="M2 13v83m112-83v83" stroke="#ffffff" stroke-width="1.2" opacity=".75"/>
+    </g>
   </defs>
 
-  <rect width="420" height="820" fill="none"/>
-  <rect x="35" y="76" width="350" height="702" rx="10" fill="url(#pcb)" stroke="#2eeaff" stroke-opacity=".6" stroke-width="2"/>
-  <rect x="45" y="86" width="330" height="682" rx="7" fill="url(#grid)"/>
+  <!-- PCB: proporción, bordes rectos y filas de contactos de la referencia. -->
+  <path d="M28 124H379q5 0 5 5l2 728q0 6-6 6H31q-5 0-5-5L24 131q0-7 4-7Z" fill="url(#pcb)" stroke="#799a9d" stroke-width="1.2"/>
+  <path d="M28 125h349M27 130l2 725h353" fill="none" stroke="#45c4d1" stroke-width=".75" opacity=".45"/>
+  <path d="M30 132h52v711H31m296-711h48v711h-48" fill="none" stroke="#435b5b" stroke-width=".75" opacity=".75"/>
+  <g fill="none" stroke="#416268" stroke-width=".9" opacity=".6" stroke-linejoin="round">
+    <path d="M98 380h26l12 12h29l17 17m-31-29h31l12 12h106l13 13h22"/>
+    <path d="M218 382h75l8 8h33m-128-8h78l12 16h38M97 395v10m23-24 15 19h19"/>
+    <path d="M326 215h9v110l-9 10v50m1-138h5v74l-9 9"/>
+    <path d="M306 445v10h24l8 8v67l-8 8h-33m5-98h29l9 8v96h-18"/>
+    <path d="M102 451h-19v38l15 15v25m2-8h-14v44l14 14h99l17 17h112"/>
+    <path d="M172 460h17l12 12v57l-17 17m-4-84h14l12 13v54"/>
+    <path d="M176 578v51l21 20h45l14-14h49m-123-4 20 22h37l13-13h35"/>
+    <path d="M176 595h33l15 13v20m-23-23 18 15v13l16 14h15"/>
+    <path d="M112 664v15m41-20v21m22-28v30m-4-28h72l14 12v39"/>
+    <path d="M271 706v15l-12 12v19m18-44v13l-11 14v17m19-47v16l-10 14v17m28-45v25l8 7v13"/>
+    <path d="M129 716v19l12 11v9m-3-37v13l12 12v12m30-35 11 14v20"/>
+    <path d="M204 711v19l21 14v11m-14-43v16l23 12v15m-13-43v16l21 11v16"/>
+    <path d="M327 647h16v45l-12 13v30m1-90h15v50l-11 13v43"/>
+  </g>
+  <g><use href="#via" transform="translate(103 400)"/><use href="#via" transform="translate(122 389)"/><use href="#via" transform="translate(142 391)"/><use href="#via" transform="translate(165 392)"/><use href="#via" transform="translate(188 389)"/><use href="#via" transform="translate(210 391)"/><use href="#via" transform="translate(232 390)"/><use href="#via" transform="translate(193 592)"/><use href="#via" transform="translate(209 605)"/><use href="#via" transform="translate(235 639)"/><use href="#via" transform="translate(316 639)"/><use href="#via" transform="translate(244 675)"/><use href="#via" transform="translate(239 730)"/><use href="#via" transform="translate(309 732)"/><use href="#via" transform="translate(198 724)"/></g>
 
-  <!-- Antena impresa -->
-  <path d="M104 76V20h214v86h-51V46h-24v43h-24V46h-24v43h-24V46h-24v43h-24V46h-19" fill="#111820" stroke="#526873" stroke-width="2"/>
-  <path d="M122 37h25v39h24V37h24v39h24V37h24v39h24V37h25" fill="none" stroke="#2eeaff" stroke-opacity=".18" stroke-width="2"/>
+  <!-- 22 contactos por cada lado. -->
+  <g font-family="'DejaVu Sans Mono',Consolas,monospace" font-size="12.3" font-weight="600" text-anchor="middle" dominant-baseline="central" fill="#b7d0d3">
+    <use href="#hole" transform="translate(38 146.00)"/><use href="#hole" transform="translate(369 146.00)"/><text transform="translate(61 146.00) rotate(90)">3V3</text><text transform="translate(350 146.00) rotate(90)">GND</text>
+    <use href="#hole" transform="translate(38 179.12)"/><use href="#hole" transform="translate(369 179.12)"/><text transform="translate(61 179.12) rotate(90)">3V3</text><text transform="translate(350 179.12) rotate(90)">TX</text>
+    <use href="#hole" transform="translate(38 212.24)"/><use href="#hole" transform="translate(369 212.24)"/><text transform="translate(61 212.24) rotate(90)">RST</text><text transform="translate(350 212.24) rotate(90)">RX</text>
+    <use href="#hole" transform="translate(38 245.36)"/><use href="#hole" transform="translate(369 245.36)"/><text transform="translate(61 245.36) rotate(90)">4</text><text transform="translate(350 245.36) rotate(90)">1</text>
+    <use href="#hole" transform="translate(38 278.48)"/><use href="#hole" transform="translate(369 278.48)"/><text transform="translate(61 278.48) rotate(90)">5</text><text transform="translate(350 278.48) rotate(90)">2</text>
+    <use href="#hole" transform="translate(38 311.60)"/><use href="#hole" transform="translate(369 311.60)"/><text transform="translate(61 311.60) rotate(90)">6</text><text transform="translate(350 311.60) rotate(90)">42</text>
+    <use href="#hole" transform="translate(38 344.72)"/><use href="#hole" transform="translate(369 344.72)"/><text transform="translate(61 344.72) rotate(90)">7</text><text transform="translate(350 344.72) rotate(90)">41</text>
+    <use href="#hole" transform="translate(38 377.84)"/><use href="#hole" transform="translate(369 377.84)"/><text transform="translate(61 377.84) rotate(90)">15</text><text transform="translate(350 377.84) rotate(90)">40</text>
+    <use href="#hole" transform="translate(38 410.96)"/><use href="#hole" transform="translate(369 410.96)"/><text transform="translate(61 410.96) rotate(90)">16</text><text transform="translate(350 410.96) rotate(90)">39</text>
+    <use href="#hole" transform="translate(38 444.08)"/><use href="#hole" transform="translate(369 444.08)"/><text transform="translate(61 444.08) rotate(90)">17</text><text transform="translate(350 444.08) rotate(90)">38</text>
+    <use href="#hole" transform="translate(38 477.20)"/><use href="#hole" transform="translate(369 477.20)"/><text transform="translate(61 477.20) rotate(90)">18</text><text transform="translate(350 477.20) rotate(90)">37</text>
+    <use href="#hole" transform="translate(38 510.32)"/><use href="#hole" transform="translate(369 510.32)"/><text transform="translate(61 510.32) rotate(90)">8</text><text transform="translate(350 510.32) rotate(90)">36</text>
+    <use href="#hole" transform="translate(38 543.44)"/><use href="#hole" transform="translate(369 543.44)"/><text transform="translate(61 543.44) rotate(90)">3</text><text transform="translate(350 543.44) rotate(90)">35</text>
+    <use href="#hole" transform="translate(38 576.56)"/><use href="#hole" transform="translate(369 576.56)"/><text transform="translate(61 576.56) rotate(90)">46</text><text transform="translate(350 576.56) rotate(90)">0</text>
+    <use href="#hole" transform="translate(38 609.68)"/><use href="#hole" transform="translate(369 609.68)"/><text transform="translate(61 609.68) rotate(90)">9</text><text transform="translate(350 609.68) rotate(90)">45</text>
+    <use href="#hole" transform="translate(38 642.80)"/><use href="#hole" transform="translate(369 642.80)"/><text transform="translate(61 642.80) rotate(90)">10</text><text transform="translate(350 642.80) rotate(90)">48</text>
+    <use href="#hole" transform="translate(38 675.92)"/><use href="#hole" transform="translate(369 675.92)"/><text transform="translate(61 675.92) rotate(90)">11</text><text transform="translate(350 675.92) rotate(90)">47</text>
+    <use href="#hole" transform="translate(38 709.04)"/><use href="#hole" transform="translate(369 709.04)"/><text transform="translate(61 709.04) rotate(90)">12</text><text transform="translate(350 709.04) rotate(90)">21</text>
+    <use href="#hole" transform="translate(38 742.16)"/><use href="#hole" transform="translate(369 742.16)"/><text transform="translate(61 742.16) rotate(90)">13</text><text transform="translate(350 742.16) rotate(90)">20</text>
+    <use href="#hole" transform="translate(38 775.28)"/><use href="#hole" transform="translate(369 775.28)"/><text transform="translate(61 775.28) rotate(90)">14</text><text transform="translate(350 775.28) rotate(90)">19</text>
+    <use href="#hole" transform="translate(38 808.40)"/><use href="#hole" transform="translate(369 808.40)"/><text transform="translate(61 808.40) rotate(90)">5Vin</text><text transform="translate(350 808.40) rotate(90)">GND</text>
+    <use href="#hole" transform="translate(38 841.52)"/><use href="#hole" transform="translate(369 841.52)"/><text transform="translate(61 841.52) rotate(90)">GND</text><text transform="translate(350 841.52) rotate(90)">GND</text>
+  </g>
 
-  <!-- Pines laterales -->
+  <!-- Antena impresa y módulo; los pads quedan en los laterales y en la base. -->
+  <path d="M90 44H320q2 0 2 2v313l-7 18H100l-10-14Z" fill="url(#module)" stroke="#70837c" stroke-width="1.1"/>
+  <path d="M93 46h226v78H93Z" fill="#222b2e"/>
+  <g fill="none" stroke="#53615e" stroke-width="1" opacity=".65">
+    <path d="M110 48h25v48h17V51h19v36h17V51h18v36h16V50h18v34h15V49h26"/>
+    <path d="M105 50h26v46h23V53h14v36h22V53h13v36h21V52h13v34h20V51h28"/>
+    <path d="M134 47v50m117-9v27h-13m-87-15h61m80-37v25"/>
+  </g>
+  <path d="M91 124h141l22 22h58v219H97" fill="#121d24" stroke="#3e5966" stroke-width=".85"/>
   <g>
-    <use href="#pin" x="42" y="91" width="18" height="18"/><use href="#pin" x="42" y="117" width="18" height="18"/><use href="#pin" x="42" y="143" width="18" height="18"/><use href="#pin" x="42" y="169" width="18" height="18"/><use href="#pin" x="42" y="195" width="18" height="18"/><use href="#pin" x="42" y="221" width="18" height="18"/><use href="#pin" x="42" y="247" width="18" height="18"/><use href="#pin" x="42" y="273" width="18" height="18"/><use href="#pin" x="42" y="299" width="18" height="18"/><use href="#pin" x="42" y="325" width="18" height="18"/><use href="#pin" x="42" y="351" width="18" height="18"/><use href="#pin" x="42" y="377" width="18" height="18"/><use href="#pin" x="42" y="403" width="18" height="18"/><use href="#pin" x="42" y="429" width="18" height="18"/><use href="#pin" x="42" y="455" width="18" height="18"/><use href="#pin" x="42" y="481" width="18" height="18"/><use href="#pin" x="42" y="507" width="18" height="18"/><use href="#pin" x="42" y="533" width="18" height="18"/><use href="#pin" x="42" y="559" width="18" height="18"/><use href="#pin" x="42" y="585" width="18" height="18"/><use href="#pin" x="42" y="611" width="18" height="18"/><use href="#pin" x="42" y="637" width="18" height="18"/><use href="#pin" x="42" y="663" width="18" height="18"/><use href="#pin" x="42" y="689" width="18" height="18"/><use href="#pin" x="42" y="715" width="18" height="18"/><use href="#pin" x="42" y="741" width="18" height="18"/>
-    <use href="#pin" x="360" y="91" width="18" height="18"/><use href="#pin" x="360" y="117" width="18" height="18"/><use href="#pin" x="360" y="143" width="18" height="18"/><use href="#pin" x="360" y="169" width="18" height="18"/><use href="#pin" x="360" y="195" width="18" height="18"/><use href="#pin" x="360" y="221" width="18" height="18"/><use href="#pin" x="360" y="247" width="18" height="18"/><use href="#pin" x="360" y="273" width="18" height="18"/><use href="#pin" x="360" y="299" width="18" height="18"/><use href="#pin" x="360" y="325" width="18" height="18"/><use href="#pin" x="360" y="351" width="18" height="18"/><use href="#pin" x="360" y="377" width="18" height="18"/><use href="#pin" x="360" y="403" width="18" height="18"/><use href="#pin" x="360" y="429" width="18" height="18"/><use href="#pin" x="360" y="455" width="18" height="18"/><use href="#pin" x="360" y="481" width="18" height="18"/><use href="#pin" x="360" y="507" width="18" height="18"/><use href="#pin" x="360" y="533" width="18" height="18"/><use href="#pin" x="360" y="559" width="18" height="18"/><use href="#pin" x="360" y="585" width="18" height="18"/><use href="#pin" x="360" y="611" width="18" height="18"/><use href="#pin" x="360" y="637" width="18" height="18"/><use href="#pin" x="360" y="663" width="18" height="18"/><use href="#pin" x="360" y="689" width="18" height="18"/><use href="#pin" x="360" y="715" width="18" height="18"/><use href="#pin" x="360" y="741" width="18" height="18"/>
+    <use href="#pad" transform="translate(90 137.00)"/><use href="#pad" transform="translate(322 137.00)"/>
+    <use href="#pad" transform="translate(90 153.80)"/><use href="#pad" transform="translate(322 153.80)"/>
+    <use href="#pad" transform="translate(90 170.60)"/><use href="#pad" transform="translate(322 170.60)"/>
+    <use href="#pad" transform="translate(90 187.40)"/><use href="#pad" transform="translate(322 187.40)"/>
+    <use href="#pad" transform="translate(90 204.20)"/><use href="#pad" transform="translate(322 204.20)"/>
+    <use href="#pad" transform="translate(90 221.00)"/><use href="#pad" transform="translate(322 221.00)"/>
+    <use href="#pad" transform="translate(90 237.80)"/><use href="#pad" transform="translate(322 237.80)"/>
+    <use href="#pad" transform="translate(90 254.60)"/><use href="#pad" transform="translate(322 254.60)"/>
+    <use href="#pad" transform="translate(90 271.40)"/><use href="#pad" transform="translate(322 271.40)"/>
+    <use href="#pad" transform="translate(90 288.20)"/><use href="#pad" transform="translate(322 288.20)"/>
+    <use href="#pad" transform="translate(90 305.00)"/><use href="#pad" transform="translate(322 305.00)"/>
+    <use href="#pad" transform="translate(90 321.80)"/><use href="#pad" transform="translate(322 321.80)"/>
+    <use href="#pad" transform="translate(90 338.60)"/><use href="#pad" transform="translate(322 338.60)"/>
+    <use href="#pad" transform="translate(90 355.40)"/><use href="#pad" transform="translate(322 355.40)"/>
+    <use href="#pad" transform="translate(106.00 372) rotate(90)"/><use href="#pad" transform="translate(122.70 372) rotate(90)"/><use href="#pad" transform="translate(139.40 372) rotate(90)"/><use href="#pad" transform="translate(156.10 372) rotate(90)"/><use href="#pad" transform="translate(172.80 372) rotate(90)"/><use href="#pad" transform="translate(189.50 372) rotate(90)"/><use href="#pad" transform="translate(206.20 372) rotate(90)"/><use href="#pad" transform="translate(222.90 372) rotate(90)"/><use href="#pad" transform="translate(239.60 372) rotate(90)"/><use href="#pad" transform="translate(256.30 372) rotate(90)"/><use href="#pad" transform="translate(273.00 372) rotate(90)"/><use href="#pad" transform="translate(289.70 372) rotate(90)"/><use href="#pad" transform="translate(306.40 372) rotate(90)"/>
   </g>
 
-  <!-- Serigrafía de pines -->
-  <g fill="#b9cbd2" font-family="monospace" font-size="8" font-weight="700" opacity=".9">
-    <text x="64" y="104">3V3</text><text x="64" y="130">RST</text><text x="64" y="156">4</text><text x="64" y="182">5</text><text x="64" y="208">6</text><text x="64" y="234">7</text><text x="64" y="260">15</text><text x="64" y="286">16</text><text x="64" y="312">17</text><text x="64" y="338">18</text><text x="64" y="364">8</text><text x="64" y="390">3</text><text x="64" y="416">46</text><text x="64" y="442">9</text><text x="64" y="468">10</text><text x="64" y="494">11</text><text x="64" y="520">12</text><text x="64" y="754">GND</text>
-    <text x="341" y="104">GND</text><text x="347" y="130">TX</text><text x="347" y="156">RX</text><text x="349" y="182">1</text><text x="349" y="208">2</text><text x="343" y="234">42</text><text x="343" y="260">41</text><text x="343" y="286">40</text><text x="343" y="312">39</text><text x="343" y="338">38</text><text x="343" y="364">37</text><text x="343" y="390">36</text><text x="343" y="416">35</text><text x="343" y="442">45</text><text x="343" y="468">48</text><text x="343" y="494">47</text><text x="343" y="520">21</text><text x="342" y="754">GND</text>
+  <!-- Blindaje metálico con el recorte superior derecho. -->
+  <path d="M110 135h119q7 0 7 7v28q0 7 8 7h66q4 0 4 5v173q0 6-6 6H110q-5 0-5-5V141q0-6 5-6Z" fill="#14212a" stroke="#466870" stroke-width="4.2"/>
+  <path d="M110 135h119q7 0 7 7v28q0 7 8 7h66q4 0 4 5v173q0 6-6 6H110q-5 0-5-5V141q0-6 5-6Z" fill="url(#shield)" stroke="#d4dbc7" stroke-width="1.4"/>
+  <path d="M110 135h119q7 0 7 7v28q0 7 8 7h66q4 0 4 5v173q0 6-6 6H110q-5 0-5-5V141q0-6 5-6Z" fill="url(#brushing)"/>
+  <path d="M109 354V143q0-4 4-4h112m85 43v171q0 4-4 4H114" fill="none" stroke="#5d7168" stroke-width="1" opacity=".65"/>
+  <g fill="#e2e7d3" font-family="Consolas,'DejaVu Sans Mono',monospace">
+    <text x="120" y="207" font-size="18.5" font-weight="700" letter-spacing=".65">ESP32-S3-N8R2</text>
+    <text x="120" y="258" font-size="10.2" letter-spacing=".2">FCC ID: 2BCLR-XH-S3E</text>
+    <text x="120" y="273" font-size="10.2" letter-spacing=".2">CMIIT ID:2023DP20155</text>
+    <text x="120" y="288" font-size="10.2" letter-spacing=".2">ISM2.4G 802.11b/g/n</text>
+    <rect x="213" y="222" width="37" height="16" rx="7" fill="none" stroke="#dce4cc" stroke-width="1"/>
+    <text x="231.5" y="234" text-anchor="middle" font-size="11.4" font-weight="700">WiFi</text>
+    <ellipse cx="268" cy="230" rx="6.4" ry="9" fill="none" stroke="#dce4cc" stroke-width=".8"/>
+    <path d="m264 225 8 10-4 3v-16l4 5-8 8" fill="none" stroke="#dce4cc" stroke-width="1"/>
   </g>
 
-  <!-- Módulo ESP32 -->
-  <rect x="102" y="102" width="218" height="240" rx="8" fill="#0c1218" stroke="#758891" stroke-width="2"/>
-  <g><use href="#pad" x="108" y="94" width="15" height="10"/><use href="#pad" x="128" y="94" width="15" height="10"/><use href="#pad" x="148" y="94" width="15" height="10"/><use href="#pad" x="168" y="94" width="15" height="10"/><use href="#pad" x="188" y="94" width="15" height="10"/><use href="#pad" x="208" y="94" width="15" height="10"/><use href="#pad" x="228" y="94" width="15" height="10"/><use href="#pad" x="248" y="94" width="15" height="10"/><use href="#pad" x="268" y="94" width="15" height="10"/><use href="#pad" x="288" y="94" width="15" height="10"/></g>
-  <g><use href="#pad" x="108" y="340" width="15" height="10"/><use href="#pad" x="128" y="340" width="15" height="10"/><use href="#pad" x="148" y="340" width="15" height="10"/><use href="#pad" x="168" y="340" width="15" height="10"/><use href="#pad" x="188" y="340" width="15" height="10"/><use href="#pad" x="208" y="340" width="15" height="10"/><use href="#pad" x="228" y="340" width="15" height="10"/><use href="#pad" x="248" y="340" width="15" height="10"/><use href="#pad" x="268" y="340" width="15" height="10"/><use href="#pad" x="288" y="340" width="15" height="10"/></g>
-  <rect x="116" y="113" width="190" height="214" rx="5" fill="url(#metal)" stroke="#f3fbfc" stroke-opacity=".7"/>
-  <rect x="125" y="122" width="172" height="196" rx="3" fill="none" stroke="#1a2b31" stroke-opacity=".35"/>
-  <g fill="#e8efed" font-family="monospace" text-anchor="middle">
-    <text x="211" y="189" font-size="17" font-weight="700">ESP32-S3-N8R2</text>
-    <text x="211" y="218" font-size="11">WiFi  ·  BLE</text>
-    <text x="211" y="248" font-size="9">XTENSA DUAL CORE</text>
-    <text x="211" y="266" font-size="9">8 MB PSRAM · 16 MB FLASH</text>
+  <!-- Conector de antena y pequeña zona expuesta del módulo. -->
+  <g fill="none" stroke="#a2c1c3" stroke-width="1.2">
+    <path d="m237 132 14-10 11 10-10 12-13-11 12-8m-12 28 13-12 11 11-11 13-10-8m-1-14 10 11m-3-5 11-11"/>
+    <path d="M264 125h40v49h-35l-9-9"/>
+  </g>
+  <path d="M273 124h18v5h6v32h-6v7h-18v-7h-6v-32h6Z" fill="url(#steel)" stroke="#dae3d7" stroke-width=".75"/>
+  <rect x="271" y="130" width="26" height="32" rx="3" fill="#e0e0c8" stroke="#a1aca1" stroke-width=".8"/>
+  <circle cx="284" cy="146" r="12.5" fill="url(#gold)" stroke="#eadcaa" stroke-width="1.1"/>
+  <circle cx="284" cy="146" r="7.7" fill="none" stroke="#fcf0cd" stroke-width="1"/>
+  <circle cx="284" cy="146" r="3.4" fill="#8b6535" stroke="#dbbb78" stroke-width=".7"/>
+  <circle cx="284" cy="146" r="1.2" fill="#f3db98"/>
+  <path d="M298 142h7v7h-7" fill="#bfa573" stroke="#e5d4b1" stroke-width=".6"/>
+  <path d="M300 152h11v18m-37-45v-4h14" fill="none" stroke="#64828a" stroke-width="1.2"/>
+
+  <!-- Regulador a la izquierda y botones RST/BOOT a la derecha. -->
+  <g>
+    <use href="#cap" transform="translate(86 425) scale(.8 1)"/>
+    <use href="#cap" transform="translate(100 425) scale(.75 1)"/>
+    <use href="#largecap" transform="translate(149 425)"/>
+    <use href="#res" transform="translate(222 427) scale(1.1 1.3)"/>
+    <use href="#switch" transform="translate(274 428)"/>
+    <use href="#switch" transform="translate(274 497)"/>
+    <use href="#cap" transform="translate(222 494) scale(.85 1.1)"/>
+    <use href="#res" transform="translate(222 516) scale(.72 .7)"/>
+    <use href="#largecap" transform="translate(150 562)"/>
+    <use href="#cap" transform="translate(194 553) scale(.7 1.12)"/>
+    <use href="#cap" transform="translate(208 553) scale(.72 1.12)"/>
+    <use href="#sot" transform="translate(240 552) rotate(90) scale(1.1)"/>
+    <use href="#cap" transform="translate(278 554) scale(1 1.3)"/>
+    <use href="#sot" transform="translate(307 552) rotate(90) scale(1.1)"/>
+    <use href="#res" transform="translate(295 536) scale(.75 .72)"/>
+    <use href="#res" transform="translate(243 570) rotate(90) scale(.7 .75)"/>
+    <path d="M99 455h30v12H99q-4-6 0-12m0 31h30v12H99q-4-6 0-12m0 31h30v12H99q-4-6 0-12" fill="url(#steel)" stroke="#d0ddd4" stroke-width=".7"/>
+    <path d="M157 468h36v41h-36Z" fill="url(#steel)" stroke="#d5e3d5" stroke-width="1"/>
+    <path d="M181 469v38m4-38v38" stroke="#f0f2db" stroke-width="1" opacity=".6"/>
+    <path d="M126 449h34q6 0 6 6v71q0 4-5 4h-35Z" fill="url(#case)" stroke="#597383" stroke-width="1"/>
+    <path d="M127 450h33v4h-33m0 73h34" stroke="#80969c" stroke-width=".9"/>
+    <text transform="translate(140 487) rotate(90)" font-family="monospace" font-size="8.2" letter-spacing=".7" text-anchor="middle" fill="#6c7b7c">AMS1117</text>
+    <path d="M153 457v60" stroke="#879ea2" stroke-width=".6" opacity=".3"/>
+    <text x="239" y="553" text-anchor="middle" font-family="monospace" font-size="5" fill="#879997">J3Y</text>
+    <text x="305" y="553" text-anchor="middle" font-family="monospace" font-size="5" fill="#879997">J3Y</text>
+  </g>
+  <g font-family="Consolas,monospace" font-size="16" font-weight="700" fill="#bcd2d6" text-anchor="middle">
+    <text transform="translate(320 428) rotate(90)">RST</text>
+    <text transform="translate(320 494) rotate(90)">BOOT</text>
   </g>
 
-  <!-- U.FL -->
-  <path d="M303 116h35v35h-35z" fill="#1a2228" stroke="#8ea0a6"/><circle cx="320.5" cy="133.5" r="12" fill="url(#gold)" stroke="#fff0b5"/><circle cx="320.5" cy="133.5" r="4" fill="#493519"/>
-  <path d="M293 129h10m18 22v17h25" fill="none" stroke="#2eeaff" stroke-opacity=".42"/>
-
-  <!-- Trazas -->
-  <g fill="none" stroke="#2eeaff" stroke-opacity=".17" stroke-width="1.5">
-    <path d="M92 365h62v30h59"/><path d="M319 365h-48v42h-40"/><path d="M82 448h81v34h89"/><path d="M337 476h-58v52h-70"/><path d="M75 562h71v72h55"/><path d="M344 583h-64v54h-35"/><path d="M103 703v-45h57v-65"/><path d="M319 703v-43h-52v-39"/>
-    <circle cx="92" cy="365" r="2" fill="#2eeaff"/><circle cx="319" cy="365" r="2" fill="#2eeaff"/><circle cx="82" cy="448" r="2" fill="#2eeaff"/><circle cx="337" cy="476" r="2" fill="#2eeaff"/>
+  <!-- LED cuadrado, resistencias y circuito integrado inferior. -->
+  <g>
+    <path d="M102 597h10v11h-10m0 35h10v11h-10m58-57h10v11h-10m0 35h10v11h-10" fill="url(#steel)" stroke="#d5dfd4" stroke-width=".6"/>
+    <path d="M108 592h57q7 0 7 7v51q0 7-7 7h-57Z" fill="#dcdfd0" stroke="#f1f3df" stroke-width="1.1"/>
+    <path d="M111 596h51q6 0 6 6v45q0 6-6 6h-51Z" fill="#e6e8d9" stroke="#c7d3c8" stroke-width=".7"/>
+    <circle cx="139" cy="623" r="6" fill="#cfd6c6" opacity=".8"/>
+    <rect x="135.5" y="620" width="7" height="6" rx="1" fill="#b3bdac"/>
+    <path d="m164 651 4-4v5h-5" fill="#aab5a6"/>
+    <text x="189" y="602" font-family="Consolas,monospace" font-size="15" font-weight="700" fill="#c1d8de">RGB</text>
+    <use href="#res" transform="translate(207 613) scale(.7 .75)"/>
+    <use href="#res" transform="translate(207 630) scale(.7 .75)"/>
+    <use href="#res" transform="translate(234 602) scale(.72 1.4)"/>
+    <use href="#cap" transform="translate(252 602) scale(.92 1.35)"/>
+    <use href="#res" transform="translate(269 602) scale(.78 1.35)"/>
+    <use href="#cap" transform="translate(285 602) scale(.96 1.35)"/>
+    <use href="#cap" transform="translate(317 601) scale(.92 1.4)"/>
+    <use href="#res" transform="translate(260 659) scale(1.15 1.55)"/>
+    <use href="#qfn" transform="translate(277 660)"/>
+    <use href="#via" transform="translate(326 653)"/>
+    <use href="#res" transform="translate(270 678) scale(.5 .55)"/>
+    <use href="#cap" transform="translate(293 720) rotate(90) scale(.9 1.1)"/>
+    <path d="M249 582h10v40h-14v-40h4m30 0h15v40h-15v-40m31 0h15v40h-15v-40" fill="none" stroke="#aec7c6" stroke-width="1"/>
+    <path d="M276 714q0-5 6-5h21q6 0 6 6v7q0 6-6 6h-21q-6 0-6-6Z" fill="none" stroke="#8fb5bf" stroke-width="1"/>
   </g>
 
-  <!-- Regulación y pasivos -->
-  <use href="#resistor" x="91" y="365" width="51" height="21"/>
-  <use href="#resistor" x="95" y="492" width="51" height="21"/>
-  <use href="#smallchip" x="88" y="402" width="72" height="58"/>
-  <use href="#resistor" x="157" y="400" width="44" height="18"/>
-  <use href="#resistor" x="160" y="429" width="44" height="18"/>
-  <use href="#smallchip" x="258" y="548" width="70" height="56"/>
-  <use href="#smallchip" x="107" y="594" width="56" height="45"/>
-  <use href="#smallchip" x="169" y="594" width="56" height="45"/>
-  <use href="#smallchip" x="231" y="594" width="56" height="45"/>
-  <g><use href="#resistor" x="215" y="454" width="42" height="17"/><use href="#resistor" x="264" y="454" width="42" height="17"/><use href="#resistor" x="215" y="480" width="42" height="17"/><use href="#resistor" x="264" y="480" width="42" height="17"/></g>
+  <!-- Pasivos de la zona USB. -->
+  <g>
+    <use href="#res" transform="translate(110 673) scale(.8 .72)"/>
+    <use href="#res" transform="translate(146 673) scale(.8 .72)"/>
+    <use href="#res" transform="translate(174 673) scale(.8 .72)"/>
+    <use href="#sot" transform="translate(107 699) scale(1.05 1.35)"/>
+    <use href="#sot" transform="translate(145 699) scale(1.05 1.35)"/>
+    <use href="#sot" transform="translate(174 699) scale(1.05 1.35)"/>
+    <use href="#cap" transform="translate(203 699) scale(.77 1.1)"/>
+    <use href="#cap" transform="translate(220 699) scale(.77 1.1)"/>
+    <use href="#res" transform="translate(237 699) scale(.82 1.1)"/>
+    <use href="#res" transform="translate(253 699) scale(.82 1.1)"/>
+    <use href="#via" transform="translate(182 721)"/>
+    <use href="#via" transform="translate(129 734)"/>
+    <path d="M198 684h60v30h-60Z" fill="none" stroke="#88a4ad" stroke-width=".65"/>
+    <text transform="translate(84 646) rotate(-90)" font-family="Consolas,monospace" font-size="12.5" font-weight="600" text-anchor="middle" fill="#c1d7d9">IN-OUT</text>
+  </g>
 
-  <!-- Botones -->
-  <g transform="translate(244 366)"><rect width="66" height="51" rx="7" fill="#d2dadd" stroke="#5d6f77"/><rect x="6" y="6" width="54" height="39" rx="5" fill="#78898f"/><circle cx="33" cy="25.5" r="15" fill="#303c42" stroke="#a9b7bb"/><circle cx="29" cy="21" r="5" fill="#697a80"/></g>
-  <g transform="translate(244 426)"><rect width="66" height="51" rx="7" fill="#d2dadd" stroke="#5d6f77"/><rect x="6" y="6" width="54" height="39" rx="5" fill="#78898f"/><circle cx="33" cy="25.5" r="15" fill="#303c42" stroke="#a9b7bb"/><circle cx="29" cy="21" r="5" fill="#697a80"/></g>
-  <g fill="#d9e6ea" font-family="monospace" font-size="10" font-weight="700"><text transform="rotate(90 327 378)" x="327" y="378">RST</text><text transform="rotate(90 327 438)" x="327" y="438">BOOT</text></g>
-
-  <!-- LED RGB y fila de LEDs -->
-  <rect x="104" y="528" width="61" height="61" rx="7" fill="#e8eef0" stroke="#84969e"/><circle cx="134.5" cy="558.5" r="19" fill="#f7ffff" stroke="#b8ced2" filter="url(#glow)"/>
-  <text x="180" y="546" fill="#d8e6e9" font-family="monospace" font-size="10" font-weight="700">RGB LED</text>
-  <g transform="translate(183 553)"><rect width="28" height="22" rx="3" fill="#151d23" stroke="#899ba2"/><rect x="34" width="28" height="22" rx="3" fill="#151d23" stroke="#899ba2"/><rect x="68" width="28" height="22" rx="3" fill="#151d23" stroke="#899ba2"/><rect x="102" width="28" height="22" rx="3" fill="#151d23" stroke="#899ba2"/><circle cx="14" cy="11" r="4" fill="#ff2e7b"/><circle cx="48" cy="11" r="4" fill="#ff9d2e"/><circle cx="82" cy="11" r="4" fill="#2eeaff"/><circle cx="116" cy="11" r="4" fill="#a8ffcf"/></g>
-
-  <!-- USB-C dobles -->
-  <g transform="translate(79 683)"><path d="M0 20Q0 0 20 0h88q20 0 20 20v95H0z" fill="url(#metal)" stroke="#dce8ea" stroke-width="2"/><path d="M18 31q0-14 14-14h64q14 0 14 14v35H18z" fill="#303b41" stroke="#9ba9ad"/><path d="M36 37h56v17H36z" fill="#0b1116"/><circle cx="18" cy="86" r="5" fill="#3b484e"/><circle cx="110" cy="86" r="5" fill="#3b484e"/></g>
-  <g transform="translate(213 683)"><path d="M0 20Q0 0 20 0h88q20 0 20 20v95H0z" fill="url(#metal)" stroke="#dce8ea" stroke-width="2"/><path d="M18 31q0-14 14-14h64q14 0 14 14v35H18z" fill="#303b41" stroke="#9ba9ad"/><path d="M36 37h56v17H36z" fill="#0b1116"/><circle cx="18" cy="86" r="5" fill="#3b484e"/><circle cx="110" cy="86" r="5" fill="#3b484e"/></g>
-  <g fill="#c8d8dc" font-family="monospace" font-size="9" font-weight="700"><text x="94" y="674">USB / UART</text><text x="246" y="674">USB / OTG</text></g>
+  <!-- Carcasas USB-C vistas desde arriba, con pestañas y soldaduras. -->
+  <use href="#usb-c" transform="translate(74 755)"/>
+  <use href="#usb-c" transform="translate(226 755)"/>
 </svg>

@@ -436,20 +436,41 @@
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 360px;
+  align-content: center;
+  gap: 16px;
+  margin: 0;
+  padding: 24px;
+  min-width: 0;
   overflow: hidden;
   border: 1px solid rgba(46, 234, 255, .24);
   background: radial-gradient(circle at 50% 45%, rgba(46, 234, 255, .12), transparent 42%), #0b121b;
 }
 
+.esp32-board-image {
+  display: block;
+  width: min(100%, 286px);
+  cursor: zoom-in;
+}
+
 .esp32-board img {
   display: block;
-  width: auto;
-  height: min(640px, 70vw);
-  max-width: 92%;
+  width: 100%;
+  height: auto;
   object-fit: contain;
   filter: drop-shadow(0 18px 28px rgba(0, 0, 0, .45));
 }
+
+.esp32-board figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 18px;
+  color: var(--muted);
+  font: .61rem/1.6 "DM Mono", monospace;
+}
+
+.esp32-board figcaption a { color: var(--cyan); text-decoration: none; }
+.esp32-board a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 5px; }
 
 .esp32-capabilities {
   display: grid;
