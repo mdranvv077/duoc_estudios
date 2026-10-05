@@ -275,6 +275,7 @@ function restoreLabTopology() {
   state.button.setAttribute("aria-expanded", "false");
   state.overlay.remove();
   document.body.style.overflow = state.overflow;
+  document.body.classList.remove("lab-expanded-page");
   labExpansion = null;
   state.button.focus({ preventScroll: true });
 }
@@ -320,7 +321,7 @@ async function expandLabTopology(button) {
   const page = document.createElement("div");
   page.className = "lab-backdrop-page";
   page.style.width = `${innerWidth}px`;
-  page.style.top = `${-scrollY}px`;
+  page.style.top = `${16 - scrollY}px`;
   for (const child of document.body.children) {
     if (child.tagName === "SCRIPT") continue;
     const copy = child.cloneNode(true);
@@ -343,6 +344,7 @@ async function expandLabTopology(button) {
   document.body.append(overlay);
   labExpansion = { figure, button, overlay, placeholder, overflow: document.body.style.overflow, animation: null, closing: false };
   document.body.style.overflow = "hidden";
+  document.body.classList.add("lab-expanded-page");
   button.textContent = "Cerrar ampliación";
   button.setAttribute("aria-expanded", "true");
   status.textContent = "";
