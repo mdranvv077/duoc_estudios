@@ -442,74 +442,13 @@
   background: radial-gradient(circle at 50% 45%, rgba(46, 234, 255, .12), transparent 42%), #0b121b;
 }
 
-.esp32-chip {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  width: 155px;
-  height: 182px;
-  border: 2px solid #35b3c3;
-  background: linear-gradient(145deg, #143b43, #09242b);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, .45), inset 0 0 30px rgba(46, 234, 255, .08);
-}
-
-.esp32-chip::before {
-  content: "";
-  position: absolute;
-  inset: 15px;
-  border: 1px solid rgba(46, 234, 255, .18);
-}
-
-.esp32-chip small,
-.esp32-chip strong {
-  position: relative;
-  z-index: 1;
+.esp32-board img {
   display: block;
-}
-
-.esp32-chip small {
-  align-self: end;
-  color: #7aabb0;
-  font: .55rem "DM Mono", monospace;
-}
-
-.esp32-chip strong {
-  align-self: start;
-  color: var(--cyan);
-  font: 500 1rem "DM Mono", monospace;
-}
-
-.esp32-pin {
-  position: absolute;
-  z-index: 1;
-  top: 80px;
-  bottom: 56px;
-  width: 26px;
-  background: repeating-linear-gradient(to bottom, #c99335 0 5px, transparent 5px 12px);
-}
-
-.pin-left { left: calc(50% - 105px); }
-.pin-right { right: calc(50% - 105px); }
-
-.esp32-antenna {
-  position: absolute;
-  top: 42px;
-  width: 115px;
-  height: 32px;
-  border-top: 2px solid #7cc8cf;
-  border-right: 2px solid #7cc8cf;
-  border-left: 2px solid #7cc8cf;
-  opacity: .65;
-}
-
-.esp32-usb {
-  position: absolute;
-  bottom: 42px;
-  width: 48px;
-  height: 25px;
-  border: 2px solid #81929e;
-  background: #1d2932;
+  width: auto;
+  height: min(640px, 70vw);
+  max-width: 92%;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, .45));
 }
 
 .esp32-capabilities {

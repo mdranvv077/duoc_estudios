@@ -7,8 +7,8 @@ export const projects = Object.freeze([
   {
     id: "esp32-s3-lab",
     number: "01",
-    title: "ESP32-S3 · Laboratorio conectado",
-    description: "Linux, MicroPython, WiFi y un panel web personalizado en una pequeña placa.",
+    title: "ESP32-S3 · Linux, Python y panel web",
+    description: "Pruebas con Linux y MicroPython, monitoreo del sistema y futuras integraciones con sensores.",
     status: PROJECT_STATUS.PUBLIC,
     href: "esp32-s3/index.html",
   },

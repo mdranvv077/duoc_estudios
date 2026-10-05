@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 820" role="img" aria-labelledby="title desc">
+  <title id="title">Placa ESP32-S3-N8R2</title>
+  <desc id="desc">Ilustración técnica vectorial frontal con módulo ESP32-S3, antena, pines, botones, LED, circuitos y dos conectores USB-C.</desc>
+  <defs>
+    <linearGradient id="pcb" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101923"/><stop offset=".55" stop-color="#070c12"/><stop offset="1" stop-color="#10161d"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#edf5f7"/><stop offset=".28" stop-color="#788b92"/><stop offset=".55" stop-color="#d8e0df"/><stop offset="1" stop-color="#607178"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe08a"/><stop offset=".45" stop-color="#b97814"/><stop offset="1" stop-color="#f4c75d"/></linearGradient>
+    <radialGradient id="hole"><stop offset="0" stop-color="#091017"/><stop offset=".52" stop-color="#aebec3"/><stop offset=".72" stop-color="#e5eff0"/><stop offset="1" stop-color="#50616a"/></radialGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0V18" fill="none" stroke="#2eeaff" stroke-opacity=".035"/></pattern>
+    <symbol id="pin" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="#111920" stroke="#72868e"/><circle cx="9" cy="9" r="5.6" fill="url(#hole)"/><circle cx="7.2" cy="7" r="1.6" fill="#fff" opacity=".55"/></symbol>
+    <symbol id="pad" viewBox="0 0 15 10"><rect x=".5" y=".5" width="14" height="9" rx="2" fill="url(#gold)" stroke="#fff1bd" stroke-opacity=".55"/></symbol>
+    <symbol id="resistor" viewBox="0 0 34 14"><rect x="1" y="1" width="32" height="12" rx="3" fill="#d7dde0" stroke="#667982"/><rect x="7" y="3" width="20" height="8" rx="2" fill="#394851"/><path d="M10 3v8m14-8v8" stroke="#b87333"/></symbol>
+    <symbol id="smallchip" viewBox="0 0 45 36"><rect x="7" y="4" width="31" height="28" rx="3" fill="#11171d" stroke="#52636d"/><path d="M2 9h5m-5 7h5m-5 7h5m31-14h5m-5 7h5m-5 7h5" stroke="#d7cc9b" stroke-width="3"/><circle cx="14" cy="11" r="2" fill="#71858d"/></symbol>
+  </defs>
+
+  <rect width="420" height="820" fill="none"/>
+  <rect x="35" y="76" width="350" height="702" rx="10" fill="url(#pcb)" stroke="#2eeaff" stroke-opacity=".6" stroke-width="2"/>
+  <rect x="45" y="86" width="330" height="682" rx="7" fill="url(#grid)"/>
+
+  <!-- Antena impresa -->
+  <path d="M104 76V20h214v86h-51V46h-24v43h-24V46h-24v43h-24V46h-24v43h-24V46h-19" fill="#111820" stroke="#526873" stroke-width="2"/>
+  <path d="M122 37h25v39h24V37h24v39h24V37h24v39h24V37h25" fill="none" stroke="#2eeaff" stroke-opacity=".18" stroke-width="2"/>
+
+  <!-- Pines laterales -->
+  <g>
+    <use href="#pin" x="42" y="91" width="18" height="18"/><use href="#pin" x="42" y="117" width="18" height="18"/><use href="#pin" x="42" y="143" width="18" height="18"/><use href="#pin" x="42" y="169" width="18" height="18"/><use href="#pin" x="42" y="195" width="18" height="18"/><use href="#pin" x="42" y="221" width="18" height="18"/><use href="#pin" x="42" y="247" width="18" height="18"/><use href="#pin" x="42" y="273" width="18" height="18"/><use href="#pin" x="42" y="299" width="18" height="18"/><use href="#pin" x="42" y="325" width="18" height="18"/><use href="#pin" x="42" y="351" width="18" height="18"/><use href="#pin" x="42" y="377" width="18" height="18"/><use href="#pin" x="42" y="403" width="18" height="18"/><use href="#pin" x="42" y="429" width="18" height="18"/><use href="#pin" x="42" y="455" width="18" height="18"/><use href="#pin" x="42" y="481" width="18" height="18"/><use href="#pin" x="42" y="507" width="18" height="18"/><use href="#pin" x="42" y="533" width="18" height="18"/><use href="#pin" x="42" y="559" width="18" height="18"/><use href="#pin" x="42" y="585" width="18" height="18"/><use href="#pin" x="42" y="611" width="18" height="18"/><use href="#pin" x="42" y="637" width="18" height="18"/><use href="#pin" x="42" y="663" width="18" height="18"/><use href="#pin" x="42" y="689" width="18" height="18"/><use href="#pin" x="42" y="715" width="18" height="18"/><use href="#pin" x="42" y="741" width="18" height="18"/>
+    <use href="#pin" x="360" y="91" width="18" height="18"/><use href="#pin" x="360" y="117" width="18" height="18"/><use href="#pin" x="360" y="143" width="18" height="18"/><use href="#pin" x="360" y="169" width="18" height="18"/><use href="#pin" x="360" y="195" width="18" height="18"/><use href="#pin" x="360" y="221" width="18" height="18"/><use href="#pin" x="360" y="247" width="18" height="18"/><use href="#pin" x="360" y="273" width="18" height="18"/><use href="#pin" x="360" y="299" width="18" height="18"/><use href="#pin" x="360" y="325" width="18" height="18"/><use href="#pin" x="360" y="351" width="18" height="18"/><use href="#pin" x="360" y="377" width="18" height="18"/><use href="#pin" x="360" y="403" width="18" height="18"/><use href="#pin" x="360" y="429" width="18" height="18"/><use href="#pin" x="360" y="455" width="18" height="18"/><use href="#pin" x="360" y="481" width="18" height="18"/><use href="#pin" x="360" y="507" width="18" height="18"/><use href="#pin" x="360" y="533" width="18" height="18"/><use href="#pin" x="360" y="559" width="18" height="18"/><use href="#pin" x="360" y="585" width="18" height="18"/><use href="#pin" x="360" y="611" width="18" height="18"/><use href="#pin" x="360" y="637" width="18" height="18"/><use href="#pin" x="360" y="663" width="18" height="18"/><use href="#pin" x="360" y="689" width="18" height="18"/><use href="#pin" x="360" y="715" width="18" height="18"/><use href="#pin" x="360" y="741" width="18" height="18"/>
+  </g>
+
+  <!-- Serigrafía de pines -->
+  <g fill="#b9cbd2" font-family="monospace" font-size="8" font-weight="700" opacity=".9">
+    <text x="64" y="104">3V3</text><text x="64" y="130">RST</text><text x="64" y="156">4</text><text x="64" y="182">5</text><text x="64" y="208">6</text><text x="64" y="234">7</text><text x="64" y="260">15</text><text x="64" y="286">16</text><text x="64" y="312">17</text><text x="64" y="338">18</text><text x="64" y="364">8</text><text x="64" y="390">3</text><text x="64" y="416">46</text><text x="64" y="442">9</text><text x="64" y="468">10</text><text x="64" y="494">11</text><text x="64" y="520">12</text><text x="64" y="754">GND</text>
+    <text x="341" y="104">GND</text><text x="347" y="130">TX</text><text x="347" y="156">RX</text><text x="349" y="182">1</text><text x="349" y="208">2</text><text x="343" y="234">42</text><text x="343" y="260">41</text><text x="343" y="286">40</text><text x="343" y="312">39</text><text x="343" y="338">38</text><text x="343" y="364">37</text><text x="343" y="390">36</text><text x="343" y="416">35</text><text x="343" y="442">45</text><text x="343" y="468">48</text><text x="343" y="494">47</text><text x="343" y="520">21</text><text x="342" y="754">GND</text>
+  </g>
+
+  <!-- Módulo ESP32 -->
+  <rect x="102" y="102" width="218" height="240" rx="8" fill="#0c1218" stroke="#758891" stroke-width="2"/>
+  <g><use href="#pad" x="108" y="94" width="15" height="10"/><use href="#pad" x="128" y="94" width="15" height="10"/><use href="#pad" x="148" y="94" width="15" height="10"/><use href="#pad" x="168" y="94" width="15" height="10"/><use href="#pad" x="188" y="94" width="15" height="10"/><use href="#pad" x="208" y="94" width="15" height="10"/><use href="#pad" x="228" y="94" width="15" height="10"/><use href="#pad" x="248" y="94" width="15" height="10"/><use href="#pad" x="268" y="94" width="15" height="10"/><use href="#pad" x="288" y="94" width="15" height="10"/></g>
+  <g><use href="#pad" x="108" y="340" width="15" height="10"/><use href="#pad" x="128" y="340" width="15" height="10"/><use href="#pad" x="148" y="340" width="15" height="10"/><use href="#pad" x="168" y="340" width="15" height="10"/><use href="#pad" x="188" y="340" width="15" height="10"/><use href="#pad" x="208" y="340" width="15" height="10"/><use href="#pad" x="228" y="340" width="15" height="10"/><use href="#pad" x="248" y="340" width="15" height="10"/><use href="#pad" x="268" y="340" width="15" height="10"/><use href="#pad" x="288" y="340" width="15" height="10"/></g>
+  <rect x="116" y="113" width="190" height="214" rx="5" fill="url(#metal)" stroke="#f3fbfc" stroke-opacity=".7"/>
+  <rect x="125" y="122" width="172" height="196" rx="3" fill="none" stroke="#1a2b31" stroke-opacity=".35"/>
+  <g fill="#e8efed" font-family="monospace" text-anchor="middle">
+    <text x="211" y="189" font-size="17" font-weight="700">ESP32-S3-N8R2</text>
+    <text x="211" y="218" font-size="11">WiFi  ·  BLE</text>
+    <text x="211" y="248" font-size="9">XTENSA DUAL CORE</text>
+    <text x="211" y="266" font-size="9">8 MB PSRAM · 16 MB FLASH</text>
+  </g>
+
+  <!-- U.FL -->
+  <path d="M303 116h35v35h-35z" fill="#1a2228" stroke="#8ea0a6"/><circle cx="320.5" cy="133.5" r="12" fill="url(#gold)" stroke="#fff0b5"/><circle cx="320.5" cy="133.5" r="4" fill="#493519"/>
+  <path d="M293 129h10m18 22v17h25" fill="none" stroke="#2eeaff" stroke-opacity=".42"/>
+
+  <!-- Trazas -->
+  <g fill="none" stroke="#2eeaff" stroke-opacity=".17" stroke-width="1.5">
+    <path d="M92 365h62v30h59"/><path d="M319 365h-48v42h-40"/><path d="M82 448h81v34h89"/><path d="M337 476h-58v52h-70"/><path d="M75 562h71v72h55"/><path d="M344 583h-64v54h-35"/><path d="M103 703v-45h57v-65"/><path d="M319 703v-43h-52v-39"/>
+    <circle cx="92" cy="365" r="2" fill="#2eeaff"/><circle cx="319" cy="365" r="2" fill="#2eeaff"/><circle cx="82" cy="448" r="2" fill="#2eeaff"/><circle cx="337" cy="476" r="2" fill="#2eeaff"/>
+  </g>
+
+  <!-- Regulación y pasivos -->
+  <use href="#resistor" x="91" y="365" width="51" height="21"/>
+  <use href="#resistor" x="95" y="492" width="51" height="21"/>
+  <use href="#smallchip" x="88" y="402" width="72" height="58"/>
+  <use href="#resistor" x="157" y="400" width="44" height="18"/>
+  <use href="#resistor" x="160" y="429" width="44" height="18"/>
+  <use href="#smallchip" x="258" y="548" width="70" height="56"/>
+  <use href="#smallchip" x="107" y="594" width="56" height="45"/>
+  <use href="#smallchip" x="169" y="594" width="56" height="45"/>
+  <use href="#smallchip" x="231" y="594" width="56" height="45"/>
+  <g><use href="#resistor" x="215" y="454" width="42" height="17"/><use href="#resistor" x="264" y="454" width="42" height="17"/><use href="#resistor" x="215" y="480" width="42" height="17"/><use href="#resistor" x="264" y="480" width="42" height="17"/></g>
+
+  <!-- Botones -->
+  <g transform="translate(244 366)"><rect width="66" height="51" rx="7" fill="#d2dadd" stroke="#5d6f77"/><rect x="6" y="6" width="54" height="39" rx="5" fill="#78898f"/><circle cx="33" cy="25.5" r="15" fill="#303c42" stroke="#a9b7bb"/><circle cx="29" cy="21" r="5" fill="#697a80"/></g>
+  <g transform="translate(244 426)"><rect width="66" height="51" rx="7" fill="#d2dadd" stroke="#5d6f77"/><rect x="6" y="6" width="54" height="39" rx="5" fill="#78898f"/><circle cx="33" cy="25.5" r="15" fill="#303c42" stroke="#a9b7bb"/><circle cx="29" cy="21" r="5" fill="#697a80"/></g>
+  <g fill="#d9e6ea" font-family="monospace" font-size="10" font-weight="700"><text transform="rotate(90 327 378)" x="327" y="378">RST</text><text transform="rotate(90 327 438)" x="327" y="438">BOOT</text></g>
+
+  <!-- LED RGB y fila de LEDs -->
+  <rect x="104" y="528" width="61" height="61" rx="7" fill="#e8eef0" stroke="#84969e"/><circle cx="134.5" cy="558.5" r="19" fill="#f7ffff" stroke="#b8ced2" filter="url(#glow)"/>
+  <text x="180" y="546" fill="#d8e6e9" font-family="monospace" font-size="10" font-weight="700">RGB LED</text>
+  <g transform="translate(183 553)"><rect width="28" height="22" rx="3" fill="#151d23" stroke="#899ba2"/><rect x="34" width="28" height="22" rx="3" fill="#151d23" stroke="#899ba2"/><rect x="68" width="28" height="22" rx="3" fill="#151d23" stroke="#899ba2"/><rect x="102" width="28" height="22" rx="3" fill="#151d23" stroke="#899ba2"/><circle cx="14" cy="11" r="4" fill="#ff2e7b"/><circle cx="48" cy="11" r="4" fill="#ff9d2e"/><circle cx="82" cy="11" r="4" fill="#2eeaff"/><circle cx="116" cy="11" r="4" fill="#a8ffcf"/></g>
+
+  <!-- USB-C dobles -->
+  <g transform="translate(79 683)"><path d="M0 20Q0 0 20 0h88q20 0 20 20v95H0z" fill="url(#metal)" stroke="#dce8ea" stroke-width="2"/><path d="M18 31q0-14 14-14h64q14 0 14 14v35H18z" fill="#303b41" stroke="#9ba9ad"/><path d="M36 37h56v17H36z" fill="#0b1116"/><circle cx="18" cy="86" r="5" fill="#3b484e"/><circle cx="110" cy="86" r="5" fill="#3b484e"/></g>
+  <g transform="translate(213 683)"><path d="M0 20Q0 0 20 0h88q20 0 20 20v95H0z" fill="url(#metal)" stroke="#dce8ea" stroke-width="2"/><path d="M18 31q0-14 14-14h64q14 0 14 14v35H18z" fill="#303b41" stroke="#9ba9ad"/><path d="M36 37h56v17H36z" fill="#0b1116"/><circle cx="18" cy="86" r="5" fill="#3b484e"/><circle cx="110" cy="86" r="5" fill="#3b484e"/></g>
+  <g fill="#c8d8dc" font-family="monospace" font-size="9" font-weight="700"><text x="94" y="674">USB / UART</text><text x="246" y="674">USB / OTG</text></g>
+</svg>

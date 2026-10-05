@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Una ESP32-S3 convertida en un pequeño laboratorio con Linux, MicroPython, WiFi y un panel web personalizado." />
-    <title>ESP32-S3 · Laboratorio conectado — DGNV Studios</title>
+    <meta name="description" content="Una ESP32-S3 para experimentar con Linux, MicroPython, monitoreo mediante una web personalizada y futuras integraciones con sensores." />
+    <title>ESP32-S3 · Linux, Python y panel web — DGNV Studios</title>
     <link rel="icon" type="image/png" href="../../img/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,10 +28,11 @@
 
       <section class="project-page-intro project-hero">
         <p class="eyebrow"><span></span> Proyecto 01 · Laboratorio personal</p>
-        <h1>Una ESP32-S3 como<br /><em>equipo conectado.</em></h1>
+        <h1>Una ESP32-S3 para<br /><em>experimentar.</em></h1>
         <p class="hero-copy">
-          Una pequeña placa que usaré principalmente para experimentar con
-          Python, conectividad WiFi y, más adelante, sensores u otros componentes.
+          Una pequeña placa para ejecutar Python, probar Linux, consultar el
+          estado del sistema desde una web propia y, más adelante, incorporar
+          sensores u otros componentes.
         </p>
         <div class="project-tags" aria-label="Tecnologías del proyecto">
           <span>ESP32-S3</span><span>Linux</span><span>MicroPython</span><span>WiFi</span>
@@ -39,17 +40,13 @@
       </section>
 
       <section class="esp32-overview" aria-label="Componentes principales del proyecto">
-        <div class="esp32-board" aria-hidden="true">
-          <span class="esp32-antenna"></span>
-          <div class="esp32-chip"><small>ESPRESSIF</small><strong>ESP32-S3</strong></div>
-          <span class="esp32-pin pin-left"></span>
-          <span class="esp32-pin pin-right"></span>
-          <span class="esp32-usb"></span>
-        </div>
+        <figure class="esp32-board">
+          <img src="img/esp32-s3-board.svg" alt="Ilustración técnica vectorial de la placa ESP32-S3-N8R2 vista desde arriba" />
+        </figure>
         <div class="esp32-capabilities">
           <article><span>01</span><strong>Python</strong><small>Pruebas y pequeños programas con MicroPython.</small></article>
-          <article><span>02</span><strong>WiFi</strong><small>Conexión a la red para acceder y consultar el sistema.</small></article>
-          <article><span>03</span><strong>Sensores</strong><small>Una base preparada para futuras ideas y componentes.</small></article>
+          <article><span>02</span><strong>Linux</strong><small>Un sistema reducido para explorar herramientas y procesos reales.</small></article>
+          <article><span>03</span><strong>Panel web</strong><small>Monitoreo sencillo de memoria, procesador, conectividad y sistema.</small></article>
         </div>
       </section>
 
@@ -60,7 +57,7 @@
           <p>
             La ESP32-S3 funcionará como una plataforma para aprender y probar.
             La intención no es limitarla a una sola tarea: podrá ejecutar código
-            en Python, conectarse mediante WiFi y recibir sensores según lo que
+            en Python, conectarse a una LAN mediante WiFi y recibir sensores según lo que
             necesite cada experimento.
           </p>
         </article>
@@ -88,10 +85,11 @@
           <p class="eyebrow"><span></span> Interfaz propia</p>
           <h2 id="esp32-panel-title">Un panel web al estilo de un router</h2>
           <p>
-            Preparé una web personalizada para administrar lo básico desde el
-            navegador y consultar rápidamente el estado del dispositivo. La idea
-            es tener un punto de control sencillo, parecido al panel de un router,
-            sin depender siempre de la consola serial.
+            Preparé una web personalizada para administrar lo básico desde un
+            navegador conectado a la misma LAN y consultar rápidamente el estado
+            del dispositivo. La idea es tener un punto de control sencillo,
+            parecido al panel de un router. Fuera de la red local, el acceso se
+            realiza directamente mediante USB o puerto COM.
           </p>
         </div>
 
@@ -100,7 +98,7 @@
           <div class="esp32-dashboard-grid">
             <article><small>Memoria RAM</small><strong>Estado</strong><span class="metric-line"><i style="width:58%"></i></span></article>
             <article><small>Procesador</small><strong>Carga</strong><span class="metric-line"><i style="width:34%"></i></span></article>
-            <article><small>Conectividad</small><strong>WiFi</strong><em>Conectado</em></article>
+            <article><small>Conectividad</small><strong>WiFi</strong><em>LAN local</em></article>
             <article><small>Sistema</small><strong>Linux</strong><em>Activo</em></article>
           </div>
         </div>
