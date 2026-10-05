@@ -215,6 +215,108 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .cli-block { position: relative; box-sizing: border-box; width: 100%; min-width: 0; max-width: 720px; margin: 25px 0; padding: 39px 20px 19px; overflow-x: hidden; border: 1px solid rgba(46, 234, 255, .25); background: #04070b; color: #dbe7ef; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025); font: .78rem/1.9 "DM Mono", monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
 .cli-block::before { content: "Cisco IOS · CLI"; position: absolute; top: 0; right: 0; left: 0; padding: 9px 12px; color: var(--muted); border-bottom: 1px solid var(--line); background: rgba(18, 27, 41, .72); font: .59rem "DM Mono", monospace; letter-spacing: .07em; }
 .cli-block::after { content: "# en verde = explicación de la guía; no se escribe en la CLI."; display: block; margin-top: 13px; padding-top: 10px; border-top: 1px solid rgba(46, 234, 255, .12); color: #009d00; font: .64rem/1.45 "DM Mono", monospace; white-space: normal; }
+.command-reference .reference-guide { margin: 26px 0 20px; padding: 6px 0 6px 18px; border-left: 2px solid var(--cyan); }
+.command-reference .reference-guide p { max-width: 780px; margin: 0 0 6px; font-size: .83rem; line-height: 1.7; color: var(--muted); }
+.command-reference .reference-guide p:last-child { margin-bottom: 0; }
+.command-reference p code { color: var(--cyan); font: .86em "DM Mono", monospace; }
+.reference-directory { margin: 24px 0 38px; border: 1px solid var(--line); background: rgba(12, 19, 28, .7); }
+.reference-directory > summary { padding: 17px 18px; color: var(--text); cursor: pointer; font-size: .85rem; font-weight: 700; }
+.reference-directory > summary::marker, .reference-note > summary::marker { color: var(--cyan); }
+.reference-directory > summary > span { margin-left: 10px; color: var(--muted); font: .65rem "DM Mono", monospace; white-space: nowrap; }
+.reference-index { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: 0; padding: 0 10px 10px; }
+.reference-index a { display: flex; align-items: baseline; gap: 10px; padding: 12px 10px; border: 1px solid transparent; color: var(--muted); font-size: .78rem; text-decoration: none; }
+.reference-index a > span { color: var(--cyan); font: .65rem "DM Mono", monospace; }
+.reference-index a:hover, .reference-index a:focus-visible { border-color: var(--line); color: var(--text); background: rgba(46, 234, 255, .035); }
+.command-reference section { margin: 40px 0; scroll-margin-top: 25px; }
+.command-reference section h3 { margin: 28px 0 10px; font-size: 1rem; }
+.reference-terminal { position: relative; width: 100%; min-width: 0; max-width: 720px; margin: 25px 0; }
+.reference-terminal-bar { position: absolute; z-index: 1; top: 1px; right: 1px; left: 1px; display: flex; align-items: center; justify-content: space-between; height: 32px; gap: 12px; padding: 9px 12px; border-bottom: 1px solid var(--line); background: rgba(18, 27, 41, .72); }
+.reference-terminal-label { display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px 14px; min-width: 0; line-height: 1; }
+.reference-terminal-label > span { color: var(--muted); font: .59rem "DM Mono", monospace; letter-spacing: .07em; }
+.reference-terminal-label > strong { color: var(--muted); font: 400 .59rem "DM Mono", monospace; }
+.command-reference .cli-command[data-cli-prompt]::before { content: attr(data-cli-prompt); color: var(--magenta); user-select: none; }
+.reference-copy { align-self: stretch; display: inline-flex; align-items: center; flex-shrink: 0; margin: -9px -6px -9px 0; padding: 0 6px; border: 0; color: var(--muted); background: transparent; font: .59rem "DM Mono", monospace; cursor: pointer; }
+.reference-copy[hidden] { display: none; }
+.reference-copy:hover, .reference-copy:focus-visible { color: var(--cyan); background: rgba(46, 234, 255, .05); }
+.reference-copy:disabled { cursor: wait; opacity: .7; }
+.command-reference .reference-terminal .cli-block { margin: 0; tab-size: 2; }
+.command-reference .cli-block::before { display: none; }
+.command-reference .cli-block::after { content: "! en verde = separador o comentario; se puede copiar en la CLI."; }
+.command-reference .reference-copy-status { max-width: none; margin: 0; padding: 0 18px 10px; color: var(--cyan); font-size: .74rem; line-height: 1.5; }
+.command-reference .reference-copy-status:empty { display: none; }
+.reference-note { margin: 10px 0 24px; border-left: 1px solid var(--line); padding-left: 14px; }
+.reference-module-links { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; padding: 12px 0 0; }
+.reference-module-links > span { margin-right: 3px; color: var(--muted); font: .6rem "DM Mono", monospace; }
+.reference-module-links a { padding: 8px 10px; border: 1px solid var(--line); color: var(--muted); background: transparent; font: .66rem/1.5 "DM Mono", monospace; text-decoration: none; }
+.reference-module-links a:hover, .reference-module-links a:focus-visible { color: var(--cyan); border-color: var(--cyan); background: rgba(46, 234, 255, .035); }
+.reference-module-links small { flex-basis: 100%; color: var(--muted); font-size: .72rem; line-height: 1.5; }
+.reference-note > summary { padding: 8px 0; color: var(--muted); cursor: pointer; font-size: .78rem; }
+.command-reference .reference-note p { margin: 6px 0 12px; font-size: .83rem; line-height: 1.75; }
+@media (max-width: 600px) {
+  .reference-terminal-label > span { display: none; }
+  .reference-index { grid-template-columns: 1fr; }
+  .reference-directory > summary > span { display: block; margin: 7px 0 0 18px; }
+}
+.reference-table { max-width: 100%; overflow-x: auto; margin: 22px 0; }
+.lab-topology { width: 100%; margin: 30px 0 34px; padding: 22px; border: 1px solid rgba(46, 234, 255, .25); background: linear-gradient(135deg, #0d1721, #080d14); }
+.command-reference .lab-topology-kicker { margin: 0 0 8px; color: var(--orange); font: .62rem "DM Mono", monospace; letter-spacing: .07em; }
+.command-reference .lab-topology h2 { margin: 0 0 10px; font-size: clamp(1.05rem, 2.5vw, 1.45rem); }
+.command-reference .lab-topology figcaption > p:last-child { margin: 0; color: var(--muted); font-size: .76rem; line-height: 1.6; }
+.lab-topology-controls { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin: 20px 0 10px; }
+.lab-view-buttons { display: flex; flex-wrap: wrap; gap: 5px; }
+.lab-topology-controls button { min-height: 34px; padding: 8px 10px; border: 1px solid var(--line); color: var(--muted); background: transparent; font: .62rem "DM Mono", monospace; cursor: pointer; }
+.lab-topology-controls button:hover, .lab-topology-controls button:focus-visible, .lab-topology-controls button[aria-pressed="true"] { border-color: rgba(46, 234, 255, .6); color: var(--cyan); background: rgba(46, 234, 255, .05); }
+.lab-topology-stage { overflow: hidden; min-width: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #080f17; }
+.lab-topology-svg { display: block; width: 100%; height: auto; aspect-ratio: 2180 / 1030; overflow: hidden; }
+.lab-topology-svg[data-lab-view]:not([data-lab-view="general"]) { max-height: 80vh; }
+.lab-topology-svg text { font-family: "DM Mono", monospace; paint-order: stroke fill; stroke: #080f17; stroke-width: 4px; stroke-linejoin: round; }
+.lab-topology-svg .lab-device-name { fill: var(--text); font-size: 22px; font-weight: 500; }
+.lab-topology-svg .lab-device-meta { fill: #acbac9; font-size: 18px; }
+.lab-topology-svg .lab-zone-title { fill: #6d8ba0; font-size: 17px; letter-spacing: 1.5px; }
+.lab-zone-borders path { fill: none; stroke: #284151; stroke-width: 1px; stroke-dasharray: 5 10; opacity: .45; }
+.lab-wire { fill: none; stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round; }
+.lab-pagp { stroke: var(--cyan); stroke-dasharray: 14 9; }
+.lab-lacp { stroke: var(--orange); stroke-dasharray: 14 9; }
+.lab-trunk { stroke: #839dad; stroke-dasharray: 14 9; }
+.lab-serial { stroke: var(--magenta); }
+.lab-routed, .lab-access { stroke: #8f9eac; }
+.lab-topology-svg .lab-label, .lab-topology-svg .lab-port { fill: #b8c7d3; font-size: 17px; }
+.lab-topology-svg .lab-small { fill: #7d94a7; font-size: 16px; }
+.lab-topology-svg .lab-network { fill: var(--text); font-size: 18px; }
+.lab-topology-svg .lab-group-pagp { fill: var(--cyan); font-size: 18px; }
+.lab-topology-svg .lab-group-lacp { fill: var(--orange); font-size: 18px; }
+.lab-pc { fill: #0b1b26; stroke: var(--cyan); stroke-width: 2px; }
+.lab-map-note rect { fill: #0b1722; stroke: #244354; stroke-width: 1px; }
+.lab-topology-svg .lab-note-title { fill: var(--orange); font-size: 16px; }
+.lab-topology-svg .lab-note-line { fill: #b9c9d7; font-size: 16px; }
+.lab-topology-legend { display: flex; flex-wrap: wrap; gap: 10px 16px; padding: 15px 0 4px; }
+.lab-topology-legend > span { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: .65rem; }
+.lab-topology-legend i { width: 25px; height: 0; border-top: 2px solid #8f9eac; }
+.lab-topology-legend .lab-legend-pagp { border-color: var(--cyan); border-top-style: dashed; }
+.lab-topology-legend .lab-legend-lacp { border-color: var(--orange); border-top-style: dashed; }
+.lab-topology-legend .lab-legend-trunk { border-color: #839dad; border-top-style: dashed; }
+.lab-topology-legend .lab-legend-serial { border-color: var(--magenta); }
+.command-reference .lab-topology-caption { max-width: none; margin: 10px 0 0; color: var(--muted); font-size: .72rem; line-height: 1.65; }
+.command-reference .lab-topology-status { margin: 8px 0 0; color: var(--orange); font-size: .72rem; }
+.lab-topology-status:empty { display: none; }
+.lab-topology:fullscreen { display: flex; flex-direction: column; gap: 0; width: 100vw; height: 100dvh; margin: 0; padding: 20px; border: 0; background: #080f17; overflow: auto; }
+.lab-topology:fullscreen .lab-topology-stage { display: flex; flex: 1; min-height: 0; justify-content: center; }
+.lab-topology:fullscreen .lab-topology-svg { width: 100%; height: 100%; }
+.lab-topology:fullscreen .lab-topology-caption { margin: 8px 0 0; }
+.lab-optional { padding-left: 0; border: 0; }
+.command-reference .lab-source-note { font-size: .72rem; color: var(--muted); }
+.lab-source-note a { color: var(--cyan); }
+@media (max-width: 600px) {
+  .lab-topology { padding: 14px; }
+  .lab-topology-controls button { min-height: 44px; }
+  .lab-topology-stage { margin-right: -5px; margin-left: -5px; overflow-x: auto; scrollbar-color: #284759 #080f17; }
+  .lab-topology-svg { min-width: 600px; }
+  .lab-topology-svg[data-lab-view]:not([data-lab-view="general"]) { max-height: none; }
+  .lab-topology:fullscreen { padding: 12px; }
+}
+.reference-table table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.reference-table caption { padding: 10px; text-align: left; color: var(--muted); }
+.reference-table th, .reference-table td { padding: 12px; border: 1px solid var(--line); text-align: left; white-space: nowrap; }
 .cli-block code { color: inherit; font: inherit; }
 .cli-prompt { color: var(--magenta); }
 .cli-command { color: var(--text); }
