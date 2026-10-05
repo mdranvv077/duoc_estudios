@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Una ESP32-S3 convertida en un pequeño laboratorio con Linux, MicroPython, WiFi y un panel web personalizado." />
+    <title>ESP32-S3 · Laboratorio conectado — DGNV Studios</title>
+    <link rel="icon" type="image/png" href="../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../assets/css/responsive.css?v=20260909-mobile" />
+    <link rel="stylesheet" href="../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../assets/css/projects.css?v=20261004-esp32" />
+  </head>
+  <body data-project-id="esp32-s3-lab" hidden>
+    <header class="site-header container">
+      <a class="brand" href="../../index.html" aria-label="Inicio DGNV Studios">
+        <img class="brand-logo" src="../../assets/images/dgnv-logo.png" alt="" />
+        <span>DGNV Studios</span>
+      </a>
+    </header>
+
+    <main class="project-page project-detail container">
+      <a class="project-back" href="../index.html">← Volver a proyectos</a>
+
+      <section class="project-page-intro project-hero">
+        <p class="eyebrow"><span></span> Proyecto 01 · Laboratorio personal</p>
+        <h1>Una ESP32-S3 como<br /><em>equipo conectado.</em></h1>
+        <p class="hero-copy">
+          Una pequeña placa que usaré principalmente para experimentar con
+          Python, conectividad WiFi y, más adelante, sensores u otros componentes.
+        </p>
+        <div class="project-tags" aria-label="Tecnologías del proyecto">
+          <span>ESP32-S3</span><span>Linux</span><span>MicroPython</span><span>WiFi</span>
+        </div>
+      </section>
+
+      <section class="esp32-overview" aria-label="Componentes principales del proyecto">
+        <div class="esp32-board" aria-hidden="true">
+          <span class="esp32-antenna"></span>
+          <div class="esp32-chip"><small>ESPRESSIF</small><strong>ESP32-S3</strong></div>
+          <span class="esp32-pin pin-left"></span>
+          <span class="esp32-pin pin-right"></span>
+          <span class="esp32-usb"></span>
+        </div>
+        <div class="esp32-capabilities">
+          <article><span>01</span><strong>Python</strong><small>Pruebas y pequeños programas con MicroPython.</small></article>
+          <article><span>02</span><strong>WiFi</strong><small>Conexión a la red para acceder y consultar el sistema.</small></article>
+          <article><span>03</span><strong>Sensores</strong><small>Una base preparada para futuras ideas y componentes.</small></article>
+        </div>
+      </section>
+
+      <section class="project-story">
+        <article>
+          <p class="eyebrow"><span></span> La idea</p>
+          <h2>Un pequeño laboratorio flexible</h2>
+          <p>
+            La ESP32-S3 funcionará como una plataforma para aprender y probar.
+            La intención no es limitarla a una sola tarea: podrá ejecutar código
+            en Python, conectarse mediante WiFi y recibir sensores según lo que
+            necesite cada experimento.
+          </p>
+        </article>
+
+        <article>
+          <p class="eyebrow"><span></span> Una prueba diferente</p>
+          <h2>Linux dentro de la ESP32-S3</h2>
+          <p>
+            También instalé Linux tomando como referencia el proyecto
+            <a href="https://github.com/paulneja/Linux-on-esp32-S3" target="_blank" rel="noopener noreferrer">Linux-on-esp32-S3</a>.
+            Esta implementación ejecuta Linux de forma nativa en la arquitectura
+            Xtensa y combina el sistema con el firmware de Espressif encargado de
+            funciones como WiFi y acceso a la memoria flash.
+          </p>
+          <p class="project-note">
+            Es un entorno reducido: incluye MicroPython y herramientas útiles,
+            pero conserva las limitaciones normales de memoria y potencia de una
+            placa de este tamaño.
+          </p>
+        </article>
+      </section>
+
+      <section class="esp32-panel-section" aria-labelledby="esp32-panel-title">
+        <div class="esp32-panel-copy">
+          <p class="eyebrow"><span></span> Interfaz propia</p>
+          <h2 id="esp32-panel-title">Un panel web al estilo de un router</h2>
+          <p>
+            Preparé una web personalizada para administrar lo básico desde el
+            navegador y consultar rápidamente el estado del dispositivo. La idea
+            es tener un punto de control sencillo, parecido al panel de un router,
+            sin depender siempre de la consola serial.
+          </p>
+        </div>
+
+        <div class="esp32-dashboard" aria-label="Representación del panel web personalizado">
+          <div class="esp32-dashboard-top"><span></span><strong>ESP32-S3 · SYSTEM</strong><small>ONLINE</small></div>
+          <div class="esp32-dashboard-grid">
+            <article><small>Memoria RAM</small><strong>Estado</strong><span class="metric-line"><i style="width:58%"></i></span></article>
+            <article><small>Procesador</small><strong>Carga</strong><span class="metric-line"><i style="width:34%"></i></span></article>
+            <article><small>Conectividad</small><strong>WiFi</strong><em>Conectado</em></article>
+            <article><small>Sistema</small><strong>Linux</strong><em>Activo</em></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-next">
+        <span>Próximos pasos</span>
+        <h2>Seguir experimentando</h2>
+        <p>La siguiente etapa será probar programas en Python, ampliar el panel y decidir qué sensor o componente puede darle una utilidad concreta al dispositivo.</p>
+      </section>
+    </main>
+
+    <footer class="container">
+      <p>DGNV Studios <small>— aprende construyendo.</small></p>
+      <p class="site-credit">Proyecto personal · ESP32-S3</p>
+      <p>© <span id="year"></span></p>
+    </footer>
+    <script src="../../assets/js/main.js"></script>
+    <script type="module" src="../assets/project-access.js?v=20261004"></script>
+  </body>
+</html>

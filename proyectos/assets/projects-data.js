@@ -5,8 +5,16 @@ export const PROJECT_STATUS = Object.freeze({
 
 export const projects = Object.freeze([
   {
-    id: "blank-project",
+    id: "esp32-s3-lab",
     number: "01",
+    title: "ESP32-S3 · Laboratorio conectado",
+    description: "Linux, MicroPython, WiFi y un panel web personalizado en una pequeña placa.",
+    status: PROJECT_STATUS.PUBLIC,
+    href: "esp32-s3/index.html",
+  },
+  {
+    id: "blank-project",
+    number: "02",
     title: "Proyecto en blanco",
     description: "Espacio reservado para la primera idea compartida.",
     status: PROJECT_STATUS.PRIVATE,
