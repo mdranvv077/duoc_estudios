@@ -268,7 +268,11 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .lab-topology-controls button:hover, .lab-topology-controls button:focus-visible, .lab-topology-controls button[aria-pressed="true"] { border-color: rgba(46, 234, 255, .6); color: var(--cyan); background: rgba(46, 234, 255, .05); }
 .lab-topology-stage { overflow: hidden; min-width: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #080f17; }
 .lab-topology-svg { display: block; width: 100%; height: auto; aspect-ratio: 2180 / 1030; overflow: hidden; }
-.lab-topology-svg[data-lab-view]:not([data-lab-view="general"]) { max-height: 80vh; }
+@media (min-width: 761px) {
+  /* En escritorio el zoom cambia el encuadre, no la altura del recuadro. */
+  .lab-topology:not(.is-expanded) .lab-topology-stage { position: relative; aspect-ratio: 16 / 9; }
+  .lab-topology:not(.is-expanded) .lab-topology-svg { position: absolute; inset: 0; width: 100%; height: 100%; min-width: 0; }
+}
 .lab-topology-svg text { font-family: "DM Mono", monospace; paint-order: stroke fill; stroke: #080f17; stroke-width: 4px; stroke-linejoin: round; }
 .lab-topology-svg .lab-device-name { fill: var(--text); font-size: 22px; font-weight: 500; }
 .lab-topology-svg .lab-device-meta { fill: #acbac9; font-size: 18px; }
@@ -304,6 +308,7 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .lab-topology-backdrop { position: absolute; inset: -16px; overflow: hidden; pointer-events: none; filter: blur(12px); opacity: .65; animation: lab-backdrop-in 460ms ease both; }
 .lab-backdrop-page { position: absolute; left: 16px; pointer-events: none; }
 body.lab-expanded-page > :not(.lab-topology-overlay) { visibility: hidden; }
+html:has(body.lab-expanded-page), body.lab-expanded-page .learning-shell { overflow: hidden; }
 .lab-topology-overlay.is-closing .lab-topology-backdrop { animation: lab-backdrop-out 240ms ease both; }
 .lab-topology.is-expanded { position: relative; display: flex; flex-direction: column; gap: 0; width: min(96vw, calc(94dvh * 16 / 9)); height: min(54vw, 94dvh); margin: 0; padding: clamp(12px, 1.3vw, 24px); border: 0; background: transparent; box-shadow: none; overflow: auto; }
 .lab-topology.is-expanded .lab-topology-stage { display: flex; flex: 1; min-height: 0; justify-content: center; overflow: hidden; border: 0; background: transparent; }
@@ -348,7 +353,25 @@ body.lab-expanded-page > :not(.lab-topology-overlay) { visibility: hidden; }
 .lesson-content > footer .site-credit { color: var(--muted); font-size: .7rem; font-weight: 500; line-height: 1.4; }
 .lesson-content > footer > p:last-child { color: var(--muted); font: .7rem "DM Mono", monospace; }
 
+html:has(.learning-shell) { background: var(--bg); color-scheme: dark; scrollbar-color: #284759 var(--bg); }
 html:has(.learning-shell), body:has(.learning-shell) { overflow-x: hidden; }
+.learning-shell, .guide-sidebar, .lab-topology.is-expanded { scrollbar-color: #284759 var(--bg); scrollbar-width: thin; }
+.learning-shell::-webkit-scrollbar, .guide-sidebar::-webkit-scrollbar, .lab-topology.is-expanded::-webkit-scrollbar { width: 8px; height: 8px; }
+.learning-shell::-webkit-scrollbar-track, .guide-sidebar::-webkit-scrollbar-track, .lab-topology.is-expanded::-webkit-scrollbar-track { background: var(--bg); }
+.learning-shell::-webkit-scrollbar-thumb, .guide-sidebar::-webkit-scrollbar-thumb, .lab-topology.is-expanded::-webkit-scrollbar-thumb { background: #284759; border: 2px solid var(--bg); border-radius: 8px; }
+/* La ampliación no muestra barras; los paneles normales conservan su desplazamiento. */
+html:has(body.lab-expanded-page), body.lab-expanded-page,
+body.lab-expanded-page .learning-shell, body.lab-expanded-page .guide-sidebar,
+body.lab-expanded-page .lab-topology-overlay,
+body.lab-expanded-page .lab-topology.is-expanded,
+body.lab-expanded-page .lab-topology-stage { scrollbar-width: none; -ms-overflow-style: none; }
+html:has(body.lab-expanded-page)::-webkit-scrollbar,
+body.lab-expanded-page::-webkit-scrollbar,
+body.lab-expanded-page .learning-shell::-webkit-scrollbar,
+body.lab-expanded-page .guide-sidebar::-webkit-scrollbar,
+body.lab-expanded-page .lab-topology-overlay::-webkit-scrollbar,
+body.lab-expanded-page .lab-topology.is-expanded::-webkit-scrollbar,
+body.lab-expanded-page .lab-topology-stage::-webkit-scrollbar { display: none; width: 0; height: 0; }
 body:has(.learning-shell) { overflow-y: hidden; }
 /* El encabezado conserva el diseño del inicio; solo se fija para la navegación lateral. */
 body:has(.learning-shell) .site-header { position: fixed; z-index: 2; top: 0; right: 0; left: 252px; width: auto; margin: 0; padding: 0 36px; transform: none; background: transparent; }

@@ -229,27 +229,64 @@ async function copyReferenceCommands(button) {
   }
 }
 
+const labViewTransitions = new WeakMap();
+const labTopologyViews = {
+  general: [0, 0, 2180, 1030],
+  left: [0, 100, 675, 930],
+  center: [675, 0, 650, 1030],
+  right: [1295, 0, 885, 1030],
+};
+
 function setLabTopologyView(button) {
-  const figure = button.closest(".lab-topology");
-  const svg = figure?.querySelector(".lab-topology-svg");
-  if (!svg) return;
-  const views = {
-    general: "0 0 2180 1030",
-    left: "0 100 675 930",
-    center: "675 0 650 1030",
-    right: "1295 0 885 1030",
+  const svg = button.closest(".lab-topology")?.querySelector(".lab-topology-svg");
+  const target = labTopologyViews[button.dataset.labView];
+  if (!svg || !target) return;
+  const previous = labViewTransitions.get(svg);
+  if (previous?.frame) cancelAnimationFrame(previous.frame);
+  const transition = {};
+  labViewTransitions.set(svg, transition);
+  if ((svg.dataset.labView || "general") === button.dataset.labView ||
+      matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    applyLabTopologyView(button);
+    return;
+  }
+  const start = svg.getAttribute("viewBox").split(/\s+/).map(Number);
+  const started = performance.now();
+  svg.querySelectorAll("text, .lab-map-note").forEach((label) => { label.style.visibility = ""; });
+  button.closest(".lab-topology").querySelectorAll("[data-lab-view]").forEach((item) => {
+    item.setAttribute("aria-pressed", String(item === button));
+  });
+  const animate = (now) => {
+    if (labViewTransitions.get(svg) !== transition || !svg.isConnected) return;
+    const progress = Math.min(1, (now - started) / 700);
+    const eased = progress < .5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2;
+    const dimensions = start.map((value, index) => value + (target[index] - value) * eased);
+    updateLabTopologyViewport(svg, dimensions);
+    if (progress < 1) transition.frame = requestAnimationFrame(animate);
+    else applyLabTopologyView(button);
   };
-  const view = views[button.dataset.labView];
-  if (!view) return;
-  svg.setAttribute("viewBox", view);
-  const dimensions = view.split(" ");
-  const [left, top, width, height] = dimensions.map(Number);
+  transition.frame = requestAnimationFrame(animate);
+}
+
+function updateLabTopologyViewport(svg, dimensions) {
+  svg.setAttribute("viewBox", dimensions.join(" "));
+  svg.style.aspectRatio = `${dimensions[2]} / ${dimensions[3]}`;
   const clip = svg.querySelector("#lab-view-clip rect");
   if (clip) {
     ["x", "y", "width", "height"].forEach((attribute, index) => {
       clip.setAttribute(attribute, dimensions[index]);
     });
   }
+}
+
+function applyLabTopologyView(button) {
+  const figure = button.closest(".lab-topology");
+  const svg = figure?.querySelector(".lab-topology-svg");
+  if (!svg) return;
+  const dimensions = labTopologyViews[button.dataset.labView];
+  if (!dimensions) return;
+  updateLabTopologyViewport(svg, dimensions);
+  const [left, top, width, height] = dimensions;
   svg.querySelectorAll("text, .lab-map-note").forEach((label) => {
     const bounds = label.getBBox();
     const outside = bounds.x < left || bounds.y < top ||
@@ -271,6 +308,7 @@ function restoreLabTopology() {
   state.animation?.cancel();
   state.placeholder.replaceWith(state.figure);
   state.figure.classList.remove("is-expanded");
+  state.figure.style.removeProperty("opacity");
   state.button.textContent = "Ampliar plano";
   state.button.setAttribute("aria-expanded", "false");
   state.overlay.remove();
@@ -340,6 +378,7 @@ async function expandLabTopology(button) {
   backdrop.append(page);
   figure.replaceWith(placeholder);
   figure.classList.add("is-expanded");
+  figure.style.opacity = "0";
   overlay.append(backdrop, figure);
   document.body.append(overlay);
   labExpansion = { figure, button, overlay, placeholder, overflow: document.body.style.overflow, animation: null, closing: false };
@@ -353,14 +392,11 @@ async function expandLabTopology(button) {
   catch { status.textContent = "Este navegador no permite ocultar sus barras. El plano sigue ampliado; pulsa Esc para cerrar."; }
   if (labExpansion?.overlay !== overlay) return;
   if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const target = figure.getBoundingClientRect();
-    const dx = origin.left + origin.width / 2 - target.left - target.width / 2;
-    const dy = origin.top + origin.height / 2 - target.top - target.height / 2;
     labExpansion.animation = figure.animate([
-      { transform: `translate(${dx}px, ${dy}px) scale(${origin.width / target.width}, ${origin.height / target.height})`, opacity: .45 },
-      { transform: "translate(0, 0) scale(1)", opacity: 1 },
-    ], { duration: 460, easing: "cubic-bezier(.2,.75,.2,1)" });
-  }
+      { opacity: 0 },
+      { opacity: 1 },
+    ], { duration: 650, delay: 250, easing: "ease-in-out", fill: "both" });
+  } else figure.style.opacity = "1";
   button.focus({ preventScroll: true });
   overlay.addEventListener("click", (event) => { if (event.target === overlay || backdrop.contains(event.target)) closeLabTopology(); });
 }
