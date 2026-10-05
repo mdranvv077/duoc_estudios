@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="El límite decide qué MAC admite el puerto. El modo de infracción decide qué hace el switch cuando esa regla se incumple." />
+    <title>Protect, restrict y shutdown — Seguridad de capa 2</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios">
+        <img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" />
+        <span>DGNV Studios</span>
+      </a>
+    </header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 08</small><strong>Seguridad de capa 2</strong></a>
+        <nav class="lesson-nav" aria-label="Módulos"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content command-reference l2-lesson">
+<p class="eyebrow"><span></span> Módulo 06 · Seguridad de capa 2</p>
+<h1>Una infracción, <em>tres respuestas.</em></h1>
+<p class="lesson-lead">El límite decide qué MAC admite el puerto. El modo de infracción decide qué hace el switch cuando esa regla se incumple.</p>
+
+<h2>Qué vamos a provocar</h2>
+<p>Parte del laboratorio sticky del módulo 5: PC1 ya envió tráfico, su MAC está aprendida en Fa0/18 y el máximo es uno. Confírmalo antes de cambiar equipos. Una MAC que aún cabe en un puerto dinámico con plazas libres no es automáticamente una infracción.</p>
+<p>En nuestra prueba, PC-PRUEBA tendrá otra MAC y sustituirá a PC1 en Fa0/18. Cuando envíe tráfico, el puerto verá una dirección de origen que no corresponde a la única MAC segura admitida.</p>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Modo</th><th scope="col">Tráfico no permitido</th><th scope="col">Estado del puerto</th></tr></thead><tbody><tr><td data-label="Modo">protect</td><td data-label="Tráfico no permitido">Descarta las tramas de las MAC que infringen la política. No ofrece el contador de infracciones de restrict.</td><td data-label="Estado del puerto">Sigue operativo para tráfico permitido.</td></tr><tr><td data-label="Modo">restrict</td><td data-label="Tráfico no permitido">Descarta y aumenta el contador de infracciones. En equipos reales puede generar avisos de registro y SNMP.</td><td data-label="Estado del puerto">Sigue operativo para tráfico permitido.</td></tr><tr><td data-label="Modo">shutdown</td><td data-label="Tráfico no permitido">La infracción deshabilita la interfaz.</td><td data-label="Estado del puerto">Queda en Secure-shutdown / error-disabled y requiere recuperación.</td></tr></tbody></table></div>
+<div class="lesson-note"><strong>No son tres tipos de aprendizaje.</strong> Puedes usar dinámico, estático o sticky con cada modo de infracción. Aquí conservamos la misma MAC sticky y solo cambiamos la respuesta, para comparar una cosa a la vez.</div>
+<h2>Prueba 1: protect</h2>
+<p>Con PC1 conectado y el puerto operativo, configura:</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Modo protect</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-13" aria-label="Copiar Modo protect" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-13"><span class="cli-command" data-cli-prompt="SW1> ">enable</span>
+<span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security violation protect</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">end</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show port-security interface fastEthernet 0/18</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Sustituye PC1 por PC-PRUEBA y haz ping a 192.168.10.12. Debe fallar para el equipo no permitido, sin que Port Security apague la interfaz. El contador puede seguir en cero: en protect eso no demuestra que las tramas no se hayan descartado. Reconecta PC1 y comprueba que vuelve a comunicar.</p>
+<h2>Prueba 2: restrict</h2>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Modo restrict</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-14" aria-label="Copiar Modo restrict" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-14"><span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security violation restrict</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">end</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show port-security interface fastEthernet 0/18</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Anota el contador antes de la prueba. Reemplaza nuevamente PC1, envía el ping y vuelve a consultarlo. El equipo ajeno no debería comunicar y el contador debe aumentar. Puede crecer más de uno porque el PC envía varias tramas, incluido ARP. Reconecta PC1 para comprobar el tráfico permitido.</p>
+<h2>Prueba 3: shutdown</h2>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Modo shutdown</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-15" aria-label="Copiar Modo shutdown" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-15"><span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security violation shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">end</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Reemplaza PC1 y envía tráfico desde PC-PRUEBA. Ahora la infracción deshabilita todo el puerto, no solo esas tramas. Volver a enchufar PC1 no recupera automáticamente la interfaz bloqueada.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Observar el bloqueo</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-16" aria-label="Copiar Observar el bloqueo" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-16"><span class="cli-command" data-cli-prompt="SW1# ">show port-security interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show interfaces fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show interfaces status</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Busca Secure-shutdown, el contador de infracciones y el estado de la interfaz. La representación exacta de error-disabled en Packet Tracer depende del modelo y la versión. Usa varias verificaciones, no solo el color del cable.</p>
+<h2>Qué modo elegir</h2>
+<p>Protect mantiene la interfaz disponible, pero deja menos evidencia. Restrict permite observar las infracciones sin apagar el puerto. Shutdown es útil cuando tu política exige cortar la interfaz y revisar el incidente antes de habilitarla de nuevo. La elección depende de esa política y de la disponibilidad que necesita el puesto.</p>
+<h2>Registrar una comparación útil</h2>
+<p>Para cada prueba anota: modo configurado, MAC segura, ping del PC de reemplazo, cambio del contador y si PC1 vuelve a comunicar al reconectarlo. La diferencia central debe quedar visible: protect y restrict conservan operativo el puerto; shutdown necesita recuperación.</p>
+<div class="lesson-note"><strong>Límite del simulador.</strong> Packet Tracer puede simplificar mensajes, SNMP y algunos estados. No prometemos que reproduzca todos los avisos de un switch real. La práctica se apoya en la política, el tráfico y las salidas que sí muestra el equipo.</div>
+<p>Deja el puerto bloqueado tras la última prueba. En el siguiente módulo lo recuperaremos después de corregir la causa.</p>
+<div class="lesson-actions"><a href="sticky.html">← Anterior: Aprendizaje sticky</a><a href="verificacion.html">Siguiente: Verificación y recuperación →</a></div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
+          <p>© <span id="year">2026</span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20261005-l2-full"></script>
+  </body>
+</html>

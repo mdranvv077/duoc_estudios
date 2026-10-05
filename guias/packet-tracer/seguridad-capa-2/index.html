@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Introducción a la seguridad de capa 2: proteger los puertos del switch y preparar las próximas prácticas de la LAN." />
-    <title>Seguridad de capa 2 — Packet Tracer</title>
+    <meta name="description" content="Entender cómo aprende el switch es el primer paso para decidir qué equipos pueden entrar a nuestra LAN." />
+    <title>Introducción a la seguridad — Seguridad de capa 2</title>
     <link rel="icon" type="image/png" href="../../../img/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../../../assets/css/logo.css" />
     <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" />
     <link rel="stylesheet" href="../../../assets/css/credits.css" />
-    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-hsrp-fit" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" />
   </head>
   <body>
     <header class="site-header container">
@@ -29,33 +29,42 @@
         <nav class="lesson-nav" aria-label="Módulos"></nav>
         <a class="sidebar-back" href="../index.html">← Ver categorías</a>
       </aside>
-      <article class="lesson-content">
-        <p class="eyebrow"><span></span> Módulo 01 · Introducción</p>
-        <h1>Antes de proteger <em>la LAN.</em></h1>
-        <p class="lesson-lead">Una red no solo debe comunicar equipos: también hay que decidir qué conexiones se permiten y qué hacer cuando aparece algo que no corresponde.</p>
+      <article class="lesson-content command-reference l2-lesson">
+<p class="eyebrow"><span></span> Módulo 01 · Seguridad de capa 2</p>
+<h1>Seguridad desde <em>el puerto.</em></h1>
+<p class="lesson-lead">Entender cómo aprende el switch es el primer paso para decidir qué equipos pueden entrar a nuestra LAN.</p>
 
-        <h2>La idea: no dejar cualquier puerta abierta</h2>
-        <p>Imagina un switch con un PC conectado y varios puertos libres. Que un puerto no tenga cable ahora no significa que esté desactivado: alguien podría conectar otro equipo. La seguridad de capa 2 empieza por revisar esas entradas y preparar los puertos según su función.</p>
-        <p>No se trata de apagar todo. Se trata de distinguir <strong>qué debe funcionar, qué no se utiliza y qué comportamiento esperamos</strong>. Un puerto para un PC no cumple el mismo papel que un trunk hacia otro switch.</p>
-
-        <div class="lesson-note" style="margin-bottom: 24px;"><strong>No es lo mismo que poner contraseñas.</strong> SSH y las claves protegen el acceso a la administración del dispositivo. Aquí nos enfocaremos en sus puertos y en el tráfico de la LAN. Ambas protecciones se complementan.</div>
-
-        <h2>Qué iremos aprendiendo</h2>
-        <ul>
-          <li><strong>Puertos sin uso:</strong> identificarlos, desactivarlos y mantenerlos separados de las VLANs de usuarios.</li>
-          <li><strong>Puertos de acceso y trunks:</strong> dejar explícita su función y limitar las VLANs que necesitan transportar.</li>
-          <li><strong>Port Security:</strong> controlar las MAC permitidas en un puerto y entender qué ocurre ante una infracción. Una MAC no demuestra por sí sola la identidad de una persona.</li>
-          <li><strong>Protección de STP:</strong> entender dónde aplicar BPDU Guard para detectar BPDUs inesperadas en puertos destinados a equipos finales.</li>
-          <li><strong>Verificación y recuperación:</strong> comprobar las protecciones y recuperar un puerto después de corregir la causa del bloqueo.</li>
-        </ul>
-        <p>Más adelante podremos ampliar la categoría con DHCP Snooping y otras protecciones, según lo que admita el equipo de Packet Tracer. Por ahora, este módulo solo presenta el enfoque; los comandos y las pruebas se desarrollarán en los siguientes.</p>
-
-        <h2>Primero conocer el puerto; después protegerlo</h2>
-        <p>Antes de aplicar cambios, identifica el equipo conectado, la VLAN y si el enlace es access, trunk o parte de un EtherChannel. Desactivar un puerto equivocado puede cortar una conexión necesaria. Tampoco aplicaremos una misma protección a todos los enlaces sin revisar su propósito.</p>
-        <p>Para continuar, conviene repasar <a href="../vlans/puertos-access.html">puertos access</a>, <a href="../trunking/trunk-estatico.html">trunks</a> y <a href="../spanning-tree/index.html">Spanning Tree</a>. Las próximas prácticas partirán de una LAN pequeña que ya funcione: primero la observaremos, luego aplicaremos una medida y finalmente comprobaremos su resultado.</p>
-        <p>Referencia técnica: <a href="https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html" target="_blank" rel="noopener">Cisco · Protecciones de capa 2</a>.</p>
-        <div class="lesson-note"><strong>La categoría continuará.</strong> Este es su primer módulo. Los siguientes se irán incorporando con configuraciones y ejercicios; no hay todavía una práctica completa de seguridad para copiar.</div>
-        <div class="lesson-actions"><a href="../index.html">← Ver categorías de Packet Tracer</a><a href="proximamente.html">Más contenido pronto →</a></div>
+<h2>Qué vamos a aprender</h2>
+<p>Hasta aquí hemos hecho que los equipos se comuniquen. Ahora miraremos el otro lado: un puerto libre, un equipo reemplazado o muchas MAC inesperadas pueden cambiar lo que ocurre en la red. Vamos a preparar los puertos, limitar las direcciones que admiten y comprobar qué pasa cuando esa regla se incumple.</p>
+<ul><li>Entender la tabla CAM y la inundación de unicast desconocido.</li><li>Separar puertos de usuarios, enlaces entre switches y puertos sin uso.</li><li>Configurar MAC seguras de forma dinámica, estática y con sticky.</li><li>Elegir la respuesta ante una infracción y recuperar el puerto sin eliminar su protección.</li></ul>
+<h2>La tabla CAM: quién está en cada puerto</h2>
+<p>Cuando llega una trama, el switch aprende su <strong>MAC de origen</strong> y la asocia con el puerto de entrada y su VLAN. Después consulta la <strong>MAC de destino</strong> para decidir por dónde reenviarla. Esta información forma la tabla de direcciones MAC, conocida habitualmente como tabla CAM.</p>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Situación</th><th scope="col">Qué hace el switch</th></tr></thead><tbody><tr><td data-label="Situación">Destino conocido</td><td data-label="Qué hace el switch">Reenvía por el puerto asociado, si STP permite el tráfico. Si ese puerto es el mismo de entrada, filtra la trama.</td></tr><tr><td data-label="Situación">Destino unicast desconocido</td><td data-label="Qué hace el switch">Inunda por los demás puertos que pueden reenviar dentro de esa VLAN.</td></tr><tr><td data-label="Situación">Destino broadcast</td><td data-label="Qué hace el switch">También se distribuye dentro de la VLAN, sin devolverlo por el puerto de entrada.</td></tr></tbody></table></div>
+<div class="lesson-note"><strong>Una precisión importante.</strong> Una trama dirigida a una MAC desconocida sigue siendo unicast. La inundación no cambia su destino a broadcast ni hace que atraviese todas las VLANs. El switch aprende la MAC de origen, no la de destino.</div>
+<h2>Qué ocurre si aparecen demasiadas MAC</h2>
+<p>La presentación describe la saturación de la tabla CAM: un equipo envía tráfico con muchas MAC de origen inventadas y ocupa entradas. Si el switch deja de conservar destinos legítimos, puede inundar más tráfico unicast desconocido. Un atacante dentro de esa VLAN podría recibir tráfico que normalmente se enviaría por un puerto concreto.</p>
+<p>El resultado exacto depende del equipo y de cómo gestione una tabla llena. No significa que todos los PCs queden automáticamente expulsados, ni que el switch se convierta por completo en un hub. Lo importante es que aumenta la exposición del tráfico y se consume capacidad de aprendizaje.</p>
+<p><strong>Port Security</strong> limita las MAC de origen admitidas en una interfaz. Puede ayudar a contener ese comportamiento, pero una MAC se puede suplantar: esta protección no autentica a una persona ni sustituye otras medidas de seguridad.</p>
+<h2>Una misma topología para toda la categoría</h2>
+<p>Usaremos un switch 2960 y dos PCs, como en la presentación. Conecta PC1 a Fa0/18 y PC2 a Fa0/19 con cobre directo. Para probar una infracción, reemplazaremos temporalmente PC1 por un tercer equipo, PC-PRUEBA, en <strong>el mismo Fa0/18</strong>.</p>
+<figure class="topology-card l2-topology"><figcaption><span>Laboratorio de seguridad</span><strong>Dos equipos legítimos y un puerto que vamos a probar</strong></figcaption>
+<svg class="l2-map-desktop" viewBox="0 0 760 360" role="img" aria-label="SW1 conectado a PC1 por Fa0/18 y PC2 por Fa0/19. PC-PRUEBA reemplazará a PC1 durante las pruebas.">
+<g fill="none" stroke="#8499a7" stroke-width="2"><path d="M247 165 L500 93"/><path d="M247 195 L500 251"/></g>
+<image href="../img/cisco-switch.png" x="147" y="148" width="100" height="57"/>
+<g class="l2-map-copy"><text x="197" y="121" class="l2-map-name">SW1 · 2960</text><text x="197" y="236">VLAN 10 · USUARIOS</text><text x="197" y="263">Fa0/18 y Fa0/19 · access</text><text x="367" y="96">Fa0/18 ↔ Fa0</text><text x="367" y="273">Fa0/19 ↔ Fa0</text><text x="560" y="43" class="l2-map-name">PC1</text><text x="560" y="138">192.168.10.11 /24</text><text x="560" y="203" class="l2-map-name">PC2</text><text x="560" y="296">192.168.10.12 /24</text><text x="380" y="342">PC-PRUEBA sustituye a PC1 en Fa0/18</text></g>
+<g fill="none" stroke="#2eeaff" stroke-width="2"><rect x="500" y="62" width="120" height="50" rx="2"/><path d="M560 112v10m-25 0h50"/><rect x="500" y="222" width="120" height="50" rx="2"/><path d="M560 272v10m-25 0h50"/></g></svg>
+<svg class="l2-map-mobile" viewBox="0 0 360 340" role="img" aria-label="SW1 en VLAN 10 conecta PC1 a Fa0/18 y PC2 a Fa0/19. PC-PRUEBA sustituye a PC1.">
+<image href="../img/cisco-switch.png" x="140" y="48" width="80" height="44"/>
+<g fill="none" stroke="#8499a7" stroke-width="2"><path d="M160 100 L90 214"/><path d="M200 100 L270 214"/></g>
+<g class="l2-map-copy"><text x="180" y="27" class="l2-map-name">SW1 · 2960</text><text x="180" y="120">VLAN 10</text><text x="55" y="161">Fa0/18</text><text x="55" y="183">access</text><text x="305" y="161">Fa0/19</text><text x="305" y="183">access</text><text x="90" y="268" class="l2-map-name">PC1</text><text x="270" y="268" class="l2-map-name">PC2</text><text x="90" y="291">192.168.10.11 /24</text><text x="270" y="291">192.168.10.12 /24</text><text x="180" y="327">PC-PRUEBA sustituye a PC1</text></g>
+<g fill="none" stroke="#2eeaff" stroke-width="2"><rect x="67" y="214" width="46" height="30" rx="2"/><path d="M90 244v8m-12 0h24"/><rect x="247" y="214" width="46" height="30" rx="2"/><path d="M270 244v8m-12 0h24"/></g></svg>
+<p>No necesitas router para estos pings: los PCs pertenecen a la misma red. PC-PRUEBA usará 192.168.10.13 /24.</p></figure>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Equipo</th><th scope="col">Puerto / dirección</th><th scope="col">Función</th></tr></thead><tbody><tr><td data-label="Equipo">PC1</td><td data-label="Puerto / dirección">SW1 Fa0/18 · 192.168.10.11 /24</td><td data-label="Función">Equipo permitido del puerto que probaremos.</td></tr><tr><td data-label="Equipo">PC2</td><td data-label="Puerto / dirección">SW1 Fa0/19 · 192.168.10.12 /24</td><td data-label="Función">Destino de las pruebas de ping.</td></tr><tr><td data-label="Equipo">PC-PRUEBA</td><td data-label="Puerto / dirección">Sustituye a PC1 · 192.168.10.13 /24</td><td data-label="Función">Equipo con otra MAC para comprobar la infracción.</td></tr></tbody></table></div>
+<h2>Cómo seguiremos la práctica</h2>
+<p>En el módulo 2 dejaremos funcionando la LAN y guardaremos una copia base. Los módulos 3, 4 y 5 comparan <strong>alternativas</strong> de aprendizaje sobre Fa0/18: comienza cada una desde esa copia, para no mezclar MAC que aprendiste antes. Luego probaremos las infracciones y terminaremos con verificación y recuperación.</p>
+<div class="lesson-note"><strong>Antes de continuar.</strong> Configura las IPs en Desktop → IP Configuration, con máscara 255.255.255.0. No hace falta gateway ni DNS para esta LAN aislada. Solo realiza estas pruebas en tu propio laboratorio.</div>
+<p class="l2-source">Material principal: <a href="https://view.genially.com/667df639b856d40014c95c74" target="_blank" rel="noopener">Implementando Seguridad en Capa 2</a>. Adaptamos sus ejemplos al laboratorio y ampliamos las pruebas.</p>
+<div class="lesson-actions"><a href="../index.html">← Ver categorías</a><a href="puertos.html">Siguiente: Preparar y proteger los puertos →</a></div>
         <footer class="container">
           <p>DGNV Studios <small>— aprende construyendo.</small></p>
           <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
@@ -64,6 +73,6 @@
       </article>
     </main>
     <script src="../../../assets/js/main.js"></script>
-    <script src="../../../assets/js/learning.js?v=20261005-l2-soon"></script>
+    <script src="../../../assets/js/learning.js?v=20261005-l2-full"></script>
   </body>
 </html>

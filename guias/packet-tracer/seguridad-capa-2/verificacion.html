@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Una protección bien configurada debe permitir el tráfico esperado, bloquear lo que no corresponde y dejar una forma clara de comprobarlo." />
+    <title>Verificación y recuperación — Seguridad de capa 2</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios">
+        <img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" />
+        <span>DGNV Studios</span>
+      </a>
+    </header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 08</small><strong>Seguridad de capa 2</strong></a>
+        <nav class="lesson-nav" aria-label="Módulos"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content command-reference l2-lesson">
+<p class="eyebrow"><span></span> Módulo 07 · Seguridad de capa 2</p>
+<h1>Comprobar, corregir <em>y recuperar.</em></h1>
+<p class="lesson-lead">Una protección bien configurada debe permitir el tráfico esperado, bloquear lo que no corresponde y dejar una forma clara de comprobarlo.</p>
+
+<h2>Cuatro consultas que se complementan</h2>
+<p>No basta con ver que el cable está verde o que existe el comando. Revisa la política, la MAC segura, el estado del puerto y la configuración guardada. Si acabas de hacer la prueba de shutdown, comienza sin habilitar aún Fa0/18.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Diagnóstico de Fa0/18</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-17" aria-label="Copiar Diagnóstico de Fa0/18" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-17"><span class="cli-command" data-cli-prompt="SW1> ">enable</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show port-security</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show port-security interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show port-security address</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show interfaces fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show running-config</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Consulta</th><th scope="col">Qué mirar</th></tr></thead><tbody><tr><td data-label="Consulta">show port-security</td><td data-label="Qué mirar">Resumen de los puertos protegidos y sus infracciones.</td></tr><tr><td data-label="Consulta">show port-security interface …</td><td data-label="Qué mirar">Estado, modo de infracción, máximo, total de MAC y contador.</td></tr><tr><td data-label="Consulta">show port-security address</td><td data-label="Qué mirar">MAC segura, VLAN, tipo de aprendizaje y puerto.</td></tr><tr><td data-label="Consulta">show interfaces …</td><td data-label="Qué mirar">Estado de la interfaz, para distinguir un bloqueo de un cable desconectado.</td></tr><tr><td data-label="Consulta">show running-config</td><td data-label="Qué mirar">La política aplicada y las MAC estáticas o sticky.</td></tr><tr><td data-label="Consulta">show startup-config</td><td data-label="Qué mirar">Lo que realmente quedará al reiniciar después del guardado.</td></tr></tbody></table></div>
+<h2>Entender la salida</h2>
+<p><code>Port Security: Enabled</code> indica que la función está activa. <code>Maximum MAC Addresses</code> es el límite y <code>Total MAC Addresses</code> cuántas plazas están ocupadas. <code>Security Violation Count</code> cuenta infracciones según el modo, no equipos distintos ni necesariamente incidentes distintos.</p>
+<p><code>Secure-up</code> es el estado operativo esperado. <code>Secure-shutdown</code> apunta a un bloqueo por seguridad. Si el puerto simplemente está desconectado, no concluyas que hubo una infracción: confirma el contador, el cable y la configuración.</p>
+<h2>Recuperar el puerto tras shutdown</h2>
+<ol><li>Retira PC-PRUEBA y reconecta PC1, el equipo autorizado.</li><li>Comprueba que la MAC segura sigue siendo la de PC1.</li><li>Reinicia administrativamente Fa0/18.</li><li>Repite el ping y las consultas de estado.</li></ol>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Recuperación manual</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-18" aria-label="Copiar Recuperación manual" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-18"><span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">end</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show port-security interface fastEthernet 0/18</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Desde PC1, prueba nuevamente <code>ping 192.168.10.12</code>. El puerto debe quedar operativo y conservar su límite, modo y MAC segura. Recuperar la interfaz no equivale a autorizar una nueva dirección ni a borrar las reglas. Si el equipo ajeno sigue conectado y envía tráfico, puede volver a bloquearse.</p>
+<div class="lesson-note"><strong>Corregir primero, habilitar después.</strong> No repitas shutdown/no shutdown indefinidamente ni aumentes el máximo solo para ocultar la infracción. Revisa qué equipo y qué MAC causaron el problema.</div>
+<h2>Reemplazo legítimo de un PC con sticky</h2>
+<p>Si el cambio de PC es autorizado, toca actualizar la entrada. Consulta la MAC anterior en running-config. Con la interfaz apagada, retira <strong>esa línea concreta</strong>, conecta el equipo nuevo y permite que aprenda. Este ejemplo usa la MAC de la presentación: sustitúyela por la que realmente está registrada.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Retirar una MAC sticky concreta</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-19" aria-label="Copiar Retirar una MAC sticky concreta" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-19"><span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">shutdown</span>
+<span class="cli-comment">! Usa la MAC antigua que muestra tu running-config</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">no switchport port-security mac-address sticky 0025.83e6.4b01</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">end</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show port-security address</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Antes de habilitar, conecta únicamente el nuevo PC autorizado. Conserva activo el comando general de sticky y las demás reglas. Luego:</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Aprender y guardar el reemplazo</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-20" aria-label="Copiar Aprender y guardar el reemplazo" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-20"><span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">end</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Envía un ping desde el nuevo PC, confirma su MAC y recién entonces guarda:</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Confirmar el reemplazo</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-21" aria-label="Copiar Confirmar el reemplazo" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-21"><span class="cli-command" data-cli-prompt="SW1# ">show port-security address</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show running-config</span>
+<span class="cli-command" data-cli-prompt="SW1# ">copy running-config startup-config</span>
+</code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Confirma el nombre de destino con Enter si te lo solicita. Espera a volver a <code>SW1#</code> y consulta <code>show startup-config</code> para comprobar la MAC guardada. En las salidas largas, usa Espacio para avanzar si aparece <code>--More--</code>.</p>
+<p>Para una MAC estática se retira la línea correspondiente con <code>no switchport port-security mac-address MAC_ANTIGUA</code> y se agrega la nueva antes de habilitar. No uses ese texto como comando literal: reemplaza el dato. Para comparar modalidades completas, la opción más clara sigue siendo abrir la copia base.</p>
+<h2>Problemas frecuentes</h2>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Síntoma</th><th scope="col">Revisión</th></tr></thead><tbody><tr><td data-label="Síntoma">El PC legítimo no comunica</td><td data-label="Revisión">IP/máscara, VLAN 10, puerto correcto, MAC autorizada y posible bloqueo.</td></tr><tr><td data-label="Síntoma">Sticky no muestra ninguna MAC</td><td data-label="Revisión">El PC debe enviar tráfico. Confirma enlace y que haya una plaza libre.</td></tr><tr><td data-label="Síntoma">El equipo de prueba comunica</td><td data-label="Revisión">Revisa que esté en Fa0/18, no Fa0/19; que Port Security esté activo y la plaza ya ocupada.</td></tr><tr><td data-label="Síntoma">La MAC desaparece al reiniciar</td><td data-label="Revisión">Confirma el tipo de aprendizaje y que guardaste después de aprender.</td></tr><tr><td data-label="Síntoma">El puerto vuelve a bloquearse</td><td data-label="Revisión">Busca una MAC incorrecta o una BPDU inesperada. BPDU Guard puede ser otra causa de error-disabled.</td></tr></tbody></table></div>
+<h2>Práctica final</h2>
+<p>Desde la copia base, prepara Fa0/18 con sticky, máximo uno y shutdown. Haz que PC1 aprenda, verifica y guarda. Reemplázalo por PC-PRUEBA y confirma la infracción. Después devuelve PC1, recupera la interfaz y demuestra que el ping vuelve a funcionar sin eliminar Port Security.</p>
+<p>Tu evidencia debe incluir la MAC aprendida, el estado antes y después de la infracción, el resultado del ping y la configuración guardada. Así demuestras tanto la protección como la recuperación, en lugar de entregar solo un bloque de comandos.</p>
+<details class="reference-note"><summary>Fuentes y alcance de la categoría</summary><p>El material principal es <a href="https://view.genially.com/667df639b856d40014c95c74" target="_blank" rel="noopener">Implementando Seguridad en Capa 2</a>: tabla CAM, Port Security, aprendizaje y verificaciones. Las pruebas, MAC estática, modos de infracción y recuperación amplían sus ejemplos.</p><p>Se contrastaron detalles con la <a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960sf_2960p_cg/b_1522e_2960_2960c_2960sf_2960p_cg_chapter_010111.html" target="_blank" rel="noopener">documentación técnica de Port Security</a> y la <a href="https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html" target="_blank" rel="noopener">referencia de PortFast y BPDU Guard</a>. El simulador puede tener diferencias de compatibilidad.</p></details>
+<div class="lesson-actions"><a href="infracciones.html">← Anterior: Protect, restrict y shutdown</a><a href="index.html">Volver a la introducción →</a></div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
+          <p>© <span id="year">2026</span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20261005-l2-full"></script>
+  </body>
+</html>

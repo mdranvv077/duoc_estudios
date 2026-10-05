@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="El switch aprende las MAC seguras a partir del tráfico, pero deja de aceptar nuevas cuando alcanza el máximo del puerto." />
+    <title>Port Security dinámico — Seguridad de capa 2</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios">
+        <img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" />
+        <span>DGNV Studios</span>
+      </a>
+    </header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 08</small><strong>Seguridad de capa 2</strong></a>
+        <nav class="lesson-nav" aria-label="Módulos"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content command-reference l2-lesson">
+<p class="eyebrow"><span></span> Módulo 03 · Seguridad de capa 2</p>
+<h1>Aprender una MAC <em>y poner un límite.</em></h1>
+<p class="lesson-lead">El switch aprende las MAC seguras a partir del tráfico, pero deja de aceptar nuevas cuando alcanza el máximo del puerto.</p>
+
+<h2>Qué significa dinámico en esta práctica</h2>
+<p>Abre la copia base del módulo anterior. PC1 sigue en Fa0/18 y PC2 en Fa0/19. En Fa0/18 activaremos Port Security sin indicar una MAC manual y sin sticky. El puerto aprenderá una <strong>MAC segura dinámica</strong> cuando PC1 envíe tráfico.</p>
+<p>La diferencia con la tabla CAM normal es que ahora existe una política por puerto. Dejaremos un máximo de una dirección: tiene sentido para este PC conectado directamente. No es un límite universal para todos los enlaces.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Aprendizaje dinámico en Fa0/18</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-5" aria-label="Copiar Aprendizaje dinámico en Fa0/18" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-5"><span class="cli-command" data-cli-prompt="SW1> ">enable</span>
+<span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport mode access</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport access vlan 10</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security maximum 1</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security violation shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">end</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<h2>Qué hace cada ajuste</h2>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Comando</th><th scope="col">Idea</th></tr></thead><tbody><tr><td data-label="Comando">switchport mode access</td><td data-label="Idea">Deja explícito que este puerto es de acceso.</td></tr><tr><td data-label="Comando">switchport port-security</td><td data-label="Idea">Activa la protección en la interfaz.</td></tr><tr><td data-label="Comando">maximum 1</td><td data-label="Idea">Admite como máximo una MAC segura.</td></tr><tr><td data-label="Comando">violation shutdown</td><td data-label="Idea">Si ocurre una infracción, deshabilita el puerto.</td></tr></tbody></table></div>
+<p>En un 2960, el máximo predeterminado es una MAC y el modo de infracción predeterminado es shutdown. Los escribimos igualmente para que puedas leer la intención de la configuración sin memorizar los valores por defecto.</p>
+<h2>Aprender y comprobar</h2>
+<p>En PC1 ejecuta <code>ping 192.168.10.12</code>. Después consulta el switch:</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Ver la MAC aprendida</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-6" aria-label="Copiar Ver la MAC aprendida" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-6"><span class="cli-command" data-cli-prompt="SW1# ">show port-security interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show port-security address</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show mac address-table</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show running-config</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Busca una dirección de tipo <code>SecureDynamic</code> asociada a Fa0/18 y VLAN 10. El total del puerto debe ser uno y su estado, tras estabilizarse, <code>Secure-up</code>. En running-config estarán los comandos de la política, pero no una línea sticky con la MAC aprendida.</p>
+<div class="lesson-note"><strong>Si el total sigue en cero.</strong> Envíale tráfico al switch desde PC1 y revisa que el enlace esté activo. Activar Port Security no implica que el PC ya haya enviado una trama ni que su MAC se haya aprendido inmediatamente.</div>
+<h2>Lo que guarda y lo que no guarda</h2>
+<p>Guardar la configuración conserva el límite y el modo de infracción. La MAC segura dinámica no se escribe como dirección fija en startup-config: tras un reinicio necesita aprenderse otra vez. Tampoco la uses como garantía permanente de identidad ante cambios de conexión.</p>
+<p>Imagina que un puerto con capacidad libre recibe primero tráfico del equipo equivocado. El aprendizaje dinámico puede admitir esa MAC. Si necesitas fijar exactamente qué PC corresponde al puerto, compara esta alternativa con la MAC estática del siguiente módulo.</p>
+<h2>Un límite razonable depende del puerto</h2>
+<p>Con un teléfono IP y un PC detrás pueden aparecer al menos dos MAC. Un punto de acceso o un enlace hacia otro switch puede transportar muchas más. Copiar <code>maximum 1</code> en esas interfaces puede bloquear tráfico legítimo. En la presentación aparece un ejemplo de máximo 50: es un parámetro ajustable, no una recomendación para nuestro PC.</p>
+<h2>Qué debes poder explicar</h2>
+<ul><li>Qué equipo generó la MAC segura y en qué puerto se aprendió.</li><li>Por qué existe un máximo y qué ocurrirá cuando se incumpla.</li><li>Por qué guardar la política no hace permanente una MAC dinámica.</li></ul>
+<p>Para comparar con la siguiente modalidad, vuelve a abrir <strong>seguridad-l2-base.pkt</strong>. No sumes una MAC estática sobre un puerto que ya tiene ocupado su límite de una dirección.</p>
+<div class="lesson-actions"><a href="puertos.html">← Anterior: Preparar y proteger los puertos</a><a href="mac-estatica.html">Siguiente: MAC segura estática →</a></div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
+          <p>© <span id="year">2026</span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20261005-l2-full"></script>
+  </body>
+</html>

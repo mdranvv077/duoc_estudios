@@ -243,6 +243,35 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .reference-terminal { position: relative; width: 100%; min-width: 0; max-width: 720px; margin: 25px 0; }
 .hsrp-table-scroll { max-width: 100%; overflow-x: auto; scrollbar-width: thin; }
 .hsrp-map-scroll { width: 100%; min-width: 0; max-width: 100%; }
+
+/* Seguridad de capa 2: reutiliza la guía y conserva tablas sin scroll lateral. */
+.l2-lesson .lesson-note { margin-bottom: 24px; }
+.l2-lesson .reference-terminal-bar { height: auto; min-height: 32px; gap: 12px; }
+.l2-lesson .reference-terminal-label { flex-wrap: wrap; row-gap: 6px; }
+.l2-topology { box-sizing: border-box; width: 100%; max-width: 820px; margin: 30px 0; }
+.l2-topology svg { display: block; width: 100%; height: auto; margin: 22px 0 8px; }
+.l2-topology .l2-map-mobile { display: none; }
+.l2-topology > p { margin: 12px 0 0; font-size: .76rem; line-height: 1.7; }
+.l2-map-copy { fill: #a9bdca; text-anchor: middle; font: 13px "DM Mono", monospace; }
+.l2-map-copy .l2-map-name { fill: #dce5f1; font-size: 16px; font-weight: 500; }
+.l2-table-wrap { max-width: 100%; margin: 26px 0; border: 1px solid var(--line); }
+.l2-table { width: 100%; border-collapse: collapse; table-layout: fixed; color: var(--muted); font-size: .78rem; line-height: 1.7; }
+.l2-table th, .l2-table td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.l2-table th { color: var(--cyan); background: rgba(46,234,255,.035); font-weight: 600; }
+.l2-table tr:last-child td { border-bottom: 0; }
+.l2-output { box-sizing: border-box; max-width: 100%; margin: 24px 0 10px; padding: 20px; border: 1px solid var(--line); background: #04070b; color: #a9bdca; font: .76rem/1.85 "DM Mono", monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.l2-output code { color: inherit; font: inherit; background: none; padding: 0; }
+.l2-lesson .l2-output-caption, .l2-lesson .l2-source { font-size: .76rem; line-height: 1.7; color: var(--muted); }
+@media (max-width: 600px) {
+  .l2-topology .l2-map-desktop { display: none; }
+  .l2-topology .l2-map-mobile { display: block; }
+  .l2-table thead { display: none; }
+  .l2-table, .l2-table tbody, .l2-table tr, .l2-table td { display: block; width: auto; }
+  .l2-table tr { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .l2-table tr:last-child { border-bottom: 0; }
+  .l2-table td { border: 0; padding: 5px 16px; }
+  .l2-table td::before { content: attr(data-label); display: block; margin-bottom: 3px; color: var(--cyan); font: .65rem/1.5 "DM Mono", monospace; }
+}
 .hsrp-table-scroll { margin: 24px 0; border: 1px solid var(--line); }
 .hsrp-table { width: 100%; min-width: 560px; border-collapse: collapse; color: var(--muted); font-size: .78rem; line-height: 1.65; }
 .hsrp-table th, .hsrp-table td { padding: 13px 15px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }

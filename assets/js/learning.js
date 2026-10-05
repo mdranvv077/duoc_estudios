@@ -17,7 +17,12 @@ const guideData = {
     label: "Seguridad de capa 2",
     sections: [
       ["index.html", "Introducción a la seguridad"],
-      ["proximamente.html", "Más contenido pronto"],
+      ["puertos.html", "Preparar y proteger los puertos"],
+      ["port-security-dinamico.html", "Port Security dinámico"],
+      ["mac-estatica.html", "MAC segura estática"],
+      ["sticky.html", "Aprendizaje sticky"],
+      ["infracciones.html", "Protect, restrict y shutdown"],
+      ["verificacion.html", "Verificación y recuperación"],
     ],
   },
   initial: {

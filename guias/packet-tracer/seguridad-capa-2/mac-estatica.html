@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Con una MAC estática tú decides la dirección autorizada, en lugar de dejar que el primer tráfico la elija." />
+    <title>MAC segura estática — Seguridad de capa 2</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios">
+        <img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" />
+        <span>DGNV Studios</span>
+      </a>
+    </header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 08</small><strong>Seguridad de capa 2</strong></a>
+        <nav class="lesson-nav" aria-label="Módulos"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content command-reference l2-lesson">
+<p class="eyebrow"><span></span> Módulo 04 · Seguridad de capa 2</p>
+<h1>Este puerto admite <em>este equipo.</em></h1>
+<p class="lesson-lead">Con una MAC estática tú decides la dirección autorizada, en lugar de dejar que el primer tráfico la elija.</p>
+
+<h2>Antes de escribir la dirección</h2>
+<p>Comienza desde la copia base, sin Port Security anterior. Mantén PC1 en Fa0/18 y PC2 en Fa0/19. En PC1 abre Command Prompt y consulta <code>ipconfig /all</code>, o revisa la dirección MAC en Config → FastEthernet0.</p>
+<p>Anota la MAC de la interfaz cableada de PC1. IOS la representa normalmente como tres grupos de cuatro cifras hexadecimales: <code>0025.83e6.4b01</code>. Esa es la dirección del ejemplo de la presentación, <strong>no necesariamente la de tu PC</strong>.</p>
+<div class="lesson-note"><strong>Reemplaza la MAC del ejemplo.</strong> Antes de copiar este bloque, cambia 0025.83e6.4b01 por la MAC real de PC1. Si autorizas otra dirección, el tráfico legítimo de PC1 puede provocar una infracción.</div>
+<h2>Autorizar la MAC en Fa0/18</h2>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · MAC estática · sustituir por la de PC1</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-7" aria-label="Copiar MAC estática · sustituir por la de PC1" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-7"><span class="cli-command" data-cli-prompt="SW1> ">enable</span>
+<span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport mode access</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport access vlan 10</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security maximum 1</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security violation shutdown</span>
+<span class="cli-comment">! Sustituye esta MAC por la de PC1</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security mac-address 0025.83e6.4b01</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">end</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>El máximo sigue siendo uno. Como esa única plaza ya está reservada a la MAC indicada, el puerto no tiene otra plaza libre para aprender un equipo distinto. Si configuraras un máximo mayor con menos MAC manuales, podrían quedar plazas para aprendizaje dinámico.</p>
+<h2>Comprobar al equipo permitido</h2>
+<p>Con PC1 conectado, prueba <code>ping 192.168.10.12</code>. Después revisa:</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Verificación de la MAC estática</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-8" aria-label="Copiar Verificación de la MAC estática" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-8"><span class="cli-command" data-cli-prompt="SW1# ">show port-security address</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show port-security interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show running-config</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>La dirección debe figurar como <code>SecureConfigured</code> o el nombre equivalente de MAC configurada que muestre tu modelo. Running-config debe incluir la línea manual con la MAC. Confirma también el puerto y la VLAN: encontrar la dirección en cualquier lugar no basta.</p>
+<h2>Probar que la regla realmente se cumple</h2>
+<p>Desconecta PC1 y conecta PC-PRUEBA al mismo Fa0/18. Ponle 192.168.10.13 /24 y ejecuta un ping hacia PC2. Su MAC distinta debe provocar la infracción y, con shutdown, bloquear el puerto. El cable conectado por sí solo no es la prueba: envía tráfico desde el PC de reemplazo.</p>
+<p>No desconectes PC2 de Fa0/19, porque sigue siendo el destino. Retira PC-PRUEBA, reconecta PC1 y usa el procedimiento de <a href="verificacion.html">recuperación del módulo 7</a>. No desactives Port Security para hacer que vuelva el ping.</p>
+<h2>Cambiar un equipo autorizado</h2>
+<p>Si reemplazas de verdad el PC de ese puesto, la configuración antigua seguirá autorizando la MAC anterior. Primero comprueba el cambio, retira la línea vieja con su forma <code>no</code> y agrega la nueva. Conserva el máximo y el modo de infracción. Es una modificación de la regla, no una falla de la protección.</p>
+<div class="lesson-note"><strong>No es autenticación de usuarios.</strong> Una MAC identifica una interfaz dentro de esta política, pero puede ser suplantada. Port Security ayuda a controlar conexiones y limitar el aprendizaje; no prueba quién está usando el PC.</div>
+<h2>Guardar con intención</h2>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Guardar la MAC autorizada</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-9" aria-label="Copiar Guardar la MAC autorizada" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-9"><span class="cli-command" data-cli-prompt="SW1# ">copy running-config startup-config</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>A diferencia de la dinámica, la MAC estática forma parte de running-config y se conserva al guardar. Antes de continuar con sticky, vuelve a la copia base: compararemos otra forma de autorizar el equipo, sin mezclarla con esta.</p>
+<div class="lesson-actions"><a href="port-security-dinamico.html">← Anterior: Port Security dinámico</a><a href="sticky.html">Siguiente: Aprendizaje sticky →</a></div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
+          <p>© <span id="year">2026</span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20261005-l2-full"></script>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Primero dejaremos una LAN que funcione. Después cerraremos los puertos que no necesitamos, sin cortar los enlaces útiles." />
+    <title>Preparar y proteger los puertos — Seguridad de capa 2</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios">
+        <img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" />
+        <span>DGNV Studios</span>
+      </a>
+    </header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 08</small><strong>Seguridad de capa 2</strong></a>
+        <nav class="lesson-nav" aria-label="Módulos"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content command-reference l2-lesson">
+<p class="eyebrow"><span></span> Módulo 02 · Seguridad de capa 2</p>
+<h1>Cada puerto tiene <em>una función.</em></h1>
+<p class="lesson-lead">Primero dejaremos una LAN que funcione. Después cerraremos los puertos que no necesitamos, sin cortar los enlaces útiles.</p>
+
+<h2>Preparar la red antes de aplicar Port Security</h2>
+<p>Trabaja con un 2960 nuevo. PC1 va a Fa0/18 y PC2 a Fa0/19. Ambos tendrán un puerto access en VLAN 10. Crear la VLAN y asignar los puertos evita depender de una configuración anterior que no conocemos.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · LAN base</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-1" aria-label="Copiar LAN base" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-1"><span class="cli-command" data-cli-prompt="SW1> ">enable</span>
+<span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">hostname SW1</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">vlan 10</span>
+<span class="cli-command" data-cli-prompt="SW1(config-vlan)# ">name USUARIOS</span>
+<span class="cli-command" data-cli-prompt="SW1(config-vlan)# ">exit</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">vlan 999</span>
+<span class="cli-command" data-cli-prompt="SW1(config-vlan)# ">name SIN_USO</span>
+<span class="cli-command" data-cli-prompt="SW1(config-vlan)# ">exit</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">description PC1</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport mode access</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport access vlan 10</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">exit</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/19</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">description PC2</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport mode access</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport access vlan 10</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">end</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Configura PC1 con 192.168.10.11 /24 y PC2 con 192.168.10.12 /24. Desde Command Prompt de PC1 ejecuta <code>ping 192.168.10.12</code>. Repite si el primer intento pierde una respuesta mientras se resuelve ARP. Debe funcionar antes de añadir protección.</p>
+<h2>Puertos sin uso: aislados y apagados</h2>
+<p>En esta topología solo se usan Fa0/18 y Fa0/19. Los demás puertos pueden quedar en una VLAN de aparcamiento y en shutdown. La VLAN 999 facilita reconocerlos, pero <strong>el apagado administrativo es lo que impide que una conexión nueva use ese puerto</strong>.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Puertos sin uso</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-2" aria-label="Copiar Puertos sin uso" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-2"><span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface range fastEthernet 0/1-17</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">description SIN_USO</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">switchport mode access</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">switchport access vlan 999</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">exit</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface range fastEthernet 0/20-24</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">description SIN_USO</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">switchport mode access</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">switchport access vlan 999</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">exit</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface range gigabitEthernet 0/1-2</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">description SIN_USO</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">switchport mode access</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">switchport access vlan 999</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">end</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<div class="lesson-note"><strong>Este rango pertenece a nuestro laboratorio.</strong> Si tu switch ya tiene un uplink, un trunk o un EtherChannel en alguno de esos puertos, exclúyelo. Un puerto sin tráfico en este momento no necesariamente es un puerto sin uso.</div>
+<h2>Los puertos de PC y las BPDU</h2>
+<p>Este complemento conecta con la categoría de Spanning Tree. PortFast permite que el puerto del PC pase rápidamente a forwarding. BPDU Guard lo deshabilita si recibe una BPDU, porque esperamos un equipo final, no otro switch participando en STP.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Puertos de equipos finales</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-3" aria-label="Copiar Puertos de equipos finales" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-3"><span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface range fastEthernet 0/18-19</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">spanning-tree portfast</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">spanning-tree bpduguard enable</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">end</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Aplica estos comandos a los puertos de los PCs. No copies esta política sobre trunks o enlaces normales entre switches. PortFast no desactiva STP y BPDU Guard no reemplaza Port Security: una medida vigila BPDUs y la otra controla MAC de origen.</p>
+<h2>¿Y si después agregamos otro switch?</h2>
+<p>Ese enlace necesitará su propia configuración: modo trunk explícito, VLANs permitidas necesarias y VLAN nativa coherente en ambos extremos. No lo mezcles con los puertos de usuarios ni le apliques el límite de una MAC pensado para un PC. Puedes repasar <a href="../trunking/trunk-estatico.html">el módulo de trunk estático</a> cuando amplíes la topología.</p>
+<h2>Comprobar y guardar la copia base</h2>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Verificación de la base</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-4" aria-label="Copiar Verificación de la base" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-4"><span class="cli-command" data-cli-prompt="SW1# ">show vlan brief</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show interfaces status</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show interfaces fastEthernet 0/18 switchport</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show running-config</span>
+<span class="cli-command" data-cli-prompt="SW1# ">copy running-config startup-config</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Fa0/18 y Fa0/19 deben estar en VLAN 10 y conectados. Los puertos que apagaste deben aparecer administrativamente deshabilitados. Revisa también que las protecciones de STP estén en los dos puertos de PC. En salidas largas, avanza con Espacio si aparece <code>--More--</code>. Al guardar, acepta con Enter el nombre de destino si te lo solicita.</p>
+<div class="lesson-note"><strong>Guarda una copia del archivo .pkt.</strong> Llámala, por ejemplo, seguridad-l2-base.pkt. Esa copia tiene conectividad y preparación de puertos, pero todavía no tiene Port Security. Será el punto de partida de cada alternativa.</div>
+<p>Hasta aquí, cualquier PC conectado a Fa0/18 podría enviar tráfico. En el siguiente módulo veremos cómo cambia eso cuando el puerto solo admite una MAC segura.</p>
+<div class="lesson-actions"><a href="index.html">← Anterior: Introducción a la seguridad</a><a href="port-security-dinamico.html">Siguiente: Port Security dinámico →</a></div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
+          <p>© <span id="year">2026</span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20261005-l2-full"></script>
+  </body>
+</html>

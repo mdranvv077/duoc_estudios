@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sticky aprende a partir del tráfico y añade las MAC seguras a la configuración. Después debes guardar lo que aprendió." />
+    <title>Aprendizaje sticky — Seguridad de capa 2</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios">
+        <img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" />
+        <span>DGNV Studios</span>
+      </a>
+    </header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 08</small><strong>Seguridad de capa 2</strong></a>
+        <nav class="lesson-nav" aria-label="Módulos"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content command-reference l2-lesson">
+<p class="eyebrow"><span></span> Módulo 05 · Seguridad de capa 2</p>
+<h1>Aprender la MAC <em>y conservarla.</em></h1>
+<p class="lesson-lead">Sticky aprende a partir del tráfico y añade las MAC seguras a la configuración. Después debes guardar lo que aprendió.</p>
+
+<h2>El aprendizaje de la presentación</h2>
+<p>La presentación llama a esta alternativa «configuración por aprendizaje». Nos referimos a <strong>sticky</strong>: el switch aprende direcciones y las incorpora a running-config como MAC seguras sticky. Eso permite conservar el equipo aprendido sin escribir primero su dirección manualmente.</p>
+<p>Vuelve a la copia base. PC1 estará en Fa0/18 y PC2 en Fa0/19. En este ejemplo protegemos Fa0/18 para observarlo sin modificar el otro extremo del ping.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Activar sticky en Fa0/18</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-10" aria-label="Copiar Activar sticky en Fa0/18" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-10"><span class="cli-command" data-cli-prompt="SW1> ">enable</span>
+<span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport mode access</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport access vlan 10</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security maximum 1</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security violation shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport port-security mac-address sticky</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">end</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<h2>El orden importa</h2>
+<ol><li>Conecta el equipo que realmente corresponde al puerto.</li><li>Activa sticky y haz que PC1 envíe tráfico, por ejemplo un ping a PC2.</li><li>Comprueba la MAC aprendida, la VLAN y el puerto.</li><li>Guarda la configuración cuando todo coincida.</li></ol>
+<p>Si un equipo ajeno envía tráfico cuando todavía hay una plaza libre, puede ocuparla. Sticky facilita el aprendizaje, pero no conoce por sí mismo cuál es el PC legítimo. Por eso conviene realizar el alta del equipo de manera controlada.</p>
+<h2>Ver el resultado antes de guardar</h2>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Verificación del aprendizaje</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-11" aria-label="Copiar Verificación del aprendizaje" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-11"><span class="cli-command" data-cli-prompt="SW1# ">show port-security address</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show port-security interface fastEthernet 0/18</span>
+<span class="cli-command" data-cli-prompt="SW1# ">show running-config</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Debe aparecer <code>SecureSticky</code> en la tabla segura. En running-config verás el comando general de sticky y otra línea con la MAC concreta aprendida. No escribas a mano la MAC del ejemplo solo para que coincida con la presentación.</p>
+<pre class="l2-output"><code>interface FastEthernet0/18
+ switchport port-security maximum 1
+ switchport port-security
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0025.83e6.4b01</code></pre>
+<p class="l2-output-caption">Extracto ilustrativo: tu orden de líneas y tu MAC pueden ser distintos. La dirección añadida es la evidencia del aprendizaje.</p>
+<h2>Running-config no es startup-config</h2>
+<p>Que la MAC ya esté visible en running-config no significa que sobrevivirá al reinicio. Guarda <strong>después de que se haya aprendido</strong>. Guardar antes y olvidarse de repetirlo puede conservar la política, pero no la dirección que apareció posteriormente.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>IOS · CLI</span><strong>Switch · SW1 · Guardar después del aprendizaje</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="l2-cli-12" aria-label="Copiar Guardar después del aprendizaje" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="l2-cli-12"><span class="cli-command" data-cli-prompt="SW1# ">copy running-config startup-config</span>
+</code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Si aparece <code>Destination filename [startup-config]?</code>, pulsa Enter para aceptar el nombre. Cuando vuelva <code>SW1#</code>, ejecuta <code>show startup-config</code> y busca la MAC concreta. Puedes guardar una segunda copia .pkt del laboratorio ya protegido, sin sobrescribir la base.</p>
+<h2>¿Qué pasa si desconecto el PC?</h2>
+<p>Una MAC sticky no desaparece simplemente porque desconectaste el cable. Si llega un equipo con otra MAC y el máximo ya está ocupado, no tiene una plaza nueva disponible. En el módulo de infracciones aprovecharemos esto para que la prueba sea reproducible.</p>
+<div class="lesson-note"><strong>Sustituir un equipo requiere revisar la regla.</strong> Antes de borrar una MAC sticky, confirma a qué equipo pertenece. Quitar el comando general de sticky no equivale necesariamente a limpiar todas las MAC: puede convertir las aprendidas en dinámicas. En el módulo 7 veremos la retirada de una entrada concreta.</div>
+<h2>Las tres alternativas, juntas</h2>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Modalidad</th><th scope="col">Quién elige la MAC</th><th scope="col">Qué conservar al guardar</th></tr></thead><tbody><tr><td data-label="Modalidad">Dinámica</td><td data-label="Quién elige la MAC">El tráfico que llega, mientras hay plazas.</td><td data-label="Qué conservar al guardar">La política, no la MAC aprendida como línea fija.</td></tr><tr><td data-label="Modalidad">Estática</td><td data-label="Quién elige la MAC">Tú la escribes manualmente.</td><td data-label="Qué conservar al guardar">La política y la MAC configurada.</td></tr><tr><td data-label="Modalidad">Sticky</td><td data-label="Quién elige la MAC">El tráfico la aprende y la añade a running-config.</td><td data-label="Qué conservar al guardar">La política y las MAC sticky que ya se aprendieron.</td></tr></tbody></table></div>
+<p>Para nuestro PC, sticky con una MAC resulta cómodo y fácil de verificar. Mantén esta versión del laboratorio para comparar las respuestas del siguiente módulo.</p>
+<div class="lesson-actions"><a href="mac-estatica.html">← Anterior: MAC segura estática</a><a href="infracciones.html">Siguiente: Protect, restrict y shutdown →</a></div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
+          <p>© <span id="year">2026</span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20261005-l2-full"></script>
+  </body>
+</html>
