@@ -1,47 +1,76 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Módulo independiente en preparación de Packet Tracer." />
-    <title>Redundancia de capa 3 — Packet Tracer</title>
-    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../assets/css/styles.css" />
-    <link rel="stylesheet" href="../../../assets/css/logo.css" />
-    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" />
-    <link rel="stylesheet" href="../../../assets/css/credits.css" />
-    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-labdesktopfit" />
-  </head>
-  <body>
-    <header class="site-header container">
-      <a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios">
-        <img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" />
-        <span>DGNV Studios</span>
-      </a>
-    </header>
-    <main class="container learning-shell">
-      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
-      <aside class="guide-sidebar" data-guide-sidebar>
-        <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 07</small><strong>Redundancia de capa 3</strong></a>
-        <nav class="lesson-nav" aria-label="Módulos"></nav>
-        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
-      </aside>
-      <article class="lesson-content">
-        <p class="eyebrow"><span></span> Plantilla de módulo</p>
-        <h1>Redundancia de capa 3.</h1>
-        <p class="lesson-lead">Este módulo está habilitado para preparar su contenido más adelante.</p>
-        <div class="lesson-note"><strong>En preparación.</strong> Todavía no contiene explicaciones, ejercicios ni comandos.</div>
-        <footer class="container">
-          <p>DGNV Studios <small>— aprende construyendo.</small></p>
-          <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
-          <p>© <span id="year">2026</span></p>
-        </footer>
-      </article>
-    </main>
-    <script src="../../../assets/js/main.js"></script>
-    <script src="../../../assets/js/learning.js?v=20261005-labdesktopfit"></script>
-  </body>
-</html>
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Entender el respaldo de la puerta de enlace y distinguir HSRP, VRRP y GLBP." /><title>FHRP y la gateway virtual — Redundancia de capa 3</title>
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-hsrp-fit" />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de redundancia de capa 3</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 07</small><strong>Redundancia de capa 3</strong></a><nav class="lesson-nav" aria-label="Módulos de redundancia de capa 3"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+<article class="lesson-content command-reference hsrp-lesson">
+<p class="eyebrow"><span></span> Módulo 01</p><h1>FHRP y la gateway virtual.</h1><p class="lesson-lead">Entender el respaldo de la puerta de enlace y distinguir HSRP, VRRP y GLBP.</p>
+<h2>La idea: pasar el mando, no cambiar la gateway</h2>
+<p>Imagina que un PC usa un router para salir de su red. Si ese router deja de funcionar, tener otro conectado no basta: el PC sigue enviando sus paquetes a la gateway que tenía configurada. Lo que necesitamos es que el segundo pueda hacerse cargo <strong>sin cambiar la puerta de enlace de los PC</strong>.</p>
+<p>Así entenderemos HSRP: dos routers comparten una dirección virtual. Uno lleva el mando de esa gateway y otro está preparado para tomarlo si el primero falla. No se copia todo el router; cambia quién atiende la dirección virtual que ya usan los equipos.</p>
+<div class="lesson-note"><strong>Primero, separar las capas.</strong> STP evita bucles en capa 2 y EtherChannel agrupa enlaces. FHRP protege la puerta de enlace IP, por eso esta categoría es de <strong>redundancia de capa 3</strong>. No son alternativas: pueden complementarse en la misma red.</div>
+<h2>FHRP es la familia; HSRP es un protocolo</h2>
+<p><strong>First Hop Redundancy Protocol</strong> significa protocolo de redundancia del primer salto: el primer router al que el PC entrega tráfico destinado a otra red. Los tres nombres que conviene reconocer son estos; practicaremos solamente HSRP.</p>
+<div class="hsrp-table-scroll"><table class="hsrp-table"><thead><tr><th scope="col">Protocolo</th><th scope="col">Idea principal</th><th scope="col">Qué veremos</th></tr></thead><tbody><tr><td>HSRP</td><td>De Cisco. Un Active y un Standby por grupo.</td><td>Nuestra práctica y sus comandos.</td></tr><tr><td>VRRP</td><td>Estándar abierto. Usa los roles Master y Backup en muchas implementaciones.</td><td>Reconocerlo, sin mezclar su sintaxis con HSRP.</td></tr><tr><td>GLBP</td><td>De Cisco. Combina respaldo de gateway con reparto de tráfico entre reenviadores.</td><td>Reconocer la diferencia; no configurarlo aquí.</td></tr></tbody></table></div>
+<figure class="topology-card hsrp-topology hsrp-topology--basic">
+<figcaption><span>Laboratorio de HSRP</span><strong>Una gateway virtual, dos routers reales</strong></figcaption>
+<div class="hsrp-map-scroll">
+<svg viewBox="0 0 760 560" class="hsrp-map" role="img" aria-label="R1 y R2 conectados a SW1 por Gi0/0 y puertos Gi0/1 y Gi0/2. PC10 en Fa0/10. Todos están en la misma LAN y PC10 usa la gateway virtual 192.168.10.1.">
+<g class="hsrp-wire"><path d="M205 186 L330 286"/><path d="M555 186 L430 286"/><path d="M350 352 L230 407"/></g>
+<g class="hsrp-copy">
+<text x="205" y="35" class="hsrp-name">R1</text><text x="205" y="59">Active preferido</text><text x="205" y="81">Prioridad 110</text><text x="205" y="103">IP real: 192.168.10.2</text>
+<image href="../img/cisco-router.png" x="163" y="132" width="84" height="54"/>
+<text x="555" y="35" class="hsrp-name">R2</text><text x="555" y="59">Standby preferido</text><text x="555" y="81">Prioridad 100</text><text x="555" y="103">IP real: 192.168.10.3</text>
+<image href="../img/cisco-router.png" x="513" y="132" width="84" height="54"/>
+<text x="140" y="229">Gi0/0 ↔ Gi0/1</text><text x="140" y="251">MISMA LAN</text><text x="620" y="229">Gi0/0 ↔ Gi0/2</text><text x="620" y="251">MISMA LAN</text>
+<text x="380" y="273" class="hsrp-name">SW1</text><image href="../img/cisco-switch.png" x="337" y="290" width="86" height="48"/>
+<text x="203" y="371">Fa0/10 ↔ Fa0</text>
+<text x="230" y="486" class="hsrp-name">PC10</text><text x="230" y="508">IP: 192.168.10.10</text><text x="230" y="530">Gateway: 192.168.10.1</text>
+</g>
+<g class="hsrp-pc"><rect x="207" y="425" width="46" height="30" rx="2"/><path d="M230 455v8m-12 0h24"/></g>
+<g class="hsrp-virtual-card"><rect x="430" y="408" width="245" height="100" rx="3"/><text x="552.5" y="435">GATEWAY VIRTUAL · GRUPO 10</text><text x="552.5" y="464" class="hsrp-virtual-ip">192.168.10.1</text><text x="552.5" y="488">No es un equipo adicional</text></g>
+</svg></div>
+<p>Las líneas representan cables reales. La gateway virtual es una dirección compartida: no necesita otro equipo ni un cable adicional.</p>
+</figure>
+<h2>IP real e IP virtual: no son lo mismo</h2>
+<p>R1 conserva su IP real <code>192.168.10.2</code> y R2 la suya, <code>192.168.10.3</code>. HSRP añade <code>192.168.10.1</code> como gateway virtual. Las tres pertenecen a <code>192.168.10.0/24</code>, pero ninguna debe repetirse como IP física de otro equipo.</p>
+<p>La gateway virtual también tiene una MAC virtual. Cuando cambia el router Active, los PC siguen usando la misma IP y MAC de gateway. No necesitan saber cuál router tomó el mando. Los routers participantes deben compartir el mismo segmento de capa 2 para intercambiar sus mensajes HSRP.</p>
+<h2>Qué hace cada rol</h2>
+<ul><li><strong>Active:</strong> atiende y reenvía el tráfico enviado a la gateway virtual de ese grupo.</li><li><strong>Standby:</strong> vigila al Active y está listo para sustituirlo. No está apagado y puede seguir atendiendo tráfico dirigido a sus propias IP u otros grupos.</li></ul>
+<p>Los mensajes <em>Hello</em> permiten comprobar que siguen presentes. Si el Standby deja de recibirlos durante el tiempo de espera, puede asumir el rol Active. Puede haber pérdida temporal de paquetes: «respaldo» no significa cambio instantáneo ni continuidad perfecta de todas las sesiones.</p>
+<h2>Los estados de HSRP: desde iniciar hasta tomar el mando</h2>
+<p>Además de los roles finales, HSRP tiene estados de preparación y elección. Puedes recordarlos con las palabras que venimos usando: <strong>inicial, aprender, escuchar, hablar, en espera y activo</strong>. Estos son sus nombres oficiales en inglés:</p>
+<div class="hsrp-table-scroll"><table class="hsrp-table"><thead><tr><th scope="col">En español</th><th scope="col">Estado oficial</th><th scope="col">Qué está haciendo</th></tr></thead><tbody>
+<tr><td>Inicial</td><td><code>Initial</code> / <code>Init</code></td><td>Todavía no puede participar, por ejemplo porque la interfaz está apagada o le falta su IP.</td></tr>
+<tr><td>Aprender</td><td><code>Learn</code></td><td>Aún no conoce la IP virtual y espera aprenderla del Active. Si ya la configuraste, puede omitir este estado.</td></tr>
+<tr><td>Escuchar</td><td><code>Listen</code></td><td>Conoce la IP virtual y escucha los mensajes Hello. No está desempeñando el rol Active ni Standby.</td></tr>
+<tr><td>Hablar</td><td><code>Speak</code></td><td>Envía y recibe Hellos y participa en la elección de Active y Standby.</td></tr>
+<tr><td>En espera / respaldo</td><td><code>Standby</code></td><td>Está listo para asumir la gateway si falla el Active; sigue intercambiando Hellos.</td></tr>
+<tr><td>Activo</td><td><code>Active</code></td><td>Lleva el mando y reenvía el tráfico enviado a la gateway virtual del grupo.</td></tr>
+</tbody></table></div>
+<div class="lesson-note"><strong>No es una escalera obligatoria.</strong> Los estados no son pasos que todos deban recorrer completos y en ese orden. Tras la elección, uno queda Active y otro Standby; no tienen que pasar ambos por Standby antes de ser Active. Si hubiera más participantes, los restantes pueden quedarse en Listen.</div>
+<p>En nuestro laboratorio, R2 queda <code>Standby</code>; cuando R1 falla, pasa a <code>Active</code>. Al regresar R1 con mayor prioridad y preempt, R1 recupera el mando y R2 vuelve a <code>Standby</code>. Puedes consultar el estado actual con <code>show standby brief</code>.</p>
+<p>Los estados pertenecen a HSRP, no a Spanning Tree ni a EtherChannel. Consulta técnica: <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html" target="_blank" rel="noopener">Cisco · Estados y mensajes de HSRP</a>.</p>
+<h2>Qué protege y qué no</h2>
+<p>Este laboratorio protege la gateway frente a la caída de uno de los routers o de su enlace a SW1. <strong>SW1 sigue siendo un punto único de falla</strong>: si cae, ambos routers quedan separados del PC. Tampoco aparecen rutas hacia Internet por activar HSRP; cada router necesita sus rutas y una salida funcional.</p>
+<div class="lesson-note"><strong>No es LACP.</strong> El Active de HSRP es el router que atiende la gateway; el modo active de LACP inicia una negociación de EtherChannel. La palabra se parece, pero cumple otra función.</div>
+<h2>Antes de practicar</h2>
+<p>Necesitas manejar IP, máscara y gateway. Para el módulo con VLAN, repasa <a href="../vlans/puertos-access.html">puertos access</a>, <a href="../trunking/trunk-estatico.html">trunks</a> y <a href="../routing/inter-vlan.html">Router-on-a-Stick</a>. Usaremos dos routers 2911, un switch 2960 y un PC; después añadiremos otro PC para una segunda VLAN.</p>
+<p>Consulta técnica: <a href="https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html" target="_blank" rel="noopener">Cisco · Funcionamiento de HSRP</a>. Comparación de la familia: <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16/fhp-xe-16-book.html" target="_blank" rel="noopener">Cisco · FHRP</a>.</p>
+<div class="lesson-actions"><a href="../index.html">← Ver categorías</a><a href="hsrp-basico.html">Siguiente: HSRP sin VLAN →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
+</article></main>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261005-hsrp-fit"></script>
+</body></html>

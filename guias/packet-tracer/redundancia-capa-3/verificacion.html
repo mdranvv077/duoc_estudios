@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Probar el relevo, entender preempt y reconocer los límites del respaldo." /><title>Fallas, recuperación y verificación — Redundancia de capa 3</title>
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-hsrp-fit" />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de redundancia de capa 3</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 07</small><strong>Redundancia de capa 3</strong></a><nav class="lesson-nav" aria-label="Módulos de redundancia de capa 3"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+<article class="lesson-content command-reference hsrp-lesson">
+<p class="eyebrow"><span></span> Módulo 04</p><h1>Fallas, recuperación y verificación.</h1><p class="lesson-lead">Probar el relevo, entender preempt y reconocer los límites del respaldo.</p>
+<h2>No basta con que el comando esté escrito</h2>
+<p>Hay que demostrar tres cosas: quién lleva el mando, qué ocurre cuando falla y qué pasa al volver. Trabaja primero con el laboratorio sin VLAN y luego repite con la versión de dos VLANs. Guarda una copia antes de provocar las fallas.</p>
+<h2>1 · Registrar el estado normal</h2><div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>Cisco IOS · CLI</span><strong>Router · R1</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="hsrp-code-10" aria-label="Copiar comandos de R1" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="hsrp-code-10"><span class="cli-command" data-cli-prompt="R1# ">show standby brief</span>
+<span class="cli-command" data-cli-prompt="R1# ">show standby</span>
+<span class="cli-command" data-cli-prompt="R1# ">show ip interface brief</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Ejecuta los mismos comandos en R2. En el laboratorio básico, R1 debe mostrar Active, R2 Standby y ambos la virtual 192.168.10.1. En el de VLANs, anota los dos grupos: los roles se reparten. La palabra <code>local</code> indica que ese papel lo desempeña el equipo desde el que miras.</p>
+<p>Desde PC10, haz ping a su gateway; con VLANs, también a PC20. Puedes repetir pings durante la prueba o usar <code>ping -t</code> si la terminal de tu versión lo admite. El objetivo es observar la transición, no asumir que todos los paquetes van a responder.</p>
+<h2>2 · Hacer caer el enlace LAN de R1</h2><p>Apaga deliberadamente Gi0/0 en R1. En la práctica con VLANs, esto afecta a todas sus subinterfaces.</p><div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>Cisco IOS · CLI</span><strong>Router · R1</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="hsrp-code-11" aria-label="Copiar comandos de R1" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="hsrp-code-11"><span class="cli-command" data-cli-prompt="R1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="R1(config)# ">interface gigabitEthernet 0/0</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">shutdown</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">end</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Comprueba en R2 con <code>show standby brief</code>. En el laboratorio básico debe pasar a Active del grupo 10. Con VLANs debe quedar Active de los grupos 10 y 20. Repite los pings y confirma que la gateway configurada en los PC <strong>no cambió</strong>.</p>
+<div class="lesson-note"><strong>No esperes cero pérdidas.</strong> Con temporizadores habituales de HSRP, el Hello es de 3 segundos y el Hold de 10 segundos. La detección puede variar según el momento del último Hello y el tipo de falla; verifica los valores reales con <code>show standby</code>. No ajustaremos tiempos en esta primera práctica.</div>
+<h2>3 · Recuperar R1 y observar preempt</h2><div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>Cisco IOS · CLI</span><strong>Router · R1</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="hsrp-code-12" aria-label="Copiar comandos de R1" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="hsrp-code-12"><span class="cli-command" data-cli-prompt="R1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="R1(config)# ">interface gigabitEthernet 0/0</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">end</span>
+<span class="cli-command" data-cli-prompt="R1# ">show standby brief</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Espera a que el enlace y HSRP converjan. Gracias a su mayor prioridad y a <code>preempt</code>, R1 vuelve a ser Active del grupo 10. En la versión con VLANs, R2 mantiene el grupo 20. Sin preempt, un router que regresa con mayor prioridad normalmente no desplaza al Active que sigue funcionando.</p>
+<h2>4 · Entender una falla que HSRP básico no detecta</h2>
+<p>Si R1 pierde su salida al ISP, pero su interfaz LAN sigue activa y continúa enviando Hellos, puede seguir siendo Active y dejar tráfico sin salida. HSRP no comprueba Internet de forma automática. Para reaccionar a esa situación se utiliza seguimiento, o <em>tracking</em>, que reduce la prioridad cuando falla una condición supervisada.</p>
+<p>Este bloque es <strong>opcional y requiere ampliar el laboratorio</strong>: Gi0/1 debe ser una salida real, configurada y operativa hacia otra red, y R2 necesita su propia ruta funcional. No lo copies sobre la topología de un solo switch esperando que aparezca Internet.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>Cisco IOS · CLI</span><strong>Router · R1</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="hsrp-code-13" aria-label="Copiar comandos de R1" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="hsrp-code-13"><span class="cli-command" data-cli-prompt="R1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="R1(config)# ">interface gigabitEthernet 0/0</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">standby 10 track gigabitEthernet 0/1 20</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">end</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Con la sintaxis de seguimiento de interfaz, una caída de Gi0/1 baja 110 a 90. R2, con prioridad 100 y preempt, puede tomar el mando. En la versión con VLANs el seguimiento del grupo 10 va en Gi0/0.10, no en la interfaz física. Algunas imágenes IOS requieren objetos <code>track</code> en lugar de esta sintaxis: revisa <code>standby 10 track ?</code>. Vigilar el estado de un enlace tampoco prueba por sí solo que un destino remoto sea alcanzable.</p>
+<h2>Si algo no funciona, revisar en este orden</h2>
+<div class="hsrp-table-scroll"><table class="hsrp-table"><thead><tr><th scope="col">Síntoma</th><th scope="col">Qué revisar</th></tr></thead><tbody><tr><td>Ambos aparecen Active</td><td>No se están oyendo: enlaces, misma LAN/VLAN, trunk permitido, encapsulación y versión HSRP.</td></tr><tr><td>No se alcanza la gateway</td><td>IP/máscara del PC, IP virtual, puerto access y estado de las interfaces.</td></tr><tr><td>Queda activo el router no esperado</td><td>Prioridad efectiva, preempt y posibles reducciones por tracking.</td></tr><tr><td>Funciona la gateway, no una red remota</td><td>Tabla de rutas, salida disponible y ruta de regreso. HSRP no sustituye el routing.</td></tr><tr><td>Falla solo una VLAN</td><td>Su grupo, su IP virtual, subinterfaces y permiso de esa VLAN en ambos trunks.</td></tr></tbody></table></div>
+<h2>Cerrar la práctica</h2><p>Restaura los enlaces y comprueba los roles normales antes de guardar en R1, R2 y SW1.</p><div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>Cisco IOS · CLI</span><strong>Router · R1</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="hsrp-code-14" aria-label="Copiar comandos de R1" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="hsrp-code-14"><span class="cli-command" data-cli-prompt="R1# ">copy running-config startup-config</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Debes poder explicar por qué los PC usan .1 y no .2 o .3, qué evento provocó el relevo y qué aporta preempt al regreso. Un ping correcto a la gateway verifica esa dirección, no garantiza toda la conectividad remota ni redundancia completa de la red.</p>
+<p>Referencia para la ampliación: <a href="https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html" target="_blank" rel="noopener">Cisco · Preempt y seguimiento</a>. Consulta de comandos y temporizadores: <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html" target="_blank" rel="noopener">Cisco · Configuración de HSRP</a>.</p>
+<div class="lesson-actions"><a href="hsrp-vlans.html">← Anterior: HSRP con VLAN y subinterfaces</a><a href="index.html">Volver a los fundamentos →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
+</article></main>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261005-hsrp-fit"></script>
+</body></html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Configurar una gateway compartida con dos routers, un switch y un PC." /><title>HSRP sin VLAN — Redundancia de capa 3</title>
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-hsrp-fit" />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de redundancia de capa 3</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 07</small><strong>Redundancia de capa 3</strong></a><nav class="lesson-nav" aria-label="Módulos de redundancia de capa 3"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+<article class="lesson-content command-reference hsrp-lesson">
+<p class="eyebrow"><span></span> Módulo 02</p><h1>HSRP sin VLAN.</h1><p class="lesson-lead">Configurar una gateway compartida con dos routers, un switch y un PC.</p>
+<h2>Un primer laboratorio sin trunks ni subinterfaces</h2>
+<p>Empieza con equipos nuevos o una copia limpia del archivo. Conecta R1 Gi0/0 a SW1 Gi0/1, R2 Gi0/0 a SW1 Gi0/2 y PC10 Fa0 a SW1 Fa0/10, con cable de cobre directo. No hace falta conectar los routers directamente entre sí: hablan a través del switch.</p>
+<figure class="topology-card hsrp-topology hsrp-topology--basic">
+<figcaption><span>Laboratorio de HSRP</span><strong>Una gateway virtual, dos routers reales</strong></figcaption>
+<div class="hsrp-map-scroll">
+<svg viewBox="0 0 760 560" class="hsrp-map" role="img" aria-label="R1 y R2 conectados a SW1 por Gi0/0 y puertos Gi0/1 y Gi0/2. PC10 en Fa0/10. Todos están en la misma LAN y PC10 usa la gateway virtual 192.168.10.1.">
+<g class="hsrp-wire"><path d="M205 186 L330 286"/><path d="M555 186 L430 286"/><path d="M350 352 L230 407"/></g>
+<g class="hsrp-copy">
+<text x="205" y="35" class="hsrp-name">R1</text><text x="205" y="59">Active preferido</text><text x="205" y="81">Prioridad 110</text><text x="205" y="103">IP real: 192.168.10.2</text>
+<image href="../img/cisco-router.png" x="163" y="132" width="84" height="54"/>
+<text x="555" y="35" class="hsrp-name">R2</text><text x="555" y="59">Standby preferido</text><text x="555" y="81">Prioridad 100</text><text x="555" y="103">IP real: 192.168.10.3</text>
+<image href="../img/cisco-router.png" x="513" y="132" width="84" height="54"/>
+<text x="140" y="229">Gi0/0 ↔ Gi0/1</text><text x="140" y="251">MISMA LAN</text><text x="620" y="229">Gi0/0 ↔ Gi0/2</text><text x="620" y="251">MISMA LAN</text>
+<text x="380" y="273" class="hsrp-name">SW1</text><image href="../img/cisco-switch.png" x="337" y="290" width="86" height="48"/>
+<text x="203" y="371">Fa0/10 ↔ Fa0</text>
+<text x="230" y="486" class="hsrp-name">PC10</text><text x="230" y="508">IP: 192.168.10.10</text><text x="230" y="530">Gateway: 192.168.10.1</text>
+</g>
+<g class="hsrp-pc"><rect x="207" y="425" width="46" height="30" rx="2"/><path d="M230 455v8m-12 0h24"/></g>
+<g class="hsrp-virtual-card"><rect x="430" y="408" width="245" height="100" rx="3"/><text x="552.5" y="435">GATEWAY VIRTUAL · GRUPO 10</text><text x="552.5" y="464" class="hsrp-virtual-ip">192.168.10.1</text><text x="552.5" y="488">No es un equipo adicional</text></g>
+</svg></div>
+<p>Las líneas representan cables reales. La gateway virtual es una dirección compartida: no necesita otro equipo ni un cable adicional.</p>
+</figure>
+<div class="lesson-note"><strong>Una sola LAN.</strong> Los tres puertos del switch pertenecen a la VLAN 1 predeterminada. Aquí «sin VLAN» significa sin segmentación ni trunks, no que el switch deje de utilizar VLANs.</div>
+<div class="hsrp-table-scroll"><table class="hsrp-table"><thead><tr><th scope="col">Elemento</th><th scope="col">Dirección / máscara</th><th scope="col">Uso</th></tr></thead><tbody><tr><td>R1 · Gi0/0</td><td>192.168.10.2 /24</td><td>IP propia del primer router.</td></tr><tr><td>R2 · Gi0/0</td><td>192.168.10.3 /24</td><td>IP propia del respaldo.</td></tr><tr><td>Grupo HSRP 10</td><td>192.168.10.1</td><td>Gateway virtual compartida.</td></tr><tr><td>PC10</td><td>192.168.10.10 /24</td><td>Gateway 192.168.10.1.</td></tr></tbody></table></div>
+<h2>Preparar SW1</h2><p>Los tres puertos van en access y en la misma VLAN 1. No creamos segmentación en este ejercicio. PortFast se aplica solo al puerto del PC.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>Cisco IOS · CLI</span><strong>Switch · SW1</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="hsrp-code-1" aria-label="Copiar comandos de SW1" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="hsrp-code-1"><span class="cli-command" data-cli-prompt="SW1# ">enable</span>
+<span class="cli-command" data-cli-prompt="SW1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">hostname SW1</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface range gigabitEthernet 0/1-2</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">switchport mode access</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">switchport access vlan 1</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if-range)# ">exit</span>
+<span class="cli-command" data-cli-prompt="SW1(config)# ">interface fastEthernet 0/10</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport mode access</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">switchport access vlan 1</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">spanning-tree portfast</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="SW1(config-if)# ">end</span>
+<span class="cli-command" data-cli-prompt="SW1# ">copy running-config startup-config</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<h2>R1: el que preferimos como Active</h2><p>Ejecuta el bloque en R1. La IP real se configura con <code>ip address</code>; la virtual, con <code>standby 10 ip</code>. No las intercambies.</p><div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>Cisco IOS · CLI</span><strong>Router · R1</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="hsrp-code-2" aria-label="Copiar comandos de R1" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="hsrp-code-2"><span class="cli-command" data-cli-prompt="R1# ">enable</span>
+<span class="cli-command" data-cli-prompt="R1# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="R1(config)# ">hostname R1</span>
+<span class="cli-command" data-cli-prompt="R1(config)# ">interface gigabitEthernet 0/0</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">ip address 192.168.10.2 255.255.255.0</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">standby 10 ip 192.168.10.1</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">standby 10 priority 110</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">standby 10 preempt</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="R1(config-if)# ">end</span>
+<span class="cli-command" data-cli-prompt="R1# ">copy running-config startup-config</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<h2>R2: el respaldo preparado</h2><p>R2 usa la misma IP virtual y el mismo grupo, pero otra IP real y una prioridad menor.</p><div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>Cisco IOS · CLI</span><strong>Router · R2</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="hsrp-code-3" aria-label="Copiar comandos de R2" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="hsrp-code-3"><span class="cli-command" data-cli-prompt="R2# ">enable</span>
+<span class="cli-command" data-cli-prompt="R2# ">configure terminal</span>
+<span class="cli-command" data-cli-prompt="R2(config)# ">hostname R2</span>
+<span class="cli-command" data-cli-prompt="R2(config)# ">interface gigabitEthernet 0/0</span>
+<span class="cli-command" data-cli-prompt="R2(config-if)# ">ip address 192.168.10.3 255.255.255.0</span>
+<span class="cli-command" data-cli-prompt="R2(config-if)# ">standby 10 ip 192.168.10.1</span>
+<span class="cli-command" data-cli-prompt="R2(config-if)# ">standby 10 priority 100</span>
+<span class="cli-command" data-cli-prompt="R2(config-if)# ">standby 10 preempt</span>
+<span class="cli-command" data-cli-prompt="R2(config-if)# ">no shutdown</span>
+<span class="cli-command" data-cli-prompt="R2(config-if)# ">end</span>
+<span class="cli-command" data-cli-prompt="R2# ">copy running-config startup-config</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<h2>Los cuatro comandos que hay que entender</h2>
+<p>En estos equipos partimos de la versión predeterminada HSRPv1; los grupos 10 y 20 están dentro de su rango. HSRPv2 también existe, pero no necesitas cambiar de versión para esta práctica. Lo importante es no mezclar versiones entre participantes del mismo grupo.</p>
+<div class="hsrp-table-scroll"><table class="hsrp-table"><thead><tr><th scope="col">Comando</th><th scope="col">Qué significa</th></tr></thead><tbody><tr><td>standby 10 ip 192.168.10.1</td><td>Participar en el grupo 10 con esa gateway virtual.</td></tr><tr><td>standby 10 priority 110</td><td>Preferir a este equipo: gana la prioridad mayor.</td></tr><tr><td>standby 10 preempt</td><td>Permitir que tome el rol Active si tiene mayor prioridad que el Active actual.</td></tr><tr><td>show standby brief</td><td>Ver grupo, prioridad, estado, Active, Standby e IP virtual.</td></tr></tbody></table></div>
+<p>La prioridad predeterminada es 100. Si hay empate durante la elección, interviene la IP real más alta; usamos 110 y 100 para que la intención sea clara. <strong>Preempt no es lo que permite sustituir a un router que desapareció</strong>: sirve para tomar el mando cuando el Active sigue presente, pero tiene menor prioridad, como al volver R1 después de una falla.</p>
+<h2>Preparar el PC y confirmar</h2><p>En PC10 → Desktop → IP Configuration, selecciona Static: IP <code>192.168.10.10</code>, máscara <code>255.255.255.0</code> y gateway <code>192.168.10.1</code>. No necesitas DNS para probar por IP.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>Cisco IOS · CLI</span><strong>Router · R1</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="hsrp-code-4" aria-label="Copiar comandos de R1" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="hsrp-code-4"><span class="cli-command" data-cli-prompt="R1# ">show ip interface brief</span>
+<span class="cli-command" data-cli-prompt="R1# ">show standby brief</span>
+<span class="cli-command" data-cli-prompt="R1# ">show standby</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>Repite las verificaciones en R2. Una vez convergido, R1 debe quedar Active y R2 Standby. Desde la terminal del PC, prueba <code>ping 192.168.10.1</code>. Un primer ping puede perderse mientras se resuelve ARP; repítelo antes de concluir que hay una falla.</p>
+<div class="lesson-note"><strong>La prueba tiene un límite.</strong> Con esta topología puedes comprobar la disponibilidad de la gateway, pero no el acceso a una red remota. Eso requeriría añadir una red de destino y rutas de ida y vuelta en ambos routers.</div>
+<p>Referencia técnica: <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html" target="_blank" rel="noopener">Cisco · Configuración de HSRP</a>.</p>
+<div class="lesson-actions"><a href="index.html">← Anterior: FHRP y la gateway virtual</a><a href="hsrp-vlans.html">Siguiente: HSRP con VLAN y subinterfaces →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
+</article></main>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261005-hsrp-fit"></script>
+</body></html>

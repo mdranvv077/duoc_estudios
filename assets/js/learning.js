@@ -1,8 +1,16 @@
+let renderedGuideUrl = window.location.href;
+let referenceReturnButton = null;
+
 const guideData = {
   redundancy: {
     folder: "redundancia-capa-3",
     label: "Redundancia de capa 3",
-    sections: [["index.html", "Redundancia de capa 3"]],
+    sections: [
+      ["index.html", "FHRP y la gateway virtual"],
+      ["hsrp-basico.html", "HSRP sin VLAN"],
+      ["hsrp-vlans.html", "HSRP con VLAN y subinterfaces"],
+      ["verificacion.html", "Fallas y recuperación"],
+    ],
   },
   layer2security: {
     folder: "seguridad-capa-2",
@@ -91,6 +99,9 @@ function currentGuideKey(url = window.location.href) {
 }
 
 function renderGuideNavigation() {
+  hideReferenceHelp();
+  referenceReturnButton?.remove();
+  referenceReturnButton = null;
   const favicon = document.querySelector('link[rel="icon"]');
   if (favicon) favicon.href = favicon.href;
   const guideSidebar = document.querySelector("[data-guide-sidebar]");
@@ -173,6 +184,7 @@ async function loadLesson(url, addHistory = true) {
 
     lessonContent.innerHTML = nextContent.innerHTML;
     document.title = nextDocument.title;
+    renderedGuideUrl = url;
     if (addHistory) history.pushState({}, "", url);
     document.querySelector(".learning-shell")?.scrollTo({ top: 0, behavior: "smooth" });
     renderGuideNavigation();
@@ -193,6 +205,7 @@ async function loadGuide(url, addHistory = true) {
 
     learningShell.innerHTML = nextShell.innerHTML;
     document.title = nextDocument.title;
+    renderedGuideUrl = url;
     if (addHistory) history.pushState({}, "", url);
     learningShell.scrollTo({ top: 0, behavior: "smooth" });
     renderGuideNavigation();
@@ -233,7 +246,7 @@ const labViewTransitions = new WeakMap();
 const labTopologyViews = {
   general: [0, 0, 2180, 1030],
   left: [0, 100, 675, 930],
-  center: [675, 0, 650, 1030],
+  center: [675, 0, 710, 1030],
   right: [1295, 0, 885, 1030],
 };
 
@@ -416,7 +429,181 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+function scrollToReferenceTarget(target) {
+  const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
+  const shell = target.closest(".learning-shell");
+  if (shell && /auto|scroll/.test(getComputedStyle(shell).overflowY)) {
+    shell.scrollTo({ top: shell.scrollTop + target.getBoundingClientRect().top - shell.getBoundingClientRect().top - 25, behavior });
+  } else {
+    window.scrollTo({ top: scrollY + target.getBoundingClientRect().top - 25, behavior });
+  }
+}
+
+const referenceHelpSelector = ".reference-index a[data-help], .reference-module-links a[data-help]";
+let referenceHelp = null;
+let referenceHelpLink = null;
+let referenceHelpHideTimer = null;
+let referenceHelpShowTimer = null;
+let referenceHelpActiveGroup = null;
+const referenceHelpGroupSelector = ".reference-index, .reference-module-links";
+
+function scheduleReferenceHelp(link) {
+  const group = link.closest(referenceHelpGroupSelector);
+  const isReady = group && group === referenceHelpActiveGroup;
+  hideReferenceHelp(true);
+  if (isReady) {
+    showReferenceHelp(link);
+    return;
+  }
+  referenceHelpShowTimer = setTimeout(() => {
+    referenceHelpShowTimer = null;
+    if (link.isConnected && (link.matches(":hover") || link.matches(":focus-visible"))) showReferenceHelp(link);
+  }, 1200);
+}
+
+function hideReferenceHelp(preserveGroup = false) {
+  if (preserveGroup !== true) referenceHelpActiveGroup = null;
+  clearTimeout(referenceHelpShowTimer);
+  referenceHelpShowTimer = null;
+  if (!referenceHelp) return;
+  referenceHelpLink?.removeAttribute("aria-describedby");
+  referenceHelpLink = null;
+  referenceHelp.classList.remove("is-visible");
+  clearTimeout(referenceHelpHideTimer);
+  referenceHelpHideTimer = setTimeout(() => { referenceHelp.hidden = true; }, 180);
+}
+
+function showReferenceHelp(link) {
+  if (!link?.dataset.help) return;
+  referenceHelpActiveGroup = link.closest(referenceHelpGroupSelector);
+  clearTimeout(referenceHelpHideTimer);
+  referenceHelpLink?.removeAttribute("aria-describedby");
+  if (!referenceHelp) {
+    referenceHelp = document.createElement("div");
+    referenceHelp.className = "reference-help";
+    referenceHelp.id = "reference-link-help";
+    referenceHelp.setAttribute("role", "tooltip");
+    document.body.append(referenceHelp);
+  }
+  referenceHelpLink = link;
+  referenceHelp.textContent = link.dataset.help;
+  referenceHelp.hidden = false;
+  link.setAttribute("aria-describedby", referenceHelp.id);
+  const anchor = link.getBoundingClientRect();
+  const tooltip = referenceHelp.getBoundingClientRect();
+  const margin = 12;
+  const left = Math.max(margin, Math.min(anchor.left + (anchor.width - tooltip.width) / 2, innerWidth - tooltip.width - margin));
+  const above = anchor.top - tooltip.height - 9;
+  const top = above >= margin ? above : Math.min(anchor.bottom + 9, innerHeight - tooltip.height - margin);
+  referenceHelp.style.left = `${left}px`;
+  referenceHelp.style.top = `${Math.max(margin, top)}px`;
+  referenceHelp.getBoundingClientRect();
+  referenceHelp.classList.add("is-visible");
+}
+
+document.addEventListener("pointerover", (event) => {
+  const link = event.target.closest(referenceHelpSelector);
+  if (link && !link.contains(event.relatedTarget)) scheduleReferenceHelp(link);
+});
+document.addEventListener("pointerout", (event) => {
+  const group = event.target.closest(referenceHelpGroupSelector);
+  if (group && !group.contains(event.relatedTarget)) referenceHelpActiveGroup = null;
+  const link = event.target.closest(referenceHelpSelector);
+  if (link && !link.contains(event.relatedTarget) && !link.matches(":focus-visible")) hideReferenceHelp(true);
+});
+document.addEventListener("focusin", (event) => {
+  if (event.target.matches(referenceHelpSelector)) scheduleReferenceHelp(event.target);
+});
+document.addEventListener("focusout", (event) => {
+  if (event.target.matches(referenceHelpSelector)) {
+    const group = event.target.closest(referenceHelpGroupSelector);
+    hideReferenceHelp(Boolean(group?.contains(event.relatedTarget)));
+  }
+});
+document.addEventListener("scroll", hideReferenceHelp, true);
+window.addEventListener("resize", hideReferenceHelp);
+document.addEventListener("keydown", (event) => { if (event.key === "Escape") hideReferenceHelp(); });
+
+const referenceDisclosures = new WeakMap();
+
+function finishReferenceDisclosure(details) {
+  const state = referenceDisclosures.get(details);
+  if (!state) return;
+  referenceDisclosures.delete(details);
+  state.animation?.cancel();
+  details.open = state.expanded;
+  details.classList.remove("is-unfolding");
+}
+
+function animateReferenceDisclosure(details, expanded) {
+  const previous = referenceDisclosures.get(details);
+  const startHeight = details.getBoundingClientRect().height;
+  const nextOpen = expanded ?? !(previous ? previous.expanded : details.open);
+  previous?.animation?.cancel();
+  referenceDisclosures.delete(details);
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    details.open = nextOpen;
+    details.classList.remove("is-unfolding");
+    return;
+  }
+  details.open = nextOpen;
+  const endHeight = details.getBoundingClientRect().height;
+  // Keep the content rendered until the closing animation finishes.
+  details.open = true;
+  details.classList.add("is-unfolding");
+  const state = { expanded: nextOpen };
+  referenceDisclosures.set(details, state);
+  state.animation = details.animate([
+    { height: `${startHeight}px` }, { height: `${endHeight}px` },
+  ], { duration: 360, easing: "cubic-bezier(.2,.75,.2,1)", fill: "both" });
+  state.animation.finished.then(() => {
+    if (referenceDisclosures.get(details) === state) finishReferenceDisclosure(details);
+  }).catch(() => {});
+}
+
+function showReferenceReturnButton() {
+  if (referenceReturnButton) return;
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "reference-return";
+  button.setAttribute("aria-label", "Volver al selector de apartados");
+  button.title = "Volver al selector de apartados";
+  button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" /></svg>';
+  button.addEventListener("click", () => {
+    const directory = document.querySelector(".reference-directory");
+    if (!directory) return;
+    if (!directory.open) animateReferenceDisclosure(directory, true);
+    history.pushState({}, "", `#${directory.id}`);
+    directory.querySelector("summary")?.focus({ preventScroll: true });
+    scrollToReferenceTarget(directory);
+    button.remove();
+    referenceReturnButton = null;
+  });
+  document.body.append(button);
+  referenceReturnButton = button;
+}
+
 document.addEventListener("click", (event) => {
+  const summary = event.target.closest("summary");
+  const disclosure = summary?.parentElement;
+  if (disclosure?.matches("details.reference-note, details.reference-directory")) {
+    event.preventDefault();
+    animateReferenceDisclosure(disclosure);
+    return;
+  }
+  const referenceLink = event.target.closest('.reference-index a[href^="#"]');
+  if (referenceLink && !event.defaultPrevented && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+    const target = document.getElementById(decodeURIComponent(referenceLink.hash.slice(1)));
+    if (!target) return;
+    event.preventDefault();
+    finishReferenceDisclosure(referenceLink.closest("details"));
+    history.pushState({}, "", referenceLink.hash);
+    const heading = target.querySelector("h2");
+    if (heading) { heading.setAttribute("tabindex", "-1"); heading.focus({ preventScroll: true }); }
+    scrollToReferenceTarget(target);
+    showReferenceReturnButton();
+    return;
+  }
   const topologyView = event.target.closest("[data-lab-view]");
   if (topologyView) {
     setLabTopologyView(topologyView);
@@ -458,6 +645,15 @@ document.addEventListener("click", (event) => {
 });
 
 window.addEventListener("popstate", () => {
+  const destination = new URL(window.location.href);
+  const rendered = new URL(renderedGuideUrl, window.location.href);
+  // Fragment navigation belongs to this document; let the browser scroll without replacing it.
+  if (destination.origin === rendered.origin && destination.pathname === rendered.pathname &&
+      destination.search === rendered.search) {
+    const target = document.getElementById(decodeURIComponent(destination.hash.slice(1)));
+    if (target) requestAnimationFrame(() => scrollToReferenceTarget(target));
+    return;
+  }
   const guideKey = currentGuideKey();
   const activeCategory = document.querySelector(".sidebar-category.active");
   if (activeCategory?.dataset.guide !== guideKey) {

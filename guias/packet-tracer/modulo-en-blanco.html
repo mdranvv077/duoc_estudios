@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../../assets/css/logo.css" />
     <link rel="stylesheet" href="../../assets/css/responsive.css?v=20260930-fiber" />
     <link rel="stylesheet" href="../../assets/css/credits.css" />
-    <link rel="stylesheet" href="../../assets/css/learning.css?v=20261005-labdesktopfit" />
+    <link rel="stylesheet" href="../../assets/css/learning.css?v=20261005-hsrp-fit" />
   </head>
   <body>
     <header class="site-header container">
@@ -89,7 +89,7 @@
 <text class="lab-device-name" x="280" y="292" text-anchor="middle">Switch2</text>
 </g>
 <g class="lab-device" data-device="SW3"><image href="img/cisco-switch.png" x="28" y="650" width="124" height="80" preserveAspectRatio="xMidYMid meet" />
-<text class="lab-device-name" x="70" y="632" text-anchor="middle">Switch3</text>
+<text class="lab-device-name" x="60" y="632" text-anchor="middle">Switch3</text>
 </g>
 <g class="lab-device" data-device="SW1"><image href="img/cisco-switch.png" x="418" y="650" width="124" height="80" preserveAspectRatio="xMidYMid meet" />
 <text class="lab-device-name" x="520" y="632" text-anchor="middle">Switch1</text>
@@ -112,13 +112,13 @@
 
 </g>
 <g class="lab-device" data-device="MLS2"><image href="img/cisco-multilayer.png" x="1389" y="569" width="82" height="82" preserveAspectRatio="xMidYMid meet" />
-<text class="lab-device-name" x="1430" y="551" text-anchor="middle">MLS2</text>
+<text class="lab-device-name" x="1430" y="680" text-anchor="middle">MLS2</text>
 </g>
 <g class="lab-device" data-device="MLS3"><image href="img/cisco-multilayer.png" x="1759" y="149" width="82" height="82" preserveAspectRatio="xMidYMid meet" />
 <text class="lab-device-name" x="1800" y="131" text-anchor="middle">MLS3</text>
 </g>
 <g class="lab-device" data-device="MLS4"><image href="img/cisco-multilayer.png" x="1759" y="569" width="82" height="82" preserveAspectRatio="xMidYMid meet" />
-<text class="lab-device-name" x="1800" y="551" text-anchor="middle">MLS4</text>
+<text class="lab-device-name" x="1800" y="680" text-anchor="middle">MLS4</text>
 </g>
 <g class="lab-device" data-device="SERVER-ISP"><image href="img/cisco-server.png" x="1061.5" y="737" width="77" height="116" preserveAspectRatio="xMidYMid meet" />
 <text class="lab-device-name" x="1100" y="879" text-anchor="middle">SERVER-ISP</text>
@@ -126,71 +126,76 @@
 <text class="lab-device-meta" x="1100" y="929" text-anchor="middle">192.168.80.10 /24</text>
 </g>
 <g class="lab-device"><g class="lab-pc" transform="translate(58 880)"><rect x="0" y="0" width="64" height="43" rx="3" /><path d="M32 43v12M17 55h30" /></g></g>
-<text class="lab-device-name" x="90" y="960" text-anchor="middle">PC10</text>
-<text class="lab-device-meta" x="90" y="987" text-anchor="middle">VLAN 10 · DHCP</text>
+<text class="lab-device-name" x="90" y="965" text-anchor="middle">PC10</text>
+<text class="lab-device-meta" x="90" y="996" text-anchor="middle">VLAN 10 · DHCP</text>
 <g class="lab-device"><g class="lab-pc" transform="translate(448 880)"><rect x="0" y="0" width="64" height="43" rx="3" /><path d="M32 43v12M17 55h30" /></g></g>
-<text class="lab-device-name" x="480" y="960" text-anchor="middle">PC20</text>
-<text class="lab-device-meta" x="480" y="987" text-anchor="middle">VLAN 20 · DHCP</text>
+<text class="lab-device-name" x="480" y="965" text-anchor="middle">PC20</text>
+<text class="lab-device-meta" x="480" y="996" text-anchor="middle">VLAN 20 · DHCP</text>
 <g class="lab-device"><g class="lab-pc" transform="translate(2038 165)"><rect x="0" y="0" width="64" height="43" rx="3" /><path d="M32 43v12M17 55h30" /></g></g>
 <text class="lab-device-name" x="2070" y="142" text-anchor="middle">PC30</text>
 <text class="lab-device-meta" x="2070" y="249" text-anchor="middle">VLAN 30 · DHCP</text>
 <g class="lab-device"><g class="lab-pc" transform="translate(2038 585)"><rect x="0" y="0" width="64" height="43" rx="3" /><path d="M32 43v12M17 55h30" /></g></g>
 <text class="lab-device-name" x="2070" y="562" text-anchor="middle">PC40</text>
 <text class="lab-device-meta" x="2070" y="669" text-anchor="middle">VLAN 40 · DHCP</text>
-<g class="lab-map-note"><rect x="162.5" y="155" width="235" height="83" rx="3" />
-<text class="lab-note-title" x="280" y="179" text-anchor="middle">STP · ROOT SWITCH</text>
-<text class="lab-note-line" x="280" y="204" text-anchor="middle">VLAN 10 y 20</text>
-<text class="lab-note-line" x="280" y="228" text-anchor="middle">Prioridad 4096</text>
+<g class="lab-map-note"><rect x="162.5" y="143" width="235" height="96" rx="3" />
+<text class="lab-note-title" x="280" y="169" text-anchor="middle">STP · ROOT SWITCH</text>
+<text class="lab-note-line" x="280" y="196" text-anchor="middle">VLAN 10 y 20</text>
+<text class="lab-note-line" x="280" y="223" text-anchor="middle">Prioridad 4096</text>
 </g>
-<g class="lab-map-note"><rect x="700" y="61" width="290" height="83" rx="3" />
-<text class="lab-note-title" x="845" y="85" text-anchor="middle">MELIPILLA</text>
-<text class="lab-note-line" x="845" y="110" text-anchor="middle">HSRP activo: 10 · respaldo: 20</text>
-<text class="lab-note-line" x="845" y="134" text-anchor="middle">DHCP: VLAN 10</text>
+<g class="lab-map-note"><rect x="680" y="61" width="330" height="96" rx="3" />
+<text class="lab-note-title" x="845" y="87" text-anchor="middle">MELIPILLA</text>
+<text class="lab-note-line" x="845" y="114" text-anchor="middle">HSRP activo: 10 · respaldo: 20</text>
+<text class="lab-note-line" x="845" y="141" text-anchor="middle">DHCP: VLAN 10</text>
 </g>
-<g class="lab-map-note"><rect x="676" y="756" width="310" height="83" rx="3" />
-<text class="lab-note-title" x="831" y="780" text-anchor="middle">ELMONTE</text>
-<text class="lab-note-line" x="831" y="805" text-anchor="middle">HSRP activo: 20 · respaldo: 10</text>
-<text class="lab-note-line" x="831" y="829" text-anchor="middle">DHCP: VLAN 20</text>
+<g class="lab-map-note"><rect x="685" y="756" width="330" height="96" rx="3" />
+<text class="lab-note-title" x="850" y="782" text-anchor="middle">ELMONTE</text>
+<text class="lab-note-line" x="850" y="809" text-anchor="middle">HSRP activo: 20 · respaldo: 10</text>
+<text class="lab-note-line" x="850" y="836" text-anchor="middle">DHCP: VLAN 20</text>
 </g>
-<g class="lab-map-note"><rect x="1302.5" y="62" width="315" height="59" rx="3" />
-<text class="lab-note-title" x="1460" y="86" text-anchor="middle">MLS1 · VLAN 30</text>
-<text class="lab-note-line" x="1460" y="111" text-anchor="middle">STP root · HSRP activo · DHCP</text>
+<g class="lab-map-note"><rect x="1302.5" y="62" width="315" height="74" rx="3" />
+<text class="lab-note-title" x="1460" y="88" text-anchor="middle">MLS1 · VLAN 30</text>
+<text class="lab-note-line" x="1460" y="116" text-anchor="middle">STP root · HSRP activo · DHCP</text>
 </g>
-<g class="lab-map-note"><rect x="1312.5" y="740" width="335" height="83" rx="3" />
-<text class="lab-note-title" x="1480" y="764" text-anchor="middle">MLS2 · VLAN 40</text>
-<text class="lab-note-line" x="1480" y="789" text-anchor="middle">STP root · HSRP activo · DHCP</text>
-<text class="lab-note-line" x="1480" y="813" text-anchor="middle">Respaldo HSRP mutuo con MLS1</text>
+<g class="lab-map-note"><rect x="1312.5" y="740" width="335" height="96" rx="3" />
+<text class="lab-note-title" x="1480" y="766" text-anchor="middle">MLS2 · VLAN 40</text>
+<text class="lab-note-line" x="1480" y="793" text-anchor="middle">STP root · HSRP activo · DHCP</text>
+<text class="lab-note-line" x="1480" y="820" text-anchor="middle">Respaldo HSRP mutuo con MLS1</text>
 </g>
-<text class="lab-group-pagp" x="88" y="476" text-anchor="middle">GRUPO 1 · PAgP</text>
-<text class="lab-port" x="88" y="500" text-anchor="middle">Fa0/1–2</text>
-<text class="lab-small" x="88" y="523" text-anchor="middle">TRUNK</text>
+<text class="lab-group-pagp" x="100" y="476" text-anchor="middle">GRUPO 1 · PAgP</text>
+<text class="lab-small" x="100" y="500" text-anchor="middle">Fa0/1–2 · trunk</text>
+<text class="lab-channel-mode" x="100" y="528" text-anchor="middle">SW2: desirable</text>
+<text class="lab-channel-mode" x="100" y="555" text-anchor="middle">SW3: auto</text>
 <text class="lab-group-pagp" x="491" y="476" text-anchor="middle">GRUPO 2 · PAgP</text>
-<text class="lab-port" x="491" y="500" text-anchor="middle">Fa0/3–4</text>
-<text class="lab-small" x="491" y="523" text-anchor="middle">TRUNK</text>
+<text class="lab-small" x="491" y="500" text-anchor="middle">Fa0/3–4 · trunk</text>
+<text class="lab-channel-mode" x="491" y="528" text-anchor="middle">SW2: desirable</text>
+<text class="lab-channel-mode" x="491" y="555" text-anchor="middle">SW1: auto</text>
 <text class="lab-group-lacp" x="281" y="737" text-anchor="middle">GRUPO 3 · LACP</text>
-<text class="lab-port" x="281" y="761" text-anchor="middle">Fa0/5–6</text>
-<text class="lab-small" x="281" y="784" text-anchor="middle">TRUNK</text>
+<text class="lab-small" x="281" y="761" text-anchor="middle">Fa0/5–6 · trunk</text>
+<text class="lab-channel-mode" x="281" y="789" text-anchor="middle">SW3: active · SW1: passive</text>
 <text class="lab-group-lacp" x="1580" y="378" text-anchor="middle">GRUPO 4 · LACP</text>
-<text class="lab-port" x="1580" y="402" text-anchor="middle">Fa0/3–4</text>
-<text class="lab-small" x="1580" y="425" text-anchor="middle">TRUNK</text>
+<text class="lab-small" x="1580" y="402" text-anchor="middle">Fa0/3–4 · trunk</text>
+<text class="lab-channel-mode" x="1580" y="430" text-anchor="middle">MLS1: active</text>
+<text class="lab-channel-mode" x="1580" y="457" text-anchor="middle">MLS2: passive</text>
 <text class="lab-group-pagp" x="1620" y="671" text-anchor="middle">GRUPO 5 · PAgP</text>
-<text class="lab-port" x="1620" y="695" text-anchor="middle">Fa0/1–2</text>
-<text class="lab-small" x="1620" y="718" text-anchor="middle">TRUNK</text>
+<text class="lab-small" x="1620" y="695" text-anchor="middle">Fa0/1–2 · trunk</text>
+<text class="lab-channel-mode" x="1620" y="723" text-anchor="middle">MLS2: desirable · MLS4: auto</text>
 <text class="lab-group-lacp" x="1940" y="378" text-anchor="middle">GRUPO 6 · LACP</text>
-<text class="lab-port" x="1940" y="402" text-anchor="middle">Fa0/3–4</text>
-<text class="lab-small" x="1940" y="425" text-anchor="middle">TRUNK</text>
-<text class="lab-group-pagp" x="1740" y="60" text-anchor="middle">GRUPO 7 · PAgP</text>
-<text class="lab-port" x="1740" y="84" text-anchor="middle">Fa0/1–2</text>
-<text class="lab-small" x="1740" y="107" text-anchor="middle">TRUNK</text>
-<text class="lab-port" x="420" y="300" text-anchor="middle">Fa0/24 ↔ Fa0/24</text>
-<text class="lab-small" x="420" y="326" text-anchor="middle">TRUNK</text>
+<text class="lab-small" x="1940" y="402" text-anchor="middle">Fa0/3–4 · trunk</text>
+<text class="lab-channel-mode" x="1940" y="430" text-anchor="middle">MLS3: active</text>
+<text class="lab-channel-mode" x="1940" y="457" text-anchor="middle">MLS4: passive</text>
+<text class="lab-group-pagp" x="1620" y="245" text-anchor="middle">GRUPO 7 · PAgP</text>
+<text class="lab-small" x="1620" y="269" text-anchor="middle">Fa0/1–2 · trunk</text>
+<text class="lab-channel-mode" x="1620" y="297" text-anchor="middle">MLS1: desirable</text>
+<text class="lab-channel-mode" x="1620" y="324" text-anchor="middle">MLS3: auto</text>
+<text class="lab-port" x="420" y="264" text-anchor="middle">Fa0/24 ↔ Fa0/24</text>
+<text class="lab-small" x="420" y="291" text-anchor="middle">TRUNK</text>
 <text class="lab-port" x="654" y="234" text-anchor="middle">Gi0/1 ↔ Gi0/1</text>
 <text class="lab-small" x="645" y="257" text-anchor="middle">TRUNK</text>
-<text class="lab-port" x="657" y="524" text-anchor="middle">Gi0/2 ↔ Gi0/1</text>
+<text class="lab-port" x="642" y="524" text-anchor="middle">Gi0/2 ↔ Gi0/1</text>
 <text class="lab-small" x="647" y="548" text-anchor="middle">TRUNK</text>
-<text class="lab-network" x="999" y="152" text-anchor="middle">192.168.40.0/24</text>
-<text class="lab-port" x="1010" y="180" text-anchor="middle">MEL .2 ↔ ISP .1</text>
-<text class="lab-small" x="975" y="219" text-anchor="middle">S0/0/0 ↔ S0/0/0</text>
+<text class="lab-network" x="999" y="181" text-anchor="middle">192.168.40.0/24</text>
+<text class="lab-port" x="1010" y="208" text-anchor="middle">MEL .2 ↔ ISP .1</text>
+<text class="lab-small" x="1020" y="235" text-anchor="middle">S0/0/0 ↔ S0/0/0</text>
 <text class="lab-network" x="1002" y="588" text-anchor="middle">192.168.50.0/24</text>
 <text class="lab-port" x="1002" y="615" text-anchor="middle">ELM .2 ↔ ISP .1</text>
 <text class="lab-small" x="1002" y="642" text-anchor="middle">S0/0/1 ↔ S0/0/1</text>
@@ -202,10 +207,10 @@
 <text class="lab-small" x="1250" y="694" text-anchor="middle">Gi0/2 ↔ Gi0/2</text>
 <text class="lab-port" x="1070" y="705" text-anchor="end">Gi0/0 ↔ Fa0</text>
 <text class="lab-network" x="1070" y="732" text-anchor="end">192.168.80.0/24</text>
-<text class="lab-port" x="145" y="813" text-anchor="start">Fa0/10 ↔ Fa0</text>
-<text class="lab-small" x="145" y="840" text-anchor="start">ACCESO</text>
-<text class="lab-port" x="420" y="813" text-anchor="end">Fa0/10 ↔ Fa0</text>
-<text class="lab-small" x="420" y="840" text-anchor="end">ACCESO</text>
+<text class="lab-port" x="145" y="828" text-anchor="start">Fa0/10 ↔ Fa0</text>
+<text class="lab-small" x="145" y="855" text-anchor="start">ACCESO</text>
+<text class="lab-port" x="420" y="828" text-anchor="end">Fa0/10 ↔ Fa0</text>
+<text class="lab-small" x="420" y="855" text-anchor="end">ACCESO</text>
 <text class="lab-port" x="1930" y="161" text-anchor="middle">Fa0/10 ↔ Fa0</text>
 <text class="lab-small" x="1930" y="225" text-anchor="middle">ACCESO</text>
 <text class="lab-port" x="1930" y="581" text-anchor="middle">Fa0/10 ↔ Fa0</text>
@@ -229,25 +234,25 @@
           <p><strong>Sigue el orden de los apartados.</strong> Cada bloque indica el equipo al que pertenece. Los comandos parten de modo privilegiado, salvo la base inicial.</p>
           <p>Los prompts en rosa son visuales: «Copiar» los omite. Las líneas <code>!</code> sí se copian. La referencia usa los puertos y direcciones de las tablas siguientes.</p>
         </div>
-        <details class="reference-directory">
+        <details class="reference-directory" id="reference-directory">
           <summary>Ir a un grupo de comandos <span>16 apartados</span></summary>
           <nav class="reference-index" aria-label="Índice de comandos">
-            <a href="#plan"><span>01</span>Plan de direcciones y puertos</a>
-            <a href="#base"><span>02</span>Configuración básica y SSH</a>
-            <a href="#vlans"><span>03</span>Crear las VLANs de cada sector</a>
-            <a href="#etherchannel"><span>04</span>Los siete EtherChannel</a>
-            <a href="#trunks"><span>05</span>Trunks individuales y puertos access</a>
-            <a href="#stp"><span>06</span>Spanning Tree</a>
-            <a href="#roas"><span>07</span>Router-on-a-stick · MELIPILLA y ELMONTE</a>
-            <a href="#svi"><span>08</span>SVI · MLS1 y MLS2</a>
-            <a href="#wan"><span>09</span>Enlaces al ISP</a>
-            <a href="#hsrp"><span>10</span>HSRP · gateways de respaldo</a>
-            <a href="#rutas"><span>11</span>Rutas estáticas · camino de ida y regreso</a>
-            <a href="#dhcp"><span>12</span>DHCP · reparto según la topología</a>
-            <a href="#gestion"><span>13</span>Administración de los switches</a>
-            <a href="#servidor"><span>14</span>SERVER-ISP y los PC</a>
-            <a href="#dinamico"><span>15</span>Opcional · sustituir las rutas estáticas</a>
-            <a href="#verificar"><span>16</span>Verificar y guardar</a>
+            <a href="#plan" data-help="Consulta las IP, VLANs y puertos que usa cada equipo del plano."><span>01</span>Plan de direcciones y puertos</a>
+            <a href="#base" data-help="Pon nombre y contraseñas a los equipos y prepara el acceso por SSH."><span>02</span>Configuración básica y SSH</a>
+            <a href="#vlans" data-help="Crea y nombra las VLANs que necesita cada sector."><span>03</span>Crear las VLANs de cada sector</a>
+            <a href="#etherchannel" data-help="Une los enlaces de cada grupo y configura PAgP o LACP en ambos extremos."><span>04</span>Los siete EtherChannel</a>
+            <a href="#trunks" data-help="Prepara los enlaces entre equipos y los puertos donde se conectan los PC."><span>05</span>Trunks individuales y puertos access</a>
+            <a href="#stp" data-help="Elige los switches raíz para evitar bucles entre los enlaces."><span>06</span>Spanning Tree</a>
+            <a href="#roas" data-help="Permite que los routers comuniquen las VLANs usando un mismo enlace."><span>07</span>Router-on-a-stick · MELIPILLA y ELMONTE</a>
+            <a href="#svi" data-help="Configura las interfaces de VLAN para que los multilayer comuniquen sus redes."><span>08</span>SVI · MLS1 y MLS2</a>
+            <a href="#wan" data-help="Configura las IP de los enlaces que conectan los equipos con el ISP."><span>09</span>Enlaces al ISP</a>
+            <a href="#hsrp" data-help="Comparte una puerta de enlace virtual y prepara un equipo de respaldo."><span>10</span>HSRP · gateways de respaldo</a>
+            <a href="#rutas" data-help="Indica por dónde enviar el tráfico y cómo puede volver a su origen."><span>11</span>Rutas estáticas · camino de ida y regreso</a>
+            <a href="#dhcp" data-help="Entrega IP automáticamente a los PC y reserva las direcciones de los equipos."><span>12</span>DHCP · reparto según la topología</a>
+            <a href="#gestion" data-help="Asigna una IP de administración a cada switch para acceder a él."><span>13</span>Administración de los switches</a>
+            <a href="#servidor" data-help="Prepara el servidor DNS y comprueba cómo reciben su IP los PC."><span>14</span>SERVER-ISP y los PC</a>
+            <a href="#dinamico" data-help="Consulta las alternativas opcionales RIP y OSPF a las rutas estáticas."><span>15</span>Opcional · sustituir las rutas estáticas</a>
+            <a href="#verificar" data-help="Comprueba los enlaces, prueba la comunicación y guarda la configuración."><span>16</span>Verificar y guardar</a>
           </nav>
         </details>
         <section id="plan">
@@ -286,7 +291,7 @@
 
 <span class="cli-comment">! CLAVES RSA</span>
 <span class="cli-command" data-cli-prompt="MELIPILLA(config)# ">crypto key generate rsa</span>
-<span class="cli-command">2048</span>
+<span class="cli-command">1024</span>
 
 <span class="cli-comment">! ACCESO SSH</span>
 <span class="cli-command" data-cli-prompt="MELIPILLA(config)# ">ip ssh version 2</span>
@@ -306,12 +311,12 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/configuracion-base.html">Configuración inicial · Configuración básica</a>
-              <a href="configuracion-inicial/seguridad.html">Configuración inicial · Seguridad del dispositivo</a>
-              <a href="configuracion-inicial/acceso-ssh.html">Configuración inicial · Acceso por SSH</a>
+              <a href="configuracion-inicial/configuracion-base.html" data-help="Abre el módulo para poner nombre al equipo y preparar su configuración básica.">Configuración inicial · Configuración básica</a>
+              <a href="configuracion-inicial/seguridad.html" data-help="Abre el módulo sobre contraseñas y protección del acceso al dispositivo.">Configuración inicial · Seguridad del dispositivo</a>
+              <a href="configuracion-inicial/acceso-ssh.html" data-help="Abre el módulo para entrar al equipo de forma remota mediante SSH.">Configuración inicial · Acceso por SSH</a>
             </div>
           </div>
-          <details class="reference-note"><summary>Notas de este bloque</summary><p>2048 es la respuesta al tamaño de clave solicitado. Si ya existen claves, IOS puede pedir confirmar su sustitución: revisa ese paso antes de continuar. En equipos con VTY 5–15, aplica también login local y transport input ssh a ese rango. Las credenciales son ejemplos para esta práctica. SSH necesitará las IP y rutas de los bloques posteriores.</p></details>
+          <details class="reference-note"><summary>Notas de este bloque</summary><p>1024 bits es el tamaño de clave usado en esta práctica y la respuesta al valor solicitado por IOS. Si ya existen claves, IOS puede pedir confirmar su sustitución: revisa ese paso antes de continuar. En equipos con VTY 5–15, aplica también login local y transport input ssh a ese rango. Las credenciales son ejemplos para esta práctica. SSH necesitará las IP y rutas de los bloques posteriores.</p></details>
 
 
 
@@ -344,7 +349,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="vlans/crear-vlans.html">VLANs · Crear y nombrar VLANs</a>
+              <a href="vlans/crear-vlans.html" data-help="Abre el módulo para crear VLANs y ponerles un nombre.">VLANs · Crear y nombrar VLANs</a>
             </div>
           </div>
 
@@ -371,7 +376,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="vlans/crear-vlans.html">VLANs · Crear y nombrar VLANs</a>
+              <a href="vlans/crear-vlans.html" data-help="Abre el módulo para crear VLANs y ponerles un nombre.">VLANs · Crear y nombrar VLANs</a>
             </div>
           </div>
 
@@ -417,9 +422,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -457,9 +462,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -497,9 +502,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -537,9 +542,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -577,9 +582,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -617,9 +622,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -659,9 +664,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -701,9 +706,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -743,9 +748,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -785,9 +790,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -827,9 +832,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -869,9 +874,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -911,9 +916,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -953,9 +958,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/pagp.html">EtherChannel · PAgP y LACP</a>
-              <a href="etherchannel/agrupar-puertos.html">EtherChannel · Agrupar puertos</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
+              <a href="etherchannel/pagp.html" data-help="Abre el módulo que explica PAgP, LACP y las parejas de modos compatibles.">EtherChannel · PAgP y LACP</a>
+              <a href="etherchannel/agrupar-puertos.html" data-help="Abre el módulo para reunir varios puertos en un EtherChannel.">EtherChannel · Agrupar puertos</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
             </div>
           </div>
 
@@ -986,9 +991,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="trunking/trunk-estatico.html">Trunking · Trunk estático</a>
-              <a href="trunking/vlan-nativa.html">Trunking · VLAN nativa</a>
-              <a href="trunking/verificacion.html">Trunking · VLANs permitidas</a>
+              <a href="trunking/trunk-estatico.html" data-help="Abre el módulo para configurar un enlace que transporte varias VLANs.">Trunking · Trunk estático</a>
+              <a href="trunking/vlan-nativa.html" data-help="Abre el módulo sobre la VLAN nativa y cómo hacerla coincidir en ambos extremos.">Trunking · VLAN nativa</a>
+              <a href="trunking/verificacion.html" data-help="Abre el módulo para elegir las VLANs permitidas y comprobar el trunk.">Trunking · VLANs permitidas</a>
             </div>
           </div>
 
@@ -1021,9 +1026,9 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="trunking/trunk-estatico.html">Trunking · Trunk estático</a>
-              <a href="trunking/vlan-nativa.html">Trunking · VLAN nativa</a>
-              <a href="trunking/verificacion.html">Trunking · VLANs permitidas</a>
+              <a href="trunking/trunk-estatico.html" data-help="Abre el módulo para configurar un enlace que transporte varias VLANs.">Trunking · Trunk estático</a>
+              <a href="trunking/vlan-nativa.html" data-help="Abre el módulo sobre la VLAN nativa y cómo hacerla coincidir en ambos extremos.">Trunking · VLAN nativa</a>
+              <a href="trunking/verificacion.html" data-help="Abre el módulo para elegir las VLANs permitidas y comprobar el trunk.">Trunking · VLANs permitidas</a>
             </div>
           </div>
 
@@ -1046,8 +1051,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="vlans/puertos-access.html">VLANs · Puertos de acceso</a>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
+              <a href="vlans/puertos-access.html" data-help="Abre el módulo para asignar el puerto de un PC a su VLAN.">VLANs · Puertos de acceso</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
             </div>
           </div>
 
@@ -1070,8 +1075,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="vlans/puertos-access.html">VLANs · Puertos de acceso</a>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
+              <a href="vlans/puertos-access.html" data-help="Abre el módulo para asignar el puerto de un PC a su VLAN.">VLANs · Puertos de acceso</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
             </div>
           </div>
 
@@ -1094,8 +1099,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="vlans/puertos-access.html">VLANs · Puertos de acceso</a>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
+              <a href="vlans/puertos-access.html" data-help="Abre el módulo para asignar el puerto de un PC a su VLAN.">VLANs · Puertos de acceso</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
             </div>
           </div>
 
@@ -1118,8 +1123,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="vlans/puertos-access.html">VLANs · Puertos de acceso</a>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
+              <a href="vlans/puertos-access.html" data-help="Abre el módulo para asignar el puerto de un PC a su VLAN.">VLANs · Puertos de acceso</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
             </div>
           </div>
 
@@ -1146,8 +1151,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
-              <a href="spanning-tree/eleccion.html">Spanning Tree · Elección y prioridades</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
+              <a href="spanning-tree/eleccion.html" data-help="Abre el módulo sobre prioridades y elección del switch raíz.">Spanning Tree · Elección y prioridades</a>
             </div>
           </div>
 
@@ -1166,8 +1171,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
-              <a href="spanning-tree/eleccion.html">Spanning Tree · Elección y prioridades</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
+              <a href="spanning-tree/eleccion.html" data-help="Abre el módulo sobre prioridades y elección del switch raíz.">Spanning Tree · Elección y prioridades</a>
             </div>
           </div>
 
@@ -1185,7 +1190,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
             </div>
           </div>
 
@@ -1205,8 +1210,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
-              <a href="spanning-tree/eleccion.html">Spanning Tree · Elección y prioridades</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
+              <a href="spanning-tree/eleccion.html" data-help="Abre el módulo sobre prioridades y elección del switch raíz.">Spanning Tree · Elección y prioridades</a>
             </div>
           </div>
 
@@ -1226,8 +1231,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
-              <a href="spanning-tree/eleccion.html">Spanning Tree · Elección y prioridades</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
+              <a href="spanning-tree/eleccion.html" data-help="Abre el módulo sobre prioridades y elección del switch raíz.">Spanning Tree · Elección y prioridades</a>
             </div>
           </div>
 
@@ -1245,7 +1250,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
             </div>
           </div>
 
@@ -1291,7 +1296,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/inter-vlan.html">Routing · Inter-VLAN</a>
+              <a href="routing/inter-vlan.html" data-help="Abre el módulo para comunicar distintas VLANs mediante un router.">Routing · Inter-VLAN</a>
             </div>
           </div>
 
@@ -1329,7 +1334,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/inter-vlan.html">Routing · Inter-VLAN</a>
+              <a href="routing/inter-vlan.html" data-help="Abre el módulo para comunicar distintas VLANs mediante un router.">Routing · Inter-VLAN</a>
             </div>
           </div>
 
@@ -1371,7 +1376,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/inter-vlan.html">Routing · Inter-VLAN</a>
+              <a href="routing/inter-vlan.html" data-help="Abre el módulo para comunicar distintas VLANs mediante un router.">Routing · Inter-VLAN</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>El módulo de Routing inter-VLAN explica la base; la configuración detallada mediante SVI todavía no tiene un módulo propio. Una SVI requiere una VLAN existente y al menos un puerto activo que la transporte en forwarding.</p></details>
@@ -1406,7 +1411,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/inter-vlan.html">Routing · Inter-VLAN</a>
+              <a href="routing/inter-vlan.html" data-help="Abre el módulo para comunicar distintas VLANs mediante un router.">Routing · Inter-VLAN</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>El módulo de Routing inter-VLAN explica la base; la configuración detallada mediante SVI todavía no tiene un módulo propio. Una SVI requiere una VLAN existente y al menos un puerto activo que la transporte en forwarding.</p></details>
@@ -1436,7 +1441,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/interfaces-ipv4.html">Configuración inicial · IP en interfaces</a>
+              <a href="configuracion-inicial/interfaces-ipv4.html" data-help="Abre el módulo para asignar IP a las interfaces y activar los enlaces.">Configuración inicial · IP en interfaces</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>Este bloque supone que MELIPILLA tiene el extremo DCE, como indica el plano. Si show controllers serial 0/0/0 muestra DTE, el clock rate se configura en el otro extremo.</p></details>
@@ -1458,7 +1463,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/interfaces-ipv4.html">Configuración inicial · IP en interfaces</a>
+              <a href="configuracion-inicial/interfaces-ipv4.html" data-help="Abre el módulo para asignar IP a las interfaces y activar los enlaces.">Configuración inicial · IP en interfaces</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>Este bloque supone que ELMONTE tiene el extremo DCE. Verifícalo con show controllers serial 0/0/1.</p></details>
@@ -1480,8 +1485,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/interfaces-ipv4.html">Configuración inicial · IP en interfaces</a>
-              <a href="routing/rutas-estaticas.html">Routing · Rutas estáticas</a>
+              <a href="configuracion-inicial/interfaces-ipv4.html" data-help="Abre el módulo para asignar IP a las interfaces y activar los enlaces.">Configuración inicial · IP en interfaces</a>
+              <a href="routing/rutas-estaticas.html" data-help="Abre el módulo para indicar manualmente el camino hacia otras redes.">Routing · Rutas estáticas</a>
             </div>
           </div>
 
@@ -1502,8 +1507,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/interfaces-ipv4.html">Configuración inicial · IP en interfaces</a>
-              <a href="routing/rutas-estaticas.html">Routing · Rutas estáticas</a>
+              <a href="configuracion-inicial/interfaces-ipv4.html" data-help="Abre el módulo para asignar IP a las interfaces y activar los enlaces.">Configuración inicial · IP en interfaces</a>
+              <a href="routing/rutas-estaticas.html" data-help="Abre el módulo para indicar manualmente el camino hacia otras redes.">Routing · Rutas estáticas</a>
             </div>
           </div>
 
@@ -1544,7 +1549,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/interfaces-ipv4.html">Configuración inicial · IP en interfaces</a>
+              <a href="configuracion-inicial/interfaces-ipv4.html" data-help="Abre el módulo para asignar IP a las interfaces y activar los enlaces.">Configuración inicial · IP en interfaces</a>
             </div>
           </div>
 
@@ -1590,7 +1595,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="redundancia-capa-3/index.html">Redundancia de capa 3 · En preparación</a>
+              <a href="redundancia-capa-3/hsrp-vlans.html" data-help="Abre el módulo para configurar HSRP por VLAN y repartir los roles entre dos routers.">Redundancia de capa 3 · HSRP por VLAN</a>
             </div>
           </div>
 
@@ -1628,7 +1633,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="redundancia-capa-3/index.html">Redundancia de capa 3 · En preparación</a>
+              <a href="redundancia-capa-3/hsrp-vlans.html" data-help="Abre el módulo para configurar HSRP por VLAN y repartir los roles entre dos routers.">Redundancia de capa 3 · HSRP por VLAN</a>
             </div>
           </div>
 
@@ -1666,7 +1671,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="redundancia-capa-3/index.html">Redundancia de capa 3 · En preparación</a>
+              <a href="redundancia-capa-3/hsrp-vlans.html" data-help="Abre el módulo para configurar HSRP por VLAN y repartir los roles entre dos routers.">Redundancia de capa 3 · HSRP por VLAN</a>
             </div>
           </div>
 
@@ -1704,11 +1709,11 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="redundancia-capa-3/index.html">Redundancia de capa 3 · En preparación</a>
+              <a href="redundancia-capa-3/hsrp-vlans.html" data-help="Abre el módulo para configurar HSRP por VLAN y repartir los roles entre dos routers.">Redundancia de capa 3 · HSRP por VLAN</a>
             </div>
           </div>
 
-          <details class="reference-note"><summary>Detalles de esta etapa</summary><p>El activo previsto tiene prioridad 110 y el respaldo 105. El seguimiento de interfaz resta 10 por defecto al caer su enlace al ISP; preempt permite que el otro asuma el rol. Esto comprueba el estado del enlace local, no toda la conectividad más allá del ISP. El módulo de redundancia sigue como plantilla; estos bloques corresponden a este laboratorio.</p></details>
+          <details class="reference-note"><summary>Detalles de esta etapa</summary><p>El activo previsto tiene prioridad 110 y el respaldo 105. El seguimiento de interfaz resta 10 por defecto al caer su enlace al ISP; preempt permite que el otro asuma el rol. Esto comprueba el estado del enlace local, no toda la conectividad más allá del ISP. La categoría de redundancia explica el procedimiento con una topología más pequeña; estos bloques corresponden al plano integrado.</p></details>
 
         </section>
         <section id="rutas">
@@ -1730,7 +1735,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/rutas-estaticas.html">Routing · Rutas estáticas</a>
+              <a href="routing/rutas-estaticas.html" data-help="Abre el módulo para indicar manualmente el camino hacia otras redes.">Routing · Rutas estáticas</a>
             </div>
           </div>
 
@@ -1748,7 +1753,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/rutas-estaticas.html">Routing · Rutas estáticas</a>
+              <a href="routing/rutas-estaticas.html" data-help="Abre el módulo para indicar manualmente el camino hacia otras redes.">Routing · Rutas estáticas</a>
             </div>
           </div>
 
@@ -1766,7 +1771,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/rutas-estaticas.html">Routing · Rutas estáticas</a>
+              <a href="routing/rutas-estaticas.html" data-help="Abre el módulo para indicar manualmente el camino hacia otras redes.">Routing · Rutas estáticas</a>
             </div>
           </div>
 
@@ -1784,7 +1789,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/rutas-estaticas.html">Routing · Rutas estáticas</a>
+              <a href="routing/rutas-estaticas.html" data-help="Abre el módulo para indicar manualmente el camino hacia otras redes.">Routing · Rutas estáticas</a>
             </div>
           </div>
 
@@ -1814,7 +1819,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/rutas-estaticas.html">Routing · Rutas estáticas</a>
+              <a href="routing/rutas-estaticas.html" data-help="Abre el módulo para indicar manualmente el camino hacia otras redes.">Routing · Rutas estáticas</a>
             </div>
           </div>
 
@@ -1848,7 +1853,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/dhcp-vlan.html">Routing · DHCP por VLAN</a>
+              <a href="routing/dhcp-vlan.html" data-help="Abre el módulo para entregar IP automáticamente a los equipos de cada VLAN.">Routing · DHCP por VLAN</a>
             </div>
           </div>
 
@@ -1874,7 +1879,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/dhcp-vlan.html">Routing · DHCP por VLAN</a>
+              <a href="routing/dhcp-vlan.html" data-help="Abre el módulo para entregar IP automáticamente a los equipos de cada VLAN.">Routing · DHCP por VLAN</a>
             </div>
           </div>
 
@@ -1900,7 +1905,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/dhcp-vlan.html">Routing · DHCP por VLAN</a>
+              <a href="routing/dhcp-vlan.html" data-help="Abre el módulo para entregar IP automáticamente a los equipos de cada VLAN.">Routing · DHCP por VLAN</a>
             </div>
           </div>
 
@@ -1926,7 +1931,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/dhcp-vlan.html">Routing · DHCP por VLAN</a>
+              <a href="routing/dhcp-vlan.html" data-help="Abre el módulo para entregar IP automáticamente a los equipos de cada VLAN.">Routing · DHCP por VLAN</a>
             </div>
           </div>
 
@@ -1956,8 +1961,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/interfaces-ipv4.html">Configuración inicial · IP en interfaces</a>
-              <a href="configuracion-inicial/acceso-ssh.html">Configuración inicial · Acceso por SSH</a>
+              <a href="configuracion-inicial/interfaces-ipv4.html" data-help="Abre el módulo para asignar IP a las interfaces y activar los enlaces.">Configuración inicial · IP en interfaces</a>
+              <a href="configuracion-inicial/acceso-ssh.html" data-help="Abre el módulo para entrar al equipo de forma remota mediante SSH.">Configuración inicial · Acceso por SSH</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>La configuración de una SVI de administración todavía no tiene un módulo propio; los enlaces repasan direccionamiento y SSH.</p></details>
@@ -1980,8 +1985,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/interfaces-ipv4.html">Configuración inicial · IP en interfaces</a>
-              <a href="configuracion-inicial/acceso-ssh.html">Configuración inicial · Acceso por SSH</a>
+              <a href="configuracion-inicial/interfaces-ipv4.html" data-help="Abre el módulo para asignar IP a las interfaces y activar los enlaces.">Configuración inicial · IP en interfaces</a>
+              <a href="configuracion-inicial/acceso-ssh.html" data-help="Abre el módulo para entrar al equipo de forma remota mediante SSH.">Configuración inicial · Acceso por SSH</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>La configuración de una SVI de administración todavía no tiene un módulo propio; los enlaces repasan direccionamiento y SSH.</p></details>
@@ -2004,8 +2009,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/interfaces-ipv4.html">Configuración inicial · IP en interfaces</a>
-              <a href="configuracion-inicial/acceso-ssh.html">Configuración inicial · Acceso por SSH</a>
+              <a href="configuracion-inicial/interfaces-ipv4.html" data-help="Abre el módulo para asignar IP a las interfaces y activar los enlaces.">Configuración inicial · IP en interfaces</a>
+              <a href="configuracion-inicial/acceso-ssh.html" data-help="Abre el módulo para entrar al equipo de forma remota mediante SSH.">Configuración inicial · Acceso por SSH</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>La configuración de una SVI de administración todavía no tiene un módulo propio; los enlaces repasan direccionamiento y SSH.</p></details>
@@ -2028,8 +2033,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/interfaces-ipv4.html">Configuración inicial · IP en interfaces</a>
-              <a href="configuracion-inicial/acceso-ssh.html">Configuración inicial · Acceso por SSH</a>
+              <a href="configuracion-inicial/interfaces-ipv4.html" data-help="Abre el módulo para asignar IP a las interfaces y activar los enlaces.">Configuración inicial · IP en interfaces</a>
+              <a href="configuracion-inicial/acceso-ssh.html" data-help="Abre el módulo para entrar al equipo de forma remota mediante SSH.">Configuración inicial · Acceso por SSH</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>La configuración de una SVI de administración todavía no tiene un módulo propio; los enlaces repasan direccionamiento y SSH.</p></details>
@@ -2054,8 +2059,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/interfaces-ipv4.html">Configuración inicial · IP en interfaces</a>
-              <a href="configuracion-inicial/acceso-ssh.html">Configuración inicial · Acceso por SSH</a>
+              <a href="configuracion-inicial/interfaces-ipv4.html" data-help="Abre el módulo para asignar IP a las interfaces y activar los enlaces.">Configuración inicial · IP en interfaces</a>
+              <a href="configuracion-inicial/acceso-ssh.html" data-help="Abre el módulo para entrar al equipo de forma remota mediante SSH.">Configuración inicial · Acceso por SSH</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>La configuración de una SVI de administración todavía no tiene un módulo propio; los enlaces repasan direccionamiento y SSH.</p></details>
@@ -2080,8 +2085,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/interfaces-ipv4.html">Configuración inicial · IP en interfaces</a>
-              <a href="configuracion-inicial/acceso-ssh.html">Configuración inicial · Acceso por SSH</a>
+              <a href="configuracion-inicial/interfaces-ipv4.html" data-help="Abre el módulo para asignar IP a las interfaces y activar los enlaces.">Configuración inicial · IP en interfaces</a>
+              <a href="configuracion-inicial/acceso-ssh.html" data-help="Abre el módulo para entrar al equipo de forma remota mediante SSH.">Configuración inicial · Acceso por SSH</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>La configuración de una SVI de administración todavía no tiene un módulo propio; los enlaces repasan direccionamiento y SSH.</p></details>
@@ -2128,7 +2133,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/ripv2.html">Routing · RIPv2</a>
+              <a href="routing/ripv2.html" data-help="Abre el módulo sobre intercambio de rutas entre routers mediante RIPv2.">Routing · RIPv2</a>
             </div>
           </div>
 
@@ -2156,7 +2161,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/ripv2.html">Routing · RIPv2</a>
+              <a href="routing/ripv2.html" data-help="Abre el módulo sobre intercambio de rutas entre routers mediante RIPv2.">Routing · RIPv2</a>
             </div>
           </div>
 
@@ -2201,7 +2206,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/ripv2.html">Routing · RIPv2</a>
+              <a href="routing/ripv2.html" data-help="Abre el módulo sobre intercambio de rutas entre routers mediante RIPv2.">Routing · RIPv2</a>
             </div>
           </div>
 
@@ -2229,7 +2234,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/ripv2.html">Routing · RIPv2</a>
+              <a href="routing/ripv2.html" data-help="Abre el módulo sobre intercambio de rutas entre routers mediante RIPv2.">Routing · RIPv2</a>
             </div>
           </div>
 
@@ -2257,7 +2262,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/ripv2.html">Routing · RIPv2</a>
+              <a href="routing/ripv2.html" data-help="Abre el módulo sobre intercambio de rutas entre routers mediante RIPv2.">Routing · RIPv2</a>
             </div>
           </div>
 
@@ -2284,7 +2289,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/ospf.html">Routing · OSPF</a>
+              <a href="routing/ospf.html" data-help="Abre el módulo sobre cómo los routers comparten rutas mediante OSPF.">Routing · OSPF</a>
             </div>
           </div>
 
@@ -2311,7 +2316,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/ospf.html">Routing · OSPF</a>
+              <a href="routing/ospf.html" data-help="Abre el módulo sobre cómo los routers comparten rutas mediante OSPF.">Routing · OSPF</a>
             </div>
           </div>
 
@@ -2355,7 +2360,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/ospf.html">Routing · OSPF</a>
+              <a href="routing/ospf.html" data-help="Abre el módulo sobre cómo los routers comparten rutas mediante OSPF.">Routing · OSPF</a>
             </div>
           </div>
 
@@ -2382,7 +2387,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/ospf.html">Routing · OSPF</a>
+              <a href="routing/ospf.html" data-help="Abre el módulo sobre cómo los routers comparten rutas mediante OSPF.">Routing · OSPF</a>
             </div>
           </div>
 
@@ -2409,7 +2414,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/ospf.html">Routing · OSPF</a>
+              <a href="routing/ospf.html" data-help="Abre el módulo sobre cómo los routers comparten rutas mediante OSPF.">Routing · OSPF</a>
             </div>
           </div>
 
@@ -2442,10 +2447,10 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="vlans/verificacion.html">VLANs · Verificación</a>
-              <a href="trunking/verificacion.html">Trunking · VLANs permitidas</a>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
+              <a href="vlans/verificacion.html" data-help="Abre el módulo para comprobar las VLANs y sus puertos.">VLANs · Verificación</a>
+              <a href="trunking/verificacion.html" data-help="Abre el módulo para elegir las VLANs permitidas y comprobar el trunk.">Trunking · VLANs permitidas</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
             </div>
           </div>
 
@@ -2466,8 +2471,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="etherchannel/trunk-verificacion.html">EtherChannel · Verificación</a>
-              <a href="spanning-tree/configuracion.html">Spanning Tree · Configuración</a>
+              <a href="etherchannel/trunk-verificacion.html" data-help="Abre el módulo para configurar el trunk del grupo y comprobar que funciona.">EtherChannel · Verificación</a>
+              <a href="spanning-tree/configuracion.html" data-help="Abre el módulo para configurar STP y proteger los puertos de acceso.">Spanning Tree · Configuración</a>
             </div>
           </div>
 
@@ -2485,8 +2490,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="redundancia-capa-3/index.html">Redundancia de capa 3 · En preparación</a>
-              <a href="routing/verificacion.html">Routing · Verificación</a>
+              <a href="redundancia-capa-3/hsrp-vlans.html" data-help="Abre el módulo para configurar HSRP por VLAN y repartir los roles entre dos routers.">Redundancia de capa 3 · HSRP por VLAN</a>
+              <a href="routing/verificacion.html" data-help="Abre el módulo para comprobar rutas y detectar problemas de comunicación.">Routing · Verificación</a>
             </div>
           </div>
 
@@ -2503,7 +2508,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/dhcp-vlan.html">Routing · DHCP por VLAN</a>
+              <a href="routing/dhcp-vlan.html" data-help="Abre el módulo para entregar IP automáticamente a los equipos de cada VLAN.">Routing · DHCP por VLAN</a>
             </div>
           </div>
 
@@ -2522,7 +2527,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/verificacion.html">Routing · Verificación</a>
+              <a href="routing/verificacion.html" data-help="Abre el módulo para comprobar rutas y detectar problemas de comunicación.">Routing · Verificación</a>
             </div>
           </div>
 
@@ -2539,8 +2544,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/acceso-ssh.html">Configuración inicial · Acceso por SSH</a>
-              <a href="configuracion-inicial/verificacion.html">Configuración inicial · Guardado</a>
+              <a href="configuracion-inicial/acceso-ssh.html" data-help="Abre el módulo para entrar al equipo de forma remota mediante SSH.">Configuración inicial · Acceso por SSH</a>
+              <a href="configuracion-inicial/verificacion.html" data-help="Abre el módulo para revisar y guardar la configuración del equipo.">Configuración inicial · Guardado</a>
             </div>
           </div>
 
@@ -2561,8 +2566,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/verificacion.html">Routing · Verificación</a>
-              <a href="configuracion-inicial/acceso-ssh.html">Configuración inicial · Acceso por SSH</a>
+              <a href="routing/verificacion.html" data-help="Abre el módulo para comprobar rutas y detectar problemas de comunicación.">Routing · Verificación</a>
+              <a href="configuracion-inicial/acceso-ssh.html" data-help="Abre el módulo para entrar al equipo de forma remota mediante SSH.">Configuración inicial · Acceso por SSH</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>En los demás PC sustituye el primer ping por su propio gateway. El resto comprueba conectividad con VLAN 30, el servidor DNS y la administración de SW2.</p></details>
@@ -2582,8 +2587,8 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="routing/ripv2.html">Routing · RIPv2</a>
-              <a href="routing/ospf.html">Routing · OSPF</a>
+              <a href="routing/ripv2.html" data-help="Abre el módulo sobre intercambio de rutas entre routers mediante RIPv2.">Routing · RIPv2</a>
+              <a href="routing/ospf.html" data-help="Abre el módulo sobre cómo los routers comparten rutas mediante OSPF.">Routing · OSPF</a>
             </div>
           </div>
 
@@ -2599,7 +2604,7 @@
             <p class="reference-copy-status" role="status" aria-live="polite"></p>
             <div class="reference-module-links" aria-label="Módulos relacionados">
               <span>Ver en la guía</span>
-              <a href="configuracion-inicial/verificacion.html">Configuración inicial · Guardado</a>
+              <a href="configuracion-inicial/verificacion.html" data-help="Abre el módulo para revisar y guardar la configuración del equipo.">Configuración inicial · Guardado</a>
             </div>
           </div>
           <details class="reference-note"><summary>Notas de este bloque</summary><p>Confirma el nombre de destino con Enter. En los PC y el servidor conserva los ajustes y guarda también el archivo .pkt del laboratorio.</p></details>
@@ -2617,6 +2622,6 @@
         </article>
       </main>
       <script src="../../assets/js/main.js"></script>
-      <script src="../../assets/js/learning.js?v=20261005-labdesktopfit"></script>
+      <script src="../../assets/js/learning.js?v=20261005-hsrp-fit"></script>
     </body>
   </html>
