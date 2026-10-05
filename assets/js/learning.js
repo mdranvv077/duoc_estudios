@@ -263,23 +263,119 @@ function setLabTopologyView(button) {
   });
 }
 
+let labExpansion = null;
+
+function restoreLabTopology() {
+  const state = labExpansion;
+  if (!state) return;
+  state.animation?.cancel();
+  state.placeholder.replaceWith(state.figure);
+  state.figure.classList.remove("is-expanded");
+  state.button.textContent = "Ampliar plano";
+  state.button.setAttribute("aria-expanded", "false");
+  state.overlay.remove();
+  document.body.style.overflow = state.overflow;
+  labExpansion = null;
+  state.button.focus({ preventScroll: true });
+}
+
+async function closeLabTopology() {
+  const state = labExpansion;
+  if (!state || state.closing) return;
+  state.closing = true;
+  state.animation?.cancel();
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    state.overlay.classList.add("is-closing");
+    state.animation = state.figure.animate([
+      { transform: "scale(1)", opacity: 1 },
+      { transform: "scale(.94)", opacity: 0 },
+    ], { duration: 240, easing: "ease-in", fill: "forwards" });
+    await state.animation.finished.catch(() => {});
+  }
+  if (labExpansion !== state) return;
+  if (document.fullscreenElement === state.overlay) {
+    try { await document.exitFullscreen(); } catch { /* Restore the page even if fullscreen has already ended. */ }
+  }
+  restoreLabTopology();
+}
+
 async function expandLabTopology(button) {
+  if (labExpansion) { await closeLabTopology(); return; }
   const figure = button.closest(".lab-topology");
   const status = figure?.querySelector(".lab-topology-status");
   if (!figure || !status) return;
-  try {
-    if (document.fullscreenElement === figure) await document.exitFullscreen();
-    else await figure.requestFullscreen();
-    status.textContent = "";
-  } catch {
-    status.textContent = "Usa los botones de zona para ampliar los detalles en este navegador.";
+  const origin = figure.getBoundingClientRect();
+  const placeholder = document.createElement("div");
+  placeholder.style.height = `${origin.height}px`;
+  placeholder.style.margin = getComputedStyle(figure).margin;
+  const overlay = document.createElement("div");
+  overlay.className = "lab-topology-overlay command-reference";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "Topología ampliada");
+  const backdrop = document.createElement("div");
+  backdrop.className = "lab-topology-backdrop";
+  backdrop.setAttribute("aria-hidden", "true");
+  backdrop.inert = true;
+  const page = document.createElement("div");
+  page.className = "lab-backdrop-page";
+  page.style.width = `${innerWidth}px`;
+  page.style.top = `${-scrollY}px`;
+  for (const child of document.body.children) {
+    if (child.tagName === "SCRIPT") continue;
+    const copy = child.cloneNode(true);
+    copy.removeAttribute("id");
+    copy.querySelectorAll("[id], script").forEach((item) => {
+      if (item.tagName === "SCRIPT") item.remove();
+      else item.removeAttribute("id");
+    });
+    [copy, ...copy.querySelectorAll("*")].forEach((item) => {
+      for (const attribute of [...item.attributes]) {
+        if (attribute.name.startsWith("data-")) item.removeAttribute(attribute.name);
+      }
+    });
+    page.append(copy);
   }
+  backdrop.append(page);
+  figure.replaceWith(placeholder);
+  figure.classList.add("is-expanded");
+  overlay.append(backdrop, figure);
+  document.body.append(overlay);
+  labExpansion = { figure, button, overlay, placeholder, overflow: document.body.style.overflow, animation: null, closing: false };
+  document.body.style.overflow = "hidden";
+  button.textContent = "Cerrar ampliación";
+  button.setAttribute("aria-expanded", "true");
+  status.textContent = "";
+  // Request immediately from the click, before waiting, to preserve browser permission.
+  try { await overlay.requestFullscreen({ navigationUI: "hide" }); }
+  catch { status.textContent = "Este navegador no permite ocultar sus barras. El plano sigue ampliado; pulsa Esc para cerrar."; }
+  if (labExpansion?.overlay !== overlay) return;
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const target = figure.getBoundingClientRect();
+    const dx = origin.left + origin.width / 2 - target.left - target.width / 2;
+    const dy = origin.top + origin.height / 2 - target.top - target.height / 2;
+    labExpansion.animation = figure.animate([
+      { transform: `translate(${dx}px, ${dy}px) scale(${origin.width / target.width}, ${origin.height / target.height})`, opacity: .45 },
+      { transform: "translate(0, 0) scale(1)", opacity: 1 },
+    ], { duration: 460, easing: "cubic-bezier(.2,.75,.2,1)" });
+  }
+  button.focus({ preventScroll: true });
+  overlay.addEventListener("click", (event) => { if (event.target === overlay || backdrop.contains(event.target)) closeLabTopology(); });
 }
 
 document.addEventListener("fullscreenchange", () => {
-  document.querySelectorAll("[data-lab-fullscreen]").forEach((button) => {
-    button.textContent = document.fullscreenElement === button.closest(".lab-topology") ? "Cerrar ampliación" : "Ampliar plano";
-  });
+  if (labExpansion && !document.fullscreenElement) restoreLabTopology();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (!labExpansion) return;
+  if (event.key === "Escape") { event.preventDefault(); closeLabTopology(); }
+  if (event.key === "Tab") {
+    const controls = [...labExpansion.figure.querySelectorAll("button, [tabindex='0']")];
+    const first = controls[0], last = controls.at(-1);
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+  }
 });
 
 document.addEventListener("click", (event) => {
