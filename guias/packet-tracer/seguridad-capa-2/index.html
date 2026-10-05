@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Módulo independiente en preparación de Packet Tracer." />
+    <meta name="description" content="Introducción a la seguridad de capa 2: proteger los puertos del switch y preparar las próximas prácticas de la LAN." />
     <title>Seguridad de capa 2 — Packet Tracer</title>
     <link rel="icon" type="image/png" href="../../../img/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,10 +30,32 @@
         <a class="sidebar-back" href="../index.html">← Ver categorías</a>
       </aside>
       <article class="lesson-content">
-        <p class="eyebrow"><span></span> Plantilla de módulo</p>
-        <h1>Seguridad de capa 2.</h1>
-        <p class="lesson-lead">Este módulo está habilitado para preparar su contenido más adelante.</p>
-        <div class="lesson-note"><strong>En preparación.</strong> Todavía no contiene explicaciones, ejercicios ni comandos.</div>
+        <p class="eyebrow"><span></span> Módulo 01 · Introducción</p>
+        <h1>Antes de proteger <em>la LAN.</em></h1>
+        <p class="lesson-lead">Una red no solo debe comunicar equipos: también hay que decidir qué conexiones se permiten y qué hacer cuando aparece algo que no corresponde.</p>
+
+        <h2>La idea: no dejar cualquier puerta abierta</h2>
+        <p>Imagina un switch con un PC conectado y varios puertos libres. Que un puerto no tenga cable ahora no significa que esté desactivado: alguien podría conectar otro equipo. La seguridad de capa 2 empieza por revisar esas entradas y preparar los puertos según su función.</p>
+        <p>No se trata de apagar todo. Se trata de distinguir <strong>qué debe funcionar, qué no se utiliza y qué comportamiento esperamos</strong>. Un puerto para un PC no cumple el mismo papel que un trunk hacia otro switch.</p>
+
+        <div class="lesson-note" style="margin-bottom: 24px;"><strong>No es lo mismo que poner contraseñas.</strong> SSH y las claves protegen el acceso a la administración del dispositivo. Aquí nos enfocaremos en sus puertos y en el tráfico de la LAN. Ambas protecciones se complementan.</div>
+
+        <h2>Qué iremos aprendiendo</h2>
+        <ul>
+          <li><strong>Puertos sin uso:</strong> identificarlos, desactivarlos y mantenerlos separados de las VLANs de usuarios.</li>
+          <li><strong>Puertos de acceso y trunks:</strong> dejar explícita su función y limitar las VLANs que necesitan transportar.</li>
+          <li><strong>Port Security:</strong> controlar las MAC permitidas en un puerto y entender qué ocurre ante una infracción. Una MAC no demuestra por sí sola la identidad de una persona.</li>
+          <li><strong>Protección de STP:</strong> entender dónde aplicar BPDU Guard para detectar BPDUs inesperadas en puertos destinados a equipos finales.</li>
+          <li><strong>Verificación y recuperación:</strong> comprobar las protecciones y recuperar un puerto después de corregir la causa del bloqueo.</li>
+        </ul>
+        <p>Más adelante podremos ampliar la categoría con DHCP Snooping y otras protecciones, según lo que admita el equipo de Packet Tracer. Por ahora, este módulo solo presenta el enfoque; los comandos y las pruebas se desarrollarán en los siguientes.</p>
+
+        <h2>Primero conocer el puerto; después protegerlo</h2>
+        <p>Antes de aplicar cambios, identifica el equipo conectado, la VLAN y si el enlace es access, trunk o parte de un EtherChannel. Desactivar un puerto equivocado puede cortar una conexión necesaria. Tampoco aplicaremos una misma protección a todos los enlaces sin revisar su propósito.</p>
+        <p>Para continuar, conviene repasar <a href="../vlans/puertos-access.html">puertos access</a>, <a href="../trunking/trunk-estatico.html">trunks</a> y <a href="../spanning-tree/index.html">Spanning Tree</a>. Las próximas prácticas partirán de una LAN pequeña que ya funcione: primero la observaremos, luego aplicaremos una medida y finalmente comprobaremos su resultado.</p>
+        <p>Referencia técnica: <a href="https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html" target="_blank" rel="noopener">Cisco · Protecciones de capa 2</a>.</p>
+        <div class="lesson-note"><strong>La categoría continuará.</strong> Este es su primer módulo. Los siguientes se irán incorporando con configuraciones y ejercicios; no hay todavía una práctica completa de seguridad para copiar.</div>
+        <div class="lesson-actions"><a href="../index.html">← Ver categorías de Packet Tracer</a><a href="proximamente.html">Más contenido pronto →</a></div>
         <footer class="container">
           <p>DGNV Studios <small>— aprende construyendo.</small></p>
           <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
@@ -42,6 +64,6 @@
       </article>
     </main>
     <script src="../../../assets/js/main.js"></script>
-    <script src="../../../assets/js/learning.js?v=20261005-hsrp-fit"></script>
+    <script src="../../../assets/js/learning.js?v=20261005-l2-soon"></script>
   </body>
 </html>

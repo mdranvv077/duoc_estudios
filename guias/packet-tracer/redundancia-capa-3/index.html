@@ -60,11 +60,12 @@
 <tr><td>En espera / respaldo</td><td><code>Standby</code></td><td>Está listo para asumir la gateway si falla el Active; sigue intercambiando Hellos.</td></tr>
 <tr><td>Activo</td><td><code>Active</code></td><td>Lleva el mando y reenvía el tráfico enviado a la gateway virtual del grupo.</td></tr>
 </tbody></table></div>
-<div class="lesson-note"><strong>No es una escalera obligatoria.</strong> Los estados no son pasos que todos deban recorrer completos y en ese orden. Tras la elección, uno queda Active y otro Standby; no tienen que pasar ambos por Standby antes de ser Active. Si hubiera más participantes, los restantes pueden quedarse en Listen.</div>
+<div class="lesson-note" style="margin-bottom: 24px;"><strong>No es una escalera obligatoria.</strong> Los estados no son pasos que todos deban recorrer completos y en ese orden. Tras la elección, uno queda Active y otro Standby; no tienen que pasar ambos por Standby antes de ser Active. Si hubiera más participantes, los restantes pueden quedarse en Listen.</div>
 <p>En nuestro laboratorio, R2 queda <code>Standby</code>; cuando R1 falla, pasa a <code>Active</code>. Al regresar R1 con mayor prioridad y preempt, R1 recupera el mando y R2 vuelve a <code>Standby</code>. Puedes consultar el estado actual con <code>show standby brief</code>.</p>
 <p>Los estados pertenecen a HSRP, no a Spanning Tree ni a EtherChannel. Consulta técnica: <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html" target="_blank" rel="noopener">Cisco · Estados y mensajes de HSRP</a>.</p>
 <h2>Qué protege y qué no</h2>
 <p>Este laboratorio protege la gateway frente a la caída de uno de los routers o de su enlace a SW1. <strong>SW1 sigue siendo un punto único de falla</strong>: si cae, ambos routers quedan separados del PC. Tampoco aparecen rutas hacia Internet por activar HSRP; cada router necesita sus rutas y una salida funcional.</p>
+<p>Servicios como DHCP necesitan su propio respaldo: HSRP no los copia al router Standby. En el <a href="verificacion.html#servicios">módulo 4 veremos qué ocurre con esos servicios</a> y qué hay que preparar para mantenerlos disponibles.</p>
 <div class="lesson-note"><strong>No es LACP.</strong> El Active de HSRP es el router que atiende la gateway; el modo active de LACP inicia una negociación de EtherChannel. La palabra se parece, pero cumple otra función.</div>
 <h2>Antes de practicar</h2>
 <p>Necesitas manejar IP, máscara y gateway. Para el módulo con VLAN, repasa <a href="../vlans/puertos-access.html">puertos access</a>, <a href="../trunking/trunk-estatico.html">trunks</a> y <a href="../routing/inter-vlan.html">Router-on-a-Stick</a>. Usaremos dos routers 2911, un switch 2960 y un PC; después añadiremos otro PC para una segunda VLAN.</p>
@@ -72,5 +73,5 @@
 <div class="lesson-actions"><a href="../index.html">← Ver categorías</a><a href="hsrp-basico.html">Siguiente: HSRP sin VLAN →</a></div>
 <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
 </article></main>
-<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261005-hsrp-fit"></script>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261005-l2-soon"></script>
 </body></html>

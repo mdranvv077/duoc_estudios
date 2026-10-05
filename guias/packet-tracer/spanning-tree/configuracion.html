@@ -187,11 +187,91 @@
           </p>
         </figure>
 
+        <h2>Qué vamos a hacer con esta topología</h2>
         <p>
-          En los módulos anteriores viste cómo se realiza la elección. Ahora
-          aplicarás ese conocimiento primero con una prioridad manual y luego
-          con las opciones <code>root primary</code> y
-          <code>root secondary</code>.
+          Vamos a elegir los switches superiores como raíces de STP, en lugar
+          de dejar esa decisión al valor predeterminado y a sus direcciones MAC.
+          Como usaremos PVST+, cada VLAN tiene su propia elección: no habrá un
+          único Root Switch para todas las VLANs.
+        </p>
+        <ul>
+          <li>
+            <strong>SW1:</strong> será el root principal de las VLANs
+            <strong>10 y 20</strong>, y el root secundario de las VLANs 30 y 40.
+          </li>
+          <li>
+            <strong>SW2:</strong> será el root principal de las VLANs
+            <strong>30 y 40</strong>, y el root secundario de las VLANs 10 y 20.
+          </li>
+          <li>
+            <strong>SW3 y SW4:</strong> seguirán siendo switches de acceso.
+            Mantendremos su prioridad predeterminada, sin asignarles
+            <code>root primary</code> ni <code>root secondary</code>.
+          </li>
+        </ul>
+        <p>
+          Así, si SW1 deja de estar disponible, SW2 queda preparado para ser
+          root de las VLANs 10 y 20; si falla SW2, SW1 queda preparado para las
+          VLANs 30 y 40. Esto supone que el respaldo siga conectado a los
+          switches que participan en esas VLANs.
+        </p>
+        <div class="lesson-note" style="margin-bottom: 24px;">
+          <strong>Los switches inferiores también participan.</strong> No
+          cambiarles la prioridad no significa desactivar STP ni dejarlos sin
+          configurar. SW3 y SW4 calculan sus caminos hacia el root y sus puertos
+          pueden reenviar o bloquear tráfico según corresponda. También deben
+          tener sus VLANs, puertos access, trunks y el modo STP de la práctica.
+        </div>
+        <p>
+          Primero estableceremos el modo PVST en los cuatro switches. Después
+          veremos cómo influye una prioridad manual y cómo preparar los roots
+          principales y secundarios con los comandos de SW1 y SW2. Finalmente
+          revisaremos la elección y los puertos. La prioridad manual es una
+          alternativa para entender el mecanismo, no un paso obligatorio que
+          debas sumar a <code>root primary</code> y <code>root secondary</code>.
+        </p>
+
+        <h2>Por qué elegimos los switches de arriba como roots</h2>
+        <p>
+          En este ejemplo, SW1 y SW2 cumplen el papel de distribución: enlazan
+          los switches de acceso, SW3 y SW4. Queremos que la referencia de STP
+          esté en esa parte de la red y no dependa de cuál switch tenga la MAC
+          más baja. Así podemos planificar los caminos y el respaldo. No es por
+          estar dibujados arriba: importa su función y sus conexiones.
+        </p>
+        <p>
+          Al repartir las VLANs entre SW1 y SW2, cada uno sirve como referencia
+          para un grupo de VLANs. Esto permite orientar sus caminos de forma
+          distinta; no significa que cada trama deba pasar por el root ni que
+          el reparto garantice la misma cantidad de tráfico en ambos switches.
+        </p>
+
+        <h3>Las BPDU coordinan; STP evita que las tramas den vueltas</h3>
+        <p>
+          Los mensajes que recuerdas son las <strong>BPDU</strong>:
+          <em>Bridge Protocol Data Unit</em>. Comunican información sobre el
+          root y los caminos hacia él. Con esa información, los switches
+          eligen una raíz y determinan los roles de sus puertos. Las BPDU
+          siguen intercambiándose para mantener y actualizar la topología.
+        </p>
+        <p>
+          El bucle peligroso no es una pregunta infinita de “¿quién es el
+          root?”. Es que las <strong>tramas de datos</strong>, por ejemplo un
+          broadcast, puedan circular y multiplicarse por el cuadrado sin parar.
+          STP deja un camino redundante bloqueado para esa VLAN y rompe el
+          círculo, conservándolo como posible respaldo.
+        </p>
+        <div class="lesson-note" style="margin-bottom: 24px;">
+          <strong>Elegir el root organiza; bloquear el camino evita el bucle.</strong>
+          STP también puede evitar bucles con una raíz elegida automáticamente.
+          Configurar SW1 y SW2 nos permite controlar dónde queda esa referencia;
+          no es la configuración manual del root, por sí sola, la que elimina
+          el bucle.
+        </div>
+        <p>
+          Repaso: <a href="eleccion.html">BPDU, BID y elección del root</a>.
+          Referencia técnica:
+          <a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/stp/stp-configuration-guide/m-stp.html" target="_blank" rel="noopener">Cisco · STP y ubicación del root</a>.
         </p>
 
         <h2>Activar PVST y revisar una VLAN</h2>
@@ -291,20 +371,36 @@
 
         <h2>Comprobar el resultado</h2>
         <p>
-          Revisa una VLAN a la vez. Confirma que aparezca el Root Switch que
-          elegiste y busca el Root Port de los demás switches. Si hay caminos de
-          respaldo, es normal que uno de los puertos no reenvíe tráfico: STP lo
-          mantiene preparado para evitar el bucle.
+          Ejecuta estos comandos desde el modo privilegiado (<code>#</code>);
+          usa <code>end</code> si aún estás configurando. Los comandos
+          <code>show</code> solo muestran información, no cambian la configuración.
+          Revisa cada VLAN en el switch indicado.
         </p>
         <pre
           class="cli-block"
           aria-label="Verificar Spanning Tree por VLAN"
-        ><code><span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree summary</span><span class="cli-comment"> # resume el modo STP y sus instancias activas</span>
-<span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 10</span><span class="cli-comment"> # verifica el Root Switch y los puertos de la VLAN 10</span>
-<span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 20</span><span class="cli-comment"> # repite la comprobación para la VLAN 20</span>
-<span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 30</span><span class="cli-comment"> # verifica el Root Switch y los puertos de la VLAN 30</span>
-<span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 40</span><span class="cli-comment"> # repite la comprobación para la VLAN 40</span>
-<span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree interface fastEthernet 0/10 detail</span><span class="cli-comment"> # revisa STP, PortFast y BPDU Guard en el puerto de acceso</span></code></pre>
+        ><code><span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree summary</span><span class="cli-comment"> # muestra el modo STP y un resumen de los puertos</span>
+<span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 10</span><span class="cli-comment"> # comprueba que SW1 sea el root de VLAN 10</span>
+<span class="cli-prompt">SW1#</span> <span class="cli-command">show spanning-tree vlan 20</span><span class="cli-comment"> # comprueba que SW1 sea el root de VLAN 20</span>
+<span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 30</span><span class="cli-comment"> # comprueba que SW2 sea el root de VLAN 30</span>
+<span class="cli-prompt">SW2#</span> <span class="cli-command">show spanning-tree vlan 40</span><span class="cli-comment"> # comprueba que SW2 sea el root de VLAN 40</span>
+<span class="cli-prompt">SW3#</span> <span class="cli-command">show spanning-tree vlan 10</span><span class="cli-comment"> # muestra el camino de SW3 hacia el root</span>
+<span class="cli-prompt">SW3#</span> <span class="cli-command">show spanning-tree interface fastEthernet 0/10 detail</span><span class="cli-comment"> # revisa STP y PortFast en el puerto del PC</span>
+<span class="cli-prompt">SW3#</span> <span class="cli-command">show running-config</span><span class="cli-comment"> # busca el puerto del PC y comprueba sus protecciones</span></code></pre>
+        <p>
+          Busca <strong>Root ID</strong> para identificar la raíz y
+          <strong>Bridge ID</strong> para identificar el switch consultado.
+          Si aparece <code>This bridge is the root</code>, ese equipo es la raíz.
+          En los demás, el puerto <code>Root</code> indica el camino hacia ella;
+          <code>FWD</code> reenvía tráfico y <code>BLK</code> lo bloquea.
+        </p>
+        <div class="lesson-note" style="margin-bottom: 24px;">
+          <strong>Qué esperamos:</strong> SW1 será root de VLAN 10 y 20;
+          SW2, de 30 y 40. Un puerto bloqueado puede ser el respaldo que evita
+          el bucle, no una falla. Para revisar el PC, sustituye
+          <code>Fa0/10</code> por su puerto real y busca PortFast y BPDU Guard
+          en su configuración.
+        </div>
         <div class="lesson-actions">
           <a href="puertos-estados.html">← Puertos, estados y tiempos</a
           ><a href="../index.html">Volver a categorías →</a>
@@ -320,6 +416,6 @@
       </article>
     </main>
     <script src="../../../assets/js/main.js"></script>
-    <script src="../../../assets/js/learning.js?v=20261005-hsrp-fit"></script>
+    <script src="../../../assets/js/learning.js?v=20261005-l2-soon"></script>
   </body>
 </html>

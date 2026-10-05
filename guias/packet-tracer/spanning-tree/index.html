@@ -162,6 +162,45 @@
           </p>
         </figure>
 
+        <h2>¿Y qué cambia si usamos EtherChannel?</h2>
+        <p>
+          <strong>STP evita bucles; EtherChannel agrupa enlaces.</strong> No son
+          alternativas. Si conectas dos switches con dos cables independientes,
+          STP puede bloquear uno de los caminos para evitar un bucle. Si preparas
+          correctamente esos cables como un EtherChannel, los switches los
+          presentan como un único enlace lógico llamado <strong>Port-channel</strong>.
+        </p>
+        <p>
+          STP ve ese Port-channel como un solo puerto, no como dos caminos
+          independientes. Así, los enlaces miembros pueden trabajar juntos y
+          repartir tráfico sin que STP bloquee uno solamente por estar en
+          paralelo con el otro. Si un miembro falla, el canal puede seguir
+          funcionando con los restantes.
+        </p>
+        <div class="lesson-note" style="margin-bottom: 24px;">
+          <strong>EtherChannel no elimina la necesidad de STP.</strong> Si los
+          enlaces lógicos siguen formando un círculo, como el triángulo del
+          ejemplo, STP debe cortar ese bucle. Puede bloquear el Port-channel
+          completo para una VLAN, en lugar de elegir un cable dentro del grupo.
+          Agrupar cables no garantiza que toda la topología quede libre de bucles.
+        </div>
+        <p>
+          Siguiendo la idea de las carreteras: EtherChannel reúne varios carriles
+          en una misma vía; STP decide qué vías pueden quedar abiertas sin formar
+          un circuito. La configuración del grupo y sus protocolos se ven en la
+          categoría 6.
+        </p>
+        <div class="assumed-topic-shortcuts">
+          <p>Continúa con:</p>
+          <div class="assumed-topic-links">
+            <a class="topic-link" href="../etherchannel/index.html" data-help="Entiende cómo varios cables forman un Port-channel y cómo se complementa con STP.">EtherChannel · Fundamentos →</a>
+          </div>
+        </div>
+        <p>
+          Referencia técnica:
+          <a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html" target="_blank" rel="noopener">Cisco · EtherChannel y Spanning Tree</a>.
+        </p>
+
         <h2>Conceptos que debes reconocer</h2>
         <ul>
           <li>
@@ -233,6 +272,6 @@
       </article>
     </main>
     <script src="../../../assets/js/main.js"></script>
-    <script src="../../../assets/js/learning.js?v=20261005-hsrp-fit"></script>
+    <script src="../../../assets/js/learning.js?v=20261005-l2-soon"></script>
   </body>
 </html>

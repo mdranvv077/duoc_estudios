@@ -15,7 +15,10 @@ const guideData = {
   layer2security: {
     folder: "seguridad-capa-2",
     label: "Seguridad de capa 2",
-    sections: [["index.html", "Seguridad de capa 2"]],
+    sections: [
+      ["index.html", "Introducción a la seguridad"],
+      ["proximamente.html", "Más contenido pronto"],
+    ],
   },
   initial: {
     folder: "configuracion-inicial",
