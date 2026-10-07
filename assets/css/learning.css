@@ -224,8 +224,8 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .reference-directory > summary { padding: 17px 18px; color: var(--text); cursor: pointer; font-size: .85rem; font-weight: 700; }
 .reference-directory > summary::marker, .reference-note > summary::marker { color: var(--cyan); }
 .reference-directory > summary > span { margin-left: 10px; color: var(--muted); font: .65rem "DM Mono", monospace; white-space: nowrap; }
-.reference-index { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: 0; padding: 0 10px 10px; }
-.reference-index a { display: flex; align-items: baseline; gap: 10px; padding: 12px 10px; border: 1px solid transparent; color: var(--muted); font-size: .78rem; text-decoration: none; }
+.reference-index { display: block; column-count: 2; column-gap: 1px; margin: 0; padding: 0 10px 10px; }
+.reference-index a { display: flex; break-inside: avoid; align-items: baseline; gap: 10px; padding: 12px 10px; border: 1px solid transparent; color: var(--muted); font-size: .78rem; text-decoration: none; }
 .reference-index a > span { color: var(--cyan); font: .65rem "DM Mono", monospace; }
 .reference-index a:hover, .reference-index a:focus-visible { border-color: var(--line); color: var(--text); background: rgba(46, 234, 255, .035); }
 .reference-help { position: fixed; z-index: 60; width: max-content; max-width: min(240px, calc(100vw - 24px)); padding: 8px 10px; color: #c7d1dd; border: 1px solid rgba(46, 234, 255, .24); background: rgba(7, 12, 18, .98); box-shadow: 0 8px 24px rgba(0, 0, 0, .28); font: .61rem/1.5 "DM Mono", monospace; text-align: center; white-space: normal; pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity .18s ease, transform .18s ease; }
@@ -314,7 +314,7 @@ a.sidebar-category:hover { color: var(--text); background: rgba(46, 234, 255, .0
 .command-reference .reference-note p { margin: 6px 0 12px; font-size: .83rem; line-height: 1.75; }
 @media (max-width: 600px) {
   .reference-terminal-label > span { display: none; }
-  .reference-index { grid-template-columns: 1fr; }
+  .reference-index { column-count: 1; }
   .reference-directory > summary > span { display: block; margin: 7px 0 0 18px; }
 }
 .reference-table { max-width: 100%; overflow-x: auto; margin: 22px 0; }
