@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261006-sequences" />
+<title>Pertenencia y búsqueda con while — Sucesiones · Nivelación matemática</title>
+<meta name="description" content="Buscar pertenencia significa encontrar una posición entera válida. El while del formulario funciona solo cuando su condición de parada tiene sentido." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de sucesiones</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Sucesiones y listas</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de sucesiones"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 05</p>
+<h1>¿Aparece ese valor <em>en la sucesión?</em></h1>
+<p class="lesson-lead">Buscar pertenencia significa encontrar una posición entera válida. El while del formulario funciona solo cuando su condición de parada tiene sentido.</p>
+
+<h2>Ahora conocemos el valor, no la posición</h2>
+<p>En el problema 2 queremos saber si 54870 pertenece a <code>aₙ = n³ − 2</code>. No estamos pidiendo a₅₄₈₇₀. Buscamos una posición n para la que <code>n³ − 2 = 54870</code>.</p>
+<p>Esta sucesión es estrictamente creciente para las posiciones n ≥ 1 y sigue creciendo sin cota superior. Podemos avanzar mientras el término sea menor que el objetivo. Al terminar, lo habremos alcanzado o superado.</p>
+<h2>Adaptar la segunda plantilla</h2>
+<p>Mantenemos <code>dif = final - termino</code> del formulario, pero comenzamos evaluando el primer término real. Así no confundimos el valor inicial cero con un término ni omitimos el primer término negativo.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Buscar 54870</span><button type="button" data-math-copy aria-controls="sequence-code-9" aria-label="Copiar Buscar 54870" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-9">final = <span class="py-number">54870</span>
+n = <span class="py-number">1</span>
+termino = n**<span class="py-number">3</span> - <span class="py-number">2</span>
+dif = final - termino
+
+<span class="py-keyword">while</span> dif > <span class="py-number">0</span>:
+    n += <span class="py-number">1</span>
+    termino = n**<span class="py-number">3</span> - <span class="py-number">2</span>
+    dif = final - termino
+
+<span class="py-keyword">if</span> dif == <span class="py-number">0</span>:
+    <span class="py-builtin">print</span>(<span class="py-string">f'El {final} es un término y ocupa el lugar {n}'</span>)
+<span class="py-keyword">else</span>:
+    <span class="py-builtin">print</span>(<span class="py-string">f'El {final} no pertenece a la sucesión'</span>)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>El 54870 es un término y ocupa el lugar 38</code></pre></div>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Valor de dif</th><th scope="col">Interpretación</th><th scope="col">Acción</th></tr></thead><tbody><tr><td data-label="Valor de dif">Mayor que 0</td><td data-label="Interpretación">El término todavía es menor que el objetivo.</td><td data-label="Acción">Avanzar a la siguiente posición.</td></tr><tr><td data-label="Valor de dif">Igual a 0</td><td data-label="Interpretación">El término coincide con el objetivo.</td><td data-label="Acción">Informar que pertenece y dar n.</td></tr><tr><td data-label="Valor de dif">Menor que 0</td><td data-label="Interpretación">Ya se superó el objetivo.</td><td data-label="Acción">En una sucesión creciente, los siguientes no volverán a él.</td></tr></tbody></table></div>
+<p>Por ejemplo, a₃₇ = 50651 y a₃₈ = 54870. La diferencia llega a cero en n = 38. Si cambias el objetivo a 54871, el siguiente término es 59317: lo supera y podemos concluir que 54871 no pertenece.</p>
+<div class="lesson-note"><strong>Actualizar es obligatorio.</strong> Dentro del while deben cambiar n, termino y dif. Si olvidas actualizar la condición, puedes dejar un ciclo infinito. En Colab puedes detener una celda con el botón de interrupción.</div>
+<h2>Por qué no sirve para cualquier regla</h2>
+<p><code>bₙ = (8 − n)²</code> comienza 49, 36, 25, 16, 9, 4, 1, 0 y después vuelve a crecer. Si buscas 9 con el criterio «parar cuando se supera», el primer término 49 ya lo supera y se podría rechazar incorrectamente. Sin embargo, b₅ = 9 y b₁₁ = 9.</p>
+<p>El problema 4 busca 290. El código del archivo llega a un «no» correcto para ese objetivo, pero eso no vuelve general el procedimiento. Hay que entender la forma de la sucesión antes de reutilizarlo.</p>
+<h2>Una búsqueda acotada para reglas no monótonas</h2>
+<p>Para buscar sin asumir crecimiento, definiremos un intervalo: las posiciones 1 a 30. Evaluamos todas y guardamos las coincidencias. Es una adaptación del while, con un límite que garantiza que termina.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Buscar todas las posiciones de 9</span><button type="button" data-math-copy aria-controls="sequence-code-10" aria-label="Copiar Buscar todas las posiciones de 9" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-10">final = <span class="py-number">9</span>
+limite = <span class="py-number">30</span>
+n = <span class="py-number">0</span>
+posiciones = []
+
+<span class="py-keyword">while</span> n < limite:
+    n += <span class="py-number">1</span>
+    termino = (<span class="py-number">8</span> - n)**<span class="py-number">2</span>
+    <span class="py-keyword">if</span> termino == final:
+        posiciones.<span class="py-builtin">append</span>(n)
+
+<span class="py-keyword">if</span> <span class="py-builtin">len</span>(posiciones) > <span class="py-number">0</span>:
+    <span class="py-builtin">print</span>(<span class="py-string">f'El {final} aparece en las posiciones {posiciones}'</span>)
+<span class="py-keyword">else</span>:
+    <span class="py-builtin">print</span>(<span class="py-string">f'El {final} no aparece entre 1 y {limite}'</span>)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>El 9 aparece en las posiciones [5, 11]</code></pre></div>
+<p>El límite 30 es una decisión de esta búsqueda. Si no encontramos un valor, solo sabemos que no apareció en esas treinta posiciones. No podemos convertir esa ausencia en «no pertenece nunca» sin una justificación matemática adicional.</p>
+<h2>Justificar el caso 290</h2>
+<p>Como 8 − n es entero, su cuadrado debe ser un cuadrado perfecto no negativo. Tenemos <code>17² = 289 &lt; 290 &lt; 324 = 18²</code>. Por tanto, 290 no es un cuadrado de un entero y no pertenece a bₙ. Esa explicación sí cubre toda la sucesión.</p>
+<h2>Enteros y decimales</h2>
+<p>En estos problemas comparamos valores enteros calculados con potencias enteras, por lo que <code>==</code> es adecuado. Con otros decimales puede haber pequeños errores de representación. Una comparación con tolerancia puede servir para aproximaciones, pero no convierte una coincidencia aproximada en pertenencia matemática exacta.</p>
+<h2>For o while en este episodio</h2>
+<p>For con range es cómodo cuando ya sabemos cuántas posiciones recorrer. While repite mientras una condición siga siendo verdadera: no conoce automáticamente cuándo conviene parar. Hay que diseñar esa condición y comprobar sus límites.</p>
+<div class="lesson-actions"><a href="geometricas.html">← Sucesiones geométricas</a><a href="practica.html">Siguiente: Taller inicial y de nivel medio →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261006-sequences"></script>
+</body></html>

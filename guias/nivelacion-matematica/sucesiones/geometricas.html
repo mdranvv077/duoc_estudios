@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261006-sequences" />
+<title>Sucesiones geométricas — Sucesiones · Nivelación matemática</title>
+<meta name="description" content="En una sucesión geométrica multiplicamos por un mismo factor. No es lo mismo aumentar una cantidad fija que aumentar un porcentaje fijo." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de sucesiones</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Sucesiones y listas</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de sucesiones"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 04</p>
+<h1>La misma razón <em>en cada paso.</em></h1>
+<p class="lesson-lead">En una sucesión geométrica multiplicamos por un mismo factor. No es lo mismo aumentar una cantidad fija que aumentar un porcentaje fijo.</p>
+
+<h2>De sumar a multiplicar</h2>
+<p>En <code>3, 6, 12, 24, …</code>, cada término duplica el anterior. La razón es r = 2. Para reconocerla dividimos términos consecutivos cuando el anterior no es cero: 6 / 3 = 2, 12 / 6 = 2 y 24 / 12 = 2.</p>
+<p>Piensa en una cantidad de datos que se duplica en cada etapa. Sumar 3 en cada etapa produciría 3, 6, 9, 12. Multiplicar por 2 produce 3, 6, 12, 24. Los primeros dos valores coinciden, pero las reglas son distintas.</p>
+<div class="math-definition"><small>Término general geométrico</small><strong>aₙ = a₁ · rⁿ⁻¹</strong></div>
+<p>Desde el primer término hasta la posición n hay n − 1 multiplicaciones. En n = 1, el exponente es cero y, con una razón no nula, r⁰ = 1: recuperamos a₁.</p>
+<h2>El ejemplo creciente de la actividad</h2>
+<p>El problema 7 propone <code>1, 1.5, 2.25, 3.375, 5.0625, …</code>. El primer término es 1 y la razón es 1.5. Multiplicar por 1.5 equivale a aumentar el valor anterior un 50 %, no a sumar 1.5.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Razón 1.5</span><button type="button" data-math-copy aria-controls="sequence-code-7" aria-label="Copiar Razón 1.5" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-7">a1 = <span class="py-number">1</span>
+r = <span class="py-number">1.5</span>
+sucesion = []
+<span class="py-keyword">for</span> i <span class="py-keyword">in</span> <span class="py-builtin">range</span>(<span class="py-number">8</span>):
+    n = i + <span class="py-number">1</span>
+    sucesion.<span class="py-builtin">append</span>(a1*r**(n - <span class="py-number">1</span>))
+<span class="py-builtin">print</span>(<span class="py-string">f'El término 8 es {sucesion[7]}'</span>)
+<span class="py-builtin">print</span>(<span class="py-string">f'La suma de 8 términos es {sum(sucesion)}'</span>)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>El término 8 es 17.0859375
+La suma de 8 términos es 49.2578125</code></pre></div>
+<p>Usamos <code>sucesion[7]</code> porque la lista empieza en el primer término y sus índices empiezan en cero. La potencia aplica a r: no escribas <code>(a1*r)**(n - 1)</code>, que sería otra expresión.</p>
+<h2>Una razón menor que uno</h2>
+<p>El problema 8 comienza <code>100, 50, 25, 12.5, 6.25, …</code>. Cada término es la mitad del anterior: r = 0.5. Con primer término positivo y <code>0 &lt; r &lt; 1</code>, los valores disminuyen hacia cero.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Mitades sucesivas</span><button type="button" data-math-copy aria-controls="sequence-code-8" aria-label="Copiar Mitades sucesivas" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-8">a1 = <span class="py-number">100</span>
+r = <span class="py-number">0.5</span>
+n = <span class="py-number">13</span>
+<span class="py-builtin">print</span>(<span class="py-string">f'El término 13 es {a1*r**(n - 1)}'</span>)
+
+sucesion = []
+<span class="py-keyword">for</span> i <span class="py-keyword">in</span> <span class="py-builtin">range</span>(<span class="py-number">10</span>):
+    n = i + <span class="py-number">1</span>
+    sucesion.<span class="py-builtin">append</span>(a1*r**(n - <span class="py-number">1</span>))
+<span class="py-builtin">print</span>(<span class="py-string">f'La suma de 10 términos es {sum(sucesion)}'</span>)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>El término 13 es 0.0244140625
+La suma de 10 términos es 199.8046875</code></pre></div>
+<p>En la matemática exacta esta regla no alcanza cero en ninguna posición finita. Que un valor sea muy pequeño no significa que sea cero. También hay límites en cómo el computador representa números extremadamente pequeños.</p>
+<h2>Qué pasa con otras razones</h2>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Con a₁ positivo</th><th scope="col">Ejemplo</th><th scope="col">Comportamiento</th></tr></thead><tbody><tr><td data-label="Con a₁ positivo">r &gt; 1</td><td data-label="Ejemplo">2, 6, 18, … con r = 3</td><td data-label="Comportamiento">Crece.</td></tr><tr><td data-label="Con a₁ positivo">0 &lt; r &lt; 1</td><td data-label="Ejemplo">100, 50, 25, …</td><td data-label="Comportamiento">Decrece hacia cero.</td></tr><tr><td data-label="Con a₁ positivo">r = 1</td><td data-label="Ejemplo">5, 5, 5, …</td><td data-label="Comportamiento">Se mantiene constante.</td></tr><tr><td data-label="Con a₁ positivo">r &lt; 0</td><td data-label="Ejemplo">2, −4, 8, −16, …</td><td data-label="Comportamiento">Alterna signos; el tamaño depende de |r|.</td></tr></tbody></table></div>
+<div class="lesson-note"><strong>El signo del primer término también importa.</strong> Las afirmaciones de crecimiento de la tabla parten de a₁ positivo. Una razón negativa puede alternar signos: no la trates como una sucesión creciente para buscar pertenencia con el while del formulario.</div>
+<h2>Sumar no significa multiplicar por la cantidad</h2>
+<p>Para una razón distinta de 1, la suma de los primeros k términos es:</p>
+<div class="math-definition"><small>Suma geométrica finita</small><strong>Sₖ = a₁ · (rᵏ − 1) / (r − 1), con r ≠ 1</strong></div>
+<p>La lista y <code>sum</code> permiten comprobar el resultado. Si r = 1, todos los términos son a₁ y la suma es k · a₁. No uses la fórmula anterior en ese caso porque dividirías por cero.</p>
+<h2>Práctica de nivel medio</h2>
+<p>Para <code>2, 6, 18, 54, …</code>, encuentra la razón, el término general, a₆ y S₆. Genera la lista para comprobar.</p>
+<details class="sequence-solution"><summary>Comprobar la práctica</summary><div><p>r = 3 y aₙ = 2 · 3ⁿ⁻¹. Los seis términos son [2, 6, 18, 54, 162, 486]. a₆ = 486 y S₆ = 728.</p></div></details>
+<p>Ya podemos generar y sumar. Ahora veremos cómo buscar una posición cuando lo conocido es el valor del término.</p>
+<div class="lesson-actions"><a href="aritmeticas.html">← Sucesiones aritméticas</a><a href="pertenencia.html">Siguiente: Pertenencia y búsqueda con while →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261006-sequences"></script>
+</body></html>

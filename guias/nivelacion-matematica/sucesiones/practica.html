@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261006-sequences" />
+<title>Taller inicial y de nivel medio — Sucesiones · Nivelación matemática</title>
+<meta name="description" content="Reunimos los cuatro problemas iniciales y añadimos una práctica de nivel medio. La respuesta debe explicar el resultado, no solo mostrar que el código ejecuta." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de sucesiones</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Sucesiones y listas</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de sucesiones"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 06</p>
+<h1>Adaptar, comprobar <em>e interpretar.</em></h1>
+<p class="lesson-lead">Reunimos los cuatro problemas iniciales y añadimos una práctica de nivel medio. La respuesta debe explicar el resultado, no solo mostrar que el código ejecuta.</p>
+
+<h2>Una pauta antes de cada celda</h2>
+<ol><li>Identifica si se pide un término, un tramo, una suma o pertenencia.</li><li>Anota la fórmula y las posiciones que realmente necesitas.</li><li>Adapta cantidad, posición inicial y expresión del formulario.</li><li>Comprueba un valor sencillo a mano y luego ejecuta.</li><li>Redacta la respuesta con posición, valor y alcance de la búsqueda.</li></ol>
+<p>Los primeros cuatro ejercicios del notebook son nuestra base inicial. Los problemas 5 a 8 están planteados, pero no resueltos allí: los usamos como extensión de nivel medio en los módulos de aritméticas y geométricas.</p>
+<h2>Problema 1 · aₙ = n³ − 2</h2>
+<p>Obtén los siete primeros términos y, en otra celda, los cuatro posteriores al vigésimo. Antes de ejecutar, decide cuántos elementos tendrá cada lista.</p>
+<details class="sequence-solution"><summary>Ver resultados y dónde se desarrolló</summary><div><p>Primeros siete: [−1, 6, 25, 62, 123, 214, 341]. Después del vigésimo: a₂₁ a a₂₄ = [9259, 10646, 12165, 13822]. La adaptación completa está en <a href="listas-python.html">Listas, for y posiciones</a>.</p></div></details>
+<h2>Problema 2 · ¿54870 pertenece?</h2>
+<p>Usa la búsqueda creciente del módulo anterior y justifica su condición de parada. Después prueba un valor que no pertenezca, como 54871.</p>
+<details class="sequence-solution"><summary>Ver la conclusión</summary><div><p>54870 pertenece y ocupa la posición 38, porque 38³ − 2 = 54870. El valor 54871 queda entre a₃₈ y a₃₉ y no pertenece. Consulta <a href="pertenencia.html">la búsqueda con while</a> para revisar la plantilla.</p></div></details>
+<h2>Problema 3 · bₙ = (8 − n)²</h2>
+<p>Genera los cuatro primeros términos. Después crea otra lista con los cinco posteriores al término de la posición 16: son b₁₇ a b₂₁, no b₁₆ a b₂₀.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Primeros cuatro términos de b</span><button type="button" data-math-copy aria-controls="sequence-code-11" aria-label="Copiar Primeros cuatro términos de b" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-11">sucesion = []
+<span class="py-keyword">for</span> i <span class="py-keyword">in</span> <span class="py-builtin">range</span>(<span class="py-number">4</span>):
+    n = i + <span class="py-number">1</span>
+    sucesion.<span class="py-builtin">append</span>((<span class="py-number">8</span> - n)**<span class="py-number">2</span>)
+    <span class="py-builtin">print</span>(<span class="py-string">f'El término {n} es {sucesion[i]}'</span>)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>El término 1 es 49
+El término 2 es 36
+El término 3 es 25
+El término 4 es 16</code></pre></div>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Cinco términos después del 16</span><button type="button" data-math-copy aria-controls="sequence-code-12" aria-label="Copiar Cinco términos después del 16" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-12">sucesion = []
+<span class="py-keyword">for</span> i <span class="py-keyword">in</span> <span class="py-builtin">range</span>(<span class="py-number">5</span>):
+    n = i + <span class="py-number">17</span>
+    sucesion.<span class="py-builtin">append</span>((<span class="py-number">8</span> - n)**<span class="py-number">2</span>)
+    <span class="py-builtin">print</span>(<span class="py-string">f'El término {n} es {sucesion[i]}'</span>)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>El término 17 es 81
+El término 18 es 100
+El término 19 es 121
+El término 20 es 144
+El término 21 es 169</code></pre></div>
+<p>Los valores anotados en el notebook para esos tramos son correctos. El ajuste está en generar únicamente la cantidad solicitada, en lugar de recorrer cincuenta posiciones.</p>
+<h2>Problema 4 · ¿290 pertenece a bₙ?</h2>
+<p>Realiza primero una búsqueda en posiciones 1 a 30 y expresa su alcance. Después usa el argumento de los cuadrados perfectos para responder sobre toda la sucesión.</p>
+<details class="sequence-solution"><summary>Ver las dos conclusiones</summary><div><p>En el intervalo 1 a 30 no hay coincidencias. Además, 290 no es un cuadrado perfecto: está entre 17² = 289 y 18² = 324. Por eso no pertenece a ninguna posición de bₙ con n entero positivo.</p></div></details>
+<h2>Nivel medio · reconocer y sumar</h2>
+<p>Para cada fila, determina el tipo, escribe el término general y calcula lo solicitado. Usa for y append para verificar las sumas. La tabla resume los problemas 5 a 8 de la actividad.</p>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Primeros términos</th><th scope="col">Término pedido</th><th scope="col">Suma pedida</th></tr></thead><tbody><tr><td data-label="Primeros términos">3, 7, 11, 15, …</td><td data-label="Término pedido">a₂₀</td><td data-label="Suma pedida">S₁₀</td></tr><tr><td data-label="Primeros términos">10, 8.25, 6.5, 4.75, …</td><td data-label="Término pedido">a₁₁</td><td data-label="Suma pedida">S₅₀</td></tr><tr><td data-label="Primeros términos">1, 1.5, 2.25, 3.375, …</td><td data-label="Término pedido">a₈</td><td data-label="Suma pedida">S₈</td></tr><tr><td data-label="Primeros términos">100, 50, 25, 12.5, …</td><td data-label="Término pedido">a₁₃</td><td data-label="Suma pedida">S₁₀</td></tr></tbody></table></div>
+<details class="sequence-solution"><summary>Comparar respuestas de nivel medio</summary><div><div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Caso</th><th scope="col">Regla y tipo</th><th scope="col">Resultados</th></tr></thead><tbody><tr><td data-label="Caso">1</td><td data-label="Regla y tipo">Aritmética: aₙ = 3 + (n − 1) · 4</td><td data-label="Resultados">a₂₀ = 79; S₁₀ = 210.</td></tr><tr><td data-label="Caso">2</td><td data-label="Regla y tipo">Aritmética: aₙ = 10 + (n − 1) · (−1.75)</td><td data-label="Resultados">a₁₁ = −7.5; S₅₀ = −1643.75.</td></tr><tr><td data-label="Caso">3</td><td data-label="Regla y tipo">Geométrica: aₙ = 1 · 1.5ⁿ⁻¹</td><td data-label="Resultados">a₈ = 17.0859375; S₈ = 49.2578125.</td></tr><tr><td data-label="Caso">4</td><td data-label="Regla y tipo">Geométrica: aₙ = 100 · 0.5ⁿ⁻¹</td><td data-label="Resultados">a₁₃ = 0.0244140625; S₁₀ = 199.8046875.</td></tr></tbody></table></div></div></details>
+<h2>Reto opcional · un valor, varias posiciones</h2>
+<p>Busca dónde aparece 4 en <code>bₙ = (8 − n)²</code>, entre las posiciones 1 y 20. Explica por qué no basta con informar la primera coincidencia si se piden todas las posiciones.</p>
+<details class="sequence-solution"><summary>Comprobar el reto</summary><div><p>Aparece en n = 6 y n = 10, porque (8 − 6)² = 4 y (8 − 10)² = 4. La búsqueda acotada con una lista de posiciones permite guardar ambas.</p></div></details>
+<h2>Errores que conviene detectar</h2>
+<ul><li>Escribir <code>^</code> en vez de <code>**</code> para una potencia.</li><li>Confundir el índice i con la posición n, sobre todo al comenzar en 17 o 21.</li><li>No reiniciar la lista y acumular resultados de otra ejecución.</li><li>Usar el while creciente con una sucesión que decrece o cambia de sentido.</li><li>Decir «no pertenece» después de revisar solo un intervalo sin justificar el resto.</li></ul>
+<div class="lesson-note"><strong>Responder también con palabras.</strong> Ejemplo: «54870 pertenece a la sucesión aₙ = n³ − 2 y ocupa la posición 38, porque al sustituir n = 38 se obtiene ese valor». Una salida de Python es evidencia; la conclusión explica qué significa.</div>
+<p class="sequence-source">Material del episodio: Formulario_EA2 (secciones 1 y 2, sin la variante con def) y Desarrollo_Actividad_Inicial_V2 (problemas 1 a 8). Apoyo para la sintaxis: <a href="https://docs.python.org/es/3/tutorial/controlflow.html" target="_blank" rel="noopener">for, range y control de flujo</a> y <a href="https://docs.python.org/es/3/tutorial/datastructures.html" target="_blank" rel="noopener">listas de Python</a>.</p>
+<div class="lesson-actions"><a href="pertenencia.html">← Pertenencia y búsqueda con while</a><a href="index.html">Volver al inicio del episodio →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261006-sequences"></script>
+</body></html>

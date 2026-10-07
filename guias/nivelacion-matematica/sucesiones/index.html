@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261006-sequences" />
+<title>Entender una sucesión — Sucesiones · Nivelación matemática</title>
+<meta name="description" content="Una sucesión organiza valores por posiciones. Primero entenderemos qué representa cada lugar y después llevaremos esa idea a una lista de Python." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de sucesiones</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Sucesiones y listas</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de sucesiones"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 01</p>
+<h1>Un orden, una posición <em>y un término.</em></h1>
+<p class="lesson-lead">Una sucesión organiza valores por posiciones. Primero entenderemos qué representa cada lugar y después llevaremos esa idea a una lista de Python.</p>
+
+<h2>Qué aprenderás en este episodio</h2>
+<p>En el episodio 1 trabajamos con funciones. Ahora la entrada será una posición: primera, segunda, tercera… A cada posición le corresponde un término. Aprenderemos a calcular términos, reconocer reglas aritméticas y geométricas, generar listas y decidir si un valor aparece en una sucesión.</p>
+<p>El recorrido parte de los cuatro problemas iniciales de tu actividad: <code>aₙ = n³ − 2</code> y <code>bₙ = (8 − n)²</code>. Después subiremos a nivel medio con diferencias, razones, sumas y búsquedas que requieren revisar el comportamiento de la sucesión. No necesitaremos NumPy ni funciones definidas con <code>def</code>.</p>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Nivel</th><th scope="col">Qué harás</th></tr></thead><tbody><tr><td data-label="Nivel">Inicial</td><td data-label="Qué harás">Leer posiciones, sustituir n y generar los primeros términos o un tramo concreto.</td></tr><tr><td data-label="Nivel">Medio</td><td data-label="Qué harás">Reconocer el tipo, construir el término general, sumar términos y justificar una búsqueda.</td></tr></tbody></table></div>
+<h2>Piensa en una fila de casilleros numerados</h2>
+<p>Cada casillero tiene un número de posición y guarda un valor. El casillero 4 no tiene por qué guardar el número 4. Por ejemplo, en <code>3, 7, 11, 15, …</code>, el cuarto casillero contiene 15. La posición es 4 y el término es 15.</p>
+<div class="sequence-strip" aria-label="Posiciones 1 a 4 y sus términos"><div><small>n = 1</small><strong>3</strong></div><div><small>n = 2</small><strong>7</strong></div><div><small>n = 3</small><strong>11</strong></div><div><small>n = 4</small><strong>15</strong></div></div>
+<p>Una sucesión puede tener una cantidad finita de términos o continuar indefinidamente. En Python normalmente guardaremos solo una parte finita: los siete primeros, por ejemplo. El orden importa y también pueden repetirse valores.</p>
+<h2>Cómo leer aₙ</h2>
+<p><code>aₙ</code> se lee «a sub n» y representa el término que ocupa la posición n. El <strong>término general</strong> es una regla para calcularlo directamente. En este episodio tomaremos <code>n = 1, 2, 3, …</code>, salvo que el enunciado indique otro inicio.</p>
+<div class="math-definition"><small>Primer problema de la actividad</small><strong>aₙ = n³ − 2</strong></div>
+<p>Para el primer término sustituimos n por 1: <code>a₁ = 1³ − 2 = −1</code>. Para el cuarto: <code>a₄ = 4³ − 2 = 62</code>. No hace falta calcular todos los anteriores si ya conocemos la fórmula.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Evaluar una posición</span><button type="button" data-math-copy aria-controls="sequence-code-1" aria-label="Copiar Evaluar una posición" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-1">n = <span class="py-number">4</span>
+termino = n**<span class="py-number">3</span> - <span class="py-number">2</span>
+<span class="py-builtin">print</span>(<span class="py-string">f'El término {n} es {termino}'</span>)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>El término 4 es 62</code></pre></div>
+<p>Python escribe la potencia con <code>**</code>. <code>n**3</code> significa n elevado a 3. No uses <code>^</code> para potencias: en Python tiene otro significado.</p>
+<h2>No todas las sucesiones crecen de la misma forma</h2>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Regla</th><th scope="col">Primeros términos</th><th scope="col">Qué observar</th></tr></thead><tbody><tr><td data-label="Regla">aₙ = n³ − 2</td><td data-label="Primeros términos">−1, 6, 25, 62, …</td><td data-label="Qué observar">Crece, pero no suma siempre la misma cantidad.</td></tr><tr><td data-label="Regla">bₙ = (8 − n)²</td><td data-label="Primeros términos">49, 36, 25, 16, …</td><td data-label="Qué observar">Al principio decrece. Llega a cero en n = 8 y luego crece.</td></tr><tr><td data-label="Regla">3, 7, 11, 15, …</td><td data-label="Primeros términos">Diferencia constante: +4</td><td data-label="Qué observar">Es aritmética si la regla continúa así.</td></tr><tr><td data-label="Regla">1, 1.5, 2.25, 3.375, …</td><td data-label="Primeros términos">Razón constante: ×1.5</td><td data-label="Qué observar">Es geométrica si la regla continúa así.</td></tr></tbody></table></div>
+<div class="lesson-note"><strong>Una lista corta no determina una única fórmula.</strong> Varias reglas pueden coincidir en los primeros valores y diferir después. Cuando el ejercicio pide reconocer un patrón, trabajamos con el tipo y la regla que propone el contexto.</div>
+<h2>La pregunta decide el procedimiento</h2>
+<p>«Calcula a₂₀» pide un valor de una posición conocida. «¿54870 pertenece?» pide buscar una posición que produzca ese valor. «Suma los primeros 10» pide combinar varios términos. Son tareas distintas, aunque todas usen el mismo término general.</p>
+<h2>Antes de seguir</h2>
+<p>Con <code>aₙ = n³ − 2</code>, calcula a₂ y a₃ a mano. Luego cambia <code>n</code> en el código y comprueba. Explica cuál es la posición y cuál es el valor que se obtiene.</p>
+<details class="sequence-solution"><summary>Comprobar el ejemplo</summary><div><p>a₂ = 6 y a₃ = 25. Las posiciones son 2 y 3; los términos correspondientes son 6 y 25.</p></div></details>
+<p>En el siguiente módulo crearemos varios casilleros a la vez: una lista que irá creciendo con <code>append</code> y un ciclo <code>for</code>.</p>
+<div class="lesson-actions"><a href="../index.html">← Ver episodios</a><a href="listas-python.html">Siguiente: Listas, for y posiciones →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261006-sequences"></script>
+</body></html>

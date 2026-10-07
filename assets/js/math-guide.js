@@ -1,4 +1,16 @@
 const mathGuideData = {
+  sequences: {
+    folder: "sucesiones",
+    label: "Sucesiones y listas",
+    modules: [
+      ["index.html", "Entender una sucesión"],
+      ["listas-python.html", "Listas, for y posiciones"],
+      ["aritmeticas.html", "Sucesiones aritméticas"],
+      ["geometricas.html", "Sucesiones geométricas"],
+      ["pertenencia.html", "Pertenencia y búsqueda con while"],
+      ["practica.html", "Taller inicial y de nivel medio"],
+    ],
+  },
   preparation: {
     folder: "preparacion",
     label: "Preparación",
@@ -55,6 +67,7 @@ const mathGuideData = {
 
 function currentMathCategory(url = window.location.href) {
   const path = new URL(url, window.location.href).pathname;
+  if (path.includes("/sucesiones/")) return "sequences";
   if (path.includes("/funciones-no-lineales/")) return "nonlinear";
   if (path.includes("/funciones-lineales/")) return "linear";
   return path.includes("/fundamentos-funciones/")
@@ -81,7 +94,7 @@ function renderMathNavigation() {
       <a class="sidebar-category ${category === "linear" ? "active" : ""}" data-math-category="linear" href="${category === "linear" ? "index.html" : "../funciones-lineales/index.html"}"><span>03</span><b>Funciones lineales</b><i>↗</i></a>
       <a class="sidebar-category ${category === "nonlinear" ? "active" : ""}" data-math-category="nonlinear" href="${category === "nonlinear" ? "index.html" : "../funciones-no-lineales/index.html"}"><span>04</span><b>No lineales</b><i>↗</i></a>
       <span class="sidebar-episode-label">Episodio 02</span>
-      <span class="sidebar-category is-soon"><span>01</span><b>Próximo módulo</b><em>Bloqueado</em></span>`;
+      <a class="sidebar-category ${category === "sequences" ? "active" : ""}" data-math-category="sequences" href="${category === "sequences" ? "index.html" : "../sucesiones/index.html"}"><span>01</span><b>Sucesiones y listas</b><i>↗</i></a>`;
   }
 
   nav.innerHTML = data.modules
@@ -90,6 +103,7 @@ function renderMathNavigation() {
         `<a class="${file === current ? "active" : ""}" href="${file}"><span>${String(index + 1).padStart(2, "0")}</span>${label}</a>`,
     )
     .join("");
+  document.querySelectorAll("[data-math-copy]").forEach((button) => { button.hidden = false; });
 }
 
 async function fetchMathDocument(url) {
@@ -138,6 +152,19 @@ async function loadMathCategory(url, addHistory = true) {
 }
 
 document.addEventListener("click", (event) => {
+  const copy = event.target.closest("[data-math-copy]");
+  if (copy) {
+    const code = document.getElementById(copy.getAttribute("aria-controls"));
+    if (!code) return;
+    copy.disabled = true;
+    Promise.resolve().then(() => navigator.clipboard.writeText(code.textContent.trim())).then(() => {
+      copy.textContent = "Copiado";
+      copy.closest(".sequence-code")?.querySelector("[role=status]")?.replaceChildren("Código copiado.");
+    }).catch(() => {
+      copy.closest(".sequence-code")?.querySelector("[role=status]")?.replaceChildren("No se pudo copiar. Selecciona el código y cópialo manualmente.");
+    }).finally(() => { copy.disabled = false; });
+    return;
+  }
   const toggle = event.target.closest("[data-sidebar-toggle]");
   if (toggle) {
     const sidebar = document.querySelector("[data-guide-sidebar]");

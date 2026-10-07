@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261006-sequences" />
+<title>Sucesiones aritméticas — Sucesiones · Nivelación matemática</title>
+<meta name="description" content="Una sucesión aritmética suma una cantidad constante entre términos consecutivos. Esa diferencia puede ser positiva, negativa o cero." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de sucesiones</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Sucesiones y listas</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de sucesiones"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 03</p>
+<h1>La misma diferencia <em>en cada paso.</em></h1>
+<p class="lesson-lead">Una sucesión aritmética suma una cantidad constante entre términos consecutivos. Esa diferencia puede ser positiva, negativa o cero.</p>
+
+<h2>Reconocer el patrón</h2>
+<p>En <code>3, 7, 11, 15, 19, …</code>, cada nuevo término aumenta 4. Lo comprobamos restando términos consecutivos: 7 − 3 = 4, 11 − 7 = 4 y 15 − 11 = 4. Llamamos <strong>diferencia d</strong> a ese cambio constante.</p>
+<p>Imagina una alcancía que tiene 3 monedas en el primer registro y recibe 4 más entre registros. El segundo tendrá 7, el tercero 11. La fórmula cuenta cuánto había al inicio y cuántas veces ocurrió el cambio.</p>
+<div class="math-definition"><small>Término general aritmético</small><strong>aₙ = a₁ + (n − 1) · d</strong></div>
+<p><code>a₁</code> es el primer término. Para llegar al término n damos <strong>n − 1 pasos</strong>: del primero al segundo hay un paso, no dos. Por eso no usamos n · d.</p>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Posición</th><th scope="col">Cálculo</th><th scope="col">Término</th></tr></thead><tbody><tr><td data-label="Posición">1</td><td data-label="Cálculo">3 + (1 − 1) · 4</td><td data-label="Término">3</td></tr><tr><td data-label="Posición">2</td><td data-label="Cálculo">3 + (2 − 1) · 4</td><td data-label="Término">7</td></tr><tr><td data-label="Posición">3</td><td data-label="Cálculo">3 + (3 − 1) · 4</td><td data-label="Término">11</td></tr><tr><td data-label="Posición">20</td><td data-label="Cálculo">3 + (20 − 1) · 4</td><td data-label="Término">79</td></tr></tbody></table></div>
+<h2>Interpretarlo en Python</h2>
+<p>En Python la multiplicación se escribe con <code>*</code>. Guardamos el primer término y la diferencia para distinguir los datos del procedimiento.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Aritmética creciente</span><button type="button" data-math-copy aria-controls="sequence-code-5" aria-label="Copiar Aritmética creciente" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-5">a1 = <span class="py-number">3</span>
+d = <span class="py-number">4</span>
+sucesion = []
+<span class="py-keyword">for</span> i <span class="py-keyword">in</span> <span class="py-builtin">range</span>(<span class="py-number">10</span>):
+    n = i + <span class="py-number">1</span>
+    sucesion.<span class="py-builtin">append</span>(a1 + (n - <span class="py-number">1</span>)*d)
+<span class="py-builtin">print</span>(sucesion)
+<span class="py-builtin">print</span>(<span class="py-string">f'La suma es {sum(sucesion)}'</span>)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>[3, 7, 11, 15, 19, 23, 27, 31, 35, 39]
+La suma es 210</code></pre></div>
+<p>Construimos los diez primeros términos y después sumamos la lista. Los mensajes quedan fuera del for porque queremos una lista completa y una sola suma, no imprimirlas diez veces.</p>
+<h2>La sucesión también puede decrecer</h2>
+<p>El problema 6 propone <code>10, 8.25, 6.5, 4.75, 3.0, …</code>. La diferencia es <code>−1.75</code>: cada término baja 1.75. La misma fórmula funciona sin cambiar la estructura.</p>
+<div class="math-definition"><small>Diferencia negativa</small><strong>aₙ = 10 + (n − 1) · (−1.75)</strong></div>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Término 11 y suma de 50</span><button type="button" data-math-copy aria-controls="sequence-code-6" aria-label="Copiar Término 11 y suma de 50" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-6">a1 = <span class="py-number">10</span>
+d = -<span class="py-number">1.75</span>
+n = <span class="py-number">11</span>
+<span class="py-builtin">print</span>(<span class="py-string">f'El término 11 es {a1 + (n - 1)*d}'</span>)
+
+sucesion = []
+<span class="py-keyword">for</span> i <span class="py-keyword">in</span> <span class="py-builtin">range</span>(<span class="py-number">50</span>):
+    n = i + <span class="py-number">1</span>
+    sucesion.<span class="py-builtin">append</span>(a1 + (n - <span class="py-number">1</span>)*d)
+<span class="py-builtin">print</span>(<span class="py-string">f'La suma de 50 términos es {sum(sucesion)}'</span>)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>El término 11 es -7.5
+La suma de 50 términos es -1643.75</code></pre></div>
+<p>Que aparezcan términos negativos no es un error de Python. La regla sigue restando. Si el contexto fuera dinero disponible o personas, habría que revisar si tiene sentido continuar hasta esa posición. Como sucesión matemática, puede continuar con valores negativos.</p>
+<h2>Término individual y suma</h2>
+<div class="math-definition"><small>Suma de los primeros k términos</small><strong>Sₖ = k · (a₁ + aₖ) / 2</strong></div>
+<p>Esta fórmula suma los primeros k términos de una sucesión aritmética. Para k = 10 tenemos a₁ = 3 y a₁₀ = 39, por lo que <code>S₁₀ = 10 · (3 + 39) / 2 = 210</code>. Coincide con <code>sum(sucesion)</code>.</p>
+<div class="lesson-note"><strong>No confundir símbolos.</strong> a₁₀ es el décimo término; S₁₀ es la suma de los diez primeros. Si el ejercicio pide una suma, responder solo el término final deja parte de la tarea sin resolver.</div>
+<h2>Cómo distinguirla de otras sucesiones</h2>
+<p>Que una sucesión crezca no basta para que sea aritmética. En <code>n³ − 2</code>, los primeros saltos son 7, 19 y 37: no son constantes. Una sucesión constante sí es aritmética con d = 0.</p>
+<h2>Práctica de nivel medio</h2>
+<p>Observa <code>20, 17, 14, 11, …</code>. Determina d, escribe el término general y calcula a₈ y S₈. Verifica la suma creando la lista con append.</p>
+<details class="sequence-solution"><summary>Comprobar la práctica</summary><div><p>d = −3, aₙ = 20 + (n − 1) · (−3), a₈ = −1 y S₈ = 76. La lista es [20, 17, 14, 11, 8, 5, 2, −1].</p></div></details>
+<p>En el siguiente módulo el cambio ya no será una suma constante: será una multiplicación constante.</p>
+<div class="lesson-actions"><a href="listas-python.html">← Listas, for y posiciones</a><a href="geometricas.html">Siguiente: Sucesiones geométricas →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261006-sequences"></script>
+</body></html>

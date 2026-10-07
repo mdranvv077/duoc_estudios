@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261005-l2-full" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261006-sequences" />
+<title>Listas, for y posiciones — Sucesiones · Nivelación matemática</title>
+<meta name="description" content="Usaremos la estructura del formulario: una lista vacía, un for que recorre las posiciones y append para guardar cada término." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de sucesiones</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Sucesiones y listas</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de sucesiones"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 02</p>
+<h1>De la fórmula <em>a la lista.</em></h1>
+<p class="lesson-lead">Usaremos la estructura del formulario: una lista vacía, un for que recorre las posiciones y append para guardar cada término.</p>
+
+<h2>La lista guarda lo que ya calculamos</h2>
+<p><code>sucesion = []</code> crea una lista vacía. Cada vez que ejecutamos <code>sucesion.append(valor)</code>, agregamos ese valor al final. La fórmula genera el término y la lista lo conserva para consultarlo o sumarlo después.</p>
+<p>En el formulario aparecía una lista con términos y luego se añadía siempre 6. Aquí comenzaremos vacíos y añadiremos el resultado de la fórmula. Así no mezclamos valores anteriores con los nuevos.</p>
+<h2>Matemática empieza en 1; el índice, en 0</h2>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Iteración i</th><th scope="col">Posición n = i + 1</th><th scope="col">Dónde se guarda</th></tr></thead><tbody><tr><td data-label="Iteración i">0</td><td data-label="Posición n = i + 1">1</td><td data-label="Dónde se guarda">sucesion[0]</td></tr><tr><td data-label="Iteración i">1</td><td data-label="Posición n = i + 1">2</td><td data-label="Dónde se guarda">sucesion[1]</td></tr><tr><td data-label="Iteración i">2</td><td data-label="Posición n = i + 1">3</td><td data-label="Dónde se guarda">sucesion[2]</td></tr></tbody></table></div>
+<p><code>i</code> será el índice del resultado en nuestra lista. <code>n</code> será la posición de la sucesión matemática. Son números distintos: por eso el formulario usa <code>n = i + 1</code>.</p>
+<h2>Problema 1: los siete primeros términos</h2>
+<p>Queremos siete posiciones, desde n = 1 hasta n = 7. <code>range(7)</code> entrega los valores 0 a 6, no incluye 7. Al sumar uno obtenemos exactamente las posiciones pedidas.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Primeros siete términos</span><button type="button" data-math-copy aria-controls="sequence-code-2" aria-label="Copiar Primeros siete términos" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-2">sucesion = []
+<span class="py-keyword">for</span> i <span class="py-keyword">in</span> <span class="py-builtin">range</span>(<span class="py-number">7</span>):
+    n = i + <span class="py-number">1</span>
+    sucesion.<span class="py-builtin">append</span>(n**<span class="py-number">3</span> - <span class="py-number">2</span>)
+    <span class="py-builtin">print</span>(<span class="py-string">f'El término {n} es {sucesion[i]}'</span>)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>El término 1 es -1
+El término 2 es 6
+El término 3 es 25
+El término 4 es 62
+El término 5 es 123
+El término 6 es 214
+El término 7 es 341</code></pre></div>
+<p>La sangría deja el cálculo, el guardado y el mensaje dentro del ciclo. Primero se añade el término y después se lee <code>sucesion[i]</code>. Si intentaras leerlo antes de añadirlo, esa posición todavía no existiría.</p>
+<div class="math-definition"><small>Lectura de una iteración</small><strong>i = 2 → n = 3 → 3³ − 2 = 25 → sucesion[2] = 25</strong></div>
+<h2>Cuatro términos después del vigésimo</h2>
+<p>«Los cuatro que continúan al vigésimo» significa <strong>a₂₁, a₂₂, a₂₃ y a₂₄</strong>. No incluye a₂₀. Necesitamos cuatro repeticiones, pero empezamos en n = 21.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Posiciones 21 a 24</span><button type="button" data-math-copy aria-controls="sequence-code-3" aria-label="Copiar Posiciones 21 a 24" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-3">sucesion = []
+<span class="py-keyword">for</span> i <span class="py-keyword">in</span> <span class="py-builtin">range</span>(<span class="py-number">4</span>):
+    n = i + <span class="py-number">21</span>
+    sucesion.<span class="py-builtin">append</span>(n**<span class="py-number">3</span> - <span class="py-number">2</span>)
+    <span class="py-builtin">print</span>(<span class="py-string">f'El término {n} es {sucesion[i]}'</span>)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>El término 21 es 9259
+El término 22 es 10646
+El término 23 es 12165
+El término 24 es 13822</code></pre></div>
+<p>La lista tiene cuatro elementos, con índices 0 a 3. Aunque el primer resultado sea a₂₁, está guardado en <code>sucesion[0]</code>, no en <code>sucesion[21]</code>. El índice depende de la lista que construimos, no del nombre del término.</p>
+<h2>Qué debes modificar en la plantilla</h2>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Dato</th><th scope="col">Primeros siete</th><th scope="col">Cuatro después del 20</th></tr></thead><tbody><tr><td data-label="Dato">Cantidad de repeticiones</td><td data-label="Primeros siete">range(7)</td><td data-label="Cuatro después del 20">range(4)</td></tr><tr><td data-label="Dato">Posición inicial</td><td data-label="Primeros siete">n = i + 1</td><td data-label="Cuatro después del 20">n = i + 21</td></tr><tr><td data-label="Dato">Término general</td><td data-label="Primeros siete">n**3 - 2</td><td data-label="Cuatro después del 20">n**3 - 2</td></tr></tbody></table></div>
+<p>En la actividad, <code>range(24)</code> genera desde a₁ hasta a₂₄. Incluye las posiciones de interés, pero no responde por separado a los dos tramos solicitados. Lo mismo ocurre con el <code>range(50)</code> del problema 3: hay que ajustar la cantidad.</p>
+<h2>Usar lo guardado</h2>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Consultar una lista</span><button type="button" data-math-copy aria-controls="sequence-code-4" aria-label="Copiar Consultar una lista" hidden>Copiar</button></div><pre tabindex="0"><code id="sequence-code-4">sucesion = [<span class="py-number">3</span>, <span class="py-number">7</span>, <span class="py-number">11</span>, <span class="py-number">15</span>]
+<span class="py-builtin">print</span>(sucesion[<span class="py-number">0</span>])
+<span class="py-builtin">print</span>(<span class="py-builtin">len</span>(sucesion))
+<span class="py-builtin">print</span>(<span class="py-builtin">sum</span>(sucesion))</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>3
+4
+36</code></pre></div>
+<p><code>len</code> cuenta elementos y <code>sum</code> suma sus valores. Sumar una lista no es lo mismo que pedir un término: aquí el cuarto término vale 15, pero la suma de los cuatro vale 36.</p>
+<div class="lesson-note"><strong>Ejecutar sin arrastrar resultados.</strong> Deja <code>sucesion = []</code> en la misma celda que el ciclo. Al volver a ejecutarla, empezarás limpio; si ejecutas solo el for sobre una lista anterior, añadirás más datos.</div>
+<h2>Mini práctica</h2>
+<p>Adapta la estructura para obtener los cuatro primeros términos de <code>bₙ = (8 − n)²</code>. Cambian la cantidad y la fórmula, no la lógica de guardar.</p>
+<details class="sequence-solution"><summary>Ver la adaptación</summary><div><p>Usa <code>range(4)</code>, <code>n = i + 1</code> y <code>sucesion.append((8 - n)**2)</code>. Debes obtener [49, 36, 25, 16].</p></div></details>
+<p>En estos ejemplos usamos for porque ya conocemos cuántos términos necesitamos. Python también puede recorrer directamente elementos de una lista; aquí nos interesa esta estructura concreta del formulario.</p>
+<div class="lesson-actions"><a href="index.html">← Entender una sucesión</a><a href="aritmeticas.html">Siguiente: Sucesiones aritméticas →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261006-sequences"></script>
+</body></html>

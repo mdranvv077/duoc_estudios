@@ -80,6 +80,38 @@
 
 .math-table tr:last-child td { border-bottom: 0; }
 
+/* Episodio 02: conserva las fórmulas y ventanas de código de la modalidad. */
+.sequence-lesson .lesson-note { margin-bottom: 24px; }
+.sequence-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 720px; margin: 24px 0; }
+.sequence-strip > div { min-width: 0; padding: 16px; border: 1px solid var(--line); background: rgba(46,234,255,.035); text-align: center; }
+.sequence-strip small { display: block; margin-bottom: 9px; color: var(--muted); font: .7rem "DM Mono", monospace; }
+.sequence-strip strong { color: var(--cyan); font: 500 1.4rem "DM Mono", monospace; }
+.sequence-code .code-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sequence-code button { flex-shrink: 0; padding: 4px 6px; border: 0; background: transparent; color: var(--muted); cursor: pointer; font: .62rem "DM Mono", monospace; }
+.sequence-code button[hidden] { display: none; }
+.sequence-code button:hover, .sequence-code button:focus-visible { color: var(--cyan); background: rgba(46,234,255,.07); }
+.sequence-code button:disabled { opacity: .6; cursor: wait; }
+.sequence-code pre, .sequence-lesson .output-window pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: hidden; }
+.sequence-copy-status { margin: 0; padding: 0 20px 12px; color: var(--cyan); font-size: .74rem; }
+.sequence-copy-status:empty { display: none; }
+.sequence-table-wrap { box-sizing: border-box; overflow: visible; }
+.sequence-table { min-width: 0; table-layout: fixed; }
+.sequence-table th, .sequence-table td { overflow-wrap: anywhere; }
+.sequence-solution { max-width: 720px; margin: 22px 0 30px; border: 1px solid var(--line); background: rgba(11,17,25,.5); }
+.sequence-solution summary { padding: 15px 18px; color: var(--cyan); cursor: pointer; font-size: .83rem; line-height: 1.55; }
+.sequence-solution > div { padding: 0 18px 16px; }
+.sequence-solution > div > p { margin: 10px 0 0; }
+.sequence-lesson .sequence-source { color: var(--muted); font-size: .76rem; line-height: 1.7; }
+@media (max-width: 600px) {
+  .sequence-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sequence-table thead { display: none; }
+  .sequence-table, .sequence-table tbody, .sequence-table tr, .sequence-table td { display: block; width: auto; }
+  .sequence-table tr { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .sequence-table tr:last-child { border-bottom: 0; }
+  .sequence-table td { padding: 5px 15px; border: 0; }
+  .sequence-table td::before { content: attr(data-label); display: block; margin-bottom: 4px; color: var(--cyan); font: .65rem/1.55 "DM Mono", monospace; }
+}
+
 .concept-pairs {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
