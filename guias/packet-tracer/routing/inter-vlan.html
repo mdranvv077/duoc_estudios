@@ -53,7 +53,14 @@
           Puedes comunicar VLANs mediante subinterfaces de un router o mediante
           interfaces VLAN (SVI) de un switch capa 3.
         </p>
-        <h2>Cómo funciona</h2>
+        <h2>Dos formas de comunicar las mismas VLANs</h2>
+        <ul>
+          <li><strong>Switch capa 2 + router:</strong> el switch transporta las
+            VLANs; las subinterfaces del router son sus gateways.</li>
+          <li><strong>Switch capa 3:</strong> el propio switch tiene las
+            gateways en sus SVI y enruta con <code>ip routing</code>.</li>
+        </ul>
+        <h2>Opción A · Switch capa 2 + router</h2>
         <p>
           El puerto del switch conectado al router debe ser trunk. En el router
           se crean subinterfaces: cada una recibe una etiqueta 802.1Q, una IP y
@@ -65,12 +72,15 @@
           class="cli-block"
         ><code><span class="cli-prompt">Router(config)#</span> <span class="cli-command">interface gigabitEthernet 0/0</span><span class="cli-comment"> # selecciona la interfaz física hacia el switch</span>
 <span class="cli-prompt">Router(config-if)#</span> <span class="cli-command">no shutdown</span><span class="cli-comment"> # habilita la interfaz principal</span>
+<span class="cli-prompt">Router(config-if)#</span> <span class="cli-command">exit</span>
 <span class="cli-prompt">Router(config)#</span> <span class="cli-command">interface gigabitEthernet 0/0.10</span><span class="cli-comment"> # crea la subinterfaz de VLAN 10</span>
 <span class="cli-prompt">Router(config-subif)#</span> <span class="cli-command">encapsulation dot1Q 10</span><span class="cli-comment"> # asocia la subinterfaz a VLAN 10</span>
 <span class="cli-prompt">Router(config-subif)#</span> <span class="cli-command">ip address 192.168.10.1 255.255.255.0</span><span class="cli-comment"> # define su gateway</span>
+<span class="cli-prompt">Router(config-subif)#</span> <span class="cli-command">exit</span>
 <span class="cli-prompt">Router(config)#</span> <span class="cli-command">interface gigabitEthernet 0/0.20</span><span class="cli-comment"> # crea la subinterfaz de VLAN 20</span>
 <span class="cli-prompt">Router(config-subif)#</span> <span class="cli-command">encapsulation dot1Q 20</span><span class="cli-comment"> # asocia la subinterfaz a VLAN 20</span>
 <span class="cli-prompt">Router(config-subif)#</span> <span class="cli-command">ip address 192.168.20.1 255.255.255.0</span><span class="cli-comment"> # define su gateway</span>
+<span class="cli-prompt">Router(config-subif)#</span> <span class="cli-command">exit</span>
 <span class="cli-prompt">Router(config)#</span> <span class="cli-command">interface gigabitEthernet 0/0.30</span><span class="cli-comment"> # crea la subinterfaz de VLAN 30</span>
 <span class="cli-prompt">Router(config-subif)#</span> <span class="cli-command">encapsulation dot1Q 30</span><span class="cli-comment"> # asocia la subinterfaz a VLAN 30</span>
 <span class="cli-prompt">Router(config-subif)#</span> <span class="cli-command">ip address 192.168.30.1 255.255.255.0</span><span class="cli-comment"> # define su gateway</span></code></pre>
@@ -79,7 +89,14 @@
           ser trunk y permitir las VLANs 10, 20 y 30. La VLAN nativa 99 no
           necesita una subinterfaz si no tendrá tráfico de usuarios.
         </div>
-        <h2>En un switch capa 3: ¿qué hace cada comando?</h2>
+        <h2>Opción B · Switch capa 3</h2>
+        <p>
+          Usamos las mismas VLANs 10, 20 y 30 y las mismas gateways, pero ahora
+          viven en MLS1. No necesitas un router externo para comunicar estas
+          VLANs ni subinterfaces con <code>encapsulation dot1Q</code>.
+          Crear VLANs y configurar puertos access o trunk se hace igual que
+          en capa 2; lo nuevo son las SVI y el enrutamiento.
+        </p>
         <p>
           <code>ip routing</code> se usa en configuración global para habilitar
           el enrutamiento del switch. <code>no switchport</code> se usa dentro
@@ -87,9 +104,9 @@
           asignarle una IP directamente. <strong>No son alternativas:</strong>
           un enlace enrutado normalmente utiliza ambos.
         </p>
-        <h3>1. IP para una VLAN: usar una SVI</h3>
+        <h3>1. IP para cada VLAN: usar una SVI</h3>
         <p>
-          Si el switch será la gateway de VLAN 10 y VLAN 20, coloca las IP en
+          Si el switch será la gateway de VLAN 10, 20 y 30, coloca las IP en
           <code>interface vlan</code>, no en sus puertos access o trunk.
           Aquí <strong>no se usa no switchport</strong>: esos puertos siguen
           transportando las VLANs en capa 2.
@@ -99,12 +116,18 @@
 <span class="cli-prompt">MLS1(config-vlan)#</span> <span class="cli-command">exit</span>
 <span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">vlan 20</span>
 <span class="cli-prompt">MLS1(config-vlan)#</span> <span class="cli-command">exit</span>
+<span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">vlan 30</span>
+<span class="cli-prompt">MLS1(config-vlan)#</span> <span class="cli-command">exit</span>
 <span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">interface vlan 10</span><span class="cli-comment"> # selecciona la SVI de VLAN 10</span>
 <span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">ip address 192.168.10.1 255.255.255.0</span><span class="cli-comment"> # gateway de VLAN 10</span>
 <span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">no shutdown</span>
 <span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">exit</span>
 <span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">interface vlan 20</span>
 <span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">ip address 192.168.20.1 255.255.255.0</span><span class="cli-comment"> # gateway de VLAN 20</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">no shutdown</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">exit</span>
+<span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">interface vlan 30</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">ip address 192.168.30.1 255.255.255.0</span><span class="cli-comment"> # gateway de VLAN 30</span>
 <span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">no shutdown</span>
 <span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">exit</span></code></pre>
         <div class="lesson-note">
@@ -114,7 +137,45 @@
           Este ejemplo reemplaza al router del caso anterior: no asignes la
           misma gateway al router y al switch simultáneamente.
         </div>
-        <h3>2. IP para un puerto físico: usar no switchport</h3>
+        <p>
+          <strong>VLAN no es lo mismo que SVI:</strong> <code>vlan 10</code>
+          crea la VLAN; <code>interface vlan 10</code> configura su interfaz IP.
+          Un switch capa 2 también puede tener una SVI para administración,
+          pero eso no lo convierte en la gateway que enruta entre VLANs.
+        </p>
+        <h3>2. Puertos access y trunk: siguen siendo capa 2</h3>
+        <p>
+          Fa0/10 conecta un PC de VLAN 10; Fa0/20 y Fa0/30 conectan los de
+          VLAN 20 y 30. Gi0/2 es un trunk hacia otro switch, si lo necesitas.
+          Las VLANs ya quedaron creadas en el bloque anterior. No pongas IP en estos
+          puertos ni uses <code>no switchport</code>.
+        </p>
+        <pre class="cli-block"><code><span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">interface fastEthernet 0/10</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">switchport mode access</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">switchport access vlan 10</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">no shutdown</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">exit</span>
+<span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">interface fastEthernet 0/20</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">switchport mode access</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">switchport access vlan 20</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">no shutdown</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">exit</span>
+<span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">interface fastEthernet 0/30</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">switchport mode access</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">switchport access vlan 30</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">no shutdown</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">exit</span>
+<span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">interface gigabitEthernet 0/2</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">switchport trunk encapsulation dot1q</span><span class="cli-comment"> # en modelos que permiten elegir encapsulación</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">switchport mode trunk</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">switchport trunk allowed vlan 10,20,30</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">no shutdown</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">exit</span></code></pre>
+        <p>
+          Configura también el otro extremo del trunk. Si tu modelo solo admite
+          802.1Q y no reconoce el comando de encapsulación, omite esa línea.
+        </p>
+        <h3>3. IP para un puerto físico: usar no switchport</h3>
         <p>
           Para un enlace enrutado hacia otro router o switch capa 3, la IP va
           directamente en el puerto. Por ejemplo, MLS1 usa 192.168.60.2/24 y
