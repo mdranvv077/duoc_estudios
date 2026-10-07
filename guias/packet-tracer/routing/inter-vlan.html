@@ -50,8 +50,8 @@
         <p class="eyebrow"><span></span> Módulo 02</p>
         <h1>Routing <em>inter-VLAN.</em></h1>
         <p class="lesson-lead">
-          Router-on-a-Stick permite usar un solo enlace físico entre el switch y
-          el router 2911 para enrutar varias VLANs.
+          Puedes comunicar VLANs mediante subinterfaces de un router o mediante
+          interfaces VLAN (SVI) de un switch capa 3.
         </p>
         <h2>Cómo funciona</h2>
         <p>
@@ -79,6 +79,68 @@
           ser trunk y permitir las VLANs 10, 20 y 30. La VLAN nativa 99 no
           necesita una subinterfaz si no tendrá tráfico de usuarios.
         </div>
+        <h2>En un switch capa 3: ¿qué hace cada comando?</h2>
+        <p>
+          <code>ip routing</code> se usa en configuración global para habilitar
+          el enrutamiento del switch. <code>no switchport</code> se usa dentro
+          de un puerto físico para convertirlo en puerto de capa 3 y poder
+          asignarle una IP directamente. <strong>No son alternativas:</strong>
+          un enlace enrutado normalmente utiliza ambos.
+        </p>
+        <h3>1. IP para una VLAN: usar una SVI</h3>
+        <p>
+          Si el switch será la gateway de VLAN 10 y VLAN 20, coloca las IP en
+          <code>interface vlan</code>, no en sus puertos access o trunk.
+          Aquí <strong>no se usa no switchport</strong>: esos puertos siguen
+          transportando las VLANs en capa 2.
+        </p>
+        <pre class="cli-block"><code><span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">ip routing</span><span class="cli-comment"> # permite enrutar entre redes</span>
+<span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">vlan 10</span><span class="cli-comment"> # crea la VLAN si todavía no existe</span>
+<span class="cli-prompt">MLS1(config-vlan)#</span> <span class="cli-command">exit</span>
+<span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">vlan 20</span>
+<span class="cli-prompt">MLS1(config-vlan)#</span> <span class="cli-command">exit</span>
+<span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">interface vlan 10</span><span class="cli-comment"> # selecciona la SVI de VLAN 10</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">ip address 192.168.10.1 255.255.255.0</span><span class="cli-comment"> # gateway de VLAN 10</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">no shutdown</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">exit</span>
+<span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">interface vlan 20</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">ip address 192.168.20.1 255.255.255.0</span><span class="cli-comment"> # gateway de VLAN 20</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">no shutdown</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">exit</span></code></pre>
+        <div class="lesson-note">
+          <strong>Para que la SVI esté up/up:</strong> la VLAN debe existir y
+          tener al menos un puerto activo en estado forwarding que la transporte
+          (access o trunk). Los PC usan la IP de su SVI como gateway.
+          Este ejemplo reemplaza al router del caso anterior: no asignes la
+          misma gateway al router y al switch simultáneamente.
+        </div>
+        <h3>2. IP para un puerto físico: usar no switchport</h3>
+        <p>
+          Para un enlace enrutado hacia otro router o switch capa 3, la IP va
+          directamente en el puerto. Por ejemplo, MLS1 usa 192.168.60.2/24 y
+          el router del otro extremo usa 192.168.60.1/24.
+        </p>
+        <pre class="cli-block"><code><span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">ip routing</span><span class="cli-comment"> # habilita el enrutamiento del equipo</span>
+<span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">interface gigabitEthernet 0/1</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">no switchport</span><span class="cli-comment"> # convierte este puerto en capa 3</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">ip address 192.168.60.2 255.255.255.0</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">no shutdown</span>
+<span class="cli-prompt">MLS1(config-if)#</span> <span class="cli-command">exit</span></code></pre>
+        <p>
+          Ese puerto deja de ser access o trunk. Úsalo en un puerto disponible,
+          no en el trunk que necesitas para las VLANs. Las SVI y los puertos
+          enrutados pueden coexistir en el mismo switch. Para redes remotas,
+          también necesitas rutas de ida y vuelta.
+        </p>
+        <h3>Comprobar las IP y las rutas</h3>
+        <pre class="cli-block"><code><span class="cli-prompt">MLS1(config)#</span> <span class="cli-command">end</span>
+<span class="cli-prompt">MLS1#</span> <span class="cli-command">show ip interface brief</span><span class="cli-comment"> # revisa IP y estado de SVI y puertos</span>
+<span class="cli-prompt">MLS1#</span> <span class="cli-command">show ip route</span><span class="cli-comment"> # revisa las redes que puede alcanzar</span></code></pre>
+        <p>
+          Usa un modelo multilayer compatible, como el 3560 de Packet Tracer.
+          <code>ip routing</code> no asigna IP ni convierte todos los puertos
+          en capa 3; <code>no switchport</code> solo afecta al puerto seleccionado.
+        </p>
         <div class="lesson-actions">
           <a href="index.html">← Antes de configurar routing</a
           ><a href="rutas-estaticas.html">Siguiente: rutas estáticas →</a>
