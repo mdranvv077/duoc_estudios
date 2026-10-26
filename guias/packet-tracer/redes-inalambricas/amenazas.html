@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="La radio puede alcanzar a personas que no tienen acceso físico a nuestros puertos." /><title>Amenazas y falsas protecciones — Redes inalámbricas</title>
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 09</small><strong>Redes inalámbricas</strong></a><nav class="lesson-nav" aria-label="Módulos"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+<article class="lesson-content command-reference l2-lesson wifi-lesson">
+<p class="eyebrow"><span></span> Módulo 06</p>
+<h1>Proteger una red que sale de la sala.</h1><p class="lesson-lead">La radio puede alcanzar a personas que no tienen acceso físico a nuestros puertos.</p>
+
+<h2>Qué cambia al usar radio</h2>
+<p>Una pared no define el límite de la WLAN. Desde fuera puede detectarse su señal, observarse información de gestión o intentarse una conexión. Por eso la seguridad no consiste en que el SSID tenga un nombre poco conocido: hay que controlar acceso y proteger las comunicaciones.</p>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Situación</th><th scope="col">Riesgo y respuesta</th></tr></thead><tbody><tr><td data-label="Situación">Intercepción</td><td data-label="Riesgo y respuesta">Sin protección adecuada, parte del tráfico queda expuesto. Usa cifrado del enlace y protocolos seguros de extremo a extremo.</td></tr><tr><td data-label="Situación">Intruso</td><td data-label="Riesgo y respuesta">Un usuario no autorizado obtiene acceso. Revisa credenciales, método de autenticación y permisos de la red.</td></tr><tr><td data-label="Situación">Denegación de servicio</td><td data-label="Riesgo y respuesta">El servicio se degrada o se interrumpe. Distingue interferencia, avería, mala configuración y actividad maliciosa antes de concluir.</td></tr><tr><td data-label="Situación">AP no autorizado</td><td data-label="Riesgo y respuesta">Alguien instala una entrada inalámbrica ajena a la política. Inventaría equipos y vigila AP y puertos de la infraestructura.</td></tr></tbody></table></div>
+<h2>Rogue AP y evil twin</h2>
+<p>Un <strong>rogue AP</strong> es un AP no autorizado; incluso puede instalarlo un empleado sin intención maliciosa. Un <strong>evil twin</strong> imita una red legítima para engañar a clientes, por ejemplo anunciando su mismo SSID. Puede formar parte de un ataque intermediario, pero anunciar el nombre no rompe automáticamente el cifrado de una red protegida.</p>
+<p>Para reducir el riesgo, evita conexiones automáticas a redes desconocidas, comprueba el método de seguridad y, en Enterprise, valida correctamente el certificado del servidor. El nombre y una señal fuerte no prueban que el AP sea legítimo.</p>
+<h2>Ocultar SSID no vuelve invisible la red</h2>
+<p>Desactivar la difusión del nombre puede retirarlo de una lista normal, pero no elimina la actividad de radio ni impide descubrir información de la WLAN por otros intercambios. Además, las balizas no desaparecen simplemente por ocultar el SSID. No debe reemplazar autenticación y cifrado.</p>
+<h2>Una MAC tampoco demuestra identidad</h2>
+<p>El filtrado MAC permite o deniega direcciones, pero estas pueden suplantarse. Además, muchos clientes usan direcciones privadas que pueden cambiar y complicar listas manuales. Igual que vimos con Port Security, controlar una dirección no equivale a autenticar a una persona.</p>
+<div class="lesson-note"><strong>Protecciones que se complementan.</strong> Cifrado y autenticación para el acceso, segmentación para limitar lo alcanzable, administración segura y actualizaciones para los equipos, y observación para detectar anomalías. Ninguna casilla aislada resuelve todos los riesgos.</div>
+<h2>Cómo observar sin atacar</h2>
+<p>En el laboratorio revisaremos redes anunciadas, clientes asociados y configuraciones. No necesitamos capturar contraseñas, interferir radio ni desconectar usuarios para comprender estas amenazas. Prueba únicamente sobre equipos y redes autorizados.</p>
+<details class="reference-note"><summary>¿Dos redes con el mismo SSID demuestran que existe un ataque?</summary><p>No. Varios AP legítimos pueden compartir nombre. Compara inventario, BSSID, ubicación y seguridad antes de concluir que uno es falso.</p></details>
+
+<div class="lesson-actions"><a href="planificacion.html">← Cobertura y capacidad</a><a href="autenticacion.html">Siguiente: WPA, cifrado y autenticación →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
+</article></main>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261026-wireless"></script>
+</body></html>

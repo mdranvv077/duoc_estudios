@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Un canal no es una red independiente: es una porción del espectro que varios equipos pueden compartir." /><title>Bandas, canales e interferencias — Redes inalámbricas</title>
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 09</small><strong>Redes inalámbricas</strong></a><nav class="lesson-nav" aria-label="Módulos"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+<article class="lesson-content command-reference l2-lesson wifi-lesson">
+<p class="eyebrow"><span></span> Módulo 04</p>
+<h1>Compartir el aire sin estorbarse.</h1><p class="lesson-lead">Un canal no es una red independiente: es una porción del espectro que varios equipos pueden compartir.</p>
+
+<h2>Banda, canal y ancho de canal</h2>
+<p>La <strong>banda</strong> es una región de frecuencias, como 2,4 o 5 GHz. El <strong>canal</strong> indica dónde se transmite dentro de esa banda. El <strong>ancho</strong>, expresado en MHz, indica cuánto espectro ocupa. No confundas MHz con Mbps: uno mide ancho de frecuencia y el otro una tasa de datos.</p>
+<p>Imagina una carretera compartida: elegir canal es elegir una zona de circulación; aumentar su ancho ocupa más espacio disponible. No crea capacidad infinita ni impide que haya otros usuarios.</p>
+<h2>2,4 GHz: por qué se repiten 1, 6 y 11</h2>
+<p>Muchos canales vecinos se solapan porque sus frecuencias centrales están próximas. Para un plan habitual de canales de 20 MHz, se utilizan <strong>1, 6 y 11</strong> en AP cercanos, dentro de lo permitido por el país. Los 22 MHz que aparecen en material de 802.11b describen ese caso histórico, no todo Wi-Fi.</p>
+<figure class="topology-card wifi-channel-plan"><figcaption><span>Ejemplo de planificación</span><strong>Tres AP cercanos · banda de 2,4 GHz</strong></figcaption><div class="wifi-flow"><div><b>AP-A</b><span>Canal 1</span></div><div><b>AP-B</b><span>Canal 6</span></div><div><b>AP-C</b><span>Canal 11</span></div></div><p>Esquema de asignación, no una escala de frecuencia. No uses 1, 2 y 3 como si fueran tres canales separados sin solapamiento.</p></figure>
+<h2>Mismo canal y canales solapados</h2>
+<p>Dos AP que se escuchan en el mismo canal comparten tiempo de aire: esperan turnos y la capacidad disponible por cliente puede caer. Si usan canales parcialmente solapados, pueden interferirse sin coordinarse bien. El problema no se resuelve únicamente cambiando el nombre del SSID.</p>
+<h2>5 GHz y el ancho de canal</h2>
+<p>En 5 GHz hay más opciones para reutilizar canales. Por ejemplo, 36, 40, 44 y 48 son canales distintos de 20 MHz donde estén autorizados. Al unirlos en un canal de 80 MHz, ocupas ese conjunto: dejan de ser cuatro alternativas independientes para AP vecinos con ese ancho.</p>
+<p>El número de canales disponibles depende del país, del dispositivo y de restricciones como <strong>DFS</strong>, que protege servicios de radar. No hay un número universal de 24 canales ni solo tres canales válidos. En 6 GHz también cambian disponibilidad y requisitos; no asumiremos soporte en todos los equipos del laboratorio.</p>
+<h2>DSSS, FHSS y OFDM</h2>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Técnica</th><th scope="col">Idea que debes retener</th></tr></thead><tbody><tr><td data-label="Técnica">DSSS</td><td data-label="Idea que debes retener">Extiende la señal mediante una secuencia de códigos. Se asocia al Wi-Fi 802.11b.</td></tr><tr><td data-label="Técnica">FHSS</td><td data-label="Idea que debes retener">Emisor y receptor cambian de frecuencia de forma coordinada. Aparecía en el 802.11 original.</td></tr><tr><td data-label="Técnica">OFDM</td><td data-label="Idea que debes retener">Divide el canal en subportadoras ortogonales para transportar información en paralelo. Se usa en generaciones como a/g/n/ac.</td></tr></tbody></table></div>
+<div class="lesson-note"><strong>No son tres tipos de canales.</strong> Son técnicas de transmisión. En Wi-Fi moderno también aparece OFDMA, que reparte recursos entre usuarios; no es simplemente otro nombre para OFDM.</div>
+<details class="reference-note"><summary>¿Un canal más ancho siempre mejora una red con muchos AP?</summary><p>No. Puede aumentar la tasa de un enlace, pero consume más espectro y deja menos canales para reutilizar. Debes equilibrar capacidad, interferencias y dispositivos compatibles.</p></details>
+
+<div class="lesson-actions"><a href="capwap.html">← AP, WLC y CAPWAP</a><a href="planificacion.html">Siguiente: Cobertura y capacidad →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
+</article></main>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261026-wireless"></script>
+</body></html>

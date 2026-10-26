@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Entender qué ocurre entre tu equipo, el punto de acceso y la red antes de tocar una configuración." /><title>Antes de configurar Wi-Fi — Redes inalámbricas</title>
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 09</small><strong>Redes inalámbricas</strong></a><nav class="lesson-nav" aria-label="Módulos"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+<article class="lesson-content command-reference l2-lesson wifi-lesson">
+<p class="eyebrow"><span></span> Módulo 01</p>
+<h1>Redes sin cables, con una base clara.</h1><p class="lesson-lead">Entender qué ocurre entre tu equipo, el punto de acceso y la red antes de tocar una configuración.</p>
+
+<h2>Qué vamos a aprender</h2>
+<p>Hasta ahora conectábamos equipos mediante puertos y cables. En una WLAN, el primer tramo viaja por radio: el portátil se comunica con un punto de acceso, o <strong>AP</strong>, y este lo incorpora a la red. Después siguen existiendo VLANs, direcciones IP, gateways y servicios como DHCP y DNS.</p>
+<p>Piensa en el AP como una entrada inalámbrica a la LAN. Que la puerta esté cerca no significa que puedas entrar: el cliente necesita una radio compatible, asociarse y cumplir la seguridad configurada. Y entrar tampoco garantiza Internet; aún debe funcionar el resto de la red.</p>
+<ul><li>Distinguir SSID, AP, cliente y controladora WLC.</li><li>Entender cómo se descubre una red y se establece una conexión.</li><li>Reconocer CAPWAP, la distribución de funciones y FlexConnect.</li><li>Elegir canales sin confundir cobertura, capacidad y velocidad.</li><li>Comparar autenticación y cifrado, y diagnosticar una WLAN sencilla.</li></ul>
+<h2>Quién hace qué</h2>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Elemento</th><th scope="col">Función</th></tr></thead><tbody><tr><td data-label="Elemento">Cliente</td><td data-label="Función">Portátil, teléfono o equipo con interfaz Wi-Fi. Busca un AP y solicita acceso.</td></tr><tr><td data-label="Elemento">AP</td><td data-label="Función">Proporciona el enlace de radio y conecta los clientes con la infraestructura.</td></tr><tr><td data-label="Elemento">SSID</td><td data-label="Función">Nombre de una red inalámbrica. No identifica de forma única un AP ni es una contraseña.</td></tr><tr><td data-label="Elemento">WLC</td><td data-label="Función">Controladora que administra AP compatibles y aplica políticas comunes.</td></tr><tr><td data-label="Elemento">Gateway / DHCP / DNS</td><td data-label="Función">Enrutan, entregan direcciones y resuelven nombres. Son funciones distintas de proporcionar Wi-Fi.</td></tr></tbody></table></div>
+<h2>Una red pequeña para seguir los ejemplos</h2>
+<figure class="topology-card wifi-diagram"><figcaption><span>Conexiones y funciones</span><strong>Portátil Wi-Fi y la infraestructura</strong></figcaption><ol class="wifi-flow"><li>Portátil Wi-Fi</li><li>AP-LAB</li><li>Switch de la LAN</li><li>Router / gateway</li></ol><p>Recorrido simplificado de un cliente hacia otras redes. Entre el portátil y el AP hay radio; los demás enlaces de este ejemplo son cableados.</p></figure>
+<p>Usaremos <code>DGNV-LAB</code> como SSID de práctica. Más adelante añadiremos una WLC para entender la administración centralizada, pero no hace falta una controladora para que exista una red Wi-Fi.</p>
+<div class="lesson-note"><strong>AP no es lo mismo que router.</strong> Un equipo doméstico puede reunir AP, switch, router y servidor DHCP en una misma caja. Aquí separaremos las funciones para entender qué falla y dónde.</div>
+<h2>Cómo avanzar</h2>
+<p>Primero veremos la conexión del cliente. Después, la administración de AP, los canales y la planificación. Terminaremos con amenazas, seguridad y una práctica guiada. No necesitas memorizar todas las siglas al inicio: cada una aparecerá cuando explique una función concreta.</p>
+<p class="l2-source">Material de partida: <a href="https://view.genially.com/667df647b856d40014c964bb" target="_blank" rel="noopener">Tecnologías inalámbricas emergentes</a>. Se reorganizan sus temas, se añaden ejemplos y se corrigen imprecisiones técnicas.</p>
+<div class="lesson-actions"><a href="../index.html">← Ver categorías</a><a href="conexion.html">Siguiente: Cómo se conecta un cliente →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
+</article></main>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261026-wireless"></script>
+</body></html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="La contraseña, el cifrado y la validación de identidad cumplen funciones relacionadas, pero diferentes." /><title>WPA, cifrado y autenticación — Redes inalámbricas</title>
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 09</small><strong>Redes inalámbricas</strong></a><nav class="lesson-nav" aria-label="Módulos"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+<article class="lesson-content command-reference l2-lesson wifi-lesson">
+<p class="eyebrow"><span></span> Módulo 07</p>
+<h1>Quién entra y cómo se protegen sus datos.</h1><p class="lesson-lead">La contraseña, el cifrado y la validación de identidad cumplen funciones relacionadas, pero diferentes.</p>
+
+<h2>Autenticar y cifrar</h2>
+<p><strong>Autenticar</strong> comprueba credenciales o una identidad según el método elegido. <strong>Cifrar</strong> protege la información transmitida. Una red abierta tradicional puede permitir asociarse sin contraseña y no cifrar el enlace. Un portal web de bienvenida no añade automáticamente cifrado Wi-Fi.</p>
+<h2>De WEP a WPA3</h2>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Tecnología</th><th scope="col">Cómo interpretarla</th></tr></thead><tbody><tr><td data-label="Tecnología">WEP</td><td data-label="Cómo interpretarla">Protección antigua con vulnerabilidades conocidas. Se estudia como antecedente, no para desplegar una red.</td></tr><tr><td data-label="Tecnología">WPA con TKIP</td><td data-label="Cómo interpretarla">Solución heredada de transición. No es la elección para una instalación nueva.</td></tr><tr><td data-label="Tecnología">WPA2 con AES-CCMP</td><td data-label="Cómo interpretarla">Base habitual en equipos compatibles. Debe distinguirse de WPA2 con opciones débiles o heredadas; importan contraseña, actualizaciones y configuración.</td></tr><tr><td data-label="Tecnología">WPA3-Personal</td><td data-label="Cómo interpretarla">Usa SAE para el establecimiento de claves basado en contraseña y mejora la resistencia frente a ataques de diccionario fuera de línea. No elimina el riesgo de una contraseña débil.</td></tr><tr><td data-label="Tecnología">WPA3-Enterprise</td><td data-label="Cómo interpretarla">Autenticación empresarial mediante 802.1X/EAP. Existe un modo de seguridad de 192 bits para necesidades específicas; no todo WPA3-Enterprise lo exige.</td></tr></tbody></table></div>
+<p>No vamos a afirmar que “todo WPA2 es inseguro” ni a tratar WEP, WPA y WPA2 como opciones equivalentes. Prefiere WPA3 en un entorno compatible; en un laboratorio que solo ofrezca WPA2, utiliza AES y explica esa limitación en vez de bajar a WEP para hacerlo funcionar.</p>
+<h2>Personal: una clave compartida</h2>
+<p>En WPA2-Personal, los usuarios conocen una PSK o contraseña común; no se necesita un servidor RADIUS. Resulta sencillo para un laboratorio pequeño, pero revocar a una persona puede exigir cambiar la clave para todos. WPA3-Personal también permite acceso con contraseña, usando SAE en lugar del mecanismo PSK de WPA2.</p>
+<h2>Enterprise: credenciales por usuario o dispositivo</h2>
+<figure class="topology-card wifi-diagram"><figcaption><span>Conexiones y funciones</span><strong>Cliente / supplicant y la infraestructura</strong></figcaption><ol class="wifi-flow"><li>Cliente / supplicant</li><li>AP o WLC / authenticator</li><li>Servidor RADIUS</li></ol><p>Modelo 802.1X simplificado: el equipo de acceso media entre el cliente y el servidor que valida el método EAP.</p></figure>
+<p>El cliente utiliza un método <strong>EAP</strong>, por ejemplo uno basado en certificados. El AP o la WLC intercambia información con RADIUS. No se trata necesariamente de escribir la misma contraseña Wi-Fi en todos los equipos.</p>
+<p>En una configuración RADIUS clásica se indica la IP del servidor y una clave compartida entre el equipo de acceso y ese servidor. Esa clave <strong>no es la contraseña del usuario</strong>. Los puertos UDP habituales son 1812 para autenticación y 1813 para contabilidad; 1645 y 1646 son alternativas heredadas.</p>
+<div class="lesson-note"><strong>Validar el servidor importa.</strong> Aceptar cualquier certificado en una WLAN Enterprise puede facilitar que un servidor falso engañe al cliente. No desactives la validación para “arreglar” una conexión sin entender el motivo del error.</div>
+<h2>OWE y DPP: funciones distintas</h2>
+<p><strong>Enhanced Open / OWE</strong> cifra el enlace de una red sin contraseña, pero no autentica por sí mismo que el AP sea legítimo. <strong>Easy Connect / DPP</strong> facilita incorporar y aprovisionar dispositivos, por ejemplo mediante un código QR. Son iniciativas relacionadas con la evolución de Wi-Fi, no cuatro modos obligatorios incluidos en cada red WPA3.</p>
+<details class="reference-note"><summary>¿AES y RADIUS son dos formas alternativas de contraseña?</summary><p>No. AES es un algoritmo de cifrado; RADIUS es un protocolo usado para centralizar funciones AAA. En una WLAN Enterprise pueden participar juntos, cada uno cumpliendo su función.</p></details>
+
+<div class="lesson-actions"><a href="amenazas.html">← Amenazas y falsas protecciones</a><a href="practica.html">Siguiente: Práctica y diagnóstico →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
+</article></main>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261026-wireless"></script>
+</body></html>

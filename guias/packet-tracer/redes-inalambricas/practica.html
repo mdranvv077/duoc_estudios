@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Un laboratorio pequeño para comprobar cada parte del recorrido sin mezclar todos los problemas." /><title>Práctica y diagnóstico — Redes inalámbricas</title>
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 09</small><strong>Redes inalámbricas</strong></a><nav class="lesson-nav" aria-label="Módulos"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+<article class="lesson-content command-reference l2-lesson wifi-lesson">
+<p class="eyebrow"><span></span> Módulo 08</p>
+<h1>Construir, probar y explicar una WLAN.</h1><p class="lesson-lead">Un laboratorio pequeño para comprobar cada parte del recorrido sin mezclar todos los problemas.</p>
+
+<h2>Objetivo y equipos</h2>
+<p>Usa un router inalámbrico disponible en Packet Tracer, un portátil con interfaz Wi-Fi y un PC cableado. Trabajaremos con <code>DGNV-LAB</code> y la LAN <code>192.168.50.0/24</code>. En este equipo doméstico se reúnen AP, switch, router y DHCP; no añadiremos una WLC a la primera práctica.</p>
+<figure class="topology-card wifi-diagram"><figcaption><span>Conexiones y funciones</span><strong>Portátil / DHCP y la infraestructura</strong></figcaption><ol class="wifi-flow"><li>Portátil / DHCP</li><li>Radio / DGNV-LAB</li><li>Router Wi-Fi / .1</li><li>PC cableado / .10</li></ol><p>El PC cableado se conecta a un puerto LAN, no al puerto Internet. Para esta prueba local no necesitas una conexión WAN.</p></figure>
+<p>Los nombres de pestañas y las opciones cambian según el modelo y la versión de Packet Tracer. Usa Config o la GUI del equipo para localizar los campos equivalentes. No supongas que el simulador implementa WPA3, análisis de espectro o todos los comportamientos de una instalación real.</p>
+<h2>1. Preparar la LAN y el AP</h2>
+<ol><li>Configura la dirección LAN del router inalámbrico como <code>192.168.50.1</code>, máscara <code>255.255.255.0</code>.</li><li>Habilita DHCP con un rango que comience en <code>192.168.50.100</code>, sin incluir la IP del router ni la del PC cableado.</li><li>Configura SSID <code>DGNV-LAB</code>, banda de 2,4 GHz y canal 1, si el modelo permite elegirlos.</li><li>Selecciona WPA2-Personal con AES si está disponible. Usa una clave exclusiva de laboratorio, por ejemplo <code>Practica-DGNV-26!</code>, no una contraseña personal.</li><li>En el PC cableado asigna <code>192.168.50.10/24</code> y gateway <code>192.168.50.1</code>.</li></ol>
+<h2>2. Conectar y comprobar</h2>
+<p>En el portátil, selecciona el SSID, introduce la clave y deja la configuración IP en DHCP. Si necesita una tarjeta inalámbrica, instala un módulo compatible con el equipo apagado desde la pestaña Physical. Confirma la dirección recibida antes de hacer ping.</p>
+<div class="reference-terminal"><div class="reference-terminal-bar"><div class="reference-terminal-label"><span>Packet Tracer · consola del cliente</span><strong>Cliente · Portátil</strong></div><button type="button" class="reference-copy" data-copy-cli aria-controls="wifi-client-code" hidden>Copiar</button></div><pre class="cli-block" tabindex="0"><code id="wifi-client-code"><span class="cli-command" data-cli-prompt="C:\&gt; ">ipconfig</span>
+<span class="cli-command" data-cli-prompt="C:\&gt; ">ping 192.168.50.1</span>
+<span class="cli-command" data-cli-prompt="C:\&gt; ">ping 192.168.50.10</span></code></pre><p class="reference-copy-status" role="status" aria-live="polite"></p></div>
+<p>El primer comando revisa la configuración IP; el primer ping prueba la LAN hacia la gateway y el segundo la comunicación con el PC cableado. Un primer intento puede demorarse por resolución ARP; repite y observa el resultado. No pruebes Internet como requisito de una práctica sin WAN.</p>
+<h2>3. Introducir fallas de una en una</h2>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Prueba</th><th scope="col">Qué observar</th></tr></thead><tbody><tr><td data-label="Prueba">Contraseña incorrecta</td><td data-label="Qué observar">El cliente no completa el acceso protegido. Corrige la clave antes de investigar DNS.</td></tr><tr><td data-label="Prueba">DHCP deshabilitado</td><td data-label="Qué observar">Un cliente sin concesión vigente puede asociarse, pero no obtener IP. Una concesión anterior puede seguir funcionando hasta renovarla.</td></tr><tr><td data-label="Prueba">Gateway incorrecta</td><td data-label="Qué observar">Un equipo puede comunicarse dentro de su subred y fallar hacia otras redes. El ping local no demuestra que la gateway esté bien.</td></tr><tr><td data-label="Prueba">DNS incorrecto</td><td data-label="Qué observar">Si se añadió un servidor y una prueba de nombres, las IP pueden funcionar mientras los nombres fallan. Sin DNS en la práctica, no esperes esa resolución.</td></tr></tbody></table></div>
+<h2>4. Ampliación: AP y WLC separados</h2>
+<p>En un archivo aparte, utiliza una WLC y un AP ligero compatibles. Prepara primero sus direcciones y alcance IP, incorpora el AP a la controladora y después publica una WLAN con SSID y seguridad coherentes. Comprueba el registro del AP y la asociación del cliente antes de investigar DHCP. El método de descubrimiento y las pantallas dependen del modelo; no copies comandos de otra plataforma sin verificarlo.</p>
+<div class="lesson-note"><strong>Qué debes poder explicar al terminar.</strong> Qué equipo proporciona radio, cuál entrega IP, dónde está la gateway, qué seguridad elegiste y en qué paso se rompe cada prueba. Guarda una copia funcional antes de introducir fallas.</div>
+<details class="reference-note"><summary>El portátil llega al PC cableado pero no a una web. ¿Está demostrado que falla el Wi-Fi?</summary><p>No. La conectividad local funciona. Revisa si existe WAN, ruta, DNS y servicio web. En la práctica inicial no se configuró Internet, por lo que esa prueba no corresponde.</p></details>
+
+<div class="lesson-actions"><a href="autenticacion.html">← WPA, cifrado y autenticación</a><a href="index.html">Volver al inicio de la categoría →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
+</article></main>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261026-wireless"></script>
+</body></html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Diseñar para las personas y las aplicaciones, no solo para llenar el plano de círculos." /><title>Cobertura y capacidad — Redes inalámbricas</title>
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 09</small><strong>Redes inalámbricas</strong></a><nav class="lesson-nav" aria-label="Módulos"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+<article class="lesson-content command-reference l2-lesson wifi-lesson">
+<p class="eyebrow"><span></span> Módulo 05</p>
+<h1>Que llegue señal no basta.</h1><p class="lesson-lead">Diseñar para las personas y las aplicaciones, no solo para llenar el plano de círculos.</p>
+
+<h2>Cobertura frente a capacidad</h2>
+<p><strong>Cobertura</strong> significa que la señal permite establecer una comunicación útil en una zona. <strong>Capacidad</strong> significa que la red puede atender la demanda de quienes están allí. Un AP puede verse desde toda una sala y, aun así, ofrecer una experiencia mala cuando todos transmiten.</p>
+<p>El tiempo de aire es compartido. Las retransmisiones, los clientes con enlaces lentos y las interferencias consumen ese recurso. La tasa anunciada por el estándar no equivale al rendimiento útil de cada usuario, ni a la velocidad contratada de Internet.</p>
+<h2>Un caso sencillo: dos salas</h2>
+<p>En una oficina trabajan ocho personas con correo y documentos. Al lado hay una sala con treinta alumnos viendo contenido y entregando archivos. Aunque tengan superficies parecidas, no necesariamente requieren la misma distribución de AP. Hay que considerar conexiones simultáneas y tráfico real, no solo metros cuadrados.</p>
+<ol><li><strong>Identifica la demanda:</strong> usuarios concurrentes, llamadas, vídeo, archivos y dispositivos de baja capacidad.</li><li><strong>Revisa el entorno:</strong> paredes, plantas, muebles, fuentes de interferencia y posibles ubicaciones.</li><li><strong>Elige bandas y canales:</strong> comprueba compatibilidad y evita ocupar todo el espectro con canales demasiado anchos.</li><li><strong>Ajusta ubicación y potencia:</strong> busca cobertura bidireccional, no simplemente potencia máxima.</li><li><strong>Valida con pruebas:</strong> mide desde los lugares donde se usará la red y con carga representativa.</li></ol>
+<h2>La potencia también tiene límites</h2>
+<p>Si el AP transmite muy fuerte pero el teléfono no puede responder desde esa distancia, el cliente puede ver la red y comunicarse mal. Aumentar potencia también puede hacer que más AP compitan en el mismo canal. Añadir AP sin planificar tampoco garantiza mejor servicio.</p>
+<div class="lesson-note"><strong>Los círculos del plano son una aproximación.</strong> La propagación real no es circular ni uniforme: cambia con materiales, obstáculos, antenas y frecuencia. Una simulación educativa ayuda a razonar, pero no sustituye una medición de radio en el lugar.</div>
+<h2>SSID y VLAN: separar usos</h2>
+<p>Podemos ofrecer <code>DGNV-EQUIPO</code> para personal y <code>DGNV-INVITADOS</code> para visitas, asociados a VLANs distintas cuando el equipo lo permite. El SSID ayuda a seleccionar la WLAN; la segmentación y sus reglas se aplican en la infraestructura. Tener otro nombre no impide por sí solo llegar a los servidores internos.</p>
+<p>Planifica también DHCP, gateways, DNS y el enlace cableado del AP. Si la WLAN centraliza datos en una WLC, considera la capacidad y disponibilidad del camino hacia ella.</p>
+<details class="reference-note"><summary>Hay buena señal, pero en hora de clase todo va lento. ¿Qué revisarías primero?</summary><p>Carga de clientes, ocupación del canal, retransmisiones, aplicaciones y enlaces de la infraestructura. No atribuyas automáticamente el problema a falta de cobertura ni aumentes potencia sin comprobarlo.</p></details>
+
+<div class="lesson-actions"><a href="canales.html">← Bandas, canales e interferencias</a><a href="amenazas.html">Siguiente: Amenazas y falsas protecciones →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
+</article></main>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261026-wireless"></script>
+</body></html>

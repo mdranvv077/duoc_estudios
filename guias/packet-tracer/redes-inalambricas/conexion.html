@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Ver una red, asociarse a ella y tener conectividad son momentos diferentes." /><title>Cómo se conecta un cliente — Redes inalámbricas</title>
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 09</small><strong>Redes inalámbricas</strong></a><nav class="lesson-nav" aria-label="Módulos"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+<article class="lesson-content command-reference l2-lesson wifi-lesson">
+<p class="eyebrow"><span></span> Módulo 02</p>
+<h1>Del SSID a una conexión útil.</h1><p class="lesson-lead">Ver una red, asociarse a ella y tener conectividad son momentos diferentes.</p>
+
+<h2>Qué tiene que coincidir</h2>
+<p>El AP y el cliente deben compartir una banda y un modo de radio compatibles. Además, el cliente debe seleccionar el SSID correcto y admitir el método de seguridad. La contraseña es necesaria en una red Personal protegida, pero no es un requisito universal: existen redes abiertas y redes Enterprise con credenciales o certificados.</p>
+<p><strong>SSID y BSSID no son lo mismo.</strong> El SSID es el nombre de la red; el BSSID identifica una instancia de esa red en un AP, normalmente mediante una dirección MAC. Varios AP pueden anunciar el mismo SSID sin ser el mismo punto de acceso.</p>
+<h2>Escaneo pasivo y activo</h2>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Método</th><th scope="col">Qué ocurre</th></tr></thead><tbody><tr><td data-label="Método">Pasivo</td><td data-label="Qué ocurre">El cliente escucha las balizas (beacons) que emite el AP. Aprende qué redes hay y qué capacidades anuncian.</td></tr><tr><td data-label="Método">Activo</td><td data-label="Qué ocurre">El cliente envía solicitudes de sondeo (probe requests) y recibe respuestas. Puede preguntar por un SSID concreto o buscar redes sin indicar uno específico, según banda y comportamiento del dispositivo.</td></tr></tbody></table></div>
+<p>Es parecido a escuchar anuncios en un pasillo o preguntar qué salas están disponibles. En ambos casos solo estás descubriendo opciones; todavía no has demostrado que puedes utilizar la red.</p>
+<h2>El proceso completo, sin mezclar capas</h2>
+<ol><li><strong>Descubrir y elegir:</strong> el cliente detecta AP y selecciona uno compatible.</li><li><strong>Establecer la conexión 802.11:</strong> se realizan los intercambios de autenticación y asociación correspondientes.</li><li><strong>Completar la seguridad:</strong> según WPA2, WPA3 o Enterprise, se validan credenciales y se establecen claves. El orden exacto de estos intercambios depende del método.</li><li><strong>Obtener configuración IP:</strong> normalmente DHCP entrega dirección, máscara, gateway y DNS.</li><li><strong>Usar la red:</strong> ya se puede probar la gateway, otros servicios y la salida hacia redes remotas.</li></ol>
+<div class="lesson-note"><strong>Autenticación 802.11 no equivale siempre a validar la contraseña.</strong> Con WPA2, la autenticación inicial Open System no comprueba la PSK; la seguridad se completa después mediante otros intercambios. Por eso conviene separar “asociado” de “acceso autorizado”.</div>
+<h2>Ejemplo: conectado, pero sin Internet</h2>
+<p>Tu portátil muestra <code>DGNV-LAB</code>, acepta la clave y aparece conectado. Si no obtiene una IP válida, revisa DHCP y la VLAN antes de cambiar el canal. Si llega a la gateway pero no resuelve nombres, revisa DNS. El icono de Wi-Fi confirma una parte del recorrido, no todos los servicios.</p>
+<h2>Comprueba que lo entendiste</h2>
+<details class="reference-note"><summary>¿Dos AP con el mismo SSID son necesariamente el mismo dispositivo?</summary><p>No. Pueden anunciar la misma red con BSSID diferentes. Esto permite ampliar la cobertura; el cambio de AP y la continuidad de las sesiones dependen del diseño y del cliente.</p></details>
+
+<div class="lesson-actions"><a href="index.html">← Antes de configurar Wi-Fi</a><a href="capwap.html">Siguiente: AP, WLC y CAPWAP →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
+</article></main>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261026-wireless"></script>
+</body></html>

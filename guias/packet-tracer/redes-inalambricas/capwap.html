@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Separar la conexión de radio, las decisiones de control y el recorrido de los datos." /><title>AP, WLC y CAPWAP — Redes inalámbricas</title>
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260930-fiber" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Navegación de Packet Tracer</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 09</small><strong>Redes inalámbricas</strong></a><nav class="lesson-nav" aria-label="Módulos"></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside>
+<article class="lesson-content command-reference l2-lesson wifi-lesson">
+<p class="eyebrow"><span></span> Módulo 03</p>
+<h1>Muchos AP, una administración común.</h1><p class="lesson-lead">Separar la conexión de radio, las decisiones de control y el recorrido de los datos.</p>
+
+<h2>Por qué aparece una controladora</h2>
+<p>Configurar un AP por separado es sencillo. Repetir SSID, seguridad y políticas en muchos AP aumenta el trabajo y las posibilidades de dejar configuraciones distintas. Una <strong>WLC</strong> permite administrar AP compatibles desde un punto común. Un AP autónomo, en cambio, conserva su propia administración.</p>
+<figure class="topology-card wifi-diagram"><figcaption><span>Conexiones y funciones</span><strong>Cliente y la infraestructura</strong></figcaption><ol class="wifi-flow"><li>Cliente</li><li>AP administrado</li><li>Red IP / CAPWAP</li><li>WLC</li></ol><p>Esquema lógico del modelo centralizado. El AP y la WLC necesitan conectividad IP; no tienen que estar unidos por un cable directo.</p></figure>
+<h2>Qué transporta CAPWAP</h2>
+<p>CAPWAP es un protocolo estandarizado por el <strong>IETF</strong>, no por IEEE. Permite el control de puntos de acceso y, en diseños con tráfico centralizado, transportar datos de clientes hacia la controladora. La red intermedia transporta los paquetes IP del túnel.</p>
+<div class="l2-table-wrap"><table class="l2-table"><thead><tr><th scope="col">Canal</th><th scope="col">Uso</th></tr></thead><tbody><tr><td data-label="Canal">UDP 5246 · control</td><td data-label="Uso">Descubrimiento, configuración y mensajes de administración entre AP y controladora.</td></tr><tr><td data-label="Canal">UDP 5247 · datos</td><td data-label="Uso">Transporta datos de clientes cuando el diseño utiliza el canal de datos CAPWAP.</td></tr></tbody></table></div>
+<p>No son números de VLAN ni puertos físicos del switch. Tampoco cambia automáticamente el protocolo de transporte por usar IPv6: UDP utiliza el identificador 17 en IPv4 y en el campo Next Header de IPv6. El 136 corresponde a UDP-Lite, no a “CAPWAP sobre IPv6”.</p>
+<h2>Split MAC: repartir el trabajo</h2>
+<p>La arquitectura MAC dividida deja en el AP funciones sensibles al tiempo de radio, como transmitir balizas y responder rápidamente a ciertas tramas. La controladora asume funciones de administración y políticas, y participa en la gestión de clientes. No significa que el AP sea una antena sin procesamiento ni que la WLC haga absolutamente todo.</p>
+<h2>DTLS: proteger el túnel</h2>
+<p><strong>DTLS</strong> protege las comunicaciones de control entre AP y WLC. El cifrado del canal de datos es una capacidad separada: disponibilidad, valores predeterminados y licencias dependen de la plataforma. No debemos presentar una condición de un modelo como regla para todas las controladoras.</p>
+<h2>FlexConnect y las sucursales</h2>
+<p>Con FlexConnect, un AP puede gestionar localmente el tráfico de ciertas WLAN aunque una WLC remota mantenga el control. En modo <strong>connected</strong> existe conectividad con la WLC; en <strong>standalone</strong> se ha perdido. La conmutación local puede existir también cuando está conectado.</p>
+<div class="lesson-note"><strong>Perder la WLC no garantiza que todo continúe.</strong> Mantener clientes y admitir nuevos depende de la conmutación, la autenticación y los servicios preparados. Una autenticación central que ya no es accesible puede impedir nuevas conexiones, aunque la LAN local siga funcionando.</div>
+<details class="reference-note"><summary>Si se cae la WAN de la sucursal, ¿todos los AP siguen funcionando igual?</summary><p>No. Hay que revisar si el tráfico se conmutaba localmente o iba a la WLC, y dónde se autenticaban los clientes. FlexConnect exige diseñar ese comportamiento; no es una copia automática de todos los servicios.</p></details>
+<p class="l2-source">Consulta técnica opcional: <a href="https://www.rfc-editor.org/rfc/rfc5415.html" target="_blank" rel="noopener">especificación de CAPWAP</a>.</p>
+<div class="lesson-actions"><a href="conexion.html">← Cómo se conecta un cliente</a><a href="canales.html">Siguiente: Bandas, canales e interferencias →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year">2026</span></p></footer>
+</article></main>
+<script src="../../../assets/js/main.js"></script><script src="../../../assets/js/learning.js?v=20261026-wireless"></script>
+</body></html>

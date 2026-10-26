@@ -2,6 +2,20 @@ let renderedGuideUrl = window.location.href;
 let referenceReturnButton = null;
 
 const guideData = {
+  wireless: {
+    folder: "redes-inalambricas",
+    label: "Redes inalámbricas",
+    sections: [
+      ["index.html", "Antes de configurar Wi-Fi"],
+      ["conexion.html", "Cómo se conecta un cliente"],
+      ["capwap.html", "AP, WLC y CAPWAP"],
+      ["canales.html", "Bandas, canales e interferencias"],
+      ["planificacion.html", "Cobertura y capacidad"],
+      ["amenazas.html", "Amenazas y falsas protecciones"],
+      ["autenticacion.html", "WPA, cifrado y autenticación"],
+      ["practica.html", "Práctica y diagnóstico"],
+    ],
+  },
   redundancy: {
     folder: "redundancia-capa-3",
     label: "Redundancia de capa 3",
@@ -98,6 +112,7 @@ function currentGuideKey(url = window.location.href) {
   if (path.endsWith("/packet-tracer/modulo-en-blanco.html")) return "standalone";
   if (path.includes("/redundancia-capa-3/")) return "redundancy";
   if (path.includes("/seguridad-capa-2/")) return "layer2security";
+  if (path.includes("/redes-inalambricas/")) return "wireless";
   if (path.includes("/etherchannel/")) return "etherchannel";
   if (path.includes("/spanning-tree/")) return "spanning";
   if (path.includes("/trunking/")) return "trunking";
@@ -134,7 +149,8 @@ function renderGuideNavigation() {
     <a class="sidebar-category ${guideKey === "spanning" ? "active" : ""}" data-guide="spanning" href="${categoryHref("spanning")}"><span>05</span><b>Spanning Tree</b><i aria-hidden="true">↗</i></a>
     <a class="sidebar-category ${guideKey === "etherchannel" ? "active" : ""}" data-guide="etherchannel" href="${categoryHref("etherchannel")}"><span>06</span><b>EtherChannel</b><i aria-hidden="true">↗</i></a>
     <a class="sidebar-category ${guideKey === "redundancy" ? "active" : ""}" data-guide="redundancy" href="${categoryHref("redundancy")}"><span>07</span><b>Redundancia de capa 3</b><i aria-hidden="true">↗</i></a>
-    <a class="sidebar-category ${guideKey === "layer2security" ? "active" : ""}" data-guide="layer2security" href="${categoryHref("layer2security")}"><span>08</span><b>Seguridad de capa 2</b><i aria-hidden="true">↗</i></a>`;
+    <a class="sidebar-category ${guideKey === "layer2security" ? "active" : ""}" data-guide="layer2security" href="${categoryHref("layer2security")}"><span>08</span><b>Seguridad de capa 2</b><i aria-hidden="true">↗</i></a>
+    <a class="sidebar-category ${guideKey === "wireless" ? "active" : ""}" data-guide="wireless" href="${categoryHref("wireless")}"><span>09</span><b>Redes inalámbricas</b><i aria-hidden="true">↗</i></a>`;
   guideSidebar.querySelector(".sidebar-brand")?.insertAdjacentElement("afterend", categories);
 
   const lessonNav = guideSidebar.querySelector(".lesson-nav");
@@ -160,7 +176,7 @@ function renderGuideNavigation() {
 
   const isIntroModule = currentLesson === "index.html";
   const lessonLead = document.querySelector(".lesson-content .lesson-lead");
-  if (!standalone && !["redundancy", "layer2security"].includes(guideKey) && isIntroModule && lessonLead && !document.querySelector(".equipment-note")) {
+  if (!standalone && !["redundancy", "layer2security", "wireless"].includes(guideKey) && isIntroModule && lessonLead && !document.querySelector(".equipment-note")) {
     const equipmentCopy = guideKey === "spanning"
       ? '<strong>Equipos recomendados:</strong> utiliza tres switches Cisco 2960 (capa 2). No necesitas un router para observar el funcionamiento de Spanning Tree en esta práctica.'
       : guideKey === "etherchannel"
