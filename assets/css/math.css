@@ -80,6 +80,23 @@
 
 .math-table tr:last-child td { border-bottom: 0; }
 
+/* Matrices: tabla de posiciones legible sin desplazar la página. */
+.matrix-card { box-sizing: border-box; max-width: 720px; margin: 28px 0; padding: 18px; border: 1px solid rgba(46,234,255,.2); background: rgba(6,10,16,.72); }
+.matrix-card figcaption { margin: 0 0 18px; color: var(--orange); font: .7rem/1.6 "DM Mono", monospace; }
+.matrix-grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.matrix-grid th, .matrix-grid td { padding: 14px 8px; border: 1px solid var(--line); text-align: center; overflow-wrap: anywhere; }
+.matrix-grid th { color: var(--muted); font: .73rem/1.5 "DM Mono", monospace; }
+.matrix-grid td { color: var(--text); font: 500 1.15rem "DM Mono", monospace; }
+.matrix-grid .matrix-focus { color: var(--cyan); background: rgba(46,234,255,.1); outline: 1px solid var(--cyan); outline-offset: -1px; }
+.matrix-lesson .sequence-code .code-title > span { min-width: 0; line-height: 1.7; }
+.matrix-lesson h3 { margin: 28px 0 12px; }
+@media (max-width: 600px) {
+  .matrix-card { padding: 12px; }
+  .matrix-grid th { font-size: .62rem; }
+  .matrix-grid td { font-size: .95rem; }
+  .matrix-grid th, .matrix-grid td { padding: 12px 5px; }
+}
+
 /* Episodio 02: conserva las fórmulas y ventanas de código de la modalidad. */
 .sequence-lesson .lesson-note { margin-bottom: 24px; }
 .sequence-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 720px; margin: 24px 0; }

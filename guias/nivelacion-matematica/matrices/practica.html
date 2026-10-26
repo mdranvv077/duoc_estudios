@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261026-matrices" />
+<title>Taller y uso del formulario — Matrices · Nivelación matemática</title><meta name="description" content="Resolver desde el enunciado: significado, dimensiones, operación, Python y respuesta con unidades." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de matrices</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Matrices</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de matrices"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson matrix-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 07</p>
+<h1>Elegir el código y explicar el resultado.</h1><p class="lesson-lead">Resolver desde el enunciado: significado, dimensiones, operación, Python y respuesta con unidades.</p>
+
+<h2>El método para cada ejercicio</h2>
+<p>Trabaja cada actividad en <strong>dos entregas complementarias</strong>: una solución matemática y una implementación en Python. La primera debe poder entenderse sin ejecutar nada; la segunda debe mostrar que sabes construir y adaptar el programa, no solo pegarlo.</p>
+<div class="concept-pairs"><div><strong>Parte matemática</strong><span>Escribe el orden, la regla o expresión, desarrolla las casillas pedidas e interpreta su significado con unidades.</span></div><div><strong>Parte Python</strong><span>Carga o genera los datos, escribe la operación, consulta posiciones y explica qué líneas debes cambiar para otro ejercicio.</span></div></div>
+<ol><li><strong>Describe filas y columnas.</strong> Anota su significado y orden.</li><li><strong>Identifica unidades.</strong> No confundas miles, millones y unidades.</li><li><strong>Escribe la operación.</strong> Antes de Python, decide qué representa el total o la diferencia.</li><li><strong>Adapta el formulario.</strong> Cambia datos, factores y dimensiones, no solo el nombre de las matrices.</li><li><strong>Comprueba una casilla.</strong> Haz un cálculo corto a mano y compara.</li><li><strong>Interpreta.</strong> Explica qué mide el número, a qué posición corresponde y en qué unidad.</li></ol>
+<h2>Nivel inicial · Distancias e igualdad</h2>
+<p>En la sección 5 de G5, las ciudades se ordenan Arica, La Serena, Santiago y Concepción. La matriz D de distancias tiene orden 4 × 4. Interpreta d<sub>42</sub> = 989, d<sub>43</sub> = 516 y d<sub>12</sub> = 1596. Después explica la diagonal de ceros y la simetría.</p>
+<details class="sequence-solution"><summary>Ver interpretación</summary><div><p>Son kilómetros de Concepción a La Serena, de Concepción a Santiago y de Arica a La Serena, respectivamente. La diagonal vale cero porque compara una ciudad consigo misma. Esta tabla modela distancias iguales en ambos sentidos, por eso d<sub>ij</sub> = d<sub>ji</sub>; no es una regla de cualquier red de viajes o rutas.</p></div></details>
+<p>Para la igualdad, F tiene orden 2 × 3 y G orden 2 × 2: no son iguales. F y H tienen el mismo orden, pero f<sub>23</sub> = 3,7 y h<sub>23</sub> = 2,7: tampoco son iguales. Tener la misma cantidad de elementos o el mismo orden no basta.</p>
+<h2>Nivel inicial · Variaciones de peso</h2>
+<p>La matriz A registra antes y D después, con hombres en fila 1 y mujeres en fila 2. Para obtener variaciones, calcula <strong>V = D − A</strong>. Prueba con los datos del ejercicio y responde cuánto aumentaron la mujer 3 y el hombre 2.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · G5 · Variación, no suma de pesos</span><button type="button" data-math-copy aria-controls="matrix-code-12" aria-label="Copiar G5 · Variación, no suma de pesos" hidden>Copiar</button></div><pre tabindex="0"><code id="matrix-code-12"><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np
+
+A = np.array([[<span class="py-number">71</span>, <span class="py-number">80</span>, <span class="py-number">75</span>, <span class="py-number">90</span>], [<span class="py-number">65</span>, <span class="py-number">58</span>, <span class="py-number">74</span>, <span class="py-number">82</span>]])
+D = np.array([[<span class="py-number">75</span>, <span class="py-number">83</span>, <span class="py-number">80</span>, <span class="py-number">94</span>], [<span class="py-number">67</span>, <span class="py-number">60</span>, <span class="py-number">78</span>, <span class="py-number">85</span>]])
+V = D - A
+<span class="py-builtin">print</span>(V)
+<span class="py-builtin">print</span>(<span class="py-string">&quot;Mujer 3:&quot;</span>, V[<span class="py-number">1</span>, <span class="py-number">2</span>])
+<span class="py-builtin">print</span>(<span class="py-string">&quot;Hombre 2:&quot;</span>, V[<span class="py-number">0</span>, <span class="py-number">1</span>])</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>[[4 3 5 4]
+ [2 2 4 3]]
+Mujer 3: 4
+Hombre 2: 3</code></pre></div>
+<p>v<sub>23</sub> = 4 y v<sub>12</sub> = 3 son aumentos en kilogramos. No son pesos finales ni porcentajes. Como cada columna identifica una persona dentro de cada fila del ejercicio, no cambies el orden al cargar los datos.</p>
+<h2>Nivel medio · Software y hardware</h2>
+<p>Sin ejecutar código, plantea la suma del total de Sur y desarrolla t<sub>24</sub>, m<sub>31</sub> y (M<sup>T</sup>)<sub>41</sub>. Después escribe tu programa y contrasta cada respuesta. Si el número coincide pero elegiste otro producto o región, la interpretación sigue siendo incorrecta.</p>
+<p>En el problema 8, las filas son productos P1, P2 y P3; las columnas son Norte, Sur, Este y Oeste. Los montos están en millones de pesos. Calcula T = S + H y la previsión M = 1,07S + 1,03H.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · G5 · Totales y previsión de ventas</span><button type="button" data-math-copy aria-controls="matrix-code-13" aria-label="Copiar G5 · Totales y previsión de ventas" hidden>Copiar</button></div><pre tabindex="0"><code id="matrix-code-13"><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np
+
+S = np.array([
+    [<span class="py-number">260</span>, <span class="py-number">480</span>, <span class="py-number">180</span>, <span class="py-number">90</span>],
+    [<span class="py-number">320</span>, <span class="py-number">440</span>, <span class="py-number">250</span>, <span class="py-number">280</span>],
+    [<span class="py-number">240</span>, <span class="py-number">360</span>, <span class="py-number">380</span>, <span class="py-number">250</span>]
+])
+H = np.array([
+    [<span class="py-number">360</span>, <span class="py-number">250</span>, <span class="py-number">300</span>, <span class="py-number">250</span>],
+    [<span class="py-number">450</span>, <span class="py-number">500</span>, <span class="py-number">350</span>, <span class="py-number">380</span>],
+    [<span class="py-number">290</span>, <span class="py-number">300</span>, <span class="py-number">460</span>, <span class="py-number">400</span>]
+])
+T = S + H
+M = <span class="py-number">1.07</span> * S + <span class="py-number">1.03</span> * H
+MT = M.T
+<span class="py-builtin">print</span>(<span class="py-string">&quot;Software en Sur:&quot;</span>, S[:, <span class="py-number">1</span>].sum())
+<span class="py-builtin">print</span>(<span class="py-string">&quot;Hardware en Sur:&quot;</span>, H[:, <span class="py-number">1</span>].sum())
+<span class="py-builtin">print</span>(<span class="py-string">&quot;t24:&quot;</span>, T[<span class="py-number">1</span>, <span class="py-number">3</span>])
+<span class="py-builtin">print</span>(<span class="py-string">&quot;m31:&quot;</span>, <span class="py-builtin">round</span>(<span class="py-builtin">float</span>(M[<span class="py-number">2</span>, <span class="py-number">0</span>]), <span class="py-number">2</span>))
+<span class="py-builtin">print</span>(<span class="py-string">&quot;MT, fila 4 columna 1:&quot;</span>, <span class="py-builtin">round</span>(<span class="py-builtin">float</span>(MT[<span class="py-number">3</span>, <span class="py-number">0</span>]), <span class="py-number">2</span>))</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>Software en Sur: 1280
+Hardware en Sur: 1050
+t24: 660
+m31: 555.5
+MT, fila 4 columna 1: 353.8</code></pre></div>
+<p>La afirmación de que Sur recaudó más por hardware es falsa: 1050 es menor que 1280. t<sub>24</sub> = 660 corresponde al producto 2 en Oeste entre ambas líneas. m<sub>31</sub> = 555,5 es la previsión para el producto 3 en Norte. (M<sup>T</sup>)<sub>41</sub> = 353,8 es la previsión del producto 1 en Oeste. Todos esos montos están en millones de pesos.</p>
+<h2>Para practicar sin repetir código de más</h2>
+<p>Vuelve a los ejercicios de motocicletas: C e I tienen orden 3 × 2, con colores por filas y modelos por columnas. Calcula T = C + I y D = C − I; interpreta t<sub>31</sub>, t<sub>12</sub>, d<sub>22</sub> y d<sub>11</sub> antes de mirar la respuesta.</p>
+<details class="sequence-solution"><summary>Ver resultados de motocicletas</summary><div><p>t<sub>31</sub> = 350 motos azules M1; t<sub>12</sub> = 185 motos rojas M2 por día entre ambas plantas. d<sub>22</sub> = 0: igual producción de motos verdes M2. d<sub>11</sub> = 110: China produce 110 motos rojas M1 más por día que Indonesia.</p></div></details>
+<h2>Qué parte del formulario usar</h2>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Lo que pide el ejercicio</th><th scope="col">Fragmento</th></tr></thead><tbody><tr><td data-label="Lo que pide el ejercicio">Cargar datos y ver orden</td><td data-label="Fragmento">np.array y A.shape.</td></tr><tr><td data-label="Lo que pide el ejercicio">Total o variación por posición</td><td data-label="Fragmento">A + B o B - A, según el contexto.</td></tr><tr><td data-label="Lo que pide el ejercicio">Aumento o reducción</td><td data-label="Fragmento">Factor * A; convierte primero el porcentaje.</td></tr><tr><td data-label="Lo que pide el ejercicio">Cambiar filas y columnas</td><td data-label="Fragmento">A.T; revisa el nuevo orden y los subíndices.</td></tr><tr><td data-label="Lo que pide el ejercicio">Generar desde aᵢⱼ</td><td data-label="Fragmento">np.fromfunction con i + 1 y j + 1.</td></tr><tr><td data-label="Lo que pide el ejercicio">Costo total por fila</td><td data-label="Fragmento">sum(axis=1); por columna, sum(axis=0).</td></tr></tbody></table></div>
+<div class="lesson-note"><strong>No confundas las operaciones.</strong> <code>A * B</code> multiplica elementos por posición en NumPy; no es el producto matricial del formulario con <code>np.dot(A, B)</code>. Tampoco <code>A.T</code> es la inversa. Esos temas requieren sus propias condiciones y se dejan para una ampliación.</div>
+<h2>Antes de entregar</h2>
+<p><strong>Desafío de adaptación:</strong> cambia la previsión a un aumento del 10 % en software y una reducción del 5 % en hardware. Primero escribe N = 1,10S + 0,95H y calcula n<sub>31</sub> a mano. Después modifica los factores y consulta la casilla correcta en Python. Debes obtener 539,5 millones de pesos; explica por qué usaste los índices (2, 0).</p>
+<p>Verifica signos, orden de filas, unidades y dimensiones. Los decimales pueden mostrar pequeñas diferencias de representación; usa redondeo al presentar, no para cambiar el significado. Si un enunciado es incompatible o ambiguo, indícalo y pide confirmación: un resultado que Python imprime no demuestra por sí solo que hayas respondido la pregunta.</p>
+
+<div class="lesson-actions"><a href="posiciones.html">← Matrices definidas por posiciones</a><a href="index.html">Volver al inicio de matrices →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261026-matrices"></script>
+</body></html>

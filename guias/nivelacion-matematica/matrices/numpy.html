@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261026-matrices" />
+<title>Crear y consultar con NumPy — Matrices · Nivelación matemática</title><meta name="description" content="Crear un array de dos dimensiones y traducir correctamente las posiciones matemáticas." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de matrices</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Matrices</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de matrices"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson matrix-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 02</p>
+<h1>De la tabla a Python.</h1><p class="lesson-lead">Crear un array de dos dimensiones y traducir correctamente las posiciones matemáticas.</p>
+
+<h2>Importar la herramienta</h2>
+<p>El formulario utiliza <code>import numpy as np</code>. NumPy permite trabajar con arrays numéricos; para representar nuestras matrices usaremos arrays de <strong>dos dimensiones</strong>. El alias <code>np</code> es un nombre corto para acceder a la librería.</p>
+<p>Cada lista interior representa una fila. Todas deben tener la misma cantidad de elementos. Las comas separan datos; el punto separa los decimales. No copies <code>2,6</code> como si fuera el decimal 2,6: Python lo leería como dos valores.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Crear una matriz y consultar su orden</span><button type="button" data-math-copy aria-controls="matrix-code-1" aria-label="Copiar Crear una matriz y consultar su orden" hidden>Copiar</button></div><pre tabindex="0"><code id="matrix-code-1"><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np
+
+A = np.array([
+    [<span class="py-number">12</span>, <span class="py-number">8</span>, <span class="py-number">15</span>],
+    [<span class="py-number">10</span>, <span class="py-number">14</span>, <span class="py-number">9</span>]
+])
+<span class="py-builtin">print</span>(A)
+<span class="py-builtin">print</span>(A.shape)
+<span class="py-builtin">print</span>(A.size)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>[[12  8 15]
+ [10 14  9]]
+(2, 3)
+6</code></pre></div>
+<p><code>A.shape</code> devuelve (filas, columnas). <code>A.size</code> cuenta todos los elementos. No se escriben paréntesis después de <code>shape</code>: es una propiedad, no una función.</p>
+<h2>Las posiciones empiezan en 0</h2>
+<p><strong>Primero en la matriz:</strong> para encontrar a<sub>23</sub>, sitúate en la segunda fila y avanza hasta su tercera columna. No sumes ni multipliques los subíndices: son coordenadas. Para que exista a<sub>ij</sub> en una matriz m × n, necesitamos 1 ≤ i ≤ m y 1 ≤ j ≤ n.</p>
+<p><strong>Después en Python:</strong> traduce esas coordenadas restando uno a cada una. El significado de la fila y la columna se conserva; cambia la numeración que utiliza el programa.</p>
+<div class="math-formula">a<sub>ij</sub> en matemática → A[i − 1, j − 1] en Python</div>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Matemática</th><th scope="col">Python</th><th scope="col">Ubicación</th></tr></thead><tbody><tr><td data-label="Matemática">a₁₁</td><td data-label="Python">A[0, 0]</td><td data-label="Ubicación">Primera fila, primera columna.</td></tr><tr><td data-label="Matemática">a₂₃</td><td data-label="Python">A[1, 2]</td><td data-label="Ubicación">Segunda fila, tercera columna.</td></tr><tr><td data-label="Matemática">Toda la fila 2</td><td data-label="Python">A[1, :]</td><td data-label="Ubicación">Los dos puntos indican todas las columnas.</td></tr><tr><td data-label="Matemática">Toda la columna 3</td><td data-label="Python">A[:, 2]</td><td data-label="Ubicación">Los dos puntos indican todas las filas.</td></tr></tbody></table></div>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Leer un elemento, una fila y una columna</span><button type="button" data-math-copy aria-controls="matrix-code-2" aria-label="Copiar Leer un elemento, una fila y una columna" hidden>Copiar</button></div><pre tabindex="0"><code id="matrix-code-2"><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np
+
+A = np.array([[<span class="py-number">12</span>, <span class="py-number">8</span>, <span class="py-number">15</span>], [<span class="py-number">10</span>, <span class="py-number">14</span>, <span class="py-number">9</span>]])
+<span class="py-builtin">print</span>(A[<span class="py-number">1</span>, <span class="py-number">2</span>])
+<span class="py-builtin">print</span>(A[<span class="py-number">1</span>, :])
+<span class="py-builtin">print</span>(A[:, <span class="py-number">2</span>])</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>9
+[10 14  9]
+[15  9]</code></pre></div>
+<p>El dato pedido no cambia por usar índices desde cero: sigue siendo el producto 2 en la región 3. Solo cambia la forma de señalarlo en el código. No escribas <code>A[2, 3]</code> para a<sub>23</sub>: en esta matriz estarías fuera de sus límites.</p>
+<h2>Una lista no opera igual que un array</h2>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Sumar listas frente a sumar arrays</span><button type="button" data-math-copy aria-controls="matrix-code-3" aria-label="Copiar Sumar listas frente a sumar arrays" hidden>Copiar</button></div><pre tabindex="0"><code id="matrix-code-3"><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np
+
+lista = [<span class="py-number">1</span>, <span class="py-number">2</span>]
+<span class="py-builtin">print</span>(lista + lista)
+A = np.array([[<span class="py-number">1</span>, <span class="py-number">2</span>]])
+<span class="py-builtin">print</span>(A + A)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>[1, 2, 1, 2]
+[[2 4]]</code></pre></div>
+<p>El <code>+</code> entre listas concatena: une los elementos. Entre arrays compatibles suma sus valores por posición. Por eso conviene conservar <code>np.array</code> al adaptar el formulario, en vez de dejar solamente listas.</p>
+<h2>Cómo interpretar lo que sale</h2>
+<p><strong>Antes de ejecutarlo:</strong> predice qué devolverán <code>A[0, 1]</code> y <code>A[:, 0]</code> en el ejemplo inicial. Escríbelo primero desde la tabla; luego modifica el código y comprueba tu respuesta. Debes obtener 8 y la columna formada por 12 y 10. Así practicas tanto la lectura como la escritura del código.</p>
+<p>Si Python imprime <code>9</code>, completa la respuesta con fila, columna y unidad. Si imprime <code>(2, 3)</code>, responde “dos filas y tres columnas”, no “la matriz vale dos y tres”. El resultado del programa y la explicación del problema cumplen papeles diferentes.</p>
+<div class="lesson-note"><strong>En Colab.</strong> Ejecuta la importación y la definición de A antes de consultarla. Para evitar depender de otra celda, los ejemplos de esta categoría incluyen sus propios datos e importación.</div>
+<details class="sequence-solution"><summary>¿Cómo leerías a₃₄ en una matriz de tres filas y cuatro columnas?</summary><div><p>Con <code>A[2, 3]</code>. Restas uno a ambos subíndices, no solo al de la fila.</p></div></details>
+<div class="lesson-actions"><a href="index.html">← Entender una matriz</a><a href="operaciones.html">Siguiente: Suma, resta y totales →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261026-matrices"></script>
+</body></html>

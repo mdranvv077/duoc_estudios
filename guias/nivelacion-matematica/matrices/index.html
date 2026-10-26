@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261026-matrices" />
+<title>Entender una matriz — Matrices · Nivelación matemática</title><meta name="description" content="Organizar datos por filas y columnas, leer su posición y explicar qué representa cada número." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de matrices</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Matrices</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de matrices"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson matrix-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 01</p>
+<h1>Una tabla que podemos calcular.</h1><p class="lesson-lead">Organizar datos por filas y columnas, leer su posición y explicar qué representa cada número.</p>
+
+<h2>De una lista a dos direcciones</h2>
+<p>En sucesiones buscábamos un término por su posición. Ahora necesitamos dos referencias: <strong>fila y columna</strong>. Una matriz es una disposición rectangular de elementos. Su utilidad no está solo en guardar números: permite operar con muchos datos manteniendo su organización.</p>
+<p>Piensa en una tabla de ventas. Las filas pueden ser productos y las columnas regiones. Si alguien pregunta por una venta, necesitamos saber de qué producto y de qué región habla. Una sola posición ya no basta.</p>
+<figure class="matrix-card"><figcaption>Ejemplo inicial · filas y columnas con significado</figcaption><table class="matrix-grid"><thead><tr><th scope="col">Producto</th><th scope="col">Norte</th><th scope="col">Centro</th><th scope="col">Sur</th></tr></thead><tbody><tr><th scope="row">Producto 1</th><td>12</td><td>8</td><td>15</td></tr><tr><th scope="row">Producto 2</th><td>10</td><td>14</td><td class="matrix-focus">9</td></tr></tbody></table></figure>
+<p>La celda destacada vale <strong>9</strong>: corresponde al producto 2 en la región Sur, es decir, fila 2 y columna 3. El valor no se interpreta solo como “nueve”: si la tabla registra ventas en miles de pesos, significa nueve mil pesos de ese producto en esa región.</p>
+<h2>Orden de una matriz</h2>
+<div class="math-formula">Orden = cantidad de filas × cantidad de columnas</div>
+<p>La matriz anterior tiene orden <strong>2 × 3</strong>. Son dos filas con tres elementos cada una: seis datos en total. Una matriz 3 × 2 también tiene seis elementos, pero no tiene el mismo orden ni organiza lo mismo.</p>
+<h2>Leer a<sub>ij</sub> sin enredarse</h2>
+<p>La letra identifica la matriz. El primer subíndice, <strong>i</strong>, indica la fila; el segundo, <strong>j</strong>, la columna. Así, a<sub>23</sub> se lee “elemento de A en la fila 2, columna 3”. En los ejercicios de esta guía las posiciones matemáticas comienzan en 1.</p>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Antes de calcular</th><th scope="col">Qué debes reconocer</th></tr></thead><tbody><tr><td data-label="Antes de calcular">Qué representan las filas</td><td data-label="Qué debes reconocer">Producto, modelo, color, variable o ciudad, según el enunciado.</td></tr><tr><td data-label="Antes de calcular">Qué representan las columnas</td><td data-label="Qué debes reconocer">Región, componente, planta, día o ciudad.</td></tr><tr><td data-label="Antes de calcular">En qué unidad están los datos</td><td data-label="Qué debes reconocer">Millones de dólares, miles de pares, unidades, kilómetros, etc.</td></tr><tr><td data-label="Antes de calcular">Qué operación se pide</td><td data-label="Qué debes reconocer">Total, variación, porcentaje, transposición o generación por fórmula.</td></tr></tbody></table></div>
+<h2>Qué aprenderás en esta categoría</h2>
+<p><strong>Dos partes con el mismo peso:</strong> comprender las matrices y aprender a programar con ellas. Trabajaremos primero la notación, las condiciones y los cálculos a mano; después traduciremos esa misma idea a Python, explicando cómo escribir y adaptar el código. No se trata solo de ejecutar un formulario.</p>
+<div class="concept-pairs"><div><strong>Matemática · entender y resolver</strong><span>Leer posiciones, operar por casillas, justificar dimensiones e interpretar resultados sin depender del computador.</span></div><div><strong>Python · construir y comprobar</strong><span>Representar los datos, elegir instrucciones, escribir operaciones y explicar por qué el resultado coincide con el cálculo matemático.</span></div></div>
+<p>Crearemos matrices con NumPy; leeremos sus dimensiones y elementos; sumaremos y restaremos datos compatibles; aplicaremos porcentajes; cambiaremos filas por columnas y generaremos matrices desde a<sub>ij</sub>. Terminaremos con ejercicios de la guía G5 y una forma de adaptar el formulario sin copiar a ciegas.</p>
+<div class="lesson-note"><strong>El alcance de esta etapa.</strong> Usaremos la parte matricial básica del formulario. El producto matricial, las inversas y los sistemas aparecen allí, pero no son necesarios para resolver el núcleo de G5. No los mezclaremos todavía con suma, porcentajes y transpuesta.</div>
+<h2>Una primera interpretación de G5</h2>
+<p>En el problema 1, cada fila es un producto y cada columna una región. A y B tienen orden 3 × 4. El elemento a<sub>24</sub> vale 2,8: el producto 2 vendió 2,8 millones de dólares en la región 4 durante el primer año. En Python escribiremos ese decimal con punto: <code>2.8</code>.</p>
+<details class="sequence-solution"><summary>Mini práctica: ¿qué cambia si intercambiamos productos y regiones?</summary><div><p>Cambia la organización: pasaríamos de 3 × 4 a 4 × 3. El dato del producto 2, región 4 se ubicaría en fila 4, columna 2. No desaparece el dato, pero cambia cómo se lee.</p></div></details>
+<p class="sequence-source">Basado en la guía G5 de matrices y en la sección matricial del formulario EA2 que compartiste. Los ejemplos incluyen comprobaciones y aclaraciones cuando un enunciado es ambiguo.</p>
+<div class="lesson-actions"><a href="../index.html">← Ver episodios</a><a href="numpy.html">Siguiente: Crear y consultar con NumPy →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261026-matrices"></script>
+</body></html>

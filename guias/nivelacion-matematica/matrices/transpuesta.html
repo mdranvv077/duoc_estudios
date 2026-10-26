@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261026-matrices" />
+<title>Transpuesta e interpretación — Matrices · Nivelación matemática</title><meta name="description" content="Transponer reorganiza las posiciones y su lectura; no calcula una matriz inversa." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de matrices</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Matrices</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de matrices"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson matrix-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 05</p>
+<h1>Las filas pasan a ser columnas.</h1><p class="lesson-lead">Transponer reorganiza las posiciones y su lectura; no calcula una matriz inversa.</p>
+
+<h2>Qué cambia y qué se conserva</h2>
+<p>La transpuesta de A se escribe A<sup>T</sup>. Su fila 1 contiene la columna 1 de A, y así sucesivamente. Los valores se conservan, pero intercambian sus posiciones. Si A tiene orden m × n, A<sup>T</sup> tiene orden n × m.</p>
+<div class="math-formula">(A<sup>T</sup>)<sub>ij</sub> = a<sub>ji</sub></div>
+<p>Si A organiza productos por región, su transpuesta organiza regiones por producto. No es “dar vuelta los números” ni invertir el orden de cada fila. La primera fila no pasa a ser la última: pasa a ser la primera columna.</p>
+<h2>Construir la transpuesta a mano</h2>
+<div class="concept-pairs"><div><strong>A · orden 2 × 3</strong><table class="matrix-grid" aria-label="Matriz A original"><tbody><tr><td>12</td><td>8</td><td>15</td></tr><tr><td>10</td><td>14</td><td>9</td></tr></tbody></table></div><div><strong>Aᵀ · orden 3 × 2</strong><table class="matrix-grid" aria-label="Matriz A transpuesta"><tbody><tr><td>12</td><td>10</td></tr><tr><td>8</td><td>14</td></tr><tr><td>15</td><td>9</td></tr></tbody></table></div></div>
+<ol><li>Escribe la fila (12, 8, 15) de arriba hacia abajo: será la primera columna.</li><li>Haz lo mismo con la segunda fila, (10, 14, 9): será la segunda columna.</li><li>Comprueba que hay tres filas y dos columnas, y que siguen estando los seis datos originales.</li></ol>
+<p>El 15 pasa de fila 1, columna 3 a fila 3, columna 1. El 9 pasa de (2, 3) a (3, 2). No se hace ninguna operación aritmética con los valores. Si vuelves a transponer, recuperas la matriz inicial: <strong>(A<sup>T</sup>)<sup>T</sup> = A</strong>.</p>
+<h2>Programar ese mismo cambio</h2>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · Transponer una matriz rectangular</span><button type="button" data-math-copy aria-controls="matrix-code-8" aria-label="Copiar Transponer una matriz rectangular" hidden>Copiar</button></div><pre tabindex="0"><code id="matrix-code-8"><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np
+
+A = np.array([[<span class="py-number">12</span>, <span class="py-number">8</span>, <span class="py-number">15</span>], [<span class="py-number">10</span>, <span class="py-number">14</span>, <span class="py-number">9</span>]])
+AT = A.T
+<span class="py-builtin">print</span>(AT)
+<span class="py-builtin">print</span>(A.shape)
+<span class="py-builtin">print</span>(AT.shape)
+<span class="py-builtin">print</span>(AT[<span class="py-number">2</span>, <span class="py-number">1</span>], A[<span class="py-number">1</span>, <span class="py-number">2</span>])</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>[[12 10]
+ [ 8 14]
+ [15  9]]
+(2, 3)
+(3, 2)
+9 9</code></pre></div>
+<p>El 9 que estaba en a<sub>23</sub> pasa a (A<sup>T</sup>)<sub>32</sub>. Si el enunciado escribe a<sup>T</sup><sub>32</sub>, se refiere al elemento de la transpuesta en fila 3 y columna 2, que corresponde a a<sub>23</sub> en la original.</p>
+<h2>Aplicarlo a los sensores de G5</h2>
+<p>Antes del código, resuelve dos posiciones. La humedad del jueves ocupa (2, 4): 0,95 · 54 = 51,3. La temperatura del miércoles ocupa (1, 3): 0,95 · 22 = 20,9. Al transponer, esa temperatura se mueve a (3, 1), sin cambiar su valor ni su unidad.</p>
+<p>El problema 7 organiza variables por filas y días por columnas. Al transponer, los días pasan a las filas y las variables a las columnas. Para ver esa idea sin ambigüedad, usaremos las dos filas de temperatura y humedad del enunciado.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · G5 · Corregir medidas y transponer</span><button type="button" data-math-copy aria-controls="matrix-code-9" aria-label="Copiar G5 · Corregir medidas y transponer" hidden>Copiar</button></div><pre tabindex="0"><code id="matrix-code-9"><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np
+
+D = np.array([
+    [<span class="py-number">20</span>, <span class="py-number">28</span>, <span class="py-number">22</span>, <span class="py-number">26</span>, <span class="py-number">24</span>],
+    [<span class="py-number">52</span>, <span class="py-number">57</span>, <span class="py-number">56</span>, <span class="py-number">54</span>, <span class="py-number">58</span>]
+])
+S = <span class="py-number">0.95</span> * D
+ST = S.T
+<span class="py-builtin">print</span>(<span class="py-string">&quot;Orden de S:&quot;</span>, S.shape)
+<span class="py-builtin">print</span>(<span class="py-string">&quot;Orden de ST:&quot;</span>, ST.shape)
+<span class="py-builtin">print</span>(<span class="py-string">&quot;Humedad del jueves:&quot;</span>, <span class="py-builtin">round</span>(<span class="py-builtin">float</span>(S[<span class="py-number">1</span>, <span class="py-number">3</span>]), <span class="py-number">2</span>))
+<span class="py-builtin">print</span>(<span class="py-string">&quot;Temperatura del miércoles:&quot;</span>, <span class="py-builtin">round</span>(<span class="py-builtin">float</span>(ST[<span class="py-number">2</span>, <span class="py-number">0</span>]), <span class="py-number">2</span>))</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>Orden de S: (2, 5)
+Orden de ST: (5, 2)
+Humedad del jueves: 51.3
+Temperatura del miércoles: 20.9</code></pre></div>
+<p>Aplicamos la reducción del 5 % que establece el ejercicio. s<sub>24</sub> = 51,3 corresponde a humedad del jueves, en porcentaje; (S<sup>T</sup>)<sub>31</sub> = 20,9 corresponde a temperatura del miércoles, en °C. En la matriz completa con presión, la transpuesta tendría orden 5 × 3, no 5 × 2.</p>
+<div class="lesson-note"><strong>Un dato que hay que confirmar.</strong> La fila de presión del archivo escribe 1.066, 1.068, etc., con unidad hPa. Esa notación podría usar el punto como separador de miles, pero Python interpreta <code>1.066</code> como decimal. Confirma si se pretende 1066 hPa antes de cargar esa fila. No cambies el dato sin explicarlo.</div>
+<p>Una misma matriz puede contener variables con unidades diferentes. El factor 0,95 se aplica aquí porque el enunciado lo pide para todas; no tendría sentido sumar entre sí una temperatura, una humedad y una presión para obtener un “total de sensores”. Tampoco tomes esa regla como una calibración física universal.</p>
+<details class="sequence-solution"><summary>¿Toda matriz cuadrada es igual a su transpuesta?</summary><div><p>No. Tener el mismo orden permite compararlas, pero además debe cumplirse a<sub>ij</sub> = a<sub>ji</sub>. Las distancias simétricas de la sección 5 de G5 son un ejemplo donde sí ocurre.</p></div></details>
+<div class="lesson-actions"><a href="porcentajes.html">← Escalares y porcentajes</a><a href="posiciones.html">Siguiente: Matrices definidas por posiciones →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261026-matrices"></script>
+</body></html>

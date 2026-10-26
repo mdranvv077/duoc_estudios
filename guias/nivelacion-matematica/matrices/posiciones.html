@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261026-matrices" />
+<title>Matrices definidas por posiciones — Matrices · Nivelación matemática</title><meta name="description" content="Adaptar np.fromfunction sin confundir índices de Python con posiciones matemáticas." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de matrices</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Matrices</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de matrices"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson matrix-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 06</p>
+<h1>Una fórmula para cada casilla.</h1><p class="lesson-lead">Adaptar np.fromfunction sin confundir índices de Python con posiciones matemáticas.</p>
+
+<h2>Cuando los datos no vienen escritos</h2>
+<p>Algunos ejercicios entregan el orden y una regla a<sub>ij</sub>. La matriz se construye evaluando esa fórmula para cada combinación de fila y columna. Es parecido al término general de una sucesión, pero ahora intervienen dos posiciones.</p>
+<p>En el problema 5, M tiene orden 8 × 9 y m<sub>ij</sub> = 8i + 12j. Para la primera casilla usamos i = 1, j = 1: obtenemos 20. Para m<sub>89</sub>, usamos i = 8, j = 9: obtenemos 172.</p>
+<h2>La plantilla del formulario</h2>
+<h3>Construir un tramo a mano</h3>
+<p>Mantén i = 1 y cambia j para construir la primera fila: m<sub>11</sub> = 8 · 1 + 12 · 1 = 20; m<sub>12</sub> = 8 · 1 + 12 · 2 = 32; m<sub>13</sub> = 44. Para la segunda fila cambia i a 2 y vuelve a recorrer las columnas: 28, 40, 52.</p>
+<figure class="matrix-card"><figcaption>Primeras dos filas y tres columnas de M · no es la matriz completa</figcaption><table class="matrix-grid" aria-label="Tramo inicial de M calculado a mano"><tbody><tr><td>20</td><td>32</td><td>44</td></tr><tr><td>28</td><td>40</td><td>52</td></tr></tbody></table></figure>
+<p>Avanzar una columna aumenta el valor en 12; avanzar una fila lo aumenta en 8. Son comprobaciones que nacen de la fórmula, no del programa. La matriz completa sigue teniendo 8 filas y 9 columnas aunque solo hayamos escrito este tramo.</p>
+<h3>Traducir la fórmula a Python</h3>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · G5 · Generar una matriz 8 × 9</span><button type="button" data-math-copy aria-controls="matrix-code-10" aria-label="Copiar G5 · Generar una matriz 8 × 9" hidden>Copiar</button></div><pre tabindex="0"><code id="matrix-code-10"><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np
+
+M = np.fromfunction(
+    <span class="py-keyword">lambda</span> i, j: <span class="py-number">8</span> * (i + <span class="py-number">1</span>) + <span class="py-number">12</span> * (j + <span class="py-number">1</span>),
+    (<span class="py-number">8</span>, <span class="py-number">9</span>),
+    dtype=int
+)
+<span class="py-builtin">print</span>(<span class="py-string">&quot;Orden:&quot;</span>, M.shape)
+<span class="py-builtin">print</span>(<span class="py-string">&quot;Primera fila:&quot;</span>, M[<span class="py-number">0</span>, :])
+<span class="py-builtin">print</span>(<span class="py-string">&quot;m89:&quot;</span>, M[<span class="py-number">7</span>, <span class="py-number">8</span>])
+<span class="py-builtin">print</span>(<span class="py-string">&quot;Orden de la transpuesta:&quot;</span>, M.T.shape)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>Orden: (8, 9)
+Primera fila: [ 20  32  44  56  68  80  92 104 116]
+m89: 172
+Orden de la transpuesta: (9, 8)</code></pre></div>
+<p><code>np.fromfunction</code> evalúa una regla sobre coordenadas que comienzan en 0. Por eso usamos <code>i + 1</code> y <code>j + 1</code> para expresar las posiciones del enunciado, que comienzan en 1. <code>lambda i, j:</code> define brevemente la regla que se evaluará.</p>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Parte del código</th><th scope="col">Qué debes adaptar</th></tr></thead><tbody><tr><td data-label="Parte del código">(8, 9)</td><td data-label="Qué debes adaptar">Número de filas y columnas solicitado.</td></tr><tr><td data-label="Parte del código">8 * (i + 1) + 12 * (j + 1)</td><td data-label="Qué debes adaptar">Fórmula completa, respetando operaciones y paréntesis.</td></tr><tr><td data-label="Parte del código">dtype=int</td><td data-label="Qué debes adaptar">Hace enteras las coordenadas en este ejemplo. No obliga a que toda fórmula produzca resultados enteros.</td></tr><tr><td data-label="Parte del código">M.T</td><td data-label="Qué debes adaptar">Intercambia filas por columnas después de construir M.</td></tr></tbody></table></div>
+<div class="lesson-note"><strong>El +1 se aplica a cada posición.</strong> Si escribes <code>8 * i + 12 * j + 1</code>, no estás corrigiendo ambas coordenadas: la primera casilla valdría 1 en vez de 20.</div>
+<h2>Combinar fórmula, transpuesta y escalar</h2>
+<p>En el problema 6 se pide A de orden 5 × 7 con a<sub>ij</sub> = ij, y B de orden 7 × 5 con b<sub>ij</sub> = 15i − 2j. A y B no se suman directamente, pero A<sup>T</sup> y B sí tienen el mismo orden: 7 × 5.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · G5 · C = A transpuesta + la mitad de B</span><button type="button" data-math-copy aria-controls="matrix-code-11" aria-label="Copiar G5 · C = A transpuesta + la mitad de B" hidden>Copiar</button></div><pre tabindex="0"><code id="matrix-code-11"><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np
+
+A = np.fromfunction(
+    <span class="py-keyword">lambda</span> i, j: (i + <span class="py-number">1</span>) * (j + <span class="py-number">1</span>), (<span class="py-number">5</span>, <span class="py-number">7</span>), dtype=int
+)
+B = np.fromfunction(
+    <span class="py-keyword">lambda</span> i, j: <span class="py-number">15</span> * (i + <span class="py-number">1</span>) - <span class="py-number">2</span> * (j + <span class="py-number">1</span>),
+    (<span class="py-number">7</span>, <span class="py-number">5</span>), dtype=int
+)
+C = A.T + <span class="py-number">0.5</span> * B
+<span class="py-builtin">print</span>(<span class="py-string">&quot;A:&quot;</span>, A.shape)
+<span class="py-builtin">print</span>(<span class="py-string">&quot;B:&quot;</span>, B.shape)
+<span class="py-builtin">print</span>(<span class="py-string">&quot;C:&quot;</span>, C.shape)
+<span class="py-builtin">print</span>(<span class="py-string">&quot;c11:&quot;</span>, C[<span class="py-number">0</span>, <span class="py-number">0</span>])
+<span class="py-builtin">print</span>(<span class="py-string">&quot;c75:&quot;</span>, C[<span class="py-number">6</span>, <span class="py-number">4</span>])</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>A: (5, 7)
+B: (7, 5)
+C: (7, 5)
+c11: 7.5
+c75: 82.5</code></pre></div>
+<p>Comprueba una casilla a mano: c<sub>11</sub> = a<sub>11</sub> + 0,5b<sub>11</sub> = 1 + 0,5 · 13 = 7,5. Para otra posición, recuerda el intercambio: c<sub>75</sub> utiliza a<sub>57</sub>, no a<sub>75</sub>.</p>
+<p>Desarrolla esa segunda casilla: a<sub>57</sub> = 5 · 7 = 35 y b<sub>75</sub> = 15 · 7 − 2 · 5 = 95. Entonces c<sub>75</sub> = 35 + 0,5 · 95 = <strong>82,5</strong>. En general, la operación se escribe c<sub>ij</sub> = a<sub>ji</sub> + 0,5b<sub>ij</sub>: solo A intercambia sus subíndices.</p>
+<h2>Un enunciado incompatible en G5</h2>
+<p>El último ejercicio de la sección 5 propone X de orden 8 × 25 y Z de orden 6 × 25, y pide W = X + Z<sup>T</sup>. Pero Z<sup>T</sup> tiene orden 25 × 6. <strong>8 × 25 y 25 × 6 no se pueden sumar.</strong> Con esos datos, W no está definida: hay que confirmar el enunciado, no cambiar dimensiones hasta que Python lo acepte.</p>
+<details class="sequence-solution"><summary>¿Qué revisarías antes de ejecutar una operación combinada?</summary><div><p>El orden inicial de cada matriz, qué orden queda después de transponer, las posiciones de la fórmula y si la suma final tiene dimensiones compatibles. La mitad de una matriz no cambia su orden.</p></div></details>
+<div class="lesson-actions"><a href="transpuesta.html">← Transpuesta e interpretación</a><a href="practica.html">Siguiente: Taller y uso del formulario →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261026-matrices"></script>
+</body></html>

@@ -1,4 +1,17 @@
 const mathGuideData = {
+  matrices: {
+    folder: "matrices",
+    label: "Matrices",
+    modules: [
+      ["index.html", "Entender una matriz"],
+      ["numpy.html", "Crear y consultar con NumPy"],
+      ["operaciones.html", "Suma, resta y totales"],
+      ["porcentajes.html", "Escalares y porcentajes"],
+      ["transpuesta.html", "Transpuesta e interpretación"],
+      ["posiciones.html", "Matrices definidas por posiciones"],
+      ["practica.html", "Taller y uso del formulario"],
+    ],
+  },
   sequences: {
     folder: "sucesiones",
     label: "Sucesiones y listas",
@@ -67,6 +80,7 @@ const mathGuideData = {
 
 function currentMathCategory(url = window.location.href) {
   const path = new URL(url, window.location.href).pathname;
+  if (path.includes("/matrices/")) return "matrices";
   if (path.includes("/sucesiones/")) return "sequences";
   if (path.includes("/funciones-no-lineales/")) return "nonlinear";
   if (path.includes("/funciones-lineales/")) return "linear";
@@ -94,7 +108,8 @@ function renderMathNavigation() {
       <a class="sidebar-category ${category === "linear" ? "active" : ""}" data-math-category="linear" href="${category === "linear" ? "index.html" : "../funciones-lineales/index.html"}"><span>03</span><b>Funciones lineales</b><i>↗</i></a>
       <a class="sidebar-category ${category === "nonlinear" ? "active" : ""}" data-math-category="nonlinear" href="${category === "nonlinear" ? "index.html" : "../funciones-no-lineales/index.html"}"><span>04</span><b>No lineales</b><i>↗</i></a>
       <span class="sidebar-episode-label">Episodio 02</span>
-      <a class="sidebar-category ${category === "sequences" ? "active" : ""}" data-math-category="sequences" href="${category === "sequences" ? "index.html" : "../sucesiones/index.html"}"><span>01</span><b>Sucesiones y listas</b><i>↗</i></a>`;
+      <a class="sidebar-category ${category === "sequences" ? "active" : ""}" data-math-category="sequences" href="${category === "sequences" ? "index.html" : "../sucesiones/index.html"}"><span>01</span><b>Sucesiones y listas</b><i>↗</i></a>
+      <a class="sidebar-category ${category === "matrices" ? "active" : ""}" data-math-category="matrices" href="${category === "matrices" ? "index.html" : "../matrices/index.html"}"><span>02</span><b>Matrices</b><i>↗</i></a>`;
   }
 
   nav.innerHTML = data.modules

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../../../img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" /><link rel="stylesheet" href="../../../assets/css/logo.css" />
+<link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" /><link rel="stylesheet" href="../../../assets/css/credits.css" />
+<link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" /><link rel="stylesheet" href="../../../assets/css/python.css" /><link rel="stylesheet" href="../../../assets/css/math.css?v=20261026-matrices" />
+<title>Escalares y porcentajes — Matrices · Nivelación matemática</title><meta name="description" content="Entender cuánto queda después de un aumento o una reducción, antes de escribir la multiplicación." />
+</head>
+<body>
+<header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a></header>
+<main class="container learning-shell">
+<button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de matrices</button>
+<aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Matemática · Episodio 02</small><strong>Matrices</strong></a><nav class="sidebar-categories" aria-label="Episodios y categorías"></nav><nav class="lesson-nav" aria-label="Módulos de matrices"></nav><a class="sidebar-back" href="../index.html">← Ver episodios</a></aside>
+<article class="lesson-content sequence-lesson matrix-lesson">
+<p class="eyebrow"><span></span> Episodio 02 · Módulo 04</p>
+<h1>Cambiar todos los datos con un factor.</h1><p class="lesson-lead">Entender cuánto queda después de un aumento o una reducción, antes de escribir la multiplicación.</p>
+
+<h2>Qué significa ponderar por un escalar</h2>
+<p>Un escalar es un número que multiplica cada elemento de la matriz. Si C contiene producción y queremos el doble, calculamos <code>2 * C</code>. Se conserva el orden y la organización; cambian los valores.</p>
+<div class="math-table-wrap sequence-table-wrap"><table class="math-table sequence-table"><thead><tr><th scope="col">Cambio pedido</th><th scope="col">Factor</th><th scope="col">Qué representa</th></tr></thead><tbody><tr><td data-label="Cambio pedido">Aumentar 30 %</td><td data-label="Factor">1.30</td><td data-label="Qué representa">El 100 % original más el 30 % adicional.</td></tr><tr><td data-label="Cambio pedido">Reducir 20 %</td><td data-label="Factor">0.80</td><td data-label="Qué representa">El 80 % que permanece.</td></tr><tr><td data-label="Cambio pedido">Reducir 10 %</td><td data-label="Factor">0.90</td><td data-label="Qué representa">El 90 % que permanece.</td></tr><tr><td data-label="Cambio pedido">Reducir 5 %</td><td data-label="Factor">0.95</td><td data-label="Qué representa">El 95 % que permanece.</td></tr></tbody></table></div>
+<p>Multiplicar por 0,20 calcula <strong>el 20 % del original</strong>, no una reducción del 20 %. Para obtener el valor reducido, multiplicas por 0,80. Es la diferencia entre preguntar cuánto se pierde y cuánto queda.</p>
+<h2>Producción de Chile y Ecuador</h2>
+<h3>Primero: resolver el cambio sin Python</h3>
+<p>Si una planta produce 120 unidades, el 20 % de esa producción es 120 · 20/100 = 24. Una producción 20 % menor es 120 − 24 = <strong>96</strong>. La forma abreviada, 0,80 · 120, expresa exactamente la misma operación.</p>
+<div class="math-formula">Valor nuevo = original · (1 − p/100)<br>Con aumento: original · (1 + p/100)</div>
+<p>La p representa el porcentaje escrito como 20, 30 o 5; al dividir por 100 lo convertimos en proporción. En una matriz aplicamos el factor a <strong>todas las casillas</strong>. Si una fila de C es (120, 70), la de E será (96, 56), porque 0,8 · 70 = 56. El orden no cambia.</p>
+<p>El escalar también se distribuye sobre una suma: k(A + B) = kA + kB. Pero <strong>1,3V + 0,9T no es 1,2(V + T)</strong> en general: cada matriz recibe un factor distinto. No sumes o promedies porcentajes para inventar un factor común.</p>
+<h3>Después: traducir la operación a código</h3>
+<p>Tomemos la versión pequeña de Beta de la sección 5 de G5: tres productos y dos plantas por país. Se indica que Ecuador produce un 20 % menos en las posiciones correspondientes. Entonces E = 0,8C y el total es T = C + E.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · G5 · Producción con una reducción del 20 %</span><button type="button" data-math-copy aria-controls="matrix-code-6" aria-label="Copiar G5 · Producción con una reducción del 20 %" hidden>Copiar</button></div><pre tabindex="0"><code id="matrix-code-6"><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np
+
+C = np.array([[<span class="py-number">120</span>, <span class="py-number">70</span>], [<span class="py-number">150</span>, <span class="py-number">110</span>], [<span class="py-number">80</span>, <span class="py-number">160</span>]])
+E = <span class="py-number">0.80</span> * C
+T = C + E
+<span class="py-builtin">print</span>(<span class="py-string">&quot;E:&quot;</span>)
+<span class="py-builtin">print</span>(E)
+<span class="py-builtin">print</span>(<span class="py-string">&quot;T:&quot;</span>)
+<span class="py-builtin">print</span>(T)</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>E:
+[[ 96.  56.]
+ [120.  88.]
+ [ 64. 128.]]
+T:
+[[216. 126.]
+ [270. 198.]
+ [144. 288.]]</code></pre></div>
+<div class="math-formula">e<sub>ij</sub> = 0,8c<sub>ij</sub> &nbsp; · &nbsp; t<sub>ij</sub> = c<sub>ij</sub> + e<sub>ij</sub> = 1,8c<sub>ij</sub></div>
+<p>En el problema 3 principal se aplica exactamente la misma operación a una matriz 7 × 5: cambian los datos, no la regla. Allí c<sub>34</sub> = 125 unidades del producto 3 en la planta 4 de Chile, y t<sub>72</sub> = 153 unidades del producto 7 al reunir las plantas 2 de ambas filiales. Ese total por columna supone la correspondencia entre plantas del enunciado, no una sola ubicación física.</p>
+<h2>Dos plantas con cambios distintos</h2>
+<p>En el problema de zapatos, Valparaíso aumenta 30 % y Temuco disminuye 10 %. Primero cambia cada matriz con su propio factor y luego suma: <strong>B = 1,3V + 0,9T</strong>. No apliques un único porcentaje a V + T, porque cada planta cambia de manera diferente.</p>
+<div class="sequence-code code-window"><div class="code-title"><span>Python · G5 · Zapatos en dos plantas</span><button type="button" data-math-copy aria-controls="matrix-code-7" aria-label="Copiar G5 · Zapatos en dos plantas" hidden>Copiar</button></div><pre tabindex="0"><code id="matrix-code-7"><span class="py-keyword">import</span> numpy <span class="py-keyword">as</span> np
+
+V = np.array([[<span class="py-number">30</span>, <span class="py-number">34</span>, <span class="py-number">20</span>], [<span class="py-number">45</span>, <span class="py-number">20</span>, <span class="py-number">16</span>], [<span class="py-number">14</span>, <span class="py-number">26</span>, <span class="py-number">25</span>]])
+T = np.array([[<span class="py-number">35</span>, <span class="py-number">30</span>, <span class="py-number">26</span>], [<span class="py-number">52</span>, <span class="py-number">25</span>, <span class="py-number">18</span>], [<span class="py-number">23</span>, <span class="py-number">24</span>, <span class="py-number">32</span>]])
+A = V + T
+B = <span class="py-number">1.30</span> * V + <span class="py-number">0.90</span> * T
+<span class="py-builtin">print</span>(<span class="py-string">&quot;a21:&quot;</span>, A[<span class="py-number">1</span>, <span class="py-number">0</span>])
+<span class="py-builtin">print</span>(<span class="py-string">&quot;b13:&quot;</span>, <span class="py-builtin">round</span>(<span class="py-builtin">float</span>(B[<span class="py-number">0</span>, <span class="py-number">2</span>]), <span class="py-number">2</span>))</code></pre><p class="sequence-copy-status" role="status" aria-live="polite"></p></div><div class="output-window"><div class="code-title">Resultado esperado</div><pre><code>a21: 97
+b13: 49.4</code></pre></div>
+<p>a<sub>21</sub> = 97 representa <strong>97 mil pares</strong> de zapatos blancos para niños al mes entre ambas plantas. b<sub>13</sub> = 49,4 representa 49,4 mil pares de zapatos negros para caballeros en la nueva estimación mensual. Las filas son colores y las columnas grupos de personas, en el orden del enunciado.</p>
+<p>Comprueba b<sub>13</sub> a mano: 1,3 · 20 + 0,9 · 26 = 26 + 23,4 = <strong>49,4</strong>. La expresión <code>B[0, 2]</code> consulta esa misma casilla. El código no elige el porcentaje por nosotros: esa decisión viene del enunciado.</p>
+<div class="lesson-note"><strong>No redondees por costumbre.</strong> Conserva precisión durante el cálculo y redondea para presentar cuando corresponda. Si el contexto exige unidades enteras, explica el criterio; no conviertas automáticamente resultados a enteros para esconder decimales.</div>
+<details class="sequence-solution"><summary>Si una matriz de costos baja 7 %, ¿qué factor usarías?</summary><div><p>0,93. Si sube 7 %, usarías 1,07. El signo de la operación se traduce en cuánto porcentaje del original queda.</p></div></details>
+<div class="lesson-actions"><a href="operaciones.html">← Suma, resta y totales</a><a href="transpuesta.html">Siguiente: Transpuesta e interpretación →</a></div>
+<footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
+</article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/math-guide.js?v=20261026-matrices"></script>
+</body></html>
