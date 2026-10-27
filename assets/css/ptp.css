@@ -31,6 +31,11 @@
 .ptp-source { margin-top: 24px; }
 .ptp-lesson a:not(.ptp-action):not(.sidebar-category) { text-underline-offset: 4px; }
 .ptp-action[hidden] { display: none; }
+.ptp-capture { max-width: 900px; margin: 28px 0; padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: rgba(6,10,16,.72); }
+.ptp-capture a { display: block; border-radius: 6px; }
+.ptp-capture a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+.ptp-capture img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.ptp-capture figcaption { margin: 14px 4px 4px; color: var(--muted); font-size: .77rem; line-height: 1.8; }
 @media(max-width:760px) {
   .ptp-resources { grid-template-columns: 1fr; }
   .ptp-resource--online { grid-column: auto; }

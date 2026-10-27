@@ -55,6 +55,10 @@
         "Preparar el caso de estudio"
       ],
       [
+        "ubiquiti.html",
+        "Seleccionar equipos Ubiquiti"
+      ],
+      [
         "google-earth.html",
         "Trazar en Google Earth Pro"
       ],
@@ -63,24 +67,41 @@
         "Evaluar con Radio Mobile"
       ],
       [
-        "ubiquiti.html",
-        "Simular equipos Ubiquiti"
+        "google-earth-final.html",
+        "Visualizar el resultado en Earth Pro"
       ],
       [
         "comparacion.html",
-        "Comparar y justificar el diseño"
+        "Integrar y justificar el diseño"
       ]
     ]
+  },
+  {
+    "key": "radio-mobile",
+    "label": "Radio Mobile paso a paso",
+    "modules": [["index.html","Importar desde Google Earth Pro"],["terreno.html","Corregir la elevación del terreno"],["parameters.html","Parámetros · configuración del caso"],["topology.html","Topología · estrella Master/Slave"],["sistema.html","Systems · perfiles de equipo"],["membership.html","Membership · unidades y roles"],["exportar.html","Radio Link y exportación"]]
   }
 ];
+  const chapters = [
+    { number: "01", label: "Teoría y fundamentos", keys: ["preparacion", "fundamentos", "parametros"] },
+    { number: "02", label: "Práctica y factibilidad", keys: ["taller", "radio-mobile"] },
+  ];
   const root = new URL("../../guias/enlaces-ptp/", document.currentScript.src);
   const relativePath = location.pathname.slice(root.pathname.length);
   const category = categories.find(item => relativePath.startsWith(item.key + "/"));
   const sidebar = document.querySelector("[data-guide-sidebar]");
   if (sidebar && category) {
-    sidebar.querySelector(".sidebar-categories").innerHTML = categories.map((item, index) =>
-      '<a class="sidebar-category ' + (item === category ? 'active' : '') + '" href="' + new URL(item.key + "/index.html", root).href + '"><span>' + String(index + 1).padStart(2, "0") + '</span><b>' + item.label + '</b><i aria-hidden="true">↗</i></a>'
+    const chapter = chapters.find(item => item.keys.includes(category.key));
+    const categoryNavigation = sidebar.querySelector(".sidebar-categories");
+    categoryNavigation.setAttribute("aria-label", "Capítulos y categorías de Enlaces PtP");
+    categoryNavigation.innerHTML = chapters.map(item =>
+      '<span class="sidebar-episode-label">Capítulo ' + item.number + ' · ' + item.label + '</span>' +
+      item.keys.map((key, index) => {
+        const entry = categories.find(candidate => candidate.key === key);
+        return '<a class="sidebar-category ' + (entry === category ? 'active' : '') + '" href="' + new URL(entry.key + "/index.html", root).href + '"><span>' + String(index + 1).padStart(2, "0") + '</span><b>' + entry.label + '</b><i aria-hidden="true">↗</i></a>';
+      }).join("")
     ).join("");
+    sidebar.querySelector(".sidebar-brand small").textContent = "Enlaces PtP · Capítulo " + chapter.number;
     const file = location.pathname.split("/").pop() || "index.html";
     sidebar.querySelector(".lesson-nav").innerHTML = category.modules.map(([name, label], index) =>
       '<a class="' + (name === file ? 'active' : '') + '" href="' + name + '"><span>' + String(index + 1).padStart(2, "0") + '</span>' + label + '</a>'
@@ -128,7 +149,7 @@
         ].filter(Boolean).join(" · ");
       }));
     } catch {
-      status.textContent = "No se pudo comprobar el catálogo. Las descargas de la guía siguen pendientes; los enlaces oficiales están disponibles.";
+      status.textContent = "No se pudo comprobar el catálogo de descargas. Puedes utilizar los enlaces oficiales disponibles debajo de cada herramienta.";
     }
   }
   prepareDownloads();
