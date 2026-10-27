@@ -1,0 +1,86 @@
+/* Solo el inicio: destellos que recorren la cuadrícula fija de 48 px. */
+.home-page { isolation: isolate; }
+
+.home-page .home-ambient {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto;
+  height: 800px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.home-page .home-grid-current {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, .5) 48%, transparent 78%);
+}
+
+.home-grid-current__trace {
+  position: absolute;
+  display: block;
+  opacity: 0;
+  border-radius: 1px;
+}
+
+.home-grid-current__trace--one,
+.home-grid-current__trace--three {
+  left: 0;
+  width: 240px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(46, 234, 255, .25) 65%, rgba(46, 234, 255, .8) 95%, transparent);
+  box-shadow: 0 0 7px rgba(46, 234, 255, .14);
+  animation: home-grid-horizontal 26s linear infinite;
+}
+
+.home-grid-current__trace--one {
+  top: 144px;
+  animation-delay: -8s;
+}
+
+.home-grid-current__trace--two {
+  top: 0;
+  left: 288px;
+  width: 1px;
+  height: 180px;
+  background: linear-gradient(to bottom, transparent, rgba(46, 234, 255, .2) 65%, rgba(46, 234, 255, .7) 95%, transparent);
+  box-shadow: 0 0 7px rgba(46, 234, 255, .12);
+  animation: home-grid-vertical 32s linear -15s infinite;
+}
+
+.home-grid-current__trace--three {
+  top: 384px;
+  background: linear-gradient(90deg, transparent, rgba(255, 46, 123, .2) 65%, rgba(255, 46, 123, .65) 95%, transparent);
+  box-shadow: 0 0 7px rgba(255, 46, 123, .1);
+  animation-duration: 37s;
+  animation-delay: -23s;
+  animation-direction: reverse;
+}
+
+@keyframes home-grid-horizontal {
+  0% { transform: translate3d(-260px, 0, 0); opacity: 0; }
+  12% { opacity: .26; }
+  60% { opacity: .26; }
+  78%, 100% { transform: translate3d(calc(100vw + 20px), 0, 0); opacity: 0; }
+}
+
+@keyframes home-grid-vertical {
+  0% { transform: translate3d(0, -200px, 0); opacity: 0; }
+  15% { opacity: .24; }
+  58% { opacity: .24; }
+  82%, 100% { transform: translate3d(0, calc(100vh + 20px), 0); opacity: 0; }
+}
+
+@media (max-width: 760px) {
+  .home-grid-current__trace--two { left: 96px; }
+  .home-grid-current__trace--three { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .home-grid-current { display: none; }
+  .home-grid-current__trace { animation: none; }
+}

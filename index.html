@@ -18,15 +18,23 @@
     <link rel="stylesheet" href="assets/css/logo.css" />
     <link rel="stylesheet" href="assets/css/responsive.css?v=20260909-mobile" />
     <link rel="stylesheet" href="assets/css/motion.css" />
+    <link rel="stylesheet" href="assets/css/home-background.css?v=20261026-led" />
     <link rel="stylesheet" href="assets/css/credits.css" />
     <link rel="stylesheet" href="assets/css/announcement.css" />
     <link rel="stylesheet" href="assets/css/afk-screen.css" />
     <link rel="stylesheet" href="assets/css/projects.css?v=20261002" />
     <link rel="icon" type="image/png" href="img/favicon.png" />
   </head>
-  <body>
-    <div class="ambient ambient-one"></div>
-    <div class="ambient ambient-two"></div>
+  <body class="home-page">
+    <div class="home-grid-current" aria-hidden="true">
+      <span class="home-grid-current__trace home-grid-current__trace--one"></span>
+      <span class="home-grid-current__trace home-grid-current__trace--two"></span>
+      <span class="home-grid-current__trace home-grid-current__trace--three"></span>
+    </div>
+    <div class="home-ambient" aria-hidden="true">
+      <div class="ambient ambient-one"></div>
+      <div class="ambient ambient-two"></div>
+    </div>
     <header class="site-header container">
       <a class="brand" href="index.html" aria-label="Inicio DGNV Studios"
         ><img
