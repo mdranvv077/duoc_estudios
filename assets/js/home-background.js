@@ -38,8 +38,12 @@
     }
     const element = document.createElement("span");
     element.className = "home-grid-current__trace home-grid-current__trace--" + (horizontal ? "horizontal" : "vertical");
-    element.style.setProperty("--trace-color", Math.random() < .8 ? "46, 234, 255" : "255, 46, 123");
+    const magenta = Math.random() < .4;
+    element.style.setProperty("--trace-color", magenta ? "255, 46, 123" : "46, 234, 255");
+    element.style.setProperty("--trace-core", magenta ? "255, 216, 233" : "210, 252, 255");
     element.style.setProperty("--trace-angle", (horizontal ? reverse ? 270 : 90 : reverse ? 0 : 180) + "deg");
+    element.style.setProperty("--trace-head-x", horizontal ? reverse ? "3%" : "97%" : "50%");
+    element.style.setProperty("--trace-head-y", horizontal ? "50%" : reverse ? "3%" : "97%");
     element.style[horizontal ? "top" : "left"] = lane * cell + "px";
     field.append(element);
 
@@ -49,7 +53,7 @@
     const end = reverse ? -length - 20 : extent + 20;
     const transform = value => horizontal ? "translate3d(" + value + "px,0,0)" : "translate3d(0," + value + "px,0)";
     const duration = (extent + length + 40) / random(42, 72) * 1000;
-    const brightness = random(.23, .32);
+    const brightness = magenta ? random(.28, .35) : random(.24, .32);
     const animation = element.animate([
       { transform: transform(start), opacity: 0, offset: 0 },
       { transform: transform(start + (end - start) * .12), opacity: brightness, offset: .12 },

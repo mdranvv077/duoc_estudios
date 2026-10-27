@@ -25,8 +25,40 @@
   display: block;
   opacity: 0;
   border-radius: 1px;
-  background: linear-gradient(var(--trace-angle, 90deg), transparent, rgba(var(--trace-color, 46, 234, 255), .25) 65%, rgba(var(--trace-color, 46, 234, 255), .8) 95%, transparent);
-  box-shadow: 0 0 7px rgba(var(--trace-color, 46, 234, 255), .14);
+  background: linear-gradient(
+    var(--trace-angle, 90deg),
+    transparent,
+    rgba(var(--trace-color, 46, 234, 255), .025) 22%,
+    rgba(var(--trace-color, 46, 234, 255), .12) 48%,
+    rgba(var(--trace-color, 46, 234, 255), .34) 75%,
+    rgba(var(--trace-color, 46, 234, 255), .72) 92%,
+    rgba(var(--trace-core, 210, 252, 255), .9) 97%,
+    transparent
+  );
+}
+
+/* Halo localizado: la cola se desvanece en vez de iluminar un rectángulo. */
+.home-grid-current__trace::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: inherit;
+  filter: blur(2px);
+  opacity: .3;
+}
+
+.home-grid-current__trace::after {
+  content: "";
+  position: absolute;
+  left: var(--trace-head-x, 97%);
+  top: var(--trace-head-y, 50%);
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(var(--trace-core, 210, 252, 255), .85);
+  box-shadow: 0 0 5px rgba(var(--trace-color, 46, 234, 255), .65),
+    0 0 10px rgba(var(--trace-color, 46, 234, 255), .18);
 }
 
 .home-grid-current__trace--horizontal {
