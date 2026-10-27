@@ -1,0 +1,50 @@
+.ptp-lesson .lesson-note { margin-bottom: 26px; }
+.ptp-lesson h3 { margin: 26px 0 12px; font-size: 1.05rem; }
+.ptp-resources { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; max-width: 820px; margin: 28px 0; }
+.ptp-resource { min-width: 0; padding: 23px; border: 1px solid var(--line); background: linear-gradient(145deg,rgba(18,27,41,.72),rgba(7,11,17,.82)); }
+.ptp-resource--online { grid-column: 1 / -1; }
+.ptp-resource-tag { display: block; color: var(--orange); font: .63rem/1.7 "DM Mono",monospace; text-transform: uppercase; letter-spacing: .07em; }
+.ptp-lesson .ptp-resource h3 { margin: 13px 0; }
+.ptp-lesson .ptp-resource p { font-size: .86rem; line-height: 1.75; }
+.ptp-action { display: inline-flex; align-items: center; justify-content: center; gap: 8px; max-width: 100%; padding: 12px 15px; color: var(--cyan); border: 1px solid rgba(46,234,255,.38); background: rgba(46,234,255,.045); text-decoration: none; font: 500 .73rem/1.6 "DM Mono",monospace; cursor: pointer; transition: border-color .2s,background .2s; }
+.ptp-action:hover { border-color: var(--cyan); background: rgba(46,234,255,.09); }
+.ptp-action:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+.ptp-action:disabled { color: var(--muted); border-color: var(--line); background: rgba(8,12,18,.4); cursor: not-allowed; }
+.ptp-resource .ptp-resource-meta { margin: 12px 0; color: var(--muted); font: .67rem/1.7 "DM Mono",monospace; overflow-wrap: anywhere; }
+.ptp-official { display: inline-block; margin-top: 5px; color: var(--muted); font: .68rem/1.6 "DM Mono",monospace; text-underline-offset: 4px; }
+.ptp-official:hover { color: var(--cyan); }
+.ptp-download-status { font-size: .8rem !important; color: var(--muted) !important; }
+.ptp-download-status:empty { display: none; }
+.ptp-start { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 920px; margin: 28px 0; padding: 25px; border: 1px solid rgba(46,234,255,.24); background: rgba(10,18,27,.75); }
+.ptp-start h2 { margin: 12px 0; font-size: 1.65rem; }
+.ptp-start p:last-child { max-width: 510px; margin: 0; color: var(--muted); font-size: .85rem; line-height: 1.7; }
+.ptp-start > a { flex-shrink: 0; }
+.ptp-table-wrap { box-sizing: border-box; width: 100%; max-width: 820px; margin: 26px 0; border: 1px solid var(--line); }
+.ptp-table { width: 100%; table-layout: fixed; border-collapse: collapse; color: #bac6d4; font-size: .82rem; line-height: 1.7; }
+.ptp-table th,.ptp-table td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.ptp-table th { color: var(--cyan); background: rgba(46,234,255,.035); font-weight: 600; }
+.ptp-table tr:last-child td { border-bottom: 0; }
+.ptp-flow { display: flex; gap: 26px; max-width: none !important; list-style: none; padding: 0 !important; margin: 26px 0; }
+.ptp-flow li { position: relative; flex: 1; min-width: 0; padding: 16px 8px; color: var(--cyan); border: 1px solid var(--line); text-align: center; font: .78rem/1.7 "DM Mono",monospace; }
+.ptp-flow li:not(:last-child)::after { content: "↔"; position: absolute; top: 50%; left: calc(100% + 5px); width: 16px; color: var(--orange); transform: translateY(-50%); }
+.ptp-link p,.ptp-source { max-width: 820px; color: var(--muted) !important; font-size: .77rem !important; line-height: 1.75 !important; }
+.ptp-source { margin-top: 24px; }
+.ptp-lesson a:not(.ptp-action):not(.sidebar-category) { text-underline-offset: 4px; }
+.ptp-action[hidden] { display: none; }
+@media(max-width:760px) {
+  .ptp-resources { grid-template-columns: 1fr; }
+  .ptp-resource--online { grid-column: auto; }
+  .ptp-start { align-items: flex-start; flex-direction: column; padding: 21px; }
+}
+@media(max-width:600px) {
+  .ptp-resource { padding: 19px; }
+  .ptp-table thead { display: none; }
+  .ptp-table,.ptp-table tbody,.ptp-table tr,.ptp-table td { display: block; width: auto; }
+  .ptp-table tr { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .ptp-table tr:last-child { border-bottom: 0; }
+  .ptp-table td { padding: 5px 15px; border: 0; }
+  .ptp-table td::before { content: attr(data-label); display: block; margin-bottom: 3px; color: var(--cyan); font: .65rem/1.5 "DM Mono",monospace; }
+  .ptp-flow { flex-direction: column; gap: 26px; }
+  .ptp-flow li:not(:last-child)::after { content: "↕"; top: calc(100% + 1px); left: calc(50% - 8px); transform: none; }
+  .ptp-lesson .math-formula { font-size: .9rem; overflow-wrap: anywhere; }
+}
