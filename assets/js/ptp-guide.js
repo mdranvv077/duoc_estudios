@@ -79,12 +79,17 @@
   {
     "key": "radio-mobile",
     "label": "Radio Mobile paso a paso",
-    "modules": [["index.html","Importar desde Google Earth Pro"],["terreno.html","Corregir la elevación del terreno"],["parameters.html","Parámetros · configuración del caso"],["topology.html","Topología · estrella Master/Slave"],["sistema.html","Systems · perfiles de equipo"],["membership.html","Membership · unidades y roles"],["exportar.html","Radio Link y exportación"]]
+    "modules": [["index.html","Importar desde Google Earth Pro"],["terreno.html","Corregir la elevación del terreno"],["parameters.html","Parámetros · configuración del caso"],["topology.html","Topología · estrella Master/Slave"],["sistema.html","Systems · perfiles de equipo"],["membership.html","Membership · unidades y roles"]]
+  },
+  {
+    "key": "resultados",
+    "label": "Resultados y guardado",
+    "modules": [["index.html","Radio Link y exportación"],["guardar.html","Guardar y retomar el proyecto"]]
   }
 ];
   const chapters = [
     { number: "01", label: "Teoría y fundamentos", keys: ["preparacion", "fundamentos", "parametros"] },
-    { number: "02", label: "Práctica y factibilidad", keys: ["taller", "radio-mobile"] },
+    { number: "02", label: "Práctica y factibilidad", keys: ["taller", "radio-mobile", "resultados"] },
   ];
   const root = new URL("../../guias/enlaces-ptp/", document.currentScript.src);
   const relativePath = location.pathname.slice(root.pathname.length);

@@ -236,6 +236,32 @@ El archivo KML se comprobó en Descargas; no se adjuntó como descarga en la web
 Guardar también el proyecto de Radio Mobile. Si cambia el diseño, recalcular
 y volver a exportar.
 
+## Guardar y retomar el proyecto
+
+Categoría: Resultados y guardado · dos módulos:
+1. Radio Link y exportación.
+2. Guardar y retomar el proyecto.
+
+Google Earth Pro:
+- Crear en Mis lugares una carpeta PtP Sombrero–Codigua.
+- Reunir los marcadores iniciales y la entrada completa importada desde Radio Mobile.
+- Clic derecho en la carpeta → Guardar lugar como… → KMZ.
+- Guardar en Descargas/PtP-Sombrero-Codigua/PtP-Sombrero-Codigua.kmz.
+- Para abrir otro día: Archivo → Abrir y seleccionar el KMZ.
+- Si se modifica el contenido, actualizar la copia KMZ con Guardar lugar como…
+
+Radio Mobile, ventana principal:
+- File → Save map as…: Sombrero-Codigua.map.
+- File → Save picture as…: guardar cada imagen de mapa necesaria, por ejemplo Sombrero-Codigua.bmp.
+- File → Save networks as…: Sombrero-Codigua.net.
+- File → Save networks: incluir mapa e imágenes en el cuadro de archivos relacionados.
+- Para abrir otro día: File → Open networks y seleccionar el NET.
+- Si faltan archivos asociados: File → Open map / Open picture, y recuperar los archivos guardados.
+- Mantener juntos NET, MAP e imágenes; conservar también Corner.ant si se traslada a otro equipo.
+- Verificar parámetros y Radio Link en ambos sentidos después de reabrir.
+
+El KMZ/KML es la presentación geográfica; no reemplaza el proyecto editable de Radio Mobile.
+
 ## Capturas y archivos
 
 - UISP: modelos, distancia, coordenadas y alturas iniciales.

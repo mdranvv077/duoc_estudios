@@ -4,16 +4,16 @@
     {
       "id": "google-earth-pro",
       "file": "google-earth-pro/GoogleEarthProSetup.exe",
-      "version": null,
+      "version": "7.3.7.1327 (27-10-2026)",
       "size": "12,67 MiB",
-      "date": "2026-10-27"
+      "date": "27-10-2026"
     },
     {
       "id": "radio-mobile",
       "file": "radio-mobile/Radio_Mobile_Setup.exe",
-      "version": null,
+      "version": "11.4.1",
       "size": "3,92 MiB",
-      "date": "2026-10-27"
+      "date": "27-10-2026"
     }
   ]
 }
