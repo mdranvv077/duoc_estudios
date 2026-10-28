@@ -7,12 +7,12 @@
 
 .hero-actions .button {
   margin-top: 17px;
-  min-width: 160px;
-  min-height: 58px;
+  min-width: 0;
+  min-height: 54px;
   justify-content: center;
-  padding: 16px 26px;
-  font-size: 1rem;
-  line-height: 1.4;
+  padding: 17px 22px;
+  font-size: .925rem;
+  line-height: normal;
 }
 
 .button-outline {
