@@ -1,0 +1,25 @@
+/* Iconos de modalidades: un mismo lienzo cuadrado y trazo, sin deformación. */
+.home-page .guide-card .guide-icon {
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+
+.home-page .guide-icon svg {
+  display: block;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.home-page .guide-icon path {
+  stroke-width: inherit;
+}
+
+.home-page .guide-icon--fiber svg {
+  stroke-width: 1.15;
+}
