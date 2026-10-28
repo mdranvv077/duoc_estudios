@@ -1,3 +1,4 @@
+const fiberAssetRoot = new URL("./", document.currentScript.src);
 const fiberGuideData = {
   start: {
     folder: "antes-de-empezar",
@@ -36,6 +37,16 @@ const fiberGuideData = {
       ["herramientas.html", "Herramientas de comprobación"],
     ],
   },
+  components: {
+    folder: "conectores-pulidos-chaquetas",
+    label: "Conectores, pulidos y chaquetas",
+    modules: [
+      ["index.html", "Reconocer los conectores"],
+      ["pulidos.html", "PC, UPC y APC"],
+      ["chaquetas.html", "Capas, chaquetas y colores"],
+      ["identificacion.html", "Elegir sin confundir"],
+    ],
+  },
   foa: {
     folder: "foa",
     label: "FOA · Libro de consulta",
@@ -58,6 +69,7 @@ const fiberGuideData = {
 function currentFiberCategory(url = location.href) {
   const path = new URL(url, location.href).pathname;
   if (path.includes("/fibra-optica/foa/")) return "foa";
+  if (path.includes("/conectores-pulidos-chaquetas/")) return "components";
   if (path.endsWith("/fibra-optica/modulo-en-blanco.html")) return "standalone";
   if (path.includes("/fibras-cables/")) return "fiber";
   if (path.includes("/conectores-empalmes/")) return "connections";
@@ -83,7 +95,8 @@ function renderFiberNavigation() {
       <a class="sidebar-category ${category === "start" ? "active" : ""}" data-fiber-category="start" href="${href("start")}"><span>01</span><b>Antes de empezar</b><i>↗</i></a>
       <a class="sidebar-category ${category === "fiber" ? "active" : ""}" data-fiber-category="fiber" href="${href("fiber")}"><span>02</span><b>Fibras y cables</b><i>↗</i></a>
       <a class="sidebar-category ${category === "connections" ? "active" : ""}" data-fiber-category="connections" href="${href("connections")}"><span>03</span><b>Conectores</b><i>↗</i></a>
-      <a class="sidebar-category ${category === "testing" ? "active" : ""}" data-fiber-category="testing" href="${href("testing")}"><span>04</span><b>Potencia y pruebas</b><i>↗</i></a>`;
+      <a class="sidebar-category ${category === "testing" ? "active" : ""}" data-fiber-category="testing" href="${href("testing")}"><span>04</span><b>Potencia y pruebas</b><i>↗</i></a>
+      <a class="sidebar-category ${category === "components" ? "active" : ""}" data-fiber-category="components" href="${href("components")}"><span>05</span><b>Conectores, pulidos y chaquetas</b><i>↗</i></a>`;
   }
   nav.hidden = standalone;
   nav.innerHTML = data ? data.modules.map(([file, label], index) => `<a class="${file === current ? "active" : ""}" href="${file}"><span>${category === "foa" ? index === 0 ? "•" : String(index).padStart(2, "0") : String(index + 1).padStart(2, "0")}</span>${label}</a>`).join("") : "";
@@ -97,6 +110,10 @@ function renderFiberNavigation() {
   standaloneLink.href = standalone ? "foa/index.html" : category === "foa" ? "index.html" : "../foa/index.html";
   standaloneLink.dataset.fiberCategory = "foa";
   standaloneLink.classList.toggle("active", category === "foa");
+  if (category === "components") {
+    import(new URL("fiber-components.js?v=20261028", fiberAssetRoot).href)
+      .then(viewer => viewer.initFiberComponents()).catch(console.error);
+  }
   if (category === "foa") {
     import(new URL("assets/foa.js?v=20260930-book", location.href).href)
       .then(reader => reader.initFoaReader()).catch(console.error);
@@ -105,7 +122,7 @@ function renderFiberNavigation() {
 
 async function prepareFiberStyles(nextDocument, url) {
   const links = [...nextDocument.querySelectorAll('link[rel="stylesheet"]')];
-  await Promise.all(links.filter(link => link.getAttribute("href").includes("foa.css")).map(link => {
+  await Promise.all(links.filter(link => /(?:foa|fiber-components)\.css/.test(link.getAttribute("href"))).map(link => {
     const href = new URL(link.getAttribute("href"), url).href;
     if ([...document.querySelectorAll('link[rel="stylesheet"]')].some(current => current.href === href)) return;
     return new Promise((resolve, reject) => {

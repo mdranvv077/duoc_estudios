@@ -20,22 +20,22 @@
 
         <h2>UPC y APC no son lo mismo</h2>
         <div class="concept-pairs">
-          <div><strong>UPC — normalmente azul</strong><span>El extremo se pule casi perpendicular. Es frecuente en redes de datos.</span></div>
+          <div><strong>UPC — normalmente azul en monomodo</strong><span>Superficie de contacto ligeramente convexa, sin inclinación intencional. Es frecuente en redes de datos.</span></div>
           <div><strong>APC — normalmente verde</strong><span>El extremo posee un ángulo que reduce la reflexión de retorno. Es común en redes ópticas sensibles a reflejos.</span></div>
         </div>
         <div class="fiber-polish-figure" aria-label="Comparación en perfil de las caras pulidas UPC y APC">
           <figure>
             <svg viewBox="0 0 280 220" role="img" aria-labelledby="upc-profile-title upc-profile-desc">
               <title id="upc-profile-title">Perfil de una férula UPC</title>
-              <desc id="upc-profile-desc">La cara de extremo UPC es plana y perpendicular al eje de la férula.</desc>
+              <desc id="upc-profile-desc">La cara UPC es ligeramente convexa y no tiene una inclinación intencional respecto a la perpendicular al eje.</desc>
               <path class="polish-upc-body" d="M36 158Q36 146 48 146H232Q244 146 244 158V204H36Z"/>
               <rect class="polish-collar" x="88" y="137" width="104" height="17" rx="2"/>
-              <path class="polish-ferrule" d="M105 138V33H175V138Z"/>
+              <path class="polish-ferrule" d="M105 138V37Q140 29 175 37V138Z"/>
               <path class="polish-ferrule-highlight" d="M113 43V132"/>
-              <path class="polish-endface" d="M105 33H175"/>
-              <text x="140" y="25" fill="#cbd7dc" font-size="11" font-family="DM Mono, monospace" text-anchor="middle">0° · PLANO</text>
+              <path class="polish-endface" d="M105 37Q140 29 175 37"/>
+              <text x="140" y="25" fill="#cbd7dc" font-size="11" font-family="DM Mono, monospace" text-anchor="middle">SIN ÁNGULO INTENCIONAL</text>
             </svg>
-            <figcaption>UPC · cara perpendicular al eje</figcaption>
+            <figcaption>UPC · contacto convexo sin inclinación intencional</figcaption>
           </figure>
           <figure>
             <svg viewBox="0 0 280 220" role="img" aria-labelledby="apc-profile-title apc-profile-desc">
@@ -59,12 +59,13 @@
         <h2>Simplex y dúplex</h2>
         <p><strong>Simplex</strong> utiliza una sola fibra o un conector individual. <strong>Dúplex</strong> agrupa dos fibras, normalmente una para transmitir y otra para recibir. Algunos sistemas pueden enviar y recibir por una sola fibra usando longitudes de onda distintas, pero requieren transceptores diseñados para ello.</p>
         <div class="lesson-note"><strong>Evita una suposición común:</strong> la forma LC o SC no determina por sí sola si la fibra es monomodo o multimodo. También debes comprobar cable, pulido, adaptador y transceptores.</div>
+        <p><a class="spectrum-cta" href="../conectores-pulidos-chaquetas/index.html">Explorar los modelos de conectores, pulidos y chaquetas →</a></p>
         <div class="fiber-source"><small>Referencia para profundizar</small><strong>FOA presenta los conectores, sus terminaciones y sus aplicaciones.</strong><a href="https://www.thefoa.org/ESP/Conectores.htm" target="_blank" rel="noopener noreferrer">Leer sobre conectores en FOA ↗</a></div>
 
         <div class="lesson-actions"><a href="index.html">← Componentes del enlace</a><a href="empalmes-limpieza.html">Siguiente: empalmes e inspección →</a></div>
         <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer>
       </article>
     </main>
-    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/fiber-guide.js?v=20260930-foa"></script>
+    <script src="../../../assets/js/main.js"></script><script src="../../../assets/js/fiber-guide.js?v=20261028-components"></script>
   </body>
 </html>
