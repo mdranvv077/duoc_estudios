@@ -1,12 +1,16 @@
 (() => {
   const field = document.querySelector("[data-home-grid]");
-  if (!field || typeof field.animate !== "function") return;
+  const plane = field?.querySelector("[data-home-grid-plane]");
+  if (!plane || typeof field.animate !== "function") return;
 
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const traces = new Set();
   const cell = 48;
+  const parallaxRatio = .1;
+  const rootStyle = document.documentElement.style;
   let timer;
   let resizeTimer;
+  let scrollFrame = 0;
   let width = 0;
   let height = 0;
   let limit = 0;
@@ -14,6 +18,16 @@
   const random = (min, max) => min + Math.random() * (max - min);
   const integer = (min, max) => Math.floor(random(min, max + 1));
   const allowed = () => !document.hidden && !reducedMotion.matches;
+
+  function updateParallax() {
+    scrollFrame = 0;
+    const offset = reducedMotion.matches ? 0 : Math.max(0, window.scrollY) * parallaxRatio;
+    rootStyle.setProperty("--home-grid-offset", -offset + "px");
+  }
+
+  function onScroll() {
+    if (!scrollFrame) scrollFrame = requestAnimationFrame(updateParallax);
+  }
 
   function clearTraces() {
     clearTimeout(timer);
@@ -45,7 +59,7 @@
     element.style.setProperty("--trace-head-x", horizontal ? reverse ? "3%" : "97%" : "50%");
     element.style.setProperty("--trace-head-y", horizontal ? "50%" : reverse ? "3%" : "97%");
     element.style[horizontal ? "top" : "left"] = lane * cell + "px";
-    field.append(element);
+    plane.append(element);
 
     const length = horizontal ? 240 : 180;
     const extent = horizontal ? width : height;
@@ -79,9 +93,13 @@
   function restart() {
     clearTimeout(resizeTimer);
     clearTraces();
+    updateParallax();
     if (!allowed()) return;
+    // Extra space keeps the moving layer filled, including at the end of the page.
+    const maxOffset = Math.max(0, document.documentElement.scrollHeight - window.innerHeight) * parallaxRatio;
+    rootStyle.setProperty("--home-grid-range", Math.ceil(maxOffset / cell) * cell + "px");
     width = field.clientWidth;
-    height = field.clientHeight;
+    height = plane.clientHeight;
     limit = width < 760 ? 4 : 8;
     for (let i = 0; i < limit; i++) addTrace(true);
     timer = setTimeout(schedule, random(500, 1000));
@@ -89,12 +107,19 @@
 
   document.addEventListener("visibilitychange", restart);
   reducedMotion.addEventListener("change", restart);
-  window.addEventListener("resize", () => {
+  function onResize() {
     clearTimeout(resizeTimer);
     clearTraces();
     resizeTimer = setTimeout(restart, 180);
-  }, { passive: true });
-  window.addEventListener("pagehide", clearTraces);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onResize, { passive: true });
+  if (typeof ResizeObserver === "function") new ResizeObserver(onResize).observe(document.body);
+  window.addEventListener("pagehide", () => {
+    cancelAnimationFrame(scrollFrame);
+    scrollFrame = 0;
+    clearTraces();
+  });
   window.addEventListener("pageshow", restart);
   restart();
 })();

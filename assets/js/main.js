@@ -15,7 +15,8 @@ if (guideMenu && openGuides && closeGuides) {
 const vlsmAnnouncement = document.getElementById("vlsm-announcement");
 const closeVlsmButton = document.querySelector("[data-close-vlsm]");
 
-if (vlsmAnnouncement && closeVlsmButton) {
+// Cambiar data-announcement-enabled a "true" en el aviso para reactivarlo.
+if (vlsmAnnouncement && closeVlsmButton && vlsmAnnouncement.dataset.announcementEnabled !== "false") {
   const dismissVlsmAnnouncement = () => {
     if (!vlsmAnnouncement.open || vlsmAnnouncement.classList.contains("is-closing")) return;
 
