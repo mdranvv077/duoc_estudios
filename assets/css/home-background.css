@@ -22,6 +22,16 @@
   pointer-events: none;
   contain: strict;
   mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, .5) 48%, transparent 78%);
+  opacity: 0;
+}
+
+.home-page .home-grid-current.is-powered {
+  animation: home-led-power-on 1.6s .25s ease-in-out both;
+}
+
+@keyframes home-led-power-on {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .home-grid-current__plane {
@@ -86,5 +96,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .home-page::before { background-position: 0 0; }
-  .home-page .home-grid-current { display: none; }
+  .home-page .home-grid-current { display: none; animation: none; }
 }

@@ -76,6 +76,27 @@
   margin-top: 0;
 }
 
+/* El mismo borde pasa del contador al control de cierre. */
+.announcement-countdown {
+  position: relative;
+  flex-shrink: 0;
+  width: 48px;
+  height: 36px;
+  border-color: #b7cde433;
+  background: #b7cde405;
+  transition: width .32s cubic-bezier(.22,.68,0,1), height .32s ease, border-color .25s, color .25s;
+}
+.announcement-countdown:disabled { cursor: default; opacity: 1; color: #b5c2ce; }
+.announcement-countdown-digit, .announcement-close-symbol { position: absolute; inset: 0; display: grid; place-items: center; }
+.announcement-countdown-digit { font: .9rem 'DM Mono', monospace; transition: opacity .16s; }
+.announcement-close-symbol { opacity: 0; transform: scale(.8); transition: opacity .2s .1s, transform .25s .1s; }
+.announcement-countdown.is-ready { width: 32px; height: 32px; }
+.announcement-countdown.is-ready .announcement-countdown-digit { opacity: 0; }
+.announcement-countdown.is-ready .announcement-close-symbol { opacity: 1; transform: scale(1); }
+@media (prefers-reduced-motion: reduce) {
+  .announcement-countdown, .announcement-countdown-digit, .announcement-close-symbol { transition: none; }
+}
+
 .announcement-actions {
   display: flex;
   align-items: center;

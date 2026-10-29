@@ -1,0 +1,14 @@
+/* Solo los elementos visibles de la portada participan en la entrada. */
+.home-page .home-entry-visible {
+  animation: home-content-arrive .7s cubic-bezier(.2,.75,.25,1) backwards;
+  animation-delay: var(--entry-delay, 0s);
+}
+.home-page .home-entry-static .terminal-dish-model,
+.home-page .home-entry-static .terminal-dish-wave { animation: none; }
+@keyframes home-content-arrive {
+  from { opacity: 0; translate: 0 10px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page .home-entry-visible { animation: none; }
+}

@@ -17,16 +17,40 @@ const closeVlsmButton = document.querySelector("[data-close-vlsm]");
 
 // Cambiar data-announcement-enabled a "true" en el aviso para reactivarlo.
 if (vlsmAnnouncement && closeVlsmButton && vlsmAnnouncement.dataset.announcementEnabled !== "false") {
+  const announcementCookie = "dgnv_fiber_category5_seen";
+  const announcementLifetime = 5 * 24 * 60 * 60; // Cinco días corridos (120 horas).
+  const announcementCookiePath = new URL(".", location.href).pathname;
+  let announcementUnlocked = false;
+  const announcementLinks = [...vlsmAnnouncement.querySelectorAll('a[href]')];
+  const guardAnnouncementLink = event => {
+    if (!announcementUnlocked && event.target.closest('a[href]')) event.preventDefault();
+  };
+  vlsmAnnouncement.addEventListener('click', guardAnnouncementLink);
+  vlsmAnnouncement.addEventListener('auxclick', guardAnnouncementLink);
+  const announcementWasSeen = () => document.cookie.split(";").some(cookie => {
+    const [name, value] = cookie.trim().split("=");
+    return name === announcementCookie && Number(value) > Date.now();
+  });
+  const rememberAnnouncement = () => {
+    const expires = new Date(Date.now() + announcementLifetime * 1000);
+    document.cookie = `${announcementCookie}=${expires.getTime()}; Max-Age=${announcementLifetime}; Expires=${expires.toUTCString()}; Path=${announcementCookiePath}; SameSite=Lax${location.protocol === "https:" ? "; Secure" : ""}`;
+  };
+
   const dismissVlsmAnnouncement = () => {
-    if (!vlsmAnnouncement.open || vlsmAnnouncement.classList.contains("is-closing")) return;
+    if (!announcementUnlocked || !vlsmAnnouncement.open || vlsmAnnouncement.classList.contains("is-closing")) return;
 
     vlsmAnnouncement.classList.add("is-closing");
-    vlsmAnnouncement.addEventListener("animationend", function closeAfterAnimation(event) {
-      if (event.animationName !== "vlsm-announcement-out") return;
+    const finishClosing = () => {
+      window.clearTimeout(closeFallback);
       vlsmAnnouncement.classList.remove("is-closing");
       vlsmAnnouncement.close();
       vlsmAnnouncement.removeEventListener("animationend", closeAfterAnimation);
-    });
+    };
+    const closeAfterAnimation = event => {
+      if (event.target === vlsmAnnouncement && event.animationName === "vlsm-announcement-out") finishClosing();
+    };
+    const closeFallback = window.setTimeout(finishClosing, 500);
+    vlsmAnnouncement.addEventListener("animationend", closeAfterAnimation);
   };
 
   closeVlsmButton.addEventListener("click", dismissVlsmAnnouncement);
@@ -39,16 +63,48 @@ if (vlsmAnnouncement && closeVlsmButton && vlsmAnnouncement.dataset.announcement
   });
 
   const showVlsmAnnouncement = () => {
+    // Comprobar también aquí por si otra pestaña ya mostró el aviso.
+    if (announcementWasSeen()) return;
     if (afkScreen?.classList.contains("is-visible") || document.querySelector('dialog[open]:not(#vlsm-announcement)')) {
       window.setTimeout(showVlsmAnnouncement, 1000);
       return;
     }
     if (vlsmAnnouncement.open) return;
+    announcementUnlocked = false;
+    closeVlsmButton.disabled = true;
+    closeVlsmButton.classList.add('announcement-countdown');
+    closeVlsmButton.classList.remove('is-ready');
+    closeVlsmButton.innerHTML = '<span class="announcement-countdown-digit" aria-hidden="true">3</span><span class="announcement-close-symbol" aria-hidden="true">×</span>';
+    const digit = closeVlsmButton.querySelector('.announcement-countdown-digit');
+    closeVlsmButton.setAttribute('aria-label', 'Cierre disponible en 3 segundos');
+    announcementLinks.forEach(link => {
+      link.setAttribute('aria-disabled', 'true');
+      link.setAttribute('tabindex', '-1');
+    });
     vlsmAnnouncement.showModal();
-    window.setTimeout(dismissVlsmAnnouncement, 10000);
+    [2, 1, 0].forEach((number, index) => window.setTimeout(() => {
+      if (!vlsmAnnouncement.open) return;
+      digit.textContent = String(number);
+      closeVlsmButton.setAttribute('aria-label', `Cierre disponible en ${number} segundos`);
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        digit.animate([{ opacity: .25, transform: 'translateY(3px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 180, easing: 'ease-out' });
+      }
+    }, (index + 1) * 1000));
+    window.setTimeout(() => {
+      if (!vlsmAnnouncement.open) return;
+      announcementUnlocked = true;
+      closeVlsmButton.disabled = false;
+      closeVlsmButton.classList.add('is-ready');
+      closeVlsmButton.setAttribute('aria-label', 'Cerrar anuncio de Fibra óptica');
+      announcementLinks.forEach(link => {
+        link.removeAttribute('aria-disabled');
+        link.removeAttribute('tabindex');
+      });
+      rememberAnnouncement();
+    }, 3250);
   };
 
-  window.setTimeout(showVlsmAnnouncement, 10000);
+  if (!announcementWasSeen()) window.setTimeout(showVlsmAnnouncement, 10000);
 }
 
 const discordInvite = document.querySelector("[data-discord-invite]");

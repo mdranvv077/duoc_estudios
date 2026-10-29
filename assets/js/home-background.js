@@ -122,4 +122,10 @@
   });
   window.addEventListener("pageshow", restart);
   restart();
+  // Iniciar el encendido una vez cargada la página, con las trazas ya preparadas.
+  const powerOn = () => requestAnimationFrame(() => {
+    requestAnimationFrame(() => field.classList.add("is-powered"));
+  });
+  if (document.readyState === "complete") powerOn();
+  else window.addEventListener("load", powerOn, { once: true });
 })();
