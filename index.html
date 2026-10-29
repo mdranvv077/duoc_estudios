@@ -21,9 +21,11 @@
     <link rel="stylesheet" href="assets/css/home-background.css?v=20261028-parallax" />
     <link rel="stylesheet" href="assets/css/credits.css" />
     <link rel="stylesheet" href="assets/css/announcement.css" />
+    <link rel="stylesheet" href="assets/css/home-footer.css?v=20261028-faq-radius50" />
     <link rel="stylesheet" href="assets/css/afk-screen.css" />
     <link rel="stylesheet" href="assets/css/projects.css?v=20261028-home-actions-20" />
     <link rel="stylesheet" href="assets/css/home-icons.css?v=20261028" />
+    <link rel="stylesheet" href="assets/css/home-card-glow.css?v=20261028-neutral-subtle" />
     <link rel="icon" type="image/png" href="img/favicon.png" />
   </head>
   <body class="home-page">
@@ -252,6 +254,22 @@
           <span class="card-arrow" aria-hidden="true">↗</span>
         </a>
       </section>
+      <section class="home-help container" aria-labelledby="home-faq-title">
+        <div class="home-help-heading"><p class="eyebrow"><span></span> Antes de seguir</p><h2 id="home-faq-title">Preguntas frecuentes</h2><p>Algunas respuestas para orientarte y aprovechar mejor las guías.</p></div>
+        <div class="home-faq">
+          <details name="home-faq"><summary><span aria-hidden="true">01</span>¿Por dónde puedo empezar?</summary><div class="home-answer"><p>Elige una modalidad según lo que quieras aprender. Dentro de cada una, comienza por la introducción y sigue el orden de sus categorías y módulos; así tendrás el contexto antes de pasar a la práctica.</p></div></details>
+          <details name="home-faq"><summary><span aria-hidden="true">02</span>¿Necesito conocimientos previos?</summary><div class="home-answer"><p>Puedes empezar por los contenidos introductorios. Cuando un tema necesita una base previa, conviene revisar los módulos anteriores y volver al ejemplo con esa base más clara.</p></div></details>
+          <details name="home-faq"><summary><span aria-hidden="true">03</span>¿Tengo que crear una cuenta para leer las guías?</summary><div class="home-answer"><p>No. Las guías y sus contenidos públicos se pueden consultar directamente, sin iniciar sesión.</p></div></details>
+          <details name="home-faq"><summary><span aria-hidden="true">04</span>¿Las guías son solo teoría?</summary><div class="home-answer"><p>Combinan explicaciones, ejemplos y práctica. Según la modalidad encontrarás comandos, código en Python, modelos interactivos o recorridos paso a paso con herramientas.</p></div></details>
+          <details name="home-faq"><summary><span aria-hidden="true">05</span>¿Necesito instalar todos los programas?</summary><div class="home-answer"><p>Solo los que correspondan a la práctica que quieras realizar. Puedes leer las explicaciones sin instalarlos; cada recorrido indica las herramientas y los archivos que utiliza.</p></div></details>
+          <details name="home-faq"><summary><span aria-hidden="true">06</span>¿Puedo seguir el contenido desde el celular?</summary><div class="home-answer"><p>Sí. La página cuenta con una vista adaptada para celulares: los textos, botones y contenidos se ajustan al tamaño de la pantalla para facilitar la lectura y la navegación. Para escribir código, trabajar con topologías o utilizar programas de escritorio, resulta más cómodo continuar en un computador.</p></div></details>
+          <details name="home-faq"><summary><span aria-hidden="true">07</span>¿Qué hago si encuentro un error o quiero proponer un tema?</summary><div class="home-answer"><p>Puedes escribirnos a través de la comunidad de Discord. Incluye el enlace al módulo y una breve explicación; una captura también ayuda a entender lo que estás viendo.</p></div></details>
+        </div>
+        <div class="home-contact">
+          <div><p class="eyebrow"><span></span> Información y ayuda</p><h3>Accesos directos</h3></div>
+          <div class="home-contact-actions"><a href="https://discord.gg/d5ctdmtPa2" target="_blank" rel="noopener noreferrer">Contacto · Discord ↗</a><details class="home-terms"><summary>Condiciones de uso</summary><p>Esta sección está en preparación. Aquí publicaremos las condiciones de uso y las directrices de la página.</p></details></div>
+        </div>
+      </section>
     </main>
     <dialog
       class="guide-menu"
@@ -339,20 +357,31 @@
         </button>
       </div>
       <p class="announcement-copy">
-        Descubre cómo viaja la luz por la fibra, reconoce sus cables y conectores
-        y aprende sobre seguridad y pruebas con modelos interactivos.
+        Explora la nueva categoría de conectores, pulidos y chaquetas.
+        Reconoce cada pieza con modelos interactivos y vistas isométricas.
       </p>
       <div class="announcement-features">
-        <span>Conectores y pulidos</span><span>Seguridad</span><span>Modelos interactivos</span>
+        <span>Conectores</span><span>Pulidos</span><span>Capas y chaquetas</span>
       </div>
       <div class="announcement-actions">
-        <a class="button announcement-cta" href="guias/fibra-optica/index.html"
-          >Explorar Fibra óptica</a
+        <a class="button announcement-cta" href="guias/fibra-optica/conectores-pulidos-chaquetas/index.html"
+          >Explorar categoría 05</a
         ><a
           class="announcement-guide-link"
-          href="guias/fibra-optica/antes-de-empezar/index.html"
-          >Comenzar Episodio 01</a
+          href="guias/fibra-optica/conectores-pulidos-chaquetas/index.html"
+          >Ver los conectores</a
         >
+      </div>
+    </dialog>
+    <dialog class="guide-menu vlsm-announcement" id="discord-confirm" aria-labelledby="discord-confirm-title" aria-describedby="discord-confirm-copy">
+      <div class="guide-menu-top">
+        <div><p class="eyebrow"><span></span> Contacto</p><h2 id="discord-confirm-title">¿Ir a <em>Discord?</em></h2></div>
+        <button class="close-menu" type="button" data-discord-cancel aria-label="Cerrar confirmación">×</button>
+      </div>
+      <p class="announcement-copy" id="discord-confirm-copy">Se abrirá una nueva pestaña con la invitación a nuestro servidor de Discord. ¿Quieres continuar?</p>
+      <div class="announcement-actions">
+        <a class="button announcement-cta" href="https://discord.gg/d5ctdmtPa2" target="_blank" rel="noopener noreferrer" data-discord-accept>Sí, ir a Discord ↗</a>
+        <button class="button button-outline announcement-cta" type="button" data-discord-cancel>No, volver</button>
       </div>
     </dialog>
     <aside class="discord-invite" data-discord-invite aria-hidden="true">
@@ -412,7 +441,10 @@
         ></button>
       </p>
     </footer>
-    <script src="assets/js/main.js?v=20261028-announcement-fiber"></script>
+    <script src="assets/js/main.js?v=20261028-discord-confirm"></script>
+    <script src="assets/js/discord-confirm.js?v=20261028"></script>
     <script src="assets/js/home-background.js?v=20261028-parallax"></script>
+    <script src="assets/js/home-faq.js?v=20261028"></script>
+    <script src="assets/js/home-card-glow.js?v=20261028"></script>
   </body>
 </html>

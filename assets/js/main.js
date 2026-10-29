@@ -39,7 +39,7 @@ if (vlsmAnnouncement && closeVlsmButton && vlsmAnnouncement.dataset.announcement
   });
 
   const showVlsmAnnouncement = () => {
-    if (afkScreen?.classList.contains("is-visible")) {
+    if (afkScreen?.classList.contains("is-visible") || document.querySelector('dialog[open]:not(#vlsm-announcement)')) {
       window.setTimeout(showVlsmAnnouncement, 1000);
       return;
     }
@@ -78,7 +78,7 @@ if (afkScreen) {
   let ignoreActivityUntil = 0;
 
   const showAfkScreen = () => {
-    if (vlsmAnnouncement?.open) {
+    if (document.querySelector('dialog[open]')) {
       idleTimer = window.setTimeout(showAfkScreen, 1000);
       return;
     }

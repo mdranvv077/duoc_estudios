@@ -1,0 +1,26 @@
+.home-page .guide-section .guide-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.home-page .guide-section .guide-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(circle 190px at var(--card-glow-x, 50%) var(--card-glow-y, 50%), #a5b4c512 0%, #7e8fa008 38%, transparent 75%);
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+
+.home-page .guide-section .guide-card > * { position: relative; z-index: 1; }
+.home-page .guide-section .guide-card:focus-visible::before { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .home-page .guide-section .guide-card:hover::before { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page .guide-section .guide-card::before { transition: none; }
+}
