@@ -15,6 +15,30 @@
 .fc-scene .fc-svg-accent { fill: #ffad47; }
 .fc-part { transition: filter .2s, opacity .2s; cursor: pointer; }
 .fc-part.is-selected { filter: drop-shadow(0 0 5px #2eeaff99); }
+.fc-lab[data-fc-viewer="connector"] { --connector-glow: #58ba75; --connector-halo: #58ba7566; }
+.fc-lab[data-family="lc"] { --connector-glow: #60a9d2; --connector-halo: #60a9d266; }
+.fc-lab[data-family="mpo"] { --connector-glow: #72e0df; --connector-halo: #72e0df66; }
+.fc-lab[data-family="st"], .fc-lab[data-family="fc"] { --connector-glow: #d8e2e6; --connector-halo: #d8e2e666; }
+.fc-lab[data-fc-viewer="connector"] .fc-part {
+  --piece-glow: var(--connector-glow);
+  --piece-halo: var(--connector-halo);
+}
+.fc-lab[data-fc-viewer="connector"] [data-model-part="boot"] { --piece-glow: #76858e; --piece-halo: #76858e66; }
+.fc-lab[data-family="st"] [data-model-part="boot"] { --piece-glow: #23a9dc; --piece-halo: #23a9dc66; }
+.fc-lab[data-fc-viewer="connector"] [data-model-part="ferrule"] { --piece-glow: #f4f5e9; --piece-halo: #f4f5e966; }
+.fc-lab[data-family="mpo"] [data-model-part="ferrule"] { --piece-glow: #78878e; --piece-halo: #78878e66; }
+.fc-lab[data-fc-viewer="connector"] .fc-part.is-selected {
+  filter: brightness(1.18) drop-shadow(0 0 3px var(--piece-glow)) drop-shadow(0 0 9px var(--piece-glow)) drop-shadow(0 0 16px var(--piece-halo));
+}
+.fc-lab[data-fc-viewer="cable"] .fc-part.is-selected {
+  filter: brightness(1.18) drop-shadow(0 0 3px var(--layer-glow)) drop-shadow(0 0 9px var(--layer-glow)) drop-shadow(0 0 16px var(--layer-halo));
+}
+.fc-lab[data-fc-viewer="cable"] [data-model-part="jacket"] { --layer-glow: #e9cb61; --layer-halo: #e9cb6166; }
+.fc-lab[data-fc-viewer="cable"] [data-model-part="strength"] { --layer-glow: #f6d781; --layer-halo: #f6d78166; }
+.fc-lab[data-fc-viewer="cable"] [data-model-part="buffer"] { --layer-glow: #529ddd; --layer-halo: #529ddd66; }
+.fc-lab[data-fc-viewer="cable"] [data-model-part="coating"] { --layer-glow: #dbaf7d; --layer-halo: #dbaf7d66; }
+.fc-lab[data-fc-viewer="cable"] [data-model-part="cladding"] { --layer-glow: #a7e0e7; --layer-halo: #a7e0e766; }
+.fc-lab[data-fc-viewer="cable"] [data-model-part="core"] { --layer-glow: #ff9d2e; --layer-halo: #ff9d2e66; }
 .fc-parts { gap: 6px; margin-top: 0; }
 .fc-parts button { padding: 8px 11px; min-height: 40px; font-size: .66rem; }
 .fc-detail { min-height: 100px; padding: 16px 18px; border-left: 2px solid var(--cyan); background: #2eeaff07; }

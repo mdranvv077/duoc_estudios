@@ -44,7 +44,6 @@ const fiberGuideData = {
       ["index.html", "Reconocer los conectores"],
       ["pulidos.html", "PC, UPC y APC"],
       ["chaquetas.html", "Capas, chaquetas y colores"],
-      ["identificacion.html", "Elegir sin confundir"],
     ],
   },
   foa: {
@@ -111,7 +110,7 @@ function renderFiberNavigation() {
   standaloneLink.dataset.fiberCategory = "foa";
   standaloneLink.classList.toggle("active", category === "foa");
   if (category === "components") {
-    import(new URL("fiber-components.js?v=20261028", fiberAssetRoot).href)
+    import(new URL("fiber-components.js?v=20261028-st-detail", fiberAssetRoot).href)
       .then(viewer => viewer.initFiberComponents()).catch(console.error);
   }
   if (category === "foa") {
