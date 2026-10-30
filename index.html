@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="assets/css/logo.css" />
     <link rel="stylesheet" href="assets/css/responsive.css?v=20260909-mobile" />
     <link rel="stylesheet" href="assets/css/motion.css" />
-    <link rel="stylesheet" href="assets/css/home-background.css?v=20261028-led-power2" />
+    <link rel="stylesheet" href="assets/css/home-background.css?v=20261029-ambient-entry" />
     <link rel="stylesheet" href="assets/css/credits.css" />
     <link rel="stylesheet" href="assets/css/announcement.css?v=20261028-countdown" />
     <link rel="stylesheet" href="assets/css/home-footer.css?v=20261028-faq-radius50" />
@@ -28,9 +28,11 @@
     <link rel="stylesheet" href="assets/css/home-card-glow.css?v=20261028-neutral-subtle" />
     <link rel="stylesheet" href="assets/css/home-terminal-dish.css?v=20261028-delay2" />
     <link rel="stylesheet" href="assets/css/home-entry.css?v=20261028-visible" />
+    <link rel="stylesheet" href="assets/css/home-corner-webs.css?v=20261029-smooth-start" />
     <link rel="icon" type="image/png" href="img/favicon.png" />
   </head>
   <body class="home-page">
+    <div class="home-corner-webs" data-home-corner-webs aria-hidden="true"></div>
     <div class="home-grid-current" data-home-grid aria-hidden="true">
       <div class="home-grid-current__plane" data-home-grid-plane></div>
     </div>
@@ -46,6 +48,28 @@
           alt=""
         /><span>DGNV Studios</span></a
       >
+      <div class="home-header-spider" aria-hidden="true">
+        <span class="home-header-spider__thread"></span>
+        <span class="home-header-spider__runner">
+          <svg class="home-header-spider__body" viewBox="0 0 40 30" fill="none">
+            <g stroke="currentColor" stroke-opacity=".5" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round">
+              <path class="spider-leg spider-leg--rear-a" d="M14 14 8 11 4 23"/>
+              <path class="spider-leg spider-leg--rear-b" d="M18 16 11 19 8 27"/>
+              <path class="spider-leg spider-leg--rear-c" d="M24 15 30 12 35 23"/>
+              <path class="spider-leg spider-leg--rear-d" d="M25 17 32 21 35 28"/>
+            </g>
+            <g stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+              <path class="spider-leg spider-leg--a" d="M15 14 8 8 2 21"/>
+              <path class="spider-leg spider-leg--b" d="M19 16 12 21 11 28"/>
+              <path class="spider-leg spider-leg--c" d="M25 15 32 8 39 21"/>
+              <path class="spider-leg spider-leg--d" d="M26 17 34 20 38 28"/>
+            </g>
+            <ellipse cx="15" cy="14" rx="7" ry="5.8" fill="currentColor"/>
+            <ellipse cx="25" cy="15" rx="5" ry="4" fill="currentColor"/>
+            <path d="m29 16 3 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </div>
     </header>
     <main>
       <section class="hero container">
@@ -464,9 +488,11 @@
       </p>
     </footer>
     <script src="assets/js/home-entry.js?v=20261028"></script>
+    <script src="assets/js/home-corner-webs.js?v=20261029-letter-threads"></script>
+    <script src="assets/js/home-spider.js?v=20261029-smooth-start"></script>
     <script src="assets/js/main.js?v=20261028-announcement-countdown"></script>
     <script src="assets/js/discord-confirm.js?v=20261028"></script>
-    <script src="assets/js/home-background.js?v=20261028-led-power2"></script>
+    <script src="assets/js/home-background.js?v=20261029-ambient-entry"></script>
     <script src="assets/js/home-faq.js?v=20261028"></script>
     <script src="assets/js/home-card-glow.js?v=20261028"></script>
   </body>
