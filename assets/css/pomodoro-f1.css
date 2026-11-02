@@ -1,0 +1,151 @@
+.pomo-page{--race:#2eeaff;--pixel:"Silkscreen","DM Mono",monospace;background-color:#080c12;background-image:radial-gradient(ellipse at 80% 12%,#16303c55,transparent 45%)}
+.pomo-page button,.pomo-page input{font:inherit}.pomo-page button{cursor:pointer}.pomo-page button:focus-visible,.pomo-page input:focus-visible,.pomo-page a:focus-visible,.pomo-page summary:focus-visible{outline:2px solid var(--race);outline-offset:5px}.pomo-back{font: .7rem "DM Mono",monospace;color:var(--muted);text-decoration:none}.pomo-back:hover{color:var(--race)}.pomo-main{padding-top:56px}.pomo-intro{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:32px}.pomo-kicker{font:.65rem var(--pixel);letter-spacing:.08em;color:var(--orange);margin-bottom:16px}.pomo-intro h1{font:clamp(1.7rem,3.7vw,3rem)/1.2 var(--pixel);letter-spacing:-.05em;margin:0}.pomo-intro h1 em{color:var(--race)}.pomo-intro>p{color:var(--muted);font-size:.8rem;line-height:1.8;margin:0}.pixel-cursor{color:var(--orange)}.race-console{border:1px solid #314553;border-radius:8px;background:linear-gradient(130deg,#101923f5,#0a1018f5);box-shadow:0 24px 85px #0005;overflow:hidden}.console-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:18px 24px;border-bottom:1px solid var(--line);font:.62rem var(--pixel);color:#b0c4d0}.status-dot{display:inline-block;width:6px;height:6px;background:var(--race);box-shadow:0 0 10px #2eeaff55;margin-right:9px}.pomo-small{border:1px solid #34434f;background:#ffffff04;color:#b7c6d0;border-radius:4px;padding:9px 12px;font-size:.68rem!important}.pomo-small:hover{border-color:var(--race);color:var(--race)}.race-grid{display:grid;grid-template-columns:280px 1fr}.race-garage{padding:26px 22px;border-right:1px solid var(--line);background:#080c1338}.driver-heading{display:flex;align-items:center;gap:12px}.driver-helmet{width:64px;flex:none;color:var(--orange)}.pomo-label{display:block;font:.58rem/1.7 var(--pixel);color:#8197a7;letter-spacing:.025em}.driver-heading input{display:block;width:100%;min-width:0;margin:7px 0;background:transparent;border:0;border-bottom:1px dashed #456070;color:#edf2f7;font:.85rem var(--pixel);padding:3px 0}.driver-number{font:.55rem var(--pixel);color:var(--orange)}.garage-divider{height:1px;background:var(--line);margin:24px 0}.circuit-list{display:grid;gap:10px}.circuit{display:flex;gap:10px;align-items:center;text-align:left;background:#ffffff03;border:1px solid #2a3743;border-radius:5px;color:#9aafbd;padding:12px 10px;transition:border-color .2s,background .2s}.circuit svg{width:53px;flex:none;fill:none;stroke:currentColor;stroke-width:2.5}.circuit span{font:.68rem var(--pixel)}.circuit small{display:block;font:.52rem "DM Mono",monospace;color:var(--muted);margin-top:6px}.circuit b{font:.6rem var(--pixel);margin-left:auto;color:#536a7b}.circuit.active{color:var(--race);border-color:#2eeaff99;background:#2eeaff08}.circuit:hover{border-color:#6d97ab}.circuit-note{color:#748b9c;font:.64rem/1.6 "DM Mono",monospace;margin:12px 0 22px}.race-settings{border-top:1px solid var(--line);padding-top:16px;color:#9fb1c0;font-size:.72rem}.race-settings summary{cursor:pointer;display:flex;justify-content:space-between;list-style:none}.race-settings summary::-webkit-details-marker{display:none}.race-settings form{display:grid;gap:12px;padding-top:18px}.race-settings label{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:.67rem}.race-settings input{width:52px;background:#080c12;border:1px solid #34434f;color:var(--text);padding:6px;font:.7rem "DM Mono",monospace}.race-stage{padding:26px 32px 0;min-width:0}.session-tabs{display:flex;flex-wrap:wrap;gap:6px}.session-tabs button{background:transparent;color:#8295a4;border:1px solid transparent;padding:8px 10px;font:.57rem var(--pixel)}.session-tabs button.active{background:#2eeaff09;border-color:#2eeaff44;color:var(--race)}.race-lights{display:flex;justify-content:center;gap:8px;margin:24px 0}.race-lights i{width:12px;height:12px;background:#24303b;border:1px solid #354351;border-radius:50%;transition:background .15s,box-shadow .15s}.race-lights i.on{background:#ff465e;box-shadow:0 0 12px #ff465e66;border-color:#ff465e}.race-lights.go i{background:var(--race);border-color:var(--race);box-shadow:0 0 12px #2eeaff55}.timing-heading,.track-heading{display:flex;justify-content:space-between;gap:10px;font:.52rem var(--pixel);color:#90a4b4}.timing-heading span:last-child{color:var(--orange)}.race-time{text-align:center;font:clamp(3rem,7vw,6.6rem)/1.25 var(--pixel);letter-spacing:-.08em;color:#edf6fa;margin:12px 0 6px;font-variant-numeric:tabular-nums;text-shadow:0 0 32px #2eeaff0f}.race-status{text-align:center;min-height:2.8em;color:#9fb1bd;font:.73rem/1.5 "DM Mono",monospace;margin:0 auto 12px;max-width:420px}.race-progress{height:4px;background:#25313c}.race-progress span{display:block;width:0;height:100%;background:var(--race);box-shadow:0 0 12px #2eeaff55;transition:width .3s linear}.race-actions{display:flex;gap:10px;justify-content:center;margin:22px 0 28px}.race-start{flex:1;background:var(--race);color:#071016;border:1px solid var(--race);border-radius:4px;padding:15px 10px;font:.68rem var(--pixel)!important;transition:filter .2s}.race-start:hover{filter:brightness(1.12)}.race-reset{color:#9eb1bf;border:1px solid #34434f;background:transparent;padding:10px 13px;border-radius:4px;font:.67rem "DM Mono",monospace!important}.race-reset:hover{color:#fff;border-color:#718c9e}.race-track{display:block;width:100%;height:175px;color:var(--race);margin-top:10px;overflow:visible}.track-road{fill:none;stroke:#344650;stroke-width:13;stroke-linejoin:round}.track-line{fill:none;stroke:#77909b;stroke-width:1;stroke-dasharray:4 5;stroke-linejoin:round}.finish-line{stroke:var(--orange);stroke-width:4}.race-telemetry{display:grid;grid-template-columns:1fr 1.3fr 1fr;border-top:1px solid var(--line);background:#090f17}.race-telemetry>div{padding:20px 24px;border-right:1px solid var(--line)}.race-telemetry>div:last-child{border:0}.race-telemetry strong{display:block;font:1.25rem var(--pixel);color:#dcebf3;margin-top:8px}.race-telemetry small{font:.6rem var(--pixel);color:#8da3b4}.stints{display:flex;gap:6px;margin-top:15px}.stints i{height:12px;flex:1;max-width:45px;background:#263540;transform:skew(-15deg)}.stints i.done{background:var(--race)}.pomo-how{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:32px 0 22px}.pomo-how span{font:.62rem var(--pixel);color:var(--orange)}.pomo-how p{font-size:.77rem;line-height:1.8;color:var(--muted);margin:10px 0 0}.pomo-local{font:.64rem/1.8 "DM Mono",monospace;color:#718595;margin-bottom:45px}.pomo-page:fullscreen{overflow:auto;background-color:#080c12}.pomo-page button:disabled{cursor:wait;opacity:.55}.pomo-page footer{align-items:center}
+.pomo-page{--car-paint:#9cabb3;--car-shade:#485b65;--car-dark:#111a22;--car-accent:#43e2c8;--car-highlight:#dce9ed;--tire-color:#ff5368}
+.pomo-page[data-team="ferrari"]{--car-paint:#ef3340;--car-shade:#a51631;--car-dark:#25151e;--car-accent:#ffd546;--car-highlight:#ff8a83}
+.pomo-page[data-team="redbull"]{--car-paint:#354c8b;--car-shade:#1d2a56;--car-dark:#11182b;--car-accent:#ffcf36;--car-highlight:#e95045}
+.pomo-page[data-tire="medium"]{--tire-color:#f5d54c}.pomo-page[data-tire="hard"]{--tire-color:#e0e9ee}
+.driver-helmet{color:var(--car-accent)}.car-customizer{padding:0 0 2px}.car-customizer>.pomo-label{margin-bottom:4px}.car-preview{width:100%;height:auto;display:block;background:linear-gradient(180deg,transparent,#ffffff03);margin:12px 0 8px}.pixel-tire{fill:#0b0f16;stroke:#435160;stroke-width:1}.pixel-tire .tire-ring{fill:none;stroke:var(--tire-color);stroke-width:2}.pixel-tire .tire-hub{fill:#7a8996;stroke:none}.car-caption{display:flex;justify-content:space-between;gap:8px;margin:12px 0 16px;font:.56rem var(--pixel);color:var(--car-accent)}.car-caption span:last-child{color:var(--tire-color);font-size:.5rem}
+.team-options{display:grid;gap:7px}.team-options button{display:flex;align-items:center;gap:9px;text-align:left;background:#ffffff02;border:1px solid #2a3743;color:#a2b3c2;padding:9px 10px;border-radius:4px;font:.62rem var(--pixel)}.team-options button[aria-pressed="true"]{border-color:var(--car-accent);background:#ffffff06;color:#edf2f7}.team-swatch{display:inline-block;flex:none;width:20px;height:7px;transform:skew(-20deg)}.swatch-mercedes{background:linear-gradient(90deg,#8d9da6 50%,#43e2c8 50%)}.swatch-ferrari{background:linear-gradient(90deg,#ef3340 70%,#ffd546 70%)}.swatch-redbull{background:linear-gradient(90deg,#354c8b 50%,#e95045 50% 70%,#ffcf36 70%)}
+.tire-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:18px}.tire-options button{display:flex;flex-direction:column;align-items:center;gap:8px;padding:9px 3px;background:#ffffff02;border:1px solid #2a3743;border-radius:4px;color:#a5b5c1;font-size:.63rem}.tire-options button[aria-pressed="true"]{border-color:var(--tire-color);color:#edf2f7;background:#ffffff06}.tire-options small{display:block;font:.56rem "DM Mono",monospace;margin-top:4px;color:#859cab}.compound{display:grid;place-items:center;width:30px;height:30px;border:3px solid currentColor;outline:3px solid #202b36;box-shadow:inset 0 0 0 2px #202b36;border-radius:50%;font:.75rem var(--pixel);background:#10151d}.compound-soft{color:#ff5368}.compound-medium{color:#f5d54c}.compound-hard{color:#e0e9ee}.tire-help{font:.63rem/1.7 "DM Mono",monospace;color:#8297a6;margin:12px 0 0}#track-car{color:var(--car-accent)}
+.race-stage .car-customizer{display:grid;grid-template-columns:minmax(0,1fr) 150px;column-gap:20px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}.race-stage .car-customizer>.pomo-label{grid-column:1/-1}.race-stage .car-preview{grid-column:1;grid-row:2;margin:0;max-width:380px;justify-self:center}.race-stage .car-caption{grid-column:1;grid-row:3;margin:8px 0 0}.race-stage .team-options{grid-column:2;grid-row:2/4}
+@media(min-width:1600px){.pomo-main{padding-top:70px}.race-stage{padding-left:45px;padding-right:45px}}
+@media(max-width:780px){.race-stage .car-customizer{display:block}.race-stage .car-preview{max-width:330px;margin:auto}.race-stage .car-caption{margin:8px 0 16px}.race-stage .team-options{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.race-stage .team-options button{flex-direction:column;gap:7px;text-align:center;padding:10px 4px;font-size:.54rem}}
+@media(max-width:780px){.pomo-page .container{width:calc(100% - 32px)}.pomo-main{padding-top:32px}.pomo-intro{align-items:start;flex-direction:column}.pomo-intro h1{font-size:1.9rem}.race-grid{grid-template-columns:1fr}.race-garage{border-right:0;border-bottom:1px solid var(--line);padding:20px}.driver-heading{max-width:260px}.garage-divider{margin:16px 0}.circuit-list{grid-template-columns:repeat(3,1fr);gap:7px}.circuit{display:flex;flex-direction:column;align-items:start;gap:6px;padding:10px 8px}.circuit svg{width:100%;max-width:65px;height:32px}.circuit b{display:none}.circuit small{font-size:.48rem;line-height:1.6}.circuit-note{margin-bottom:12px}.race-stage{padding:22px 20px 0}.race-time{font-size:clamp(3rem,12vw,5rem)}.race-lights{margin:22px 0}.race-telemetry>div{padding:16px 12px}.race-telemetry .pomo-label{font-size:.48rem}.race-telemetry strong{font-size:1rem}.pomo-how{gap:18px}.console-heading{padding:14px 16px;font-size:.48rem}.pomo-small{font-size:.58rem!important}.timing-heading{font-size:.45rem}.pomo-back{font-size:.6rem}}
+@media(max-width:430px){.pomo-intro h1{font-size:1.55rem}.race-actions{flex-direction:column}.session-tabs{gap:2px}.session-tabs button{padding:8px 6px;font-size:.48rem}.pomo-how{grid-template-columns:1fr;gap:16px}.race-telemetry{grid-template-columns:1fr 1fr}.race-telemetry .stint-block{grid-column:1/-1;border-top:1px solid var(--line)}.race-track{height:145px}.console-heading{gap:8px}.console-heading>span{max-width:130px;line-height:1.6}}
+.race-stage .race-track{height:235px;margin-top:14px}.track-runoff{fill:none;stroke:#173132;stroke-opacity:.65;stroke-width:26;stroke-linejoin:round}.track-boundary{fill:none;stroke:#a6b7bd;stroke-opacity:.55;stroke-width:15;stroke-linejoin:round}.track-road{stroke:#293741;stroke-width:12;stroke-linecap:round}.track-line{stroke:#c6d6dc;stroke-opacity:.25;stroke-width:.7;stroke-dasharray:3 7}.track-kerbs{fill:none;stroke-width:3.2;stroke-linecap:butt}.track-pitlane{fill:none;stroke:#526b79;stroke-width:4;stroke-linecap:round}.track-pit-boxes{fill:none;stroke:#bdcbd1;stroke-opacity:.4;stroke-width:.8}.track-grandstand{stroke:#526677;stroke-width:1.5}.track-surroundings text{fill:#7a93a4;font:5.5px var(--pixel);letter-spacing:.5px}.track-callout{fill:none;stroke:#8198a7;stroke-width:.7}.finish-line{fill:url(#finish-checks);stroke:none}.circuit svg{stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:780px){.race-stage .race-track{height:185px}}
+.helmet-trigger{display:grid;justify-items:center;flex:none;width:76px;padding:4px 3px 7px;border:1px solid transparent;border-radius:5px;background:#ffffff03;color:#b7c9d3;transition:border-color .2s,background .2s}
+.helmet-trigger:hover,.helmet-trigger[aria-expanded="true"]{border-color:#6b8d9e;background:#ffffff08}
+.helmet-trigger .driver-helmet{color:var(--helmet-color,var(--car-accent));width:64px}
+.helmet-trigger-hint{font:.625rem/1.5 var(--pixel);color:#a7bdca;margin-top:2px}
+.driver-heading>div{min-width:0;flex:1}
+.helmet-picker{margin-top:18px;padding:14px 10px;border:1px solid #344b5b;border-radius:5px;background:#080e17}
+.helmet-picker[hidden]{display:none}
+.helmet-picker>.pomo-label{margin:0 0 12px}
+.helmet-colors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.helmet-colors button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-height:60px;padding:8px 3px;border:1px solid #344451;border-radius:4px;background:#ffffff03;color:#afc2d0;font:.75rem/1.5 "DM Mono",monospace}
+.helmet-colors button:hover{border-color:#779baa}
+.helmet-colors button[aria-pressed="true"]{border-color:var(--race);background:#2eeaff0a;color:#edf6fa}
+.helmet-colors i{width:20px;height:20px;border-radius:3px;box-shadow:0 0 0 1px #ffffff38}
+.helmet-help{font:.75rem/1.7 "DM Mono",monospace;color:#93aaba;margin:12px 0 0}
+/* A shared type scale keeps the arcade labels legible across the dashboard. */
+.pomo-page{--pomo-caption:.75rem;--pomo-control:.875rem}
+.pomo-kicker,.console-heading,.pomo-label,.race-telemetry .pomo-label,
+.driver-number,.circuit small,.circuit b,.timing-heading,.track-heading,
+.car-caption,.car-caption span:last-child,.tire-options small,.race-telemetry small,
+.pomo-how span{font-size:var(--pomo-caption);line-height:1.65}
+.pomo-back,.circuit-note,.race-settings,.race-settings label,.race-settings input,
+.race-status,.tire-help,.pomo-local,.tire-options button,.circuit span,
+.team-options button,.race-stage .team-options button,.session-tabs button{font-size:var(--pomo-control);line-height:1.65}
+.pomo-small{font-size:var(--pomo-control)!important;line-height:1.5}
+.race-start,.race-reset{font-size:var(--pomo-control)!important;line-height:1.6}
+.pomo-intro>p,.pomo-how p{font-size:1rem;line-height:1.8}
+.driver-heading input{font-size:1rem;line-height:1.6}
+.race-telemetry strong{font-size:1.5rem;line-height:1.4}
+.race-grid{grid-template-columns:310px minmax(0,1fr)}
+.race-stage .car-customizer{grid-template-columns:minmax(0,1fr) 175px}
+.race-settings form{gap:16px}.race-settings input{width:62px;padding:8px}
+.team-options button{min-height:42px}.circuit{padding:14px 10px}
+.circuit small{overflow-wrap:anywhere}.circuit-note,.tire-help,.pomo-local{color:#9aafbd}
+.pomo-label,.race-telemetry .pomo-label{color:#a0b3c1}
+.race-status{max-width:520px;min-height:3.3em;margin-bottom:18px}
+.race-actions{gap:12px}.session-tabs{gap:8px}.session-tabs button{padding:9px 10px}
+.timing-heading,.track-heading{flex-wrap:wrap;row-gap:8px}
+.race-telemetry>div{min-width:0}.pomo-how{gap:28px}
+.track-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 24px;padding:4px 0 20px;font:var(--pomo-caption)/1.6 "DM Mono",monospace;color:#a0b3c1}
+.track-legend span{display:inline-flex;gap:8px;align-items:center}
+.track-legend i{display:inline-block;width:14px;height:10px;flex:none}
+.legend-finish{background:repeating-conic-gradient(#dce9ed 0 25%,#111b24 0 50%) 0 0/7px 7px}
+.legend-pit{border:2px solid #718e9e;border-top:0;border-radius:0 0 6px 6px}
+@media(max-width:1000px) and (min-width:781px){.race-stage{padding-left:22px;padding-right:22px}.race-stage .car-customizer{grid-template-columns:minmax(0,1fr) 145px}.race-actions{flex-direction:column}}
+@media(max-width:780px){
+  .race-grid{grid-template-columns:minmax(0,1fr)}
+  .race-stage .car-customizer{display:block}
+  .race-stage .team-options button{font-size:var(--pomo-caption);padding:12px 4px;line-height:1.6}
+  .circuit{padding:12px 8px}.circuit span{font-size:var(--pomo-caption)}
+  .console-heading{align-items:flex-start;flex-direction:column;gap:12px}
+  .console-heading>span{max-width:none}.console-heading .pomo-small{align-self:flex-end}
+  .timing-heading{flex-direction:column;align-items:center;text-align:center}
+  .race-telemetry .pomo-label{min-height:3.3em}
+  .session-tabs{gap:4px}.session-tabs button{font-size:var(--pomo-caption);padding:9px 7px}
+  .race-status{min-height:3.3em}.pomo-how{gap:22px}
+  .pomo-page footer{gap:16px;flex-wrap:wrap}
+}
+/* Timer updates remain available to screen readers without a visible caption. */
+.race-status{position:absolute;width:1px;height:1px;min-height:0;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.race-time{margin-bottom:24px}
+.race-planner{min-width:0;border-left:1px solid var(--line);background:#090f1780}
+.planner-section{padding:24px 20px;border-bottom:1px solid var(--line);min-width:0}
+.planner-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+.planner-heading h2{margin:0;font:1rem/1.5 var(--pixel);letter-spacing:0;color:#e5eff5}
+.planner-tag{font:.75rem/1.6 var(--pixel);color:var(--race)}
+.planner-form{display:grid;gap:10px;margin-bottom:20px}
+.planner-form label{font-size:.875rem;line-height:1.6;color:#a7bbc9}
+.planner-form input,.planner-form select{width:100%;min-width:0;padding:11px 10px;border:1px solid #344858;border-radius:4px;background:#0a111b;color:#e2edf5;font:.875rem/1.5 "Manrope",sans-serif;box-sizing:border-box}
+.planner-form input::placeholder{color:#7991a3;opacity:1}
+.planner-add{padding:11px 10px;border:1px solid #2eeaff55;border-radius:4px;background:#2eeaff0a;color:var(--race);font:.75rem/1.6 var(--pixel)!important}
+.planner-add:hover{background:#2eeaff16;border-color:var(--race)}
+.planner-filters{display:flex;gap:6px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.planner-filters button{flex:1;min-width:0;padding:8px 4px;color:#94aabb;background:transparent;border:1px solid transparent;border-radius:3px;font:.75rem/1.6 "DM Mono",monospace!important}
+.planner-filters button[aria-pressed="true"]{color:var(--race);border-color:#2eeaff44;background:#2eeaff08}
+.planner-list{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:10px}
+.planner-task{display:flex;align-items:flex-start;gap:6px;padding:12px 8px 12px 10px;border:1px solid #2a3a48;border-radius:5px;background:#ffffff02}
+.planner-task label{display:flex;gap:10px;align-items:flex-start;flex:1;min-width:0;cursor:pointer}
+.planner-task input{appearance:auto;flex:none;accent-color:var(--race);width:17px;height:17px;margin:3px 0 0;cursor:pointer}
+.planner-task-copy{display:grid;gap:5px;min-width:0;font-size:.875rem;line-height:1.7;color:#d8e6ef;overflow-wrap:anywhere}
+.planner-task-copy small{font:.75rem/1.6 "DM Mono",monospace;color:#91aabb}
+.planner-task.is-done .planner-task-name{text-decoration:line-through;color:#8da3b3}
+.planner-delete{display:grid;place-items:center;flex:none;width:28px;min-height:28px;padding:0;border:1px solid transparent;border-radius:3px;background:transparent;color:#8fa5b5;font:1.25rem/1 "Manrope",sans-serif!important}
+.planner-delete:hover{color:#ff8090;background:#ff536810;border-color:#ff536844}
+.planner-empty,.planner-description,.planner-storage{font:.875rem/1.8 "Manrope",sans-serif;color:#93aabb;overflow-wrap:anywhere}
+.planner-empty{margin:16px 0 0}.planner-description{margin:-6px 0 18px}.planner-storage{margin:18px 20px 24px;font-size:.75rem}
+.planner-empty[hidden],.planner-filter-project[hidden]{display:none}
+.planner-project{display:flex;align-items:flex-start;gap:4px;padding:10px 7px 10px 10px;border:1px solid #2a3a48;border-radius:5px;background:#ffffff02}
+.planner-project-select{flex:1;min-width:0;display:grid;gap:8px;padding:0;border:0;background:transparent;text-align:left;color:#c4d7e5}
+.planner-project-select[aria-pressed="true"]{color:var(--race)}
+.planner-project-name{font-size:.875rem;line-height:1.7;overflow-wrap:anywhere}
+.planner-project-select small{font:.75rem/1.7 "DM Mono",monospace;color:#91aabb}
+.planner-project-bar{display:block;height:3px;background:#2b3d4a;width:100%;margin-top:2px}
+.planner-project-bar i{display:block;height:100%;background:var(--race)}
+.planner-filter-project{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:7px 9px;background:#2eeaff08;border:1px solid #2eeaff33;border-radius:3px;color:var(--race);font:.75rem/1.6 "DM Mono",monospace}
+.planner-filter-project span{overflow-wrap:anywhere;min-width:0}.planner-filter-project button{border:0;background:transparent;color:inherit;flex:none;padding:3px 5px;font-size:1.2rem}
+@media(min-width:1280px){.pomo-page .container{width:min(1440px,calc(100% - 48px))}.race-grid{grid-template-columns:280px minmax(0,1fr) 300px}}
+@media(max-width:1279px){.race-planner{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-left:0;border-top:1px solid var(--line)}.planner-section:first-child{border-right:1px solid var(--line)}.planner-storage,#planner-status{grid-column:1/-1}}
+@media(max-width:780px){.race-planner{grid-template-columns:minmax(0,1fr)}.planner-section:first-child{border-right:0}.planner-section{padding:24px 20px}}
+.backup-actions{display:grid;gap:10px}
+.backup-status{font:.875rem/1.8 "Manrope",sans-serif;color:#b2d9e4;margin:14px 0 0;overflow-wrap:anywhere}
+.backup-status:empty{display:none}
+.backup-dialog{width:min(540px,calc(100% - 32px));max-height:calc(100vh - 32px);padding:28px;border:1px solid #4f788b;border-radius:8px;background:linear-gradient(135deg,#13212e,#0a1019);color:#dfeef6;box-shadow:0 24px 90px #0009;overflow:auto}
+.backup-dialog::backdrop{background:#03070bc7;backdrop-filter:blur(6px)}
+.backup-dialog h2{font:1.1rem/1.6 var(--pixel);letter-spacing:0;margin:12px 0 20px}
+.backup-dialog p{font-size:.9375rem;line-height:1.8}
+.backup-dialog .pomo-label{font-size:var(--pomo-caption)}
+.backup-file-name{font-family:"DM Mono",monospace;font-size:.875rem!important;color:#a4becd;overflow-wrap:anywhere;margin-bottom:10px}
+.backup-summary{padding:14px;border:1px solid #365161;border-radius:4px;background:#2eeaff06;color:var(--race)}
+.backup-dialog-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:12px;margin-top:24px}
+.backup-dialog-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.backup-dialog-top .pomo-label{margin:0;min-width:0}
+.backup-close{display:grid;place-items:center;flex:none;width:32px;height:32px;border:1px solid #405867;background:transparent;color:#a7bfcd;border-radius:4px;font:1.4rem/1 "Manrope",sans-serif!important}
+.backup-close:hover{color:#edf7fa;border-color:#90b9ca}
+.backup-dropzone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;min-height:214px;padding:28px 18px;border:2px dashed #486579;border-radius:7px;color:#b9d1df;background:linear-gradient(145deg,#142d3a66,#0a131f44);text-align:center;transition:background .18s,border-color .18s,box-shadow .18s}
+.backup-dropzone svg{width:48px;height:48px;color:var(--race);margin-bottom:6px;transition:translate .18s}
+.backup-dropzone strong{font:.875rem/1.8 var(--pixel)}
+.backup-dropzone span{font:.9375rem/1.7 "Manrope",sans-serif;color:#b3c7d3}
+.backup-dropzone small{font:.75rem/1.7 "DM Mono",monospace;color:#93adbd}
+.backup-dropzone:hover,.backup-dropzone.is-dragging{border-color:var(--race);background:#2eeaff0d;box-shadow:inset 0 0 30px #2eeaff05}
+.backup-dropzone.is-dragging svg{translate:0 -4px}
+.backup-dialog.has-file .backup-dropzone{min-height:150px;padding:18px}
+.backup-dialog.has-file .backup-dropzone svg{width:34px;height:34px;margin-bottom:0}
+.backup-upload-status,.backup-upload-error{margin:14px 0 0;font-size:.875rem!important;line-height:1.8}
+.backup-upload-status{color:#a9d7df}.backup-upload-error{padding:12px;border:1px solid #e3788355;border-radius:4px;background:#ff53680a;color:#f2b2ba}
+.backup-upload-status:empty,.backup-upload-error:empty{display:none}
+.backup-preview{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.backup-preview[hidden]{display:none}
+.backup-dialog button:disabled{cursor:not-allowed}
+.backup-dialog[open]{animation:backup-dialog-enter .2s ease-out}
+.backup-dialog[open]::backdrop{animation:backup-backdrop-enter .2s ease-out}
+@keyframes backup-dialog-enter{from{opacity:0;translate:0 6px;scale:.985}to{opacity:1;translate:0 0;scale:1}}
+@keyframes backup-backdrop-enter{from{opacity:0}to{opacity:1}}
+@media(max-width:430px){.backup-dialog{padding:20px}.backup-dialog h2{font-size:1rem}.backup-dropzone{padding:22px 12px}.backup-dialog-actions{display:grid;grid-template-columns:1fr;width:100%}.backup-dialog-actions button{width:100%}}
+@media(max-width:1279px) and (min-width:781px){.planner-backup{grid-column:1/-1}.backup-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.pomo-page *{scroll-behavior:auto!important;transition:none!important}.backup-dialog[open],.backup-dialog[open]::backdrop{animation:none}}
