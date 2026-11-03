@@ -113,6 +113,9 @@
 @media(max-width:1279px){.race-planner{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-left:0;border-top:1px solid var(--line)}.planner-section:first-child{border-right:1px solid var(--line)}.planner-storage,#planner-status{grid-column:1/-1}}
 @media(max-width:780px){.race-planner{grid-template-columns:minmax(0,1fr)}.planner-section:first-child{border-right:0}.planner-section{padding:24px 20px}}
 .backup-actions{display:grid;gap:10px}
+.console-controls{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px}
+#sound-toggle[aria-pressed="true"]{color:var(--race);border-color:#2eeaff66;background:#2eeaff08}
+@media(max-width:780px){.console-controls{width:100%}.console-controls .pomo-small{flex:1;min-width:0}}
 .backup-status{font:.875rem/1.8 "Manrope",sans-serif;color:#b2d9e4;margin:14px 0 0;overflow-wrap:anywhere}
 .backup-status:empty{display:none}
 .backup-dialog{width:min(540px,calc(100% - 32px));max-height:calc(100vh - 32px);padding:28px;border:1px solid #4f788b;border-radius:8px;background:linear-gradient(135deg,#13212e,#0a1019);color:#dfeef6;box-shadow:0 24px 90px #0009;overflow:auto}

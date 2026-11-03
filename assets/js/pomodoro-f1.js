@@ -30,11 +30,13 @@
   } catch { /* The timer also works when browser storage is unavailable. */ }
   state.team = 'mercedes';
   state.tire = 'soft';
+  state.soundEnabled = false;
   state.helmets = { mercedes: 'turquoise', ferrari: 'red', redbull: 'navy' };
   try {
     const cookie = document.cookie.split(';').map(value => value.trim()).find(value => value.startsWith(`${preferenceCookie}=`));
     const preferences = cookie ? JSON.parse(decodeURIComponent(cookie.slice(preferenceCookie.length + 1))) : null;
     if (preferences) {
+      state.soundEnabled = preferences.soundEnabled === true;
       if (Object.hasOwn(teams, preferences.team)) state.team = preferences.team;
       if (Object.hasOwn(tires, preferences.tire)) state.tire = preferences.tire;
       for (const team of Object.keys(teams)) {
@@ -50,7 +52,7 @@
   let lastDisplay = '';
   const persist = () => { try { const { team, tire, helmets, ...session } = state; localStorage.setItem(key, JSON.stringify(session)); } catch {} };
   function persistPreferences() {
-    const value = encodeURIComponent(JSON.stringify({ team: state.team, tire: state.tire, helmets: state.helmets, durations: state.durations }));
+    const value = encodeURIComponent(JSON.stringify({ team: state.team, tire: state.tire, helmets: state.helmets, durations: state.durations, soundEnabled: state.soundEnabled }));
     const path = new URL('.', location.href).pathname;
     document.cookie = `${preferenceCookie}=${value}; Max-Age=15552000; Path=${path}; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}`;
     persist();
@@ -85,6 +87,40 @@
     palette.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', button.dataset.helmet === state.helmets[state.team]));
   }
   const status = message => { $('#race-status').textContent = message; };
+  let audioContext, audioVolume;
+  function prepareAudio() {
+    if (!state.soundEnabled) return;
+    try {
+      if (!audioContext) {
+        const Audio = window.AudioContext || window.webkitAudioContext;
+        if (!Audio) return;
+        audioContext = new Audio(); audioVolume = audioContext.createGain();
+        audioVolume.gain.value = .035; audioVolume.connect(audioContext.destination);
+      }
+      audioVolume.gain.value = .035;
+      if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
+    } catch { /* Audio availability never blocks the timer. */ }
+  }
+  function tone(frequency, duration = .1) {
+    if (!state.soundEnabled || !audioContext || audioContext.state !== 'running') return;
+    const now = audioContext.currentTime, oscillator = audioContext.createOscillator(), envelope = audioContext.createGain();
+    oscillator.type = 'sine'; oscillator.frequency.value = frequency;
+    envelope.gain.setValueAtTime(0, now); envelope.gain.linearRampToValueAtTime(1, now + .012);
+    envelope.gain.exponentialRampToValueAtTime(.001, now + duration);
+    oscillator.connect(envelope); envelope.connect(audioVolume);
+    oscillator.start(now); oscillator.stop(now + duration + .01);
+    oscillator.onended = () => { oscillator.disconnect(); envelope.disconnect(); };
+  }
+  function updateSoundButton() {
+    $('#sound-toggle').setAttribute('aria-pressed', state.soundEnabled);
+    $('#sound-toggle').textContent = state.soundEnabled ? '♪ Sonido: activado' : '♪ Sonido: desactivado';
+  }
+  $('#sound-toggle').addEventListener('click', () => {
+    state.soundEnabled = !state.soundEnabled;
+    if (state.soundEnabled) prepareAudio();
+    else if (audioVolume) audioVolume.gain.value = 0;
+    updateSoundButton(); persistPreferences();
+  });
   const clock = seconds => `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(Math.ceil(seconds) % 60).padStart(2, '0')}`;
   function clearLights() { $('.race-lights').classList.remove('go'); document.querySelectorAll('.race-lights i').forEach(light => light.classList.remove('on')); }
   function cancelLaunch() { launchId++; starting = false; clearLights(); }
@@ -131,9 +167,10 @@
     persist(); status(state.mode === 'focus' ? 'En pista. Mantén la atención en tu tarea.' : 'En boxes. Descansa y recupera energía.'); render();
   }
   function launch() {
+    prepareAudio();
     starting = true; const id = ++launchId; clearLights(); render(); status('Prepárate. La tanda comienza cuando se apaguen los semáforos.');
-    document.querySelectorAll('.race-lights i').forEach((light, i) => setTimeout(() => { if (id === launchId) light.classList.add('on'); }, i * 400));
-    setTimeout(() => { if (id !== launchId) return; clearLights(); $('.race-lights').classList.add('go'); starting = false; begin(); setTimeout(() => { if (id === launchId) clearLights(); }, 700); }, 2400);
+    document.querySelectorAll('.race-lights i').forEach((light, i) => setTimeout(() => { if (id === launchId) { light.classList.add('on'); tone(480); } }, i * 400));
+    setTimeout(() => { if (id !== launchId) return; clearLights(); $('.race-lights').classList.add('go'); tone(760, .22); starting = false; begin(); setTimeout(() => { if (id === launchId) clearLights(); }, 700); }, 2400);
   }
   $('#start').addEventListener('click', () => {
     if (starting) return;
@@ -239,11 +276,14 @@
   window.addEventListener('pomo:backup-restore', event => {
     cancelLaunch();
     state = { ...event.detail.session, durations: { ...event.detail.session.durations }, helmets: { ...event.detail.session.helmets }, end: null };
+    state.soundEnabled = state.soundEnabled === true;
+    if (!state.soundEnabled && audioVolume) audioVolume.gain.value = 0;
+    updateSoundButton();
     persistPreferences(); updateCircuit(); updateGarage();
     $('#driver-name').value = state.driver;
     lastDisplay = ''; render(); status('Respaldo cargado. El temporizador está en pausa.');
   });
-  updateCircuit(); updateGarage();
+  updateCircuit(); updateGarage(); updateSoundButton();
   if (state.end && Date.now() >= state.end) finish();
   else { render(); if (state.end) status('Tanda recuperada. El temporizador sigue en marcha.'); }
   setInterval(tick, 200);

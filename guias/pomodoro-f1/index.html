@@ -10,11 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../assets/css/styles.css" />
   <link rel="stylesheet" href="../../assets/css/logo.css" />
-  <link rel="stylesheet" href="../../assets/css/pomodoro-f1.css?v=20261102-dropzone" />
+  <link rel="stylesheet" href="../../assets/css/pomodoro-f1.css?v=20261103-sound" />
   <link rel="icon" href="../../img/favicon.png" />
-  <script defer src="../../assets/js/pomodoro-f1.js?v=20261102-backup"></script>
+  <script defer src="../../assets/js/pomodoro-f1.js?v=20261103-sound"></script>
   <script defer src="../../assets/js/pomodoro-planner.js?v=20261102-backup"></script>
-  <script defer src="../../assets/js/pomodoro-backup.js?v=20261102-dropzone"></script>
+  <script defer src="../../assets/js/pomodoro-backup.js?v=20261103-sound"></script>
 </head>
 <body class="pomo-page">
   <header class="site-header container">
@@ -24,7 +24,7 @@
   <main class="container pomo-main">
     <div class="pomo-intro"><div><p class="pomo-kicker">ESTUDIO / RITMO / DESCANSO</p><h1>Pomodoro <em>F1</em><span class="pixel-cursor" aria-hidden="true">_</span></h1></div><p>Una tarea. Una tanda. Toda tu atención.<br />Convierte el estudio en una carrera a tu ritmo.</p></div>
     <section class="race-console" aria-label="Temporizador de estudio">
-      <div class="console-heading"><span><i class="status-dot"></i> DGNV / RACE CONTROL</span><button class="pomo-small" id="fullscreen" type="button">↗ Pantalla completa</button></div>
+      <div class="console-heading"><span><i class="status-dot"></i> DGNV / RACE CONTROL</span><div class="console-controls"><button type="button" class="pomo-small" id="sound-toggle" aria-pressed="false">♪ Sonido: desactivado</button><button class="pomo-small" id="fullscreen" type="button">↗ Pantalla completa</button></div></div>
       <div class="race-grid">
         <aside class="race-garage">
           <div class="driver-heading"><button type="button" class="helmet-trigger" id="helmet-trigger" aria-label="Cambiar color del casco" aria-expanded="false" aria-controls="helmet-picker" title="Personalizar casco"><svg class="driver-helmet" viewBox="0 0 80 80" aria-hidden="true"><path d="M14 43V33L22 18 34 11H49L63 21 69 38 65 60 55 69H27L18 59Z" fill="currentColor" fill-opacity=".16" stroke="currentColor" stroke-width="2"/><path d="M20 35 33 27H53L64 36 61 47H22Z" fill="#080b11" stroke="currentColor" stroke-width="2"/><path d="M34 12 38 26H44L49 12M27 57H57M32 63H51" stroke="currentColor" stroke-width="2"/></svg><span class="helmet-trigger-hint" aria-hidden="true">COLOR ▾</span></button><div><label class="pomo-label" for="driver-name">TU PILOTO</label><input id="driver-name" maxlength="18" value="PILOTO 01" autocomplete="off" aria-label="Nombre del piloto" /><span class="driver-number">DGNV · AUTO 01</span></div></div>

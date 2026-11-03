@@ -27,7 +27,7 @@
     const palettes = { mercedes: ['turquoise', 'silver', 'white', 'graphite', 'purple', 'blue'], ferrari: ['red', 'yellow', 'white', 'graphite', 'green', 'blue'], redbull: ['navy', 'red', 'yellow', 'white', 'orange', 'purple'] };
     if (!session.helmets || !Object.keys(palettes).every(team => oneOf(session.helmets[team], palettes[team]))) invalid();
     return {
-      session: { circuit: session.circuit, team: session.team, tire: session.tire, mode: session.mode, driver: session.driver, completed: session.completed, minutes: session.minutes, remaining: session.remaining, total: session.total, end: null, durations: { focus: durations.focus, short: durations.short, long: durations.long }, helmets: { mercedes: session.helmets.mercedes, ferrari: session.helmets.ferrari, redbull: session.helmets.redbull } },
+      session: { soundEnabled: session.soundEnabled === true, circuit: session.circuit, team: session.team, tire: session.tire, mode: session.mode, driver: session.driver, completed: session.completed, minutes: session.minutes, remaining: session.remaining, total: session.total, end: null, durations: { focus: durations.focus, short: durations.short, long: durations.long }, helmets: { mercedes: session.helmets.mercedes, ferrari: session.helmets.ferrari, redbull: session.helmets.redbull } },
       planner: { tasks, projects },
     };
   }
