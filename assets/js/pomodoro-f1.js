@@ -121,7 +121,34 @@
     else if (audioVolume) audioVolume.gain.value = 0;
     updateSoundButton(); persistPreferences();
   });
-  const clock = seconds => `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(Math.ceil(seconds) % 60).padStart(2, '0')}`;
+  const clock = seconds => { const whole = Math.ceil(seconds); return `${String(Math.floor(whole / 60)).padStart(2, '0')}:${String(whole % 60).padStart(2, '0')}`; };
+  const trackPath = $('#track-line'), trackCar = $('#track-car');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let trackLength = 0, carFrame = null;
+  function positionCar() {
+    if (!trackLength) return;
+    // Use the exact deadline, independently of the rounded seconds on the clock.
+    const remaining = state.end ? (state.end - Date.now()) / 1000 : state.remaining;
+    const progress = Math.min(1, Math.max(0, 1 - remaining / state.total));
+    const position = (progress * 4 % 1) * trackLength;
+    const point = trackPath.getPointAtLength(position);
+    const before = trackPath.getPointAtLength((position - .5 + trackLength) % trackLength);
+    const after = trackPath.getPointAtLength((position + .5) % trackLength);
+    trackCar.setAttribute('transform', `translate(${point.x} ${point.y}) rotate(${Math.atan2(after.y - before.y, after.x - before.x) * 180 / Math.PI})`);
+  }
+  function animateCar() {
+    carFrame = null;
+    positionCar();
+    if (state.end && Date.now() < state.end && !reducedMotion.matches) carFrame = requestAnimationFrame(animateCar);
+  }
+  function syncCar() {
+    positionCar();
+    if (state.end && !reducedMotion.matches) {
+      if (carFrame === null) carFrame = requestAnimationFrame(animateCar);
+    } else if (carFrame !== null) {
+      cancelAnimationFrame(carFrame); carFrame = null;
+    }
+  }
   function clearLights() { $('.race-lights').classList.remove('go'); document.querySelectorAll('.race-lights i').forEach(light => light.classList.remove('on')); }
   function cancelLaunch() { launchId++; starting = false; clearLights(); }
   function render() {
@@ -144,11 +171,7 @@
     document.querySelectorAll('[data-mode]').forEach(button => { const active = button.dataset.mode === state.mode; button.classList.toggle('active', active); button.setAttribute('aria-pressed', active); });
     $('#start').disabled = starting;
     $('#start').textContent = starting ? 'PREPARANDO SALIDA…' : state.end ? 'Ⅱ BANDERA ROJA · PAUSAR' : state.remaining < state.total ? '▶ REANUDAR TANDA' : state.mode === 'focus' ? '▶ TOMAR LA SALIDA' : '▶ INICIAR DESCANSO';
-    const path = $('#track-line'), length = path.getTotalLength();
-    // Four visual laps per session: the marker represents elapsed study time.
-    const position = (progress * 4 % 1) * length;
-    const point = path.getPointAtLength(position), next = path.getPointAtLength((position + 1) % length);
-    $('#track-car').setAttribute('transform', `translate(${point.x} ${point.y}) rotate(${Math.atan2(next.y - point.y, next.x - point.x) * 180 / Math.PI})`);
+    syncCar();
   }
   function setMode(mode) {
     cancelLaunch(); state.mode = mode; state.end = null;
@@ -174,7 +197,7 @@
   }
   $('#start').addEventListener('click', () => {
     if (starting) return;
-    if (state.end) { state.remaining = Math.max(0, Math.ceil((state.end - Date.now()) / 1000)); state.end = null; if (!state.remaining) { finish(); return; } persist(); render(); status('Bandera roja. Tanda en pausa; reanúdala cuando estés listo.'); }
+    if (state.end) { state.remaining = Math.max(0, (state.end - Date.now()) / 1000); state.end = null; if (!state.remaining) { finish(); return; } persist(); render(); status('Bandera roja. Tanda en pausa; reanúdala cuando estés listo.'); }
     else if (state.mode === 'focus' && state.remaining === state.total) launch();
     else begin();
   });
@@ -184,6 +207,7 @@
     const circuit = circuits[state.circuit];
     $('#circuit-name').textContent = `CIRCUITO ${circuit.name}`;
     document.querySelectorAll('[data-track-outline]').forEach(path => path.setAttribute('d', circuit.path));
+    trackLength = trackPath.getTotalLength();
     drawKerbs();
     const start = $('#track-line').getPointAtLength(0);
     $('.finish-line').setAttribute('x', start.x - 3);
@@ -269,7 +293,7 @@
     tick();
     event.detail.session = {
       ...state, durations: { ...state.durations }, helmets: { ...state.helmets },
-      remaining: state.end ? Math.max(1, Math.ceil((state.end - Date.now()) / 1000)) : state.remaining,
+      remaining: state.end ? Math.max(0, (state.end - Date.now()) / 1000) : state.remaining,
       end: null,
     };
   });

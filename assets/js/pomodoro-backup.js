@@ -23,7 +23,7 @@
     });
     if (!oneOf(session.circuit, ['neon', 'delta', 'orbita']) || !oneOf(session.team, ['mercedes', 'ferrari', 'redbull']) || !oneOf(session.tire, ['soft', 'medium', 'hard']) || !oneOf(session.mode, ['focus', 'short', 'long']) || typeof session.driver !== 'string' || session.driver.length > 18 || !integer(session.completed, 0, 1000000000) || !Number.isFinite(session.minutes) || session.minutes < 0 || session.minutes > 1000000000) invalid();
     const durations = session.durations;
-    if (!durations || !integer(durations.focus, 1, 180) || !integer(durations.short, 1, 60) || !integer(durations.long, 1, 90) || session.total !== durations[session.mode] * 60 || !integer(session.remaining, 0, session.total) || session.end !== null) invalid();
+    if (!durations || !integer(durations.focus, 1, 180) || !integer(durations.short, 1, 60) || !integer(durations.long, 1, 90) || session.total !== durations[session.mode] * 60 || (!Number.isFinite(session.remaining) || session.remaining < 0 || session.remaining > session.total) || session.end !== null) invalid();
     const palettes = { mercedes: ['turquoise', 'silver', 'white', 'graphite', 'purple', 'blue'], ferrari: ['red', 'yellow', 'white', 'graphite', 'green', 'blue'], redbull: ['navy', 'red', 'yellow', 'white', 'orange', 'purple'] };
     if (!session.helmets || !Object.keys(palettes).every(team => oneOf(session.helmets[team], palettes[team]))) invalid();
     return {
