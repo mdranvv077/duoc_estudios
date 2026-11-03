@@ -95,9 +95,9 @@
         const Audio = window.AudioContext || window.webkitAudioContext;
         if (!Audio) return;
         audioContext = new Audio(); audioVolume = audioContext.createGain();
-        audioVolume.gain.value = .0525; audioVolume.connect(audioContext.destination);
+        audioVolume.gain.value = .105; audioVolume.connect(audioContext.destination);
       }
-      audioVolume.gain.value = .0525;
+      audioVolume.gain.value = .105;
       if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
     } catch { /* Audio availability never blocks the timer. */ }
   }
