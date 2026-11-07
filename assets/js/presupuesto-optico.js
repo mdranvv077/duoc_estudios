@@ -49,7 +49,7 @@
     while (current && !seen.has(current.id)) {
       seen.add(current.id); nodes.unshift(current);
       const link = incoming(current.id);
-      if (!link) break;
+      if (!link || !byId(link.from)) break;
       edges.unshift(link); current = byId(link.from);
     }
     return nodes[0]?.type === "olt" ? { nodes, edges, lengthM: edges.reduce((sum, e) => sum + e.lengthM, 0) } : null;
@@ -112,7 +112,7 @@
   }
 
   function renderDiagram() {
-    const canvas = $("canvas"), width = Math.max(300, canvas.clientWidth);
+    const canvas = $("canvas"), width = layout(canvas.clientWidth).width;
     const geometry = layout(width);
     layoutCache = geometry;
     const { placed, vertical, height } = geometry;
@@ -240,7 +240,7 @@
   }
   function moveNode(event) {
     if (!drag || event.pointerId !== drag.pointerId) return;
-    const dx = event.clientX - drag.clientX, dy = event.clientY - drag.clientY;
+    const dx = (event.clientX - drag.clientX) / zoom, dy = (event.clientY - drag.clientY) / zoom;
     if (!drag.moved && Math.hypot(dx, dy) < 5) return;
     drag.moved = true; event.preventDefault();
     const item = byId(drag.id); if (!item) return;
@@ -262,7 +262,7 @@
   function deleteNode(id) {
     const item = byId(id); if (!item) return;
     plan.nodes = plan.nodes.filter(n => n.id !== id);
-    plan.edges = plan.edges.filter(e => e.from !== id && e.to !== id);
+    plan.edges.forEach(e => { if(e.from === id)e.from=null; if(e.to === id)e.to=null; });
     selected = null; render(); notify(`${item.label} quitado. Sus ramas quedan disponibles para volver a conectarlas.`);
   }
   function changeNode(field, raw) {
@@ -343,6 +343,161 @@
     setTimeout(() => URL.revokeObjectURL(url), 1000); notify("Diseño descargado para continuar después.");
   }
 
+  // Optical editor: stored component losses, detachable endpoints and viewport tools.
+  let zoom = 1, pan = {x: 0, y: 0}, snapshots = [], historyIndex = -1, restoring = false, clipboard = null;
+  const allowedTypes = () => Object.entries(TYPES).filter(([t]) => !['splice','point'].includes(t));
+  const lossForWave = nm => nm < 1300 ? .4 : nm < 1400 ? .35 : nm < 1530 ? .25 : .22;
+  function normalize() {
+    if (!plan) return;
+    const gpon = CLASSES[plan.opticalClass].system === 'GPON';
+    plan.lambdaUp ??= gpon ? 1310 : 1270; plan.lambdaDown ??= gpon ? 1490 : 1577;
+    plan.alphaUp ??= lossForWave(plan.lambdaUp); plan.alphaDown ??= lossForWave(plan.lambdaDown);
+    for (const n of plan.nodes) {
+      if (n.type === 'splice') { n.type = 'mufa'; n.label = 'Mufa'; }
+      if (n.type === 'point') { n.type = 'roseta'; n.label = 'Roseta'; }
+      n.spliceLoss ??= n.splices * plan.spliceLoss;
+      n.connectionLoss ??= n.connectors * plan.connectorLoss;
+      n.splitters ??= []; n.txDbm ??= n.type === 'olt' ? 3 : 2;
+    }
+    for (const e of plan.edges) {
+      e.ends ??= [{type:'SC/APC',loss:0},{type:'SC/APC',loss:0}];
+      e.alphaUp ??= plan.alphaUp; e.alphaDown ??= plan.alphaDown; e.dbPerKm=e.alphaDown;
+    }
+  }
+  function remember() {
+    if (!plan || restoring) return;
+    const s = JSON.stringify(plan);
+    if (snapshots[historyIndex] === s) return;
+    snapshots = snapshots.slice(0, historyIndex + 1); snapshots.push(s);
+    if (snapshots.length > 80) snapshots.shift(); historyIndex = snapshots.length - 1;
+  }
+  const originalShowPlanner=showPlanner; showPlanner=function(){if(plan.view){zoom=plan.view.zoom??1;pan=plan.view.pan??{x:0,y:0};}originalShowPlanner();};
+  const baseNode = node;
+  node = type => { const n = baseNode(type); n.connectors=0; n.splices=0; n.spliceLoss=['mufa','roseta','odf','nap','node'].includes(type)?plan?.spliceLoss??.1:0; n.connectionLoss=0; n.splitters=[]; n.txDbm=type==='olt'?3:2; return n; };
+  const baseEdge = edge;
+  edge = (a,b,l) => ({...baseEdge(a,b,l),alphaUp:plan.alphaUp??.35,alphaDown:plan.alphaDown??.25,ends:[{type:'SC/APC',loss:plan.connectorLoss},{type:'SC/APC',loss:plan.connectorLoss}]});
+  children = id => plan.edges.filter(e=>e.from===id && byId(e.to)).map(e=>e.to);
+  incoming = id => plan.edges.find(e=>e.to===id && byId(e.from));
+  layout = function(width) {
+    const placed=new Map(), roots=plan.nodes.filter(n=>!incoming(n.id)); let row=0,maxDepth=0;
+    function walk(id,d){const kids=children(id);maxDepth=Math.max(maxDepth,d);const ys=kids.map(k=>walk(k,d+1));const y=ys.length?ys.reduce((a,b)=>a+b,0)/ys.length:90+row++*190;placed.set(id,{x:65+d*310,y,w:150,h:112});return y;}
+    roots.forEach(n=>walk(n.id,0));
+    const worldWidth=Math.max(1100,130+(maxDepth+1)*310),height=Math.max(430,row*190+150);
+    for(const n of plan.nodes){const p=placed.get(n.id),m=n.layout?.desktop;if(p&&m){p.x=m.x*(worldWidth-p.w);p.y=m.y*(height-p.h);}}
+    return {placed,vertical:false,height,width:worldWidth,mode:'desktop'};
+  };
+  const baseDiagram=renderDiagram;
+  renderDiagram=function(){
+    if(!plan)return; normalize();
+    const canvas=$('canvas'), g=layout(canvas.clientWidth);
+    baseDiagram();
+    $('cables').setAttribute('viewBox',`0 0 ${g.width} ${g.height}`);
+    const world=$('optical-world');world.style.width=g.width+'px';world.style.height=g.height+'px';
+    $('cables').style.width=g.width+'px';$('cables').style.height=g.height+'px';
+    $('diagram-items').style.width=g.width+'px';$('diagram-items').style.height=g.height+'px';
+    canvas.style.height=(document.fullscreenElement?Math.max(450,innerHeight-155):560)+'px';
+    if(!plan.view || !plan.view.manual){zoom=Math.min(1,canvas.clientWidth/g.width);pan={x:0,y:0};plan.view={zoom,pan};}
+    world.style.transform=`translate(${pan.x}px,${pan.y}px) scale(${zoom})`;
+    const extra=[];
+    for(const e of plan.edges){
+      const a=g.placed.get(e.from),b=g.placed.get(e.to);
+      const start=a?{x:a.x+a.w,y:a.y+a.h/2}:e.looseFrom??{x:(b?.x??200)-150,y:(b?.y??100)+56};
+      const end=b?{x:b.x,y:b.y+b.h/2}:e.looseTo??{x:start.x+170,y:start.y};
+      if(!a||!b){$('cables').insertAdjacentHTML('beforeend',`<path class="ob-cable" d="M${start.x} ${start.y} L${end.x} ${end.y}"/>`);extra.push(`<button class="ob-cable-label" style="left:${(start.x+end.x)/2-50}px;top:${(start.y+end.y)/2-48}px" data-edge-id="${e.id}">${distance(e.lengthM)}</button>`);}
+      [start,end].forEach((p,i)=>extra.push(`<button class="ob-endpoint" style="left:${p.x-11}px;top:${p.y-9}px" data-end-edge="${e.id}" data-end-index="${i}" title="Editar o reconectar conector" aria-label="Editar conector ${i+1}">▰</button>`));
+    }
+    $('diagram-items').insertAdjacentHTML('beforeend',extra.join(''));
+    $('zoom-readout').textContent=Math.round(zoom*100)+'%';if(selected)anchorEditor();
+  };
+  function anchorEditor(){
+    const panel=$('inspector-panel');if(panel.hidden)return;
+    const selector=selected?.kind==='node'?`[data-node-id="${selected.id}"]`:selected?.kind==='connector'?`[data-end-edge="${selected.id}"][data-end-index="${selected.index}"]`:`.ob-cable-label[data-edge-id="${selected?.id}"]`;
+    const r=document.querySelector(selector)?.getBoundingClientRect();if(!r)return;
+    const w=Math.min(370,innerWidth-24),h=Math.min(panel.scrollHeight,innerHeight-32);
+    panel.style.width=w+'px';panel.style.left=Math.max(12,Math.min(innerWidth-w-12,r.right+14))+'px';panel.style.top=Math.max(12,Math.min(innerHeight-h-12,r.top))+'px';panel.style.right='auto';panel.style.bottom='auto';
+  }
+  const num=(key,title,value,unit='dB')=>`<label>${title}<span>${unit}</span><input data-opt-field="${key}" type="number" step="any" value="${value}" /></label>`;
+  const splitOptions=v=>Object.keys(SPLITTER_DB).map(n=>`<option value="${n}" ${+v===+n?'selected':''}>1:${n} · ${SPLITTER_DB[n]} dB</option>`).join('');
+  renderInspector=function(){
+    const panel=$('inspector-panel');panel.hidden=!selected;if(!selected)return;normalize();let html='';
+    if(selected.kind==='node'){
+      const n=byId(selected.id);if(!n){selected=null;panel.hidden=true;return;}
+      $('inspector-title').textContent=n.label;
+      html=`<label>Nombre<input data-opt-field="label" value="${escape(n.label)}" maxlength="48" /></label>`;
+      if(['mufa','roseta','odf','nap','node'].includes(n.type))html+=num('spliceLoss','Pérdida de empalmes de este elemento',n.spliceLoss);
+      html+=num('connectionLoss','Otras conexiones internas',n.connectionLoss)+num('extraLoss','Pérdida adicional',n.extraLoss);
+      if(n.type==='olt')html+=num('txDbm','Potencia TX downstream',n.txDbm,'dBm');
+      if(n.type==='ont')html+=num('txDbm','Potencia TX upstream',n.txDbm,'dBm');
+      if(['nap','node','splitter'].includes(n.type))html+=`<label>Splitter<select data-opt-field="ratio"><option value="0">Sin splitter</option>${splitOptions(n.ratio)}</select></label>`;
+      if(n.type==='odf')html+=`<div><strong>Splitters dentro del ODF</strong>${n.splitters.map(s=>`<div class="ob-split-row"><select data-split-id="${s.id}">${splitOptions(s.ratio)}</select><button data-remove-split="${s.id}">×</button></div>`).join('')}<button class="ob-secondary" id="add-internal-split">+ Agregar splitter</button><p>En cada cable saliente elige cuál de estos splitters atraviesa esa rama.</p></div>`;
+      html+='<p>Arrastra la tarjeta para mover el dibujo. Las distancias se editan en los cables.</p>';
+    }else{
+      const e=plan.edges.find(e=>e.id===selected.id);if(!e)return;
+      if(selected.kind==='connector'){
+        const i=selected.index,c=e.ends[i];$('inspector-title').textContent=`Conector · extremo ${i+1}`;
+        html=`<label>Tipo<select data-opt-field="connectorType"><option ${c.type==='SC/APC'?'selected':''}>SC/APC</option><option ${c.type==='SC/UPC'?'selected':''}>SC/UPC</option></select></label>${num('connectorLoss','Pérdida de este conector',c.loss)}<label>Conectado a<select data-opt-field="endpoint"><option value="">Desconectado</option>${plan.nodes.map(n=>`<option value="${n.id}" ${e[i===0?'from':'to']===n.id?'selected':''}>${escape(n.label)}</option>`).join('')}</select></label><p>Desconectar conserva el cable, sus conectores y sus pérdidas. Puedes unirlo a otro equipo desde esta lista.</p>`;
+      }else{
+        $('inspector-title').textContent='Tramo de fibra';html=num('lengthM','Longitud',fromMeters(e.lengthM),plan.unit)+num('alphaUp','Atenuación upstream',e.alphaUp,'dB/km')+num('alphaDown','Atenuación downstream',e.alphaDown,'dB/km');
+        const odf=byId(e.from);if(odf?.type==='odf')html+=`<label>Splitter de salida del ODF<select data-opt-field="splitterId"><option value="">Sin splitter</option>${odf.splitters.map(s=>`<option value="${s.id}" ${e.splitterId===s.id?'selected':''}>1:${s.ratio} · ${s.id.slice(-4)}</option>`).join('')}</select></label>`;
+      }
+    }
+    $('inspector-content').innerHTML=`<div class="ob-field-grid">${html}</div>`;anchorEditor();
+  };
+  calculate=function(ont){const path=pathTo(ont.id);if(!path||path.edges.some(e=>!e.from||!e.to))return null;let fiber=0,upFiber=0,components=0;const rows=[];
+    for(const e of path.edges){const down=e.lengthM/1000*e.alphaDown;fiber+=down;upFiber+=e.lengthM/1000*e.alphaUp;const cl=e.ends.reduce((a,c)=>a+c.loss,0);components+=cl;rows.push(['Fibra y conectores',distance(e.lengthM),down+cl]);const s=byId(e.from)?.splitters?.find(s=>s.id===e.splitterId);if(s){components+=SPLITTER_DB[s.ratio];rows.push(['Splitter ODF',`1:${s.ratio}`,SPLITTER_DB[s.ratio]]);}}
+    for(const n of path.nodes){const l=n.spliceLoss+n.connectionLoss+n.extraLoss+(n.ratio?SPLITTER_DB[n.ratio]:0);components+=l;rows.push([n.label,'Pérdidas individuales',l]);}
+    const physical=fiber+components;return {path,rows,fiber,components,physical,remaining:CLASSES[plan.opticalClass].max-physical-plan.reserve,below:physical<CLASSES[plan.opticalClass].min,rxDown:path.nodes[0].txDbm-physical,rxUp:ont.txDbm-upFiber-components};};
+  const baseResults=renderResults;
+  renderResults=function(){normalize();baseResults();const results=plan.nodes.filter(n=>n.type==='ont').map(n=>calculate(n)).filter(Boolean);document.querySelectorAll('.ob-result-card').forEach((card,i)=>{const r=results[i];if(r)card.querySelector('.ob-result-metrics').insertAdjacentHTML('beforeend',`<div><small>RX en ONT · downstream</small><strong>${fmt(r.rxDown)} dBm</strong></div><div><small>RX en OLT · upstream</small><strong>${fmt(r.rxUp)} dBm</strong></div>`);});};
+  const baseRender=render;
+  render=function(){normalize();baseRender();remember();};
+  const baseImport=validateImport;
+  validateImport=function(raw){
+    for(const n of raw.nodes??[]){for(const k of ['spliceLoss','connectionLoss','txDbm'])if(n[k]!==undefined&&(!Number.isFinite(n[k])||n[k]<(k==='txDbm'?-30:0)||n[k]>100))throw Error('Perdida o potencia individual invalida');if(n.splitters!==undefined&&(!Array.isArray(n.splitters)||n.splitters.length>128||n.splitters.some(x=>typeof x.id!=='string'||!/^[a-zA-Z0-9_-]{1,32}$/.test(x.id)||!Object.hasOwn(SPLITTER_DB,x.ratio))))throw Error('Lista de splitters invalida');}
+    for(const e of raw.edges??[]){if(e.ends!==undefined&&(!Array.isArray(e.ends)||e.ends.length!==2||e.ends.some(c=>!['SC/APC','SC/UPC'].includes(c.type)||!Number.isFinite(c.loss)||c.loss<0||c.loss>100)))throw Error('Conector invalido');for(const k of ['alphaUp','alphaDown'])if(e[k]!==undefined&&(!Number.isFinite(e[k])||e[k]<0||e[k]>10))throw Error('Atenuacion invalida');}
+    if(raw.view&&(!Number.isFinite(raw.view.zoom)||raw.view.zoom<.001||raw.view.zoom>3||!Number.isFinite(raw.view.pan?.x)||!Number.isFinite(raw.view.pan?.y)))throw Error('Vista invalida');
+const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.to)loose.push(e);raw={...raw,edges:raw.edges.filter(e=>e.from&&e.to)};}const p=baseImport(raw);for(const e of loose){if(!Number.isFinite(e.lengthM)||e.lengthM<=0||!Array.isArray(e.ends)||e.ends.length!==2)throw Error('Cable desconectado inválido');p.edges.push(e);}for(const k of ['lambdaUp','lambdaDown','alphaUp','alphaDown'])if(raw[k]!==undefined){if(!Number.isFinite(raw[k])||raw[k]<0)throw Error('Parámetro óptico inválido');p[k]=raw[k];}p.view=raw.view;return p;};
+  function viewport(){if(!plan)return;$('optical-world').style.transform=`translate(${pan.x}px,${pan.y}px) scale(${zoom})`;plan.view={zoom,pan:{...pan},manual:true};$('zoom-readout').textContent=Math.round(zoom*100)+'%';if(selected)anchorEditor();}
+  const shell=document.querySelector('.ob-diagram-shell'),canvas=$('canvas');
+  const world=document.createElement('div');world.id='optical-world';world.append($('cables'),$('diagram-items'));canvas.prepend(world);
+  const tools=document.createElement('div');tools.className='ob-map-tools';tools.innerHTML='<button data-tool="undo">↶ Deshacer</button><button data-tool="redo">↷ Rehacer</button><button data-tool="out">−</button><span id="zoom-readout">100%</span><button data-tool="in">+</button><button data-tool="fit">Ajustar</button><button data-tool="copy">Copiar</button><button data-tool="paste">Pegar</button><button data-tool="full">Pantalla completa</button>';shell.prepend(tools);
+  shell.append($('inspector-panel'));
+  tools.addEventListener('click',async e=>{const t=e.target.dataset.tool;if(!t||!plan)return;
+    if(t==='undo'||t==='redo'){const next=historyIndex+(t==='undo'?-1:1);if(next<0||next>=snapshots.length)return;historyIndex=next;restoring=true;plan=JSON.parse(snapshots[next]);selected=null;render();restoring=false;}
+    if(t==='in'||t==='out'){zoom=Math.max(.15,Math.min(3,zoom*(t==='in'?1.15:1/1.15)));viewport();}
+    if(t==='fit'){zoom=Math.min(1,canvas.clientWidth/layoutCache.width);pan={x:0,y:0};viewport();}
+    if(t==='copy'&&selected){const e=plan.edges.find(e=>e.id===selected.id);const data=selected.kind==='node'?byId(selected.id):selected.kind==='connector'?e?.ends[selected.index]:e;if(data)clipboard={kind:selected.kind,data:JSON.parse(JSON.stringify(data))};}
+    if(t==='paste'&&clipboard){const n=JSON.parse(JSON.stringify(clipboard.data));if(clipboard.kind==='node'){n.id=uid();n.label+=' copia';n.layout={};plan.nodes.push(n);selected={kind:'node',id:n.id};}else if(clipboard.kind==='edge'){n.id=uid();n.from=null;n.to=null;n.splitterId='';n.looseFrom={x:150,y:300};n.looseTo={x:400,y:300};plan.edges.push(n);selected={kind:'edge',id:n.id};}else if(selected?.kind==='connector'){plan.edges.find(e=>e.id===selected.id).ends[selected.index]=n;}render();}
+    if(t==='full'){if(document.fullscreenElement)await document.exitFullscreen();else await shell.requestFullscreen();}
+  });
+  canvas.addEventListener('wheel',e=>{if(!plan)return;e.preventDefault();const r=canvas.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,z=Math.max(.15,Math.min(3,zoom*Math.exp(-e.deltaY*.0015)));pan={x:x-(x-pan.x)*z/zoom,y:y-(y-pan.y)*z/zoom};zoom=z;viewport();},{passive:false});
+  let panning=null;
+  canvas.addEventListener('pointerdown',e=>{if(e.target===canvas||e.target===$('optical-world')||e.target===$('cables'))panning={x:e.clientX,y:e.clientY,px:pan.x,py:pan.y};});
+  window.addEventListener('pointermove',e=>{if(panning){pan={x:panning.px+e.clientX-panning.x,y:panning.py+e.clientY-panning.y};viewport();}});
+  window.addEventListener('pointerup',()=>{panning=null;remember();});
+  document.addEventListener('fullscreenchange',()=>{renderDiagram();anchorEditor();});
+  document.addEventListener('pointerdown',e=>{if(!selected||e.target.closest('#inspector-panel,.ob-node,.ob-cable-label,.ob-endpoint,.ob-add-choices,.ob-node-add,.ob-cable-add,.ob-map-tools'))return;selected=null;renderInspector();});
+  $('diagram-items').addEventListener('click',e=>{const b=e.target.closest('[data-end-edge]');if(b){selected={kind:'connector',id:b.dataset.endEdge,index:+b.dataset.endIndex};renderInspector();}});
+  $('inspector-content').addEventListener('change',e=>{
+    const f=e.target.dataset.optField,sid=e.target.dataset.splitId;if(!f&&!sid)return;try{
+      const n=selected.kind==='node'?byId(selected.id):null,link=plan.edges.find(x=>x.id===selected.id),v=e.target.value;
+      if(sid){n.splitters.find(s=>s.id===sid).ratio=+v;}
+      else if(f==='label')n.label=v.slice(0,48);
+      else if(f==='connectorType')link.ends[selected.index].type=v;
+      else if(f==='endpoint'){
+        const k=selected.index===0?'from':'to',old=link[k];link[k]=v||null;
+        if(v&&(link.from===link.to||plan.edges.some(x=>x.id!==link.id&&x.to===link.to&&link.to)||descendants(link.to).has(link.from))){link[k]=old;throw Error('Esta conexión forma un ciclo o la entrada ya está ocupada');}
+      }else if(f==='splitterId')link.splitterId=v;
+      else{const value=+v;if(!Number.isFinite(value)||value< (f==='txDbm'?-30:0)||value>500000)throw Error('Valor no válido');if(f==='connectorLoss')link.ends[selected.index].loss=value;else if(n)n[f]=f==='ratio'?(value||null):value;else {link[f]=f==='lengthM'?toMeters(value):value;if(f==='alphaUp'||f==='alphaDown')link[f+'Manual']=true;}}
+      render();
+    }catch(err){notify(err.message,'error');renderInspector();}
+  });
+  $('inspector-content').addEventListener('click',e=>{const n=byId(selected?.id);if(e.target.id==='add-internal-split'&&n){n.splitters.push({id:uid(),ratio:8});render();}if(e.target.dataset.removeSplit&&n){const id=e.target.dataset.removeSplit;n.splitters=n.splitters.filter(s=>s.id!==id);plan.edges.forEach(l=>{if(l.splitterId===id)l.splitterId='';});render();}});
+  const extraSettings=document.createElement('div');extraSettings.className='ob-settings-grid';extraSettings.innerHTML=[['lambdaUp','λ · Upstream','nm'],['lambdaDown','λ · Downstream','nm'],['alphaUp','Fibra upstream','dB/km'],['alphaDown','Fibra downstream','dB/km']].map(([k,l,u])=>`<label>${l}<span>${u}</span><input type="number" data-global-opt="${k}" step="any" /></label>`).join('');document.querySelector('.ob-settings').append(extraSettings);
+  extraSettings.addEventListener('change',e=>{const k=e.target.dataset.globalOpt,v=+e.target.value;if(!k||!Number.isFinite(v)||v<=0)return;plan[k]=v;if(k==='lambdaUp')plan.alphaUp=lossForWave(v);if(k==='lambdaDown')plan.alphaDown=lossForWave(v);for(const e of plan.edges){if(!e.alphaUpManual)e.alphaUp=plan.alphaUp;if(!e.alphaDownManual)e.alphaDown=plan.alphaDown;}render();});
+  $('setting-fiber').closest('label').hidden=true;const baseHeader=renderHeader;renderHeader=function(){baseHeader();$('fiber-readout').textContent=fmt(plan.alphaUp,3)+' / '+fmt(plan.alphaDown,3)+' dB/km';document.querySelectorAll('[data-global-opt]').forEach(i=>i.value=plan[i.dataset.globalOpt]);};
+  const basePicker=openPicker;openPicker=function(mode,id,anchor){basePicker(mode,id,anchor);$('add-choices').querySelectorAll('[data-pick-type="splice"],[data-pick-type="point"]').forEach(b=>b.remove());};
+
   $("setup-form").addEventListener("submit", event => { event.preventDefault(); const data = new FormData(event.currentTarget); newPlan(String(data.get("opticalClass")), String(data.get("unit"))); });
   $("canvas-add").addEventListener("click", event => openPicker("root", null, event.currentTarget.getBoundingClientRect()));
   $("close-popover").addEventListener("click", closePicker);
@@ -393,6 +548,7 @@
     const value = max ? Number(event.target.value) : event.target.value;
     if (max && (!Number.isFinite(value) || value < 0 || value > max)) { notify("Revisa ese valor.", "error"); renderHeader(); return; }
     plan[field] = value;
+    if(field==='opticalClass'){const g=CLASSES[value].system==='GPON';plan.lambdaUp=g?1310:1270;plan.lambdaDown=g?1490:1577;plan.alphaUp=lossForWave(plan.lambdaUp);plan.alphaDown=lossForWave(plan.lambdaDown);for(const e of plan.edges){if(!e.alphaUpManual)e.alphaUp=plan.alphaUp;if(!e.alphaDownManual)e.alphaDown=plan.alphaDown;}}
     render(); notify("Valores de cálculo actualizados.");
   });
   new ResizeObserver(() => { if (plan && !$("planner").hidden) renderDiagram(); }).observe($("canvas"));
