@@ -1,0 +1,61 @@
+:root{color-scheme:dark}
+html[data-theme="light"]{color-scheme:light;--bg:#f3f6fa;--surface:#ffffff;--surface-light:#e9eff6;--text:#182b3c;--muted:#506477;--cyan:#007f91;--orange:#a75800;--magenta:#bf235f;--line:rgba(35,68,96,.18)}
+.theme-changing body,.theme-changing body *,.theme-changing body *::before,.theme-changing body *::after{transition:background-color .28s ease,color .28s ease,border-color .28s ease,box-shadow .28s ease!important}
+.theme-button svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;flex:none}
+.site-theme-dialog{position:fixed;inset:0;margin:auto;width:min(520px,calc(100% - 28px));max-height:calc(100dvh - 28px);box-sizing:border-box;padding:28px;background:var(--surface,#0e131c);color:var(--text,#edf2f7);border:1px solid var(--line);border-radius:8px;box-shadow:0 24px 90px #0005;overflow:auto}
+.site-theme-dialog[open]{animation:site-theme-enter .2s ease-out}
+.site-theme-dialog.is-closing{animation:site-theme-exit .18s ease-in both}
+.site-theme-dialog::backdrop{background:#030914a8;backdrop-filter:blur(7px)}
+.site-theme-top{display:flex;align-items:center;justify-content:space-between;gap:16px}.site-theme-top p{margin:0;color:var(--orange);font:.7rem "DM Mono",monospace;letter-spacing:.08em}
+.site-theme-close{width:36px;height:36px;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--text);font:1.5rem/1 Arial;cursor:pointer;flex:none}
+.site-theme-dialog h2{font-size:1.9rem;line-height:1.2;margin:16px 0}.site-theme-dialog>p{color:var(--muted);font-size:.9375rem;line-height:1.75}
+.site-theme-options{display:grid;gap:10px;border:0;padding:0;margin:24px 0}.site-theme-options legend{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.site-theme-options label{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--line);border-radius:6px;cursor:pointer;background:var(--bg)}
+.site-theme-options label:has(input:checked){border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan)}
+.site-theme-options input{accent-color:var(--cyan);width:17px;height:17px;flex:none}.site-theme-options strong{display:block;font-size:1rem}.site-theme-options small{display:block;color:var(--muted);font-size:.8125rem;line-height:1.6;margin-top:4px}
+.theme-preview{display:grid;place-items:center;width:42px;height:42px;border-radius:5px;flex:none;font-size:1.5rem;border:1px solid #8da5b866}.preview-dark{background:#101b29;color:#c6f4ff}.preview-light{background:#f4f7fa;color:#286477}.preview-device{background:linear-gradient(90deg,#101b29 50%,#f4f7fa 50%);color:#64919d}
+.site-theme-dialog .site-theme-note,.site-theme-dialog .site-theme-status{font-size:.8125rem}.site-theme-status:empty{display:none}
+.site-theme-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.site-theme-actions button{padding:12px 15px;border:1px solid var(--line);background:transparent;color:var(--text);font:700 .875rem/1.6 Manrope,sans-serif;border-radius:4px;cursor:pointer}.site-theme-actions .theme-follow{background:var(--cyan);color:#fff;border-color:var(--cyan)}
+.site-theme-dialog :focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+@keyframes site-theme-enter{from{opacity:0;translate:0 8px;scale:.99}to{opacity:1;translate:0 0;scale:1}}
+@keyframes site-theme-exit{from{opacity:1;translate:0 0}to{opacity:0;translate:0 6px}}
+html[data-theme="light"] body{color:var(--text);background-color:var(--bg)}
+html[data-theme="light"] :is(.guide-card,.category-panel,.modality-overview,.outcome-grid article,.project-list,.project-card,.episode-group,.math-definition,.matrix-card,.python-reading,.ptp-resource,.ptp-start,.ptp-flow li,.vlsm-workspace,.vlsm-results,.vlsm-how,.home-faq details,.home-contact,.home-terms>p,.backup-dialog,.race-console,.race-garage,.race-planner,.race-telemetry,.planner-task,.planner-project,.helmet-picker){background:var(--surface);border-color:var(--line);color:var(--text);box-shadow:none}
+html[data-theme="light"] :is(.guide-menu,.guide-sidebar){background:linear-gradient(145deg,#fff,#eaf1f7);color:var(--text);border-color:var(--line)}
+html[data-theme="light"] :is(.hero-copy,.lesson-content p,.lesson-content ul,.lesson-content ol,.guide-content>p,.category-name,.guide-menu-item strong,.project-description,.project-copy,.home-faq summary,.home-faq .home-answer,.home-help-heading>p,.home-contact-actions>a,.home-terms summary,.sidebar-back,.topology-node small,.outcome-grid p,.episode-heading p,.episode-heading strong,.network-inputs label,.request-row label,.ptp-resource-meta,.pomo-how p,.pomo-local,.pomo-intro>p,.race-status,.planner-description,.planner-empty,.planner-storage,.planner-task-copy,.planner-project-name,.planner-form label,.helmet-help,.tire-help,.circuit-note){color:var(--muted)}
+html[data-theme="light"] :is(h1,h2,h3,.brand,.guide-content h3,.lesson-content strong,.home-faq summary,.home-contact h3,.planner-heading h2,.race-time,.race-telemetry strong){color:var(--text)}
+html[data-theme="light"] h1 em{color:var(--cyan);text-shadow:none}
+html[data-theme="light"] :is(.button-outline,.home-contact-actions>a,.home-terms summary,.category-button,.circuit,.session-tabs button,.race-reset,.pomo-small,.team-options button,.race-stage .team-options button,.tire-options button,.planner-project-select,.backup-close,.planner-delete,.helmet-colors button){background:#edf3f8;color:var(--text);border-color:var(--line)}
+html[data-theme="light"] :is(input:not([type=radio]):not([type=checkbox]),select,textarea){background:#fff;color:var(--text);border-color:#aabcca}
+html[data-theme="light"] :is(.pomo-label,.driver-number,.console-heading,.timing-heading,.track-heading,.planner-tag,.circuit small,.car-caption,.race-telemetry small,.planner-task-copy small,.planner-project-select small,.track-legend,.tire-options small){color:var(--muted)}
+html[data-theme="light"] .pomo-page{--race:#007f91;background-image:radial-gradient(ellipse at 80% 12%,#d3ecf166,transparent 45%)}
+html[data-theme="light"] :is(.race-start,.button:not(.button-outline)){color:#fff;background:var(--cyan)}
+html[data-theme="light"] :is(.circuit.active,.session-tabs button.active,.planner-filters button[aria-pressed=true],.helmet-colors button[aria-pressed=true]){color:var(--cyan);border-color:var(--cyan);background:#e0f0f3}
+html[data-theme="light"] :is(.backup-dropzone,.backup-summary){background:#eaf3f7;color:var(--text);border-color:#8caebb}
+html[data-theme="light"] :is(.backup-dropzone span,.backup-dropzone small,.backup-dialog p,.backup-upload-status,.backup-status,.backup-file-name){color:var(--muted)}
+html[data-theme="light"] .backup-upload-error{color:#982f40;background:#fff0f1}
+html[data-theme="light"] :is(.math-table,.matrix-grid,.ptp-table,.vlsm-results table){background:#fff;color:var(--text)}
+html[data-theme="light"] :is(th,td){border-color:var(--line);color:var(--text)}
+html[data-theme="light"] :is(.cli-block,.code-block,.code-output){background:#e8eef5;color:#203a50;border-color:#a8bdcc}
+html[data-theme="light"] :is(.cli-block code,.code-block code,.code-output code,.py-variable){color:#203a50}
+html[data-theme="light"] :is(.py-comment,.py-guide-comment,.cli-comment){color:#347146}
+html[data-theme="light"] :is(.py-string,.py-function,.py-builtin){color:#087064}
+html[data-theme="light"] .terminal-preview{background:#f7fbffeb;border-color:#7eafb9;box-shadow:0 20px 50px #28445c16;color:#203a50}
+html[data-theme="light"] .terminal-preview :is(span,i){color:#24475e}
+html[data-theme="light"] .home-header-spider{color:#627b8a}
+html[data-theme="light"] .home-corner-webs{color:#366c7b}
+html[data-theme="light"] :is(.topology-card,.vfl-lab){background:#0c1722;--text:#edf2f7;--muted:#aabcca;--cyan:#2eeaff;--orange:#ff9d2e;color:#edf2f7}
+html[data-theme="light"] :is(.topology-card,.vfl-lab) :is(p,strong,b,small){color:#c4d4e1}
+html[data-theme="light"] :is(.sidebar-brand strong,.sidebar-category,.lesson-nav a,.lesson-nav-label,.sidebar-back,.project-name strong,.project-name small,.project-empty p,.admin-field,.network-inputs p,.requirements-head p,.results-heading>p,.planner-filters button,.race-settings summary,.race-settings label,.tire-help,.helmet-trigger-hint){color:var(--muted)}
+html[data-theme="light"] :is(.lesson-nav a.active,.sidebar-category.active){color:var(--cyan);background:#007f910c}
+html[data-theme="light"] :is(.sidebar-brand small,.card-label,.py-keyword,.py-operator){color:#965000}
+html[data-theme="light"] :is(.py-number,.py-boolean){color:#8b3274}
+html[data-theme="light"] :is(.code-block::before,.cli-block::before){background:#dbe5ef;color:#405e74;border-color:var(--line)}
+html[data-theme="light"] :is(.cli-block::after,.cli-comment,.py-guide-comment){color:#247042}
+html[data-theme="light"] :is(.admin-login,.admin-summary,.project-button,.project-story article,.esp32-capabilities article,.project-next,.l2-output){background:var(--surface);color:var(--text);border-color:var(--line)}
+html[data-theme="light"] :is(.esp32-capabilities strong,.project-empty strong){color:var(--text)}
+html[data-theme="light"] footer :is(p,small,a){color:var(--muted)}
+html[data-theme="light"] :is(.fc-lab,.lab-topology){--text:#edf2f7;--muted:#aabcca;--cyan:#2eeaff;--orange:#ff9d2e;background-color:#0c1722;color:#edf2f7}
+html[data-theme="light"] :is(.fc-lab,.lab-topology) :is(p,strong,b,small){color:#c4d4e1}
+@media(max-width:430px){.site-theme-dialog{padding:20px}.site-theme-actions{flex-direction:column}.site-theme-options label{gap:10px;padding:12px}.site-theme-dialog h2{font-size:1.6rem}}
+@media(prefers-reduced-motion:reduce){.theme-changing body *{transition:none!important}.site-theme-dialog[open],.site-theme-dialog.is-closing{animation:none}}
