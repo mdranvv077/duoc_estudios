@@ -32,9 +32,9 @@
   function rememberMismatch() {
     dismissed.add(mismatch());
     try {
-      sessionStorage.setItem('dgnv-theme-prompt', mismatch());
       document.cookie = `${noticeCookieName}=1; Max-Age=31536000; Path=${cookiePath}; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}`;
     } catch {}
+    try { sessionStorage.setItem('dgnv-theme-prompt', mismatch()); } catch {}
   }
   function alreadyAsked() {
     if (dismissed.has(mismatch())) return true;
@@ -62,6 +62,7 @@
   }
   function schedulePrompt() {
     clearTimeout(promptTimer);
+    if (suggestion?.open && alreadyAsked()) close(suggestion);
     if (!suggestion || root.dataset.theme === deviceTheme() || alreadyAsked()) return;
     promptTimer = setTimeout(() => {
       if (root.dataset.theme === deviceTheme() || alreadyAsked() || suggestion.open) return;
@@ -69,7 +70,8 @@
       suggestion.querySelector('[data-theme-mismatch]').textContent = `Tu dispositivo está en ${names[deviceTheme()]} y la web en ${names[root.dataset.theme]}. Si prefieres, puedes elegir otra apariencia.`;
       const focused = document.activeElement;
       suggestion.show();
-      focused?.focus?.({ preventScroll: true });
+      if (focused && focused !== document.body) focused.focus({ preventScroll: true });
+      else suggestion.querySelector(':focus')?.blur();
     }, 30000);
   }
   function init() {
