@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dibuja una topología FTTH y calcula las pérdidas ópticas de cada camino." />
+  <title>Presupuesto óptico — DGNV Studios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="../../assets/js/theme.js?v=20261107-refined"></script>
+  <link rel="stylesheet" href="../../assets/css/styles.css" />
+  <link rel="stylesheet" href="../../assets/css/logo.css" />
+  <link rel="stylesheet" href="../../assets/css/responsive.css?v=20260909-mobile" />
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=20261107-daylight" />
+  <link rel="stylesheet" href="../../assets/css/presupuesto-optico.css?v=20261107-3" />
+  <link rel="icon" type="image/png" href="../../img/favicon.png" />
+</head>
+<body class="optical-page">
+  <header class="site-header container">
+    <a class="brand" href="../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a>
+    <a class="ob-header-back" href="../../index.html#modalidades">← Modalidades</a>
+  </header>
+  <main class="container ob-main">
+    <section class="ob-hero">
+      <div><p class="eyebrow"><span></span> Fibra óptica · Herramienta interactiva</p><h1>Presupuesto <em>óptico.</em></h1><p class="hero-copy">Parte con un lienzo casi vacío. Conecta equipos, dibuja ramificaciones y ajusta cada cable para calcular la pérdida de los caminos hasta las ONT.</p></div>
+      <div class="ob-hero-art" aria-hidden="true"><span class="ob-hero-node">OLT</span><i></i><span class="ob-hero-node ob-hero-split">1×8</span><i></i><span class="ob-hero-node">ONT</span></div>
+    </section>
+
+    <section class="ob-setup ob-panel" id="setup" aria-labelledby="setup-title">
+      <div class="ob-section-heading"><span class="ob-kicker">01 / Punto de partida</span><h2 id="setup-title">Dos decisiones y a diseñar</h2><p>La clase indica el intervalo de pérdida admisible del camino óptico. La unidad solo cambia cómo introduces y lees las distancias.</p></div>
+      <form id="setup-form" class="ob-setup-form">
+        <label>Clase óptica <span>intervalo de pérdida de la red</span><select name="opticalClass"><optgroup label="GPON"><option value="B+">B+ · 13 a 28 dB</option><option value="C+">C+ · 17 a 32 dB</option></optgroup><optgroup label="XGS-PON"><option value="N1">N1 · 14 a 29 dB</option><option value="N2">N2 · 16 a 31 dB</option><option value="E1">E1 · 18 a 33 dB</option><option value="E2">E2 · 20 a 35 dB</option></optgroup></select></label>
+        <label>Unidad de distancia <span>para cables y posiciones</span><select name="unit"><option value="km">Kilómetros (km)</option><option value="m">Metros (m)</option><option value="ft">Pies (ft)</option></select></label>
+        <button type="submit" class="ob-primary">Crear topología ↗</button>
+      </form>
+      <div class="ob-setup-bottom"><p>La clase no determina los dB/km de la fibra. El lienzo parte con <strong>0,35 dB/km como ejemplo editable</strong>; cambia ese valor según el cable y la longitud de onda.</p><div class="ob-setup-actions"><button type="button" class="ob-secondary" id="return-design" hidden>Volver al diseño actual</button><label class="ob-file-trigger">Abrir un diseño guardado<input type="file" id="import-setup" accept=".json,application/json" /></label></div></div>
+      <p class="ob-message" id="setup-message" role="alert" hidden></p>
+    </section>
+
+    <section id="planner" class="ob-planner" aria-labelledby="planner-title" hidden>
+      <div class="ob-planner-head"><div><span class="ob-kicker">02 / Lienzo interactivo</span><h2 id="planner-title">Tu red óptica</h2><p>Selecciona un equipo o la etiqueta de un cable para editarlo. La longitud de cada cable interviene en el cálculo; el dibujo se acomoda automáticamente.</p></div><div class="ob-planner-actions"><button type="button" class="ob-secondary" id="export-design">Descargar diseño</button><label class="ob-file-trigger">Abrir diseño<input type="file" id="import-planner" accept=".json,application/json" /></label><button type="button" class="ob-secondary" id="new-design">Nuevo diseño</button></div></div>
+
+      <div class="ob-summary-strip ob-panel"><div><small>Clase seleccionada</small><strong id="class-readout">—</strong></div><div><small>Pérdida admisible</small><strong id="class-range">—</strong></div><div><small>Fibra inicial</small><strong id="fiber-readout">—</strong></div><div><small>Unidad</small><strong id="unit-readout">—</strong></div></div>
+
+      <p class="ob-message" id="planner-message" role="status" aria-live="polite"></p>
+
+      <div class="ob-diagram-shell ob-panel"><div class="ob-diagram-top"><div><span class="ob-kicker">Topología FTTH</span><h3>Recorrido de la señal</h3></div><span>Agrega con + · mueve las tarjetas · edita al seleccionar</span></div><div class="ob-canvas" id="canvas" aria-label="Diagrama de red óptica"><svg id="cables" class="ob-cables" aria-hidden="true"></svg><div id="diagram-items" class="ob-diagram-items"></div><button type="button" class="ob-canvas-add" id="canvas-add" aria-label="Agregar elemento sin conexión" title="Agregar elemento sin conexión">+</button><div class="ob-add-popover" id="add-popover" hidden><div class="ob-popover-head"><div><span class="ob-kicker">Agregar al diagrama</span><strong id="add-popover-title">Elige un elemento</strong></div><button type="button" id="close-popover" aria-label="Cerrar selector">×</button></div><div id="add-choices" class="ob-add-choices"></div></div></div><p class="ob-diagram-help">Usa el + del lienzo para crear un elemento libre, el + de una tarjeta para conectarlo o el + de un cable para insertarlo. Arrastra las tarjetas para ordenar el dibujo; cambia la distancia pulsando la etiqueta del cable.</p></div>
+
+      <aside class="ob-inspector ob-panel" id="inspector-panel" aria-labelledby="inspector-title" hidden><div class="ob-editor-head"><div class="ob-section-heading"><span class="ob-kicker">Editar selección</span><h3 id="inspector-title">Selecciona un elemento</h3></div><button type="button" id="close-inspector" aria-label="Cerrar edición">×</button></div><div id="inspector-content" class="ob-inspector-content"></div></aside><section class="ob-results ob-panel" aria-labelledby="results-title"><div class="ob-section-heading"><span class="ob-kicker">Cálculo en vivo</span><h3 id="results-title">Pérdidas del recorrido</h3></div><div id="results-content" class="ob-results-content"></div></section>
+
+      <details class="ob-settings ob-panel"><summary>Ajustar valores de cálculo</summary><div class="ob-settings-grid"><label>Clase óptica<select id="setting-class"><option value="B+">GPON B+</option><option value="C+">GPON C+</option><option value="N1">XGS-PON N1</option><option value="N2">XGS-PON N2</option><option value="E1">XGS-PON E1</option><option value="E2">XGS-PON E2</option></select></label><label>Unidad<select id="setting-unit"><option value="km">Kilómetros</option><option value="m">Metros</option><option value="ft">Pies</option></select></label><label>Atenuación inicial <span>dB/km</span><input id="setting-fiber" type="number" min="0" max="10" step="0.001" /></label><label>Par de conectores <span>dB/par</span><input id="setting-connectors" type="number" min="0" max="10" step="0.01" /></label><label>Empalme <span>dB</span><input id="setting-splices" type="number" min="0" max="10" step="0.01" /></label><label>Reserva de diseño <span>dB</span><input id="setting-reserve" type="number" min="0" max="20" step="0.1" /></label></div><p>Los valores de ejemplo se pueden sustituir por datos de las fichas técnicas y del cable utilizado.</p></details>
+      <details class="ob-reference ob-panel"><summary>Tabla de pérdidas máximas de splitters utilizada</summary><div class="ob-table-wrap"><table><thead><tr><th>Relación</th><th>Pérdida máxima admitida</th></tr></thead><tbody><tr><td>1 × 2</td><td>4,0 dB</td></tr><tr><td>1 × 4</td><td>7,6 dB</td></tr><tr><td>1 × 8</td><td>10,7 dB</td></tr><tr><td>1 × 16</td><td>14,2 dB</td></tr><tr><td>1 × 32</td><td>17,8 dB</td></tr><tr><td>1 × 64</td><td>21,8 dB</td></tr><tr><td>1 × 128</td><td>25,0 dB</td></tr></tbody></table></div></details>
+      <p class="ob-footnote">Cada ONT se calcula por su propio camino desde la OLT. Las pérdidas de ramas distintas no se suman entre sí. La clase indica un intervalo de pérdida óptica; confirma siempre las especificaciones de los transceptores, del cable y los valores medidos en terreno. Referencias de clases: <a href="https://www.itu.int/rec/T-REC-G.984.2/en" target="_blank" rel="noopener noreferrer">ITU-T G.984.2</a> y <a href="https://www.itu.int/rec/T-REC-G.9807.1/en" target="_blank" rel="noopener noreferrer">ITU-T G.9807.1</a>.</p>
+    </section>
+  </main>
+  <footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Presupuesto óptico · herramienta de diseño</p><p>© <span id="year"></span></p></footer>
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/presupuesto-optico.js?v=20261107-3"></script>
+</body>
+</html>
