@@ -240,15 +240,21 @@
   }
   function moveNode(event) {
     if (!drag || event.pointerId !== drag.pointerId) return;
-    const dx = (event.clientX - drag.clientX) / zoom, dy = (event.clientY - drag.clientY) / zoom;
+    const dx = event.clientX - drag.clientX, dy = event.clientY - drag.clientY;
     if (!drag.moved && Math.hypot(dx, dy) < 5) return;
-    drag.moved = true; event.preventDefault();
+    if(!drag.moved){
+      freezePositions();
+      const initial=worldPoint({clientX:drag.clientX,clientY:drag.clientY});
+      drag.offsetX=initial.x-drag.x;drag.offsetY=initial.y-drag.y;
+    }
+    drag.moved = true; event.preventDefault?.();
     const item = byId(drag.id); if (!item) return;
-    const x = Math.max(0, Math.min(drag.width - drag.w, drag.x + dx));
-    const y = Math.max(0, Math.min(drag.height - drag.h, drag.y + dy));
-    item.layout ||= {};
-    item.layout[drag.mode] = { x: Number((x / Math.max(1, drag.width - drag.w)).toFixed(5)), y: Number((y / Math.max(1, drag.height - drag.h)).toFixed(5)) };
+    const pointer=worldPoint(event),x=pointer.x-drag.offsetX,y=pointer.y-drag.offsetY;
+    item.position={x,y};
+    extendWorld(x,y,drag.w,drag.h);
+    dragPointer={clientX:event.clientX,clientY:event.clientY,pointerId:event.pointerId};
     renderDiagram();
+    if(!dragFrame)dragFrame=requestAnimationFrame(autoPanNode);
   }
   function finishMove(event) {
     if (!drag || event.pointerId !== drag.pointerId) return;
@@ -257,13 +263,14 @@
       setTimeout(() => { suppressNodeClick = false; }, 0);
       notify("Posición visual actualizada y guardada en el diseño.");
     }
-    drag = null;
+    drag = null;dragPointer=null;cancelAnimationFrame(dragFrame);dragFrame=0;
+    remember();
   }
   function deleteNode(id) {
     const item = byId(id); if (!item) return;
     plan.nodes = plan.nodes.filter(n => n.id !== id);
     plan.edges.forEach(e => { if(e.from === id)e.from=null; if(e.to === id)e.to=null; });
-    selected = null; render(); notify(`${item.label} quitado. Sus ramas quedan disponibles para volver a conectarlas.`);
+    selected = null; render(); notify(`${item.label} quitado; se conservaron los cables que siguen conectados a otro elemento.`);
   }
   function changeNode(field, raw) {
     const item = byId(selected.id); if (!item) return;
@@ -383,10 +390,32 @@
     const placed=new Map(), roots=plan.nodes.filter(n=>!incoming(n.id)); let row=0,maxDepth=0;
     function walk(id,d){const kids=children(id);maxDepth=Math.max(maxDepth,d);const ys=kids.map(k=>walk(k,d+1));const y=ys.length?ys.reduce((a,b)=>a+b,0)/ys.length:90+row++*190;placed.set(id,{x:65+d*310,y,w:150,h:112});return y;}
     roots.forEach(n=>walk(n.id,0));
-    const worldWidth=Math.max(plan.worldWidth??0,1100,130+(maxDepth+1)*310),height=Math.max(plan.worldHeight??0,430,row*190+150);plan.worldWidth=worldWidth;plan.worldHeight=height;
-    for(const n of plan.nodes){const p=placed.get(n.id),m=n.layout?.desktop;if(p&&m){p.x=m.x*(worldWidth-p.w);p.y=m.y*(height-p.h);}}
+    let worldWidth=Math.max(plan.worldWidth??0,1100,130+(maxDepth+1)*310),height=Math.max(plan.worldHeight??0,430,row*190+150);
+    for(const n of plan.nodes){const p=placed.get(n.id),m=n.layout?.desktop;if(p&&n.position){p.x=n.position.x;p.y=n.position.y;}else if(p&&m){p.x=m.x*(worldWidth-p.w);p.y=m.y*(height-p.h);n.position={x:p.x,y:p.y};}if(p){worldWidth=Math.max(worldWidth,p.x+p.w+100);height=Math.max(height,p.y+p.h+100);}}
+    for(const e of plan.edges)for(const key of ['looseFrom','looseTo'])if(e[key]){worldWidth=Math.max(worldWidth,e[key].x+100);height=Math.max(height,e[key].y+100);}
+    plan.worldWidth=worldWidth;plan.worldHeight=height;
     return {placed,vertical:false,height,width:worldWidth,mode:'desktop'};
   };
+  function freezePositions(){for(const n of plan.nodes){const p=layoutCache?.placed.get(n.id);if(p)n.position={x:p.x,y:p.y};}}
+  function extendWorld(x,y,w=0,h=0){
+    const sx=Math.max(0,100-x),sy=Math.max(0,100-y);
+    if(sx||sy){
+      for(const n of plan.nodes)if(n.position){n.position.x+=sx;n.position.y+=sy;}
+      for(const e of plan.edges)for(const key of ['looseFrom','looseTo'])if(e[key]){e[key].x+=sx;e[key].y+=sy;}
+      pan.x-=sx*zoom;pan.y-=sy*zoom;
+    }
+    plan.worldWidth=Math.max((plan.worldWidth??1100)+sx,x+sx+w+100);
+    plan.worldHeight=Math.max((plan.worldHeight??430)+sy,y+sy+h+100);
+    plan.view={zoom,pan:{...pan},manual:true};
+  }
+  let dragPointer=null,dragFrame=0;
+  function autoPanNode(){
+    dragFrame=0;if(!drag?.moved||!dragPointer)return;
+    const r=$('canvas').getBoundingClientRect(),p=dragPointer;
+    const speed=(value,min,max)=>value<min+34?-Math.min(10,(min+34-value)*.22):value>max-34?Math.min(10,(value-max+34)*.22):0;
+    const vx=speed(p.clientX,r.left,r.right),vy=speed(p.clientY,r.top,r.bottom);
+    if(vx||vy){pan.x-=vx;pan.y-=vy;moveNode(p);}
+  }
   const supportsConnector=n=>n&&['olt','odf','nap','node','splitter','roseta','ont'].includes(n.type);
   const compatibleEnd=(c,n)=>c.joint==='splice'?n?.type==='mufa':supportsConnector(n);
   function endpointPosition(p,side,index){if(side==='top')return{x:p.x+p.w/2,y:p.y};if(side==='bottom')return{x:p.x+p.w/2,y:p.y+p.h};if(side==='left'||side==='auto'&&index===1)return{x:p.x,y:p.y+p.h/2};return{x:p.x+p.w,y:p.y+p.h/2};}
@@ -400,7 +429,7 @@
     $('cables').style.width=g.width+'px';$('cables').style.height=g.height+'px';
     $('diagram-items').style.width=g.width+'px';$('diagram-items').style.height=g.height+'px';
     canvas.style.height=(document.fullscreenElement?Math.max(450,innerHeight-155):560)+'px';
-    if(!plan.view || !plan.view.manual){zoom=Math.min(1,canvas.clientWidth/g.width);pan={x:0,y:0};plan.view={zoom,pan};}
+    if(!plan.view || !plan.view.manual){zoom=Math.min(1,canvas.clientWidth/g.width,canvas.clientHeight/g.height);pan={x:0,y:0};plan.view={zoom,pan};}
     world.style.transform=`translate(${pan.x}px,${pan.y}px) scale(${zoom})`;
     const extra=[]; $('cables').innerHTML='';
     for(const e of plan.edges){
@@ -467,10 +496,18 @@
   const baseResults=renderResults;
   renderResults=function(){normalize();baseResults();const results=plan.nodes.filter(n=>n.type==='ont').map(n=>calculate(n)).filter(Boolean);document.querySelectorAll('.ob-result-card').forEach((card,i)=>{const r=results[i];if(r)card.querySelector('.ob-result-metrics').insertAdjacentHTML('beforeend',`<div><small>RX en ONT · downstream</small><strong>${fmt(r.rxDown)} dBm</strong></div><div><small>RX en OLT · upstream</small><strong>${fmt(r.rxUp)} dBm</strong></div>`);});};
   const baseRender=render;
-  render=function(){normalize();baseRender();remember();};
+  function removeUnattachedCables(){
+    const removed=plan.edges.filter(e=>!byId(e.from)&&!byId(e.to));
+    if(!removed.length)return;
+    const ids=new Set(removed.map(e=>e.id));
+    plan.edges=plan.edges.filter(e=>!ids.has(e.id));
+    if(selected&&selected.kind!=='node'&&ids.has(selected.id))selected=null;
+    notify('Cable eliminado: sus dos extremos quedaron desconectados.');
+  }
+  render=function(){removeUnattachedCables();normalize();baseRender();remember();};
   const baseImport=validateImport;
   validateImport=function(raw){
-    for(const n of raw.nodes??[]){for(const k of ['spliceLoss','connectionLoss','txDbm'])if(n[k]!==undefined&&(!Number.isFinite(n[k])||n[k]<(k==='txDbm'?-30:0)||n[k]>100))throw Error('Perdida o potencia individual invalida');if(n.splitters!==undefined&&(!Array.isArray(n.splitters)||n.splitters.length>128||n.splitters.some(x=>typeof x.id!=='string'||!/^[a-zA-Z0-9_-]{1,32}$/.test(x.id)||!Object.hasOwn(SPLITTER_DB,x.ratio))))throw Error('Lista de splitters invalida');}
+    for(const n of raw.nodes??[]){if(n.position&&(!Number.isFinite(n.position.x)||!Number.isFinite(n.position.y)||n.position.x<0||n.position.y<0))throw Error('Posicion de elemento invalida');for(const k of ['spliceLoss','connectionLoss','txDbm'])if(n[k]!==undefined&&(!Number.isFinite(n[k])||n[k]<(k==='txDbm'?-30:0)||n[k]>100))throw Error('Perdida o potencia individual invalida');if(n.splitters!==undefined&&(!Array.isArray(n.splitters)||n.splitters.length>128||n.splitters.some(x=>typeof x.id!=='string'||!/^[a-zA-Z0-9_-]{1,32}$/.test(x.id)||!Object.hasOwn(SPLITTER_DB,x.ratio))))throw Error('Lista de splitters invalida');}
     for(const e of raw.edges??[]){for(const k of ['looseFrom','looseTo'])if(e[k]&&(!Number.isFinite(e[k].x)||!Number.isFinite(e[k].y)))throw Error('Posicion de extremo invalida');if(e.ends!==undefined&&(!Array.isArray(e.ends)||e.ends.length!==2||e.ends.some(c=>(c.side!==undefined&&!['auto','left','right','top','bottom'].includes(c.side))||(c.joint!==undefined&&!['connector','splice'].includes(c.joint))||!['SC/APC','SC/UPC'].includes(c.type)||!Number.isFinite(c.loss)||c.loss<0||c.loss>100)))throw Error('Conector invalido');for(const k of ['alphaUp','alphaDown'])if(e[k]!==undefined&&(!Number.isFinite(e[k])||e[k]<0||e[k]>10))throw Error('Atenuacion invalida');}
     if(raw.view&&(!Number.isFinite(raw.view.zoom)||raw.view.zoom<.001||raw.view.zoom>3||!Number.isFinite(raw.view.pan?.x)||!Number.isFinite(raw.view.pan?.y)))throw Error('Vista invalida');
 const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.to)loose.push(e);raw={...raw,edges:raw.edges.filter(e=>e.from&&e.to)};}const p=baseImport(raw);for(const e of loose){if(!Number.isFinite(e.lengthM)||e.lengthM<=0||!Array.isArray(e.ends)||e.ends.length!==2)throw Error('Cable desconectado inválido');p.edges.push(e);}for(const k of ['lambdaUp','lambdaDown','alphaUp','alphaDown'])if(raw[k]!==undefined){if(!Number.isFinite(raw[k])||raw[k]<0)throw Error('Parámetro óptico inválido');p[k]=raw[k];}p.view=raw.view;if(Number.isFinite(raw.worldWidth))p.worldWidth=raw.worldWidth;if(Number.isFinite(raw.worldHeight))p.worldHeight=raw.worldHeight;return p;};
@@ -485,9 +522,9 @@ const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.t
   tools.addEventListener('click',async e=>{const t=e.target.closest('button[data-tool]')?.dataset.tool;if(!t||!plan)return;
     if(t==='undo'||t==='redo'){const next=historyIndex+(t==='undo'?-1:1);if(next<0||next>=snapshots.length)return;historyIndex=next;restoring=true;plan=JSON.parse(snapshots[next]);selected=null;render();restoring=false;}
     if(t==='in'||t==='out'){zoom=Math.max(.15,Math.min(3,zoom*(t==='in'?1.15:1/1.15)));viewport();}
-    if(t==='fit'){zoom=Math.min(1,canvas.clientWidth/layoutCache.width);pan={x:0,y:0};viewport();}
+    if(t==='fit'){zoom=Math.min(1,canvas.clientWidth/layoutCache.width,canvas.clientHeight/layoutCache.height);pan={x:0,y:0};viewport();}
     if(t==='copy'&&selected){const e=plan.edges.find(e=>e.id===selected.id);const data=selected.kind==='node'?byId(selected.id):selected.kind==='connector'?e?.ends[selected.index]:e;if(data)clipboard={kind:selected.kind,data:JSON.parse(JSON.stringify(data))};}
-    if(t==='paste'&&clipboard){const n=JSON.parse(JSON.stringify(clipboard.data));if(clipboard.kind==='node'){n.id=uid();n.label+=' copia';n.layout={};plan.nodes.push(n);selected={kind:'node',id:n.id};}else if(clipboard.kind==='edge'){n.id=uid();n.from=null;n.to=null;n.splitterId='';n.looseFrom={x:150,y:300};n.looseTo={x:400,y:300};plan.edges.push(n);selected={kind:'edge',id:n.id};}else if(selected?.kind==='connector'){plan.edges.find(e=>e.id===selected.id).ends[selected.index]=n;}render();}
+    if(t==='paste'&&clipboard){const n=JSON.parse(JSON.stringify(clipboard.data));if(clipboard.kind==='node'){n.id=uid();n.label+=' copia';n.layout={};if(n.position)n.position={x:n.position.x+45,y:n.position.y+45};plan.nodes.push(n);selected={kind:'node',id:n.id};}else if(clipboard.kind==='edge'){if(selected?.kind!=='node'){notify('Selecciona un elemento para pegar el cable conectado a él.');return;}n.id=uid();n.from=selected.id;n.to=null;n.splitterId='';n.looseFrom={x:150,y:300};n.looseTo={x:400,y:300};plan.edges.push(n);selected={kind:'edge',id:n.id};}else if(selected?.kind==='connector'){plan.edges.find(e=>e.id===selected.id).ends[selected.index]=n;}render();}
     if(t==='full'){if(document.fullscreenElement)await document.exitFullscreen();else await shell.requestFullscreen();}
   });
   canvas.addEventListener('wheel',e=>{
@@ -515,9 +552,9 @@ const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.t
     const d=endpointDrag;if(!d||e.pointerId!==d.pointerId)return;
     if(!d.moved&&Math.hypot(e.clientX-d.x,e.clientY-d.y)<5)return;
     e.preventDefault();const link=plan.edges.find(l=>l.id===d.id);if(!link)return;
-    if(!d.moved){for(const n of plan.nodes){const p=layoutCache.placed.get(n.id);if(p){n.layout||={};n.layout.desktop={x:p.x/Math.max(1,layoutCache.width-p.w),y:p.y/Math.max(1,layoutCache.height-p.h)};}}}
+    if(!d.moved)freezePositions();
     d.moved=true;link[d.index===0?'from':'to']=null;
-    link[d.index===0?'looseFrom':'looseTo']=worldPoint(e);selected=null;renderInspector();renderDiagram();
+    const loose=worldPoint(e);link[d.index===0?'looseFrom':'looseTo']=loose;extendWorld(loose.x,loose.y);selected=null;renderInspector();renderDiagram();
     document.querySelectorAll('.ob-node').forEach(b=>b.classList.toggle('is-compatible',compatibleEnd(link.ends[d.index],byId(b.dataset.nodeId))));
   },{passive:false});
   window.addEventListener('pointerup',e=>{
@@ -532,9 +569,9 @@ const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.t
       if(invalid){link[key]=null;message='Conexión no válida: entrada ocupada o bucle.';}
       else{const sides=[['left',Math.abs(p.x-r.x)],['right',Math.abs(p.x-r.x-r.w)],['top',Math.abs(p.y-r.y)],['bottom',Math.abs(p.y-r.y-r.h)]];sides.sort((a,b)=>a[1]-b[1]);link.ends[d.index].side=sides[0][0];message='Extremo conectado a '+byId(id).label+'.';}
     }else message='Este equipo no admite este tipo de extremo; queda suelto.';}
-    render();notify(message);
+    render();notify(plan.edges.some(e=>e.id===link.id)?message:'Cable eliminado: sus dos extremos quedaron desconectados.');
   });
-  window.addEventListener('pointercancel',()=>{endpointDrag=null;});
+  window.addEventListener('pointercancel',()=>{const moved=endpointDrag?.moved;endpointDrag=null;if(moved)render();});
   document.addEventListener('fullscreenchange',()=>{renderDiagram();anchorEditor();});
   document.addEventListener('pointerdown',e=>{if(!selected||e.target.closest('#inspector-panel,.ob-node,.ob-cable-label,.ob-endpoint,.ob-add-choices,.ob-node-add,.ob-cable-add,.ob-map-tools'))return;selected=null;renderInspector();});
   $('diagram-items').addEventListener('click',e=>{if(suppressNodeClick)return;const b=e.target.closest('[data-end-edge]');if(b){selected={kind:'connector',id:b.dataset.endEdge,index:+b.dataset.endIndex};renderInspector();}});
@@ -590,6 +627,7 @@ const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.t
   window.addEventListener("pointermove", moveNode, { passive: false });
   window.addEventListener("pointerup", finishMove);
   window.addEventListener("pointercancel", finishMove);
+  window.addEventListener("blur", () => { if(drag)finishMove({pointerId:drag.pointerId}); });
   document.addEventListener("keydown", event => { if (event.key === "Escape") { if (picker) closePicker(); else if (selected) { selected = null; renderDiagram(); renderInspector(); } } });
   $("cables").addEventListener("click", event => { const link = event.target.closest("[data-edge-id]"); if (link) { selected = { kind: "edge", id: link.dataset.edgeId }; render(); } });
   $("inspector-content").addEventListener("change", event => {
