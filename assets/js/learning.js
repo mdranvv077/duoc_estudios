@@ -81,6 +81,7 @@ const guideData = {
       ["rutas-estaticas.html", "Rutas estáticas"],
       ["dhcp-vlan.html", "DHCP por VLAN"],
       ["ripv2.html", "RIPv2 básico"],
+      ["loopback.html", "Interfaz Loopback"],
       ["ospf.html", "OSPF básico"],
       ["verificacion.html", "Verificación y diagnóstico"],
     ],

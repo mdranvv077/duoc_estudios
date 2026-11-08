@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interfaz Loopback — Packet Tracer</title>
+    <link rel="icon" type="image/png" href="../../../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="../../../assets/js/theme.js?v=20261107-refined"></script>
+    <link rel="stylesheet" href="../../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../../assets/css/logo.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css?v=20260909-mobile" />
+    <link rel="stylesheet" href="../../../assets/css/credits.css" />
+    <link rel="stylesheet" href="../../../assets/css/learning.css?v=20261026-wireless" />
+    <link rel="stylesheet" href="../../../assets/css/theme.css?v=20261107-daylight" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="../../../index.html"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt="" /><span>DGNV Studios</span></a>
+    </header>
+    <main class="container learning-shell">
+      <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de Routing</button>
+      <aside class="guide-sidebar" data-guide-sidebar>
+        <a class="sidebar-brand" href="../index.html"><small>Packet Tracer · 04</small><strong>Routing</strong></a>
+        <nav class="lesson-nav"></nav>
+        <a class="sidebar-back" href="../index.html">← Ver categorías</a>
+      </aside>
+      <article class="lesson-content">
+        <p class="eyebrow"><span></span> Módulo 06</p>
+        <h1>Interfaz <em>Loopback.</em></h1>
+        <p class="lesson-lead">Una Loopback es una interfaz virtual del router. Puedes asignarle una IP sin ocupar un puerto físico ni conectar otro cable. En este módulo verás cuándo sirve, cómo configurarla y qué significa realmente que permanezca activa.</p>
+
+        <h2>Una dirección del router independiente de un puerto</h2>
+        <p>Una interfaz física, como GigabitEthernet0/0, depende de su enlace: si se desconecta el cable, baja. La Loopback existe dentro del router y no depende de un enlace concreto. Por eso se usa como una dirección estable para identificar el equipo, administrarlo o probar su conectividad IP.</p>
+        <p>El número de <code>Loopback0</code> solo identifica esa interfaz virtual; también podrías crear <code>Loopback1</code>. Cada una puede tener su propia IP. En el ejemplo usaremos <code>10.10.10.1/32</code>: la máscara <code>255.255.255.255</code> representa una sola dirección, no una red de usuarios conectada a un puerto.</p>
+        <div class="lesson-note"><strong>Distinción importante:</strong> que Loopback0 aparezca <code>up/up</code> indica que está activa dentro de R1. No garantiza que R2 pueda llegar a ella. Para alcanzarla desde otro equipo, debe existir un camino físico funcional y una ruta hacia su IP.</div>
+
+        <h2>Ejemplo en Packet Tracer: R1 y R2</h2>
+        <p>Conecta dos routers por GigabitEthernet0/0. El enlace entre ellos usa <code>10.0.0.0/30</code>: R1 tiene <code>10.0.0.1</code> y R2 <code>10.0.0.2</code>. La Loopback <code>10.10.10.1/32</code> pertenece a R1. Los nombres de las interfaces pueden variar según el modelo elegido; usa las que realmente conectaste.</p>
+        <p>Primero configura el enlace y la Loopback en R1:</p>
+        <pre class="cli-block"><code><span class="cli-prompt">R1#</span> <span class="cli-command">configure terminal</span>
+<span class="cli-prompt">R1(config)#</span> <span class="cli-command">interface gigabitEthernet 0/0</span>
+<span class="cli-prompt">R1(config-if)#</span> <span class="cli-command">ip address 10.0.0.1 255.255.255.252</span>
+<span class="cli-prompt">R1(config-if)#</span> <span class="cli-command">no shutdown</span>
+<span class="cli-prompt">R1(config-if)#</span> <span class="cli-command">exit</span>
+<span class="cli-prompt">R1(config)#</span> <span class="cli-command">interface loopback 0</span>
+<span class="cli-prompt">R1(config-if)#</span> <span class="cli-command">ip address 10.10.10.1 255.255.255.255</span>
+<span class="cli-prompt">R1(config-if)#</span> <span class="cli-command">no shutdown</span>
+<span class="cli-prompt">R1(config-if)#</span> <span class="cli-command">end</span></code></pre>
+        <p><code>interface loopback 0</code> crea o abre la interfaz virtual; <code>ip address</code> le asigna la dirección. <code>no shutdown</code> asegura que quede habilitada. No hay que configurar un switch ni un cable para la Loopback.</p>
+
+        <h2>Hacerla alcanzable desde R2</h2>
+        <p>R2 conoce directamente el enlace <code>10.0.0.0/30</code>, pero aún no sabe dónde está <code>10.10.10.1</code>. Configura su interfaz y una ruta estática hacia esa única dirección, con R1 como siguiente salto:</p>
+        <pre class="cli-block"><code><span class="cli-prompt">R2#</span> <span class="cli-command">configure terminal</span>
+<span class="cli-prompt">R2(config)#</span> <span class="cli-command">interface gigabitEthernet 0/0</span>
+<span class="cli-prompt">R2(config-if)#</span> <span class="cli-command">ip address 10.0.0.2 255.255.255.252</span>
+<span class="cli-prompt">R2(config-if)#</span> <span class="cli-command">no shutdown</span>
+<span class="cli-prompt">R2(config-if)#</span> <span class="cli-command">exit</span>
+<span class="cli-prompt">R2(config)#</span> <span class="cli-command">ip route 10.10.10.1 255.255.255.255 10.0.0.1</span>
+<span class="cli-prompt">R2(config)#</span> <span class="cli-command">end</span></code></pre>
+        <p>La ruta dice: «para llegar a <code>10.10.10.1</code>, entrega el paquete a <code>10.0.0.1</code>». R1 puede responder porque <code>10.0.0.2</code> está en su red directamente conectada. En una red más grande, las rutas de ida y regreso deben existir en todos los tramos necesarios.</p>
+
+        <h2>Comprobar el resultado</h2>
+        <pre class="cli-block"><code><span class="cli-prompt">R1#</span> <span class="cli-command">show ip interface brief</span><span class="cli-comment"> # Loopback0 debe figurar con 10.10.10.1 y up/up</span>
+<span class="cli-prompt">R1#</span> <span class="cli-command">show interfaces loopback 0</span><span class="cli-comment"> # muestra los detalles de la interfaz virtual</span>
+<span class="cli-prompt">R2#</span> <span class="cli-command">show ip route 10.10.10.1</span><span class="cli-comment"> # confirma la ruta hacia R1</span>
+<span class="cli-prompt">R2#</span> <span class="cli-command">ping 10.10.10.1</span><span class="cli-comment"> # prueba el camino completo</span></code></pre>
+        <p>Si el ping falla, comprueba primero que ambos puertos físicos estén activos, que las IP del enlace pertenezcan a la misma subred y que la ruta en R2 apunte a <code>10.0.0.1</code>. Puede fallar el primer intento mientras se resuelve ARP; repite la prueba si el resto está correcto.</p>
+        <div class="lesson-note"><strong>Prueba útil:</strong> si apagas GigabitEthernet0/0 de R1, su Loopback puede seguir mostrando <code>up/up</code>, pero R2 perderá el camino físico para alcanzarla. La Loopback no sustituye al enlace ni crea redundancia.</div>
+
+        <h2>Relación con OSPF</h2>
+        <p>OSPF necesita un <em>router ID</em> único. Una IP de Loopback puede servir como referencia estable para elegirlo, aunque también puedes definirlo explícitamente con <code>router-id</code>, como en el siguiente módulo. Crear la Loopback no activa OSPF ni anuncia su dirección automáticamente: eso requiere configurar el protocolo y las redes correspondientes.</p>
+        <p>Referencia técnica: <a class="topic-link" href="https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-cfg-vir-if-xe.html" target="_blank" rel="noopener noreferrer">Cisco · Interfaces virtuales</a>.</p>
+        <div class="lesson-actions"><a href="ripv2.html">← RIPv2 básico</a><a href="ospf.html">Siguiente: OSPF básico →</a></div>
+        <footer class="container">
+          <p>DGNV Studios <small>— aprende construyendo.</small></p>
+          <p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p>
+          <p>© <span id="year"></span></p>
+        </footer>
+      </article>
+    </main>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/learning.js?v=20261108-loopback"></script>
+  </body>
+</html>
