@@ -22,7 +22,7 @@
     delta: { name: 'DELTA', path: 'M100 190H347C373 190 390 179 402 158L443 91C453 75 443 59 427 61L356 78C344 81 332 77 327 65L322 45C320 28 301 24 290 37L263 74C256 84 245 86 236 77L216 55C206 44 190 45 182 56L162 85C154 98 141 102 125 97L106 90C87 82 68 94 66 112L58 150C54 173 76 190 100 190Z' },
     orbita: { name: 'ÓRBITA', path: 'M100 190H216C247 190 262 183 268 166C272 153 257 145 246 145H222C209 145 207 133 216 126C229 115 247 122 261 112L282 91C291 82 304 83 313 96L329 116C341 132 359 131 371 116L419 66C433 50 421 31 402 33L328 39C299 41 281 24 249 27L166 34C149 35 140 48 144 63L149 78C153 91 142 101 128 97L110 91C87 84 71 87 64 109C55 131 61 151 73 165L85 181C89 187 94 190 100 190Z' },
   };
-  const labels = { focus: 'TANDA DE CONCENTRACIÓN', short: 'PARADA EN BOXES', long: 'DESCANSO LARGO' };
+  const labels = { focus: 'CONCENTRACIÓN', short: 'DESCANSO CORTO', long: 'DESCANSO LARGO' };
   let state = { circuit: 'neon', team: 'mercedes', tire: 'soft', mode: 'focus', durations: { focus: 25, short: 5, long: 15 }, remaining: 1500, total: 1500, end: null, completed: 0, minutes: 0, driver: 'PILOTO 01' };
   try {
     const saved = JSON.parse(localStorage.getItem(key));
@@ -167,10 +167,10 @@
     $('#minutes').replaceChildren(document.createTextNode(`${Math.round(state.minutes)} `), Object.assign(document.createElement('small'), { textContent: 'MIN' }));
     const stints = state.completed % 4;
     document.querySelectorAll('#stints i').forEach((item, i) => item.classList.toggle('done', i < stints));
-    $('#stints').setAttribute('aria-label', `${stints} de 4 tandas del ciclo completadas`);
+    $('#stints').setAttribute('aria-label', `${stints} de 4 sesiones del ciclo completadas`);
     document.querySelectorAll('[data-mode]').forEach(button => { const active = button.dataset.mode === state.mode; button.classList.toggle('active', active); button.setAttribute('aria-pressed', active); });
     $('#start').disabled = starting;
-    $('#start').textContent = starting ? 'PREPARANDO SALIDA…' : state.end ? 'Ⅱ BANDERA ROJA · PAUSAR' : state.remaining < state.total ? '▶ REANUDAR TANDA' : state.mode === 'focus' ? '▶ TOMAR LA SALIDA' : '▶ INICIAR DESCANSO';
+    $('#start').textContent = starting ? 'INICIANDO SESIÓN…' : state.end ? 'Ⅱ PAUSAR SESIÓN' : state.remaining < state.total ? '▶ REANUDAR SESIÓN' : state.mode === 'focus' ? '▶ INICIAR CONCENTRACIÓN' : '▶ INICIAR DESCANSO';
     syncCar();
   }
   function setMode(mode) {
@@ -183,26 +183,26 @@
     if (wasFocus) { state.completed++; state.minutes += state.total / 60; }
     const next = wasFocus ? (state.completed % 4 === 0 ? 'long' : 'short') : 'focus';
     setMode(next);
-    status(wasFocus ? `¡Bandera a cuadros! Tanda completada. Tu ${next === 'long' ? 'descanso largo' : 'descanso corto'} está listo para comenzar.` : 'Descanso completado. Cuando quieras, vuelve a la pista.');
+    status(wasFocus ? `Sesión de concentración completada. Puedes iniciar el ${next === 'long' ? 'descanso largo' : 'descanso corto'}.` : 'Descanso completado. Puedes iniciar otra sesión de concentración.');
   }
   function begin() {
     state.end = Date.now() + state.remaining * 1000;
-    persist(); status(state.mode === 'focus' ? 'En pista. Mantén la atención en tu tarea.' : 'En boxes. Descansa y recupera energía.'); render();
+    persist(); status(state.mode === 'focus' ? 'Sesión de concentración en curso.' : 'Descanso en curso.'); render();
   }
   function launch() {
     prepareAudio();
-    starting = true; const id = ++launchId; clearLights(); render(); status('Prepárate. La tanda comienza cuando se apaguen los semáforos.');
+    starting = true; const id = ++launchId; clearLights(); render(); status('La sesión comenzará al terminar la secuencia del semáforo.');
     document.querySelectorAll('.race-lights i').forEach((light, i) => setTimeout(() => { if (id === launchId) { light.classList.add('on'); tone(480); } }, i * 400));
     setTimeout(() => { if (id !== launchId) return; clearLights(); $('.race-lights').classList.add('go'); tone(760, .22); starting = false; begin(); setTimeout(() => { if (id === launchId) clearLights(); }, 700); }, 2400);
   }
   $('#start').addEventListener('click', () => {
     if (starting) return;
-    if (state.end) { state.remaining = Math.max(0, (state.end - Date.now()) / 1000); state.end = null; if (!state.remaining) { finish(); return; } persist(); render(); status('Bandera roja. Tanda en pausa; reanúdala cuando estés listo.'); }
+    if (state.end) { state.remaining = Math.max(0, (state.end - Date.now()) / 1000); state.end = null; if (!state.remaining) { finish(); return; } persist(); render(); status('Sesión en pausa. El tiempo restante se conserva.'); }
     else if (state.mode === 'focus' && state.remaining === state.total) launch();
     else begin();
   });
-  $('#reset').addEventListener('click', () => { setMode(state.mode); status('Sesión reiniciada. Todo listo para empezar.'); });
-  document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => { setMode(button.dataset.mode); status(state.mode === 'focus' ? 'Prepara tu tarea y toma la salida.' : 'Pausa preparada. Iníciala cuando quieras.'); }));
+  $('#reset').addEventListener('click', () => { setMode(state.mode); status('Sesión reiniciada. El temporizador volvió a la duración configurada.'); });
+  document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => { setMode(button.dataset.mode); status(state.mode === 'focus' ? 'Concentración seleccionada. Inicia la sesión cuando quieras.' : 'Descanso seleccionado. Inícialo cuando quieras.'); }));
   function updateCircuit() {
     const circuit = circuits[state.circuit];
     $('#circuit-name').textContent = `CIRCUITO ${circuit.name}`;
@@ -243,7 +243,7 @@
     }
     $('#track-kerbs').replaceChildren(fragment);
   }
-  document.querySelectorAll('[data-circuit]').forEach(button => button.addEventListener('click', () => { state.circuit = button.dataset.circuit; setMode('focus'); updateCircuit(); render(); status('Circuito seleccionado. Prepara tu siguiente tarea.'); }));
+  document.querySelectorAll('[data-circuit]').forEach(button => button.addEventListener('click', () => { state.circuit = button.dataset.circuit; setMode('focus'); updateCircuit(); render(); status('Circuito visual seleccionado. La sesión de concentración quedó reiniciada.'); }));
   document.querySelectorAll('button[data-team]').forEach(button => button.addEventListener('click', () => {
     state.team = button.dataset.team;
     updateGarage(); persistPreferences();
@@ -253,13 +253,13 @@
     state.tire = button.dataset.tire;
     state.durations.focus = tires[state.tire].minutes;
     setMode('focus'); updateCircuit(); updateGarage(); persistPreferences();
-    status(`Neumáticos ${tires[state.tire].name.toLowerCase()}: tanda preparada de ${state.durations.focus} minutos. Elección guardada.`);
+    status(`Neumáticos ${tires[state.tire].name.toLowerCase()}: concentración de ${state.durations.focus} minutos. Preferencia guardada.`);
   }));
   $('#settings').addEventListener('submit', event => {
     event.preventDefault();
     if (!event.currentTarget.reportValidity()) return;
     for (const mode of ['focus', 'short', 'long']) state.durations[mode] = Number(event.currentTarget.elements[mode].value);
-    setMode(state.mode); persistPreferences(); status('Estrategia actualizada. Se ha reiniciado la sesión con los nuevos tiempos.');
+    setMode(state.mode); persistPreferences(); status('Duraciones actualizadas. La sesión se reinició con los nuevos tiempos.');
   });
   $('#driver-name').value = state.driver;
   $('#helmet-trigger').addEventListener('click', () => {
@@ -309,6 +309,6 @@
   });
   updateCircuit(); updateGarage(); updateSoundButton();
   if (state.end && Date.now() >= state.end) finish();
-  else { render(); if (state.end) status('Tanda recuperada. El temporizador sigue en marcha.'); }
+  else { render(); if (state.end) status('Sesión recuperada. El temporizador sigue en marcha.'); }
   setInterval(tick, 200);
 })();

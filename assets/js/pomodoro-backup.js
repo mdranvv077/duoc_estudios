@@ -85,7 +85,7 @@
       pending = validate(data);
       $('#backup-file-name').textContent = file.name;
       const taskCount = pending.planner.tasks.length, projectCount = pending.planner.projects.length;
-      $('#backup-summary').textContent = `${taskCount} ${taskCount === 1 ? 'tarea' : 'tareas'} · ${projectCount} ${projectCount === 1 ? 'proyecto' : 'proyectos'} · ${pending.session.completed} ${pending.session.completed === 1 ? 'tanda completada' : 'tandas completadas'}`;
+      $('#backup-summary').textContent = `${taskCount} ${taskCount === 1 ? 'tarea' : 'tareas'} · ${projectCount} ${projectCount === 1 ? 'proyecto' : 'proyectos'} · ${pending.session.completed} ${pending.session.completed === 1 ? 'sesión completada' : 'sesiones completadas'}`;
       $('#backup-preview').hidden = false;
       $('#backup-confirm').disabled = false;
       $('#backup-drop-label').textContent = 'Archivo listo para cargar';

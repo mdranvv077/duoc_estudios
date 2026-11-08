@@ -64,7 +64,7 @@
     });
     $('#task-list').replaceChildren(...taskNodes);
     $('#task-empty').hidden = visible.length > 0;
-    $('#task-empty').textContent = view === 'done' ? 'Aquí aparecerán las tareas que completes.' : project ? 'Este proyecto no tiene tareas pendientes.' : 'Anota tu primera tarea para la próxima tanda.';
+    $('#task-empty').textContent = view === 'done' ? 'No hay tareas completadas.' : project ? 'Este proyecto no tiene tareas pendientes.' : 'No hay tareas pendientes. Agrega una para organizar la sesión.';
     $('#project-count').textContent = String(projects.length).padStart(2, '0');
     const projectNodes = projects.map(project => {
       const related = tasks.filter(t => t.project === project.id);
