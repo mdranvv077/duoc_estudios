@@ -39,6 +39,22 @@
   function incoming(id) { return plan.edges.find(e => e.to === id); }
   function children(id) { return plan.edges.filter(e => e.from === id).map(e => e.to); }
   function byId(id) { return plan.nodes.find(n => n.id === id); }
+  function suggestedCableLength(fromType, toType) {
+    const pair = new Set([fromType, toType]);
+    // Patch cords and indoor subscriber leads are deliberately short.
+    if (pair.has("olt") && pair.has("odf")) return 2;
+    if (pair.has("roseta") && pair.has("ont")) return 2;
+
+    // Feeder and distribution plant: a useful starting point for long spans.
+    const outside = new Set(["olt", "odf", "mufa", "node", "nap"]);
+    if (outside.has(fromType) && outside.has(toType)) return 2000;
+
+    // Drop cable from the distribution network towards the subscriber.
+    if ((["mufa", "node", "nap", "splitter"].includes(fromType) && ["roseta", "ont"].includes(toType)) ||
+        (["mufa", "node", "nap", "splitter"].includes(toType) && ["roseta", "ont"].includes(fromType))) return 100;
+
+    return 100;
+  }
   function descendants(id, found = new Set()) {
     for (const child of children(id)) if (!found.has(child)) { found.add(child); descendants(child, found); }
     return found;
@@ -219,7 +235,10 @@
     }
     const item = node(type);
     let link = null;
-    if (context.mode === "child") link = edge(context.id, item.id, 1000);
+    if (context.mode === "child") {
+      const origin = byId(context.id);
+      link = edge(context.id, item.id, suggestedCableLength(origin?.type, item.type));
+    }
     plan.nodes.push(item); if (link) plan.edges.push(link);
     selected = { kind: "node", id: item.id };
     render(); notify(`${item.label} agregado${link ? ` con un cable inicial de ${distance(link.lengthM)}` : " sin conexión"}. Ajusta sus datos en el panel de edición.`);
@@ -279,7 +298,7 @@
     else if (field === "parent") {
       if (raw === item.id || descendants(item.id).has(raw) || (raw && !byId(raw))) throw new Error("Esa conexión formaría un ciclo o no existe.");
       const old = incoming(item.id); if (old) plan.edges = plan.edges.filter(e => e.id !== old.id);
-      if (raw) plan.edges.push(edge(raw, item.id, old?.lengthM || 1000));
+      if (raw) plan.edges.push(edge(raw, item.id, old?.lengthM || suggestedCableLength(byId(raw)?.type, item.type)));
     } else if (field === "ratio") { if (raw !== "none" && !Object.hasOwn(SPLITTER_DB, raw)) throw new Error("División no válida."); item.ratio = raw === "none" ? null : Number(raw); }
     else if (field === "position") {
       const link = incoming(item.id), origin = link ? location(link.from) : null, target = toMeters(Number(raw));
@@ -443,6 +462,7 @@
       $('cables').insertAdjacentHTML('beforeend',`<path class="ob-cable" data-edge-id="${e.id}" d="M${start.x} ${start.y} C${c1.x} ${c1.y},${c2.x} ${c2.y},${end.x} ${end.y}"/>`);
       let label=document.querySelector(`.ob-cable-label[data-edge-id="${e.id}"]`);
       if(!label){extra.push(`<button class="ob-cable-label" style="left:${mx-50}px;top:${my-48}px" data-edge-id="${e.id}">${distance(e.lengthM)}</button>`);}else{label.style.left=(mx-50)+'px';label.style.top=(my-48)+'px';}
+      extra.push(`<button type="button" class="ob-cable-remove" style="left:${mx-61}px;top:${my-58}px" data-remove-edge-id="${e.id}" aria-label="Eliminar cable completo" title="Eliminar cable completo">×</button>`);
       const add=document.querySelector(`[data-add-on-edge="${e.id}"]`);if(add){add.style.left=(mx+44)+'px';add.style.top=(my-38)+'px';}
       [start,end].forEach((p,i)=>extra.push(`<button class="ob-endpoint ${e.ends[i].joint==='splice'?'is-splice':''}" style="left:${p.x-11}px;top:${p.y-9}px" data-end-edge="${e.id}" data-end-index="${i}" title="Arrastrar para desconectar o conectar" aria-label="${e.ends[i].joint==='splice'?'Unión por fusión':'Conector'} ${i+1}">${e.ends[i].joint==='splice'?'●':'▰'}</button>`));
     }
@@ -451,8 +471,18 @@
     if(!plan.nodes.length){$('diagram-items').querySelector('.ob-empty')?.remove();if(!emptyMessage){const message=document.createElement('p');message.className='ob-empty';message.textContent='Lienzo vacío. Pulsa + para agregar un elemento.';canvas.append(message);}}else emptyMessage?.remove();
     $('zoom-readout').textContent=Math.round(zoom*100)+'%';if(selected)anchorEditor();
   };
+  let editorSelectionKey=null,editorManualPosition=null,editorDrag=null;
   function anchorEditor(){
     const panel=$('inspector-panel');if(panel.hidden)return;
+    const key=selected?`${selected.kind}:${selected.id}:${selected.index??''}`:null;
+    if(key!==editorSelectionKey){editorSelectionKey=key;editorManualPosition=null;}
+    if(editorManualPosition){
+      const maxX=Math.max(0,shell.clientWidth-panel.offsetWidth),maxY=Math.max(0,shell.clientHeight-panel.offsetHeight);
+      editorManualPosition.x=Math.max(0,Math.min(maxX,editorManualPosition.x));
+      editorManualPosition.y=Math.max(0,Math.min(maxY,editorManualPosition.y));
+      panel.style.left=editorManualPosition.x+'px';panel.style.top=editorManualPosition.y+'px';
+      panel.style.right='auto';panel.style.bottom='auto';return;
+    }
     const selector=selected?.kind==='node'?`[data-node-id="${selected.id}"]`:selected?.kind==='connector'?`[data-end-edge="${selected.id}"][data-end-index="${selected.index}"]`:`.ob-cable-label[data-edge-id="${selected?.id}"]`;
     const r=document.querySelector(selector)?.getBoundingClientRect();if(!r)return;
     const bounds=shell.getBoundingClientRect(),w=Math.min(340,shell.clientWidth-24);
@@ -465,7 +495,7 @@
   const num=(key,title,value,unit='dB')=>`<label>${title}<span>${unit}</span><input data-opt-field="${key}" type="number" step="any" value="${value}" /></label>`;
   const splitOptions=v=>Object.keys(SPLITTER_DB).map(n=>`<option value="${n}" ${+v===+n?'selected':''}>1:${n} · ${SPLITTER_DB[n]} dB</option>`).join('');
   renderInspector=function(){
-    const panel=$('inspector-panel');panel.hidden=!selected;if(!selected)return;normalize();let html='';
+    const panel=$('inspector-panel');panel.hidden=!selected;if(!selected){editorSelectionKey=null;editorManualPosition=null;return;}normalize();let html='';
     if(selected.kind==='node'){
       const n=byId(selected.id);if(!n){selected=null;panel.hidden=true;return;}
       $('inspector-title').textContent=n.label;
@@ -513,6 +543,28 @@
 const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.to)loose.push(e);raw={...raw,edges:raw.edges.filter(e=>e.from&&e.to)};}const p=baseImport(raw);for(const e of loose){if(!Number.isFinite(e.lengthM)||e.lengthM<=0||!Array.isArray(e.ends)||e.ends.length!==2)throw Error('Cable desconectado inválido');p.edges.push(e);}for(const k of ['lambdaUp','lambdaDown','alphaUp','alphaDown'])if(raw[k]!==undefined){if(!Number.isFinite(raw[k])||raw[k]<0)throw Error('Parámetro óptico inválido');p[k]=raw[k];}p.view=raw.view;if(Number.isFinite(raw.worldWidth))p.worldWidth=raw.worldWidth;if(Number.isFinite(raw.worldHeight))p.worldHeight=raw.worldHeight;return p;};
   function viewport(){if(!plan)return;$('optical-world').style.transform=`translate(${pan.x}px,${pan.y}px) scale(${zoom})`;plan.view={zoom,pan:{...pan},manual:true};$('zoom-readout').textContent=Math.round(zoom*100)+'%';if(selected)anchorEditor();}
   const shell=document.querySelector('.ob-diagram-shell'),canvas=$('canvas');
+  const editorPanel=$('inspector-panel'),editorHead=editorPanel.querySelector('.ob-editor-head');
+  editorHead.addEventListener('pointerdown',event=>{
+    if(event.button!==0||event.target.closest('button')||editorPanel.hidden)return;
+    const bounds=shell.getBoundingClientRect(),rect=editorPanel.getBoundingClientRect();
+    editorDrag={pointerId:event.pointerId,offsetX:event.clientX-rect.left,offsetY:event.clientY-rect.top};
+    editorManualPosition={x:rect.left-bounds.left,y:rect.top-bounds.top};
+    editorHead.setPointerCapture(event.pointerId);
+    editorPanel.classList.add('is-dragging');event.preventDefault();
+  });
+  editorHead.addEventListener('pointermove',event=>{
+    if(!editorDrag||event.pointerId!==editorDrag.pointerId)return;
+    const bounds=shell.getBoundingClientRect();
+    editorManualPosition={
+      x:Math.max(0,Math.min(shell.clientWidth-editorPanel.offsetWidth,event.clientX-bounds.left-editorDrag.offsetX)),
+      y:Math.max(0,Math.min(shell.clientHeight-editorPanel.offsetHeight,event.clientY-bounds.top-editorDrag.offsetY))
+    };
+    anchorEditor();
+  });
+  function stopEditorDrag(event){if(!editorDrag||event.pointerId!==editorDrag.pointerId)return;editorDrag=null;editorPanel.classList.remove('is-dragging');}
+  editorHead.addEventListener('pointerup',stopEditorDrag);
+  editorHead.addEventListener('pointercancel',stopEditorDrag);
+  editorHead.addEventListener('lostpointercapture',()=>{editorDrag=null;editorPanel.classList.remove('is-dragging');});
   const world=document.createElement('div');world.id='optical-world';world.append($('cables'),$('diagram-items'));canvas.prepend(world);
   const toolButton=(action,label,path,iconOnly=false)=>`<button type="button" data-tool="${action}" title="${label}" aria-label="${label}" ${iconOnly?'class="ob-tool-icon"':''}><svg viewBox="0 0 24 24" aria-hidden="true">${path}</svg>${iconOnly?'':label}</button>`;
   const tools=document.createElement('div');tools.className='ob-map-tools';tools.setAttribute('aria-label','Controles del mapa');
@@ -618,6 +670,15 @@ const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.t
   $("import-planner").addEventListener("change", event => importFile(event.target));
   $("diagram-items").addEventListener("click", event => {
     if (suppressNodeClick) return;
+    const removeEdge = event.target.closest("[data-remove-edge-id]");
+    if (removeEdge) {
+      const id = removeEdge.dataset.removeEdgeId;
+      plan.edges = plan.edges.filter(e => e.id !== id);
+      if (selected?.id === id) selected = null;
+      if (picker?.id === id) closePicker();
+      render(); notify("Cable eliminado; los elementos permanecen en el mapa.");
+      return;
+    }
     const remove = event.target.closest("[data-remove-id]"); if (remove) { deleteNode(remove.dataset.removeId); return; }
     const addFrom = event.target.closest("[data-add-from-id]"); if (addFrom) { openPicker("child", addFrom.dataset.addFromId, addFrom.getBoundingClientRect()); return; }
     const addOn = event.target.closest("[data-add-on-edge]"); if (addOn) { openPicker("edge", addOn.dataset.addOnEdge, addOn.getBoundingClientRect()); return; }
