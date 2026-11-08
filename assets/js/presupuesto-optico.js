@@ -368,7 +368,7 @@
     }
     for (const e of plan.edges) {
       e.ends ??= [{type:'SC/APC',loss:0},{type:'SC/APC',loss:0}];
-      e.ends.forEach((c,i)=>{c.joint??='connector';c.side??='auto';if(byId(e[i===0?'from':'to'])?.type==='mufa'){c.joint='splice';c.loss=0;}});
+      e.ends.forEach((c,i)=>{c.joint??='connector';c.side??='auto';if(['mufa','node'].includes(byId(e[i===0?'from':'to'])?.type)){c.joint='splice';c.loss=0;}});
       e.alphaUp ??= plan.alphaUp; e.alphaDown ??= plan.alphaDown; e.dbPerKm=e.alphaDown;
     }
   }
@@ -416,8 +416,8 @@
     const vx=speed(p.clientX,r.left,r.right),vy=speed(p.clientY,r.top,r.bottom);
     if(vx||vy){pan.x-=vx;pan.y-=vy;moveNode(p);}
   }
-  const supportsConnector=n=>n&&['olt','odf','nap','node','splitter','roseta','ont'].includes(n.type);
-  const compatibleEnd=(c,n)=>c.joint==='splice'?n?.type==='mufa':supportsConnector(n);
+  const supportsConnector=n=>n&&['olt','odf','nap','splitter','roseta','ont'].includes(n.type);
+  const compatibleEnd=(c,n)=>c.joint==='splice'?['mufa','node','odf','nap','roseta','splitter'].includes(n?.type):supportsConnector(n);
   function endpointPosition(p,side,index){if(side==='top')return{x:p.x+p.w/2,y:p.y};if(side==='bottom')return{x:p.x+p.w/2,y:p.y+p.h};if(side==='left'||side==='auto'&&index===1)return{x:p.x,y:p.y+p.h/2};return{x:p.x+p.w,y:p.y+p.h/2};}
   const baseDiagram=renderDiagram;
   renderDiagram=function(){
@@ -481,7 +481,7 @@
       const e=plan.edges.find(e=>e.id===selected.id);if(!e)return;
       if(selected.kind==='connector'){
         const i=selected.index,c=e.ends[i];$('inspector-title').textContent=`${c.joint==='splice'?'Unión por fusión':'Conector'} · extremo ${i+1}`;
-        html=`${c.joint==='splice'?'<p>Entrada por fusión. Su pérdida se configura en la mufa.</p>':`<label>Tipo<select data-opt-field="connectorType"><option ${c.type==='SC/APC'?'selected':''}>SC/APC</option><option ${c.type==='SC/UPC'?'selected':''}>SC/UPC</option></select></label>${num('connectorLoss','Pérdida de este conector',c.loss)}`}<label>Conectado a<select data-opt-field="endpoint"><option value="">Desconectado</option>${plan.nodes.filter(n=>compatibleEnd(c,n)).map(n=>`<option value="${n.id}" ${e[i===0?'from':'to']===n.id?'selected':''}>${escape(n.label)}</option>`).join('')}</select></label><label>Cara de conexión<select data-opt-field="endpointSide">${[['auto','Automática'],['left','Izquierda'],['right','Derecha'],['top','Superior'],['bottom','Inferior']].map(([v,t])=>`<option value="${v}" ${c.side===v?'selected':''}>${t}</option>`).join('')}</select></label><p>Arrastra el extremo para dejarlo suelto o soltarlo sobre una cara de un equipo compatible. El cable conserva sus datos.</p>`;
+        html=`<label>Tipo de unión<select data-opt-field="connectorType"><option value="SC/APC" ${c.joint!=='splice'&&c.type==='SC/APC'?'selected':''}>SC/APC</option><option value="SC/UPC" ${c.joint!=='splice'&&c.type==='SC/UPC'?'selected':''}>SC/UPC</option><option value="fusion" ${c.joint==='splice'?'selected':''}>Empalme por fusión</option></select></label>${c.joint==='splice'?'<p>La pérdida de fusión se configura en el elemento al que está unida; no se suma de nuevo en este extremo.</p>':num('connectorLoss','Pérdida de este conector',c.loss)}<label>Conectado a<select data-opt-field="endpoint"><option value="">Desconectado</option>${plan.nodes.filter(n=>compatibleEnd(c,n)).map(n=>`<option value="${n.id}" ${e[i===0?'from':'to']===n.id?'selected':''}>${escape(n.label)}</option>`).join('')}</select></label><label>Cara de conexión<select data-opt-field="endpointSide">${[['auto','Automática'],['left','Izquierda'],['right','Derecha'],['top','Superior'],['bottom','Inferior']].map(([v,t])=>`<option value="${v}" ${c.side===v?'selected':''}>${t}</option>`).join('')}</select></label><p>Arrastra el extremo para dejarlo suelto o soltarlo sobre una cara de un equipo compatible. El cable conserva sus datos.</p>`;
       }else{
         $('inspector-title').textContent='Tramo de fibra';html=num('lengthM','Longitud',fromMeters(e.lengthM),plan.unit)+num('alphaUp','Atenuación upstream',e.alphaUp,'dB/km')+num('alphaDown','Atenuación downstream',e.alphaDown,'dB/km');
         const odf=byId(e.from);if(odf?.type==='odf')html+=`<label>Splitter de salida del ODF<select data-opt-field="splitterId"><option value="">Sin splitter</option>${odf.splitters.map(s=>`<option value="${s.id}" ${e.splitterId===s.id?'selected':''}>1:${s.ratio} · ${s.id.slice(-4)}</option>`).join('')}</select></label>`;
@@ -580,7 +580,16 @@ const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.t
       const n=selected.kind==='node'?byId(selected.id):null,link=plan.edges.find(x=>x.id===selected.id),v=e.target.value;
       if(sid){n.splitters.find(s=>s.id===sid).ratio=+v;}
       else if(f==='label')n.label=v.slice(0,48);
-      else if(f==='connectorType')link.ends[selected.index].type=v;
+      else if(f==='connectorType'){
+        if(!['SC/APC','SC/UPC','fusion'].includes(v))throw Error('Tipo de union no valido');
+        const c=link.ends[selected.index],key=selected.index===0?'from':'to',attached=byId(link[key]);
+        if(v==='fusion'){if(c.joint!=='splice')c.savedConnectorLoss=c.loss;c.joint='splice';c.loss=0;}
+        else{if(c.joint==='splice')c.loss=c.savedConnectorLoss??plan.connectorLoss;c.joint='connector';c.type=v;}
+        if(attached&&!compatibleEnd(c,attached)){
+          const p=layoutCache.placed.get(attached.id);if(p)link[selected.index===0?'looseFrom':'looseTo']=endpointPosition(p,c.side,selected.index);
+          link[key]=null;notify('El extremo queda suelto porque el nuevo tipo de unión no es compatible con ese equipo.');
+        }
+      }
       else if(f==='endpointSide')link.ends[selected.index].side=v;
       else if(f==='endpoint'){
         if(v&&!compatibleEnd(link.ends[selected.index],byId(v)))throw Error('Elemento incompatible con este extremo');
