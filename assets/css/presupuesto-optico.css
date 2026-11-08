@@ -39,3 +39,22 @@ html[data-theme=light] .ob-add-popover{background:#f0f5eb;box-shadow:0 18px 38px
 .ob-cable-remove{position:absolute;z-index:5;display:grid;place-items:center;width:23px;height:23px;padding:0;border:1px solid #627c89;border-radius:50%;background:#142631;color:#d7e4eb;font:600 1rem/1 Manrope,sans-serif;cursor:pointer;pointer-events:auto;box-shadow:0 2px 8px #0007;transition:transform .2s,background .2s,color .2s}.ob-cable-remove:hover{transform:scale(1.12);background:var(--ob-bad);border-color:var(--ob-bad);color:#081218}html[data-theme=light] .ob-cable-remove{background:#f6fbf4;color:#23484c}html[data-theme=light] .ob-cable-remove:hover{background:var(--ob-bad);color:#fff}
 
 .ob-canvas.is-empty .ob-canvas-add{transition:background .2s,color .2s}
+
+/* Shared project import dialog for the setup and the topology editor. */
+.ob-import-dialog{position:fixed;inset:0;box-sizing:border-box;width:min(500px,calc(100vw - 28px));max-height:calc(100dvh - 28px);margin:auto;padding:25px;border:1px solid var(--ob-line);border-radius:8px;background:var(--ob-panel);color:var(--ob-ink);box-shadow:0 28px 80px #0009;font-family:Manrope,sans-serif;overflow-y:auto;animation:ob-import-in .24s ease both}
+.ob-import-dialog::backdrop{background:#020a10a8;backdrop-filter:blur(5px)}
+.ob-import-head{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.ob-import-head button{width:32px;height:32px;padding:0;border:1px solid var(--ob-line);border-radius:4px;background:transparent;color:var(--ob-ink);font:600 1.25rem Manrope,sans-serif;cursor:pointer}
+.ob-import-dialog h2{margin:12px 0 8px;font-size:1.55rem;line-height:1.2}
+.ob-import-dialog>p{margin:0 0 19px;color:var(--ob-muted);font-size:.82rem;line-height:1.6}
+.ob-import-dropzone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;width:100%;min-height:188px;padding:18px;border:1px dashed var(--ob-line);border-radius:6px;background:var(--ob-panel-soft);color:var(--ob-ink);font-family:Manrope,sans-serif;text-align:center;cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s}
+.ob-import-dropzone:hover,.ob-import-dropzone.is-dragging{border-color:var(--ob-accent);background:color-mix(in srgb,var(--ob-panel-soft) 84%,var(--ob-accent));box-shadow:0 0 0 3px color-mix(in srgb,var(--ob-accent) 16%,transparent)}
+.ob-import-dropzone svg{width:42px;height:42px;margin-bottom:3px;color:var(--ob-accent)}
+.ob-import-dropzone strong{font-size:.89rem}.ob-import-dropzone span{color:var(--ob-muted);font-size:.78rem}.ob-import-dropzone small{margin-top:3px;color:var(--ob-muted);font:500 .66rem "DM Mono",monospace}
+.ob-import-dialog .ob-import-error{margin:12px 0 0;color:var(--ob-bad);font-size:.77rem}
+.ob-import-preview{display:grid;gap:5px;margin-top:14px;padding:12px 14px;border:1px solid var(--ob-line);border-radius:5px;background:var(--ob-panel-soft);font-size:.76rem}
+.ob-import-preview strong{overflow-wrap:anywhere}.ob-import-preview span,.ob-import-preview p{color:var(--ob-muted)}.ob-import-preview p{margin:5px 0 0;line-height:1.5}
+.ob-import-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:22px}.ob-import-actions button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+@keyframes ob-import-in{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:520px){.ob-import-dialog{padding:20px}.ob-import-actions{flex-wrap:wrap}.ob-import-actions button{flex:1}}
+@media(prefers-reduced-motion:reduce){.ob-import-dialog{animation:none}.ob-import-dropzone{transition:none}}

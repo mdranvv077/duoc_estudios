@@ -353,14 +353,33 @@
     for (const n of raw.nodes) { const seen = new Set(); let current = n.id; while (incomingMap.has(current)) { if (seen.has(current)) throw new Error("El diseño contiene un ciclo."); seen.add(current); current = incomingMap.get(current); } }
     return { format: raw.format, version: 2, opticalClass: raw.opticalClass, unit: raw.unit, fiberLoss: raw.fiberLoss, connectorLoss: raw.connectorLoss, spliceLoss: raw.spliceLoss, reserve: raw.reserve, nodes: raw.nodes.map(n => ({ ...n, layout: { ...(n.layout?.desktop ? { desktop: { ...n.layout.desktop } } : {}), ...(n.layout?.mobile ? { mobile: { ...n.layout.mobile } } : {}) } })), edges: raw.edges.map(e => ({ ...e })) };
   }
-  async function importFile(input) {
-    const file = input.files?.[0]; input.value = ""; if (!file) return;
+  let pendingImport = null;
+  const importDialog = $("import-dialog"), importFileInput = $("import-file"), importDropzone = $("import-dropzone");
+  function resetImport() {
+    pendingImport = null;
+    importFileInput.value = "";
+    $("import-error").hidden = true;
+    $("import-error").textContent = "";
+    $("import-preview").hidden = true;
+    $("import-confirm").disabled = true;
+    importDropzone.classList.remove("is-dragging");
+  }
+  function openImport() { resetImport(); importDialog.showModal(); }
+  async function inspectImport(file) {
+    resetImport();
+    if (!file) return;
     try {
+      if (!file.name.toLowerCase().endsWith(".json")) throw new Error("Selecciona un archivo JSON.");
       if (file.size > 1024 * 1024) throw new Error("El archivo supera 1 MB.");
-      plan = validateImport(JSON.parse(await file.text())); selected = null; closePicker(); $("return-design").hidden = true; showPlanner(); notify("Diseño cargado con sus posiciones, conexiones y valores de cálculo.");
+      pendingImport = validateImport(JSON.parse(await file.text()));
+      $("import-name").textContent = file.name;
+      $("import-summary").textContent = `${pendingImport.nodes.length} elementos · ${pendingImport.edges.length} cables · clase ${pendingImport.opticalClass}`;
+      $("import-replace").hidden = !plan;
+      $("import-preview").hidden = false;
+      $("import-confirm").disabled = false;
     } catch (error) {
-      const box = $("planner").hidden ? $("setup-message") : $("planner-message");
-      box.hidden = false; box.textContent = error instanceof SyntaxError ? "No se pudo leer el archivo JSON." : error.message; box.dataset.kind = "error";
+      $("import-error").textContent = error instanceof SyntaxError ? "No se pudo leer el archivo JSON." : error.message;
+      $("import-error").hidden = false;
     }
   }
   function exportFile() {
@@ -666,8 +685,28 @@ const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.t
   $("new-design").addEventListener("click", () => { $("planner").hidden = true; $("setup").hidden = false; $("return-design").hidden = false; $("setup").scrollIntoView({ behavior: "smooth" }); });
   $("return-design").addEventListener("click", showPlanner);
   $("export-design").addEventListener("click", exportFile);
-  $("import-setup").addEventListener("change", event => importFile(event.target));
-  $("import-planner").addEventListener("change", event => importFile(event.target));
+  $("import-setup").addEventListener("click", openImport);
+  $("import-planner").addEventListener("click", openImport);
+  $("import-close").addEventListener("click", () => importDialog.close());
+  $("import-cancel").addEventListener("click", () => importDialog.close());
+  importDialog.addEventListener("close", resetImport);
+  importDropzone.addEventListener("click", () => importFileInput.click());
+  importFileInput.addEventListener("change", () => inspectImport(importFileInput.files?.[0]));
+  importDropzone.addEventListener("dragenter", event => { event.preventDefault(); importDropzone.classList.add("is-dragging"); });
+  importDropzone.addEventListener("dragover", event => { event.preventDefault(); event.dataTransfer.dropEffect = "copy"; importDropzone.classList.add("is-dragging"); });
+  importDropzone.addEventListener("dragleave", event => { if (!importDropzone.contains(event.relatedTarget)) importDropzone.classList.remove("is-dragging"); });
+  importDropzone.addEventListener("drop", event => { event.preventDefault(); importDropzone.classList.remove("is-dragging"); inspectImport(event.dataTransfer.files?.[0]); });
+  document.addEventListener("dragover", event => { if (importDialog.open) event.preventDefault(); });
+  document.addEventListener("drop", event => { if (importDialog.open) event.preventDefault(); });
+  $("import-confirm").addEventListener("click", () => {
+    if (!pendingImport) return;
+    const imported = pendingImport;
+    importDialog.close();
+    plan = imported; selected = null; closePicker();
+    snapshots = []; historyIndex = -1;
+    $("return-design").hidden = true;
+    showPlanner(); notify("Diseño cargado con sus posiciones, conexiones y valores de cálculo.");
+  });
   $("diagram-items").addEventListener("click", event => {
     if (suppressNodeClick) return;
     const removeEdge = event.target.closest("[data-remove-edge-id]");
