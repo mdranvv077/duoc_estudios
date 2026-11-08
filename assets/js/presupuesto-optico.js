@@ -361,6 +361,7 @@
     }
     for (const e of plan.edges) {
       e.ends ??= [{type:'SC/APC',loss:0},{type:'SC/APC',loss:0}];
+      e.ends.forEach((c,i)=>{c.joint??='connector';c.side??='auto';if(byId(e[i===0?'from':'to'])?.type==='mufa'){c.joint='splice';c.loss=0;}});
       e.alphaUp ??= plan.alphaUp; e.alphaDown ??= plan.alphaDown; e.dbPerKm=e.alphaDown;
     }
   }
@@ -382,10 +383,13 @@
     const placed=new Map(), roots=plan.nodes.filter(n=>!incoming(n.id)); let row=0,maxDepth=0;
     function walk(id,d){const kids=children(id);maxDepth=Math.max(maxDepth,d);const ys=kids.map(k=>walk(k,d+1));const y=ys.length?ys.reduce((a,b)=>a+b,0)/ys.length:90+row++*190;placed.set(id,{x:65+d*310,y,w:150,h:112});return y;}
     roots.forEach(n=>walk(n.id,0));
-    const worldWidth=Math.max(1100,130+(maxDepth+1)*310),height=Math.max(430,row*190+150);
+    const worldWidth=Math.max(plan.worldWidth??0,1100,130+(maxDepth+1)*310),height=Math.max(plan.worldHeight??0,430,row*190+150);plan.worldWidth=worldWidth;plan.worldHeight=height;
     for(const n of plan.nodes){const p=placed.get(n.id),m=n.layout?.desktop;if(p&&m){p.x=m.x*(worldWidth-p.w);p.y=m.y*(height-p.h);}}
     return {placed,vertical:false,height,width:worldWidth,mode:'desktop'};
   };
+  const supportsConnector=n=>n&&['olt','odf','nap','node','splitter','roseta','ont'].includes(n.type);
+  const compatibleEnd=(c,n)=>c.joint==='splice'?n?.type==='mufa':supportsConnector(n);
+  function endpointPosition(p,side,index){if(side==='top')return{x:p.x+p.w/2,y:p.y};if(side==='bottom')return{x:p.x+p.w/2,y:p.y+p.h};if(side==='left'||side==='auto'&&index===1)return{x:p.x,y:p.y+p.h/2};return{x:p.x+p.w,y:p.y+p.h/2};}
   const baseDiagram=renderDiagram;
   renderDiagram=function(){
     if(!plan)return; normalize();
@@ -398,23 +402,36 @@
     canvas.style.height=(document.fullscreenElement?Math.max(450,innerHeight-155):560)+'px';
     if(!plan.view || !plan.view.manual){zoom=Math.min(1,canvas.clientWidth/g.width);pan={x:0,y:0};plan.view={zoom,pan};}
     world.style.transform=`translate(${pan.x}px,${pan.y}px) scale(${zoom})`;
-    const extra=[];
+    const extra=[]; $('cables').innerHTML='';
     for(const e of plan.edges){
       const a=g.placed.get(e.from),b=g.placed.get(e.to);
-      const start=a?{x:a.x+a.w,y:a.y+a.h/2}:e.looseFrom??{x:(b?.x??200)-150,y:(b?.y??100)+56};
-      const end=b?{x:b.x,y:b.y+b.h/2}:e.looseTo??{x:start.x+170,y:start.y};
-      if(!a||!b){$('cables').insertAdjacentHTML('beforeend',`<path class="ob-cable" d="M${start.x} ${start.y} L${end.x} ${end.y}"/>`);extra.push(`<button class="ob-cable-label" style="left:${(start.x+end.x)/2-50}px;top:${(start.y+end.y)/2-48}px" data-edge-id="${e.id}">${distance(e.lengthM)}</button>`);}
-      [start,end].forEach((p,i)=>extra.push(`<button class="ob-endpoint" style="left:${p.x-11}px;top:${p.y-9}px" data-end-edge="${e.id}" data-end-index="${i}" title="Editar o reconectar conector" aria-label="Editar conector ${i+1}">▰</button>`));
+      const start=a?endpointPosition(a,e.ends[0].side,0):e.looseFrom??{x:(b?.x??200)-150,y:(b?.y??100)+56};
+      const end=b?endpointPosition(b,e.ends[1].side,1):e.looseTo??{x:start.x+170,y:start.y};
+      const vectors={left:{x:-1,y:0},right:{x:1,y:0},top:{x:0,y:-1},bottom:{x:0,y:1}};
+      const v1=vectors[e.ends[0].side]??vectors.right,v2=vectors[e.ends[1].side]??vectors.left;
+      const c1={x:start.x+v1.x*80,y:start.y+v1.y*80},c2={x:end.x+v2.x*80,y:end.y+v2.y*80};
+      const mx=(start.x+3*c1.x+3*c2.x+end.x)/8,my=(start.y+3*c1.y+3*c2.y+end.y)/8;
+      $('cables').insertAdjacentHTML('beforeend',`<path class="ob-cable" data-edge-id="${e.id}" d="M${start.x} ${start.y} C${c1.x} ${c1.y},${c2.x} ${c2.y},${end.x} ${end.y}"/>`);
+      let label=document.querySelector(`.ob-cable-label[data-edge-id="${e.id}"]`);
+      if(!label){extra.push(`<button class="ob-cable-label" style="left:${mx-50}px;top:${my-48}px" data-edge-id="${e.id}">${distance(e.lengthM)}</button>`);}else{label.style.left=(mx-50)+'px';label.style.top=(my-48)+'px';}
+      const add=document.querySelector(`[data-add-on-edge="${e.id}"]`);if(add){add.style.left=(mx+44)+'px';add.style.top=(my-38)+'px';}
+      [start,end].forEach((p,i)=>extra.push(`<button class="ob-endpoint ${e.ends[i].joint==='splice'?'is-splice':''}" style="left:${p.x-11}px;top:${p.y-9}px" data-end-edge="${e.id}" data-end-index="${i}" title="Arrastrar para desconectar o conectar" aria-label="${e.ends[i].joint==='splice'?'Unión por fusión':'Conector'} ${i+1}">${e.ends[i].joint==='splice'?'●':'▰'}</button>`));
     }
     $('diagram-items').insertAdjacentHTML('beforeend',extra.join(''));
+    const emptyMessage=canvas.querySelector(':scope > .ob-empty');
+    if(!plan.nodes.length){$('diagram-items').querySelector('.ob-empty')?.remove();if(!emptyMessage){const message=document.createElement('p');message.className='ob-empty';message.textContent='Lienzo vacío. Pulsa + para agregar un elemento.';canvas.append(message);}}else emptyMessage?.remove();
     $('zoom-readout').textContent=Math.round(zoom*100)+'%';if(selected)anchorEditor();
   };
   function anchorEditor(){
     const panel=$('inspector-panel');if(panel.hidden)return;
     const selector=selected?.kind==='node'?`[data-node-id="${selected.id}"]`:selected?.kind==='connector'?`[data-end-edge="${selected.id}"][data-end-index="${selected.index}"]`:`.ob-cable-label[data-edge-id="${selected?.id}"]`;
     const r=document.querySelector(selector)?.getBoundingClientRect();if(!r)return;
-    const w=Math.min(370,innerWidth-24),h=Math.min(panel.scrollHeight,innerHeight-32);
-    panel.style.width=w+'px';panel.style.left=Math.max(12,Math.min(innerWidth-w-12,r.right+14))+'px';panel.style.top=Math.max(12,Math.min(innerHeight-h-12,r.top))+'px';panel.style.right='auto';panel.style.bottom='auto';
+    const bounds=shell.getBoundingClientRect(),w=Math.min(340,shell.clientWidth-24);
+    panel.style.width=w+'px';panel.style.maxHeight=Math.min(640,Math.max(260,$('canvas').clientHeight-24))+'px';
+    const h=panel.offsetHeight,right=r.right-bounds.left+14,left=r.left-bounds.left-w-14;
+    panel.style.left=Math.max(12,Math.min(shell.clientWidth-w-12,right+w<=shell.clientWidth-12?right:left))+'px';
+    panel.style.top=Math.max(12,Math.min(shell.clientHeight-h-12,r.top-bounds.top))+'px';
+    panel.style.right='auto';panel.style.bottom='auto';
   }
   const num=(key,title,value,unit='dB')=>`<label>${title}<span>${unit}</span><input data-opt-field="${key}" type="number" step="any" value="${value}" /></label>`;
   const splitOptions=v=>Object.keys(SPLITTER_DB).map(n=>`<option value="${n}" ${+v===+n?'selected':''}>1:${n} · ${SPLITTER_DB[n]} dB</option>`).join('');
@@ -423,7 +440,7 @@
     if(selected.kind==='node'){
       const n=byId(selected.id);if(!n){selected=null;panel.hidden=true;return;}
       $('inspector-title').textContent=n.label;
-      html=`<label>Nombre<input data-opt-field="label" value="${escape(n.label)}" maxlength="48" /></label>`;
+      html=`<label>Nombre<input type="text" data-opt-field="label" value="${escape(n.label)}" maxlength="48" /></label>`;
       if(['mufa','roseta','odf','nap','node'].includes(n.type))html+=num('spliceLoss','Pérdida de empalmes de este elemento',n.spliceLoss);
       html+=num('connectionLoss','Otras conexiones internas',n.connectionLoss)+num('extraLoss','Pérdida adicional',n.extraLoss);
       if(n.type==='olt')html+=num('txDbm','Potencia TX downstream',n.txDbm,'dBm');
@@ -434,8 +451,8 @@
     }else{
       const e=plan.edges.find(e=>e.id===selected.id);if(!e)return;
       if(selected.kind==='connector'){
-        const i=selected.index,c=e.ends[i];$('inspector-title').textContent=`Conector · extremo ${i+1}`;
-        html=`<label>Tipo<select data-opt-field="connectorType"><option ${c.type==='SC/APC'?'selected':''}>SC/APC</option><option ${c.type==='SC/UPC'?'selected':''}>SC/UPC</option></select></label>${num('connectorLoss','Pérdida de este conector',c.loss)}<label>Conectado a<select data-opt-field="endpoint"><option value="">Desconectado</option>${plan.nodes.map(n=>`<option value="${n.id}" ${e[i===0?'from':'to']===n.id?'selected':''}>${escape(n.label)}</option>`).join('')}</select></label><p>Desconectar conserva el cable, sus conectores y sus pérdidas. Puedes unirlo a otro equipo desde esta lista.</p>`;
+        const i=selected.index,c=e.ends[i];$('inspector-title').textContent=`${c.joint==='splice'?'Unión por fusión':'Conector'} · extremo ${i+1}`;
+        html=`${c.joint==='splice'?'<p>Entrada por fusión. Su pérdida se configura en la mufa.</p>':`<label>Tipo<select data-opt-field="connectorType"><option ${c.type==='SC/APC'?'selected':''}>SC/APC</option><option ${c.type==='SC/UPC'?'selected':''}>SC/UPC</option></select></label>${num('connectorLoss','Pérdida de este conector',c.loss)}`}<label>Conectado a<select data-opt-field="endpoint"><option value="">Desconectado</option>${plan.nodes.filter(n=>compatibleEnd(c,n)).map(n=>`<option value="${n.id}" ${e[i===0?'from':'to']===n.id?'selected':''}>${escape(n.label)}</option>`).join('')}</select></label><label>Cara de conexión<select data-opt-field="endpointSide">${[['auto','Automática'],['left','Izquierda'],['right','Derecha'],['top','Superior'],['bottom','Inferior']].map(([v,t])=>`<option value="${v}" ${c.side===v?'selected':''}>${t}</option>`).join('')}</select></label><p>Arrastra el extremo para dejarlo suelto o soltarlo sobre una cara de un equipo compatible. El cable conserva sus datos.</p>`;
       }else{
         $('inspector-title').textContent='Tramo de fibra';html=num('lengthM','Longitud',fromMeters(e.lengthM),plan.unit)+num('alphaUp','Atenuación upstream',e.alphaUp,'dB/km')+num('alphaDown','Atenuación downstream',e.alphaDown,'dB/km');
         const odf=byId(e.from);if(odf?.type==='odf')html+=`<label>Splitter de salida del ODF<select data-opt-field="splitterId"><option value="">Sin splitter</option>${odf.splitters.map(s=>`<option value="${s.id}" ${e.splitterId===s.id?'selected':''}>1:${s.ratio} · ${s.id.slice(-4)}</option>`).join('')}</select></label>`;
@@ -454,15 +471,18 @@
   const baseImport=validateImport;
   validateImport=function(raw){
     for(const n of raw.nodes??[]){for(const k of ['spliceLoss','connectionLoss','txDbm'])if(n[k]!==undefined&&(!Number.isFinite(n[k])||n[k]<(k==='txDbm'?-30:0)||n[k]>100))throw Error('Perdida o potencia individual invalida');if(n.splitters!==undefined&&(!Array.isArray(n.splitters)||n.splitters.length>128||n.splitters.some(x=>typeof x.id!=='string'||!/^[a-zA-Z0-9_-]{1,32}$/.test(x.id)||!Object.hasOwn(SPLITTER_DB,x.ratio))))throw Error('Lista de splitters invalida');}
-    for(const e of raw.edges??[]){if(e.ends!==undefined&&(!Array.isArray(e.ends)||e.ends.length!==2||e.ends.some(c=>!['SC/APC','SC/UPC'].includes(c.type)||!Number.isFinite(c.loss)||c.loss<0||c.loss>100)))throw Error('Conector invalido');for(const k of ['alphaUp','alphaDown'])if(e[k]!==undefined&&(!Number.isFinite(e[k])||e[k]<0||e[k]>10))throw Error('Atenuacion invalida');}
+    for(const e of raw.edges??[]){for(const k of ['looseFrom','looseTo'])if(e[k]&&(!Number.isFinite(e[k].x)||!Number.isFinite(e[k].y)))throw Error('Posicion de extremo invalida');if(e.ends!==undefined&&(!Array.isArray(e.ends)||e.ends.length!==2||e.ends.some(c=>(c.side!==undefined&&!['auto','left','right','top','bottom'].includes(c.side))||(c.joint!==undefined&&!['connector','splice'].includes(c.joint))||!['SC/APC','SC/UPC'].includes(c.type)||!Number.isFinite(c.loss)||c.loss<0||c.loss>100)))throw Error('Conector invalido');for(const k of ['alphaUp','alphaDown'])if(e[k]!==undefined&&(!Number.isFinite(e[k])||e[k]<0||e[k]>10))throw Error('Atenuacion invalida');}
     if(raw.view&&(!Number.isFinite(raw.view.zoom)||raw.view.zoom<.001||raw.view.zoom>3||!Number.isFinite(raw.view.pan?.x)||!Number.isFinite(raw.view.pan?.y)))throw Error('Vista invalida');
-const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.to)loose.push(e);raw={...raw,edges:raw.edges.filter(e=>e.from&&e.to)};}const p=baseImport(raw);for(const e of loose){if(!Number.isFinite(e.lengthM)||e.lengthM<=0||!Array.isArray(e.ends)||e.ends.length!==2)throw Error('Cable desconectado inválido');p.edges.push(e);}for(const k of ['lambdaUp','lambdaDown','alphaUp','alphaDown'])if(raw[k]!==undefined){if(!Number.isFinite(raw[k])||raw[k]<0)throw Error('Parámetro óptico inválido');p[k]=raw[k];}p.view=raw.view;return p;};
+const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.to)loose.push(e);raw={...raw,edges:raw.edges.filter(e=>e.from&&e.to)};}const p=baseImport(raw);for(const e of loose){if(!Number.isFinite(e.lengthM)||e.lengthM<=0||!Array.isArray(e.ends)||e.ends.length!==2)throw Error('Cable desconectado inválido');p.edges.push(e);}for(const k of ['lambdaUp','lambdaDown','alphaUp','alphaDown'])if(raw[k]!==undefined){if(!Number.isFinite(raw[k])||raw[k]<0)throw Error('Parámetro óptico inválido');p[k]=raw[k];}p.view=raw.view;if(Number.isFinite(raw.worldWidth))p.worldWidth=raw.worldWidth;if(Number.isFinite(raw.worldHeight))p.worldHeight=raw.worldHeight;return p;};
   function viewport(){if(!plan)return;$('optical-world').style.transform=`translate(${pan.x}px,${pan.y}px) scale(${zoom})`;plan.view={zoom,pan:{...pan},manual:true};$('zoom-readout').textContent=Math.round(zoom*100)+'%';if(selected)anchorEditor();}
   const shell=document.querySelector('.ob-diagram-shell'),canvas=$('canvas');
   const world=document.createElement('div');world.id='optical-world';world.append($('cables'),$('diagram-items'));canvas.prepend(world);
-  const tools=document.createElement('div');tools.className='ob-map-tools';tools.innerHTML='<button data-tool="undo">↶ Deshacer</button><button data-tool="redo">↷ Rehacer</button><button data-tool="out">−</button><span id="zoom-readout">100%</span><button data-tool="in">+</button><button data-tool="fit">Ajustar</button><button data-tool="copy">Copiar</button><button data-tool="paste">Pegar</button><button data-tool="full">Pantalla completa</button>';shell.prepend(tools);
+  const toolButton=(action,label,path,iconOnly=false)=>`<button type="button" data-tool="${action}" title="${label}" aria-label="${label}" ${iconOnly?'class="ob-tool-icon"':''}><svg viewBox="0 0 24 24" aria-hidden="true">${path}</svg>${iconOnly?'':label}</button>`;
+  const tools=document.createElement('div');tools.className='ob-map-tools';tools.setAttribute('aria-label','Controles del mapa');
+  tools.innerHTML=`<div class="ob-tool-group" role="group" aria-label="Historial">${toolButton('undo','Deshacer','<path d="M9 5 4 10l5 5M4 10h10a6 6 0 0 1 0 12"/>')}${toolButton('redo','Rehacer','<path d="m15 5 5 5-5 5m5-5H10a6 6 0 0 0 0 12"/>')}</div><div class="ob-tool-group ob-tool-zoom" role="group" aria-label="Escala del mapa">${toolButton('out','Alejar','<path d="M5 12h14"/>',true)}<output id="zoom-readout" aria-label="Zoom actual">100%</output>${toolButton('in','Acercar','<path d="M5 12h14M12 5v14"/>',true)}${toolButton('fit','Ajustar','<path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/>')}</div><div class="ob-tool-group" role="group" aria-label="Portapapeles">${toolButton('copy','Copiar','<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/>')}${toolButton('paste','Pegar','<path d="M9 5H5v16h14V5h-4"/><rect x="9" y="3" width="6" height="5" rx="1"/>')}</div><div class="ob-tool-group ob-tool-screen">${toolButton('full','Pantalla completa','<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>')}</div>`;
+  shell.prepend(tools);
   shell.append($('inspector-panel'));
-  tools.addEventListener('click',async e=>{const t=e.target.dataset.tool;if(!t||!plan)return;
+  tools.addEventListener('click',async e=>{const t=e.target.closest('button[data-tool]')?.dataset.tool;if(!t||!plan)return;
     if(t==='undo'||t==='redo'){const next=historyIndex+(t==='undo'?-1:1);if(next<0||next>=snapshots.length)return;historyIndex=next;restoring=true;plan=JSON.parse(snapshots[next]);selected=null;render();restoring=false;}
     if(t==='in'||t==='out'){zoom=Math.max(.15,Math.min(3,zoom*(t==='in'?1.15:1/1.15)));viewport();}
     if(t==='fit'){zoom=Math.min(1,canvas.clientWidth/layoutCache.width);pan={x:0,y:0};viewport();}
@@ -470,21 +490,63 @@ const loose=[];if(raw.version===2){for(const e of raw.edges??[])if(!e.from||!e.t
     if(t==='paste'&&clipboard){const n=JSON.parse(JSON.stringify(clipboard.data));if(clipboard.kind==='node'){n.id=uid();n.label+=' copia';n.layout={};plan.nodes.push(n);selected={kind:'node',id:n.id};}else if(clipboard.kind==='edge'){n.id=uid();n.from=null;n.to=null;n.splitterId='';n.looseFrom={x:150,y:300};n.looseTo={x:400,y:300};plan.edges.push(n);selected={kind:'edge',id:n.id};}else if(selected?.kind==='connector'){plan.edges.find(e=>e.id===selected.id).ends[selected.index]=n;}render();}
     if(t==='full'){if(document.fullscreenElement)await document.exitFullscreen();else await shell.requestFullscreen();}
   });
-  canvas.addEventListener('wheel',e=>{if(!plan)return;e.preventDefault();const r=canvas.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,z=Math.max(.15,Math.min(3,zoom*Math.exp(-e.deltaY*.0015)));pan={x:x-(x-pan.x)*z/zoom,y:y-(y-pan.y)*z/zoom};zoom=z;viewport();},{passive:false});
+  canvas.addEventListener('wheel',e=>{
+    if(!plan||$('planner').hidden||!e.ctrlKey||e.altKey||e.metaKey||e.target.closest('#inspector-panel,#add-popover'))return;
+    e.preventDefault();
+    const bounds=canvas.getBoundingClientRect(),x=e.clientX-bounds.left,y=e.clientY-bounds.top;
+    const z=Math.max(.15,Math.min(3,zoom*Math.exp(-e.deltaY*.0015)));
+    pan={x:x-(x-pan.x)*z/zoom,y:y-(y-pan.y)*z/zoom};zoom=z;viewport();
+  },{passive:false});
   let panning=null;
-  canvas.addEventListener('pointerdown',e=>{if(e.target===canvas||e.target===$('optical-world')||e.target===$('cables'))panning={x:e.clientX,y:e.clientY,px:pan.x,py:pan.y};});
-  window.addEventListener('pointermove',e=>{if(panning){pan={x:panning.px+e.clientX-panning.x,y:panning.py+e.clientY-panning.y};viewport();}});
-  window.addEventListener('pointerup',()=>{panning=null;remember();});
+  canvas.addEventListener('pointerdown',e=>{if(e.button!==1||!plan)return;e.preventDefault();canvas.setPointerCapture(e.pointerId);canvas.style.cursor='grabbing';panning={x:e.clientX,y:e.clientY,px:pan.x,py:pan.y};});
+  canvas.addEventListener('auxclick',e=>{if(e.button===1)e.preventDefault();});
+  function stopPanning(){if(!panning)return;panning=null;canvas.style.cursor='';remember();}
+  window.addEventListener('pointermove',e=>{if(panning){if(!(e.buttons&4)){stopPanning();return;}pan={x:panning.px+e.clientX-panning.x,y:panning.py+e.clientY-panning.y};viewport();}});
+  window.addEventListener('pointerup',stopPanning);
+  window.addEventListener('pointercancel',stopPanning);
+  window.addEventListener('blur',stopPanning);
+  let endpointDrag=null;
+  $('diagram-items').addEventListener('pointerdown',e=>{
+    const b=e.target.closest('[data-end-edge]');if(!b||e.button!==0)return;
+    endpointDrag={id:b.dataset.endEdge,index:+b.dataset.endIndex,pointerId:e.pointerId,x:e.clientX,y:e.clientY,moved:false};
+  });
+  function worldPoint(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left-pan.x)/zoom,y:(e.clientY-r.top-pan.y)/zoom};}
+  window.addEventListener('pointermove',e=>{
+    const d=endpointDrag;if(!d||e.pointerId!==d.pointerId)return;
+    if(!d.moved&&Math.hypot(e.clientX-d.x,e.clientY-d.y)<5)return;
+    e.preventDefault();const link=plan.edges.find(l=>l.id===d.id);if(!link)return;
+    if(!d.moved){for(const n of plan.nodes){const p=layoutCache.placed.get(n.id);if(p){n.layout||={};n.layout.desktop={x:p.x/Math.max(1,layoutCache.width-p.w),y:p.y/Math.max(1,layoutCache.height-p.h)};}}}
+    d.moved=true;link[d.index===0?'from':'to']=null;
+    link[d.index===0?'looseFrom':'looseTo']=worldPoint(e);selected=null;renderInspector();renderDiagram();
+    document.querySelectorAll('.ob-node').forEach(b=>b.classList.toggle('is-compatible',compatibleEnd(link.ends[d.index],byId(b.dataset.nodeId))));
+  },{passive:false});
+  window.addEventListener('pointerup',e=>{
+    const d=endpointDrag;if(!d||e.pointerId!==d.pointerId)return;endpointDrag=null;if(!d.moved)return;
+    suppressNodeClick=true;setTimeout(()=>{suppressNodeClick=false;},0);
+    const link=plan.edges.find(l=>l.id===d.id);if(!link)return;
+    const p=worldPoint(e),target=[...layoutCache.placed].find(([,r])=>p.x>=r.x-15&&p.x<=r.x+r.w+15&&p.y>=r.y-15&&p.y<=r.y+r.h+15);
+    let message='Extremo suelto. Puedes volver a arrastrarlo a un equipo compatible.';
+    if(target){const [id,r]=target;if(compatibleEnd(link.ends[d.index],byId(id))){
+      const key=d.index===0?'from':'to';link[key]=id;
+      const invalid=link.from===link.to||(link.to&&plan.edges.some(l=>l.id!==link.id&&l.to===link.to))||(link.to&&descendants(link.to).has(link.from));
+      if(invalid){link[key]=null;message='Conexión no válida: entrada ocupada o bucle.';}
+      else{const sides=[['left',Math.abs(p.x-r.x)],['right',Math.abs(p.x-r.x-r.w)],['top',Math.abs(p.y-r.y)],['bottom',Math.abs(p.y-r.y-r.h)]];sides.sort((a,b)=>a[1]-b[1]);link.ends[d.index].side=sides[0][0];message='Extremo conectado a '+byId(id).label+'.';}
+    }else message='Este equipo no admite este tipo de extremo; queda suelto.';}
+    render();notify(message);
+  });
+  window.addEventListener('pointercancel',()=>{endpointDrag=null;});
   document.addEventListener('fullscreenchange',()=>{renderDiagram();anchorEditor();});
   document.addEventListener('pointerdown',e=>{if(!selected||e.target.closest('#inspector-panel,.ob-node,.ob-cable-label,.ob-endpoint,.ob-add-choices,.ob-node-add,.ob-cable-add,.ob-map-tools'))return;selected=null;renderInspector();});
-  $('diagram-items').addEventListener('click',e=>{const b=e.target.closest('[data-end-edge]');if(b){selected={kind:'connector',id:b.dataset.endEdge,index:+b.dataset.endIndex};renderInspector();}});
+  $('diagram-items').addEventListener('click',e=>{if(suppressNodeClick)return;const b=e.target.closest('[data-end-edge]');if(b){selected={kind:'connector',id:b.dataset.endEdge,index:+b.dataset.endIndex};renderInspector();}});
   $('inspector-content').addEventListener('change',e=>{
     const f=e.target.dataset.optField,sid=e.target.dataset.splitId;if(!f&&!sid)return;try{
       const n=selected.kind==='node'?byId(selected.id):null,link=plan.edges.find(x=>x.id===selected.id),v=e.target.value;
       if(sid){n.splitters.find(s=>s.id===sid).ratio=+v;}
       else if(f==='label')n.label=v.slice(0,48);
       else if(f==='connectorType')link.ends[selected.index].type=v;
+      else if(f==='endpointSide')link.ends[selected.index].side=v;
       else if(f==='endpoint'){
+        if(v&&!compatibleEnd(link.ends[selected.index],byId(v)))throw Error('Elemento incompatible con este extremo');
         const k=selected.index===0?'from':'to',old=link[k];link[k]=v||null;
         if(v&&(link.from===link.to||plan.edges.some(x=>x.id!==link.id&&x.to===link.to&&link.to)||descendants(link.to).has(link.from))){link[k]=old;throw Error('Esta conexión forma un ciclo o la entrada ya está ocupada');}
       }else if(f==='splitterId')link.splitterId=v;
