@@ -23,6 +23,7 @@
       rel="stylesheet"
       href="../../../assets/css/learning.css?v=20261026-wireless"
     />
+    <link rel="stylesheet" href="../../../assets/css/routing-static.css?v=20261109-spacing-2" />
       <link rel="stylesheet" href="../../../assets/css/theme.css?v=20261107-daylight" />
   </head>
   <body>
@@ -139,6 +140,65 @@
           topologías pequeñas y estables. Si tienes muchas rutas o cambios
           frecuentes, un protocolo dinámico puede ser más práctico.
         </div>
+        <h2>Tres routers: llegar a una LAN más lejana</h2>
+        <p>Ahora R1 y R3 no son vecinos: entre ellos está R2. La imagen separa las tres LAN de las dos WAN. Cada router ya conoce sus redes conectadas directamente; las rutas estáticas se usan para las redes que están más allá de su vecino.</p>
+        <figure class="topology-card route3-card" aria-labelledby="route3-title">
+          <figcaption id="route3-title"><span>Segundo laboratorio</span><strong>R1 → R2 → R3, con IPv4 e IPv6</strong></figcaption>
+          <div class="route3-map" role="img" aria-label="R1 conectado a R2 por WAN 1; R2 conectado a R3 por WAN 2. Cada router tiene su propia LAN con un switch. Para ir de LAN 1 a LAN 3 se atraviesan ambas WAN.">
+            <div class="route3-site route3-left"><div class="route3-router"><img src="../img/cisco-router.png" alt=""/><b>R1</b><small>LAN 1 · G0/0</small></div><div class="route3-lan"><span>LAN 1 · 192.168.10.0/24</span><img src="../img/cisco-switch.png" alt=""/><small>Switch 1</small></div></div>
+            <div class="route3-wan"><strong>WAN 1</strong><span>10.10.0.0/30</span><small>R1 .1 ↔ R2 .2</small><i></i></div>
+            <div class="route3-site route3-center"><div class="route3-router"><img src="../img/cisco-router.png" alt=""/><b>R2</b><small>Router intermedio</small></div><div class="route3-lan"><span>LAN 2 · 192.168.20.0/24</span><img src="../img/cisco-switch.png" alt=""/><small>Switch 2</small></div></div>
+            <div class="route3-wan"><strong>WAN 2</strong><span>10.10.1.0/30</span><small>R2 .1 ↔ R3 .2</small><i></i></div>
+            <div class="route3-site route3-right"><div class="route3-router"><img src="../img/cisco-router.png" alt=""/><b>R3</b><small>LAN 3 · G0/0</small></div><div class="route3-lan"><span>LAN 3 · 192.168.30.0/24</span><img src="../img/cisco-switch.png" alt=""/><small>Switch 3</small></div></div>
+          </div>
+          <p class="route3-caption">Los switches conectan equipos dentro de cada LAN; las rutas se configuran en R1, R2 y R3. Los puertos serie del esquema son ejemplos: usa los números disponibles en tu modelo de Packet Tracer.</p>
+        </figure>
+        <h3>Direcciones del laboratorio</h3>
+        <p>Configura primero las interfaces con estas direcciones y actívalas con <code>no shutdown</code>. En los tres routers habilita <code>ipv6 unicast-routing</code>. Si usas enlaces serie, el extremo DCE necesita reloj. Los equipos de cada LAN deben tener como gateway la IP de su router en esa LAN.</p>
+        <div class="route3-table-wrap"><table class="route3-table"><thead><tr><th>Red</th><th>R1</th><th>R2</th><th>R3</th></tr></thead><tbody>
+          <tr><th>LAN 1</th><td>192.168.10.1/24<br>2001:db8:10::1/64</td><td>—</td><td>—</td></tr>
+          <tr><th>WAN 1</th><td>10.10.0.1/30<br>2001:db8:100::1/64</td><td>10.10.0.2/30<br>2001:db8:100::2/64</td><td>—</td></tr>
+          <tr><th>LAN 2</th><td>—</td><td>192.168.20.1/24<br>2001:db8:20::1/64</td><td>—</td></tr>
+          <tr><th>WAN 2</th><td>—</td><td>10.10.1.1/30<br>2001:db8:101::1/64</td><td>10.10.1.2/30<br>2001:db8:101::2/64</td></tr>
+          <tr><th>LAN 3</th><td>—</td><td>—</td><td>192.168.30.1/24<br>2001:db8:30::1/64</td></tr>
+        </tbody></table></div>
+        <h3>R1: primero WAN 2, luego LAN 3</h3>
+        <p>Queremos que la ruta a LAN 3 señale la dirección de R3 en WAN 2 (<code>10.10.1.2</code>). Como R1 no está conectado a WAN 2, primero le indicamos que esa red se alcanza mediante R2 (<code>10.10.0.2</code>). Así R1 puede resolver el siguiente salto de la segunda ruta. En IPv6 se aplica la misma lógica con <code>2001:db8:101::2</code>.</p>
+        <pre class="cli-block"><code><span class="cli-comment">! R1 · IPv4</span>
+<span class="cli-prompt">R1(config)#</span> <span class="cli-command">ip route 10.10.1.0 255.255.255.252 10.10.0.2</span>
+<span class="cli-prompt">R1(config)#</span> <span class="cli-command">ip route 192.168.30.0 255.255.255.0 10.10.1.2</span>
+<span class="cli-prompt">R1(config)#</span> <span class="cli-command">ip route 192.168.20.0 255.255.255.0 10.10.0.2</span>
+<span class="cli-comment">! R1 · IPv6</span>
+<span class="cli-prompt">R1(config)#</span> <span class="cli-command">ipv6 route 2001:db8:101::/64 2001:db8:100::2</span>
+<span class="cli-prompt">R1(config)#</span> <span class="cli-command">ipv6 route 2001:db8:30::/64 2001:db8:101::2</span>
+<span class="cli-prompt">R1(config)#</span> <span class="cli-command">ipv6 route 2001:db8:20::/64 2001:db8:100::2</span></code></pre>
+        <div class="lesson-note"><strong>Por qué aparece WAN 2:</strong> es una ruta de apoyo para alcanzar el siguiente salto remoto de R3. Si en cambio apuntas la ruta a LAN 3 directamente al vecino R2 (<code>10.10.0.2</code> o <code>2001:db8:100::2</code>), no necesitas crear antes la ruta a WAN 2. No configures ambas variantes a la vez en este ejercicio.</div>
+        <h3>R2: dirigir cada LAN hacia su extremo</h3>
+        <p>R2 tiene conectadas WAN 1, WAN 2 y LAN 2. Solo necesita rutas a LAN 1 por R1 y a LAN 3 por R3.</p>
+        <pre class="cli-block"><code><span class="cli-comment">! R2 · IPv4</span>
+<span class="cli-prompt">R2(config)#</span> <span class="cli-command">ip route 192.168.10.0 255.255.255.0 10.10.0.1</span>
+<span class="cli-prompt">R2(config)#</span> <span class="cli-command">ip route 192.168.30.0 255.255.255.0 10.10.1.2</span>
+<span class="cli-comment">! R2 · IPv6</span>
+<span class="cli-prompt">R2(config)#</span> <span class="cli-command">ipv6 route 2001:db8:10::/64 2001:db8:100::1</span>
+<span class="cli-prompt">R2(config)#</span> <span class="cli-command">ipv6 route 2001:db8:30::/64 2001:db8:101::2</span></code></pre>
+        <h3>R3: preparar el camino de regreso</h3>
+        <p>El tráfico de LAN 1 a LAN 3 requiere respuesta. Para mantener el mismo ejemplo de siguiente salto remoto, R3 aprende WAN 1 por R2 y después LAN 1 por la dirección de R1 en esa WAN. LAN 2 se alcanza directamente a través de R2.</p>
+        <pre class="cli-block"><code><span class="cli-comment">! R3 · IPv4</span>
+<span class="cli-prompt">R3(config)#</span> <span class="cli-command">ip route 10.10.0.0 255.255.255.252 10.10.1.1</span>
+<span class="cli-prompt">R3(config)#</span> <span class="cli-command">ip route 192.168.10.0 255.255.255.0 10.10.0.1</span>
+<span class="cli-prompt">R3(config)#</span> <span class="cli-command">ip route 192.168.20.0 255.255.255.0 10.10.1.1</span>
+<span class="cli-comment">! R3 · IPv6</span>
+<span class="cli-prompt">R3(config)#</span> <span class="cli-command">ipv6 route 2001:db8:100::/64 2001:db8:101::1</span>
+<span class="cli-prompt">R3(config)#</span> <span class="cli-command">ipv6 route 2001:db8:10::/64 2001:db8:100::1</span>
+<span class="cli-prompt">R3(config)#</span> <span class="cli-command">ipv6 route 2001:db8:20::/64 2001:db8:101::1</span></code></pre>
+        <h3>Comprobar ida, regreso y resolución</h3>
+        <p>En R1 revisa que la ruta a LAN 3 aparezca en ambas tablas. Después prueba desde un equipo de LAN 1 hacia otro de LAN 3, tanto por IPv4 como por IPv6. Si falla, comprueba las interfaces, el gateway de los equipos y la ruta de regreso en R3.</p>
+        <pre class="cli-block"><code><span class="cli-prompt">R1#</span> <span class="cli-command">show ip route 10.10.1.0</span>
+<span class="cli-prompt">R1#</span> <span class="cli-command">show ip route 192.168.30.0</span>
+<span class="cli-prompt">R1#</span> <span class="cli-command">show ipv6 route 2001:db8:101::/64</span>
+<span class="cli-prompt">R1#</span> <span class="cli-command">show ipv6 route 2001:db8:30::/64</span>
+<span class="cli-prompt">R1#</span> <span class="cli-command">traceroute 192.168.30.1</span></code></pre>
+        <p><code>2001:db8::/32</code> se reserva para documentación y laboratorios; sustituye estas direcciones por las de tu actividad. Según la versión de Packet Tracer y el modelo de router, la visualización de rutas recursivas puede variar: lo decisivo es comprobar la tabla y la comunicación de extremo a extremo.</p>
         <div class="lesson-actions">
           <a href="inter-vlan.html">← Routing inter-VLAN</a
           ><a href="dhcp-vlan.html">Siguiente: DHCP por VLAN →</a>
