@@ -9,8 +9,8 @@
   const media = matchMedia('(prefers-color-scheme: light)');
   const deviceTheme = () => media.matches ? 'light' : 'dark';
   const read = () => {
-    try { const value = document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith(`${cookieName}=`))?.split('=')[1]; return modes.includes(value) ? value : 'dark'; }
-    catch { return 'dark'; }
+    try { const value = document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith(`${cookieName}=`))?.split('=')[1]; return modes.includes(value) ? value : 'device'; }
+    catch { return 'device'; }
   };
   let mode = read(), transitionTimer, promptTimer, picker, suggestion;
   const labels = { dark: 'Oscuro', light: 'Claro', device: 'Dispositivo' };
