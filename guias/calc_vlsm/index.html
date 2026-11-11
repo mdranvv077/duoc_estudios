@@ -58,7 +58,7 @@
         <aside class="vlsm-how">
           <p>Cómo usarla</p>
           <ol>
-            <li>Ingresa la red base con su prefijo.</li>
+            <li>Ingresa la dirección desde la que quieres asignar subredes y el prefijo del bloque.</li>
             <li>Añade las áreas y sus hosts necesarios.</li>
             <li>Calcula y revisa cada rango asignado.</li>
           </ol>
@@ -77,7 +77,7 @@
         <form id="vlsm-form" novalidate>
           <div class="network-inputs">
             <label
-              >Red base<input
+              >Dirección inicial y prefijo<input
                 id="base-network"
                 inputmode="decimal"
                 autocomplete="off"
@@ -86,7 +86,7 @@
                 aria-describedby="base-network-help"
             /></label>
             <p id="base-network-help">
-              Usa formato IPv4/CIDR. Ejemplo: <code>192.168.10.0/24</code>.
+              Por ejemplo, <code>192.168.20.0/20</code> inicia la asignación desde esa dirección dentro del bloque /20. Si la primera subred necesita alineación, se usa el siguiente inicio válido.
             </p>
           </div>
           <div class="requirements-head">
@@ -315,6 +315,6 @@
       <p>© <span id="year"></span></p>
     </footer>
     <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/calc-vlsm.js"></script>
+    <script src="../../assets/js/calc-vlsm.js?v=20261111-inicio"></script>
   </body>
 </html>

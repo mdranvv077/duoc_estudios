@@ -13,5 +13,49 @@
   addButton.addEventListener("click",()=>createRequest());
   if(help&&openHelp&&closeHelp){openHelp.addEventListener("click",()=>help.showModal());closeHelp.addEventListener("click",()=>help.close());help.addEventListener("click",event=>{if(event.target===help)help.close()});if(new URLSearchParams(window.location.search).get("guia")==="1")help.showModal()}
   list.addEventListener("click",event=>{const button=event.target.closest(".remove-request");if(button&&list.children.length>1)button.closest(".request-row").remove()});
-  form.addEventListener("submit",event=>{event.preventDefault();const [rawIp,rawPrefix]=document.getElementById("base-network").value.trim().split("/"),prefix=Number(rawPrefix);if(!validIp(rawIp)||!Number.isInteger(prefix)||prefix<0||prefix>30){showError("Usa una red IPv4 válida, por ejemplo 192.168.10.0/24");return}const mask=prefixMask(prefix),base=ipToNumber(rawIp)&mask,available=2**(32-prefix),requests=[...list.querySelectorAll(".request-row")].map((row,index)=>({name:row.querySelector(".request-name").value.trim()||`Subred ${index+1}`,hosts:Number(row.querySelector(".request-hosts").value)}));if(requests.some(request=>!Number.isInteger(request.hosts)||request.hosts<1)){showError("Cada subred necesita al menos un host válido.");return}const planned=requests.map(request=>({...request,size:nextPowerOfTwo(request.hosts+2)})).sort((a,b)=>b.size-a.size);if(planned.some(request=>request.size>available)||planned.reduce((total,request)=>total+request.size,0)>available){showError("Las subredes solicitadas no caben dentro de la red base.");return}let cursor=base;const allocations=planned.map(request=>{const assignedPrefix=32-Math.log2(request.size),broadcast=cursor+request.size-1,allocation={...request,network:cursor,prefix:assignedPrefix,broadcast};cursor+=request.size;return allocation});resultsBody.innerHTML=allocations.map(item=>{const usableHosts=item.size-2;return `<tr><td>${item.name}</td><td>${item.hosts} <small>/ ${usableHosts}</small></td><td>${numberToIp(item.network)}/${item.prefix}</td><td>${numberToIp(prefixMask(item.prefix))}</td><td>${numberToIp(item.network+1)} — ${numberToIp(item.broadcast-1)}</td><td>${numberToIp(item.broadcast)}</td></tr>`}).join("");const used=allocations.reduce((total,item)=>total+item.size,0);resultsSummary.textContent=`${allocations.length} subred${allocations.length===1?"":"es"} asignada${allocations.length===1?"":"s"}. ${available-used} direcciones quedan disponibles dentro de ${numberToIp(base)}/${prefix}.`;results.hidden=false;setStatus("Cálculo actualizado");results.scrollIntoView({behavior:"smooth",block:"start"})});
+  function invalidateResults() {
+    results.hidden = true;
+    setStatus("");
+  }
+  form.addEventListener("input", invalidateResults);
+  list.addEventListener("click", event => {
+    if (event.target.closest(".remove-request")) invalidateResults();
+  });
+  addButton.addEventListener("click", invalidateResults);
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    const cidr = document.getElementById("base-network").value.trim().split("/");
+    const [rawIp, rawPrefix] = cidr;
+    const prefix = Number(rawPrefix);
+    if (cidr.length !== 2 || !validIp(rawIp) || !/^\d{1,2}$/.test(rawPrefix) || prefix > 30) {
+      showError("Usa una red IPv4 válida, por ejemplo 192.168.10.0/24.");
+      return;
+    }
+    const start = ipToNumber(rawIp);
+    const network = (start & prefixMask(prefix)) >>> 0;
+    const end = network + 2 ** (32 - prefix);
+    const requests = [...list.querySelectorAll(".request-row")].map((row, index) => ({
+      name: row.querySelector(".request-name").value.trim() || `Subred ${index + 1}`,
+      hosts: Number(row.querySelector(".request-hosts").value)
+    }));
+    if (requests.some(({hosts}) => !Number.isInteger(hosts) || hosts < 1 || hosts > 16777214)) {
+      showError("Introduce entre 1 y 16777214 hosts por subred.");
+      return;
+    }
+    const planned = requests.map(request => ({...request, size: nextPowerOfTwo(request.hosts + 2)}))
+      .sort((a, b) => b.hosts - a.hosts);
+    const required = planned.reduce((total, request) => total + request.size, 0);
+    // Smaller power-of-two blocks remain aligned after the largest block.
+    let cursor = Math.ceil(start / planned[0].size) * planned[0].size;
+    if (cursor + required > end) {
+      const available = Math.max(0, end - cursor);
+      showError(`Desde ${rawIp}, tras alinear la primera subred, quedan ${available} direcciones hasta ${numberToIp(end - 1)}. Las subredes requieren ${required}.`);
+      return;
+    }
+    const allocations = planned.map(request => {
+      const first = cursor;
+      cursor += request.size;
+      return {...request, network: first, prefix: 32 - Math.log2(request.size), broadcast: cursor - 1};
+    });
+    resultsBody.innerHTML=allocations.map(item=>{const usableHosts=item.size-2;return `<tr><td>${item.name}</td><td>${item.hosts} <small>/ ${usableHosts}</small></td><td>${numberToIp(item.network)}/${item.prefix}</td><td>${numberToIp(prefixMask(item.prefix))}</td><td>${numberToIp(item.network+1)} — ${numberToIp(item.broadcast-1)}</td><td>${numberToIp(item.broadcast)}</td></tr>`}).join("");resultsSummary.textContent = `Inicio solicitado: ${rawIp}. Primera subred: ${numberToIp(allocations[0].network)}/${allocations[0].prefix}. Después de la última asignación quedan ${end - cursor} direcciones en ${numberToIp(network)}/${prefix}.`;results.hidden=false;setStatus("Cálculo actualizado");results.scrollIntoView({behavior:"smooth",block:"start"})});
 })();
