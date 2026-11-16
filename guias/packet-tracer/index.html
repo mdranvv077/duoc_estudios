@@ -24,6 +24,7 @@
     />
     <link rel="stylesheet" href="../../assets/css/credits.css" />
     <link rel="stylesheet" href="../../assets/css/learning.css?v=20261026-wireless" />
+    <link rel="stylesheet" href="../../assets/css/packet-search.css?v=20261116" />
       <link rel="stylesheet" href="../../assets/css/theme.css?v=20261107-daylight" />
   </head>
   <body>
@@ -47,6 +48,23 @@
         </p>
       </section>
 
+      <section class="packet-search" aria-labelledby="packet-search-title">
+        <div class="packet-search-heading">
+          <div>
+            <p class="category-panel-title">Buscar en la guía</p>
+            <h2 id="packet-search-title">Encuentra un tema o comando</h2>
+            <p>Busca por categoría, módulo o palabra del contenido.</p>
+          </div>
+          <span class="packet-search-shortcut" aria-hidden="true">/</span>
+        </div>
+        <label class="packet-search-field" for="packet-search-input">
+          <span aria-hidden="true">⌕</span>
+          <input id="packet-search-input" type="search" autocomplete="off" placeholder="Ej.: VLAN, HSRP, show ip route…" aria-controls="packet-search-results" />
+        </label>
+        <p class="packet-search-status" id="packet-search-status" role="status" aria-live="polite">Escribe para buscar en los módulos de Packet Tracer.</p>
+        <div class="packet-search-results" id="packet-search-results"></div>
+      </section>
+
       <section class="modality-overview" aria-labelledby="packet-outcomes">
         <span>Recorrido de aprendizaje</span>
         <h2 id="packet-outcomes">Qué aprenderás en esta modalidad</h2>
@@ -61,7 +79,7 @@
           </article>
           <article>
             <strong>Comunicar redes diferentes</strong>
-            <p>Configurar routing inter-VLAN, rutas estáticas, DHCP y una introducción práctica a RIPv2 y OSPF.</p>
+            <p>Configurar routing inter-VLAN, rutas estáticas, DHCP y una introducción práctica a RIPv2, EIGRP y OSPF.</p>
           </article>
           <article>
             <strong>Construir enlaces resistentes</strong>
@@ -129,5 +147,6 @@
       <p>© <span id="year"></span></p>
     </footer>
     <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/packet-search.js?v=20261116"></script>
   </body>
 </html>

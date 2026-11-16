@@ -1,0 +1,29 @@
+.rip-topology{max-width:880px}
+.rip-diagram{display:grid;grid-template-columns:118px 90px 78px minmax(160px,1fr) 78px 90px 118px;align-items:center;min-height:210px;padding:22px 4px 12px}
+.rip-lan,.rip-router,.rip-link{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;text-align:center}
+.rip-lan{gap:4px;align-self:stretch}
+.rip-lan img{width:60px;height:43px;object-fit:contain}
+.rip-router img{width:68px;height:48px;object-fit:contain}
+.rip-lan b,.rip-router b{color:var(--text);font:600 .8rem "DM Mono",monospace}
+.rip-lan small,.rip-link small{color:var(--muted);font:.6rem/1.45 "DM Mono",monospace}
+.rip-network{max-width:145px;margin-bottom:7px;color:var(--cyan);font:600 .66rem/1.4 "DM Mono",monospace}
+.rip-link{align-self:center;min-height:92px;justify-content:flex-end;gap:5px}
+.rip-link span{color:var(--text);font:.59rem/1.35 "DM Mono",monospace}
+.rip-link i{display:block;width:100%;height:0;margin:5px 0;border-top:3px dashed var(--cyan);filter:drop-shadow(0 0 5px rgba(46,234,255,.16))}
+.rip-link-wan i{border-color:var(--orange);filter:drop-shadow(0 0 5px rgba(255,157,46,.16))}
+.rip-link-wan span{width:210px;color:var(--orange)}
+.rip-link-wan small{width:205px}
+.rip-topology .topology-caption{margin-top:9px}
+html[data-theme="light"] .rip-topology{background:var(--surface);border-color:var(--line)}
+@media(max-width:800px){
+  .rip-diagram{display:flex;flex-direction:column;gap:0;min-height:0;padding:12px 4px}
+  .rip-lan,.rip-router{min-height:70px;align-self:center}
+  .rip-lan{gap:2px}
+  .rip-network{max-width:none;margin-bottom:2px}
+  .rip-link{min-height:72px;justify-content:center;gap:3px}
+  .rip-link span,.rip-link-wan span,.rip-link-wan small{width:auto}
+  .rip-link i{width:0;height:20px;margin:2px 0;border-top:0;border-left:3px dashed var(--cyan)}
+  .rip-link-wan i{border-color:var(--orange)}
+  .rip-lan img{width:55px;height:37px}
+  .rip-router img{width:62px;height:43px}
+}
