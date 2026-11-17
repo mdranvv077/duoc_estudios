@@ -1,4 +1,11 @@
 .rip-topology{max-width:880px}
+.rip-triangle{display:block;width:100%;height:auto;min-height:240px;overflow:visible}
+.rip-triangle path{fill:none;stroke-width:3;stroke-linecap:round}
+.rip-triangle .rip-lan-line{stroke:var(--cyan)}
+.rip-triangle .rip-wan-line{stroke:var(--orange);stroke-dasharray:10 7}
+.rip-triangle text{fill:var(--muted);font:12px "DM Mono",monospace;text-anchor:middle}
+.rip-triangle .rip-name{fill:var(--text);font-weight:700;font-size:17px}
+.rip-triangle .rip-accent{fill:var(--orange);font-weight:700}
 .rip-diagram{display:grid;grid-template-columns:118px 90px 78px minmax(160px,1fr) 78px 90px 118px;align-items:center;min-height:210px;padding:22px 4px 12px}
 .rip-lan,.rip-router,.rip-link{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;text-align:center}
 .rip-lan{gap:4px;align-self:stretch}

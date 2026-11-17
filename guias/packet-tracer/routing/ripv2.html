@@ -65,23 +65,25 @@
           el resumen automático para que las subredes se anuncien correctamente.
         </p>
         <h2>Topología del ejemplo</h2>
-        <p>Usaremos dos routers, cada uno con su propia LAN. El enlace entre R1 y R2 es donde intercambian rutas RIP. El puerto hacia el switch también pertenece al proceso RIP para anunciar la LAN, pero no necesita enviar actualizaciones a los equipos de esa red.</p>
+        <p>R1 y R3 tienen una LAN; R2 conecta ambas WAN. R1 debe aprender la LAN 3 a través de R2, y R3 debe aprender la LAN 1. La forma recuerda un triángulo, pero no hay enlace directo entre R1 y R3.</p>
         <figure class="topology-card rip-topology" aria-labelledby="rip-topology-title">
-          <figcaption id="rip-topology-title"><span>Laboratorio RIPv2</span><strong>Dos LAN conectadas por dos routers</strong></figcaption>
-          <div class="rip-diagram" role="img" aria-label="LAN 10, 192.168.10.0/24, conectada por un switch a G0/0 de R1. R1 G0/1, 10.0.0.1, se conecta a R2 G0/1, 10.0.0.2, en la red 10.0.0.0/30. R2 G0/0 conecta un switch y LAN 20, 192.168.20.0/24. G0/0 queda pasiva para RIP en ambos routers.">
-            <div class="rip-lan"><span class="rip-network">LAN 10 · 192.168.10.0/24</span><img src="../img/cisco-switch.png" alt=""/><b>SW1</b><small>PC → gateway 192.168.10.1</small></div>
-            <div class="rip-link rip-link-lan"><span>G0/0 · 192.168.10.1</span><i></i><small>RIP pasivo</small></div>
-            <div class="rip-router"><img src="../img/cisco-router.png" alt=""/><b>R1</b></div>
-            <div class="rip-link rip-link-wan"><span>G0/1 · 10.0.0.1 ↔ 10.0.0.2 · G0/1</span><i></i><small>WAN · 10.0.0.0/30 · RIP activo</small></div>
-            <div class="rip-router"><img src="../img/cisco-router.png" alt=""/><b>R2</b></div>
-            <div class="rip-link rip-link-lan"><span>G0/0 · 192.168.20.1</span><i></i><small>RIP pasivo</small></div>
-            <div class="rip-lan"><span class="rip-network">LAN 20 · 192.168.20.0/24</span><img src="../img/cisco-switch.png" alt=""/><b>SW2</b><small>PC → gateway 192.168.20.1</small></div>
-          </div>
-          <p class="topology-caption">Configura y habilita primero las interfaces indicadas. Los switches conectan los PCs; RIPv2 se configura en los routers.</p>
+          <figcaption id="rip-topology-title"><span>Laboratorio RIPv2</span><strong>R1 → R2 → R3 · dos WAN y dos LAN</strong></figcaption>
+          <svg class="rip-triangle" viewBox="0 0 800 440" role="img" aria-label="R1 abajo a la izquierda, R2 arriba al centro y R3 abajo a la derecha. WAN 1 R1-R2: 10.10.0.0/30; WAN 2 R2-R3: 10.10.1.0/30. LAN 1 192.168.10.0/24 sale de R1; LAN 3 192.168.30.0/24 sale de R3.">
+            <path class="rip-lan-line" d="M40 335H165 M635 335H760"/><path class="rip-wan-line" d="M210 305L376 90 M424 90L590 305"/>
+            <image href="../img/cisco-router.png" x="165" y="300" width="90" height="60"/><image href="../img/cisco-router.png" x="355" y="48" width="90" height="60"/><image href="../img/cisco-router.png" x="545" y="300" width="90" height="60"/>
+            <text x="210" y="383" class="rip-name">R1</text><text x="400" y="40" class="rip-name">R2</text><text x="590" y="383" class="rip-name">R3</text>
+            <text x="90" y="298">LAN 1</text><text x="90" y="318">192.168.10.0/24</text><text x="710" y="298">LAN 3</text><text x="710" y="318">192.168.30.0/24</text>
+            <text x="150" y="160" class="rip-accent">WAN 1 · 10.10.0.0/30</text><text x="650" y="160" class="rip-accent">WAN 2 · 10.10.1.0/30</text>
+            <text x="150" y="190">R1 S0/1/0 · 10.10.0.2</text><text x="650" y="190">R2 S0/2/0 · 10.10.1.1</text>
+            <text x="150" y="208">R2 S0/1/0 · 10.10.0.1</text><text x="650" y="208">R3 S0/2/0 · 10.10.1.2</text>
+            <text x="115" y="410">R1 G0/0 · 192.168.10.1 · pasiva</text><text x="685" y="410">R3 G0/0 · 192.168.30.1 · pasiva</text>
+          </svg>
+          <p class="topology-caption">Configura primero las IP y activa las interfaces. En los enlaces serie, el extremo DCE necesita <code>clock rate</code>. La LAN 2 de R2 aparece en la referencia original, pero no tiene dirección indicada: aquí no se configura ni se anuncia.</p>
         </figure>
+        <div class="lesson-note"><strong>Sobre IPv6:</strong> la imagen de referencia también muestra prefijos IPv6, pero <code>router rip</code> con RIPv2 intercambia rutas IPv4. Estos comandos no anuncian IPv6; ese sería otro ejercicio con un protocolo compatible.</div>
         <h2>Anunciar redes conectadas</h2>
-        <p>Con las direcciones de la topología ya asignadas, entra a <code>router rip</code> en cada equipo. <code>network</code> incluye las interfaces de esas redes en RIP; la red LAN se anuncia al vecino a través de la WAN.</p>
-        <h3>R1 · LAN 10</h3>
+        <p>Con las IP de la topología ya asignadas, configura RIP en los tres routers. El comando <code>network 10.0.0.0</code> abarca las interfaces 10.10.x.x de ambas WAN en IOS; <code>no auto-summary</code> conserva sus prefijos /30 al anunciarlos.</p>
+        <h3>R1 · LAN 1 y WAN 1</h3>
         <pre class="cli-block"><code><span class="cli-prompt">R1(config)#</span> <span class="cli-command">router rip</span>
 <span class="cli-prompt">R1(config-router)#</span> <span class="cli-command">version 2</span>
 <span class="cli-prompt">R1(config-router)#</span> <span class="cli-command">no auto-summary</span>
@@ -89,20 +91,27 @@
 <span class="cli-prompt">R1(config-router)#</span> <span class="cli-command">network 10.0.0.0</span>
 <span class="cli-prompt">R1(config-router)#</span> <span class="cli-command">passive-interface gigabitEthernet 0/0</span>
 <span class="cli-prompt">R1(config-router)#</span> <span class="cli-command">end</span></code></pre>
-        <h3>R2 · LAN 20</h3>
+        <h3>R2 · WAN 1 y WAN 2</h3>
         <pre class="cli-block"><code><span class="cli-prompt">R2(config)#</span> <span class="cli-command">router rip</span>
 <span class="cli-prompt">R2(config-router)#</span> <span class="cli-command">version 2</span>
 <span class="cli-prompt">R2(config-router)#</span> <span class="cli-command">no auto-summary</span>
-<span class="cli-prompt">R2(config-router)#</span> <span class="cli-command">network 192.168.20.0</span>
 <span class="cli-prompt">R2(config-router)#</span> <span class="cli-command">network 10.0.0.0</span>
-<span class="cli-prompt">R2(config-router)#</span> <span class="cli-command">passive-interface gigabitEthernet 0/0</span>
 <span class="cli-prompt">R2(config-router)#</span> <span class="cli-command">end</span></code></pre>
-        <p><code>passive-interface gigabitEthernet 0/0</code> evita enviar actualizaciones RIP hacia los PCs de la LAN. La red sigue anunciándose a R2 o R1 por <code>G0/1</code>; la interfaz pasiva sigue transportando tráfico normal. Si tu router usa otros nombres de puertos, sustituye <code>G0/0</code> por la interfaz real que mira hacia la LAN.</p>
+        <h3>R3 · WAN 2 y LAN 3</h3>
+        <pre class="cli-block"><code><span class="cli-prompt">R3(config)#</span> <span class="cli-command">router rip</span>
+<span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">version 2</span>
+<span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">no auto-summary</span>
+<span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">network 10.0.0.0</span>
+<span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">network 192.168.30.0</span>
+<span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">passive-interface gigabitEthernet 0/0</span>
+<span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">end</span></code></pre>
+        <p><code>passive-interface gigabitEthernet 0/0</code> se aplica solo a las LAN de R1 y R3: no envían actualizaciones RIP hacia los equipos de usuario, pero siguen anunciando sus redes por las WAN. No marques como pasivas las interfaces serie, porque R1, R2 y R3 necesitan intercambiar rutas por ellas.</p>
         <h2>Comprobar el intercambio</h2>
         <pre class="cli-block"><code><span class="cli-prompt">R1#</span> <span class="cli-command">show ip protocols</span><span class="cli-comment"> # confirma RIPv2 y la interfaz pasiva</span>
-<span class="cli-prompt">R1#</span> <span class="cli-command">show ip route rip</span><span class="cli-comment"> # debe incluir 192.168.20.0/24</span>
-<span class="cli-prompt">R2#</span> <span class="cli-command">show ip route rip</span><span class="cli-comment"> # debe incluir 192.168.10.0/24</span></code></pre>
-        <p>Cuando las rutas aparezcan con la letra <code>R</code>, prueba un ping entre los PCs. Revisa sus gateways, el estado de <code>G0/1</code> y que esa interfaz no haya quedado pasiva si no se reciben rutas.</p>
+<span class="cli-prompt">R1#</span> <span class="cli-command">show ip route rip</span><span class="cli-comment"> # busca WAN 2 y LAN 3</span>
+<span class="cli-prompt">R2#</span> <span class="cli-command">show ip route rip</span><span class="cli-comment"> # busca LAN 1 y LAN 3</span>
+<span class="cli-prompt">R3#</span> <span class="cli-command">show ip route rip</span><span class="cli-comment"> # busca WAN 1 y LAN 1</span></code></pre>
+        <p>Las rutas aprendidas aparecen con la letra <code>R</code>. Desde R1, la ruta a <code>192.168.30.0/24</code> debe pasar por R2; desde R3 sucede lo mismo en sentido inverso. Si falla, revisa IP, interfaces serie y que estas no estén pasivas.</p>
         <div class="lesson-note">
           <strong>No combines sin motivo:</strong> en un mismo laboratorio elige
           rutas estáticas, RIP u OSPF según el objetivo. Configurarlos todos
