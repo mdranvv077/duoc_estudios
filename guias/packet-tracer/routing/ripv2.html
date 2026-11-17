@@ -76,7 +76,7 @@
             <text x="150" y="160" class="rip-accent">WAN 1 · 10.10.0.0/30</text><text x="650" y="160" class="rip-accent">WAN 2 · 10.10.1.0/30</text>
             <text x="150" y="190">R1 S0/1/0 · 10.10.0.2</text><text x="650" y="190">R2 S0/2/0 · 10.10.1.1</text>
             <text x="150" y="208">R2 S0/1/0 · 10.10.0.1</text><text x="650" y="208">R3 S0/2/0 · 10.10.1.2</text>
-            <text x="115" y="410">R1 G0/0 · 192.168.10.1 · pasiva</text><text x="685" y="410">R3 G0/0 · 192.168.30.1 · pasiva</text>
+            <text x="115" y="410">R1 G0/0/0 · 192.168.10.1 · pasiva</text><text x="685" y="410">R3 G0/0/0 · 192.168.30.1 · pasiva</text>
           </svg>
           <p class="topology-caption">Configura primero las IP y activa las interfaces. En los enlaces serie, el extremo DCE necesita <code>clock rate</code>. La LAN 2 de R2 aparece en la referencia original, pero no tiene dirección indicada: aquí no se configura ni se anuncia.</p>
         </figure>
@@ -89,7 +89,7 @@
 <span class="cli-prompt">R1(config-router)#</span> <span class="cli-command">no auto-summary</span>
 <span class="cli-prompt">R1(config-router)#</span> <span class="cli-command">network 192.168.10.0</span>
 <span class="cli-prompt">R1(config-router)#</span> <span class="cli-command">network 10.0.0.0</span>
-<span class="cli-prompt">R1(config-router)#</span> <span class="cli-command">passive-interface gigabitEthernet 0/0</span>
+<span class="cli-prompt">R1(config-router)#</span> <span class="cli-command">passive-interface gigabitEthernet 0/0/0</span>
 <span class="cli-prompt">R1(config-router)#</span> <span class="cli-command">end</span></code></pre>
         <h3>R2 · WAN 1 y WAN 2</h3>
         <pre class="cli-block"><code><span class="cli-prompt">R2(config)#</span> <span class="cli-command">router rip</span>
@@ -103,9 +103,9 @@
 <span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">no auto-summary</span>
 <span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">network 10.0.0.0</span>
 <span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">network 192.168.30.0</span>
-<span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">passive-interface gigabitEthernet 0/0</span>
+<span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">passive-interface gigabitEthernet 0/0/0</span>
 <span class="cli-prompt">R3(config-router)#</span> <span class="cli-command">end</span></code></pre>
-        <p><code>passive-interface gigabitEthernet 0/0</code> se aplica solo a las LAN de R1 y R3: no envían actualizaciones RIP hacia los equipos de usuario, pero siguen anunciando sus redes por las WAN. No marques como pasivas las interfaces serie, porque R1, R2 y R3 necesitan intercambiar rutas por ellas.</p>
+        <p><code>passive-interface gigabitEthernet 0/0/0</code> se aplica solo a las LAN de R1 y R3: no envían actualizaciones RIP hacia los equipos de usuario, pero siguen anunciando sus redes por las WAN. No marques como pasivas las interfaces serie, porque R1, R2 y R3 necesitan intercambiar rutas por ellas.</p>
         <h2>Comprobar el intercambio</h2>
         <pre class="cli-block"><code><span class="cli-prompt">R1#</span> <span class="cli-command">show ip protocols</span><span class="cli-comment"> # confirma RIPv2 y la interfaz pasiva</span>
 <span class="cli-prompt">R1#</span> <span class="cli-command">show ip route rip</span><span class="cli-comment"> # busca WAN 2 y LAN 3</span>
