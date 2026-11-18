@@ -1,3 +1,13 @@
+.home-page .hero .terminal-preview {
+  border-radius: 12px;
+  border-color: color-mix(in srgb, var(--cyan) 21%, var(--line));
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--bg) 60%, transparent);
+}
+
+.home-page .terminal-top {
+  border-bottom-color: var(--line);
+}
+
 .home-page .terminal-dish {
   position: absolute;
   bottom: 100%;
