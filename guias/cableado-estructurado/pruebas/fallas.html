@@ -1,0 +1,197 @@
+<!doctype html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Mapa de hilos y fallas · Guía de cableado estructurado y pares trenzados."><title>Mapa de hilos y fallas — Cableado estructurado</title><link rel="icon" type="image/png" href="../../../img/favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="../../../assets/js/theme.js?v=20261108-device-default"></script><link rel="stylesheet" href="../../../assets/css/styles.css"><link rel="stylesheet" href="../../../assets/css/logo.css"><link rel="stylesheet" href="../../../assets/css/responsive.css"><link rel="stylesheet" href="../../../assets/css/credits.css"><link rel="stylesheet" href="../../../assets/css/learning.css"><link rel="stylesheet" href="../../../assets/css/theme.css"><link rel="stylesheet" href="../../../assets/css/cableado.css"></head><body><header class="site-header container"><a class="brand" href="../../../index.html" aria-label="Inicio DGNV Studios"><img class="brand-logo" src="../../../assets/images/dgnv-logo.png" alt=""><span>DGNV Studios</span></a></header><main class="container learning-shell"><button class="sidebar-toggle" type="button" data-sidebar-toggle aria-expanded="false">☰ Módulos de cableado estructurado</button><aside class="guide-sidebar" data-guide-sidebar><a class="sidebar-brand" href="../index.html"><small>Cableado estructurado · 06</small><strong>Ethernet y comprobación</strong></a><nav class="sidebar-categories" aria-label="Categorías de cableado estructurado"><a class="sidebar-category " href="../el-cable/index.html"><span>01</span><b>Primeros conceptos y el cable</b><i aria-hidden="true">↗</i></a><a class="sidebar-category " href="../componentes/index.html"><span>02</span><b>Componentes del sistema</b><i aria-hidden="true">↗</i></a><a class="sidebar-category " href="../terminacion/index.html"><span>03</span><b>Terminación y conexiones</b><i aria-hidden="true">↗</i></a><a class="sidebar-category " href="../recorridos/index.html"><span>04</span><b>Recorridos e instalación</b><i aria-hidden="true">↗</i></a><a class="sidebar-category " href="../administracion/index.html"><span>05</span><b>Administración y tierra</b><i aria-hidden="true">↗</i></a><a class="sidebar-category active" href="index.html"><span>06</span><b>Ethernet y comprobación</b><i aria-hidden="true">↗</i></a></nav><nav class="lesson-nav" aria-label="Módulos de la categoría"><a class="" href="index.html"><span>01</span>Ethernet y PoE</a><a class="active" href="fallas.html"><span>02</span>Mapa de hilos y fallas</a><a class="" href="certificacion.html"><span>03</span>Certificación e interpretación</a></nav><a class="sidebar-back" href="../index.html">← Ver categorías</a></aside><article class="lesson-content cab-lesson"><p class="eyebrow"><span></span> Módulo 02</p><h1>Mapa de hilos y fallas<em>.</em></h1><p class="lesson-lead">Interpreta el mapa pin por pin y usa el resultado para decidir dónde buscar una falla antes de rehacer una terminación.</p><div class="cab-model"><div class="cab-model-header"><span>MODELO DIDÁCTICO</span><small>Representación sin escala</small></div><section class="ct-game" data-ct-game aria-labelledby="ct-title">
+    <h2 id="ct-title">Prueba el patch cord</h2>
+    <p>Conecta ambos extremos del patch cord. Mueve el interruptor a ON o S-ON, observa el barrido y decide si el cable pasa la prueba.</p>
+    <div class="ct-stage">
+      <svg viewBox="0 0 640 815" role="group" aria-label="Tester NSHL468 con unidades MASTER y REMOTE">
+        <defs>
+          <linearGradient id="ct-shell" x2=".22" y2="1">
+            <stop stop-color="#e9e6de"/><stop offset=".47" stop-color="#dcd9d1"/><stop offset="1" stop-color="#c0bab0"/>
+          </linearGradient>
+          <linearGradient id="ct-remote" x2="1" y2=".1">
+            <stop stop-color="#c8c4bb"/><stop offset=".15" stop-color="#e5e1d9"/><stop offset=".79" stop-color="#d8d3ca"/><stop offset="1" stop-color="#b5aea4"/>
+          </linearGradient>
+          <linearGradient id="ct-side" x2="1" y2=".1">
+            <stop stop-color="#948e84"/><stop offset=".46" stop-color="#c5bfb5"/><stop offset="1" stop-color="#aaa399"/>
+          </linearGradient>
+          <linearGradient id="ct-face" x2=".78" y2="1">
+            <stop stop-color="#00773c"/><stop offset=".34" stop-color="#078449"/><stop offset=".73" stop-color="#006932"/><stop offset="1" stop-color="#00793c"/>
+          </linearGradient>
+          <linearGradient id="ct-slider" x2="1" y2="0">
+            <stop stop-color="#b8b1a7"/><stop offset=".25" stop-color="#f4eee4"/><stop offset=".68" stop-color="#e7dfd4"/><stop offset="1" stop-color="#aaa195"/>
+          </linearGradient>
+          <linearGradient id="ct-plug" x2="1" y2=".2">
+            <stop stop-color="#839ba1"/><stop offset=".5" stop-color="#d5e1d9"/><stop offset="1" stop-color="#637f88"/>
+          </linearGradient>
+          <radialGradient id="ct-shadow"><stop stop-color="#0a100d" stop-opacity=".78"/><stop offset="1" stop-color="#0a100d" stop-opacity="0"/></radialGradient>
+          <linearGradient id="ct-cable" gradientUnits="userSpaceOnUse" x1="0" y1="19" x2="0" y2="114">
+            <stop stop-color="#234e72"/><stop offset=".45" stop-color="#69afd3"/><stop offset="1" stop-color="#2b6d97"/>
+          </linearGradient>
+          <clipPath id="ct-port-lip"><rect x="-31" y="-115" width="62" height="116"/></clipPath>
+        </defs>
+        <ellipse cx="325" cy="756" rx="308" ry="41" fill="url(#ct-shadow)"/>
+        <g class="ct-cord" data-ct-cord="master">
+    <path d="M302 23C248 23 193 22 193 62" fill="none" stroke="#172934" stroke-width="13"/>
+    <path d="M302 23C248 23 193 22 193 62" fill="none" stroke="url(#ct-cable)" stroke-width="10"/>
+    <path d="M302 23C248 23 193 22 193 62" fill="none" stroke="#80c7e4" stroke-opacity=".37" stroke-width="2"/>
+  </g>
+        <g class="ct-cord" data-ct-cord="remote">
+    <path d="M302 23C356 23 442 16 442 49" fill="none" stroke="#172934" stroke-width="13"/>
+    <path d="M302 23C356 23 442 16 442 49" fill="none" stroke="url(#ct-cable)" stroke-width="10"/>
+    <path d="M302 23C356 23 442 16 442 49" fill="none" stroke="#80c7e4" stroke-opacity=".37" stroke-width="2"/>
+  </g>
+        <path d="M61 153Q63 140 91 136L295 125Q349 122 384 137L397 718Q390 751 323 760L105 752Q55 748 54 723Z" fill="url(#ct-shell)" stroke="#b1a99e" stroke-width="1.3"/>
+        <path d="M63 150Q68 143 91 139L296 128Q351 125 379 137" fill="none" stroke="#fff9ee" stroke-opacity=".63" stroke-width="3"/>
+        <path d="M370 132Q384 130 395 140L405 726 380 745 374 712Z" fill="url(#ct-side)"/>
+        <path d="M58 725Q112 741 230 745Q334 749 381 727" fill="none" stroke="#a7a197" stroke-opacity=".58" stroke-width="2.5"/>
+        <path d="M93 196Q93 180 108 178Q208 163 319 173Q338 174 339 189L333 601Q332 620 315 624Q232 639 169 632Q146 628 152 606L178 506Q187 469 163 454Q142 438 106 446Q97 449 97 436Z" fill="url(#ct-face)" stroke="#4b9f66" stroke-width="1.25"/>
+        <path d="M101 195Q98 184 112 181Q224 168 320 176" stroke="#8bbb84" stroke-opacity=".55" stroke-width="2" fill="none"/>
+        <path d="M386 139Q407 115 462 115Q528 111 566 135L586 726Q573 756 523 764Q441 772 390 744L380 728Z" fill="url(#ct-remote)" stroke="#aea99e" stroke-width="1.1"/>
+        <path d="M545 124Q577 121 608 138L610 290Q605 299 609 312L610 376Q606 382 609 395L605 735Q592 749 566 746L557 712Z" fill="url(#ct-side)" stroke="#aaa298"/>
+        <path d="M566 136Q574 132 581 140L582 723Q582 737 574 741L564 727Z" fill="#eee9df" opacity=".67"/>
+        <path d="M386 143Q410 119 464 118Q505 116 536 124" fill="none" stroke="#f6efe4" stroke-opacity=".63" stroke-width="3"/>
+        <path d="M398 735Q488 766 561 738" fill="none" stroke="#ada69d" stroke-opacity=".64" stroke-width="2"/>
+        <path d="M407 174Q454 141 512 163Q520 166 520 172L517 600Q514 606 506 609Q451 631 404 604Q400 602 400 591Z" fill="url(#ct-face)" stroke="#4c9f66" stroke-width="1.3"/>
+        <path d="M171 132h44l-3 10h-38zM420 119h44l-3 10h-38z" fill="#a9a69d" stroke="#eee8de" stroke-width="1.2"/>
+        <path d="M175 133h36l-2 7h-32zM424 120h36l-2 7h-32z" fill="#303632"/>
+        <g transform="translate(193 140)" clip-path="url(#ct-port-lip)">
+    <g class="ct-plug" data-ct-plug="master">
+      <path d="M-7-32h14l3 9v8h-20v-8z" fill="#427fa1" stroke="#244d67" stroke-width="1.2"/>
+      <path d="M-8-23H8m-9 4h18" stroke="#87b9d0" stroke-opacity=".65" stroke-width="1.2"/>
+      <path d="M-16-16h32l2 5v24l-3 3h-30l-3-3v-24z" fill="url(#ct-plug)" stroke="#e3eeea" stroke-width="1.1"/>
+      <path d="M-13-9h26v19h-26z" fill="#53656a" fill-opacity=".7"/>
+      <path d="M-10.5 -8v15" stroke="#f8e4cc" stroke-width="1.55"/><rect x="-11.35" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M-7.5 -8v15" stroke="#e58d48" stroke-width="1.55"/><rect x="-8.35" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M-4.5 -8v15" stroke="#edf0cc" stroke-width="1.55"/><rect x="-5.35" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M-1.5 -8v15" stroke="#6a9ac0" stroke-width="1.55"/><rect x="-2.35" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M1.5 -8v15" stroke="#dbe7ef" stroke-width="1.55"/><rect x="0.65" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M4.5 -8v15" stroke="#73a779" stroke-width="1.55"/><rect x="3.65" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M7.5 -8v15" stroke="#e5dbca" stroke-width="1.55"/><rect x="6.65" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M10.5 -8v15" stroke="#8b6851" stroke-width="1.55"/><rect x="9.65" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/>
+      <path d="M-15-12v26m30-26v26M-14-13h28" fill="none" stroke="#f1faf6" stroke-opacity=".78"/>
+      <path d="M1-16h7l9 25-4 2L5-9H1z" fill="#e9f4eb" fill-opacity=".58" stroke="#edf6f0" stroke-width=".65"/>
+    </g>
+  </g><g transform="translate(442 127)" clip-path="url(#ct-port-lip)">
+    <g class="ct-plug" data-ct-plug="remote">
+      <path d="M-7-32h14l3 9v8h-20v-8z" fill="#427fa1" stroke="#244d67" stroke-width="1.2"/>
+      <path d="M-8-23H8m-9 4h18" stroke="#87b9d0" stroke-opacity=".65" stroke-width="1.2"/>
+      <path d="M-16-16h32l2 5v24l-3 3h-30l-3-3v-24z" fill="url(#ct-plug)" stroke="#e3eeea" stroke-width="1.1"/>
+      <path d="M-13-9h26v19h-26z" fill="#53656a" fill-opacity=".7"/>
+      <path d="M-10.5 -8v15" stroke="#f8e4cc" stroke-width="1.55"/><rect x="-11.35" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M-7.5 -8v15" stroke="#e58d48" stroke-width="1.55"/><rect x="-8.35" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M-4.5 -8v15" stroke="#edf0cc" stroke-width="1.55"/><rect x="-5.35" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M-1.5 -8v15" stroke="#6a9ac0" stroke-width="1.55"/><rect x="-2.35" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M1.5 -8v15" stroke="#dbe7ef" stroke-width="1.55"/><rect x="0.65" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M4.5 -8v15" stroke="#73a779" stroke-width="1.55"/><rect x="3.65" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M7.5 -8v15" stroke="#e5dbca" stroke-width="1.55"/><rect x="6.65" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/><path d="M10.5 -8v15" stroke="#8b6851" stroke-width="1.55"/><rect x="9.65" y="7" width="1.7" height="7.5" rx=".35" fill="#d5a648" stroke="#f8da87" stroke-width=".36"/>
+      <path d="M-15-12v26m30-26v26M-14-13h28" fill="none" stroke="#f1faf6" stroke-opacity=".78"/>
+      <path d="M1-16h7l9 25-4 2L5-9H1z" fill="#e9f4eb" fill-opacity=".58" stroke="#edf6f0" stroke-width=".65"/>
+    </g>
+  </g>
+        <g class="ct-print" fill="#c3e7c7" font-family="Arial, sans-serif">
+          <text x="108" y="239" font-size="18">CABLE</text>
+          <text x="107" y="265" font-size="18">TESTER</text>
+          <text x="209" y="233" font-size="17">RJ45 + RJ11</text>
+          <text x="409" y="216" font-size="16">RJ11+ RJ45</text>
+          <g font-size="16"><g>
+        <text x="235" y="269" text-anchor="middle">1</text>
+        <rect class="ct-led" data-ct-led="master-1" x="250" y="260" width="19" height="8" rx="3.6"/>
+        <path d="M253 262h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="235" y="297" text-anchor="middle">2</text>
+        <rect class="ct-led" data-ct-led="master-2" x="250" y="288" width="19" height="8" rx="3.6"/>
+        <path d="M253 290h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="235" y="325" text-anchor="middle">3</text>
+        <rect class="ct-led" data-ct-led="master-3" x="250" y="316" width="19" height="8" rx="3.6"/>
+        <path d="M253 318h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="235" y="353" text-anchor="middle">4</text>
+        <rect class="ct-led" data-ct-led="master-4" x="250" y="344" width="19" height="8" rx="3.6"/>
+        <path d="M253 346h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="235" y="381" text-anchor="middle">5</text>
+        <rect class="ct-led" data-ct-led="master-5" x="250" y="372" width="19" height="8" rx="3.6"/>
+        <path d="M253 374h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="235" y="409" text-anchor="middle">6</text>
+        <rect class="ct-led" data-ct-led="master-6" x="250" y="400" width="19" height="8" rx="3.6"/>
+        <path d="M253 402h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="235" y="437" text-anchor="middle">7</text>
+        <rect class="ct-led" data-ct-led="master-7" x="250" y="428" width="19" height="8" rx="3.6"/>
+        <path d="M253 430h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="235" y="465" text-anchor="middle">8</text>
+        <rect class="ct-led" data-ct-led="master-8" x="250" y="456" width="19" height="8" rx="3.6"/>
+        <path d="M253 458h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="235" y="493" text-anchor="middle">G</text>
+        <rect class="ct-led" data-ct-led="master-G" x="250" y="484" width="19" height="8" rx="3.6"/>
+        <path d="M253 486h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="473" y="269" text-anchor="middle">1</text>
+        <rect class="ct-led" data-ct-led="remote-1" x="443" y="260" width="19" height="8" rx="3.6"/>
+        <path d="M446 262h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="473" y="297" text-anchor="middle">2</text>
+        <rect class="ct-led" data-ct-led="remote-2" x="443" y="288" width="19" height="8" rx="3.6"/>
+        <path d="M446 290h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="473" y="325" text-anchor="middle">3</text>
+        <rect class="ct-led" data-ct-led="remote-3" x="443" y="316" width="19" height="8" rx="3.6"/>
+        <path d="M446 318h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="473" y="353" text-anchor="middle">4</text>
+        <rect class="ct-led" data-ct-led="remote-4" x="443" y="344" width="19" height="8" rx="3.6"/>
+        <path d="M446 346h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="473" y="381" text-anchor="middle">5</text>
+        <rect class="ct-led" data-ct-led="remote-5" x="443" y="372" width="19" height="8" rx="3.6"/>
+        <path d="M446 374h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="473" y="409" text-anchor="middle">6</text>
+        <rect class="ct-led" data-ct-led="remote-6" x="443" y="400" width="19" height="8" rx="3.6"/>
+        <path d="M446 402h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="473" y="437" text-anchor="middle">7</text>
+        <rect class="ct-led" data-ct-led="remote-7" x="443" y="428" width="19" height="8" rx="3.6"/>
+        <path d="M446 430h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="473" y="465" text-anchor="middle">8</text>
+        <rect class="ct-led" data-ct-led="remote-8" x="443" y="456" width="19" height="8" rx="3.6"/>
+        <path d="M446 458h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g><g>
+        <text x="473" y="493" text-anchor="middle">G</text>
+        <rect class="ct-led" data-ct-led="remote-G" x="443" y="484" width="19" height="8" rx="3.6"/>
+        <path d="M446 486h13" stroke="#b3e4a6" stroke-opacity=".24" stroke-width="1"/>
+      </g></g>
+          <path d="M278 262h5v142h-5M435 262h-5v142h5" fill="none" stroke="#b8e2bf" stroke-width="1.7" stroke-linecap="round"/>
+          <text x="202" y="537" font-size="21" letter-spacing=".4">MASTER</text>
+          <text x="203" y="561" font-size="17">NSHL468</text>
+          <text x="175" y="600" font-size="15">CPJ20 12T 0318</text>
+          <text x="414" y="527" font-size="19" letter-spacing=".6">REMOTE</text>
+          <text x="414" y="552" font-size="17">NSHL468</text>
+        </g>
+        <g transform="translate(129 321)">
+          <rect class="ct-power-mark" x="-1.3" y="-15" width="2.6" height="5" rx="1.1" transform="rotate(0)"/><rect class="ct-power-mark" x="-1.3" y="-15" width="2.6" height="5" rx="1.1" transform="rotate(45)"/><rect class="ct-power-mark" x="-1.3" y="-15" width="2.6" height="5" rx="1.1" transform="rotate(90)"/><rect class="ct-power-mark" x="-1.3" y="-15" width="2.6" height="5" rx="1.1" transform="rotate(135)"/><rect class="ct-power-mark" x="-1.3" y="-15" width="2.6" height="5" rx="1.1" transform="rotate(180)"/><rect class="ct-power-mark" x="-1.3" y="-15" width="2.6" height="5" rx="1.1" transform="rotate(225)"/><rect class="ct-power-mark" x="-1.3" y="-15" width="2.6" height="5" rx="1.1" transform="rotate(270)"/><rect class="ct-power-mark" x="-1.3" y="-15" width="2.6" height="5" rx="1.1" transform="rotate(315)"/>
+          <circle r="4.5" fill="#135733"/>
+        </g>
+        <rect x="104" y="468" width="56" height="20" rx="3" fill="#9c978f"/>
+        <path d="M106 488H159" stroke="#ede7dc" stroke-width="2"/>
+        <rect class="ct-knob" x="106" y="467" width="19" height="22" rx="2.5" fill="url(#ct-slider)" stroke="#b4ada1" stroke-width="1"/>
+        <g fill="#474941" font-family="Arial, sans-serif" font-size="7.5" font-weight="700" text-anchor="middle">
+          <text x="115.5" y="503">OFF</text>
+          <text x="132.5" y="503">ON</text>
+          <text x="148.5" y="503">S-ON</text>
+        </g>
+        <rect data-ct-slider x="95" y="448" width="76" height="61" rx="4" fill="transparent"
+          tabindex="0" role="slider" aria-label="Interruptor del tester"
+          aria-describedby="ct-switch-tip" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" aria-valuetext="OFF, apagado"/>
+        <g class="ct-switch-tip" id="ct-switch-tip" role="tooltip" font-family="Arial, sans-serif">
+          <path d="M185 443H475Q486 443 486 454V500Q486 511 475 511H185Q175 511 175 501V483L165 476L175 469V453Q175 443 185 443Z" fill="#11252c" stroke="#79b99a" stroke-width="1.5"/>
+          <text x="190" y="468" fill="#f1fff8" font-size="18" font-weight="700">Desliza para cambiar de modo</text>
+          <text x="190" y="493" fill="#c7e6d7" font-size="16">OFF apaga · ON rápido · S-ON lento</text>
+        </g>
+        <ellipse cx="276" cy="684" rx="34" ry="18" fill="#131815" stroke="#85837a" stroke-width="1.1" transform="rotate(-8 276 684)"/>
+        <path d="M272 674a9 9 0 0 0 0 18m16-18a9 9 0 0 0 0 18m-8-9h7" stroke="#e5e6dc" stroke-width="2.7" fill="none" transform="rotate(-8 276 684)"/>
+      </svg>
+    </div>
+    <div class="ct-controls" role="group" aria-label="Conexión y encendido">
+      <button type="button" data-ct-connect="master" aria-pressed="false">Conectar MASTER</button>
+      <button type="button" data-ct-connect="remote" aria-pressed="false">Conectar REMOTE</button>
+    </div>
+    <p class="ct-hint">El patch cord es UTP. En el tester, G corresponde al blindaje y queda apagado.</p>
+    <div class="ct-controls ct-answer" role="group" aria-label="Diagnóstico del cable">
+      <button type="button" data-ct-answer="good" disabled>Cable bueno</button>
+      <button type="button" data-ct-answer="bad" disabled>Cable malo</button>
+      <button type="button" data-ct-next hidden>Nuevo cable</button>
+    </div>
+    <p class="ct-status" data-ct-status role="status">Conecta los dos extremos para empezar.</p>
+  </section><details class="ct-fault-guide"><summary>Explorar otros tipos de falla</summary><div class="cab-model-controls"><button type="button" data-fault="Correcto" class="active">Correcto</button><button type="button" data-fault="Abierto" class="">Abierto</button><button type="button" data-fault="Invertido" class="">Invertido</button><button type="button" data-fault="Cruzado" class="">Cruzado</button><button type="button" data-fault="Par dividido" class="">Par dividido</button></div><div id="cab-tester-art"><div class="cab-test-report"><span>PROBADOR · MAPA DE HILOS</span><strong>Correcto</strong><p>Los pines 1 a 8 llegan al mismo número en el otro extremo.</p><div><i class="">1</i><i class="">2</i><i class="">3</i><i class="">4</i><i class="">5</i><i class="">6</i><i class="">7</i><i class="">8</i></div></div></div></details></div><section class="cab-section"><h2>Primera comprobación</h2><p>Un probador de mapa de hilos detecta circuitos abiertos, cortos, inversiones y conexiones cruzadas. Selecciona una falla en el modelo para comparar la conexión esperada con la observada.</p></section><section class="cab-section"><h2>Par dividido</h2><p>Puede ocurrir que todos los pines coincidan extremo a extremo, pero los conductores no conserven sus pares físicos. La continuidad simple no detecta necesariamente este problema; la geometría afecta la diafonía.</p></section><section class="cab-section"><h2>Cómo leer cada falla</h2><p>En un enlace directo, el pin 1 local debe llegar al pin 1 remoto y así sucesivamente. Un abierto indica falta de continuidad. En un corto, dos conductores hacen contacto. Si los pines 1 y 2 llegan intercambiados, el par está invertido. Si el par 1–2 llega al par 3–6 y viceversa, los pares están cruzados. Revisa si esa disposición era parte del diseño antes de corregirla.</p></section><section class="cab-section"><h2>Dónde empezar a buscar</h2><p>Desconecta el enlace de los equipos antes de usar un probador de cable y coloca el remoto en la toma que corresponde. Si la falla aparece con los cordones y desaparece al comprobar el enlace fijo, revisa los cordones por separado. En el enlace fijo, inspecciona primero el asiento de los conductores y el orden A/B en ambos extremos.</p><p>Si un abierto vuelve después de rehacer ambas terminaciones, consulta la distancia aproximada a la falla, si el instrumento la informa. Compárala con los tramos del plano para priorizar curvas, registros o zonas donde se hizo obra.</p></section><section class="cab-section"><h2>Ejercicio</h2><p>El mapa muestra 1→1 hasta 8→8, pero el instrumento informa un par dividido. Comprueba si se usó un conductor de otro par físico para completar alguno de los pares de pines, por ejemplo 3–6. Conserva cada pareja de colores del mismo trenzado, vuelve a terminar el extremo que corresponda y repite la prueba.</p></section><div class="lesson-actions"><a href="index.html">← Módulo anterior</a><a href="certificacion.html">Módulo siguiente →</a></div><footer class="container"><p>DGNV Studios <small>— aprende construyendo.</small></p><p class="site-credit">Creado por <strong>Caroline y Julio</strong> · 1.º año Redes y Telecomunicaciones · 2026</p><p>© <span id="year"></span></p></footer></article></main><script src="../../../assets/js/main.js"></script><script src="../../../assets/js/cableado.js"></script><script src="../../../assets/js/cableado-nav.js"></script><script src="../../../assets/js/cableado-tester.js"></script></body></html>
